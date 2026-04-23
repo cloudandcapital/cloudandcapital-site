@@ -1,0 +1,32 @@
+/* ─── Fontsource Imports ────────────────────────────────────────────── */
+@import '@fontsource/playfair-display/400.css';
+@import '@fontsource/playfair-display/700.css';
+@import '@fontsource/playfair-display/400-italic.css';
+
+@import '@fontsource/cormorant-garamond/400.css';
+@import '@fontsource/cormorant-garamond/500.css';
+@import '@fontsource/cormorant-garamond/400-italic.css';
+
+@import '@fontsource/jost/400.css';
+@import '@fontsource/jost/500.css';
+@import '@fontsource/jost/600.css';
+
+/* ─── Type Scale ────────────────────────────────────────────────────── */
+:root {
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Cormorant Garamond', Georgia, serif;
+  --font-ui: 'Jost', system-ui, sans-serif;
+}
+
+/* ─── Utility Classes ───────────────────────────────────────────────── */
+.display {
+  font-family: var(--font-display);
+}
+
+.body {
+  font-family: var(--font-body);
+}
+
+.ui {
+  font-family: var(--font-ui);
+}

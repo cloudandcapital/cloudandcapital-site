@@ -76,6 +76,55 @@ const { title = 'Cloud & Capital', description = '' } = Astro.props;
         transition: color .2s;
       }
       .site-nav-links a:hover { color: #000; }
+      .site-nav-dropdown { position: relative; }
+      .site-nav-dropdown-btn {
+        font-family: 'DM Mono', monospace;
+        font-size: .58rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: #4A4A4A;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        gap: .3rem;
+        transition: color .2s;
+      }
+      .site-nav-dropdown-btn:hover { color: #000; }
+      .site-nav-chevron { font-size: .48rem; display: inline-block; transition: transform .2s; }
+      .site-nav-dropdown:hover .site-nav-chevron,
+      .site-nav-dropdown.is-open .site-nav-chevron { transform: rotate(180deg); }
+      .site-nav-dropdown-menu {
+        display: none;
+        position: absolute;
+        top: calc(100% + .85rem);
+        right: 0;
+        background: #faf7f2;
+        border: 1px solid rgba(0,0,0,.08);
+        box-shadow: 0 8px 28px rgba(0,0,0,.08);
+        list-style: none;
+        padding: .4rem 0;
+        min-width: 168px;
+        z-index: 210;
+      }
+      .site-nav-dropdown:hover .site-nav-dropdown-menu,
+      .site-nav-dropdown:focus-within .site-nav-dropdown-menu,
+      .site-nav-dropdown.is-open .site-nav-dropdown-menu { display: block; }
+      .site-nav-dropdown-menu li a {
+        display: block;
+        padding: .55rem 1.25rem;
+        font-family: 'DM Mono', monospace;
+        font-size: .58rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: #4A4A4A;
+        text-decoration: none;
+        transition: color .15s, background .15s;
+        white-space: nowrap;
+      }
+      .site-nav-dropdown-menu li a:hover { color: #000; background: rgba(107,142,127,.07); }
       .site-nav-toggle {
         display: none;
         flex-direction: column;
@@ -119,6 +168,12 @@ const { title = 'Cloud & Capital', description = '' } = Astro.props;
           color: rgba(244,239,230,.65);
         }
         .site-nav-links a:hover { color: rgba(244,239,230,1); }
+        .site-nav-dropdown { text-align: center; }
+        .site-nav-dropdown-btn { color: rgba(244,239,230,.65); font-size: .72rem; letter-spacing: .16em; margin: 0 auto; }
+        .site-nav-dropdown-btn:hover { color: rgba(244,239,230,1); }
+        .site-nav-dropdown-menu { position: static; background: transparent; border: none; box-shadow: none; padding: .35rem 0 0; min-width: 0; text-align: center; }
+        .site-nav-dropdown-menu li a { color: rgba(244,239,230,.42); font-size: .68rem; padding: .35rem .75rem; }
+        .site-nav-dropdown-menu li a:hover { color: rgba(244,239,230,.85); background: transparent; }
       }
     </style>
     <nav class="site-nav">
@@ -131,9 +186,14 @@ const { title = 'Cloud & Capital', description = '' } = Astro.props;
         <li><a href="/#work">Work</a></li>
         <li><a href="/#about">About</a></li>
         <li><a href="/#writing">Writing</a></li>
-        <li><a href="https://market-tape.cloudandcapital.com">Market Tape</a></li>
-        <li><a href="/signal-audit">Signal Audit</a></li>
-        <li><a href="/interactive-lab">Interactive Lab</a></li>
+        <li class="site-nav-dropdown" id="tool-nav-tools">
+          <button class="site-nav-dropdown-btn" aria-haspopup="true" aria-expanded="false" id="tool-nav-tools-btn">Tools <span class="site-nav-chevron">▾</span></button>
+          <ul class="site-nav-dropdown-menu">
+            <li><a href="https://market-tape.cloudandcapital.com" target="_blank">Market Tape</a></li>
+            <li><a href="/signal-audit">Signal Audit</a></li>
+            <li><a href="/interactive-lab">Interactive Lab</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
     <script>
@@ -154,6 +214,20 @@ const { title = 'Cloud & Capital', description = '' } = Astro.props;
             toggle.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
           });
+        });
+      })();
+      (function() {
+        var btn = document.getElementById('tool-nav-tools-btn');
+        var item = document.getElementById('tool-nav-tools');
+        if (!btn || !item) return;
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var isOpen = item.classList.toggle('is-open');
+          btn.setAttribute('aria-expanded', isOpen);
+        });
+        document.addEventListener('click', function() {
+          item.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
         });
       })();
     </script>

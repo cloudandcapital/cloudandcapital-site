@@ -30,6 +30,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.25rem 3.5rem;displ
 .nav-links a:hover{color:var(--ink);}
 .nav-cta{padding:.5rem 1.1rem;background:var(--sage);color:var(--white)!important;transition:background .2s;}
 .nav-cta:hover{background:var(--sage-light)!important;}
+.nav-has-dropdown{position:relative;}
+.nav-dropdown-btn{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;gap:.3rem;transition:color .2s;}
+.nav-dropdown-btn:hover{color:var(--ink);}
+.nav-chevron{font-size:.48rem;display:inline-block;transition:transform .2s;}
+.nav-has-dropdown:hover .nav-chevron,.nav-has-dropdown.is-open .nav-chevron{transform:rotate(180deg);}
+.nav-dropdown-menu{display:none;position:absolute;top:calc(100% + .85rem);right:0;background:#faf7f2;border:1px solid var(--rule);box-shadow:0 8px 28px rgba(0,0,0,.08);list-style:none;padding:.4rem 0;min-width:168px;z-index:210;}
+.nav-has-dropdown:hover .nav-dropdown-menu,.nav-has-dropdown:focus-within .nav-dropdown-menu,.nav-has-dropdown.is-open .nav-dropdown-menu{display:block;}
+.nav-dropdown-menu li a{display:block;padding:.55rem 1.25rem;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);text-decoration:none;transition:color .15s,background .15s;white-space:nowrap;}
+.nav-dropdown-menu li a:hover{color:var(--ink);background:var(--sage-faint);}
 
 /* BUTTONS */
 .btn{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:.9rem 1.75rem;transition:all .2s;cursor:pointer;border:none;display:inline-block;}
@@ -2357,6 +2366,14 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   .nav-links a:hover { color: rgba(244,239,230,1); }
   .nav-toggle.is-open span { background: rgba(244,239,230,.9); }
 
+  /* ── Tools dropdown (mobile, inside dark overlay) ── */
+  .nav-has-dropdown { text-align: center; }
+  .nav-dropdown-btn { color: rgba(244,239,230,.65); font-size: .78rem; letter-spacing: .16em; margin: 0 auto; }
+  .nav-dropdown-btn:hover { color: rgba(244,239,230,1); }
+  .nav-dropdown-menu { position: static; background: transparent; border: none; box-shadow: none; padding: .35rem 0 0; min-width: 0; text-align: center; }
+  .nav-dropdown-menu li a { color: rgba(244,239,230,.42); font-size: .68rem; padding: .35rem .75rem; }
+  .nav-dropdown-menu li a:hover { color: rgba(244,239,230,.85); background: transparent; }
+
   /* ── Advisory: stack photo over content ── */
   .advisory-inner {
     grid-template-columns: 1fr !important;
@@ -2562,9 +2579,14 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
     <li><a href="#about">About</a></li>
     <li><a href="#community">Community</a></li>
     <li><a href="#writing">Writing</a></li>
-    <li><a href="https://market-tape.cloudandcapital.com">Market Tape</a></li>
-    <li><a href="/signal-audit">Signal Audit</a></li>
-    <li><a href="/interactive-lab">Interactive Lab</a></li>
+    <li class="nav-has-dropdown" id="nav-tools">
+      <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false" id="nav-tools-btn">Tools <span class="nav-chevron">▾</span></button>
+      <ul class="nav-dropdown-menu" id="nav-tools-menu">
+        <li><a href="https://market-tape.cloudandcapital.com" target="_blank">Market Tape</a></li>
+        <li><a href="/signal-audit">Signal Audit</a></li>
+        <li><a href="/interactive-lab">Interactive Lab</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
@@ -3244,6 +3266,22 @@ if (phPrev) phPrev.addEventListener('click', () => {
       toggle.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     });
+  });
+})();
+
+// Tools dropdown toggle
+(function() {
+  var btn = document.getElementById('nav-tools-btn');
+  var item = document.getElementById('nav-tools');
+  if (!btn || !item) return;
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var isOpen = item.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', isOpen);
+  });
+  document.addEventListener('click', function() {
+    item.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
   });
 })();
 

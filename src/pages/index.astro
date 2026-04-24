@@ -2214,6 +2214,19 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   background: var(--rule) !important;
 }
 
+/* No purple links anywhere in the Writing section */
+.writing-featured,
+.writing-featured:visited,
+.writing-small,
+.writing-small:visited {
+  color: var(--ink) !important;
+  text-decoration: none !important;
+}
+.writing-featured .wf-cta,
+.writing-small .ws-cta {
+  color: var(--sage) !important;
+}
+
 /* Featured card: top accent, soft shadow */
 .writing-featured {
   box-shadow: 0 8px 30px rgba(0,0,0,0.04) !important;
@@ -2243,10 +2256,12 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   height: 100%;
   min-height: 280px;
 }
-/* Image fills the right column */
+/* Image: subtle inset so it feels intentionally placed, not slammed against grid */
 .wf-img-wrap {
   overflow: hidden;
   background: var(--cream-dark);
+  margin: 10px 10px 10px 0;
+  border-radius: 2px;
 }
 .wf-img {
   width: 100%;
@@ -2264,11 +2279,12 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   .wf-img-wrap { order: -1; }
 }
 
-/* Content padding: left-aligned, comfortable internal spacing */
+/* Content: vertically centered relative to image, CTA stays at bottom */
 .wf-content {
-  padding: 2.5rem 2rem 2.5rem 3.5rem !important;
-  display: flex;
-  flex-direction: column;
+  padding: 3rem 2rem 2.5rem 3.5rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
 }
 
 /* Small cards: same 3.5rem left edge for perfect alignment */
@@ -2729,7 +2745,6 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
         <!-- Left: text -->
         <div class="wf-content">
           <div class="wf-eyebrow">Featured Column</div>
-          <div class="wf-cat">Markets &amp; Mimosas</div>
           <div class="wf-title">Markets & Mimosas</div>
           <div class="wf-desc">Biweekly notes on markets, cloud economics, technology spend, and the operating layer behind the bill.</div>
           <div class="wf-cta">Read latest →</div>

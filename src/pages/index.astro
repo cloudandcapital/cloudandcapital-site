@@ -1725,11 +1725,60 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 }
 
 /* ── Section whitespace: more breathing room ── */
-section#discipline { padding-top: 9rem !important; padding-bottom: 9rem !important; }
+section#discipline { padding-top: 6rem !important; padding-bottom: 6rem !important; }
 .work-inner { padding-top: 9rem !important; padding-bottom: 9rem !important; }
 .advisory { padding-top: 9rem !important; padding-bottom: 9rem !important; }
 .community { padding-top: 9rem !important; padding-bottom: 9rem !important; }
 .writing { padding-top: 9rem !important; padding-bottom: 9rem !important; }
+
+/* ── Discipline: tighten intro header + card top space ── */
+section#discipline > div[style*="padding:2.5rem"] {
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+}
+section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
+  padding-top: 5.5rem !important;
+}
+
+/* ── About thesis: larger, more visually present ── */
+.about-v4-final-thesis {
+  font-size: 1.12rem !important;
+  line-height: 1.6 !important;
+  color: var(--ink-soft) !important;
+  max-width: none !important;
+  font-weight: 400 !important;
+}
+
+/* ── Collaborator logos: larger and intentional ── */
+.comm-collab-logos {
+  gap: 1.25rem !important;
+  margin-bottom: 1.5rem;
+  align-items: center;
+  display: flex;
+}
+.comm-collab-logo-fw { height: 28px !important; opacity: .85 !important; }
+.comm-collab-logo-sc { height: 30px !important; opacity: .85 !important; }
+
+/* ── Event card: speaker list styling ── */
+.ev-speakers {
+  margin-top: .75rem;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+.ev-speaker {
+  font-family: 'DM Mono', monospace;
+  font-size: .55rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+/* ── Newsletter: wider text column ── */
+.newsletter-left { flex: 1; min-width: 0; }
+.newsletter-desc { max-width: none !important; }
+.newsletter-actions { flex-shrink: 0; }
 
 /* ── Geometric section dividers ── */
 .geo-divider {
@@ -1751,7 +1800,7 @@ section#discipline { padding-top: 9rem !important; padding-bottom: 9rem !importa
 
 /* mobile adjustments for new whitespace */
 @media (max-width: 900px) {
-  section#discipline { padding-top: 5rem !important; padding-bottom: 5rem !important; }
+  section#discipline { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
   .work-inner { padding-top: 5rem !important; padding-bottom: 5rem !important; }
   .advisory { padding-top: 5rem !important; padding-bottom: 5rem !important; }
   .community { padding-top: 5rem !important; padding-bottom: 5rem !important; }
@@ -1789,7 +1838,7 @@ section#discipline { padding-top: 9rem !important; padding-bottom: 9rem !importa
     <p class="hero-eyebrow">Technology Economics & FinOps</p>
     <div class="hero-founder">Diana Molski · Cloud &amp; Capital</div>
     <h1 class="hero-headline">Decision systems<br>for <em>finance</em> and<br><em>engineering</em><br>leaders.</h1>
-    <p class="hero-sub">Cloud, SaaS, AI infrastructure — the full picture. I build tools that make cost visible before the invoice arrives, and frameworks that turn visibility into decisions. That upstream layer is where the real work happens.</p>
+    <p class="hero-sub">Cloud, SaaS, and AI infrastructure spend rarely become expensive at the invoice. I build tools and frameworks that make cost visible earlier, so finance and engineering teams can understand tradeoffs before they turn into waste.</p>
     <div class="hero-ctas">
       <a href="/signal-audit" class="btn btn-sage">Take the 5-Minute Signal Audit</a>
       <a href="/interactive-lab" class="btn btn-outline">Explore the Interactive Lab</a>
@@ -2065,7 +2114,7 @@ section#discipline { padding-top: 9rem !important; padding-bottom: 9rem !importa
 
       <p class="about-v4-final-body">Her background spans Morgan Stanley and years spent analyzing markets, capital flows, and how economic behavior plays out in real systems. That instinct eventually moved toward building — tools and systems that make cost legible before it becomes a problem. That same lens now carries into cloud economics, AI infrastructure, and FinOps, where cost is shaped inside decisions rather than observed after the fact.</p>
 
-      <p class="about-v4-final-body about-v4-final-thesis">Most teams still see cost after it happens. The real work sits earlier, inside the decisions that create&nbsp;it.</p>
+      <p class="about-v4-final-body about-v4-final-thesis">Most teams still see cost after it happens. The real work sits earlier, inside the decisions that create it.</p>
 <div class="about-v4-final-certs">AWS Cloud Practitioner · Azure AI · FinOps Practitioner · FOCUS Analyst</div>
 <div class="about-v4-final-ctas"><a href="mailto:diana@cloudandcapital.com" class="about-v4-final-btn about-v4-final-btn-sage">Contact</a></div>
     </div>
@@ -2095,8 +2144,15 @@ section#discipline { padding-top: 9rem !important; padding-bottom: 9rem !importa
           <div class="ev-feature-copy">
             <div class="ev-tag">April 9, 2026 · Hawthorne, CA · Vol. 01</div>
             <div class="ev-title">Using AI to Put the Ops in FinOps</div>
-            <div class="ev-meta">Common Space Brewery · South Bay.<br>Practitioners, cloud economists, and finance-engineering translators.</div>
-            <div class="ev-sponsor ev-sponsor-dark">Sponsored by wiv.ai</div>
+            <div class="ev-meta">Common Space Brewery · South Bay.</div>
+            <div class="ev-meta" style="margin-top:.6rem;">Our first LA FinOps Meetup brought finance, engineering, and cloud practitioners together for an informal evening on FinOps, AI, and the operating work behind modern technology spend.</div>
+            <div class="ev-meta" style="margin-top:.5rem;">Sessions included Grant Havrilenko on his FinOps journey and Ian Cannon + Jeff Blume from Wiv.ai on using AI to put the Ops in FinOps.</div>
+            <div class="ev-speakers">
+              <div class="ev-speaker">Grant Havrilenko · Cloud FinOps Manager @ Ulta Beauty</div>
+              <div class="ev-speaker">Ian Cannon · Senior Account Executive @ Wiv.ai</div>
+              <div class="ev-speaker">Jeff Blume · Principal Solutions Architect @ Wiv.ai</div>
+            </div>
+            <div class="ev-sponsor ev-sponsor-dark">Sponsored by Wiv.ai</div>
           </div>
           <div class="ev-poster-wrap">
             <img src="/images/event-poster-vol01.png" alt="Using AI to Put the Ops in FinOps poster" class="ev-poster">
@@ -2141,7 +2197,7 @@ section#discipline { padding-top: 9rem !important; padding-bottom: 9rem !importa
     <div class="newsletter-left">
       <div class="newsletter-tag">Cloud & Capital · Substack</div>
       <div class="newsletter-title">Markets, cloud economics,<br>and the operating layer behind the bill.</div>
-      <div class="newsletter-desc">Markets & Mimosas on Fridays. Cloud economics, technology spend, and FinOps when the story demands it. No filler. No generic AI takes — just where finance meets infrastructure.</div>
+      <div class="newsletter-desc">Markets & Mimosas, biweekly. Cloud economics, technology spend, and FinOps when the story calls for it. Written where finance meets infrastructure.</div>
     </div>
     <div class="newsletter-actions">
       <a href="https://substack.com/@cloudandcapital" class="btn btn-sage" target="_blank">Subscribe on Substack</a>

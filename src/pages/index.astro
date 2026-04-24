@@ -1786,9 +1786,24 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 /* ── Work intro: tighten gap to feature below (40–50% reduction) ── */
 .work-intro { margin-bottom: 2.75rem !important; }
 
-/* ── Collaborator logos: 2× (approx 42/44px) ── */
-.comm-collab-logo-fw { height: 42px !important; opacity: .85 !important; }
-.comm-collab-logo-sc { height: 44px !important; opacity: .85 !important; }
+/* ── Collaborator logos: +25%, wider gap ── */
+.comm-collab-logos { gap: 2rem !important; }
+.comm-collab-logo-fw { height: 52px !important; opacity: .85 !important; }
+.comm-collab-logo-sc { height: 54px !important; opacity: .85 !important; }
+
+/* ── Event poster: +35%, top-aligned, anchored with border ── */
+.ev-feature-layout {
+  grid-template-columns: minmax(0,1fr) 220px !important;
+}
+.ev-poster-wrap {
+  align-items: flex-start !important;
+  padding-top: 1.8rem !important;
+}
+.ev-poster {
+  max-width: 168px !important;
+  border: 1px solid rgba(25,23,20,.10) !important;
+  box-shadow: 0 10px 28px rgba(25,23,20,.15), 0 2px 6px rgba(25,23,20,.08) !important;
+}
 
 /* ── Geometric section dividers ── */
 .geo-divider {

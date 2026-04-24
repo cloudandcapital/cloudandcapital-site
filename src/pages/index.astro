@@ -2129,6 +2129,96 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   .newsletter-actions .btn { width: auto !important; }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   WRITING — EDITORIAL REFINEMENT
+   ═══════════════════════════════════════════════════════════ */
+
+/* Section: remove horizontal padding — all children manage their own */
+.writing {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+/* Section label re-padded */
+.writing > .section-label {
+  padding-left: 3.5rem !important;
+}
+
+/* Newsletter hero: full-bleed dark, larger vertical padding,
+   extra bottom to create space for the card overlap */
+.newsletter-strip {
+  margin: 0 !important;
+  width: 100% !important;
+  padding: 4rem 3.5rem calc(4rem + 52px) !important;
+  align-items: flex-start !important;
+  gap: 4rem !important;
+}
+/* Constrain text block; buttons stay on right */
+.newsletter-left {
+  max-width: 650px !important;
+  flex: 1 !important;
+}
+.newsletter-actions {
+  flex-direction: column !important;
+  gap: .6rem !important;
+  flex-shrink: 0 !important;
+  min-width: 190px !important;
+  padding-top: .35rem !important;
+}
+.newsletter-actions .btn {
+  width: 100% !important;
+  text-align: center !important;
+}
+
+/* Editorial grid: overlap hero by 52px, dark 1px gap (seamless in overlap) */
+.writing-editorial {
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  margin-top: -52px !important;
+  position: relative !important;
+  z-index: 2 !important;
+  gap: 1px !important;
+  background: var(--ink) !important;
+}
+
+/* Featured card: soft shadow for floating effect, no hover lift disruption */
+.writing-featured {
+  box-shadow: 0 4px 24px rgba(25,23,20,.13), 0 1px 4px rgba(25,23,20,.07) !important;
+}
+.writing-featured:hover {
+  transform: none !important;
+  box-shadow: 0 8px 32px rgba(25,23,20,.18), 0 2px 8px rgba(25,23,20,.09) !important;
+  background: var(--cream) !important;
+}
+
+/* Visual: no fade — clean sharp boundary between chart and content */
+.wf-visual-fade { display: none !important; }
+.wf-visual {
+  border-bottom: 1px solid rgba(255,255,255,.08) !important;
+}
+
+/* Content padding: 3.5rem left = aligned with newsletter text and section label */
+.wf-content {
+  padding: 2.5rem 3.5rem 3rem !important;
+}
+
+/* Small cards: same 3.5rem left edge for perfect alignment */
+.writing-small {
+  padding: 2.25rem 3.5rem !important;
+}
+
+/* Mobile overrides for the new layout */
+@media (max-width: 900px) {
+  .writing > .section-label { padding-left: 1.5rem !important; }
+  .newsletter-strip { padding: 2.5rem 1.5rem 3rem !important; }
+  .newsletter-actions { flex-direction: row !important; min-width: 0 !important; }
+  .newsletter-actions .btn { width: auto !important; }
+  .writing-editorial { margin-top: 0 !important; gap: 8px !important; background: var(--rule) !important; }
+  .wf-content { padding: 2rem 1.5rem !important; }
+  .writing-small { padding: 2rem 1.5rem !important; }
+}
+
 </style>
 
 <nav>

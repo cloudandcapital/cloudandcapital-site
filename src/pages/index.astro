@@ -2152,7 +2152,8 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   padding: 4rem 3.5rem !important;
   align-items: flex-start !important;
   gap: 4rem !important;
-  min-height: 240px !important;
+  min-height: 280px !important;
+  padding-bottom: 5rem !important;
   background: var(--ink) !important;
 }
 .newsletter-bg-visual {
@@ -2169,7 +2170,14 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: rgba(0, 0, 0, 0.27);
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.27) 0%,
+    rgba(0,0,0,0.27) 52%,
+    rgba(0,0,0,0.15) 75%,
+    rgba(245,238,233,0.55) 90%,
+    rgba(245,238,233,1) 100%
+  );
 }
 .newsletter-strip .newsletter-left,
 .newsletter-strip .newsletter-actions {
@@ -2206,10 +2214,13 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   background: var(--rule) !important;
 }
 
-/* Featured card: top accent + soft shadow */
+/* Featured card: top accent, soft shadow, 24px lift into hero */
 .writing-featured {
-  box-shadow: 0 2px 12px rgba(25,23,20,.07), 0 1px 3px rgba(25,23,20,.04) !important;
+  box-shadow: 0 4px 20px rgba(25,23,20,.10), 0 1px 4px rgba(25,23,20,.05) !important;
   border-top: 2px solid var(--sage) !important;
+  position: relative !important;
+  top: -24px !important;
+  z-index: 3 !important;
 }
 .writing-featured:hover {
   transform: translateY(-2px) !important;
@@ -2650,9 +2661,17 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
         <!-- Secondary dashed -->
         <path d="M0 250 C200 238 420 218 640 192 C860 165 1020 138 1200 108"
               fill="none" stroke="rgba(90,126,94,.25)" stroke-width="1" stroke-dasharray="6 6"/>
-        <!-- Gold accent -->
-        <circle cx="600" cy="148" r="4" fill="#B8924A"/>
-        <circle cx="600" cy="148" r="11" fill="rgba(184,146,74,.13)"/>
+        <!-- Gold accent with layered glow -->
+        <defs>
+          <filter id="dot-glow" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <circle cx="600" cy="148" r="28" fill="rgba(184,146,74,.04)"/>
+        <circle cx="600" cy="148" r="18" fill="rgba(184,146,74,.09)"/>
+        <circle cx="600" cy="148" r="11" fill="rgba(184,146,74,.16)"/>
+        <circle cx="600" cy="148" r="4"  fill="#B8924A" filter="url(#dot-glow)"/>
       </svg>
     </div>
     <!-- Overlay -->

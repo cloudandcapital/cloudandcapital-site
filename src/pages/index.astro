@@ -1420,7 +1420,7 @@ section#work .work-intro{
   .about-v4-final-lede{font-size:1.12rem;}
   .about-v4-final-fragment{
     max-width:320px;
-    margin:.15rem 0 1.1rem auto;
+    margin:.15rem auto 1.1rem 0;
   }
 }
 
@@ -2343,35 +2343,43 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   /* ── Nav ── */
   .nav-toggle { display: flex; z-index: 301; }
 
-  /* Full-screen mobile nav */
+  /* Drop-down panel from nav bar */
   .nav-links {
     display: none !important;
-    position: fixed;
-    inset: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     background: #191714;
     flex-direction: column !important;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
     z-index: 300;
     list-style: none;
-    padding: 0;
+    padding: .75rem 0 1.25rem;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    border-top: 1px solid rgba(255,255,255,.06);
+    box-shadow: 0 12px 32px rgba(0,0,0,.35);
   }
   .nav-links.is-open { display: flex !important; }
+  .nav-links > li { width: 100%; }
   .nav-links a {
-    font-size: .78rem;
+    display: block;
+    padding: .8rem 1.75rem;
+    font-size: .68rem;
     letter-spacing: .16em;
     color: rgba(244,239,230,.65);
   }
   .nav-links a:hover { color: rgba(244,239,230,1); }
-  .nav-toggle.is-open span { background: rgba(244,239,230,.9); }
 
-  /* ── Tools dropdown (mobile, inside dark overlay) ── */
-  .nav-has-dropdown { text-align: center; }
-  .nav-dropdown-btn { color: rgba(244,239,230,.65); font-size: .78rem; letter-spacing: .16em; margin: 0 auto; }
+  /* ── Tools dropdown (mobile, inside nav panel) ── */
+  .nav-has-dropdown { width: 100%; }
+  .nav-dropdown-btn { display: block; width: 100%; padding: .8rem 1.75rem; text-align: left; color: rgba(244,239,230,.65); font-size: .68rem; letter-spacing: .16em; }
   .nav-dropdown-btn:hover { color: rgba(244,239,230,1); }
-  .nav-dropdown-menu { position: static; background: transparent; border: none; box-shadow: none; padding: .35rem 0 0; min-width: 0; text-align: center; }
-  .nav-dropdown-menu li a { color: rgba(244,239,230,.42); font-size: .68rem; padding: .35rem .75rem; }
+  .nav-dropdown-menu { position: static; background: rgba(255,255,255,.04); border: none; box-shadow: none; padding: .25rem 0; min-width: 0; text-align: left; }
+  .nav-dropdown-menu li a { padding: .6rem 1.75rem .6rem 2.75rem; color: rgba(244,239,230,.42); font-size: .63rem; background: transparent; }
   .nav-dropdown-menu li a:hover { color: rgba(244,239,230,.85); background: transparent; }
 
   /* ── Advisory: stack photo over content ── */

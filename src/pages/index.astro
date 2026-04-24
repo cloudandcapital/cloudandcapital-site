@@ -1614,6 +1614,150 @@ section.work,
 .comm-collab-logo-fw{height:15px;}
 .comm-collab-logo-sc{height:16px;}
 
+/* ═══════════════════════════════════════════════════════════
+   DESIGN REFINEMENT
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Hero: subtle radial gradient background ── */
+.hero-left {
+  background:
+    radial-gradient(ellipse at 0% 100%, rgba(90,126,94,.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 95% 5%, rgba(184,146,74,.04) 0%, transparent 50%);
+}
+
+/* ── Hero: slightly larger CTA buttons with lift hover ── */
+.hero-ctas .btn {
+  font-size: .72rem;
+  padding: 1rem 2.1rem;
+}
+.btn-sage {
+  box-shadow: 0 2px 8px rgba(90,126,94,.18);
+  transition: all .25s ease;
+}
+.btn-sage:hover {
+  background: var(--sage-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(90,126,94,.3);
+}
+.btn-outline {
+  transition: all .25s ease;
+}
+.btn-outline:hover {
+  border-color: var(--sage);
+  color: var(--sage);
+  transform: translateY(-2px);
+}
+
+/* ── About: enlarged name + sage divider ── */
+.about-v4-final-caption-name {
+  font-size: 2.15rem !important;
+  letter-spacing: -.01em !important;
+}
+.about-v4-final-caption {
+  border-top: 2px solid var(--sage) !important;
+  padding-top: 1.1rem !important;
+}
+
+/* ── About: thesis sentence — slightly smaller to reduce wrapping ── */
+.about-v4-final-thesis {
+  font-size: .9rem !important;
+  max-width: none !important;
+  line-height: 1.55 !important;
+}
+
+/* ── Discipline: more padding in colored blocks ── */
+section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
+  padding-right: 2.4rem !important;
+  padding-bottom: 2.5rem !important;
+}
+
+/* ── Event poster: stronger drop shadow ── */
+.ev-poster {
+  box-shadow: 0 14px 36px rgba(25,23,20,.24), 0 3px 8px rgba(25,23,20,.10) !important;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.ev-poster:hover {
+  transform: scale(1.015);
+  box-shadow: 0 20px 44px rgba(25,23,20,.30), 0 5px 12px rgba(25,23,20,.12) !important;
+}
+
+/* ── Carousel photos: consistent treatment + frame ── */
+.photo-slide {
+  border: 1px solid var(--rule);
+  box-shadow: 0 3px 12px rgba(25,23,20,.08);
+}
+.photo-slide img {
+  filter: saturate(.88) contrast(1.04) brightness(.97);
+}
+
+/* ── Article cards: lift on hover ── */
+.acard {
+  border: 1px solid transparent;
+  transition: background .2s ease, transform .22s ease, box-shadow .22s ease, border-color .2s ease;
+}
+.acard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(25,23,20,.09);
+  border-color: var(--rule);
+}
+
+/* ── Newsletter buttons: match CTA sizing ── */
+.newsletter-actions .btn {
+  font-size: .7rem;
+  padding: 1rem 1.9rem;
+  transition: all .25s ease;
+}
+.newsletter-actions .btn-outline-w:hover {
+  background: rgba(255,255,255,.08);
+  transform: translateY(-2px);
+}
+.newsletter-actions .btn-sage:hover {
+  transform: translateY(-2px);
+}
+
+/* ── Community Get Notified button: hover lift ── */
+.community .btn-sage {
+  transition: all .25s ease;
+}
+.community .btn-sage:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(90,126,94,.28);
+}
+
+/* ── Section whitespace: more breathing room ── */
+section#discipline { padding-top: 9rem !important; padding-bottom: 9rem !important; }
+.work-inner { padding-top: 9rem !important; padding-bottom: 9rem !important; }
+.advisory { padding-top: 9rem !important; padding-bottom: 9rem !important; }
+.community { padding-top: 9rem !important; padding-bottom: 9rem !important; }
+.writing { padding-top: 9rem !important; padding-bottom: 9rem !important; }
+
+/* ── Geometric section dividers ── */
+.geo-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent 0%, var(--rule) 18%, var(--rule) 82%, transparent 100%);
+  position: relative;
+  margin: 0;
+}
+.geo-divider::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 6px;
+  height: 6px;
+  background: var(--sage);
+}
+
+/* mobile adjustments for new whitespace */
+@media (max-width: 900px) {
+  section#discipline { padding-top: 5rem !important; padding-bottom: 5rem !important; }
+  .work-inner { padding-top: 5rem !important; padding-bottom: 5rem !important; }
+  .advisory { padding-top: 5rem !important; padding-bottom: 5rem !important; }
+  .community { padding-top: 5rem !important; padding-bottom: 5rem !important; }
+  .writing { padding-top: 5rem !important; padding-bottom: 5rem !important; }
+}
+
 </style>
 
 <nav>
@@ -1643,7 +1787,7 @@ section.work,
 <section class="hero">
   <div class="hero-left">
     <p class="hero-eyebrow">Technology Economics & FinOps</p>
-    <div class="hero-founder">Diana Molski · Founder, Cloud &amp; Capital</div>
+    <div class="hero-founder">Diana Molski · Cloud &amp; Capital</div>
     <h1 class="hero-headline">Decision systems<br>for <em>finance</em> and<br><em>engineering</em><br>leaders.</h1>
     <p class="hero-sub">Cloud, SaaS, AI infrastructure — the full picture. I build tools that make cost visible before the invoice arrives, and frameworks that turn visibility into decisions. That upstream layer is where the real work happens.</p>
     <div class="hero-ctas">
@@ -1928,6 +2072,7 @@ section.work,
   </div>
 </section>
 
+<div class="geo-divider"></div>
 <!-- COMMUNITY -->
 
 <section class="community" id="community">
@@ -1986,6 +2131,7 @@ section.work,
 </section>
 
 
+<div class="geo-divider"></div>
 <!-- WRITING -->
 <section class="writing" id="writing">
   <div class="section-label">Writing</div>

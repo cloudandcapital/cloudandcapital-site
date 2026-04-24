@@ -2143,12 +2143,11 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   padding-left: 3.5rem !important;
 }
 
-/* Newsletter hero: full-bleed dark, larger vertical padding,
-   extra bottom to create space for the card overlap */
+/* Newsletter hero: full-bleed dark, larger vertical padding */
 .newsletter-strip {
   margin: 0 !important;
   width: 100% !important;
-  padding: 4rem 3.5rem calc(4rem + 52px) !important;
+  padding: 4rem 3.5rem !important;
   align-items: flex-start !important;
   gap: 4rem !important;
 }
@@ -2169,26 +2168,26 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   text-align: center !important;
 }
 
-/* Editorial grid: overlap hero by 52px, dark 1px gap (seamless in overlap) */
+/* Editorial grid: 32px breathing room below hero, clean separator */
 .writing-editorial {
   border-left: none !important;
   border-right: none !important;
   border-top: none !important;
   border-bottom: none !important;
-  margin-top: -52px !important;
+  margin-top: 32px !important;
   position: relative !important;
-  z-index: 2 !important;
-  gap: 1px !important;
-  background: var(--ink) !important;
+  z-index: 1 !important;
+  gap: 8px !important;
+  background: var(--rule) !important;
 }
 
-/* Featured card: soft shadow for floating effect, no hover lift disruption */
+/* Featured card: soft shadow, normal hover */
 .writing-featured {
-  box-shadow: 0 4px 24px rgba(25,23,20,.13), 0 1px 4px rgba(25,23,20,.07) !important;
+  box-shadow: 0 2px 12px rgba(25,23,20,.07), 0 1px 3px rgba(25,23,20,.04) !important;
 }
 .writing-featured:hover {
-  transform: none !important;
-  box-shadow: 0 8px 32px rgba(25,23,20,.18), 0 2px 8px rgba(25,23,20,.09) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(25,23,20,.11), 0 2px 6px rgba(25,23,20,.06) !important;
   background: var(--cream) !important;
 }
 
@@ -2214,7 +2213,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   .newsletter-strip { padding: 2.5rem 1.5rem 3rem !important; }
   .newsletter-actions { flex-direction: row !important; min-width: 0 !important; }
   .newsletter-actions .btn { width: auto !important; }
-  .writing-editorial { margin-top: 0 !important; gap: 8px !important; background: var(--rule) !important; }
+  .writing-editorial { margin-top: 16px !important; gap: 8px !important; background: var(--rule) !important; }
   .wf-content { padding: 2rem 1.5rem !important; }
   .writing-small { padding: 2rem 1.5rem !important; }
 }

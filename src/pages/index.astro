@@ -2339,9 +2339,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
     display: none !important;
     position: fixed;
     inset: 0;
-    background: rgba(244,239,230,.97);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: #191714;
     flex-direction: column !important;
     align-items: center;
     justify-content: center;
@@ -2354,9 +2352,10 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   .nav-links a {
     font-size: .78rem;
     letter-spacing: .16em;
-    color: var(--ink-muted);
+    color: rgba(244,239,230,.65);
   }
-  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover { color: rgba(244,239,230,1); }
+  .nav-toggle.is-open span { background: rgba(244,239,230,.9); }
 
   /* ── Advisory: stack photo over content ── */
   .advisory-inner {
@@ -2564,7 +2563,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
     <li><a href="#community">Community</a></li>
     <li><a href="#writing">Writing</a></li>
     <li><a href="https://market-tape.cloudandcapital.com">Market Tape</a></li>
-    <li><a href="/audit">Signal Audit</a></li>
+    <li><a href="/signal-audit">Signal Audit</a></li>
     <li><a href="/interactive-lab">Interactive Lab</a></li>
   </ul>
 </nav>
@@ -3233,6 +3232,7 @@ if (phPrev) phPrev.addEventListener('click', () => {
   if (!toggle || !links) return;
   toggle.addEventListener('click', function() {
     const isOpen = links.classList.toggle('is-open');
+    toggle.classList.toggle('is-open', isOpen);
     toggle.setAttribute('aria-expanded', isOpen);
     document.body.style.overflow = isOpen ? 'hidden' : '';
   });
@@ -3240,6 +3240,7 @@ if (phPrev) phPrev.addEventListener('click', () => {
   links.querySelectorAll('a').forEach(function(a) {
     a.addEventListener('click', function() {
       links.classList.remove('is-open');
+      toggle.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     });

@@ -36,6 +36,127 @@ const { title = 'Cloud & Capital', description = '' } = Astro.props;
     </script>
   </head>
   <body>
+    <style>
+      .site-nav {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 200;
+        padding: 1rem 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(245,238,233,.96);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(0,0,0,.07);
+      }
+      .site-nav-logo {
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        font-size: .95rem;
+        font-weight: 500;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: #000;
+        text-decoration: none;
+      }
+      .site-nav-links {
+        display: flex;
+        gap: 1.75rem;
+        list-style: none;
+        margin: 0; padding: 0;
+        align-items: center;
+      }
+      .site-nav-links a {
+        font-family: 'DM Mono', monospace;
+        font-size: .58rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: #4A4A4A;
+        text-decoration: none;
+        transition: color .2s;
+      }
+      .site-nav-links a:hover { color: #000; }
+      .site-nav-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 6px 4px;
+        z-index: 201;
+      }
+      .site-nav-toggle span {
+        display: block;
+        width: 22px;
+        height: 1.5px;
+        background: #000;
+        border-radius: 2px;
+        transition: background .25s;
+      }
+      .site-nav-toggle.is-open span { background: rgba(244,239,230,.9); }
+      @media (max-width: 768px) {
+        .site-nav { padding: 1rem 1.25rem; }
+        .site-nav-toggle { display: flex; z-index: 301; }
+        .site-nav-links {
+          display: none;
+          position: fixed;
+          inset: 0;
+          background: #191714;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 2.25rem;
+          z-index: 300;
+          list-style: none;
+          padding: 0;
+        }
+        .site-nav-links.is-open { display: flex; }
+        .site-nav-links a {
+          font-size: .72rem;
+          letter-spacing: .16em;
+          color: rgba(244,239,230,.65);
+        }
+        .site-nav-links a:hover { color: rgba(244,239,230,1); }
+      }
+    </style>
+    <nav class="site-nav">
+      <a class="site-nav-logo" href="/">Cloud &amp; Capital</a>
+      <button class="site-nav-toggle" aria-label="Open menu" aria-expanded="false" id="tool-nav-toggle">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="site-nav-links" id="tool-nav-links">
+        <li><a href="/#discipline">Discipline</a></li>
+        <li><a href="/#work">Work</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#writing">Writing</a></li>
+        <li><a href="https://market-tape.cloudandcapital.com">Market Tape</a></li>
+        <li><a href="/signal-audit">Signal Audit</a></li>
+        <li><a href="/interactive-lab">Interactive Lab</a></li>
+      </ul>
+    </nav>
+    <script>
+      (function() {
+        var toggle = document.getElementById('tool-nav-toggle');
+        var links = document.getElementById('tool-nav-links');
+        if (!toggle || !links) return;
+        toggle.addEventListener('click', function() {
+          var isOpen = links.classList.toggle('is-open');
+          toggle.classList.toggle('is-open', isOpen);
+          toggle.setAttribute('aria-expanded', isOpen);
+          document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+        links.querySelectorAll('a').forEach(function(a) {
+          a.addEventListener('click', function() {
+            links.classList.remove('is-open');
+            toggle.classList.remove('is-open');
+            toggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+          });
+        });
+      })();
+    </script>
     <slot />
   </body>
 </html>

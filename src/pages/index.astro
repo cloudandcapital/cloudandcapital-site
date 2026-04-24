@@ -10,11 +10,11 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 <style is:global>
 
 :root{
-  --cream:#F4EFE6;--cream-dark:#EDE6D9;--ink:#191714;--ink-soft:#38342D;
-  --ink-muted:#857E74;--ink-faint:#C0B9AE;--gold:#B8924A;--gold-light:#D4B07A;
-  --sage:#5A7E5E;--sage-light:#74A079;--sage-dark:#304D35;--sage-pale:#EAF0EA;
-  --sage-faint:rgba(90,126,94,.07);
-  --rule:#DDD7CC;--white:#FDFBF7;
+  --cream:#F5EEE9;--cream-dark:#EDE5DC;--ink:#000000;--ink-soft:#2A2A2A;
+  --ink-muted:#4A4A4A;--ink-faint:#8B8B8B;--gold:#C9A961;--gold-light:#DDB977;
+  --sage:#6B8E7F;--sage-light:#86A89A;--sage-dark:#3D6055;--sage-pale:#EAF0EA;
+  --sage-faint:rgba(107,142,127,.07);--loss:#D97070;
+  --rule:#E5DDD5;--white:#FFFFFF;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{font-size:16px;scroll-behavior:smooth;}
@@ -2442,6 +2442,94 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   .ctab-hed { font-size: 1.5rem !important; }
 }
 
+/* ── Work 4-col bottom cards ── */
+.work-bottom-4col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+.work-4col-card {
+  padding: 2.5rem 2.25rem 2.75rem;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(255,255,255,.08);
+  position: relative;
+  transition: background .2s;
+}
+.work-4col-card:last-child { border-right: none; }
+.work-4col-card:hover { background: rgba(255,255,255,.03); }
+.work-4col-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--sage);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform .3s ease;
+}
+.work-4col-card:hover::before { transform: scaleY(1); }
+.work-4col-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: .57rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: .9rem;
+}
+.work-4col-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem;
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 1.1rem;
+}
+.work-4col-desc {
+  font-size: .82rem;
+  color: rgba(244,239,230,.42);
+  line-height: 1.78;
+  flex: 1;
+  margin-bottom: 1.75rem;
+}
+.work-4col-desc ul {
+  list-style: none;
+  padding: 0;
+  margin-top: .65rem;
+}
+.work-4col-desc ul li {
+  padding: .15rem 0 .15rem .85rem;
+  position: relative;
+}
+.work-4col-desc ul li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--sage-light);
+}
+.work-4col-link {
+  font-family: 'DM Mono', monospace;
+  font-size: .58rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--sage-light);
+  text-decoration: none;
+  margin-top: auto;
+  transition: color .2s;
+}
+.work-4col-link:hover { color: var(--sage); }
+@media (max-width: 1024px) {
+  .work-bottom-4col { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .work-bottom-4col { grid-template-columns: 1fr; }
+  .work-4col-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+}
+
+/* ── Hero tagline spacing ── */
+.hero-tagline { margin-bottom: .75rem !important; }
+
 </style>
 
 <nav>
@@ -2473,10 +2561,11 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <p class="hero-eyebrow">Technology Economics & FinOps</p>
+    <p class="hero-eyebrow">Finance-native · Systems builder</p>
     <div class="hero-founder">Diana Molski · Cloud &amp; Capital</div>
-    <h1 class="hero-headline">Decision systems<br>for <em>finance</em> and<br><em>engineering</em><br>leaders.</h1>
-    <p class="hero-sub">Cloud, SaaS, and AI infrastructure spend rarely become expensive at the invoice. I build tools and frameworks that make cost visible earlier, so finance and engineering teams understand tradeoffs before they turn into waste.</p>
+    <h1 class="hero-headline">I build tools that catch<br>cost problems before<br>they <em>compound.</em></h1>
+    <p class="hero-tagline">Cloud, SaaS, and AI infrastructure spend rarely become expensive at the invoice.</p>
+    <p class="hero-sub">I build tools and frameworks that make cost visible earlier, so finance and engineering teams understand tradeoffs before they turn into waste.</p>
     <div class="hero-ctas">
       <a href="/signal-audit" class="btn btn-sage">Take the 5-Minute Signal Audit</a>
       <a href="/interactive-lab" class="btn btn-outline">Explore the Interactive Lab</a>
@@ -2614,12 +2703,13 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
     <span class="cdb-fl cdb-fl-s" style="left:4%;top:50%;animation-delay:3.3s">YoY</span>
     <span class="cdb-fl cdb-fl-l" style="left:94%;top:50%;animation-delay:7.3s">−23.4%</span>
   </div>
-  <div class="cdb-ch tl"><span class="cdb-ld"></span>LIVE<span style="opacity:.5;padding:0 .4rem">·</span>COST SIGNAL</div>
+  <div class="cdb-ch tl"><span class="cdb-ld"></span>LIVE<span style="opacity:.5;padding:0 .4rem">·</span>MARKET SIGNAL</div>
   <div class="cdb-ch tr">04:18:22 UTC</div>
   <div class="cdb-ch bl">Cloud &amp; Capital</div>
   <div class="cdb-ch br">Δ −23.4%<span style="opacity:.5;padding:0 .4rem">·</span>12M</div>
-  
+
 </div>
+<p style="font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);text-align:center;padding:.7rem 0 0;opacity:.7;">Real-time tech infrastructure pricing · Updated every 30 min</p>
 </div>
 
 <!-- WORK -->
@@ -2684,21 +2774,52 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
         </div>
       </div>
 
-      <div class="work-bottom-card work-bottom-card-light">
-        <div class="work-bottom-tag">Open Source · Pipeline</div>
-        <div class="work-bottom-title">The Six-Tool Pipeline</div>
-        <div class="work-bottom-desc">FinOps Lite → Watchdog → Recovery Economics → AI Cost Lens → SaaS Cost Analyzer → Tech Spend Command Center. Each tool covers a distinct layer of the Visibility → Variance → Tradeoffs framework. FOCUS 1.0 compliant, multi-cloud.</div>
-        <a href="https://github.com/cloudandcapital" target="_blank" class="work-bottom-link">View on GitHub →</a>
+    </div><!-- end work-editorial-grid -->
+
+    <!-- 4-card bottom row -->
+    <div class="work-bottom-4col">
+
+      <div class="work-4col-card">
+        <div class="work-4col-tag">Open Source · Pipeline</div>
+        <div class="work-4col-title">The Six-Tool Pipeline</div>
+        <div class="work-4col-desc">
+          6 open-source FinOps tools covering the full FinOps Foundation 2026 framework:
+          <ul>
+            <li>FinOps Lite</li>
+            <li>FinOps Watchdog</li>
+            <li>Recovery Economics</li>
+            <li>AI Cost Lens</li>
+            <li>SaaS Cost Analyzer</li>
+            <li>Tech Spend Command Center</li>
+          </ul>
+          <br>All MIT licensed. CI on every push.
+        </div>
+        <a href="https://github.com/cloudandcapital" target="_blank" class="work-4col-link">View on GitHub →</a>
       </div>
 
-      <div class="work-bottom-card work-bottom-card-cream">
-        <div class="work-bottom-tag">Interactive · Tool</div>
-        <div class="work-bottom-title">Signal Audit</div>
-        <div class="work-bottom-desc">A five-minute diagnostic that surfaces where cost enters your decision chain and where it doesn’t. Built for finance leaders and engineering managers who suspect the problem is upstream.</div>
-        <a href="/signal-audit" class="work-bottom-link work-bottom-link-gold">Take the audit →</a>
+      <div class="work-4col-card">
+        <div class="work-4col-tag">Interactive · Tool</div>
+        <div class="work-4col-title">Market Tape</div>
+        <div class="work-4col-desc">Live market signals for tech infrastructure teams.<br><br>AI-powered morning brief connects market moves to cloud budgets. Bloomberg meets FinOps.<br><br>Updated every 30 minutes with sector leaders, AI stock data, and momentum signals.</div>
+        <a href="https://cloudandcapital.com/market-tape" target="_blank" class="work-4col-link">Launch Dashboard →</a>
       </div>
 
-    </div>
+      <div class="work-4col-card">
+        <div class="work-4col-tag">Interactive · Tool</div>
+        <div class="work-4col-title">Signal Audit</div>
+        <div class="work-4col-desc">A five-minute diagnostic that surfaces where cost enters your decision chain and where it doesn’t.<br><br>Built for finance leaders and engineering managers who suspect the problem is upstream.</div>
+        <a href="/signal-audit" class="work-4col-link">Take the Audit →</a>
+      </div>
+
+      <div class="work-4col-card">
+        <div class="work-4col-tag">Interactive · Tool</div>
+        <div class="work-4col-title">Interactive Lab</div>
+        <div class="work-4col-desc">Reframe decisions from FinOps, Finance, or Engineering lens.<br><br>GPU commitments, SaaS renewals, build-vs-buy. AI structures the tradeoffs before the meeting.</div>
+        <a href="/interactive-lab" class="work-4col-link">Open Lab →</a>
+      </div>
+
+    </div><!-- end work-bottom-4col -->
+
   </div>
 </section>
 
@@ -2748,9 +2869,11 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
       </div>
 
 
-      <p class="about-v4-final-lede">Diana works across the systems where capital and technology meet, from markets and the economy to cloud, AI, and FinOps.</p>
+      <p class="about-v4-final-lede">I work where capital and technology meet — from markets and macro to cloud economics, AI infrastructure, and FinOps.</p>
 
-      <p class="about-v4-final-body">Her background spans Morgan Stanley and years spent analyzing markets, capital flows, and how economic behavior plays out in real systems. That instinct eventually moved toward building — tools and systems that make cost legible before it becomes a problem. That same lens now carries into cloud economics, AI infrastructure, and FinOps, where cost is shaped inside decisions rather than observed after the fact.</p>
+      <p class="about-v4-final-body">My background spans Morgan Stanley and years analyzing markets, capital flows, and how economic behavior shows up in real systems. That instinct eventually moved toward building — tools and systems that make cost legible before it becomes a problem.</p>
+
+      <p class="about-v4-final-body">That same lens now carries into cloud economics, AI infrastructure, and FinOps, where cost is shaped inside decisions rather than observed after the fact.</p>
 
       <p class="about-v4-final-body about-v4-final-thesis">Most teams still see cost after it happens. The real work sits earlier, inside the decisions that create it.</p>
 <div class="about-v4-final-certs">AWS · Azure AI · FinOps Practitioner · FOCUS Analyst</div>

@@ -1857,7 +1857,7 @@ section.work,
         <div class="work-bottom-tag">Open Source · Pipeline</div>
         <div class="work-bottom-title">The Six-Tool Pipeline</div>
         <div class="work-bottom-desc">FinOps Lite → Watchdog → Recovery Economics → AI Cost Lens → SaaS Cost Analyzer → Tech Spend Command Center. Each tool covers a distinct layer of the Visibility → Variance → Tradeoffs framework. FOCUS 1.0 compliant, multi-cloud.</div>
-        <a href="https://github.com/dianuhs" target="_blank" class="work-bottom-link">View on GitHub →</a>
+        <a href="https://github.com/cloudandcapital" target="_blank" class="work-bottom-link">View on GitHub →</a>
       </div>
 
       <div class="work-bottom-card work-bottom-card-cream">
@@ -1923,7 +1923,7 @@ section.work,
 
       <p class="about-v4-final-body about-v4-final-thesis">Most teams still see cost after it happens. The real work sits earlier, inside the decisions that create&nbsp;it.</p>
 <div class="about-v4-final-certs">AWS Cloud Practitioner · Azure AI · FinOps Practitioner · FOCUS Analyst</div>
-<div class="about-v4-final-ctas"><a href="#contact" class="about-v4-final-btn about-v4-final-btn-sage">Contact</a></div>
+<div class="about-v4-final-ctas"><a href="mailto:diana@cloudandcapital.com" class="about-v4-final-btn about-v4-final-btn-sage">Contact</a></div>
     </div>
   </div>
 </section>
@@ -1963,8 +1963,24 @@ section.work,
         <div class="ev-tag">May 2026 · Vol. 02 · Coming Up</div>
         <div class="ev-title">Next Event — Details TBA</div>
         <div class="ev-meta">Date and location coming soon.</div>
-        <a href="mailto:diana@cloudandcapital.com?subject=FinOps%20Weekly%20LA%20%E2%80%94%20Notify%20Me&body=Hi%20Diana%2C%0A%0APlease%20add%20me%20to%20the%20list%20for%20the%20next%20FinOps%20Weekly%20LA%20event." class="ev-link">Get notified →</a>
       </article>
+    </div>
+  </div>
+
+  <div class="photos-section reveal">
+    <div class="photos-label">
+      <span>From the community</span>
+      <div>
+        <button class="ph-nav-btn" id="ph-prev">←</button>
+        <button class="ph-nav-btn" id="ph-next">→</button>
+      </div>
+    </div>
+    <div class="photos-viewport">
+      <div class="photos-track" id="ph-track">
+        <div class="photo-slide"><img src="/images/community/photo-1.jpg" alt="FinOps Weekly LA event"></div>
+        <div class="photo-slide"><img src="/images/community/photo-2.jpg" alt="FinOps Weekly LA event"></div>
+        <div class="photo-slide"><img src="/images/community/photo-3.jpg" alt="FinOps Weekly LA event"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1982,8 +1998,8 @@ section.work,
       <div class="newsletter-desc">Markets & Mimosas on Fridays. Cloud economics, technology spend, and FinOps when the story demands it. No filler. No generic AI takes — just where finance meets infrastructure.</div>
     </div>
     <div class="newsletter-actions">
-      <a href="https://substack.com" class="btn btn-sage" target="_blank">Subscribe on Substack</a>
-      <a href="https://substack.com" class="btn btn-outline-w" target="_blank">Latest post →</a>
+      <a href="https://substack.com/@cloudandcapital" class="btn btn-sage" target="_blank">Subscribe on Substack</a>
+      <a href="https://substack.com/@cloudandcapital" class="btn btn-outline-w" target="_blank">Latest post →</a>
     </div>
   </div>
 
@@ -2073,11 +2089,13 @@ let pos = 0;
 const track = document.getElementById('ph-track');
 const getSlides = () => track ? track.querySelectorAll('.photo-slide') : [];
 const slideW = () => { const s = getSlides(); return s.length ? s[0].offsetWidth + 16 : 0; };
-document.getElementById('ph-next').addEventListener('click', () => {
+const phNext = document.getElementById('ph-next');
+const phPrev = document.getElementById('ph-prev');
+if (phNext) phNext.addEventListener('click', () => {
   const max = getSlides().length - 3;
   if(pos < max){ pos++; track.style.transform = `translateX(-${pos * slideW()}px)`; }
 });
-document.getElementById('ph-prev').addEventListener('click', () => {
+if (phPrev) phPrev.addEventListener('click', () => {
   if(pos > 0){ pos--; track.style.transform = `translateX(-${pos * slideW()}px)`; }
 });
 

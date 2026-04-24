@@ -66,6 +66,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.25rem 3.5rem;displ
 .hero-tagline{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;font-weight:300;color:var(--ink-muted);margin-bottom:1rem;}
 h1.hero-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.2vw,4.7rem);font-weight:300;line-height:1.05;letter-spacing:-.02em;color:var(--ink);margin-bottom:1.25rem;}
 h1.hero-headline em{font-style:italic;color:var(--ink-soft);}
+.mob-br{display:none;}
+@media(max-width:600px){.mob-br{display:block;line-height:0;}}
 .hero-sub{font-size:.95rem;color:var(--ink-muted);max-width:46ch;line-height:1.8;margin-bottom:2.75rem;}
 .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;}
 
@@ -2610,7 +2612,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   <div class="hero-left">
     <p class="hero-eyebrow">— Finance-native · Systems builder —</p>
     <div class="hero-founder">Diana Molski · Cloud &amp; Capital</div>
-    <h1 class="hero-headline">I build tools that catch<br>cost problems before<br>they <em>compound.</em></h1>
+    <h1 class="hero-headline">I build tools that catch cost problems<span class="mob-br"></span> before they <em>compound.</em></h1>
     <p class="hero-tagline">Using AI. Building in public.</p>
     <p class="hero-sub">Cloud, SaaS, and AI infrastructure spend rarely become expensive at the invoice. I build FinOps tools and decision systems using AI, and I share the process as I go — the agent workflows, the prompts, what works, what breaks. I also write about markets and how economic signals show up in cloud budgets.</p>
     <div class="hero-ctas">

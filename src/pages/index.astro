@@ -52,10 +52,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.25rem 3.5rem;displ
 /* HERO */
 .hero{display:grid;grid-template-columns:55% 45%;min-height:100vh;padding-top:4.5rem;}
 .hero-left{padding:6rem 4rem 5rem 3.5rem;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--rule);opacity:0;animation:fadeUp 1s ease forwards .15s;}
-.hero-eyebrow{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);margin-bottom:2rem;display:flex;align-items:center;gap:.8rem;}
-.hero-eyebrow::before{content:'';display:block;width:1.75rem;height:1px;background:var(--sage);}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);margin-bottom:1.25rem;display:block;}
+.hero-eyebrow::before{content:none;}
 .hero-tagline{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;font-weight:300;color:var(--ink-muted);margin-bottom:1rem;}
-h1.hero-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(3.6rem,6.5vw,7.2rem);font-weight:300;line-height:1.0;letter-spacing:-.03em;color:var(--ink);margin-bottom:1.5rem;}
+h1.hero-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.2vw,4.7rem);font-weight:300;line-height:1.05;letter-spacing:-.02em;color:var(--ink);margin-bottom:1.25rem;}
 h1.hero-headline em{font-style:italic;color:var(--ink-soft);}
 .hero-sub{font-size:.95rem;color:var(--ink-muted);max-width:46ch;line-height:1.8;margin-bottom:2.75rem;}
 .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;}
@@ -2561,8 +2561,8 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <p class="hero-eyebrow">Finance-native · Systems builder</p>
     <div class="hero-founder">Diana Molski · Cloud &amp; Capital</div>
+    <p class="hero-eyebrow">— Finance-native · Systems builder —</p>
     <h1 class="hero-headline">I build tools that catch<br>cost problems before<br>they <em>compound.</em></h1>
     <p class="hero-tagline">Cloud, SaaS, and AI infrastructure spend rarely become expensive at the invoice.</p>
     <p class="hero-sub">I build tools and frameworks that make cost visible earlier, so finance and engineering teams understand tradeoffs before they turn into waste.</p>

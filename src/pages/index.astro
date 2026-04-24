@@ -1780,6 +1780,16 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 .newsletter-desc { max-width: none !important; }
 .newsletter-actions { flex-shrink: 0; }
 
+/* ── Hero paragraph: wider to align with button group ── */
+.hero-sub { max-width: 58ch !important; }
+
+/* ── Work intro: tighten gap to feature below (40–50% reduction) ── */
+.work-intro { margin-bottom: 2.75rem !important; }
+
+/* ── Collaborator logos: 2× (approx 42/44px) ── */
+.comm-collab-logo-fw { height: 42px !important; opacity: .85 !important; }
+.comm-collab-logo-sc { height: 44px !important; opacity: .85 !important; }
+
 /* ── Geometric section dividers ── */
 .geo-divider {
   height: 1px;
@@ -1821,7 +1831,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
     <li><a href="#community">Community</a></li>
     <li><a href="#writing">Writing</a></li>
     <li><a href="https://www.cloudandcapital.com/market-tape">Market Tape</a></li>
-    <li><a href="/interactive-lab" class="nav-cta">Interactive Lab</a></li>
+    <li><a href="/interactive-lab">Interactive Lab</a></li>
   </ul>
 </nav>
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
@@ -1838,7 +1848,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
     <p class="hero-eyebrow">Technology Economics & FinOps</p>
     <div class="hero-founder">Diana Molski · Cloud &amp; Capital</div>
     <h1 class="hero-headline">Decision systems<br>for <em>finance</em> and<br><em>engineering</em><br>leaders.</h1>
-    <p class="hero-sub">Cloud, SaaS, and AI infrastructure spend rarely become expensive at the invoice. I build tools and frameworks that make cost visible earlier, so finance and engineering teams can understand tradeoffs before they turn into waste.</p>
+    <p class="hero-sub">Cloud, SaaS, and AI infrastructure spend rarely become expensive at the invoice. I build tools and frameworks that make cost visible earlier, so finance and engineering teams understand tradeoffs before they turn into waste.</p>
     <div class="hero-ctas">
       <a href="/signal-audit" class="btn btn-sage">Take the 5-Minute Signal Audit</a>
       <a href="/interactive-lab" class="btn btn-outline">Explore the Interactive Lab</a>
@@ -1864,7 +1874,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 <!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <span class="mi">Cloud Cost Guard</span><span class="ms">◆</span>
+    <span class="mi">Cloud+ Cost Guard</span><span class="ms">◆</span>
     <span class="mi">FinOps Weekly Los Angeles</span><span class="ms">◆</span>
     <span class="mi">AI Infrastructure Economics</span><span class="ms">◆</span>
     <span class="mi">Unit Economics</span><span class="ms">◆</span>
@@ -1994,7 +2004,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 
       <div class="work-feature-copy">
         <div class="work-feature-meta">Dashboard · AI Analyst · Live</div>
-        <div class="work-feature-title">Cloud Cost Guard<br><em>+ Lumen</em></div>
+        <div class="work-feature-title">Cloud+ Cost Guard<br><em>+ Lumen</em></div>
         <div class="work-feature-desc">Multi-cloud + AI + SaaS spend in one dashboard.<br>Ask Lumen anything about your costs and get a specific answer in plain English, with numbers attached.</div>
         <div class="work-feature-actions">
           <a href="https://guard.cloudandcapital.com" target="_blank" class="work-feature-link">View live dashboard →</a>
@@ -2115,7 +2125,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
       <p class="about-v4-final-body">Her background spans Morgan Stanley and years spent analyzing markets, capital flows, and how economic behavior plays out in real systems. That instinct eventually moved toward building — tools and systems that make cost legible before it becomes a problem. That same lens now carries into cloud economics, AI infrastructure, and FinOps, where cost is shaped inside decisions rather than observed after the fact.</p>
 
       <p class="about-v4-final-body about-v4-final-thesis">Most teams still see cost after it happens. The real work sits earlier, inside the decisions that create it.</p>
-<div class="about-v4-final-certs">AWS Cloud Practitioner · Azure AI · FinOps Practitioner · FOCUS Analyst</div>
+<div class="about-v4-final-certs">AWS · Azure AI · FinOps Practitioner · FOCUS Analyst</div>
 <div class="about-v4-final-ctas"><a href="mailto:diana@cloudandcapital.com" class="about-v4-final-btn about-v4-final-btn-sage">Contact</a></div>
     </div>
   </div>
@@ -2146,12 +2156,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
             <div class="ev-title">Using AI to Put the Ops in FinOps</div>
             <div class="ev-meta">Common Space Brewery · South Bay.</div>
             <div class="ev-meta" style="margin-top:.6rem;">Our first LA FinOps Meetup brought finance, engineering, and cloud practitioners together for an informal evening on FinOps, AI, and the operating work behind modern technology spend.</div>
-            <div class="ev-meta" style="margin-top:.5rem;">Sessions included Grant Havrilenko on his FinOps journey and Ian Cannon + Jeff Blume from Wiv.ai on using AI to put the Ops in FinOps.</div>
-            <div class="ev-speakers">
-              <div class="ev-speaker">Grant Havrilenko · Cloud FinOps Manager @ Ulta Beauty</div>
-              <div class="ev-speaker">Ian Cannon · Senior Account Executive @ Wiv.ai</div>
-              <div class="ev-speaker">Jeff Blume · Principal Solutions Architect @ Wiv.ai</div>
-            </div>
+            <div class="ev-meta" style="margin-top:.5rem;">Featuring sessions from Ulta Beauty and Wiv.ai on real-world FinOps and AI in practice.</div>
             <div class="ev-sponsor ev-sponsor-dark">Sponsored by Wiv.ai</div>
           </div>
           <div class="ev-poster-wrap">

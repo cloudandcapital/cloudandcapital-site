@@ -91,7 +91,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .audit-card {
     background: var(--soft-white);
-    border: 1px solid var(--border-soft);
     border-radius: 3px;
     padding: 56px 56px 48px;
     box-shadow: var(--shadow-card);
@@ -352,7 +351,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .breakdown-item {
     padding: 28px 24px;
-    border: 1px solid var(--border-soft);
     background: var(--soft-white);
     border-radius: 3px;
     box-shadow: var(--shadow-card);
@@ -753,7 +751,7 @@ function buildBreakdown(totalScore) {
     item.className = 'breakdown-item';
     item.innerHTML = `
       <div class="breakdown-item-label">${g.label}</div>
-      <div class="breakdown-item-score">${total}<span style="font-size:16px;color:#9a9485">/${max}</span></div>
+      <div class="breakdown-item-score">${total}<span style="font-size:16px;color:var(--text-light)">/${max}</span></div>
       <div class="breakdown-bar"><div class="breakdown-bar-fill" style="width:${pct}%"></div></div>
     `;
     grid.appendChild(item);

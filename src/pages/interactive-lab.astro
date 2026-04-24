@@ -41,7 +41,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .lab-wrap { padding: 0 60px 100px; max-width: 980px; }
 
   /* CARD */
-  .lab-card { background: var(--soft-white); border: 1px solid var(--border-soft); border-radius: 3px; padding: 56px 56px 48px; box-shadow: var(--shadow-card); position: relative; }
+  .lab-card { background: var(--soft-white); border-radius: 3px; padding: 56px 56px 48px; box-shadow: var(--shadow-card); position: relative; }
   .lab-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--forest); border-radius: 3px 3px 0 0; }
 
   .card-section { margin-bottom: 40px; }
@@ -111,7 +111,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .aspects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 48px; }
 
-  .aspect { background: var(--pure-white); border: 1px solid var(--border-soft); padding: 28px 26px; border-radius: 2px; box-shadow: var(--shadow-card); position: relative; }
+  .aspect { background: var(--pure-white); padding: 28px 26px; border-radius: 2px; box-shadow: var(--shadow-card); position: relative; }
   .aspect-icon { width: 28px; height: 28px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--forest); border-radius: 50%; font-family: 'Playfair Display', serif; font-size: 13px; color: var(--forest); font-style: italic; }
   .aspect-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--forest); margin-bottom: 10px; font-weight: 500; }
   .aspect-text { font-family: 'Cormorant Garamond', serif; font-size: 17px; line-height: 1.6; color: var(--text); font-weight: 400; }
@@ -152,8 +152,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   /* RESULT ACTIONS */
   .result-actions { display: flex; gap: 12px; flex-wrap: wrap; padding-bottom: 0; }
-  .btn-gold { background: transparent; color: var(--forest); border-color: var(--forest); }
-  .btn-gold:hover { background: var(--forest); color: white; }
+  .btn-gold { background: transparent; color: var(--gold); border-color: var(--gold); }
+  .btn-gold:hover { background: var(--gold); color: white; }
 
   /* CTA */
   .cross-cta { margin-top: 60px; padding: 44px 52px; background: var(--cream-dark); display: flex; align-items: center; justify-content: space-between; gap: 32px; }
@@ -165,7 +165,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .btn-solid:hover { background: var(--forest-deep); }
 
   /* ERROR */
-  .error-msg { background: #f6e6db; border: 1px solid #d4a78b; color: #8a5425; padding: 16px 20px; font-size: 13px; margin-top: 20px; border-radius: 2px; display: none; }
+  .error-msg { background: rgba(217, 112, 112, 0.08); border: 1px solid var(--alert); color: var(--alert); padding: 16px 20px; font-size: 13px; margin-top: 20px; border-radius: 2px; display: none; }
   .error-msg.active { display: block; }
 
   @media (max-width: 768px) {

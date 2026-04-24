@@ -1,25 +1,25 @@
 /* ─── Brand Tokens ─────────────────────────────────────────────────── */
-/* Extracted verbatim from signal-audit.html and interactive-lab.html  */
 :root {
-  --cream: #ede8de;
-  --cream-dark: #e4ddd0;
-  --cream-mid: #d9d1c2;
-  --soft-white: #faf7ee;
-  --pure-white: #ffffff;
-  --near-black: #181f1a;
-  --text: #1e1e1a;
-  --text-muted: #6b6659;
-  --text-light: #9a9485;
-  --forest: #2a4233;
-  --forest-deep: #1c2e22;
-  --forest-light: #3a5a45;
-  --gold: #c9a96e;
-  --gold-soft: rgba(201, 169, 110, 0.12);
-  --sage-tint: rgba(42, 66, 51, 0.04);
-  --border: rgba(30, 30, 26, 0.12);
-  --border-soft: rgba(30, 30, 26, 0.08);
-  --border-strong: rgba(30, 30, 26, 0.22);
-  --shadow-card: 0 1px 2px rgba(30, 30, 26, 0.03), 0 8px 40px rgba(30, 30, 26, 0.06);
+  --cream: #F5EEE9;
+  --cream-dark: #EBE3DB;
+  --cream-mid: #DDD5CA;
+  --soft-white: #FFFFFF;
+  --pure-white: #FFFFFF;
+  --near-black: #1A1A1A;
+  --text: #000000;
+  --text-muted: #4A4A4A;
+  --text-light: #8B8B8B;
+  --forest: #6B8E7F;
+  --forest-deep: #4d6e63;
+  --forest-light: #8aab9c;
+  --gold: #C9A961;
+  --gold-soft: rgba(201, 169, 97, 0.12);
+  --sage-tint: rgba(107, 142, 127, 0.06);
+  --alert: #D97070;
+  --border: rgba(0, 0, 0, 0.10);
+  --border-soft: rgba(0, 0, 0, 0.07);
+  --border-strong: rgba(0, 0, 0, 0.18);
+  --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.04), 0 12px 48px rgba(0, 0, 0, 0.10);
 }
 
 /* ─── Reset ────────────────────────────────────────────────────────── */

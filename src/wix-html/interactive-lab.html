@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Lab — Cloud & Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #ede8de;
+    --cream-dark: #e4ddd0;
+    --soft-white: #faf7ee;
+    --pure-white: #ffffff;
+    --forest: #2a4233;
+    --forest-deep: #1c2e22;
+    --forest-light: #3a5a45;
+    --sage-tint: rgba(42,66,51,0.04);
+    --near-black: #181f1a;
+    --text: #1e1e1a;
+    --text-muted: #6b6659;
+    --text-light: #9a9485;
+    --gold: #c9a96e;
+    --gold-soft: rgba(201,169,110,0.12);
+    --border: rgba(30,30,26,0.12);
+    --border-soft: rgba(30,30,26,0.08);
+    --border-strong: rgba(30,30,26,0.22);
+    --shadow-card: 0 1px 2px rgba(30,30,26,0.03), 0 8px 40px rgba(30,30,26,0.06);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 80px 60px 60px;
+    max-width: 820px;
+  }
+
+  .label {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .label::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 1px;
+    background: var(--text-muted);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 5vw, 58px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--forest);
+  }
+
+  .hero p {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 580px;
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 32px;
+    margin-top: 36px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .meta-item {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  .meta-item strong {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 3px;
+  }
+
+  /* MAIN WRAP */
+  .lab-wrap {
+    padding: 0 60px 100px;
+    max-width: 980px;
+  }
+
+  /* CARD */
+  .lab-card {
+    background: var(--soft-white);
+    border: 1px solid var(--border-soft);
+    border-radius: 3px;
+    padding: 56px 56px 48px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+  }
+
+  .lab-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--forest);
+    border-radius: 3px 3px 0 0;
+  }
+
+  .card-section {
+    margin-bottom: 40px;
+  }
+
+  .card-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin-bottom: 16px;
+  }
+
+  /* STARTER SCENARIOS */
+  .scenarios-intro {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+
+  .scenarios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .scenario {
+    background: var(--pure-white);
+    border: 1px solid var(--border-soft);
+    padding: 14px 18px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text);
+    font-weight: 300;
+    border-radius: 2px;
+  }
+
+  .scenario:hover {
+    border-color: var(--forest);
+    transform: translateX(2px);
+    background: var(--pure-white);
+  }
+
+  .scenario-label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  /* TEXTAREA */
+  .decision-input {
+    width: 100%;
+    min-height: 140px;
+    resize: vertical;
+    background: var(--pure-white);
+    border: 1px solid var(--border-soft);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    padding: 20px 22px;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+  }
+
+  .decision-input:focus {
+    outline: none;
+    border-color: var(--forest);
+    box-shadow: 0 0 0 3px var(--sage-tint);
+  }
+
+  .decision-input::placeholder {
+    color: var(--text-light);
+    font-style: italic;
+  }
+
+  /* PERSPECTIVE TOGGLE */
+  .perspectives {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .perspective {
+    background: var(--pure-white);
+    border: 1px solid var(--border-soft);
+    padding: 16px 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    border-radius: 2px;
+    font-family: inherit;
+  }
+
+  .perspective:hover {
+    border-color: var(--forest);
+  }
+
+  .perspective.selected {
+    border-color: var(--forest);
+    background: var(--sage-tint);
+    box-shadow: inset 0 3px 0 var(--forest);
+  }
+
+  .perspective-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text);
+    font-style: italic;
+    margin-bottom: 4px;
+  }
+
+  .perspective-desc {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  /* ACTIONS */
+  .actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 36px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border: 1px solid;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 400;
+    border-radius: 0;
+  }
+
+  .btn-primary {
+    background: var(--forest);
+    color: white;
+    border-color: var(--forest);
+  }
+
+  .btn-primary:hover {
+    background: var(--forest-deep);
+    border-color: var(--forest-deep);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-muted);
+    border-color: var(--border-strong);
+  }
+
+  .btn-ghost:hover {
+    color: var(--text);
+    border-color: var(--text-muted);
+  }
+
+  /* THINKING STATE */
+  .thinking-overlay {
+    display: none;
+    text-align: center;
+    padding: 80px 40px;
+    animation: fadeUp 0.4s ease;
+  }
+
+  .thinking-overlay.active { display: block; }
+
+  .thinking-dots {
+    display: inline-flex;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .thinking-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--forest);
+    animation: pulse 1.4s ease infinite;
+  }
+
+  .thinking-dot:nth-child(2) { animation-delay: 0.2s; }
+  .thinking-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes pulse {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+
+  .thinking-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-style: italic;
+    color: var(--text-muted);
+    transition: opacity 0.3s;
+    min-height: 32px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESULT */
+  .result {
+    display: none;
+    animation: fadeUp 0.5s ease;
+    margin-top: 60px;
+  }
+
+  .result.active { display: block; }
+
+  .result-header {
+    background: var(--near-black);
+    color: white;
+    padding: 52px 56px 48px;
+    margin: 0 -56px 0;
+    position: relative;
+  }
+
+  .result-header-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .result-header-label::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 1px;
+    background: rgba(255,255,255,0.25);
+  }
+
+  .framed-decision {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 400;
+    line-height: 1.35;
+    color: white;
+    letter-spacing: -0.005em;
+  }
+
+  .framed-decision em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  /* RESULT BODY */
+  .result-body {
+    padding: 48px 56px 0;
+    margin: 0 -56px;
+  }
+
+  .aspects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .aspect {
+    background: var(--pure-white);
+    border: 1px solid var(--border-soft);
+    padding: 28px 26px;
+    border-radius: 2px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+  }
+
+  .aspect-icon {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--forest);
+    border-radius: 50%;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: var(--forest);
+    font-style: italic;
+  }
+
+  .aspect-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .aspect-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  /* SPECTRUM */
+  .spectrum-section {
+    padding: 36px 0;
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+    margin-bottom: 48px;
+  }
+
+  .spectrum-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .spectrum-label::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 1px;
+    background: var(--text-light);
+  }
+
+  .spectrum-track {
+    position: relative;
+    height: 2px;
+    background: var(--border);
+    margin: 44px 0 24px;
+    border-radius: 2px;
+  }
+
+  .spectrum-ticks {
+    position: absolute;
+    top: -6px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .spectrum-tick {
+    width: 1px;
+    height: 14px;
+    background: var(--border);
+  }
+
+  .spectrum-dot {
+    position: absolute;
+    top: 50%;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--forest);
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 4px var(--sage-tint), 0 0 0 8px rgba(42,66,51,0.06);
+    transition: left 1s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .spectrum-dot::after {
+    content: attr(data-score);
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: var(--forest);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .spectrum-ends {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+
+  .spectrum-ends em {
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* THE MOVE */
+  .the-move {
+    background: var(--forest);
+    color: white;
+    padding: 40px 44px;
+    border-radius: 2px;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .the-move-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .the-move-label::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .the-move-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    line-height: 1.65;
+    color: white;
+    font-weight: 400;
+  }
+
+  /* REFRAME */
+  .reframe-section {
+    padding: 36px 0 0;
+    border-top: 1px solid var(--border-soft);
+    margin-bottom: 32px;
+  }
+
+  .reframe-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .reframe-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .reframe-option {
+    background: var(--pure-white);
+    border: 1px solid var(--border-soft);
+    padding: 20px 22px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    font-family: inherit;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .reframe-option:hover {
+    border-color: var(--forest);
+    transform: translateX(2px);
+    background: var(--sage-tint);
+  }
+
+  .reframe-option-label {
+    flex: 1;
+  }
+
+  .reframe-option-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .reframe-option-desc {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .reframe-option-arrow {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--forest);
+    transition: transform 0.2s;
+  }
+
+  .reframe-option:hover .reframe-option-arrow {
+    transform: translateX(3px);
+  }
+
+  /* RESULT ACTIONS */
+  .result-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-bottom: 0;
+  }
+
+  .btn-gold {
+    background: transparent;
+    color: var(--forest);
+    border-color: var(--forest);
+  }
+
+  .btn-gold:hover {
+    background: var(--forest);
+    color: white;
+  }
+
+  /* CTA */
+  .cross-cta {
+    margin-top: 60px;
+    padding: 44px 52px;
+    background: var(--cream-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .cross-cta-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .cross-cta-text h3 em {
+    font-style: italic;
+    color: var(--forest);
+  }
+
+  .cross-cta-text p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .btn-solid {
+    background: var(--forest);
+    color: white;
+    border-color: var(--forest);
+    text-decoration: none;
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .btn-solid:hover {
+    background: var(--forest-deep);
+  }
+
+  /* ERROR */
+  .error-msg {
+    background: #f6e6db;
+    border: 1px solid #d4a78b;
+    color: #8a5425;
+    padding: 16px 20px;
+    font-size: 13px;
+    margin-top: 20px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  .error-msg.active { display: block; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 48px 24px 40px; }
+    .lab-wrap { padding: 0 24px 80px; }
+    .lab-card { padding: 36px 24px 32px; }
+    .result-header { padding: 40px 24px 36px; margin: 0 -24px; }
+    .result-body { padding: 40px 24px 0; margin: 0 -24px; }
+    .aspects-grid { grid-template-columns: 1fr; gap: 14px; }
+    .perspectives { grid-template-columns: 1fr; }
+    .reframe-options { grid-template-columns: 1fr; }
+    .scenarios { grid-template-columns: 1fr; }
+    .meta-row { flex-wrap: wrap; gap: 16px; }
+    .cross-cta { flex-direction: column; padding: 32px 24px; align-items: flex-start; }
+    .the-move { padding: 32px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="label">Interactive · Decision Frame</div>
+  <h1>Bring a decision.<br>Leave with a <em>frame.</em></h1>
+  <p>Most cloud and AI decisions get made inside a narrow frame — one team's priorities, one spreadsheet, one deadline. The Lab reframes the decision the way a finance-native operator would: where the cost actually lives, what the real tradeoff is, and what a sharp move looks like.</p>
+  <div class="meta-row">
+    <div class="meta-item">Input<strong>Your decision</strong></div>
+    <div class="meta-item">Time<strong>~30 seconds</strong></div>
+    <div class="meta-item">Output<strong>Structured frame</strong></div>
+    <div class="meta-item">Gate<strong>No sign-up</strong></div>
+  </div>
+</div>
+
+<div class="lab-wrap">
+
+  <!-- INPUT CARD -->
+  <div class="lab-card" id="inputCard">
+
+    <div class="card-section">
+      <div class="section-label">Starter scenarios</div>
+      <div class="scenarios-intro">Click any to populate — or describe your own below.</div>
+      <div class="scenarios">
+        <button type="button" class="scenario" data-scenario="Our engineering team wants to commit $500K for a year of reserved GPU capacity to train our models. Finance wants flexibility to reassess quarterly. We don't yet know whether our workload will scale or plateau. Which way should we go?">
+          <span class="scenario-label">GPU Commitment</span>
+          $500K of GPU capacity, one-year commit vs. quarterly flex
+        </button>
+        <button type="button" class="scenario" data-scenario="Our Datadog contract is up for renewal in 60 days. Spend has grown 3x in two years. We're considering renegotiating, switching to a competitor, or building more observability in-house. What's the right frame?">
+          <span class="scenario-label">SaaS Renewal</span>
+          Datadog renewal after 3x spend growth
+        </button>
+        <button type="button" class="scenario" data-scenario="We use the Claude API for internal agents and customer-facing features. Monthly spend is approaching $40K and growing fast. Leadership is asking whether we should fine-tune a smaller model or build in-house to cut costs. How should we think about it?">
+          <span class="scenario-label">Build vs. Buy AI</span>
+          Claude API spend hitting $40K/month — build or buy?
+        </button>
+        <button type="button" class="scenario" data-scenario="Our AWS bill hit $180K/month and finance is asking hard questions. Engineering says there's no easy cut — every service is load-bearing. But we haven't done a real cost review in 18 months. Where do we actually start?">
+          <span class="scenario-label">Cost Review</span>
+          AWS bill hit $180K/month — where to start
+        </button>
+        <button type="button" class="scenario" data-scenario="We're a 50-person company running entirely on AWS. Leadership is pushing to go multi-cloud for 'resilience and negotiating leverage.' Engineering sees massive operational cost. Is this the right move now or are we chasing a narrative?">
+          <span class="scenario-label">Multi-Cloud</span>
+          50-person team — is multi-cloud actually worth it?
+        </button>
+      </div>
+    </div>
+
+    <div class="card-section">
+      <div class="section-label">Your decision</div>
+      <textarea
+        class="decision-input"
+        id="decisionInput"
+        placeholder="Describe the decision you're navigating. Include the pressure, the context, and what's at stake. The more specific, the sharper the frame."
+      ></textarea>
+    </div>
+
+    <div class="card-section">
+      <div class="section-label">Frame it from</div>
+      <div class="perspectives" id="perspectives">
+        <button type="button" class="perspective selected" data-persp="finops">
+          <div class="perspective-name">FinOps</div>
+          <div class="perspective-desc">Cost × Decisions</div>
+        </button>
+        <button type="button" class="perspective" data-persp="finance">
+          <div class="perspective-name">Finance</div>
+          <div class="perspective-desc">Capital × Risk</div>
+        </button>
+        <button type="button" class="perspective" data-persp="engineering">
+          <div class="perspective-name">Engineering</div>
+          <div class="perspective-desc">Build × Operate</div>
+        </button>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn btn-primary" id="submitBtn" disabled>Frame the decision →</button>
+      <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+    </div>
+
+    <div class="error-msg" id="errorMsg"></div>
+  </div>
+
+  <!-- THINKING OVERLAY -->
+  <div class="thinking-overlay" id="thinking">
+    <div class="thinking-dots">
+      <div class="thinking-dot"></div>
+      <div class="thinking-dot"></div>
+      <div class="thinking-dot"></div>
+    </div>
+    <div class="thinking-text" id="thinkingText">Reading the decision</div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result" id="result">
+    <div class="lab-card" style="padding: 0; overflow: hidden;">
+      <div class="result-header">
+        <div class="result-header-label" id="frameLabel">Decision framed · FinOps lens</div>
+        <div class="framed-decision" id="framedDecision"></div>
+      </div>
+
+      <div class="result-body">
+        <div class="aspects-grid">
+          <div class="aspect">
+            <div class="aspect-icon">i</div>
+            <div class="aspect-label">Where cost actually lives</div>
+            <div class="aspect-text" id="aspectCost"></div>
+          </div>
+          <div class="aspect">
+            <div class="aspect-icon">ii</div>
+            <div class="aspect-label">The real tradeoff</div>
+            <div class="aspect-text" id="aspectTradeoff"></div>
+          </div>
+          <div class="aspect">
+            <div class="aspect-icon">iii</div>
+            <div class="aspect-label">Hidden risk</div>
+            <div class="aspect-text" id="aspectRisk"></div>
+          </div>
+          <div class="aspect">
+            <div class="aspect-icon">iv</div>
+            <div class="aspect-label">What to watch</div>
+            <div class="aspect-text" id="aspectWatch"></div>
+          </div>
+        </div>
+
+        <div class="spectrum-section">
+          <div class="spectrum-label">Flexibility vs. Commitment</div>
+          <div class="spectrum-track">
+            <div class="spectrum-ticks">
+              <div class="spectrum-tick"></div>
+              <div class="spectrum-tick"></div>
+              <div class="spectrum-tick"></div>
+              <div class="spectrum-tick"></div>
+              <div class="spectrum-tick"></div>
+            </div>
+            <div class="spectrum-dot" id="spectrumDot" style="left: 50%" data-score=""></div>
+          </div>
+          <div class="spectrum-ends">
+            <div><em>Flexibility</em> · optionality preserved</div>
+            <div>locked in · <em>Commitment</em></div>
+          </div>
+        </div>
+
+        <div class="the-move">
+          <div class="the-move-label">The move</div>
+          <div class="the-move-text" id="theMoveText"></div>
+        </div>
+
+        <div class="reframe-section" id="reframeSection">
+          <div class="reframe-intro">Same decision, different lens. See how the frame shifts.</div>
+          <div class="reframe-options" id="reframeOptions"></div>
+        </div>
+
+        <div class="result-actions">
+          <button type="button" class="btn btn-gold" id="tryAnotherBtn">Try another decision</button>
+          <button type="button" class="btn btn-ghost" id="refineBtn">Refine this one</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cross-cta">
+      <div class="cross-cta-text">
+        <h3>Want to see your <em>signal pattern?</em></h3>
+        <p>The Signal Audit maps how cost moves through your organization — and where it gets stuck.</p>
+      </div>
+      <a href="/signal-audit" class="btn btn-solid">Take the Signal Audit →</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const inputEl = document.getElementById('decisionInput');
+const submitBtn = document.getElementById('submitBtn');
+const resetBtn = document.getElementById('resetBtn');
+const inputCard = document.getElementById('inputCard');
+const thinkingEl = document.getElementById('thinking');
+const thinkingText = document.getElementById('thinkingText');
+const resultEl = document.getElementById('result');
+const errorEl = document.getElementById('errorMsg');
+
+let selectedPerspective = 'finops';
+
+// Scenario chips
+document.querySelectorAll('.scenario').forEach(btn => {
+  btn.addEventListener('click', () => {
+    inputEl.value = btn.dataset.scenario;
+    inputEl.focus();
+    updateSubmitState();
+  });
+});
+
+// Perspective toggle
+document.querySelectorAll('.perspective').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.perspective').forEach(p => p.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedPerspective = btn.dataset.persp;
+  });
+});
+
+// Enable submit when text exists
+inputEl.addEventListener('input', updateSubmitState);
+function updateSubmitState() {
+  submitBtn.disabled = inputEl.value.trim().length < 20;
+}
+
+// Reset
+resetBtn.addEventListener('click', () => {
+  inputEl.value = '';
+  resultEl.classList.remove('active');
+  inputCard.style.display = 'block';
+  errorEl.classList.remove('active');
+  updateSubmitState();
+});
+
+// Submit
+submitBtn.addEventListener('click', async () => {
+  const decision = inputEl.value.trim();
+  if (decision.length < 20) return;
+
+  errorEl.classList.remove('active');
+  inputCard.style.display = 'none';
+  resultEl.classList.remove('active');
+  thinkingEl.classList.add('active');
+
+  runThinkingSequence();
+
+  try {
+    const data = await getFrame(decision, selectedPerspective);
+    renderResult(data);
+  } catch (err) {
+    console.error(err);
+    inputCard.style.display = 'block';
+    thinkingEl.classList.remove('active');
+    errorEl.textContent = 'The model had trouble responding. Try again, or refine your decision with a bit more context.';
+    errorEl.classList.add('active');
+  }
+});
+
+// Thinking sequence
+const thinkingSteps = {
+  finops: ['Reading the decision', 'Tracing where cost lives', 'Mapping tradeoffs and risk', 'Framing the move'],
+  finance: ['Reading the decision', 'Following the capital', 'Modeling risk and flexibility', 'Framing the move'],
+  engineering: ['Reading the decision', 'Mapping architecture cost', 'Weighing build vs. operate', 'Framing the move']
+};
+
+async function runThinkingSequence() {
+  const steps = thinkingSteps[selectedPerspective] || thinkingSteps.finops;
+  for (let i = 0; i < steps.length; i++) {
+    if (!thinkingEl.classList.contains('active')) return;
+    thinkingText.style.opacity = '0';
+    await sleep(200);
+    thinkingText.textContent = steps[i];
+    thinkingText.style.opacity = '1';
+    await sleep(900);
+  }
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// Call Anthropic API
+async function getFrame(decision, perspective) {
+  const perspectiveContext = {
+    finops: 'You are analyzing this decision through a FinOps lens — the discipline of bringing cost into engineering and business decisions. Focus on how cost signal moves through the decision, where commitment pressure exists, and how to preserve optionality while managing spend.',
+    finance: 'You are analyzing this decision through a Finance lens — capital allocation, risk management, forecasting accuracy, and commitment structure. Focus on how this decision shapes the financial profile of the organization, the real cost of capital, and downside protection.',
+    engineering: 'You are analyzing this decision through an Engineering lens — architecture cost, operational burden, technical tradeoffs, and team capacity. Focus on what this decision means for the system, the team, and the long-term cost of ownership.'
+  };
+
+  const systemPrompt = `You are the voice of Cloud & Capital — a finance-native cloud economics brand. Your writing is calm, authoritative, and specific. You write for operators, not tourists. No filler, no generic hedging, no AI-sounding phrases.
+
+${perspectiveContext[perspective]}
+
+You will receive a decision someone is navigating. You must return a structured JSON response with exactly these fields:
+
+{
+  "framed_decision": "One sharp sentence (max 25 words) that restates the decision in its true frame. Use italics via <em>tags</em> to emphasize the key tension. This is the thing they'll screenshot.",
+  "cost_location": "2-3 sentences (max 45 words) on where cost actually lives in this decision — not the obvious line item, but the structural place where value is being created or destroyed.",
+  "real_tradeoff": "2-3 sentences (max 45 words) on the actual tradeoff — not the stated one. What are they really choosing between?",
+  "hidden_risk": "2-3 sentences (max 45 words) on the risk that's easy to miss. The thing that bites 6-12 months later, not the obvious one.",
+  "what_to_watch": "2-3 sentences (max 45 words) on the one signal or metric that will tell them if this decision is working. Be specific.",
+  "the_move": "2-3 sentences (max 55 words) on what a sharp operator would do. Concrete, actionable, not hedged. This is the payoff.",
+  "flexibility_score": <number from 0 to 100, where 0 = maximum commitment/locked in, 100 = maximum flexibility/optionality preserved. This reflects where the CURRENT direction of the decision sits, not where it should go.>
+}
+
+Rules:
+- Return ONLY the JSON object, no preamble, no markdown fences
+- Write like a peer giving sharp advice, not a consultant hedging
+- Be specific to the decision — no generic FinOps bromides
+- Use "you/your" to address them directly
+- No bullet points within fields — clean prose only
+- The framed_decision should feel like a line someone would write on a whiteboard`;
+
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1500,
+      system: systemPrompt,
+      messages: [{
+        role: 'user',
+        content: `Decision to frame:\n\n${decision}`
+      }]
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error('API request failed');
+  }
+
+  const result = await response.json();
+  const text = result.content?.find(c => c.type === 'text')?.text || '';
+  const cleaned = text.replace(/```json\s*/g, '').replace(/```\s*$/g, '').trim();
+
+  return JSON.parse(cleaned);
+}
+
+function renderResult(data) {
+  const perspName = {
+    finops: 'FinOps lens',
+    finance: 'Finance lens',
+    engineering: 'Engineering lens'
+  };
+
+  document.getElementById('frameLabel').textContent = `Decision framed · ${perspName[selectedPerspective]}`;
+  document.getElementById('framedDecision').innerHTML = data.framed_decision || '';
+  document.getElementById('aspectCost').textContent = data.cost_location || '';
+  document.getElementById('aspectTradeoff').textContent = data.real_tradeoff || '';
+  document.getElementById('aspectRisk').textContent = data.hidden_risk || '';
+  document.getElementById('aspectWatch').textContent = data.what_to_watch || '';
+  document.getElementById('theMoveText').textContent = data.the_move || '';
+
+  const score = Math.max(0, Math.min(100, data.flexibility_score || 50));
+  const dot = document.getElementById('spectrumDot');
+  dot.setAttribute('data-score', score + (score < 35 ? ' · locked' : score > 65 ? ' · flexible' : ' · balanced'));
+
+  // Build reframe options for the OTHER perspectives
+  buildReframeOptions();
+
+  thinkingEl.classList.remove('active');
+  resultEl.classList.add('active');
+
+  // Animate dot into position
+  setTimeout(() => {
+    dot.style.left = score + '%';
+  }, 300);
+
+  // Scroll to result only if it's off-screen
+  const resultRect = resultEl.getBoundingClientRect();
+  if (resultRect.top > window.innerHeight * 0.5 || resultRect.top < 0) {
+    resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function buildReframeOptions() {
+  const allPerspectives = [
+    { key: 'finops', name: 'FinOps', desc: 'Cost × Decisions' },
+    { key: 'finance', name: 'Finance', desc: 'Capital × Risk' },
+    { key: 'engineering', name: 'Engineering', desc: 'Build × Operate' }
+  ];
+  const others = allPerspectives.filter(p => p.key !== selectedPerspective);
+  const container = document.getElementById('reframeOptions');
+  container.innerHTML = others.map(p => `
+    <button type="button" class="reframe-option" data-reframe="${p.key}">
+      <div class="reframe-option-label">
+        <div class="reframe-option-name">${p.name}</div>
+        <div class="reframe-option-desc">${p.desc}</div>
+      </div>
+      <div class="reframe-option-arrow">→</div>
+    </button>
+  `).join('');
+
+  container.querySelectorAll('.reframe-option').forEach(btn => {
+    btn.addEventListener('click', () => reframeWithPerspective(btn.dataset.reframe));
+  });
+}
+
+async function reframeWithPerspective(newPersp) {
+  const decision = inputEl.value.trim();
+  if (!decision) return;
+
+  // Update selected perspective
+  selectedPerspective = newPersp;
+  document.querySelectorAll('.perspective').forEach(p => {
+    p.classList.toggle('selected', p.dataset.persp === newPersp);
+  });
+
+  // Show thinking, hide result
+  resultEl.classList.remove('active');
+  thinkingEl.classList.add('active');
+
+  // Scroll thinking into view if not visible
+  const thinkingRect = thinkingEl.getBoundingClientRect();
+  if (thinkingRect.top < 0 || thinkingRect.top > window.innerHeight * 0.6) {
+    thinkingEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  runThinkingSequence();
+
+  try {
+    const data = await getFrame(decision, newPersp);
+    renderResult(data);
+  } catch (err) {
+    console.error(err);
+    thinkingEl.classList.remove('active');
+    inputCard.style.display = 'block';
+    errorEl.textContent = 'The model had trouble responding. Try again.';
+    errorEl.classList.add('active');
+  }
+}
+
+// Try another / refine
+document.getElementById('tryAnotherBtn').addEventListener('click', () => {
+  inputEl.value = '';
+  resultEl.classList.remove('active');
+  inputCard.style.display = 'block';
+  updateSubmitState();
+  smartScrollToInput();
+});
+
+document.getElementById('refineBtn').addEventListener('click', () => {
+  resultEl.classList.remove('active');
+  inputCard.style.display = 'block';
+  inputEl.focus();
+  smartScrollToInput();
+});
+
+function smartScrollToInput() {
+  const rect = inputCard.getBoundingClientRect();
+  if (rect.top < 0 || rect.top > window.innerHeight * 0.4) {
+    inputCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+updateSubmitState();
+</script>
+</body>
+</html>

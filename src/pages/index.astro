@@ -52,7 +52,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.25rem 3.5rem;displ
 /* HERO */
 .hero{display:grid;grid-template-columns:55% 45%;min-height:100vh;padding-top:4.5rem;}
 .hero-left{padding:6rem 4rem 5rem 3.5rem;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--rule);opacity:0;animation:fadeUp 1s ease forwards .15s;}
-.hero-eyebrow{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);margin-bottom:1.25rem;display:block;}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);margin-bottom:.75rem;display:block;opacity:.75;}
 .hero-eyebrow::before{content:none;}
 .hero-tagline{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;font-weight:300;color:var(--ink-muted);margin-bottom:1rem;}
 h1.hero-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.2vw,4.7rem);font-weight:300;line-height:1.05;letter-spacing:-.02em;color:var(--ink);margin-bottom:1.25rem;}
@@ -2530,6 +2530,24 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 /* ── Hero tagline spacing ── */
 .hero-tagline { margin-bottom: .75rem !important; }
 
+/* ── About thesis pull-quote ── */
+.about-thesis {
+  margin: 3rem 0;
+  padding: 2rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  text-align: center;
+}
+.about-thesis p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--ink);
+  max-width: 36ch;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
 </style>
 
 <nav>
@@ -2561,8 +2579,8 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-founder">Diana Molski · Cloud &amp; Capital</div>
     <p class="hero-eyebrow">— Finance-native · Systems builder —</p>
+    <div class="hero-founder">Diana Molski · Cloud &amp; Capital</div>
     <h1 class="hero-headline">I build tools that catch<br>cost problems before<br>they <em>compound.</em></h1>
     <p class="hero-tagline">Using AI. Building in public.</p>
     <p class="hero-sub">Cloud, SaaS, and AI infrastructure spend rarely become expensive at the invoice. I build FinOps tools and decision systems using AI, and I share the process as I go — the agent workflows, the prompts, what works, what breaks. I also write about markets and how economic signals show up in cloud budgets.</p>
@@ -2684,7 +2702,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 .cdb-ld{display:inline-block;width:5px;height:5px;border-radius:50%;background:#5A7E5E;vertical-align:middle;margin-right:.5rem;animation:cdbbl 1.5s ease-in-out infinite;}
 @keyframes cdbbl{0%,100%{opacity:1}50%{opacity:.25}}
 </style>
-<div style="border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);">
+<div style="border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--cream);">
 <div class="cdb">
   <div class="cdb-grid"></div><div class="cdb-ticks"></div>
   <svg class="cdb-chart" viewBox="0 0 2400 180" preserveAspectRatio="none">
@@ -2793,14 +2811,14 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
       <div class="work-4col-card">
         <div class="work-4col-tag">Interactive · Tool</div>
         <div class="work-4col-title">Market Tape</div>
-        <div class="work-4col-desc">Live market signals for tech infrastructure teams.<br><br>AI-powered morning brief connects market moves to cloud budgets. Bloomberg meets FinOps.<br><br>Updated every 30 minutes with sector leaders, AI stock data, and momentum signals.</div>
+        <div class="work-4col-desc">Real-time market signals for cloud infrastructure teams.<br><br>AI-powered morning brief connects market moves to cloud budgets. Bloomberg meets FinOps.<br><br>Updated every 30 minutes with sector leaders, AI stock data, and momentum signals.</div>
         <a href="https://cloudandcapital.com/market-tape" target="_blank" class="work-4col-link">Launch Dashboard →</a>
       </div>
 
       <div class="work-4col-card">
         <div class="work-4col-tag">Interactive · Tool</div>
         <div class="work-4col-title">Signal Audit</div>
-        <div class="work-4col-desc">A five-minute diagnostic that surfaces where cost enters your decision chain and where it doesn’t.<br><br>Built for finance leaders and engineering managers who suspect the problem is upstream.</div>
+        <div class="work-4col-desc">Five-minute diagnostic that surfaces where cost enters your decision chain.<br><br>Built for finance leaders and engineering managers who suspect the problem is upstream.</div>
         <a href="/signal-audit" class="work-4col-link">Take the Audit →</a>
       </div>
 
@@ -2868,7 +2886,9 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 
       <p class="about-v4-final-body">That same lens now carries into cloud economics, AI infrastructure, and FinOps, where cost is shaped inside decisions rather than observed after the fact.</p>
 
-      <p class="about-v4-final-body about-v4-final-thesis">Most teams still see cost after it happens. The real work sits earlier, inside the decisions that create it.</p>
+      <div class="about-thesis">
+        <p>"Most teams still see cost after it happens. The real work sits earlier, inside the decisions that create it."</p>
+      </div>
 <div class="about-v4-final-certs">AWS · Azure AI · FinOps Practitioner · FOCUS Analyst</div>
 <div class="about-v4-final-ctas"><a href="mailto:diana@cloudandcapital.com" class="about-v4-final-btn about-v4-final-btn-sage">Contact</a></div>
     </div>

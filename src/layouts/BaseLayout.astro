@@ -14,9 +14,19 @@ const { title = 'Cloud & Capital', description = '' } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     {title && <title>{title}</title>}
     {description && <meta name="description" content={description} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://cloudandcapital.com" />
+    <meta property="og:title" content={title || 'Cloud & Capital'} />
+    <meta property="og:description" content={description || 'FinOps tools and insights for cloud infrastructure teams'} />
+    <meta property="og:image" content="https://cloudandcapital.com/images/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title || 'Cloud & Capital'} />
+    <meta name="twitter:description" content={description || 'FinOps tools and insights for cloud infrastructure teams'} />
+    <meta name="twitter:image" content="https://cloudandcapital.com/images/og-image.png" />
   </head>
   <body>
     <slot />

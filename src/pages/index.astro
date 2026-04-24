@@ -2294,13 +2294,152 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 
 /* Mobile overrides for the new layout */
 @media (max-width: 900px) {
-  .writing > .section-label { padding-left: 1.5rem !important; }
-  .newsletter-strip { padding: 2.5rem 1.5rem 3rem !important; }
-  .newsletter-actions { flex-direction: row !important; min-width: 0 !important; }
-  .newsletter-actions .btn { width: auto !important; }
-  .writing-editorial { margin-top: 16px !important; gap: 8px !important; background: var(--rule) !important; }
+  .writing > .section-label { padding-left: 0 !important; }
+  .newsletter-strip { padding: 2.5rem 1.5rem 3rem !important; min-height: auto !important; }
+  .newsletter-actions { flex-direction: column !important; min-width: 0 !important; width: 100%; }
+  .newsletter-actions .btn { width: 100% !important; text-align: center !important; }
+  .writing-editorial { margin-top: 12px !important; gap: 8px !important; background: var(--rule) !important; }
+  .wf-inner { grid-template-columns: 1fr !important; grid-template-rows: 200px auto; }
+  .wf-img-wrap { order: -1 !important; margin: 0 !important; border-radius: 0 !important; }
   .wf-content { padding: 2rem 1.5rem !important; }
   .writing-small { padding: 2rem 1.5rem !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE QA — COMPREHENSIVE RESPONSIVE FIXES
+   ═══════════════════════════════════════════════════════════ */
+
+/* Hamburger button — desktop: hidden */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 4px;
+  z-index: 201;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: all .25s ease;
+}
+
+@media (max-width: 900px) {
+  /* ── Nav ── */
+  .nav-toggle { display: flex; }
+
+  /* Full-screen mobile nav */
+  .nav-links {
+    display: none !important;
+    position: fixed;
+    inset: 0;
+    background: rgba(244,239,230,.97);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    z-index: 300;
+    list-style: none;
+    padding: 0;
+  }
+  .nav-links.is-open { display: flex !important; }
+  .nav-links a {
+    font-size: .78rem;
+    letter-spacing: .16em;
+    color: var(--ink-muted);
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* ── Advisory: stack photo over content ── */
+  .advisory-inner {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .adv-photo {
+    width: min(280px, 90%) !important;
+    margin: 0 auto !important;
+  }
+  .adv-content {
+    padding: 2.5rem 1.5rem !important;
+  }
+
+  /* ── Discipline 4-col inline grid → 1 col ── */
+  section#discipline > div[style*="display:grid"][style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Work: stack editorial grid ── */
+  .work-editorial-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .work-feature-copy { min-height: auto; }
+  .work-feature-right { min-height: 360px; }
+
+  /* ── Writing: restore padding removed by full-bleed desktop rule ── */
+  .writing {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+  .writing > .section-label { padding-left: 0 !important; }
+  /* Newsletter strip already handled in writing block above */
+
+  /* ── CTA band: stack buttons full width ── */
+  .ctab-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: .75rem !important;
+    width: 100%;
+  }
+  .ctab-actions .btn {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* ── Footer: ensure clean wrap ── */
+  .f-nav { gap: 1rem; }
+}
+
+@media (max-width: 600px) {
+  /* ── Hero: tighter on small screens ── */
+  .hero-left { padding: 4.5rem 1.25rem 2rem !important; }
+  h1.hero-headline { font-size: clamp(2rem, 10vw, 2.8rem); }
+  .hero-sub { font-size: .88rem; }
+
+  /* ── Discipline: ensure no overflow ── */
+  section#discipline > div[style*="display:grid"][style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+  .discipline-card-title { white-space: normal !important; font-size: 1rem !important; }
+
+  /* ── Work ── */
+  .work-feature-copy { padding: 2.5rem 1.5rem !important; }
+  .work-feature-right { min-height: 280px !important; }
+
+  /* ── About ── */
+  .about-v4-final { padding: 3rem 1.25rem 4rem !important; }
+  .about-v4-final-headline { font-size: 1.8rem !important; }
+
+  /* ── Community ── */
+  .comm-heading { font-size: 1.8rem !important; }
+  .ev-feature-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .ev-poster-wrap { display: none !important; }
+
+  /* ── Writing ── */
+  .newsletter-strip { padding: 2rem 1.25rem 2.5rem !important; }
+  .writing { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+
+  /* ── CTA ── */
+  .ctab-hed { font-size: 1.5rem !important; }
 }
 
 </style>
@@ -2310,7 +2449,10 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
     <span class="nav-logo-main">Cloud & Capital</span>
     <span class="nav-logo-sub">Turning numbers into strategy.</span>
   </a>
-  <ul class="nav-links">
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
     <li><a href="#discipline">Discipline</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#about">About</a></li>
@@ -2946,6 +3088,26 @@ if (phPrev) phPrev.addEventListener('click', () => {
   window.addEventListener('resize', resize);
   resize();
   requestAnimationFrame(draw);
+})();
+
+// Mobile nav toggle
+(function() {
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.getElementById('nav-links');
+  if (!toggle || !links) return;
+  toggle.addEventListener('click', function() {
+    const isOpen = links.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  // Close when a link is tapped
+  links.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      links.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
 })();
 
 // Animate stat numbers on scroll

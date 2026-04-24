@@ -2231,6 +2231,22 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   border-bottom: 1px solid rgba(255,255,255,.08) !important;
 }
 
+/* Featured card image */
+.wf-img-wrap {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--ink);
+}
+.wf-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
 /* Content padding: 3.5rem left = aligned with newsletter text and section label */
 .wf-content {
   padding: 2.5rem 3.5rem 3rem !important;
@@ -2688,29 +2704,32 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   <!-- Editorial grid -->
   <div class="writing-editorial">
 
-    <!-- Featured card -->
-    <a href="https://substack.com/home/post/p-188660781" class="writing-featured reveal" target="_blank">
-      <div class="wf-content">
-        <div class="wf-eyebrow">Featured Essay</div>
-        <div class="wf-title">When Capital Becomes Compute</div>
-        <div class="wf-desc">How capital turns into infrastructure in the AI era, and why the financial models haven't caught up.</div>
-        <div class="wf-cta">Read essay →</div>
+    <!-- Featured card: Markets & Mimosas column -->
+    <a href="https://substack.com/@cloudandcapital" class="writing-featured reveal" target="_blank">
+      <div class="wf-img-wrap">
+        <img src="/images/writing/markets-mimosas-hero.png" alt="Markets & Mimosas" class="wf-img">
       </div>
-
+      <div class="wf-content">
+        <div class="wf-eyebrow">Featured Column</div>
+        <div class="wf-cat" style="font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:.85rem;">Markets &amp; Mimosas</div>
+        <div class="wf-title">Markets & Mimosas</div>
+        <div class="wf-desc">Biweekly notes on markets, cloud economics, technology spend, and the operating layer behind the bill.</div>
+        <div class="wf-cta">Read latest →</div>
+      </div>
     </a>
 
     <!-- Right stack -->
     <div class="writing-stack">
-      <a href="https://substack.com/home/post/p-185469778" class="writing-small reveal d1" target="_blank">
+      <a href="https://substack.com/home/post/p-188660781" class="writing-small reveal d1" target="_blank">
+        <div class="ws-cat">Capital Layer</div>
+        <div class="ws-title">When Capital Becomes Compute</div>
+        <div class="ws-desc">How capital turns into infrastructure in the AI era, and why the financial models haven't caught up.</div>
+        <div class="ws-cta">Read essay →</div>
+      </a>
+      <a href="https://substack.com/home/post/p-185469778" class="writing-small reveal d2" target="_blank">
         <div class="ws-cat">Deployment Rhythm</div>
         <div class="ws-title">Deploying Fast, Thinking Slow</div>
         <div class="ws-desc">Why shipping fast has a way of becoming tomorrow's bill.</div>
-        <div class="ws-cta">Read essay →</div>
-      </a>
-      <a href="https://substack.com/home/post/p-182921534" class="writing-small reveal d2" target="_blank">
-        <div class="ws-cat">Cost Signals</div>
-        <div class="ws-title">The Cloud Cost Blind Spot</div>
-        <div class="ws-desc">Efficiency does not guarantee clarity. The difference between knowing your bill and understanding your economics.</div>
         <div class="ws-cta">Read essay →</div>
       </a>
     </div>

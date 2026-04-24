@@ -1,0 +1,78 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+
+<SiteLayout title="Page Not Found — Cloud & Capital" description="">
+<style>
+  .notfound {
+    min-height: 100vh;
+    background: var(--cream, #F5EEE9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .notfound-inner {
+    text-align: center;
+    max-width: 480px;
+  }
+  .notfound-code {
+    font-family: 'DM Mono', monospace;
+    font-size: .62rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--sage, #6B8E7F);
+    margin-bottom: 1.5rem;
+  }
+  .notfound-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink, #000);
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+  }
+  .notfound-body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: .95rem;
+    color: var(--ink-muted, #4A4A4A);
+    line-height: 1.65;
+    margin-bottom: 2.5rem;
+  }
+  .notfound-link {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: .62rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--white, #fff);
+    background: var(--sage, #6B8E7F);
+    padding: .65rem 1.5rem;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .notfound-link:hover {
+    background: var(--sage-dark, #4A6B5F);
+  }
+  .notfound-rule {
+    width: 2rem;
+    height: 1px;
+    background: var(--sage, #6B8E7F);
+    margin: 0 auto 1.5rem;
+  }
+</style>
+
+<div class="notfound">
+  <div class="notfound-inner">
+    <div class="notfound-code">404</div>
+    <div class="notfound-rule"></div>
+    <h1 class="notfound-heading">Page not found.</h1>
+    <p class="notfound-body">
+      The page you're looking for doesn't exist or has moved.<br>
+      Let's get you back on track.
+    </p>
+    <a href="/" class="notfound-link">Back to Cloud &amp; Capital</a>
+  </div>
+</div>
+</SiteLayout>

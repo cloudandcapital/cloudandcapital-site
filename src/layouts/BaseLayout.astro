@@ -27,6 +27,13 @@ const { title = 'Cloud & Capital', description = '' } = Astro.props;
     <meta name="twitter:title" content={title || 'Cloud & Capital'} />
     <meta name="twitter:description" content={description || 'FinOps tools and insights for cloud infrastructure teams'} />
     <meta name="twitter:image" content="https://cloudandcapital.com/images/og-image.png" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GXRMNTEB3B"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GXRMNTEB3B');
+    </script>
   </head>
   <body>
     <slot />

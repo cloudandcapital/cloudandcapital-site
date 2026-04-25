@@ -23,8 +23,10 @@ const { title = 'Cloud & Capital', description = 'Technology Economics & FinOps'
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="shortcut icon" href="/icon.png" />
+    <link rel="apple-touch-icon" href="/icon.png" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     <meta property="og:type" content="website" />
@@ -46,5 +48,8 @@ const { title = 'Cloud & Capital', description = 'Technology Economics & FinOps'
   </head>
   <body>
     <slot />
+    <footer style="text-align:center;padding:1.5rem;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,0,0,0.3);border-top:1px solid rgba(0,0,0,0.07);">
+      © 2026 Cloud &amp; Capital · Finance · AI · Data · Cloud
+    </footer>
   </body>
 </html>

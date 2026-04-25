@@ -30,7 +30,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.25rem 3.5rem;displ
 .nav-links a:hover{color:var(--ink);}
 .nav-cta{padding:.5rem 1.1rem;background:var(--sage);color:var(--white)!important;transition:background .2s;}
 .nav-cta:hover{background:var(--sage-light)!important;}
-.nav-has-dropdown{position:relative;}
+.nav-has-dropdown{position:relative;}.nav-has-dropdown::after{content:'';position:absolute;top:100%;left:-0.5rem;right:-0.5rem;height:1rem;z-index:209;}
 .nav-dropdown-btn{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;gap:.3rem;transition:color .2s;}
 .nav-dropdown-btn:hover{color:var(--ink);}
 .nav-chevron{font-size:.48rem;display:inline-block;transition:transform .2s;}

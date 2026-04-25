@@ -3135,15 +3135,31 @@ let pos = 0;
 const track = document.getElementById('ph-track');
 const getSlides = () => track ? track.querySelectorAll('.photo-slide') : [];
 const slideW = () => { const s = getSlides(); return s.length ? s[0].offsetWidth + 16 : 0; };
+const visibleCount = () => {
+  if (!track) return 3;
+  const vpW = track.parentElement.offsetWidth;
+  const sw = slideW();
+  return sw > 0 ? Math.max(1, Math.floor(vpW / sw)) : 3;
+};
+const maxPos = () => Math.max(0, getSlides().length - visibleCount());
+const goTo = (n) => {
+  pos = Math.max(0, Math.min(n, maxPos()));
+  track.style.transform = `translateX(-${pos * slideW()}px)`;
+};
 const phNext = document.getElementById('ph-next');
 const phPrev = document.getElementById('ph-prev');
-if (phNext) phNext.addEventListener('click', () => {
-  const max = getSlides().length - 3;
-  if(pos < max){ pos++; track.style.transform = `translateX(-${pos * slideW()}px)`; }
-});
-if (phPrev) phPrev.addEventListener('click', () => {
-  if(pos > 0){ pos--; track.style.transform = `translateX(-${pos * slideW()}px)`; }
-});
+if (phNext) phNext.addEventListener('click', () => goTo(pos + 1));
+if (phPrev) phPrev.addEventListener('click', () => goTo(pos - 1));
+
+// Touch swipe support
+if (track) {
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 40) { goTo(dx > 0 ? pos + 1 : pos - 1); }
+  }, { passive: true });
+}
 
 // Animated market chart
 (function(){

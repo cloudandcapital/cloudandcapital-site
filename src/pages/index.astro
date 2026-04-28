@@ -2141,7 +2141,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 /* Writing section tagline — mirrors work-intro typography, adapted for light background */
 .writing-intro {
   padding-left: 3.5rem !important;
-  color: var(--ink-soft) !important;
+  color: #6f8f7a !important;
   margin-top: 1.25rem !important;
   margin-bottom: 2.5rem !important;
 }
@@ -2163,17 +2163,17 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 .newsletter-header {
   width: 100% !important;
 }
-/* Two-column row: body text left, CTAs anchored next to content */
+/* Two-column row: body text left, CTAs pushed to far right */
 .newsletter-body {
   display: flex !important;
   align-items: flex-start !important;
-  justify-content: flex-start !important;
+  justify-content: space-between !important;
   gap: 3rem !important;
   width: 100% !important;
 }
 .newsletter-left {
   max-width: 580px !important;
-  flex: 1 !important;
+  flex: 0 1 auto !important;
 }
 .newsletter-desc {
   max-width: 60ch !important;

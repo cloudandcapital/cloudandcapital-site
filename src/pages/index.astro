@@ -2140,44 +2140,12 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 
 /* Newsletter hero: full-bleed with chart background + overlay */
 .newsletter-strip {
-  position: relative !important;
-  overflow: hidden !important;
   margin: 0 !important;
   width: 100% !important;
   padding: 4rem 3.5rem !important;
   align-items: flex-start !important;
   gap: 4rem !important;
-  min-height: 300px !important;
-  padding-bottom: 4.5rem !important;
   background: var(--ink) !important;
-}
-.newsletter-bg-visual {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.newsletter-bg-visual svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-.newsletter-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.27) 0%,
-    rgba(0,0,0,0.27) 52%,
-    rgba(0,0,0,0.15) 75%,
-    rgba(245,238,233,0.55) 90%,
-    rgba(245,238,233,1) 100%
-  );
-}
-.newsletter-strip .newsletter-left,
-.newsletter-strip .newsletter-actions {
-  position: relative;
-  z-index: 2;
 }
 /* Constrain text block; buttons stay on right */
 .newsletter-left {
@@ -2995,45 +2963,6 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 
   <!-- Newsletter hero with visual background -->
   <div class="newsletter-strip reveal">
-
-    <!-- Background chart (fills the hero) -->
-    <div class="newsletter-bg-visual" aria-hidden="true">
-      <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-        <!-- Horizontal grid -->
-        <line x1="0" y1="65"  x2="1200" y2="65"  stroke="rgba(255,255,255,.045)" stroke-width="1"/>
-        <line x1="0" y1="130" x2="1200" y2="130" stroke="rgba(255,255,255,.045)" stroke-width="1"/>
-        <line x1="0" y1="195" x2="1200" y2="195" stroke="rgba(255,255,255,.045)" stroke-width="1"/>
-        <!-- Vertical grid -->
-        <line x1="240"  y1="0" x2="240"  y2="260" stroke="rgba(255,255,255,.025)" stroke-width="1"/>
-        <line x1="480"  y1="0" x2="480"  y2="260" stroke="rgba(255,255,255,.025)" stroke-width="1"/>
-        <line x1="720"  y1="0" x2="720"  y2="260" stroke="rgba(255,255,255,.025)" stroke-width="1"/>
-        <line x1="960"  y1="0" x2="960"  y2="260" stroke="rgba(255,255,255,.025)" stroke-width="1"/>
-        <!-- Area fill -->
-        <path d="M0 240 C150 225 300 198 480 165 C660 130 840 88 1200 38 L1200 260 L0 260 Z"
-              fill="rgba(90,126,94,.09)"/>
-        <path d="M0 250 C200 238 420 218 640 192 C860 165 1020 138 1200 108 L1200 260 L0 260 Z"
-              fill="rgba(90,126,94,.05)"/>
-        <!-- Primary trend line -->
-        <path d="M0 240 C150 225 300 198 480 165 C660 130 840 88 1200 38"
-              fill="none" stroke="#5A7E5E" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
-        <!-- Secondary dashed -->
-        <path d="M0 250 C200 238 420 218 640 192 C860 165 1020 138 1200 108"
-              fill="none" stroke="rgba(90,126,94,.25)" stroke-width="1" stroke-dasharray="6 6"/>
-        <!-- Gold accent with layered glow -->
-        <defs>
-          <filter id="dot-glow" x="-80%" y="-80%" width="260%" height="260%">
-            <feGaussianBlur stdDeviation="4" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-        <circle cx="600" cy="148" r="22" fill="rgba(184,146,74,.03)"/>
-        <circle cx="600" cy="148" r="14" fill="rgba(184,146,74,.07)"/>
-        <circle cx="600" cy="148" r="9"  fill="rgba(184,146,74,.13)"/>
-        <circle cx="600" cy="148" r="4"  fill="#B8924A" filter="url(#dot-glow)"/>
-      </svg>
-    </div>
-    <!-- Overlay -->
-    <div class="newsletter-overlay" aria-hidden="true"></div>
 
     <div class="newsletter-left">
       <div class="newsletter-tag">Cloud & Capital · Substack</div>

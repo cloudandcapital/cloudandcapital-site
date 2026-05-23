@@ -15,12 +15,21 @@ export async function OPTIONS() {
   return new Response(null, { status: 200, headers: CORS_HEADERS });
 }
 
+const MAX_INPUT_CHARS = 2000;
+
 export async function POST({ request }) {
   const { decision, perspective } = await request.json();
 
   if (!decision || !perspective) {
     return new Response(
       JSON.stringify({ error: 'Missing required fields: decision, perspective' }),
+      { status: 400, headers: CORS_HEADERS }
+    );
+  }
+
+  if (typeof decision === 'string' && decision.length > MAX_INPUT_CHARS) {
+    return new Response(
+      JSON.stringify({ error: 'Decision too long. Please keep it under 2,000 characters.' }),
       { status: 400, headers: CORS_HEADERS }
     );
   }
@@ -68,7 +77,7 @@ Rules:
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
         max_tokens: 1500,
-        system: systemPrompt,
+        system: [{ type: 'text', text: systemPrompt, cache_control: { type: 'ephemeral' } }],
         messages: [{ role: 'user', content: `Decision to frame:\n\n${decision}` }],
       }),
     });
@@ -91,7 +100,10 @@ Rules:
       return new Response(JSON.stringify({ error: 'Failed to parse AI response' }), { status: 500, headers: CORS_HEADERS });
     }
 
-    return new Response(JSON.stringify(parsed), { status: 200, headers: CORS_HEADERS });
+    return new Response(JSON.stringify(parsed), {
+      status: 200,
+      headers: { ...CORS_HEADERS, 'Cache-Control': 's-maxage=14400, stale-while-revalidate=86400' },
+    });
   } catch (err) {
     console.error('Handler error:', err);
     return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500, headers: CORS_HEADERS });

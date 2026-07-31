@@ -13,7 +13,7 @@ Cloud & Capital is a technology economics and FinOps practice. The site covers D
 | Route | Description |
 |---|---|
 | `/` | Main site — discipline, work, about, community, writing |
-| `/audit` | Signal Audit — 5-minute cost diagnostic tool |
+| `/signal-audit` | Signal Audit — 5-minute cost diagnostic tool |
 | `/interactive-lab` | Interactive Lab — AI-powered analysis tool |
 | `404` | Branded not-found page |
 

@@ -10,34 +10,24 @@ import '@fontsource/dm-sans/400.css';
 import '@fontsource/dm-sans/500.css';
 import '@fontsource/dm-mono/300.css';
 import '@fontsource/dm-mono/400.css';
+import HeadMeta from '../components/HeadMeta.astro';
 
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
-const { title = 'Cloud & Capital', description = 'Turning numbers into strategy' } = Astro.props;
+const {
+  title = 'Cloud & Capital',
+  description = 'Turning numbers into strategy',
+  noindex = false,
+} = Astro.props;
 ---
 
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="shortcut icon" href="/icon.png" />
-    <link rel="apple-touch-icon" href="/icon.png" />
-    <title>{title}</title>
-    {description && <meta name="description" content={description} />}
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://cloudandcapital.com" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description || 'Turning numbers into strategy'} />
-    <meta property="og:image" content="https://cloudandcapital.com/images/og-image.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description || 'Turning numbers into strategy'} />
-    <meta name="twitter:image" content="https://cloudandcapital.com/images/og-image.png" />
+    <HeadMeta title={title} description={description} noindex={noindex} />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GXRMNTEB3B"></script>
     <script>
       window.dataLayer = window.dataLayer || [];

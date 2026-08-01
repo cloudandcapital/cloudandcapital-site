@@ -1,6 +1,6 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { latestIssue, upcomingEvent } from '../data/homeContent';
+import { latestIssue } from '../data/homeContent';
 ---
 
 <SiteLayout
@@ -2603,6 +2603,229 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   line-height: 1.55;
 }
 
+/* ── 2026 editorial refinement ─────────────────────────── */
+nav{
+  padding:1.05rem clamp(1.5rem,4vw,4.5rem);
+}
+.hero{
+  grid-template-columns:minmax(0,1.08fr) minmax(430px,.92fr);
+  min-height:820px;
+  max-width:1600px;
+  margin:0 auto;
+}
+.hero-left{
+  padding:7.5rem clamp(2.5rem,5vw,5.5rem) 5rem clamp(2rem,4vw,4.5rem);
+}
+.hero-founder{
+  margin-bottom:1.65rem;
+}
+h1.hero-headline{
+  max-width:11.5ch;
+  font-size:clamp(3.35rem,5vw,5.35rem);
+  line-height:.98;
+  margin-bottom:1.55rem;
+}
+.hero-tagline{
+  font-size:1.15rem;
+  margin-bottom:.8rem !important;
+}
+.hero-sub{
+  max-width:54ch;
+  font-size:1rem;
+  line-height:1.82;
+  margin-bottom:2.35rem;
+}
+.hero-right{
+  padding:5.9rem clamp(1.5rem,3vw,3.5rem) 2.75rem 0 !important;
+  border-right:none;
+}
+.hero-viz{
+  height:auto;
+  flex:1;
+  min-height:390px;
+  border:1px solid rgba(0,0,0,.08);
+}
+.hero-stats{
+  flex:0 0 auto;
+  min-height:190px;
+}
+.mini-stat{
+  padding:1.15rem 1.3rem;
+}
+.s-num{
+  font-size:1.75rem;
+}
+.marquee-wrap{
+  padding:1rem clamp(1rem,4vw,4rem);
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.marquee-track{
+  width:100%;
+  justify-content:center;
+  animation:none;
+}
+.mi{
+  padding:0 clamp(.8rem,2vw,2rem);
+  font-size:.62rem;
+  letter-spacing:.16em;
+}
+.cdb-shell{display:none;}
+section#discipline > div:first-child{
+  padding:4.5rem clamp(1.5rem,4vw,4.5rem) 3rem !important;
+}
+.work-inner,
+.community,
+.writing{
+  padding-top:6rem;
+  padding-bottom:6rem;
+}
+.work-inner{
+  padding-left:clamp(1.5rem,4vw,4.5rem);
+  padding-right:clamp(1.5rem,4vw,4.5rem);
+}
+.work-intro{
+  margin:1.2rem 0 3.4rem;
+}
+.work-feature-copy{
+  padding:3rem clamp(2rem,3vw,3.5rem);
+}
+.work-bottom-4col{
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.work-4col-card{
+  padding:2.25rem 2rem 2.4rem;
+}
+.about-v4-final{
+  padding-top:6rem;
+  padding-bottom:6rem;
+}
+.about-thesis{
+  margin:2.25rem 0;
+  padding:1.55rem 0;
+}
+.community{
+  padding-left:clamp(1.5rem,4vw,4.5rem);
+  padding-right:clamp(1.5rem,4vw,4.5rem);
+}
+.community-top{
+  grid-template-columns:minmax(250px,.72fr) minmax(0,1.28fr);
+  gap:clamp(2.5rem,5vw,6rem);
+}
+.event-stack .ev-card-feature{
+  margin:0;
+}
+.photos-section{
+  margin-top:3.5rem;
+}
+.writing{
+  padding-left:clamp(1.5rem,4vw,4.5rem);
+  padding-right:clamp(1.5rem,4vw,4.5rem);
+}
+.cta-band{
+  padding:4.25rem clamp(1.5rem,4vw,4.5rem);
+}
+
+@media (max-width: 900px){
+  .hero{
+    grid-template-columns:1fr;
+    min-height:auto;
+  }
+  .hero-left{
+    padding:6.6rem 1.5rem 3rem;
+  }
+  h1.hero-headline{
+    max-width:12ch;
+    font-size:clamp(3rem,9vw,4.4rem);
+  }
+  .hero-right{
+    padding:0 1.5rem 2.75rem !important;
+  }
+  .hero-viz{
+    min-height:300px;
+    height:300px;
+  }
+  .hero-stats{
+    min-height:174px;
+  }
+  .marquee-track{
+    flex-wrap:wrap;
+    row-gap:.65rem;
+  }
+  .ms{display:none;}
+  .mi{padding:0 .8rem;}
+  .community-top{
+    grid-template-columns:1fr;
+    gap:3rem;
+  }
+}
+
+@media (max-width: 600px){
+  .nav-logo-sub{display:none;}
+  .hero-left{
+    padding:5.6rem 1.25rem 2.4rem !important;
+  }
+  .hero-eyebrow{
+    margin-bottom:.55rem;
+  }
+  .hero-founder{
+    margin-bottom:1.25rem;
+  }
+  h1.hero-headline{
+    font-size:clamp(2.8rem,12.4vw,3.65rem) !important;
+    line-height:1;
+  }
+  .hero-sub{
+    font-size:.92rem;
+    line-height:1.72;
+    margin-bottom:1.8rem;
+  }
+  .hero-ctas{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  .hero-ctas .btn{
+    width:100%;
+    text-align:center;
+  }
+  .hero-right{
+    padding:0 1.25rem 2.25rem !important;
+  }
+  .hero-viz{
+    min-height:235px;
+    height:235px;
+  }
+  .hero-stats{
+    min-height:166px;
+  }
+  .mini-stat{
+    padding:.95rem 1rem;
+  }
+  .s-num{font-size:1.55rem;}
+  .s-lbl{font-size:.49rem;}
+  .marquee-wrap{padding:.85rem .6rem;}
+  .marquee-track{gap:.35rem 0;}
+  .mi{font-size:.53rem;padding:0 .55rem;}
+  section#discipline > div:first-child{
+    padding:3.25rem 1.25rem 2.2rem !important;
+  }
+  .work-inner,
+  .community,
+  .writing{
+    padding-top:4.25rem !important;
+    padding-bottom:4.25rem !important;
+  }
+  .work-intro{margin-bottom:2.5rem;}
+  .work-feature-copy{padding:2.5rem 1.5rem !important;}
+  .work-chat-bubble-ai{line-height:1.62;}
+  .work-4col-card{padding:2rem 1.5rem 2.2rem;}
+  .about-v4-final-fragment{display:none;}
+  .about-v4-final-grid{gap:2.25rem;}
+  .about-thesis{margin:1.8rem 0;padding:1.25rem 0;}
+  .community-top{gap:2.4rem;}
+  .photos-section{margin-top:2.5rem;}
+  .cta-band{padding:3.5rem 1.25rem;}
+}
+
 </style>
 
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -2647,11 +2870,10 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
     <div class="hero-founder">Diana Molski · Cloud &amp; Capital</div>
     <h1 class="hero-headline">I build tools that catch cost problems<span class="mob-br"></span> before they <em>compound.</em></h1>
     <p class="hero-tagline">Practitioner-built. Finance-first.</p>
-    <p class="hero-sub">Cloud, SaaS, and AI infrastructure spend rarely become expensive at the invoice. I build FinOps tools and decision systems using AI, and I share the process as I go — the agent workflows, the prompts, what works, what breaks. I also write about markets and how economic signals show up in cloud budgets.</p>
+    <p class="hero-sub">I build FinOps tools and decision systems for cloud, SaaS, and AI infrastructure spend. The work starts before the invoice, where architecture, commitments, and operating choices shape the bill.</p>
     <div class="hero-ctas">
-      <a href="/signal-audit" class="btn btn-sage">Take the 5-Minute Signal Audit</a>
-      <a href="/interactive-lab" class="btn btn-outline">Explore the Interactive Lab</a>
-      <a href="https://cloudandcapital.substack.com/" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Subscribe to Newsletter</a>
+      <a href="#work" class="btn btn-sage">Explore the Work</a>
+      <a href="/signal-audit" class="btn btn-outline">Take the Signal Audit</a>
     </div>
   </div>
   <div class="hero-right" style="padding-right:3.5rem;">
@@ -2664,10 +2886,10 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
       <div style="position:absolute;bottom:.75rem;right:.85rem;z-index:5;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.06em;color:rgba(255,255,255,.28);text-align:right;">Illustrative — <a href="https://market-tape.cloudandcapital.com" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:.15em;">Market Tape →</a></div>
     </div>
     <div class="hero-stats">
-      <div class="mini-stat"><div class="s-num">98%</div><div class="s-lbl">Of FinOps practices<br>managing AI spend</div></div>
-      <div class="mini-stat"><div class="s-num g">$1T+</div><div class="s-lbl">Global public cloud<br>spend, 2026</div></div>
-      <div class="mini-stat"><div class="s-num g">Day 1</div><div class="s-lbl">When cost decisions<br>actually matter</div></div>
       <div class="mini-stat"><div class="s-num">10</div><div class="s-lbl">Tools shipped</div></div>
+      <div class="mini-stat"><div class="s-num g">6</div><div class="s-lbl">Open-source FinOps tools</div></div>
+      <div class="mini-stat"><div class="s-num g">AI</div><div class="s-lbl">Spend and infrastructure economics</div></div>
+      <div class="mini-stat"><div class="s-num">LA</div><div class="s-lbl">FinOps community</div></div>
     </div>
   </div>
 </section>
@@ -2675,39 +2897,11 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 <!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <span class="mi">Cloud Cost Guard</span><span class="ms">◆</span>
-    <span class="mi">FinOps Weekly Los Angeles</span><span class="ms">◆</span>
-    <span class="mi">AI Infrastructure Economics</span><span class="ms">◆</span>
-    <span class="mi">Unit Economics</span><span class="ms">◆</span>
-    <span class="mi">Commitment Strategy</span><span class="ms">◆</span>
-    <span class="mi">GPU Economics</span><span class="ms">◆</span>
-    <span class="mi">Visibility → Variance → Tradeoffs</span><span class="ms">◆</span>
-    <span class="mi">SaaS Rationalization</span><span class="ms">◆</span>
+    <span class="mi">Cloud Economics</span><span class="ms">◆</span>
+    <span class="mi">AI Spend</span><span class="ms">◆</span>
+    <span class="mi">FinOps Tools</span><span class="ms">◆</span>
     <span class="mi">Finance × Engineering</span><span class="ms">◆</span>
-    <span class="mi">Markets & Mimosas</span><span class="ms">◆</span>
-    <span class="mi">The Decision Layer</span><span class="ms">◆</span>
-    <span class="mi">Pre-invoice View</span><span class="ms">◆</span>
-    <span class="mi">Cost-as-Design</span><span class="ms">◆</span>
-    <span class="mi">Build vs Buy Analysis</span><span class="ms">◆</span>
-    <span class="mi">Technology Spend Strategy</span><span class="ms">◆</span>
-    <span class="mi">The Stack Report</span><span class="ms">◆</span>
-    <!-- duplicate for seamless loop -->
-    <span class="mi">Cloud Cost Guard</span><span class="ms">◆</span>
-    <span class="mi">FinOps Weekly Los Angeles</span><span class="ms">◆</span>
-    <span class="mi">AI Infrastructure Economics</span><span class="ms">◆</span>
-    <span class="mi">Unit Economics</span><span class="ms">◆</span>
-    <span class="mi">Commitment Strategy</span><span class="ms">◆</span>
-    <span class="mi">GPU Economics</span><span class="ms">◆</span>
-    <span class="mi">Visibility → Variance → Tradeoffs</span><span class="ms">◆</span>
-    <span class="mi">SaaS Rationalization</span><span class="ms">◆</span>
-    <span class="mi">Finance × Engineering</span><span class="ms">◆</span>
-    <span class="mi">Markets & Mimosas</span><span class="ms">◆</span>
-    <span class="mi">The Decision Layer</span><span class="ms">◆</span>
-    <span class="mi">Pre-invoice View</span><span class="ms">◆</span>
-    <span class="mi">Cost-as-Design</span><span class="ms">◆</span>
-    <span class="mi">Build vs Buy Analysis</span><span class="ms">◆</span>
-    <span class="mi">Technology Spend Strategy</span><span class="ms">◆</span>
-    <span class="mi">The Stack Report</span><span class="ms">◆</span>
+    <span class="mi">Markets &amp; Mimosas</span>
   </div>
 </div>
 
@@ -2724,19 +2918,19 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
     <div style="background:var(--white);padding:1.75rem 1.75rem 1.5rem;">
       <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:300;color:rgba(90,126,94,.18);line-height:1;margin-bottom:.75rem;">01</div>
       <div class="discipline-card-title">The invoice is already too late.</div>
-      <div class="discipline-card-copy">Commitments compound before invoices arrive. Architecture choices, vendor agreements, reservation logic — none of these wait for the finance team. By the time a report surfaces the number, the decision behind it is already old.</div>
+      <div class="discipline-card-copy">Architecture choices, vendor agreements, and reservation logic shape cost before reporting begins. By the time the number surfaces, the decision behind it is already old.</div>
     </div>
 
     <div style="background:var(--white);padding:1.75rem 1.75rem 1.5rem;">
       <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:300;color:rgba(90,126,94,.18);line-height:1;margin-bottom:.75rem;">02</div>
       <div class="discipline-card-title">Cost is a design input, not a report.</div>
-      <div class="discipline-card-copy">The teams getting this right aren't doing more analysis. They built cost into the decision itself — before the architecture review, the vendor commitment, the roadmap sign-off. The report comes later. The decision doesn't.</div>
+      <div class="discipline-card-copy">Strong teams build cost into architecture reviews, vendor commitments, and roadmap decisions. The report comes later. The economic decision does not.</div>
     </div>
 
     <div style="background:var(--white);padding:1.75rem 1.75rem 1.5rem;">
       <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:300;color:rgba(90,126,94,.18);line-height:1;margin-bottom:.75rem;">03</div>
       <div class="discipline-card-title">Finance and engineering need one language.</div>
-      <div class="discipline-card-copy">When engineering and finance share the same cost model, decisions happen in one meeting instead of three. No translation layer. No waiting for the next sprint review to find out what something actually cost.</div>
+      <div class="discipline-card-copy">A shared cost model lets finance and engineering make the decision together, without a translation layer or another reporting cycle.</div>
     </div>
 
     <div style="background:#304D35;padding:1.5rem 1.75rem 1.5rem;display:flex;flex-direction:column;">
@@ -2781,7 +2975,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 .cdb-ld{display:inline-block;width:5px;height:5px;border-radius:50%;background:#5A7E5E;vertical-align:middle;margin-right:.5rem;animation:cdbbl 1.5s ease-in-out infinite;}
 @keyframes cdbbl{0%,100%{opacity:1}50%{opacity:.25}}
 </style>
-<div style="border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:#ffffff;">
+<div class="cdb-shell" style="border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:#ffffff;">
 <div class="cdb">
   <div class="cdb-grid"></div><div class="cdb-ticks"></div>
   <svg class="cdb-chart" viewBox="0 0 2400 180" preserveAspectRatio="none">
@@ -2838,10 +3032,9 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
             </div>
 
             <div class="work-chat-bubble work-chat-bubble-ai work-chat-bubble-ai-main">
-              <strong><strong>EC2 is hemorrhaging cash</strong></strong> — you had a <strong>154% spike</strong> on Feb 4th, jumping from <strong>$482</strong> to <strong>$1,226</strong> in a single day. That’s a <strong>critical anomaly</strong> and your biggest cost driver at <strong>$7,421</strong> (40.5% of cloud spend).<br>
-              Second concern: <strong>19 unused SaaS licenses</strong> are burning <strong>$242/month</strong>. Slack alone has 8 ghost seats at ~$11 each, and GitHub has 7 unused at ~$5 each.<br>
-              Your AI spend is also creeping up <strong>(+12.4%, now $892)</strong>, mostly from GPT-4o at <strong>$512</strong>. If you're not actively optimizing prompts or batching requests, you're leaving money on the table.<br>
-              <strong>What triggered that EC2 spike on Feb 4th — did you launch new instances, or is something autoscaling out of control?</strong>
+              <strong>EC2 jumped 154% in one day</strong>, from <strong>$482</strong> to <strong>$1,226</strong>. It is now the largest cost driver at <strong>40.5% of cloud spend</strong>.<br><br>
+              I also found <strong>19 unused SaaS licenses</strong> costing <strong>$242 per month</strong>, while AI spend rose <strong>12.4%</strong>.<br><br>
+              <strong>Start with the EC2 spike. Was this a planned launch or uncontrolled autoscaling?</strong>
             </div>
           </div>
 
@@ -2880,9 +3073,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
         <div class="work-4col-tag">Open Source · Pipeline</div>
         <div class="work-4col-title">The Six-Tool Pipeline</div>
         <div class="work-4col-desc">
-          Open-source FinOps toolkit covering the full FinOps Foundation 2026 framework.<br><br>
-          FinOps Lite · Watchdog · Recovery Economics · AI Cost Lens · SaaS Analyzer · Command Center<br><br>
-          All MIT licensed. CI on every push.
+          Six open-source tools spanning allocation, anomalies, resilience, AI spend, SaaS, and executive reporting. MIT licensed with CI on every push.
         </div>
         <a href="https://github.com/cloudandcapital" target="_blank" rel="noopener noreferrer" class="work-4col-link">View on GitHub →</a>
       </div>
@@ -2890,21 +3081,21 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
       <div class="work-4col-card">
         <div class="work-4col-tag">Interactive · Tool</div>
         <div class="work-4col-title">Market Tape</div>
-        <div class="work-4col-desc">AI-powered market dashboard — Lumen researches live data across indices, sectors, commodities, and crypto, then generates analysis connecting market signals to infrastructure decisions. Built for FinOps teams and traders.</div>
+        <div class="work-4col-desc">A live market dashboard connecting indices, sectors, commodities, and crypto to infrastructure and spending decisions.</div>
         <a href="https://market-tape.cloudandcapital.com" target="_blank" rel="noopener noreferrer" class="work-4col-link">Launch Dashboard →</a>
       </div>
 
       <div class="work-4col-card">
         <div class="work-4col-tag">Interactive · Tool</div>
         <div class="work-4col-title">Signal Audit</div>
-        <div class="work-4col-desc">Five-minute diagnostic that surfaces where cost enters your decision chain.<br><br>Built for finance leaders and engineering managers who suspect the problem is upstream.</div>
+        <div class="work-4col-desc">A five-minute diagnostic showing where cost enters the decision chain before it reaches the invoice.</div>
         <a href="/signal-audit" class="work-4col-link">Take the Audit →</a>
       </div>
 
       <div class="work-4col-card">
         <div class="work-4col-tag">Interactive · Tool</div>
         <div class="work-4col-title">Interactive Lab</div>
-        <div class="work-4col-desc">Reframe decisions from FinOps, Finance, or Engineering lens.<br><br>GPU commitments, SaaS renewals, build-vs-buy. AI structures the tradeoffs before the meeting.</div>
+        <div class="work-4col-desc">Structure GPU commitments, SaaS renewals, and build-versus-buy decisions through finance, FinOps, or engineering.</div>
         <a href="/interactive-lab" class="work-4col-link">Open Lab →</a>
       </div>
 
@@ -2959,11 +3150,11 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
       </div>
 
 
-      <p class="about-v4-final-lede">I came from Morgan Stanley — client side, Series 7 and 66 — where I spent years watching how people with capital think about risk and where to put money. Now that lens points at tech spend: cloud, AI infrastructure, SaaS. The cost decisions that shape your bill start long before the invoice arrives.</p>
+      <p class="about-v4-final-lede">I came from Morgan Stanley, where I learned how people with capital think about risk and where to put money. Now I apply that lens to technology spend across cloud, AI infrastructure, and SaaS.</p>
 
-      <p class="about-v4-final-body">That same lens now carries into cloud economics, AI infrastructure, and FinOps, where cost is shaped inside decisions rather than observed after the fact.</p>
+      <p class="about-v4-final-body">I work where finance and engineering meet, building tools that make the economic consequence visible while there is still time to change it.</p>
 
-      <p class="about-v4-final-body">I'm also a parent, which means time is never theoretical. Every system I build has to earn its place — either it saves time or it doesn't ship.</p>
+      <p class="about-v4-final-body">I'm also a parent, so time is never theoretical. Every system I build has to earn its place. Either it saves time or it does not ship.</p>
 
       <div class="about-thesis">
         <p>"Most teams still see cost after it happens. The real work sits earlier, inside the decisions that create it."</p>
@@ -2989,25 +3180,10 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
         <img src="/images/sponsor-logo.webp" alt="" class="comm-collab-logo comm-collab-logo-sc" loading="lazy">
       </div>
       <p class="comm-body">The Los Angeles chapter of FinOps Weekly is produced by FinOps Weekly and SmartClouds and hosted locally by Diana Molski, Los Angeles regional leader.</p>
-      <a href={upcomingEvent.registrationUrl} class="btn btn-sage" target="_blank" rel="noopener noreferrer">Register for August 27</a>
+      <a href="mailto:diana@cloudandcapital.com?subject=FinOps%20Weekly%20Los%20Angeles" class="btn btn-sage">Get Event Updates</a>
     </div>
 
     <div class="event-stack reveal d2">
-      <article class="ev-card ev-card-next ev-card-upcoming">
-        <div class="ev-tag">{upcomingEvent.eyebrow}</div>
-        <div class="ev-title">{upcomingEvent.title}</div>
-        <p class="ev-speaker-line"><strong>{upcomingEvent.speaker}</strong> · {upcomingEvent.speakerRole}</p>
-        <div class="ev-details">
-          <span class="ev-detail">{upcomingEvent.day}</span>
-          <span class="ev-detail">{upcomingEvent.time}</span>
-          <span class="ev-detail">{upcomingEvent.venue}</span>
-          <span class="ev-detail">{upcomingEvent.location}</span>
-        </div>
-        <div class="ev-meta">{upcomingEvent.description}</div>
-        <div class="ev-sponsor ev-sponsor-dark">{upcomingEvent.credit}</div>
-        <a class="ev-register" href={upcomingEvent.registrationUrl} target="_blank" rel="noopener noreferrer">View event &amp; register →</a>
-      </article>
-
       <article class="ev-card ev-card-feature">
         <div class="ev-feature-layout">
           <div class="ev-feature-copy">
@@ -3060,9 +3236,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
     <div class="newsletter-body">
       <div class="newsletter-left">
         <div class="newsletter-desc">
-          <p style="margin:0 0 .6rem;"><span style="color:rgba(244,239,230,.85);font-weight:500;">Markets &amp; Mimosas</span> — every other Friday. Market signals, AI and cloud spend, and the decisions most teams miss.</p>
-          <p style="margin:0 0 .85rem;opacity:.7;">Essays and quarterly reports coming soon.</p>
-          <p style="margin:0;opacity:.7;">All free.</p>
+          <p style="margin:0;"><span style="color:rgba(244,239,230,.85);font-weight:500;">Markets &amp; Mimosas</span>, every other Friday. Market signals, AI and cloud spend, and the decisions most teams miss.</p>
         </div>
       </div>
       <div class="newsletter-actions">

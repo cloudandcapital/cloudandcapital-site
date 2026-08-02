@@ -164,7 +164,7 @@ const interactiveTools = tools.filter((tool) =>
   .flagship-actions a { color: #86a89a; }
   .flagship-actions a:hover, .tool-column > a:hover, .pipeline-heading > a:hover, .pipeline-list a:hover { text-decoration: underline; text-underline-offset: .3em; }
   .flagship-actions span { font-family: 'DM Mono', monospace; font-size: .57rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(245,238,233,.57); }
-  .flagship-visual { display: grid; grid-template-columns: 1.1fr .9fr; overflow: hidden; border: 1px solid rgba(117, 96, 73, .3); border-radius: 20px; background: #f5eee9; }
+  .flagship-visual { display: grid; grid-template-columns: 1.1fr .9fr; overflow: hidden; border: 1px solid rgba(117, 96, 73, .3); border-radius: 20px; background: #f5eee9; transform: translateY(30px); }
   .lumen-panel, .cost-shape-panel { min-width: 0; padding: clamp(1.35rem, 2.4vw, 2rem); background: #f5eee9; color: #000; }
   .lumen-panel { display: flex; flex-direction: column; justify-content: center; }
   .visual-kicker { margin: 0 0 1.5rem; font-family: 'DM Mono', monospace; font-size: .56rem; letter-spacing: .14em; text-transform: uppercase; color: #6b8e7f; }
@@ -211,7 +211,7 @@ const interactiveTools = tools.filter((tool) =>
   }
   @media (max-width: 720px) {
     .flagship-intro { display: block; }.flagship-intro > p:last-child { margin-top: 1rem; }
-    .flagship-visual { grid-template-columns: 1fr; min-height: 0; }.lumen-panel { min-height: 18rem; }.cost-shape-panel { border-top: 1px solid rgba(117, 96, 73, .18); border-left: none; }
+    .flagship-visual { grid-template-columns: 1fr; min-height: 0; transform: translateY(22px); }.lumen-panel { min-height: 18rem; }.cost-shape-panel { border-top: 1px solid rgba(117, 96, 73, .18); border-left: none; }
     .decision-diagram { min-height: 26rem; }.diagram-layers { grid-template-rows: repeat(3, minmax(4.65rem, auto)); margin-top: 1rem; margin-bottom: 1.35rem; }.diagram-layer { min-height: 4.65rem; }
     .tool-columns { grid-template-columns: 1fr; }.tool-column { min-height: 0; border-right: none; border-bottom: 1px solid rgba(0,0,0,.14); }.tool-column:last-child { border-bottom: none; }
     .work-cta { grid-template-columns: 1fr; align-items: start; }.work-cta > a { justify-self: start; }

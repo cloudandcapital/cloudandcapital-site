@@ -131,17 +131,17 @@ const interactiveTools = tools.filter((tool) =>
   .work-opening h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; color: #000; }
   .work-opening h1 { max-width: 14ch; margin: 0; font-size: clamp(3.1rem, 4.4vw, 4.75rem); line-height: .98; letter-spacing: -.035em; }
   .work-opening-copy { max-width: 58ch; margin: 2rem 0 0; font-family: 'DM Sans', sans-serif; font-size: clamp(.95rem, 1.4vw, 1.08rem); line-height: 1.82; color: #4a4a4a; }
-  .decision-diagram { min-height: 29rem; margin-top: 2.55rem; padding: clamp(1.5rem, 3vw, 2.5rem) 0 0; display: flex; flex-direction: column; background: #191714; color: #f5eee9; border-top: 1px solid #6b8e7f; }
-  .diagram-group-label { margin: 0; padding: 0 clamp(1.35rem, 3vw, 2.6rem); font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .18em; line-height: 1.5; text-transform: uppercase; color: #86a89a; }
-  .diagram-layers { position: relative; display: flex; flex: 1; flex-direction: column; justify-content:center; margin: 1.5rem 0 1.85rem; padding-left: calc(clamp(1.35rem, 3vw, 2.6rem) + 2.15rem); padding-right: clamp(1.35rem, 3vw, 2.6rem); }
-  .diagram-layers::before { content: ''; position: absolute; left: calc(clamp(1.35rem, 3vw, 2.6rem) + .55rem); top: 1.25rem; bottom: 1.25rem; width: 1px; background: #6b8e7f; }
-  .diagram-layer { position: relative; display: grid; grid-template-columns: clamp(3.2rem, 5vw, 4.35rem) minmax(0, 1fr); gap: .85rem; align-items: center; min-height: 5.5rem; padding: 1.05rem 0; border-top: 1px solid rgba(245,238,233,.16); }
+  .decision-diagram { --diagram-pad: clamp(1.35rem, 3vw, 2.6rem); --diagram-number: clamp(3.2rem, 5vw, 4.35rem); --diagram-gap: .85rem; min-height: 29rem; margin-top: 2.55rem; padding: clamp(1.5rem, 3vw, 2.5rem) 0 0; display: flex; flex-direction: column; background: #211f1b; color: #f5eee9; border-top: 1px solid #6b8e7f; }
+  .diagram-group-label { margin: 0; padding: 0 var(--diagram-pad); font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .18em; line-height: 1.5; text-transform: uppercase; color: #86a89a; }
+  .diagram-layers { position: relative; display: flex; flex: 1; flex-direction: column; justify-content:center; margin: 1.5rem 0 1.85rem; padding-left: var(--diagram-pad); padding-right: var(--diagram-pad); }
+  .diagram-layers::before { content: ''; position: absolute; left: calc(var(--diagram-pad) + .55rem); top: 1.25rem; bottom: 1.25rem; width: 1px; background: #6b8e7f; }
+  .diagram-layer { position: relative; display: grid; grid-template-columns: var(--diagram-number) minmax(0, 1fr); gap: var(--diagram-gap); align-items: center; min-height: 5.5rem; padding: 1.05rem 0; border-top: 1px solid rgba(245,238,233,.16); }
   .diagram-layer:last-child { border-bottom: 1px solid rgba(245,238,233,.16); }
-  .diagram-layer::before { content: ''; position: absolute; left: -2.15rem; top: 50%; width: .7rem; height: 1px; background: #6b8e7f; }
+  .diagram-layer::before { content: ''; position: absolute; left: .55rem; top: 50%; width: .7rem; height: 1px; background: #6b8e7f; }
   .diagram-layer > span, .diagram-invoice > span { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(2.4rem, 4vw, 3.7rem); font-weight: 300; line-height: .8; color: #86a89a; }
   .diagram-layer strong, .diagram-invoice strong { display: block; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.45rem, 2.2vw, 2rem); font-weight: 400; line-height: 1; color: #f5eee9; }
   .diagram-layer small, .diagram-invoice small { display: block; margin-top: .45rem; font-family: 'DM Mono', monospace; font-size: .55rem; letter-spacing: .08em; line-height: 1.55; color: rgba(245,238,233,.6); }
-  .diagram-invoice { display: grid; grid-template-columns: clamp(3.2rem, 5vw, 4.35rem) minmax(0, 1fr); gap: .85rem; align-items: center; padding: 1.5rem clamp(1.35rem, 3vw, 2.6rem); background: #ede5dc; border-top: 1px solid #6b8e7f; }
+  .diagram-invoice { display: grid; grid-template-columns: var(--diagram-number) minmax(0, 1fr); gap: var(--diagram-gap); align-items: center; padding: 1.5rem var(--diagram-pad); background: #ede5dc; border-top: 1px solid #6b8e7f; }
   .diagram-invoice > span { color: #6b8e7f; }.diagram-invoice strong { color: #000; }.diagram-invoice small { color: #4a4a4a; }
   .flagship { background: #000; color: #f5eee9; padding: clamp(3rem, 5vw, 4.75rem) clamp(1.5rem, 5vw, 4.5rem) clamp(4rem, 6vw, 5.5rem); border-top: 1px solid rgba(107,142,127,.5); }
   .flagship-intro { margin-bottom: 1.4rem; }

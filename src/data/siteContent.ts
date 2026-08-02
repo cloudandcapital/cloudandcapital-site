@@ -103,6 +103,7 @@ export const openSourceTools = [
 
 export const featuredWriting = {
   title: 'Who Gets Stuck With the Bill?',
+  topic: 'Markets & Mimosas',
   href: 'https://cloudandcapital.substack.com/p/who-gets-stuck-with-the-bill',
   description:
     'The AI buildout has become a negotiation over who carries utilization risk, and who keeps the right to walk away.',
@@ -110,15 +111,26 @@ export const featuredWriting = {
   imageAlt: 'Who Gets Stuck With the Bill? Markets & Mimosas',
 };
 
+export const newsletter = {
+  label: 'Cloud & Capital · Substack',
+  title: 'Markets, AI spend, and what the bill is actually telling you.',
+  description:
+    'Markets & Mimosas is the Cloud & Capital newsletter on markets, AI infrastructure, cloud spend, and the decisions behind the bill. Published every other Friday.',
+  subscribeHref: 'https://cloudandcapital.substack.com',
+  latestIssueHref: featuredWriting.href,
+};
+
 export const writing = [
   featuredWriting,
   {
     title: 'When Capital Becomes Compute',
+    topic: 'Capital Layer',
     href: 'https://cloudandcapital.substack.com/p/when-capital-becomes-compute',
     description: 'How capital turns into infrastructure in the AI era, and why the financial models have not caught up.',
   },
   {
     title: 'Deploying Fast, Thinking Slow',
+    topic: 'Deployment Rhythm',
     href: 'https://cloudandcapital.substack.com/p/deploying-fast-thinking-slow',
     description: 'Why shipping fast has a way of becoming tomorrow’s bill.',
   },

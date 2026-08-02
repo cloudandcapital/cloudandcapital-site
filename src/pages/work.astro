@@ -23,6 +23,10 @@ const interactiveTools = tools.filter((tool) =>
         <div class="decision-diagram" aria-label="Cloud and Capital decision chain: Architecture, Commitments, and Utilization shape cost before the Invoice reports it.">
           <p class="diagram-group-label">Cost is shaped here</p>
           <div class="diagram-layers">
+            <span class="diagram-connector-line" aria-hidden="true"></span>
+            <span class="diagram-connector-dot" aria-hidden="true"></span>
+            <span class="diagram-connector-dot" aria-hidden="true"></span>
+            <span class="diagram-connector-dot" aria-hidden="true"></span>
             <div class="diagram-layer"><span>01</span><div><strong>Architecture</strong><small>compute · storage · data</small></div></div>
             <div class="diagram-layer"><span>02</span><div><strong>Commitments</strong><small>term · coverage · flexibility</small></div></div>
             <div class="diagram-layer"><span>03</span><div><strong>Utilization</strong><small>demand · idle · variance</small></div></div>
@@ -131,17 +135,20 @@ const interactiveTools = tools.filter((tool) =>
   .work-opening h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; color: #000; }
   .work-opening h1 { max-width: 14ch; margin: 0; font-size: clamp(3.1rem, 4.4vw, 4.75rem); line-height: .98; letter-spacing: -.035em; }
   .work-opening-copy { max-width: 58ch; margin: 2rem 0 0; font-family: 'DM Sans', sans-serif; font-size: clamp(.95rem, 1.4vw, 1.08rem); line-height: 1.82; color: #4a4a4a; }
-  .decision-diagram { --diagram-pad: clamp(1.35rem, 3vw, 2.6rem); --diagram-number: clamp(3.2rem, 5vw, 4.35rem); --diagram-gap: .85rem; min-height: 29rem; margin-top: 2.55rem; padding: clamp(1.5rem, 3vw, 2.5rem) 0 0; display: flex; flex-direction: column; background: #211f1b; color: #f5eee9; border-top: 1px solid #6b8e7f; }
-  .diagram-group-label { margin: 0; padding: 0 var(--diagram-pad); font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .18em; line-height: 1.5; text-transform: uppercase; color: #86a89a; }
-  .diagram-layers { position: relative; display: flex; flex: 1; flex-direction: column; justify-content:center; margin: 1.5rem 0 1.85rem; padding-left: var(--diagram-pad); padding-right: var(--diagram-pad); }
-  .diagram-layers::before { content: ''; position: absolute; left: calc(var(--diagram-pad) + .55rem); top: 1.25rem; bottom: 1.25rem; width: 1px; background: #6b8e7f; }
-  .diagram-layer { position: relative; display: grid; grid-template-columns: var(--diagram-number) minmax(0, 1fr); gap: var(--diagram-gap); align-items: center; min-height: 5.5rem; padding: 1.05rem 0; border-top: 1px solid rgba(245,238,233,.16); }
+  .decision-diagram { --diagram-pad: clamp(1.35rem, 3vw, 2.6rem); --diagram-connector: .65rem; --diagram-number: clamp(3.2rem, 5vw, 4.35rem); --diagram-gap: .85rem; min-height: 29rem; margin-top: 2.55rem; padding: clamp(1.5rem, 3vw, 2.5rem) 0 0; display: flex; flex-direction: column; background: #211f1b; color: #f5eee9; border-top: 1px solid #6b8e7f; }
+  .diagram-group-label { margin: 0; padding: 0 var(--diagram-pad); font-family: 'DM Mono', monospace; font-size: clamp(.62rem, 1vw, .7rem); letter-spacing: .14em; line-height: 1.5; text-transform: uppercase; color: #a8c0b5; }
+  .diagram-layers { display: grid; flex: 1; grid-template-columns: var(--diagram-connector) minmax(0, 1fr); grid-template-rows: repeat(3, minmax(5.5rem, auto)); column-gap: var(--diagram-gap); margin: 1.5rem 0 1.85rem; padding: 0 var(--diagram-pad); }
+  .diagram-connector-line { grid-column: 1; grid-row: 1 / 4; justify-self: center; width: 1px; margin: 1.25rem 0; background: #6b8e7f; }
+  .diagram-connector-dot { grid-column: 1; align-self: center; justify-self: center; width: 4px; height: 4px; border-radius: 50%; background: #86a89a; }
+  .diagram-connector-dot:nth-of-type(2) { grid-row: 1; }.diagram-connector-dot:nth-of-type(3) { grid-row: 2; }.diagram-connector-dot:nth-of-type(4) { grid-row: 3; }
+  .diagram-layer { display: grid; grid-column: 2; grid-template-columns: var(--diagram-number) minmax(0, 1fr); gap: var(--diagram-gap); align-items: center; min-height: 5.5rem; padding: 1.05rem 0; border-top: 1px solid rgba(245,238,233,.16); }
+  .diagram-layer:nth-of-type(1) { grid-row: 1; }.diagram-layer:nth-of-type(2) { grid-row: 2; }.diagram-layer:nth-of-type(3) { grid-row: 3; }
   .diagram-layer:last-child { border-bottom: 1px solid rgba(245,238,233,.16); }
-  .diagram-layer::before { content: ''; position: absolute; left: .55rem; top: 50%; width: .7rem; height: 1px; background: #6b8e7f; }
   .diagram-layer > span, .diagram-invoice > span { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(2.4rem, 4vw, 3.7rem); font-weight: 300; line-height: .8; color: #86a89a; }
   .diagram-layer strong, .diagram-invoice strong { display: block; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.45rem, 2.2vw, 2rem); font-weight: 400; line-height: 1; color: #f5eee9; }
   .diagram-layer small, .diagram-invoice small { display: block; margin-top: .45rem; font-family: 'DM Mono', monospace; font-size: .55rem; letter-spacing: .08em; line-height: 1.55; color: rgba(245,238,233,.6); }
-  .diagram-invoice { display: grid; grid-template-columns: var(--diagram-number) minmax(0, 1fr); gap: var(--diagram-gap); align-items: center; padding: 1.5rem var(--diagram-pad); background: #ede5dc; border-top: 1px solid #6b8e7f; }
+  .diagram-invoice { display: grid; grid-template-columns: var(--diagram-connector) var(--diagram-number) minmax(0, 1fr); column-gap: var(--diagram-gap); align-items: center; padding: 1.5rem var(--diagram-pad); background: #ede5dc; border-top: 1px solid #6b8e7f; }
+  .diagram-invoice > span { grid-column: 2; }.diagram-invoice > div { grid-column: 3; }
   .diagram-invoice > span { color: #6b8e7f; }.diagram-invoice strong { color: #000; }.diagram-invoice small { color: #4a4a4a; }
   .flagship { background: #000; color: #f5eee9; padding: clamp(3rem, 5vw, 4.75rem) clamp(1.5rem, 5vw, 4.5rem) clamp(4rem, 6vw, 5.5rem); border-top: 1px solid rgba(107,142,127,.5); }
   .flagship-intro { margin-bottom: 1.4rem; }
@@ -204,7 +211,7 @@ const interactiveTools = tools.filter((tool) =>
   @media (max-width: 720px) {
     .flagship-intro { display: block; }.flagship-intro > p:last-child { margin-top: 1rem; }
     .flagship-visual { grid-template-columns: 1fr; min-height: 0; }.lumen-panel { min-height: 18rem; }
-    .decision-diagram { min-height: 26rem; }.diagram-layers { margin-top: 1rem; margin-bottom: 1.35rem; }.diagram-layer { min-height: 4.65rem; }
+    .decision-diagram { min-height: 26rem; }.diagram-layers { grid-template-rows: repeat(3, minmax(4.65rem, auto)); margin-top: 1rem; margin-bottom: 1.35rem; }.diagram-layer { min-height: 4.65rem; }
     .tool-columns { grid-template-columns: 1fr; }.tool-column { min-height: 0; border-right: none; border-bottom: 1px solid rgba(0,0,0,.14); }.tool-column:last-child { border-bottom: none; }
     .work-cta { grid-template-columns: 1fr; align-items: start; }.work-cta > a { justify-self: start; }
   }

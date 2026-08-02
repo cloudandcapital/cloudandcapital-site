@@ -1,34 +1,24 @@
 ---
 import '../styles/global.css';
 import '../styles/type.css';
+import HeadMeta from '../components/HeadMeta.astro';
 
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
-const { title = 'Cloud & Capital', description = '' } = Astro.props;
+const {
+  title = 'Cloud & Capital',
+  description = '',
+  noindex = false,
+} = Astro.props;
 ---
 
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="shortcut icon" href="/icon.png" />
-    <link rel="apple-touch-icon" href="/icon.png" />
-    {title && <title>{title}</title>}
-    {description && <meta name="description" content={description} />}
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://cloudandcapital.com" />
-    <meta property="og:title" content={title || 'Cloud & Capital'} />
-    <meta property="og:description" content={description || 'Turning numbers into strategy'} />
-    <meta property="og:image" content="https://cloudandcapital.com/images/og-image.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title || 'Cloud & Capital'} />
-    <meta name="twitter:description" content={description || 'Turning numbers into strategy'} />
-    <meta name="twitter:image" content="https://cloudandcapital.com/images/og-image.png" />
+    <HeadMeta title={title} description={description} noindex={noindex} />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GXRMNTEB3B"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -190,7 +180,7 @@ const { title = 'Cloud & Capital', description = '' } = Astro.props;
     </style>
     <nav class="site-nav">
       <a class="site-nav-logo" href="/">Cloud &amp; Capital</a>
-      <button class="site-nav-toggle" aria-label="Open menu" aria-expanded="false" id="tool-nav-toggle">
+      <button type="button" class="site-nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="tool-nav-links" id="tool-nav-toggle">
         <span></span><span></span><span></span>
       </button>
       <ul class="site-nav-links" id="tool-nav-links">
@@ -200,12 +190,12 @@ const { title = 'Cloud & Capital', description = '' } = Astro.props;
         <li><a href="/#community">Community</a></li>
         <li><a href="/#writing">Writing</a></li>
         <li class="site-nav-dropdown" id="tool-nav-tools">
-          <button class="site-nav-dropdown-btn" aria-haspopup="true" aria-expanded="false" id="tool-nav-tools-btn">Tools <span class="site-nav-chevron">▾</span></button>
-          <ul class="site-nav-dropdown-menu">
-            <li><a href="https://market-tape.cloudandcapital.com" target="_blank">Market Tape</a></li>
+          <button type="button" class="site-nav-dropdown-btn" aria-haspopup="true" aria-expanded="false" aria-controls="tool-nav-tools-menu" id="tool-nav-tools-btn">Tools <span class="site-nav-chevron">▾</span></button>
+          <ul class="site-nav-dropdown-menu" id="tool-nav-tools-menu">
+            <li><a href="https://market-tape.cloudandcapital.com" target="_blank" rel="noopener noreferrer">Market Tape</a></li>
             <li><a href="/signal-audit">Signal Audit</a></li>
             <li><a href="/interactive-lab">Interactive Lab</a></li>
-            <li><a href="https://guard.cloudandcapital.com" target="_blank">Cloud+ Cost Guard</a></li>
+            <li><a href="https://guard.cloudandcapital.com" target="_blank" rel="noopener noreferrer">Cloud+ Cost Guard</a></li>
           </ul>
         </li>
       </ul>

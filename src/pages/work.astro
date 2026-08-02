@@ -46,7 +46,7 @@ const interactiveTools = tools.filter((tool) =>
         <div class="flagship-grid">
           <div class="flagship-copy">
             <p class="tool-meta">{flagship.label}</p>
-            <h2 id="flagship-title">{flagship.title}</h2>
+            <h2 id="flagship-title">Cloud Cost Guard <span>+ Lumen</span></h2>
             <p>{flagship.description}</p>
             <div class="flagship-actions">
               <a href={flagship.href} target="_blank" rel="noopener noreferrer">View live dashboard <span aria-hidden="true">→</span></a>
@@ -157,6 +157,7 @@ const interactiveTools = tools.filter((tool) =>
   .flagship-copy { min-height: 31rem; padding: clamp(2.25rem, 5vw, 4.4rem) clamp(1.5rem, 4vw, 3.75rem); display: flex; flex-direction: column; justify-content: center; border-right: 1px solid rgba(245,238,233,.13); }
   .flagship-copy .tool-meta { color: #c9a961; }
   .flagship-copy h2 { margin: 0 0 1.25rem; font-size: clamp(2.55rem, 4.5vw, 4.75rem); line-height: .98; color: #f5eee9; }
+  .flagship-copy h2 span { display: block; }
   .flagship-copy > p:not(.tool-meta) { max-width: 39ch; margin: 0; font-family: 'DM Sans', sans-serif; font-size: .94rem; line-height: 1.85; color: rgba(245,238,233,.74); }
   .flagship-actions { display: flex; flex-wrap: wrap; gap: 1.25rem 1.5rem; align-items: center; margin-top: 2.25rem; }
   .flagship-actions a, .tool-column > a, .pipeline-heading > a, .pipeline-list a { font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .12em; line-height: 1.5; text-transform: uppercase; text-decoration: none; color: #6b8e7f; }
@@ -167,7 +168,7 @@ const interactiveTools = tools.filter((tool) =>
   .lumen-panel, .cost-shape-panel { min-width: 0; padding: clamp(1.35rem, 2.4vw, 2rem); background: #f5eee9; color: #000; }
   .lumen-panel { display: flex; flex-direction: column; justify-content: center; }
   .visual-kicker { margin: 0 0 1.5rem; font-family: 'DM Mono', monospace; font-size: .56rem; letter-spacing: .14em; text-transform: uppercase; color: #6b8e7f; }
-  .question { max-width: 20ch; margin: 0 0 1.5rem; padding: .85rem 1rem; font-family: 'DM Sans', sans-serif; font-size: .82rem; line-height: 1.65; background: rgba(107,142,127,.1); }
+  .question { margin: 0 0 1.1rem; padding: 1rem 1.1rem; font-family: 'DM Sans', sans-serif; font-size: .82rem; line-height: 1.65; background: #e9e1d8; }
   .analysis { padding: 1.1rem 0 0; border-top: 1px solid rgba(0,0,0,.1); font-family: 'DM Sans', sans-serif; font-size: .8rem; line-height: 1.72; color: #4a4a4a; }
   .analysis strong { display: block; margin-bottom: .5rem; color: #000; font-weight: 500; }
   .cost-shape-panel { display: flex; flex-direction: column; }
@@ -188,7 +189,7 @@ const interactiveTools = tools.filter((tool) =>
   .tool-column h3 { margin: 0 0 1rem; font-size: clamp(1.7rem, 2.4vw, 2.25rem); line-height: 1.05; }
   .tool-column > p:not(.tool-meta) { margin: 0 0 2rem; font-family: 'DM Sans', sans-serif; font-size: .86rem; line-height: 1.8; color: #4a4a4a; }
   .tool-column > a { margin-top: auto; }
-  .pipeline { padding-top: clamp(4rem, 7vw, 6.25rem); padding-bottom: clamp(3.5rem, 5vw, 4.75rem); display: grid; grid-template-columns: minmax(15rem, .7fr) minmax(0, 1.3fr); gap: clamp(2.5rem, 8vw, 8rem); background: #ebe3db; }
+  .pipeline { padding-top: clamp(4rem, 7vw, 6.25rem); padding-bottom: clamp(3.5rem, 5vw, 4.75rem); display: grid; grid-template-columns: minmax(15rem, .7fr) minmax(0, 1.3fr); gap: clamp(2.5rem, 8vw, 8rem); background: #fbfaf7; }
   .pipeline-heading > p:not(.section-label) { max-width: 31ch; margin: 1.4rem 0 2rem; font-family: 'DM Sans', sans-serif; font-size: .9rem; line-height: 1.8; color: #4a4a4a; }
   .pipeline-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(0,0,0,.16); }
   .pipeline-list li { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr) auto; gap: 1rem; align-items: baseline; padding: 1.45rem 0; border-bottom: 1px solid rgba(0,0,0,.16); }

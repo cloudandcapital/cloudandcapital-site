@@ -63,12 +63,42 @@ export const tools = [
 ];
 
 export const openSourceTools = [
-  'FinOps Lite',
-  'FinOps Watchdog',
-  'Recovery Economics',
-  'AI Cost Lens',
-  'SaaS Cost Analyzer',
-  'Tech Spend Command Center',
+  {
+    title: 'FinOps Lite',
+    description: 'Allocation for a clearer view of where spend begins.',
+    href: 'https://github.com/cloudandcapital',
+    external: true,
+  },
+  {
+    title: 'FinOps Watchdog',
+    description: 'Anomaly detection for changes that need attention.',
+    href: 'https://github.com/cloudandcapital',
+    external: true,
+  },
+  {
+    title: 'Recovery Economics',
+    description: 'Resilience economics for the tradeoffs behind recovery.',
+    href: 'https://github.com/cloudandcapital',
+    external: true,
+  },
+  {
+    title: 'AI Cost Lens',
+    description: 'AI spend for the infrastructure decisions shaping the bill.',
+    href: 'https://github.com/cloudandcapital',
+    external: true,
+  },
+  {
+    title: 'SaaS Cost Analyzer',
+    description: 'SaaS spend for the licenses and renewals in the stack.',
+    href: 'https://github.com/cloudandcapital',
+    external: true,
+  },
+  {
+    title: 'Tech Spend Command Center',
+    description: 'Executive reporting for the operating picture across spend.',
+    href: 'https://github.com/cloudandcapital',
+    external: true,
+  },
 ];
 
 export const featuredWriting = {

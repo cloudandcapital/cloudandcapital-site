@@ -1,8 +1,188 @@
 ---
-import ArchitectureRoute from '../components/ArchitectureRoute.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { contactLink, openSourceTools, tools } from '../data/siteContent';
+
+const flagship = tools.find((tool) => tool.slug === 'cloud-cost-guard-lumen');
+const interactiveTools = tools.filter((tool) =>
+  ['market-tape', 'signal-audit', 'interactive-lab'].includes(tool.slug),
+);
 ---
 
-<BaseLayout title="Work | Cloud & Capital" description="Tools for the decisions behind the bill.">
-  <ArchitectureRoute label="Work" title="Tools for the decisions behind the bill." description="Cloud & Capital tools are being organized here. The approved homepage remains unchanged during this architecture stage." />
+<BaseLayout
+  title="Work | Cloud & Capital"
+  description="Tools for the decisions behind the bill. Explore Cloud & Capital systems for cloud, AI, and SaaS spend."
+>
+  <main id="main-content">
+    <section class="work-opening" aria-labelledby="work-title">
+      <p class="section-label">Work</p>
+      <h1 id="work-title">Tools for the decisions behind the bill.</h1>
+      <p class="work-opening-copy">I build FinOps tools and decision systems for cloud, SaaS, and AI infrastructure spend. The work starts before the invoice, where architecture, commitments, and operating choices shape the bill.</p>
+    </section>
+
+    {flagship && (
+      <section class="flagship" aria-labelledby="flagship-title">
+        <div class="flagship-intro">
+          <p class="section-label section-label-dark">Flagship system</p>
+          <p>The work starts before the invoice, where architecture, commitments, and operating choices shape the bill.</p>
+        </div>
+        <div class="flagship-grid">
+          <div class="flagship-copy">
+            <p class="tool-meta">{flagship.label}</p>
+            <h2 id="flagship-title">{flagship.title}</h2>
+            <p>{flagship.description}</p>
+            <div class="flagship-actions">
+              <a href={flagship.href} target="_blank" rel="noopener noreferrer">View live dashboard <span aria-hidden="true">→</span></a>
+              <span>Cloud · AI · SaaS</span>
+            </div>
+          </div>
+          <div class="flagship-visual" aria-label="Illustrative Cloud Cost Guard and Lumen analysis">
+            <div class="lumen-panel">
+              <p class="visual-kicker">Lumen analysis</p>
+              <p class="question">What’s bleeding money right now?</p>
+              <div class="analysis">
+                <strong>EC2 jumped 154% in one day, from $482 to $1,226.</strong>
+                <span>It is the largest cost driver at 40.5% of cloud spend. Start with the EC2 spike. Was this a planned launch or uncontrolled autoscaling?</span>
+              </div>
+            </div>
+            <div class="cost-shape-panel">
+              <p class="visual-kicker">Current cost shape</p>
+              <div class="donut" aria-hidden="true"></div>
+              <p class="cost-shape-title">Tech spend by scope</p>
+              <ul>
+                <li><span class="dot cloud"></span><span>Cloud infrastructure</span><strong>88.1%</strong></li>
+                <li><span class="dot saas"></span><span>SaaS tools</span><strong>7.6%</strong></li>
+                <li><span class="dot ai"></span><span>AI / LLM</span><strong>4.3%</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section class="interactive-tools" aria-labelledby="interactive-title">
+      <div class="section-heading">
+        <p class="section-label">Interactive tools</p>
+        <h2 id="interactive-title">Decision tools for the work in front of you.</h2>
+      </div>
+      <div class="tool-columns">
+        {interactiveTools.map((tool) => (
+          <article class="tool-column">
+            <p class="tool-meta">{tool.label}</p>
+            <h3>{tool.title}</h3>
+            <p>{tool.description}</p>
+            <a href={tool.href} target={tool.external ? '_blank' : undefined} rel={tool.external ? 'noopener noreferrer' : undefined}>{tool.slug === 'market-tape' ? 'Launch dashboard' : tool.slug === 'signal-audit' ? 'Take the audit' : 'Open Lab'} <span aria-hidden="true">→</span></a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="pipeline" aria-labelledby="pipeline-title">
+      <div class="pipeline-heading">
+        <p class="section-label">Open source pipeline</p>
+        <h2 id="pipeline-title">The Six Tool Pipeline</h2>
+        <p>Six open source FinOps tools spanning allocation, anomaly detection, resilience economics, AI spend, SaaS, and executive reporting.</p>
+        <a href="https://github.com/cloudandcapital" target="_blank" rel="noopener noreferrer">View the pipeline on GitHub <span aria-hidden="true">→</span></a>
+      </div>
+      <ol class="pipeline-list">
+        {openSourceTools.map((tool, index) => (
+          <li>
+            <span class="pipeline-number">{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{tool.title}</h3>
+              <p>{tool.description}</p>
+            </div>
+            <a href={tool.href} target="_blank" rel="noopener noreferrer" aria-label={`View ${tool.title} on GitHub`}>GitHub <span aria-hidden="true">→</span></a>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="work-cta" aria-labelledby="work-cta-title">
+      <div>
+        <p class="section-label section-label-gold">Work with the decision layer</p>
+        <h2 id="work-cta-title">Working on cloud economics, FinOps, or AI infrastructure?</h2>
+      </div>
+      <a href={contactLink.href}>{contactLink.label} <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
 </BaseLayout>
+
+<style>
+  main { overflow: hidden; background: #f5eee9; }
+  .work-opening, .interactive-tools, .pipeline { padding: clamp(4.75rem, 9vw, 8rem) clamp(1.5rem, 5vw, 4.5rem); }
+  .work-opening { padding-top: clamp(8rem, 14vw, 11rem); max-width: 76rem; }
+  .section-label, .tool-meta { margin: 0 0 1.25rem; font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .18em; line-height: 1.5; text-transform: uppercase; color: #6b8e7f; }
+  .section-label::after { content: ''; display: inline-block; width: 3rem; height: 1px; margin: 0 0 .25rem .75rem; background: currentColor; opacity: .55; }
+  .work-opening h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; color: #000; }
+  .work-opening h1 { max-width: 15ch; margin: 0; font-size: clamp(3.1rem, 6.5vw, 6.25rem); line-height: .96; letter-spacing: -.035em; }
+  .work-opening-copy { max-width: 58ch; margin: 2rem 0 0; font-family: 'DM Sans', sans-serif; font-size: clamp(.95rem, 1.4vw, 1.08rem); line-height: 1.82; color: #4a4a4a; }
+  .flagship { background: #000; color: #f5eee9; padding: clamp(4.75rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4.5rem); }
+  .flagship-intro { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; margin-bottom: 2.6rem; }
+  .flagship-intro > p:last-child { max-width: 42ch; margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.2rem, 2vw, 1.65rem); line-height: 1.25; color: rgba(245,238,233,.6); }
+  .section-label-dark { color: rgba(245,238,233,.5); white-space: nowrap; }
+  .flagship-grid { display: grid; grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr); border-top: 2px solid #6b8e7f; border-bottom: 1px solid rgba(245,238,233,.13); }
+  .flagship-copy { min-height: 31rem; padding: clamp(2.25rem, 5vw, 4.4rem) clamp(1.5rem, 4vw, 3.75rem); display: flex; flex-direction: column; justify-content: center; border-right: 1px solid rgba(245,238,233,.13); }
+  .flagship-copy .tool-meta { color: #c9a961; }
+  .flagship-copy h2 { margin: 0 0 1.25rem; font-size: clamp(2.55rem, 4.5vw, 4.75rem); line-height: .98; color: #f5eee9; }
+  .flagship-copy > p:not(.tool-meta) { max-width: 39ch; margin: 0; font-family: 'DM Sans', sans-serif; font-size: .94rem; line-height: 1.85; color: rgba(245,238,233,.74); }
+  .flagship-actions { display: flex; flex-wrap: wrap; gap: 1.25rem 1.5rem; align-items: center; margin-top: 2.25rem; }
+  .flagship-actions a, .tool-column > a, .pipeline-heading > a, .pipeline-list a { font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .12em; line-height: 1.5; text-transform: uppercase; text-decoration: none; color: #6b8e7f; }
+  .flagship-actions a { color: #86a89a; }
+  .flagship-actions a:hover, .tool-column > a:hover, .pipeline-heading > a:hover, .pipeline-list a:hover { text-decoration: underline; text-underline-offset: .3em; }
+  .flagship-actions span { font-family: 'DM Mono', monospace; font-size: .57rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(245,238,233,.57); }
+  .flagship-visual { display: grid; grid-template-columns: 1.1fr .9fr; gap: 1px; padding: 1rem; background: #000; }
+  .lumen-panel, .cost-shape-panel { min-width: 0; padding: clamp(1.35rem, 2.4vw, 2rem); background: #f5eee9; color: #000; }
+  .lumen-panel { display: flex; flex-direction: column; justify-content: center; }
+  .visual-kicker { margin: 0 0 1.5rem; font-family: 'DM Mono', monospace; font-size: .56rem; letter-spacing: .14em; text-transform: uppercase; color: #6b8e7f; }
+  .question { max-width: 20ch; margin: 0 0 1.5rem; padding: .85rem 1rem; font-family: 'DM Sans', sans-serif; font-size: .82rem; line-height: 1.65; background: rgba(107,142,127,.1); }
+  .analysis { padding: 1.1rem 0 0; border-top: 1px solid rgba(0,0,0,.1); font-family: 'DM Sans', sans-serif; font-size: .8rem; line-height: 1.72; color: #4a4a4a; }
+  .analysis strong { display: block; margin-bottom: .5rem; color: #000; font-weight: 500; }
+  .cost-shape-panel { display: flex; flex-direction: column; }
+  .donut { width: min(11rem, 100%); aspect-ratio: 1; margin: .25rem auto 1rem; border-radius: 50%; background: conic-gradient(#6b8e7f 0 88.1%, #a7b6d8 88.1% 95.7%, #c9a961 95.7% 100%); position: relative; }
+  .donut::after { content: ''; position: absolute; inset: 23%; border-radius: 50%; background: #f5eee9; }
+  .cost-shape-title { margin: .25rem 0 1rem; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.25rem; line-height: 1.1; }
+  .cost-shape-panel ul { list-style: none; margin: auto 0 0; padding: 0; }
+  .cost-shape-panel li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .45rem; align-items: center; padding: .52rem 0; border-top: 1px solid rgba(0,0,0,.08); font-family: 'DM Mono', monospace; font-size: .54rem; letter-spacing: .04em; line-height: 1.35; color: #4a4a4a; }
+  .cost-shape-panel strong { color: #000; font-weight: 400; }
+  .dot { width: .42rem; height: .42rem; border-radius: 50%; }
+  .dot.cloud { background: #6b8e7f; }.dot.saas { background: #a7b6d8; }.dot.ai { background: #c9a961; }
+  .interactive-tools { border-bottom: 1px solid rgba(0,0,0,.11); }
+  .section-heading { max-width: 42rem; margin-bottom: 3.75rem; }
+  .section-heading h2, .pipeline-heading h2, .work-cta h2 { margin: 0; font-size: clamp(2.25rem, 4vw, 4rem); line-height: 1.03; letter-spacing: -.025em; }
+  .tool-columns { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(0,0,0,.14); border-bottom: 1px solid rgba(0,0,0,.14); }
+  .tool-column { min-height: 19rem; padding: 2.25rem clamp(1.25rem, 2.4vw, 2.5rem) 2.5rem; display: flex; flex-direction: column; border-right: 1px solid rgba(0,0,0,.14); }
+  .tool-column:last-child { border-right: none; }
+  .tool-column h3 { margin: 0 0 1rem; font-size: clamp(1.7rem, 2.4vw, 2.25rem); line-height: 1.05; }
+  .tool-column > p:not(.tool-meta) { margin: 0 0 2rem; font-family: 'DM Sans', sans-serif; font-size: .86rem; line-height: 1.8; color: #4a4a4a; }
+  .tool-column > a { margin-top: auto; }
+  .pipeline { display: grid; grid-template-columns: minmax(15rem, .7fr) minmax(0, 1.3fr); gap: clamp(2.5rem, 8vw, 8rem); background: #ebe3db; }
+  .pipeline-heading > p:not(.section-label) { max-width: 31ch; margin: 1.4rem 0 2rem; font-family: 'DM Sans', sans-serif; font-size: .9rem; line-height: 1.8; color: #4a4a4a; }
+  .pipeline-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(0,0,0,.16); }
+  .pipeline-list li { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr) auto; gap: 1rem; align-items: baseline; padding: 1.45rem 0; border-bottom: 1px solid rgba(0,0,0,.16); }
+  .pipeline-number { font-family: 'DM Mono', monospace; font-size: .59rem; letter-spacing: .08em; color: #6b8e7f; }
+  .pipeline-list h3 { margin: 0 0 .35rem; font-size: clamp(1.25rem, 2vw, 1.62rem); line-height: 1.08; }
+  .pipeline-list p { margin: 0; font-family: 'DM Sans', sans-serif; font-size: .83rem; line-height: 1.65; color: #4a4a4a; }
+  .pipeline-list a { white-space: nowrap; }
+  .work-cta { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: end; padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 5vw, 4.5rem); background: #3d6055; }
+  .section-label-gold { color: #ddb977; }.section-label-gold::after { opacity: .45; }
+  .work-cta h2 { max-width: 23ch; color: #fff; }
+  .work-cta > a { padding: .9rem 1.45rem; background: #fff; color: #3d6055; font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
+  .work-cta > a:hover { background: #f5eee9; }
+  @media (max-width: 920px) {
+    .flagship-grid, .pipeline { grid-template-columns: 1fr; }
+    .flagship-copy { min-height: auto; border-right: none; border-bottom: 1px solid rgba(245,238,233,.13); }
+    .flagship-visual { min-height: 30rem; }.pipeline { gap: 3rem; }
+  }
+  @media (max-width: 720px) {
+    .flagship-intro { display: block; }.flagship-intro > p:last-child { margin-top: 1rem; }
+    .flagship-visual { grid-template-columns: 1fr; min-height: 0; }.lumen-panel { min-height: 18rem; }
+    .tool-columns { grid-template-columns: 1fr; }.tool-column { min-height: 0; border-right: none; border-bottom: 1px solid rgba(0,0,0,.14); }.tool-column:last-child { border-bottom: none; }
+    .work-cta { grid-template-columns: 1fr; align-items: start; }.work-cta > a { justify-self: start; }
+  }
+  @media (max-width: 480px) {
+    .work-opening, .interactive-tools, .pipeline { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .work-opening h1 { font-size: clamp(2.9rem, 15vw, 4rem); }.flagship { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .flagship-copy { padding: 2.5rem 1.25rem; }.flagship-visual { padding: .65rem; }.pipeline-list li { grid-template-columns: 2.6rem minmax(0, 1fr); gap: .75rem; }.pipeline-list a { grid-column: 2; justify-self: start; }
+    .work-cta { padding-left: 1.25rem; padding-right: 1.25rem; }
+  }
+</style>

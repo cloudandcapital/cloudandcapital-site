@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { featuredWriting, newsletter, writing } from '../data/siteContent';
+import { featuredWriting, newsletter, writingFeatured } from '../data/siteContent';
 
-const archive = writing.slice(1);
+const archive = [featuredWriting];
 ---
 
 <BaseLayout
@@ -17,23 +17,23 @@ const archive = writing.slice(1);
           <h1 id="writing-title">Cloud economics, AI infrastructure, and the decisions behind the bill.</h1>
           <p>Research and field notes on technology spend, capital allocation, and the operating choices shaping the bill.</p>
         </div>
-        <div class="field-notes" aria-label="Cloud and Capital field notes: Signal, Thesis, and Decision">
-          <p class="field-notes-label">C&amp;C // Field Notes</p>
-          <div class="field-notes-list">
-            <div class="field-notes-row">
-              <span>01</span>
-              <p><strong>Signal</strong>markets · infrastructure · spend</p>
-            </div>
-            <div class="field-notes-row">
-              <span>02</span>
-              <p><strong>Thesis</strong>risk · allocation · utilization</p>
-            </div>
-            <div class="field-notes-row">
-              <span>03</span>
-              <p><strong>Decision</strong>build · commit · wait</p>
-            </div>
-          </div>
-          <p class="field-notes-meta">Issue File / 004<span class="field-notes-cursor" aria-hidden="true">_</span></p>
+        <div class="editorial-folio" aria-label="Cloud and Capital research folio for There Was No Opting Out">
+          <p class="folio-tab">Issue 004</p>
+          <article class="folio-proof">
+            <p class="folio-kicker">Field note · research proof</p>
+            <h2>There Was No<br />Opting Out</h2>
+            <p class="folio-fragment">Cloud economics is now a capital allocation question.</p>
+          </article>
+          <figure class="folio-chart">
+            <figcaption>Infrastructure signal</figcaption>
+            <svg viewBox="0 0 220 82" role="img" aria-label="Abstract infrastructure market line chart">
+              <path class="chart-grid" d="M0 17H220M0 42H220M0 67H220" />
+              <path class="chart-line" d="M0 65 L25 58 L47 61 L72 44 L94 51 L121 30 L145 37 L173 18 L195 26 L220 8" />
+              <circle cx="220" cy="8" r="3" />
+            </svg>
+          </figure>
+          <p class="folio-annotation">margin note<br /><em>utilization risk has a cost</em></p>
+          <p class="folio-meta">AI infrastructure · cloud economics</p>
         </div>
       </div>
     </section>
@@ -58,15 +58,15 @@ const archive = writing.slice(1);
       <div class="featured-essay-heading">
         <p class="section-label">Featured essay</p>
       </div>
-      <a class="featured-essay-link" href={featuredWriting.href} target="_blank" rel="noopener noreferrer">
+      <a class="featured-essay-link" href={writingFeatured.href} target="_blank" rel="noopener noreferrer">
         <div class="featured-essay-copy">
-          <p class="article-topic">{featuredWriting.topic}</p>
-          <h2 id="featured-title">{featuredWriting.title}</h2>
-          <p>{featuredWriting.description}</p>
+          <p class="article-topic">{writingFeatured.topic}</p>
+          <h2 id="featured-title">{writingFeatured.title}</h2>
+          <p>{writingFeatured.description}</p>
           <span>Read essay <span aria-hidden="true">→</span></span>
         </div>
         <div class="featured-essay-image">
-          <img src={featuredWriting.image} alt={featuredWriting.imageAlt} />
+          <img src={writingFeatured.image} alt={writingFeatured.imageAlt} />
         </div>
       </a>
     </section>
@@ -77,11 +77,10 @@ const archive = writing.slice(1);
         <h2 id="archive-title">Recent writing.</h2>
       </div>
       <div class="archive-list">
-        {archive.map((article, index) => (
+        {archive.map((article) => (
           <a href={article.href} target="_blank" rel="noopener noreferrer" class="archive-entry">
-            <span class="archive-number">{String(index + 1).padStart(2, '0')}</span>
             <div>
-              <p class="article-topic">{article.topic}</p>
+              <p class="archive-meta">{article.date} <span>{article.topic}</span></p>
               <h3>{article.title}</h3>
               <p>{article.description}</p>
             </div>
@@ -111,21 +110,26 @@ const archive = writing.slice(1);
   .writing-hero h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; color: #000; }
   .writing-hero h1 { max-width: 14ch; margin: 0; font-size: clamp(3.1rem, 4.4vw, 4.75rem); line-height: .98; letter-spacing: -.035em; }
   .writing-hero-copy > p:last-child { max-width: 58ch; margin: 2rem 0 0; font-family: 'DM Sans', sans-serif; font-size: clamp(.95rem, 1.4vw, 1.08rem); line-height: 1.82; color: #4a4a4a; }
-  .field-notes { min-height: 29rem; padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.35rem, 3vw, 2.6rem); display: flex; flex-direction: column; background: #211f1b; color: #f5eee9; border-top: 1px solid #6b8e7f; }
-  .field-notes-label, .field-notes-meta { margin: 0; font-family: 'DM Mono', monospace; font-size: clamp(.62rem, 1vw, .7rem); letter-spacing: .14em; line-height: 1.5; text-transform: uppercase; }
-  .field-notes-label { color: #ddb977; }
-  .field-notes-label::after { content: ''; display: inline-block; width: 2.5rem; height: 1px; margin: 0 0 .25rem .7rem; background: #ddb977; opacity: .7; }
-  .field-notes-list { margin: clamp(2rem, 4vw, 3.5rem) 0 auto; border-top: 1px solid rgba(168,192,181,.6); }
-  .field-notes-row { display: grid; grid-template-columns: clamp(3.2rem, 5vw, 4.35rem) minmax(0, 1fr); gap: 1.1rem; padding: 1.1rem 0; border-bottom: 1px solid rgba(245,238,233,.18); }
-  .field-notes-row > span { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(2.45rem, 3.8vw, 3.7rem); font-weight: 300; line-height: .82; letter-spacing: -.035em; color: #a8c0b5; }
-  .field-notes-row p { margin: 0; padding-top: .1rem; font-family: 'DM Mono', monospace; font-size: clamp(.61rem, .9vw, .69rem); letter-spacing: .1em; line-height: 1.7; text-transform: lowercase; color: rgba(245,238,233,.64); }
-  .field-notes-row strong { display: block; margin-bottom: .22rem; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.45rem, 2.1vw, 1.95rem); font-weight: 300; letter-spacing: -.015em; line-height: 1; text-transform: none; color: #f5eee9; }
-  .field-notes-meta { padding-top: 1.4rem; color: #a8c0b5; }
-  .field-notes-cursor { display: inline-block; margin-left: .25rem; color: #ddb977; animation: field-notes-blink 1.15s step-end infinite; }
+  .editorial-folio { position: relative; min-height: 29rem; padding: clamp(1.35rem, 2.5vw, 2.25rem); overflow: hidden; background: #91877b; color: #211f1b; border-top: 1px solid #6b8e7f; }
+  .folio-tab { position: absolute; top: 0; right: clamp(1.1rem, 2vw, 1.8rem); margin: 0; padding: .55rem .7rem .5rem; background: #ddb977; font-family: 'DM Mono', monospace; font-size: .56rem; letter-spacing: .12em; line-height: 1; text-transform: uppercase; color: #211f1b; }
+  .folio-proof { position: relative; z-index: 1; width: min(73%, 22rem); min-height: 21rem; padding: clamp(1.35rem, 2.5vw, 2rem); background: #fbfaf7; border: 1px solid rgba(33,31,27,.16); }
+  .folio-kicker, .folio-meta, .folio-chart figcaption { margin: 0; font-family: 'DM Mono', monospace; font-size: .57rem; letter-spacing: .13em; line-height: 1.5; text-transform: uppercase; }
+  .folio-kicker { color: #55796c; }
+  .folio-proof h2 { max-width: 12ch; margin: clamp(2.7rem, 6vw, 4.5rem) 0 1.25rem; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(2.1rem, 3.7vw, 3.45rem); font-weight: 300; letter-spacing: -.035em; line-height: .93; color: #211f1b; }
+  .folio-fragment { max-width: 22ch; margin: 0; font-family: 'DM Sans', sans-serif; font-size: .78rem; line-height: 1.65; color: #514c45; text-decoration: underline; text-decoration-color: #ddb977; text-decoration-thickness: 2px; text-underline-offset: .3em; }
+  .folio-chart { position: absolute; z-index: 2; right: clamp(1.35rem, 3vw, 2.4rem); bottom: clamp(3.6rem, 8vw, 6.2rem); width: min(46%, 14rem); margin: 0; padding: .8rem; background: #d5cdc2; border: 1px solid rgba(33,31,27,.17); }
+  .folio-chart figcaption { margin-bottom: .55rem; color: #55796c; }
+  .folio-chart svg { display: block; width: 100%; height: auto; overflow: hidden; }
+  .folio-chart .chart-grid { fill: none; stroke: rgba(33,31,27,.16); stroke-width: 1; }
+  .folio-chart .chart-line { fill: none; stroke: #55796c; stroke-width: 2; }
+  .folio-chart circle { fill: #b88c45; }
+  .folio-annotation { position: absolute; right: clamp(1.35rem, 3vw, 2.4rem); bottom: 1.45rem; max-width: 15ch; margin: 0; font-family: 'DM Sans', sans-serif; font-size: .64rem; line-height: 1.45; color: #39352f; }
+  .folio-annotation em { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1rem; }
+  .folio-meta { position: absolute; left: clamp(1.35rem, 2.5vw, 2.25rem); bottom: 1.55rem; color: #55796c; }
   .newsletter-feature { padding: clamp(4rem, 7vw, 6.5rem) clamp(1.5rem, 5vw, 4.5rem); background: #000; color: #f5eee9; }
   .newsletter-feature-inner { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(17rem, .9fr); gap: clamp(3rem, 8vw, 9rem); max-width: 88rem; }
   .section-label-light { color: #ddb977; }.section-label-light::after { opacity: .4; }
-  .newsletter-feature h2 { max-width: 18ch; margin: 0; font-size: clamp(2.5rem, 4.5vw, 4.75rem); line-height: .99; color: #f5eee9; }
+  .newsletter-feature h2 { max-width: 18ch; margin: 0; font-size: clamp(2.4rem, 4.275vw, 4.5rem); line-height: .99; color: #f5eee9; }
   .newsletter-feature-detail { display: flex; flex-direction: column; justify-content: end; }
   .newsletter-feature-detail > p { max-width: 44ch; margin: 0; font-family: 'DM Sans', sans-serif; font-size: .94rem; line-height: 1.85; color: rgba(245,238,233,.68); }
   .newsletter-actions { display: flex; flex-wrap: wrap; gap: .85rem; margin-top: 2rem; }
@@ -133,16 +137,16 @@ const archive = writing.slice(1);
   .newsletter-actions a:first-child { padding: .9rem 1.2rem; background: #6b8e7f; color: #fff; }
   .newsletter-actions a:last-child { padding: .9rem 1.2rem; border: 1px solid rgba(245,238,233,.32); color: #f5eee9; }
   .newsletter-actions a:hover { background: #86a89a; border-color: #86a89a; }
-  .featured-essay { background: #fbfaf7; }
+  .featured-essay { padding-top: clamp(3.75rem, 5vw, 4.75rem); background: #fbfaf7; }
   .featured-essay-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; margin-bottom: 2.25rem; }
   .featured-essay-heading > p:last-child { margin: 0; font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: #8b8b8b; }
-  .featured-essay-link { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: clamp(2.25rem, 5vw, 4.5rem); padding: clamp(2rem, 3vw, 2.5rem) 0; border-top: 2px solid #6b8e7f; border-bottom: 1px solid rgba(0,0,0,.13); color: inherit; text-decoration: none; }
+  .featured-essay-link { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: clamp(2.25rem, 5vw, 4.5rem); padding: clamp(3rem, 4vw, 3.5rem) 0 clamp(3rem, 5vw, 4rem); border-top: 2px solid #6b8e7f; border-bottom: 1px solid rgba(0,0,0,.13); color: inherit; text-decoration: none; }
   .featured-essay-copy { padding: clamp(2.25rem, 5vw, 4.25rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2.25rem, 5vw, 4.25rem) 0; display: flex; flex-direction: column; justify-content: center; }
   .article-topic { color: #6b8e7f; }
   .featured-essay-copy h2 { max-width: 11ch; margin: 0 0 1.25rem; font-size: clamp(2.5rem, 4.5vw, 4.7rem); line-height: .99; }
   .featured-essay-copy > p { max-width: 38ch; margin: 0; font-family: 'DM Sans', sans-serif; font-size: .93rem; line-height: 1.83; color: #4a4a4a; }
   .featured-essay-copy > span { margin-top: 2.25rem; color: #3d6055; }
-  .featured-essay-image { height: clamp(29.5rem, 37vw, 31rem); overflow: hidden; background: #ebe3db; }
+  .featured-essay-image { height: clamp(28.125rem, 33vw, 29.375rem); overflow: hidden; background: #ebe3db; }
   .featured-essay-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
   .featured-essay-link:hover .featured-essay-image img { transform: scale(1.025); }
   .featured-essay-link:hover .featured-essay-copy > span { text-decoration: underline; text-underline-offset: .3em; }
@@ -150,10 +154,10 @@ const archive = writing.slice(1);
   .archive-heading { max-width: 46rem; margin-bottom: 3.25rem; }
   .archive-heading h2, .writing-cta h2 { margin: 0; font-size: clamp(2.25rem, 4vw, 4rem); line-height: 1.03; letter-spacing: -.025em; }
   .archive-list { border-top: 1px solid rgba(0,0,0,.16); }
-  .archive-entry { display: grid; grid-template-columns: 4rem minmax(0, 1fr) auto; gap: 1.25rem; align-items: start; padding: 2rem 0; border-bottom: 1px solid rgba(0,0,0,.16); color: inherit; text-decoration: none; transition: background .2s; }
+  .archive-entry { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.25rem; align-items: start; padding: 2rem 0; border-bottom: 1px solid rgba(0,0,0,.16); color: inherit; text-decoration: none; transition: background .2s; }
   .archive-entry:hover { background: rgba(255,255,255,.36); }
-  .archive-number { padding-top: .2rem; font-family: 'DM Mono', monospace; font-size: .61rem; letter-spacing: .1em; color: #6b8e7f; }
-  .archive-entry .article-topic { margin-bottom: .75rem; font-size: .56rem; }
+  .archive-meta { margin: 0 0 .75rem; font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .13em; line-height: 1.5; text-transform: uppercase; color: #6b8e7f; }
+  .archive-meta span::before { content: '·'; margin: 0 .5rem; color: #b88c45; }
   .archive-entry h3 { margin: 0 0 .7rem; font-size: clamp(1.55rem, 2.4vw, 2.25rem); line-height: 1.05; }
   .archive-entry div > p:last-child { max-width: 58ch; margin: 0; font-family: 'DM Sans', sans-serif; font-size: .86rem; line-height: 1.75; color: #4a4a4a; }
   .archive-link { padding-top: .4rem; color: #3d6055; white-space: nowrap; }
@@ -163,22 +167,20 @@ const archive = writing.slice(1);
   .writing-cta h2 { max-width: 24ch; color: #fff; }
   .writing-cta > a { padding: .95rem 1.3rem; background: #fff; color: #3d6055; font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
   .writing-cta > a:hover { background: #f5eee9; }
-  @keyframes field-notes-blink { 50% { opacity: 0; } }
   @media (max-width: 900px) {
     .writing-hero-grid, .newsletter-feature-inner, .featured-essay-link { grid-template-columns: 1fr; }
-    .writing-hero-grid { gap: 0; }.field-notes { width: min(100%, 42rem); margin-top: 3rem; }
+    .writing-hero-grid { gap: 0; }.editorial-folio { width: min(100%, 42rem); margin-top: 3rem; }
     .newsletter-feature-detail { justify-content: start; }.featured-essay-copy { padding: 2.75rem 0; }.featured-essay-image { height: 25rem; order: -1; }
   }
   @media (max-width: 720px) {
     .writing-hero h1 { max-width: 12ch; }.writing-hero, .featured-essay, .writing-archive { padding-left: 1.25rem; padding-right: 1.25rem; }
     .newsletter-feature { padding-left: 1.25rem; padding-right: 1.25rem; }.featured-essay-heading { display: block; }.featured-essay-heading > p:last-child { margin-top: .75rem; }
-    .archive-entry { grid-template-columns: 2.7rem minmax(0, 1fr); gap: .8rem; }.archive-link { grid-column: 2; padding-top: .4rem; }
+    .archive-entry { grid-template-columns: minmax(0, 1fr); gap: .8rem; }.archive-link { padding-top: .4rem; }
     .writing-cta { grid-template-columns: 1fr; align-items: start; padding-left: 1.25rem; padding-right: 1.25rem; }.writing-cta > a { justify-self: start; }
   }
   @media (max-width: 480px) {
     .writing-hero { padding-top: 6.75rem; }.writing-hero h1 { font-size: clamp(2.85rem, 14vw, 4rem); }.newsletter-actions { flex-direction: column; }.newsletter-actions a { text-align: center; }
-    .field-notes { min-height: 25rem; margin-top: 2.5rem; }.field-notes-list { margin-top: 2rem; }.field-notes-row { padding: 1rem 0; }
+    .editorial-folio { min-height: 25rem; margin-top: 2.5rem; }.folio-proof { min-height: 18rem; }.folio-chart { right: 1rem; bottom: 3.4rem; }.folio-annotation { right: 1rem; }
     .featured-essay-image { height: 18rem; }.featured-essay-copy { padding-top: 2rem; padding-bottom: 2.5rem; }
   }
-  @media (prefers-reduced-motion: reduce) { .field-notes-cursor { animation: none; } }
 </style>

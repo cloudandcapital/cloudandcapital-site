@@ -104,11 +104,22 @@ export const openSourceTools = [
 export const featuredWriting = {
   title: 'Who Gets Stuck With the Bill?',
   topic: 'Markets & Mimosas',
+  date: 'Jul 20, 2026',
   href: 'https://cloudandcapital.substack.com/p/who-gets-stuck-with-the-bill',
   description:
     'The AI buildout has become a negotiation over who carries utilization risk, and who keeps the right to walk away.',
   image: '/images/writing/markets-mimosas-hero.png',
   imageAlt: 'Who Gets Stuck With the Bill? Markets & Mimosas',
+};
+
+export const writingFeatured = {
+  title: 'There Was No Opting Out',
+  topic: 'Markets & Mimosas',
+  date: 'Aug 02, 2026',
+  href: 'https://cloudandcapital.substack.com/p/there-was-no-opting-out',
+  description: 'Microsoft paid through capex. CoreWeave paid through debt. Apple paid through the supply chain.',
+  image: '/images/writing/markets-mimosas-hero.png',
+  imageAlt: 'There Was No Opting Out Markets & Mimosas',
 };
 
 export const newsletter = {
@@ -117,10 +128,11 @@ export const newsletter = {
   description:
     'Markets & Mimosas is the Cloud & Capital newsletter on markets, AI infrastructure, cloud spend, and the decisions behind the bill. Published every other Friday.',
   subscribeHref: 'https://cloudandcapital.substack.com',
-  latestIssueHref: featuredWriting.href,
+  latestIssueHref: writingFeatured.href,
 };
 
 export const writing = [
+  writingFeatured,
   featuredWriting,
   {
     title: 'When Capital Becomes Compute',

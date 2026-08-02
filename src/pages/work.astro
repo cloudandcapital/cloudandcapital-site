@@ -14,16 +14,35 @@ const interactiveTools = tools.filter((tool) =>
 >
   <main id="main-content">
     <section class="work-opening" aria-labelledby="work-title">
-      <p class="section-label">Work</p>
-      <h1 id="work-title">Tools for the decisions behind the bill.</h1>
-      <p class="work-opening-copy">I build FinOps tools and decision systems for cloud, SaaS, and AI infrastructure spend. The work starts before the invoice, where architecture, commitments, and operating choices shape the bill.</p>
+      <div class="work-opening-grid">
+        <div class="work-opening-text">
+          <p class="section-label">Work</p>
+          <h1 id="work-title">Tools for the decisions behind the bill.</h1>
+          <p class="work-opening-copy">I build FinOps tools and decision systems for cloud, SaaS, and AI infrastructure spend. The work starts before the invoice, where architecture, commitments, and operating choices shape the bill.</p>
+        </div>
+        <div class="decision-diagram" aria-label="Cloud and Capital decision chain: Architecture, Commitments, and Utilization shape cost before the Invoice reports it.">
+          <p class="diagram-system-label">CC://Decision-Layer</p>
+          <div class="diagram-shaped">
+            <p class="diagram-group-label">Cost is shaped here</p>
+            <div class="diagram-stages">
+              <div class="diagram-stage"><span>01</span><div><strong>Architecture</strong><small>compute · storage · data</small></div></div>
+              <div class="diagram-stage"><span>02</span><div><strong>Commitments</strong><small>term · coverage · flexibility</small></div></div>
+              <div class="diagram-stage"><span>03</span><div><strong>Utilization</strong><small>demand · idle · variance</small></div></div>
+            </div>
+          </div>
+          <div class="diagram-connector" aria-hidden="true"></div>
+          <div class="diagram-invoice">
+            <p class="diagram-group-label">Cost is reported here</p>
+            <div class="diagram-stage"><span>04</span><div><strong>Invoice</strong><small>reported cost</small></div></div>
+          </div>
+        </div>
+      </div>
     </section>
 
     {flagship && (
       <section class="flagship" aria-labelledby="flagship-title">
         <div class="flagship-intro">
           <p class="section-label section-label-dark">Flagship system</p>
-          <p>The work starts before the invoice, where architecture, commitments, and operating choices shape the bill.</p>
         </div>
         <div class="flagship-grid">
           <div class="flagship-copy">
@@ -99,7 +118,7 @@ const interactiveTools = tools.filter((tool) =>
 
     <section class="work-cta" aria-labelledby="work-cta-title">
       <div>
-        <p class="section-label section-label-gold">Work with the decision layer</p>
+        <p class="section-label section-label-gold">Start a conversation</p>
         <h2 id="work-cta-title">Working on cloud economics, FinOps, or AI infrastructure?</h2>
       </div>
       <a href={contactLink.href}>{contactLink.label} <span aria-hidden="true">→</span></a>
@@ -110,16 +129,28 @@ const interactiveTools = tools.filter((tool) =>
 <style>
   main { overflow: hidden; background: #f5eee9; }
   .work-opening, .interactive-tools, .pipeline { padding: clamp(4.75rem, 9vw, 8rem) clamp(1.5rem, 5vw, 4.5rem); }
-  .work-opening { padding-top: clamp(8rem, 14vw, 11rem); max-width: 76rem; }
+  .work-opening { padding-top: clamp(7.25rem, 10vw, 8.5rem); padding-bottom: clamp(3.75rem, 5vw, 4.75rem); }
+  .work-opening-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(21rem, .95fr); gap: clamp(3rem, 8vw, 9rem); align-items: center; max-width: 88rem; }
   .section-label, .tool-meta { margin: 0 0 1.25rem; font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .18em; line-height: 1.5; text-transform: uppercase; color: #6b8e7f; }
   .section-label::after { content: ''; display: inline-block; width: 3rem; height: 1px; margin: 0 0 .25rem .75rem; background: currentColor; opacity: .55; }
   .work-opening h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; color: #000; }
-  .work-opening h1 { max-width: 15ch; margin: 0; font-size: clamp(3.1rem, 6.5vw, 6.25rem); line-height: .96; letter-spacing: -.035em; }
+  .work-opening h1 { max-width: 11ch; margin: 0; font-size: clamp(3.1rem, 5.75vw, 5.75rem); line-height: .96; letter-spacing: -.035em; }
   .work-opening-copy { max-width: 58ch; margin: 2rem 0 0; font-family: 'DM Sans', sans-serif; font-size: clamp(.95rem, 1.4vw, 1.08rem); line-height: 1.82; color: #4a4a4a; }
-  .flagship { background: #000; color: #f5eee9; padding: clamp(4.75rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4.5rem); }
-  .flagship-intro { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; margin-bottom: 2.6rem; }
-  .flagship-intro > p:last-child { max-width: 42ch; margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.2rem, 2vw, 1.65rem); line-height: 1.25; color: rgba(245,238,233,.6); }
-  .section-label-dark { color: rgba(245,238,233,.5); white-space: nowrap; }
+  .decision-diagram { width: 100%; border-top: 1px solid rgba(0,0,0,.18); border-bottom: 1px solid rgba(0,0,0,.18); padding: 1.1rem 0 1.35rem; }
+  .diagram-system-label, .diagram-group-label { margin: 0; font-family: 'DM Mono', monospace; font-size: .57rem; letter-spacing: .16em; line-height: 1.5; text-transform: uppercase; }
+  .diagram-system-label { padding-bottom: 1.1rem; color: #4a4a4a; border-bottom: 1px solid rgba(0,0,0,.1); }
+  .diagram-shaped { padding-top: 1.25rem; }.diagram-group-label { color: #6b8e7f; }
+  .diagram-stages { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(0,0,0,.14); border-bottom: 1px solid rgba(0,0,0,.14); margin-top: .9rem; }
+  .diagram-stage { min-width: 0; padding: 1.1rem .85rem 1.1rem 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .65rem; align-items: start; }
+  .diagram-stage + .diagram-stage { padding-left: .85rem; border-left: 1px solid rgba(0,0,0,.12); }
+  .diagram-stage > span { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; line-height: .9; color: #6b8e7f; }
+  .diagram-stage strong { display: block; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.12rem; font-weight: 400; line-height: 1.02; color: #000; }
+  .diagram-stage small { display: block; margin-top: .45rem; font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .04em; line-height: 1.55; color: #4a4a4a; }
+  .diagram-connector { width: 1px; height: 1.75rem; margin: 0 0 0 1.5rem; background: #6b8e7f; }
+  .diagram-invoice { border-left: 1px solid #6b8e7f; padding-left: 1rem; }.diagram-invoice .diagram-stage { padding-bottom: 0; }
+  .flagship { background: #000; color: #f5eee9; padding: clamp(3rem, 5vw, 4.75rem) clamp(1.5rem, 5vw, 4.5rem) clamp(4rem, 6vw, 5.5rem); border-top: 1px solid rgba(107,142,127,.5); }
+  .flagship-intro { margin-bottom: 1.4rem; }
+  .section-label-dark { color: rgba(245,238,233,.68); white-space: nowrap; }
   .flagship-grid { display: grid; grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr); border-top: 2px solid #6b8e7f; border-bottom: 1px solid rgba(245,238,233,.13); }
   .flagship-copy { min-height: 31rem; padding: clamp(2.25rem, 5vw, 4.4rem) clamp(1.5rem, 4vw, 3.75rem); display: flex; flex-direction: column; justify-content: center; border-right: 1px solid rgba(245,238,233,.13); }
   .flagship-copy .tool-meta { color: #c9a961; }
@@ -146,16 +177,16 @@ const interactiveTools = tools.filter((tool) =>
   .cost-shape-panel strong { color: #000; font-weight: 400; }
   .dot { width: .42rem; height: .42rem; border-radius: 50%; }
   .dot.cloud { background: #6b8e7f; }.dot.saas { background: #a7b6d8; }.dot.ai { background: #c9a961; }
-  .interactive-tools { border-bottom: 1px solid rgba(0,0,0,.11); }
-  .section-heading { max-width: 42rem; margin-bottom: 3.75rem; }
+  .interactive-tools { padding-top: clamp(3.5rem, 6.75vw, 6rem); padding-bottom: clamp(3.5rem, 6.75vw, 6rem); border-bottom: 1px solid rgba(0,0,0,.11); }
+  .section-heading { max-width: 42rem; margin-bottom: 2.85rem; }
   .section-heading h2, .pipeline-heading h2, .work-cta h2 { margin: 0; font-size: clamp(2.25rem, 4vw, 4rem); line-height: 1.03; letter-spacing: -.025em; }
   .tool-columns { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(0,0,0,.14); border-bottom: 1px solid rgba(0,0,0,.14); }
-  .tool-column { min-height: 19rem; padding: 2.25rem clamp(1.25rem, 2.4vw, 2.5rem) 2.5rem; display: flex; flex-direction: column; border-right: 1px solid rgba(0,0,0,.14); }
+  .tool-column { min-height: 15.25rem; padding: 1.75rem clamp(1.25rem, 2.4vw, 2.5rem) 2rem; display: flex; flex-direction: column; border-right: 1px solid rgba(0,0,0,.14); }
   .tool-column:last-child { border-right: none; }
   .tool-column h3 { margin: 0 0 1rem; font-size: clamp(1.7rem, 2.4vw, 2.25rem); line-height: 1.05; }
   .tool-column > p:not(.tool-meta) { margin: 0 0 2rem; font-family: 'DM Sans', sans-serif; font-size: .86rem; line-height: 1.8; color: #4a4a4a; }
   .tool-column > a { margin-top: auto; }
-  .pipeline { display: grid; grid-template-columns: minmax(15rem, .7fr) minmax(0, 1.3fr); gap: clamp(2.5rem, 8vw, 8rem); background: #ebe3db; }
+  .pipeline { padding-top: clamp(4rem, 7vw, 6.25rem); padding-bottom: clamp(3.5rem, 5vw, 4.75rem); display: grid; grid-template-columns: minmax(15rem, .7fr) minmax(0, 1.3fr); gap: clamp(2.5rem, 8vw, 8rem); background: #ebe3db; }
   .pipeline-heading > p:not(.section-label) { max-width: 31ch; margin: 1.4rem 0 2rem; font-family: 'DM Sans', sans-serif; font-size: .9rem; line-height: 1.8; color: #4a4a4a; }
   .pipeline-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(0,0,0,.16); }
   .pipeline-list li { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr) auto; gap: 1rem; align-items: baseline; padding: 1.45rem 0; border-bottom: 1px solid rgba(0,0,0,.16); }
@@ -169,13 +200,15 @@ const interactiveTools = tools.filter((tool) =>
   .work-cta > a { padding: .9rem 1.45rem; background: #fff; color: #3d6055; font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
   .work-cta > a:hover { background: #f5eee9; }
   @media (max-width: 920px) {
-    .flagship-grid, .pipeline { grid-template-columns: 1fr; }
+    .work-opening-grid, .flagship-grid, .pipeline { grid-template-columns: 1fr; }
+    .work-opening-grid { gap: 3rem; }.work-opening h1 { max-width: 13ch; }
     .flagship-copy { min-height: auto; border-right: none; border-bottom: 1px solid rgba(245,238,233,.13); }
     .flagship-visual { min-height: 30rem; }.pipeline { gap: 3rem; }
   }
   @media (max-width: 720px) {
     .flagship-intro { display: block; }.flagship-intro > p:last-child { margin-top: 1rem; }
     .flagship-visual { grid-template-columns: 1fr; min-height: 0; }.lumen-panel { min-height: 18rem; }
+    .diagram-stages { grid-template-columns: 1fr; }.diagram-stage { padding: .95rem 0; }.diagram-stage + .diagram-stage { padding-left: 0; border-left: none; border-top: 1px solid rgba(0,0,0,.12); }
     .tool-columns { grid-template-columns: 1fr; }.tool-column { min-height: 0; border-right: none; border-bottom: 1px solid rgba(0,0,0,.14); }.tool-column:last-child { border-bottom: none; }
     .work-cta { grid-template-columns: 1fr; align-items: start; }.work-cta > a { justify-self: start; }
   }

@@ -2922,6 +2922,73 @@ section#discipline > div:first-child{
   .cta-band{padding-top:2.5rem;}
 }
 
+/* ── Final polish and August event V3 ──────────────────── */
+.hero-eyebrow{color:rgba(25,23,20,.76);}
+.hero-founder{color:rgba(25,23,20,.56);}
+section#discipline > div:first-child{
+  padding-top:2.7rem !important;
+  padding-bottom:2.2rem !important;
+}
+.work .section-label{color:rgba(244,239,230,.74) !important;}
+.work .section-label::after{background:rgba(244,239,230,.46);}
+.work .work-intro{color:rgba(244,239,230,.80);}
+#discipline,
+#work,
+#about,
+#community,
+#writing{scroll-margin-top:6rem;}
+.about-v4-final{padding-top:6rem;}
+.about-v4-final-certs{
+  max-width:82%;
+  font-size:.58rem;
+  letter-spacing:.08em;
+  line-height:1.78;
+}
+.about-v4-final-ctas{margin-top:1.7rem;}
+.event-stack{gap:1rem;}
+.ev-card-upcoming .ev-feature-layout{
+  grid-template-columns:minmax(0,1fr) minmax(130px,180px) !important;
+}
+.ev-logo-wrap{padding:1.2rem 1.25rem;}
+.ev-partner-logo{
+  display:block;
+  width:min(100%,150px);
+  height:auto;
+  object-fit:contain;
+}
+.photos-section{margin-top:3.5rem;}
+.writing{padding-bottom:2.1rem !important;}
+.cta-band{padding-top:2.25rem;}
+
+@media (max-width:600px){
+  section#discipline > div:first-child{
+    padding-top:2.1rem !important;
+    padding-bottom:1.7rem !important;
+  }
+  #discipline,
+  #work,
+  #about,
+  #community,
+  #writing{scroll-margin-top:5.25rem;}
+  .about-v4-final{padding-top:4.5rem !important;}
+  .about-v4-final-certs{
+    max-width:none;
+    font-size:.56rem;
+    line-height:1.76;
+  }
+  .ev-card-upcoming .ev-feature-layout{
+    grid-template-columns:1fr !important;
+    padding-right:0;
+  }
+  .ev-card-upcoming .ev-logo-wrap{
+    display:flex !important;
+    padding:0 1.5rem 1.5rem;
+  }
+  .ev-card-upcoming .ev-partner-logo{max-width:135px;}
+  .writing{padding-bottom:2rem !important;}
+  .cta-band{padding-top:2rem;}
+}
+
 </style>
 
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -2977,7 +3044,7 @@ section#discipline > div:first-child{
       <canvas id="market-canvas"></canvas>
       <div class="hero-viz-label">
         <span class="hvl-tag">C&C · TECHNOLOGY SPEND INDEX</span>
-        <span class="hvl-val" id="hvl-val">–</span>
+        <span class="hvl-val" id="hvl-val">N/A</span>
       </div>
       <div style="position:absolute;bottom:.75rem;right:.85rem;z-index:5;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.06em;color:rgba(255,255,255,.28);text-align:right;">Illustrative · <a href="https://market-tape.cloudandcapital.com" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:.15em;">Market Tape →</a></div>
     </div>
@@ -3281,10 +3348,26 @@ section#discipline > div:first-child{
     </div>
 
     <div class="event-stack reveal d2">
+      <article class="ev-card ev-card-feature ev-card-upcoming">
+        <div class="ev-feature-layout">
+          <div class="ev-feature-copy">
+            <div class="ev-tag">August 27, 2026 · 6:30 PM to 9:00 PM · Upcoming</div>
+            <div class="ev-sponsor ev-sponsor-dark">FinOps Weekly Meetup · Powered by Infracost</div>
+            <div class="ev-title">Shifting FinOps Left All the Way to the AI Code Generator</div>
+            <div class="ev-speaker-line"><strong>Hassan Khajeh Hosseini</strong><br>CEO, Infracost · FinOps Foundation Governing Board Member</div>
+            <div class="ev-details"><span class="ev-detail">Location TBA</span></div>
+            <div class="ev-meta">Learn how engineering teams can bring cloud cost awareness earlier into the development lifecycle and build more cost efficient software from the start.</div>
+            <a href="https://luma.com/b128j01h" target="_blank" rel="noopener noreferrer" class="ev-register">Register for the event →</a>
+          </div>
+          <div class="ev-poster-wrap ev-logo-wrap">
+            <img src="/images/infracost-logo.png" alt="Infracost" class="ev-partner-logo" loading="lazy">
+          </div>
+        </div>
+      </article>
       <article class="ev-card ev-card-feature">
         <div class="ev-feature-layout">
           <div class="ev-feature-copy">
-            <div class="ev-tag">April 9, 2026 · Hawthorne, CA · Vol. 01</div>
+            <div class="ev-tag">Past event · April 9, 2026 · Hawthorne, CA · Vol. 01</div>
             <div class="ev-title">Using AI to Put the Ops in FinOps</div>
             <div class="ev-meta">Common Space Brewery · South Bay.</div>
             <div class="ev-meta" style="margin-top:.6rem;">Our first LA FinOps Meetup brought finance, engineering, and cloud practitioners together for an informal evening on FinOps, AI, and the operating work behind modern technology spend.</div>

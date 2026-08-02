@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import '../styles/type.css';
 import HeadMeta from '../components/HeadMeta.astro';
-import { contactLink, footerLinks, navigation } from '../data/siteContent';
+import { footerLinks, navigation } from '../data/siteContent';
 
 interface Props {
   title?: string;
@@ -34,7 +34,7 @@ const {
         position: fixed;
         top: 0; left: 0; right: 0;
         z-index: 200;
-        padding: 1rem 2.5rem;
+        padding: 1.25rem 3.5rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -44,24 +44,36 @@ const {
         border-bottom: 1px solid rgba(0,0,0,.07);
       }
       .site-nav-logo {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        text-decoration: none;
+      }
+      .site-nav-logo-main {
         font-family: 'Cormorant Garamond', 'Georgia', serif;
-        font-size: .95rem;
+        font-size: 1rem;
         font-weight: 500;
-        letter-spacing: .14em;
+        letter-spacing: .12em;
         text-transform: uppercase;
         color: #000;
-        text-decoration: none;
+      }
+      .site-nav-logo-sub {
+        font-family: 'DM Mono', monospace;
+        font-size: .54rem;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        color: #4A4A4A;
       }
       .site-nav-links {
         display: flex;
-        gap: 1.75rem;
+        gap: 2rem;
         list-style: none;
         margin: 0; padding: 0;
         align-items: center;
       }
       .site-nav-links a {
         font-family: 'DM Mono', monospace;
-        font-size: .58rem;
+        font-size: .62rem;
         letter-spacing: .12em;
         text-transform: uppercase;
         color: #4A4A4A;
@@ -69,7 +81,6 @@ const {
         transition: color .2s;
       }
       .site-nav-links a:hover { color: #000; }
-      .site-nav-links .site-nav-cta { color: #3d6055; }
       .site-nav-dropdown { position: relative; }
       .site-nav-dropdown::after { content: ''; position: absolute; top: 100%; left: -0.5rem; right: -0.5rem; height: 1rem; z-index: 209; }
       .site-nav-dropdown-btn {
@@ -140,6 +151,27 @@ const {
         transition: background .25s;
       }
       .site-nav-toggle.is-open span { background: rgba(244,239,230,.9); }
+      .site-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2.5rem 3.5rem;
+        background: #000;
+        border-top: 1px solid rgba(255,255,255,.07);
+      }
+      .site-footer-logo {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: .95rem;
+        font-weight: 500;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: #f5eee9;
+        text-decoration: none;
+      }
+      .site-footer-links { display: flex; gap: 1.75rem; list-style: none; margin: 0; padding: 0; }
+      .site-footer-links a { font-family: 'DM Mono', monospace; font-size: .57rem; letter-spacing: .11em; text-transform: uppercase; color: rgba(244,239,230,.48); text-decoration: none; transition: color .2s; }
+      .site-footer-links a:hover { color: #f5eee9; }
+      .site-footer-copy { font-family: 'DM Mono', monospace; font-size: .54rem; color: rgba(244,239,230,.36); }
       @media (max-width: 768px) {
         .site-nav { padding: 1rem 1.25rem; }
         .site-nav-toggle { display: flex; z-index: 301; }
@@ -178,16 +210,17 @@ const {
         .site-nav-dropdown-menu { position: static; background: rgba(255,255,255,.04); border: none; box-shadow: none; padding: .25rem 0; min-width: 0; text-align: left; }
         .site-nav-dropdown-menu li a { padding: .6rem 1.75rem .6rem 2.75rem; color: rgba(244,239,230,.42); font-size: .63rem; background: transparent; }
         .site-nav-dropdown-menu li a:hover { color: rgba(244,239,230,.85); background: transparent; }
+        .site-footer { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; text-align: center; }
+        .site-footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
       }
     </style>
     <nav class="site-nav">
-      <a class="site-nav-logo" href="/">Cloud &amp; Capital</a>
+      <a class="site-nav-logo" href="/"><span class="site-nav-logo-main">Cloud &amp; Capital</span><span class="site-nav-logo-sub">Turning numbers into strategy.</span></a>
       <button type="button" class="site-nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="tool-nav-links" id="tool-nav-toggle">
         <span></span><span></span><span></span>
       </button>
       <ul class="site-nav-links" id="tool-nav-links">
         {navigation.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
-        <li><a class="site-nav-cta" href={contactLink.href}>{contactLink.label}</a></li>
       </ul>
     </nav>
     <script>
@@ -212,11 +245,12 @@ const {
       })();
     </script>
     <slot />
-    <footer style="padding:1.5rem;text-align:center;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,0,0,0.45);border-top:1px solid rgba(0,0,0,0.07);">
-      <nav aria-label="Footer navigation" style="display:flex;justify-content:center;gap:1rem 1.5rem;flex-wrap:wrap;margin-bottom:.85rem;">
-        {footerLinks.map((link) => <a href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined} style="color:inherit;text-decoration:none;">{link.label}</a>)}
-      </nav>
-      © 2026 Cloud &amp; Capital · AI Spend · FinOps · Markets
+    <footer class="site-footer">
+      <a class="site-footer-logo" href="/">Cloud &amp; Capital</a>
+      <ul class="site-footer-links">
+        {footerLinks.map((link) => <li><a href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>{link.label}</a></li>)}
+      </ul>
+      <span class="site-footer-copy">© 2026 Cloud &amp; Capital · diana@cloudandcapital.com</span>
     </footer>
   </body>
 </html>

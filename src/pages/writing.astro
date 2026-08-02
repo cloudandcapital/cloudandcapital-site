@@ -35,7 +35,6 @@ const archive = writing.slice(1);
     <section class="featured-essay" aria-labelledby="featured-title">
       <div class="featured-essay-heading">
         <p class="section-label">Featured essay</p>
-        <p>From the publication</p>
       </div>
       <a class="featured-essay-link" href={featuredWriting.href} target="_blank" rel="noopener noreferrer">
         <div class="featured-essay-copy">
@@ -53,7 +52,7 @@ const archive = writing.slice(1);
     <section class="writing-archive" aria-labelledby="archive-title">
       <div class="archive-heading">
         <p class="section-label">Archive</p>
-        <h2 id="archive-title">Writing from the operating layer.</h2>
+        <h2 id="archive-title">Recent writing.</h2>
       </div>
       <div class="archive-list">
         {archive.map((article, index) => (
@@ -83,11 +82,11 @@ const archive = writing.slice(1);
 <style>
   main { overflow: hidden; background: #f5eee9; }
   .writing-hero, .featured-essay, .writing-archive { padding: clamp(4.5rem, 8vw, 7.5rem) clamp(1.5rem, 5vw, 4.5rem); }
-  .writing-hero { padding-top: clamp(7.5rem, 11vw, 9rem); padding-bottom: clamp(4.5rem, 6vw, 5.75rem); max-width: 84rem; }
+  .writing-hero { padding: clamp(4.75rem, 9vw, 8rem) clamp(1.5rem, 5vw, 4.5rem); padding-top: clamp(6rem, 8vw, 7rem); padding-bottom: clamp(3.75rem, 5vw, 4.75rem); }
   .section-label, .article-topic { margin: 0 0 1.25rem; font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .18em; line-height: 1.5; text-transform: uppercase; color: #6b8e7f; }
   .section-label::after { content: ''; display: inline-block; width: 3rem; height: 1px; margin: 0 0 .25rem .75rem; background: currentColor; opacity: .55; }
   .writing-hero h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; color: #000; }
-  .writing-hero h1 { max-width: 15ch; margin: 0; font-size: clamp(3.1rem, 6vw, 6.2rem); line-height: .97; letter-spacing: -.035em; }
+  .writing-hero h1 { max-width: 14ch; margin: 0; font-size: clamp(3.1rem, 4.4vw, 4.75rem); line-height: .98; letter-spacing: -.035em; }
   .writing-hero > p:last-child { max-width: 61ch; margin: 2rem 0 0; font-family: 'DM Sans', sans-serif; font-size: clamp(.95rem, 1.35vw, 1.08rem); line-height: 1.82; color: #4a4a4a; }
   .newsletter-feature { padding: clamp(4rem, 7vw, 6.5rem) clamp(1.5rem, 5vw, 4.5rem); background: #000; color: #f5eee9; }
   .newsletter-feature-inner { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(17rem, .9fr); gap: clamp(3rem, 8vw, 9rem); max-width: 88rem; }

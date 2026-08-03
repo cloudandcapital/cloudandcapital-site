@@ -26,7 +26,6 @@ const archive = writing.slice(1);
             <p class="manuscript-fragment manuscript-fragment-offset">cost reveals the decision later</p>
             <aside class="manuscript-annotation" aria-label="Margin annotation">
               <em>capacity first →<br />cost follows.</em>
-              <span class="manuscript-annotation-arrow" aria-hidden="true">↶</span>
             </aside>
             <p class="manuscript-meta">C&amp;C research desk · issue file</p>
           </div>
@@ -115,18 +114,17 @@ const archive = writing.slice(1);
   .writing-hero h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; color: #000; }
   .writing-hero h1 { max-width: 14ch; margin: 0; font-size: clamp(3.1rem, 4.4vw, 4.75rem); line-height: .98; letter-spacing: -.035em; }
   .writing-hero-copy > p:last-child { max-width: 58ch; margin: 2rem 0 0; font-family: 'DM Sans', sans-serif; font-size: clamp(.95rem, 1.4vw, 1.08rem); line-height: 1.82; color: #4a4a4a; }
-  .manuscript-visual { position: relative; justify-self: end; width: min(48vw, 43.5rem); max-width: 43.5rem; aspect-ratio: 13 / 10; min-height: 0; padding: clamp(1.35rem, 2.5vw, 2.25rem); overflow: hidden; background: #71685e; border-top: 1px solid #6b8e7f; }
-  .manuscript-paper { position: relative; width: 100%; height: 100%; min-height: 0; padding: clamp(1.4rem, 2.8vw, 2.25rem) clamp(8.25rem, 17vw, 9.25rem) clamp(1.4rem, 2.8vw, 2.25rem) clamp(1.4rem, 2.8vw, 2.25rem); background: #fbfaf7; border: 1px solid rgba(33,31,27,.14); }
+  .manuscript-visual { position: relative; display: grid; place-items: center; justify-self: end; width: min(48vw, 43.5rem); max-width: 43.5rem; aspect-ratio: 13 / 10; min-height: 0; padding: clamp(1.35rem, 2.5vw, 2.25rem); overflow: hidden; background: #71685e; border-top: 1px solid #6b8e7f; }
+  .manuscript-paper { position: relative; box-sizing: border-box; width: calc(100% - clamp(1rem, 1.5vw, 1.5rem)); height: calc(100% - clamp(1rem, 1.5vw, 1.5rem)); min-height: 0; padding: clamp(1.2rem, 2vw, 1.75rem); background: #fbfaf7; border: 1px solid rgba(33,31,27,.14); box-shadow: 0 .65rem 1.35rem rgba(33,31,27,.15); }
   .manuscript-label, .manuscript-subject, .manuscript-meta { margin: 0; font-family: 'DM Mono', monospace; font-size: .57rem; letter-spacing: .13em; line-height: 1.5; text-transform: uppercase; }
   .manuscript-label { color: #55796c; }
   .manuscript-subject { margin-top: .55rem; color: #514c45; }
-  .manuscript-lines { position: absolute; top: 5.15rem; right: clamp(8.25rem, 17vw, 9.25rem); left: clamp(1.4rem, 2.8vw, 2.25rem); display: grid; grid-template-rows: repeat(6, 1fr); height: 12.2rem; }
+  .manuscript-lines { position: absolute; right: clamp(1.2rem, 2vw, 1.75rem); bottom: 4rem; left: clamp(1.2rem, 2vw, 1.75rem); display: grid; grid-template-rows: repeat(6, 1fr); height: 4.5rem; }
   .manuscript-lines span { border-top: 1px solid rgba(33,31,27,.1); }
-  .manuscript-fragment { width: fit-content; max-width: 100%; margin: 5.1rem 0 0; padding: .1rem .22rem; background: rgba(221,185,119,.55); font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.3rem, 2vw, 1.75rem); line-height: 1.1; color: #211f1b; }
-  .manuscript-fragment-offset { margin-top: 2.55rem; margin-left: clamp(.25rem, 1vw, .75rem); background: rgba(168,192,181,.48); }
-  .manuscript-annotation { position: absolute; top: 5.15rem; right: clamp(.8rem, 2vw, 1.25rem); width: clamp(6.5rem, 12vw, 7.25rem); margin: 0; padding-left: clamp(.45rem, 1vw, .7rem); border-left: 1px solid rgba(85,121,108,.65); color: #4b463f; }
+  .manuscript-fragment { position: absolute; top: 42%; left: clamp(1.2rem, 2vw, 1.75rem); width: fit-content; max-width: calc(100% - clamp(7.25rem, 14vw, 8.75rem)); margin: 0; padding: .1rem .22rem; background: rgba(221,185,119,.55); font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.3rem, 2vw, 1.75rem); line-height: 1.1; color: #211f1b; }
+  .manuscript-fragment-offset { top: 58%; margin-left: clamp(.25rem, 1vw, .75rem); background: rgba(168,192,181,.48); }
+  .manuscript-annotation { position: absolute; top: 41%; right: clamp(1.1rem, 2vw, 1.5rem); width: clamp(5.5rem, 10vw, 6.25rem); margin: 0; padding-left: clamp(.45rem, 1vw, .7rem); border-left: 1px solid rgba(85,121,108,.65); color: #4b463f; }
   .manuscript-annotation em { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(.88rem, 1.3vw, 1.08rem); font-style: italic; line-height: 1.05; }
-  .manuscript-annotation-arrow { display: block; width: fit-content; margin: .45rem 0 0 -.7rem; color: #9a7a3f; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.55rem; line-height: 1; transform: rotate(-25deg); }
   .manuscript-meta { position: absolute; left: clamp(1.35rem, 2.5vw, 2.25rem); bottom: 1.55rem; color: #3d6055; }
   .newsletter-feature { padding: clamp(4.5rem, 5.5vw, 5.5rem) 0; background: #000; color: #f5eee9; }
   .section-label-light { color: #ddb977; }.section-label-light::after { opacity: .4; }
@@ -186,7 +184,7 @@ const archive = writing.slice(1);
   }
   @media (max-width: 480px) {
     .writing-hero { padding-top: 6.75rem; }.writing-hero h1 { font-size: clamp(2.85rem, 14vw, 4rem); }.newsletter-actions { flex-direction: column; }.newsletter-actions a { text-align: center; }
-    .manuscript-visual { min-height: 25rem; margin-top: 2.5rem; }.manuscript-paper { min-height: 18rem; padding-right: 6.5rem; }.manuscript-lines { right: 6.5rem; }.manuscript-annotation { top: 5.15rem; right: .7rem; bottom: auto; width: 5.5rem; padding-left: .4rem; }.manuscript-annotation em { font-size: .72rem; }.manuscript-annotation-arrow { margin-left: -.45rem; font-size: 1.25rem; }
+    .manuscript-visual { min-height: 25rem; margin-top: 2.5rem; }.manuscript-paper { min-height: 18rem; padding: 1.25rem; }.manuscript-lines { right: 1.25rem; bottom: 2.75rem; left: 1.25rem; height: 2.75rem; }.manuscript-fragment { max-width: calc(100% - 6.8rem); }.manuscript-annotation { top: 41%; right: .8rem; width: 4.25rem; padding-left: .4rem; }.manuscript-annotation em { font-size: .72rem; }
     .featured-article-image { height: 18rem; }.featured-article-copy { padding-top: 2rem; padding-bottom: 2.5rem; }
   }
 </style>

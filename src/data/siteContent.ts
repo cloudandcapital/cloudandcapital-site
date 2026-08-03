@@ -104,7 +104,7 @@ export const openSourceTools = [
 export const featuredWriting = {
   title: 'Who Gets Stuck With the Bill?',
   topic: 'Markets & Mimosas',
-  date: 'Jul 20, 2026',
+  date: 'July 20, 2026',
   href: 'https://cloudandcapital.substack.com/p/who-gets-stuck-with-the-bill',
   description:
     'The AI buildout has become a negotiation over who carries utilization risk, and who keeps the right to walk away.',
@@ -126,7 +126,7 @@ export const newsletter = {
   label: 'Cloud & Capital · Substack',
   title: 'Markets, AI spend, and what the bill is actually telling you.',
   description:
-    'Markets & Mimosas is the Cloud & Capital newsletter on markets, AI infrastructure, cloud spend, and the decisions behind the bill. Published every other Friday.',
+    'Markets & Mimosas is the Cloud & Capital newsletter on markets, AI infrastructure, cloud spend, and the decisions behind the bill. Published on weekends.',
   subscribeHref: 'https://cloudandcapital.substack.com',
   latestIssueHref: writingFeatured.href,
 };
@@ -137,14 +137,23 @@ export const writing = [
   {
     title: 'When Capital Becomes Compute',
     topic: 'Capital Layer',
+    date: 'February 20, 2026',
     href: 'https://cloudandcapital.substack.com/p/when-capital-becomes-compute',
-    description: 'How capital turns into infrastructure in the AI era, and why the financial models have not caught up.',
+    description: 'How equity, infrastructure, and compute are reinforcing each other beneath the AI narrative.',
   },
   {
     title: 'Deploying Fast, Thinking Slow',
     topic: 'Deployment Rhythm',
+    date: 'January 22, 2026',
     href: 'https://cloudandcapital.substack.com/p/deploying-fast-thinking-slow',
-    description: 'Why shipping fast has a way of becoming tomorrow’s bill.',
+    description: 'Why cloud decisions get expensive when they outlive their context.',
+  },
+  {
+    title: 'Why Even Well-Run Teams Still Struggle With Cloud Costs',
+    topic: 'Operating Layer',
+    date: 'December 29, 2025',
+    href: 'https://cloudandcapital.substack.com/p/why-even-well-run-teams-still-struggle',
+    description: 'How timing, defaults, and reasonable decisions compound into cost problems.',
   },
 ];
 

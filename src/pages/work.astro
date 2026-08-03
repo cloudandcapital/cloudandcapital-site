@@ -56,10 +56,18 @@ const interactiveTools = tools.filter((tool) =>
           <div class="flagship-visual" aria-label="Illustrative Cloud Cost Guard and Lumen analysis">
             <div class="lumen-panel">
               <p class="visual-kicker">Lumen analysis</p>
-              <p class="question">What’s bleeding money right now?</p>
-              <div class="analysis">
-                <strong>EC2 jumped 154% in one day, from $482 to $1,226.</strong>
-                <span>It is the largest cost driver at 40.5% of cloud spend. Start with the EC2 spike. Was this a planned launch or uncontrolled autoscaling?</span>
+              <div class="lumen-exchange">
+                <p class="question">What’s bleeding money right now?</p>
+                <div class="analysis">
+                  <strong>EC2 jumped 154% in one day, from $482 to $1,226.</strong>
+                  <span>It is the largest cost driver at 40.5% of cloud spend. Start with the EC2 spike. Was this a planned launch or uncontrolled autoscaling?</span>
+                </div>
+              </div>
+              <div class="lumen-exchange">
+                <p class="question">What should I investigate first?</p>
+                <div class="analysis">
+                  <span>Start with EC2. Compare the spike against recent deployments and autoscaling changes, then check whether utilization increased with spend. If demand stayed flat, idle capacity and rightsizing are the fastest places to look.</span>
+                </div>
               </div>
             </div>
             <div class="cost-shape-panel">
@@ -168,6 +176,7 @@ const interactiveTools = tools.filter((tool) =>
   .lumen-panel, .cost-shape-panel { min-width: 0; padding: clamp(1.35rem, 2.4vw, 2rem); background: #f5eee9; color: #000; }
   .lumen-panel { display: flex; flex-direction: column; justify-content: center; }
   .visual-kicker { margin: 0 0 1.5rem; font-family: 'DM Mono', monospace; font-size: .56rem; letter-spacing: .14em; text-transform: uppercase; color: #6b8e7f; }
+  .lumen-exchange + .lumen-exchange { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(117, 96, 73, .16); }
   .question { margin: 0 0 .85rem; padding: .95rem 1.1rem; border-radius: 13px; font-family: 'DM Sans', sans-serif; font-size: .82rem; line-height: 1.65; background: #e5ddd4; }
   .analysis { padding: 1.15rem 1.1rem; border: 1px solid rgba(107,142,127,.16); border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: .8rem; line-height: 1.72; color: #4a4a4a; background: #edf1ed; }
   .analysis strong { display: block; margin-bottom: .5rem; color: #000; font-weight: 500; }

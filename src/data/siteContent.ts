@@ -117,7 +117,7 @@ export const featuredWriting = {
 export const writingFeatured = {
   title: 'There Was No Opting Out',
   topic: 'Markets & Mimosas',
-  date: 'Aug 02, 2026',
+  date: 'August 2, 2026',
   href: 'https://cloudandcapital.substack.com/p/there-was-no-opting-out',
   description: 'Microsoft paid through capex. CoreWeave paid through debt. Apple paid through the supply chain.',
   image: '/images/writing/markets-mimosas-hero.png',
@@ -162,7 +162,7 @@ export const writing = [
     date: 'December 29, 2025',
     href: 'https://cloudandcapital.substack.com/p/why-even-well-run-teams-still-struggle',
     description: 'How timing, defaults, and reasonable decisions compound into cost problems.',
-    archiveImage: '/images/writing/well-run-teams-cloud-costs.png',
+    archiveImage: '/images/writing/why-well-run-teams-struggle-with-cloud-costs.png',
     archiveImageAlt: 'Why Even Well-Run Teams Still Struggle With Cloud Costs published cover artwork',
   },
 ];

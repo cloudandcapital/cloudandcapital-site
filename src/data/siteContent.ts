@@ -7,7 +7,7 @@ export type SiteLink = {
 export const navigation: SiteLink[] = [
   { label: 'Work', href: '/work' },
   { label: 'Writing', href: '/writing' },
-  { label: 'Community', href: '/community' },
+  { label: 'Community', href: '/#community' },
   { label: 'About', href: '/#about' },
 ];
 
@@ -15,7 +15,7 @@ export const footerLinks: SiteLink[] = [
   { label: 'Home', href: '/' },
   { label: 'Work', href: '/work' },
   { label: 'Writing', href: '/writing' },
-  { label: 'Community', href: '/community' },
+  { label: 'Community', href: '/#community' },
   { label: 'About', href: '/#about' },
   { label: 'Market Tape', href: 'https://market-tape.cloudandcapital.com', external: true },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/dianalyst', external: true },

@@ -2984,8 +2984,131 @@ section#discipline > div:first-child{
 .f-nav a{color:rgba(244,239,230,.48);}
 .f-copy{color:rgba(244,239,230,.36);}
 
+/* ── Community record ─────────────────────────────────── */
+.community{
+  padding:clamp(4.25rem,6vw,6rem) clamp(1.5rem,4vw,4.5rem) !important;
+  background:var(--white);
+}
+.community-record-head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(18rem,.9fr);
+  gap:clamp(2.5rem,6vw,6rem);
+  align-items:end;
+  padding-bottom:clamp(2rem,3vw,3rem);
+  border-bottom:1px solid var(--rule);
+}
+.community-record-head .section-label{margin-bottom:1.1rem;}
+.community-record-head h2{
+  margin:0;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.35rem,4vw,4.25rem);
+  font-weight:300;
+  line-height:.99;
+  letter-spacing:-.035em;
+  color:var(--ink);
+}
+.community-record-head h2 em{font-style:italic;color:var(--sage);}
+.community-record-head > p{
+  max-width:48ch;
+  margin:0;
+  font-size:.92rem;
+  line-height:1.82;
+  color:var(--ink-muted);
+}
+.community-record{
+  display:grid;
+  grid-template-columns:minmax(13rem,.62fr) minmax(18rem,1fr) minmax(16rem,.78fr);
+  gap:clamp(1.5rem,3vw,3.5rem);
+  align-items:start;
+  padding-top:clamp(2rem,3vw,3rem);
+}
+.community-record figure{margin:0;}
+.community-flyer{
+  align-self:start;
+  max-width:19rem;
+  border:1px solid rgba(0,0,0,.1);
+  background:#151c67;
+}
+.community-flyer img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+.community-record-copy{padding-top:.2rem;}
+.community-record-meta,
+.community-detail-label,
+.community-record-sponsor{
+  margin:0;
+  font-family:'DM Mono',monospace;
+  font-size:.56rem;
+  letter-spacing:.14em;
+  line-height:1.65;
+  text-transform:uppercase;
+}
+.community-record-meta{color:var(--sage);}
+.community-record-copy h3{
+  max-width:11ch;
+  margin:1rem 0 1.3rem;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.1rem,3.3vw,3.5rem);
+  font-weight:300;
+  line-height:.96;
+  letter-spacing:-.035em;
+  color:var(--ink);
+}
+.community-record-location{
+  margin:0;
+  font-family:'DM Sans',sans-serif;
+  font-size:.88rem;
+  line-height:1.7;
+  color:var(--ink-muted);
+}
+.community-record-details{
+  display:grid;
+  gap:1.1rem;
+  margin-top:1.5rem;
+  padding-top:1.35rem;
+  border-top:1px solid var(--rule);
+}
+.community-detail-label{margin-bottom:.3rem;color:var(--sage);}
+.community-record-details p:not(.community-detail-label){
+  margin:0;
+  font-size:.78rem;
+  line-height:1.7;
+  color:var(--ink-muted);
+}
+.community-record-sponsor{margin-top:1.4rem;color:var(--ink-faint);}
+.community-photo-primary{
+  min-height:25rem;
+  overflow:hidden;
+  background:var(--cream-dark);
+}
+.community-photo-primary img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 52%;
+  filter:saturate(.92) contrast(1.02);
+}
+
 @media (max-width:600px){
   .credential-unit{white-space:normal;}
+  .community{padding:3.75rem 1.5rem !important;}
+  .community-record-head{
+    grid-template-columns:1fr;
+    gap:1.35rem;
+    padding-bottom:2rem;
+  }
+  .community-record-head h2{font-size:clamp(2.35rem,11vw,3.25rem);}
+  .community-record{
+    grid-template-columns:1fr;
+    gap:1.6rem;
+    padding-top:2rem;
+  }
+  .community-flyer{width:min(17rem,100%);}
+  .community-record-copy h3{font-size:2.65rem;}
+  .community-photo-primary{min-height:14rem;}
 }
 
 </style>
@@ -3320,66 +3443,37 @@ section#discipline > div:first-child{
 <!-- COMMUNITY -->
 
 <section class="community" id="community">
-  <div class="community-top">
-    <div class="reveal">
+  <div class="community-record-head reveal">
+    <div>
       <div class="section-label">Community</div>
-      <h2 class="comm-heading">FinOps Weekly<br><em style="font-style:italic;color:var(--ink-muted);">Los Angeles</em></h2>
-      <div class="comm-collab">In partnership with</div>
-      <div class="comm-collab-logos" aria-hidden="true">
-        <img src="/images/finops-weekly-logo.png" alt="" class="comm-collab-logo comm-collab-logo-fw" loading="lazy">
-        <img src="/images/sponsor-logo.webp" alt="" class="comm-collab-logo comm-collab-logo-sc" loading="lazy">
-      </div>
-      <p class="comm-body">FinOps Weekly Los Angeles brings finance, engineering, and cloud practitioners together for practical conversations about modern technology spend. Produced by FinOps Weekly and SmartClouds and hosted locally by Diana Molski, Los Angeles regional leader.</p>
-      <a href="mailto:diana@cloudandcapital.com?subject=FinOps%20Weekly%20Los%20Angeles" class="btn btn-sage">Get Event Updates</a>
+      <h2>Bringing FinOps conversations<br><em>to Los Angeles.</em></h2>
     </div>
-
-    <div class="event-stack reveal d2">
-      <article class="ev-card ev-card-feature ev-card-upcoming">
-        <div class="ev-feature-layout">
-          <div class="ev-feature-copy">
-            <div class="ev-tag">Upcoming · August 27, 2026 · Vol. 02</div>
-            <div class="ev-title">Shifting FinOps Left All the Way to the AI Code Generator</div>
-            <div class="ev-speaker-line"><strong>Hassan Khajeh Hosseini</strong><br>CEO, Infracost · FinOps Foundation Governing Board Member</div>
-            <div class="ev-meta" style="margin-top:.6rem;font-family:'DM Mono',monospace;font-size:.53rem;letter-spacing:.1em;text-transform:uppercase;">Location TBA</div>
-            <div class="ev-meta">Learn how engineering teams can bring cloud cost awareness earlier into the development lifecycle and build more cost efficient software from the start.</div>
-            <a href="https://luma.com/b128j01h" target="_blank" rel="noopener noreferrer" class="ev-register">Register for the event →</a>
-            <div class="ev-sponsor ev-sponsor-dark">Sponsored by Infracost</div>
-          </div>
-        </div>
-      </article>
-      <article class="ev-card ev-card-feature">
-        <div class="ev-feature-layout">
-          <div class="ev-feature-copy">
-            <div class="ev-tag">Past event · April 9, 2026 · Hawthorne, CA · Vol. 01</div>
-            <div class="ev-title">Using AI to Put the Ops in FinOps</div>
-            <div class="ev-meta">Common Space Brewery · South Bay.</div>
-            <div class="ev-meta" style="margin-top:.6rem;">Our first LA FinOps Meetup brought finance, engineering, and cloud practitioners together for an informal evening on FinOps, AI, and the operating work behind modern technology spend.</div>
-            <div class="ev-meta" style="margin-top:.5rem;">Featuring sessions from Ulta Beauty and Wiv.ai on real world FinOps and AI in practice.</div>
-            <div class="ev-sponsor ev-sponsor-dark">Sponsored by Wiv.ai</div>
-          </div>
-          <div class="ev-poster-wrap">
-            <img src="/images/event-poster-vol01.png" alt="Using AI to Put the Ops in FinOps poster" class="ev-poster" loading="lazy">
-          </div>
-        </div>
-      </article>
-    </div>
+    <p>In April 2026, Diana Molski helped organize and host the first FinOps Weekly Los Angeles meetup, bringing finance, engineering, cloud, and FinOps practitioners together at Common Space Brewery.</p>
   </div>
 
-  <div class="photos-section reveal">
-    <div class="photos-label">
-      <span>From the community</span>
-      <div>
-        <button type="button" class="ph-nav-btn" id="ph-prev" aria-label="Previous event photo">←</button>
-        <button type="button" class="ph-nav-btn" id="ph-next" aria-label="Next event photo">→</button>
+  <div class="community-record reveal">
+    <figure class="community-flyer">
+      <img src="/images/event-poster-vol01.png" alt="April 9, 2026 FinOps Weekly Los Angeles flyer featuring Diana Molski" loading="lazy">
+    </figure>
+    <div class="community-record-copy">
+      <p class="community-record-meta">FinOps Weekly LA Meetup · Thursday, April 9, 2026 · 5:00 PM–8:00 PM</p>
+      <h3>The first LA gathering.</h3>
+      <p class="community-record-location">Common Space Brewery<br>3411 W El Segundo Blvd<br>Hawthorne, CA 90250</p>
+      <div class="community-record-details">
+        <div>
+          <p class="community-detail-label">Speakers</p>
+          <p>Grant Havrilenko · Cloud FinOps Manager at Ulta Beauty<br>Ian Cannon · Senior Account Executive at Wiv.ai<br>Jeff Blume · Principal Solutions Architect at Wiv.ai</p>
+        </div>
+        <div>
+          <p class="community-detail-label">Sessions</p>
+          <p>My FinOps Journey<br>Using AI to Put the Ops in FinOps</p>
+        </div>
       </div>
+      <p class="community-record-sponsor">Sponsored by Wiv.ai</p>
     </div>
-    <div class="photos-viewport" role="region" aria-label="FinOps Weekly Los Angeles event photos">
-      <div class="photos-track" id="ph-track">
-        <div class="photo-slide"><img src="/images/community/photo-1.jpg" alt="FinOps Weekly LA event" loading="lazy"></div>
-        <div class="photo-slide"><img src="/images/community/photo-2.jpeg" alt="FinOps Weekly LA event" loading="lazy"></div>
-        <div class="photo-slide"><img src="/images/community/photo-3.jpeg" alt="FinOps Weekly LA event" loading="lazy"></div>
-      </div>
-    </div>
+    <figure class="community-photo-primary">
+      <img src="/images/community/photo-3.jpeg" alt="FinOps Weekly Los Angeles attendees gathered at Common Space Brewery" loading="lazy">
+    </figure>
   </div>
 </section>
 
@@ -3501,37 +3595,6 @@ section#discipline > div:first-child{
     });
   },{threshold:0.35}).observe(s);
 })();
-// Photo carousel
-let pos = 0;
-const track = document.getElementById('ph-track');
-const getSlides = () => track ? track.querySelectorAll('.photo-slide') : [];
-const slideW = () => { const s = getSlides(); return s.length ? s[0].offsetWidth + 16 : 0; };
-const visibleCount = () => {
-  if (!track) return 3;
-  const vpW = track.parentElement.offsetWidth;
-  const sw = slideW();
-  return sw > 0 ? Math.max(1, Math.floor(vpW / sw)) : 3;
-};
-const maxPos = () => Math.max(0, getSlides().length - visibleCount());
-const goTo = (n) => {
-  pos = Math.max(0, Math.min(n, maxPos()));
-  track.style.transform = `translateX(-${pos * slideW()}px)`;
-};
-const phNext = document.getElementById('ph-next');
-const phPrev = document.getElementById('ph-prev');
-if (phNext) phNext.addEventListener('click', () => goTo(pos + 1));
-if (phPrev) phPrev.addEventListener('click', () => goTo(pos - 1));
-
-// Touch swipe support
-if (track) {
-  let touchStartX = 0;
-  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend', e => {
-    const dx = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(dx) > 40) { goTo(dx > 0 ? pos + 1 : pos - 1); }
-  }, { passive: true });
-}
-
 // Animated market chart
 (function(){
   const canvas = document.getElementById('market-canvas');

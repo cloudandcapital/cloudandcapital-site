@@ -110,6 +110,8 @@ export const featuredWriting = {
     'The AI buildout has become a negotiation over who carries utilization risk, and who keeps the right to walk away.',
   image: '/images/writing/markets-mimosas-hero.png',
   imageAlt: 'Who Gets Stuck With the Bill? Markets & Mimosas',
+  archiveImage: '/images/writing/who-gets-stuck-with-the-bill.png',
+  archiveImageAlt: 'Who Gets Stuck With the Bill? published cover artwork',
 };
 
 export const writingFeatured = {
@@ -120,6 +122,8 @@ export const writingFeatured = {
   description: 'Microsoft paid through capex. CoreWeave paid through debt. Apple paid through the supply chain.',
   image: '/images/writing/markets-mimosas-hero.png',
   imageAlt: 'There Was No Opting Out Markets & Mimosas',
+  archiveImage: '/images/writing/markets-mimosas-hero.png',
+  archiveImageAlt: 'There Was No Opting Out Markets & Mimosas',
 };
 
 export const newsletter = {
@@ -136,24 +140,30 @@ export const writing = [
   featuredWriting,
   {
     title: 'When Capital Becomes Compute',
-    topic: 'Capital Layer',
+    topic: 'AI Infrastructure',
     date: 'February 20, 2026',
     href: 'https://cloudandcapital.substack.com/p/when-capital-becomes-compute',
     description: 'How equity, infrastructure, and compute are reinforcing each other beneath the AI narrative.',
+    archiveImage: '/images/writing/when-capital-becomes-compute.png',
+    archiveImageAlt: 'When Capital Becomes Compute published cover artwork',
   },
   {
     title: 'Deploying Fast, Thinking Slow',
-    topic: 'Deployment Rhythm',
+    topic: 'Cloud Economics',
     date: 'January 22, 2026',
     href: 'https://cloudandcapital.substack.com/p/deploying-fast-thinking-slow',
     description: 'Why cloud decisions get expensive when they outlive their context.',
+    archiveImage: '/images/writing/deploying-fast-thinking-slow.png',
+    archiveImageAlt: 'Deploying Fast, Thinking Slow published cover artwork',
   },
   {
     title: 'Why Even Well-Run Teams Still Struggle With Cloud Costs',
-    topic: 'Operating Layer',
+    topic: 'Cloud Economics',
     date: 'December 29, 2025',
     href: 'https://cloudandcapital.substack.com/p/why-even-well-run-teams-still-struggle',
     description: 'How timing, defaults, and reasonable decisions compound into cost problems.',
+    archiveImage: '/images/writing/well-run-teams-cloud-costs.png',
+    archiveImageAlt: 'Why Even Well-Run Teams Still Struggle With Cloud Costs published cover artwork',
   },
 ];
 

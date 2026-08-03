@@ -2989,16 +2989,14 @@ section#discipline > div:first-child{
   padding:clamp(4.25rem,6vw,6rem) clamp(1.5rem,4vw,4.5rem) !important;
   background:var(--white);
 }
-.community-record-head{
+.community-feature{
   display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(18rem,.9fr);
-  gap:clamp(2.5rem,6vw,6rem);
-  align-items:end;
-  padding-bottom:clamp(2rem,3vw,3rem);
-  border-bottom:1px solid var(--rule);
+  grid-template-columns:minmax(0,.78fr) minmax(28rem,1.08fr);
+  gap:clamp(2.75rem,6vw,6.75rem);
+  align-items:center;
 }
-.community-record-head .section-label{margin-bottom:1.1rem;}
-.community-record-head h2{
+.community-copy .section-label{margin-bottom:1.1rem;}
+.community-copy h2{
   margin:0;
   font-family:'Cormorant Garamond',serif;
   font-size:clamp(2.35rem,4vw,4.25rem);
@@ -3007,35 +3005,15 @@ section#discipline > div:first-child{
   letter-spacing:-.035em;
   color:var(--ink);
 }
-.community-record-head h2 em{font-style:italic;color:var(--sage);}
-.community-record-head > p{
+.community-copy h2 em{font-style:italic;color:var(--sage);}
+.community-copy > p{
   max-width:48ch;
-  margin:0;
+  margin:1.35rem 0 0;
   font-size:.92rem;
   line-height:1.82;
   color:var(--ink-muted);
 }
-.community-record{
-  display:grid;
-  grid-template-columns:minmax(13rem,.62fr) minmax(18rem,1fr) minmax(16rem,.78fr);
-  gap:clamp(1.5rem,3vw,3.5rem);
-  align-items:start;
-  padding-top:clamp(2rem,3vw,3rem);
-}
-.community-record figure{margin:0;}
-.community-flyer{
-  align-self:start;
-  max-width:19rem;
-  border:1px solid rgba(0,0,0,.1);
-  background:#151c67;
-}
-.community-flyer img{
-  display:block;
-  width:100%;
-  height:auto;
-}
-.community-record-copy{padding-top:.2rem;}
-.community-record-meta,
+.community-event-meta,
 .community-detail-label,
 .community-record-sponsor{
   margin:0;
@@ -3045,70 +3023,89 @@ section#discipline > div:first-child{
   line-height:1.65;
   text-transform:uppercase;
 }
-.community-record-meta{color:var(--sage);}
-.community-record-copy h3{
-  max-width:11ch;
-  margin:1rem 0 1.3rem;
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2.1rem,3.3vw,3.5rem);
-  font-weight:300;
-  line-height:.96;
-  letter-spacing:-.035em;
-  color:var(--ink);
+.community-event-meta{
+  margin-top:1.65rem;
+  color:var(--sage);
 }
-.community-record-location{
-  margin:0;
+.community-venue{
+  margin:1rem 0 0;
   font-family:'DM Sans',sans-serif;
   font-size:.88rem;
   line-height:1.7;
   color:var(--ink-muted);
 }
-.community-record-details{
+.community-details{
   display:grid;
-  gap:1.1rem;
-  margin-top:1.5rem;
+  grid-template-columns:1.3fr .9fr;
+  gap:1.25rem;
+  margin-top:1.35rem;
   padding-top:1.35rem;
   border-top:1px solid var(--rule);
 }
 .community-detail-label{margin-bottom:.3rem;color:var(--sage);}
-.community-record-details p:not(.community-detail-label){
+.community-details p:not(.community-detail-label){
   margin:0;
   font-size:.78rem;
   line-height:1.7;
   color:var(--ink-muted);
 }
 .community-record-sponsor{margin-top:1.4rem;color:var(--ink-faint);}
-.community-photo-primary{
-  min-height:25rem;
+.community-visual-stage{
+  position:relative;
+  min-height:clamp(27rem,38vw,33rem);
   overflow:hidden;
-  background:var(--cream-dark);
+  background:#24211d;
 }
-.community-photo-primary img{
+.community-visual-stage figure{margin:0;}
+.community-group-photo{
+  position:absolute;
+  top:clamp(1.5rem,3vw,2.75rem);
+  right:clamp(1.25rem,2.75vw,2.5rem);
+  bottom:clamp(1.5rem,3vw,2.75rem);
+  left:30%;
+  overflow:hidden;
+}
+.community-group-photo img{
   display:block;
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:center 52%;
+  object-position:center 42%;
   filter:saturate(.92) contrast(1.02);
 }
+.community-flyer{
+  position:absolute;
+  z-index:1;
+  top:50%;
+  left:clamp(1.25rem,3vw,2.75rem);
+  width:clamp(15rem,28vw,20rem);
+  transform:translateY(-50%);
+  border:1px solid rgba(244,239,230,.24);
+  background:#151c67;
+  box-shadow:0 1.2rem 2.75rem rgba(0,0,0,.3),0 .2rem .7rem rgba(0,0,0,.18);
+}
+.community-flyer img{display:block;width:100%;height:auto;}
 
 @media (max-width:600px){
   .credential-unit{white-space:normal;}
   .community{padding:3.75rem 1.5rem !important;}
-  .community-record-head{
+  .community-feature{
     grid-template-columns:1fr;
-    gap:1.35rem;
-    padding-bottom:2rem;
+    gap:2rem;
   }
-  .community-record-head h2{font-size:clamp(2.35rem,11vw,3.25rem);}
-  .community-record{
-    grid-template-columns:1fr;
-    gap:1.6rem;
-    padding-top:2rem;
+  .community-copy h2{font-size:clamp(2.35rem,11vw,3.25rem);}
+  .community-details{grid-template-columns:1fr;gap:1rem;}
+  .community-visual-stage{
+    display:flex;
+    flex-direction:column;
+    gap:1.1rem;
+    min-height:0;
+    padding:1.25rem;
   }
-  .community-flyer{width:min(17rem,100%);}
-  .community-record-copy h3{font-size:2.65rem;}
-  .community-photo-primary{min-height:14rem;}
+  .community-flyer,
+  .community-group-photo{position:static;transform:none;width:100%;}
+  .community-flyer{align-self:center;max-width:16rem;}
+  .community-group-photo{aspect-ratio:4 / 3;}
 }
 
 </style>
@@ -3443,23 +3440,14 @@ section#discipline > div:first-child{
 <!-- COMMUNITY -->
 
 <section class="community" id="community">
-  <div class="community-record-head reveal">
-    <div>
+  <div class="community-feature reveal">
+    <div class="community-copy">
       <div class="section-label">Community</div>
       <h2>Bringing FinOps conversations<br><em>to Los Angeles.</em></h2>
-    </div>
-    <p>In April 2026, Diana Molski helped organize and host the first FinOps Weekly Los Angeles meetup, bringing finance, engineering, cloud, and FinOps practitioners together at Common Space Brewery.</p>
-  </div>
-
-  <div class="community-record reveal">
-    <figure class="community-flyer">
-      <img src="/images/event-poster-vol01.png" alt="April 9, 2026 FinOps Weekly Los Angeles flyer featuring Diana Molski" loading="lazy">
-    </figure>
-    <div class="community-record-copy">
-      <p class="community-record-meta">FinOps Weekly LA Meetup · Thursday, April 9, 2026 · 5:00 PM–8:00 PM</p>
-      <h3>The first LA gathering.</h3>
-      <p class="community-record-location">Common Space Brewery<br>3411 W El Segundo Blvd<br>Hawthorne, CA 90250</p>
-      <div class="community-record-details">
+      <p>In April 2026, Diana Molski helped organize and host the first FinOps Weekly Los Angeles meetup, bringing finance, engineering, cloud, and FinOps practitioners together at Common Space Brewery.</p>
+      <p class="community-event-meta">FinOps Weekly LA Meetup · April 9, 2026</p>
+      <p class="community-venue">Common Space Brewery<br>Hawthorne, California</p>
+      <div class="community-details">
         <div>
           <p class="community-detail-label">Speakers</p>
           <p>Grant Havrilenko · Cloud FinOps Manager at Ulta Beauty<br>Ian Cannon · Senior Account Executive at Wiv.ai<br>Jeff Blume · Principal Solutions Architect at Wiv.ai</p>
@@ -3471,9 +3459,14 @@ section#discipline > div:first-child{
       </div>
       <p class="community-record-sponsor">Sponsored by Wiv.ai</p>
     </div>
-    <figure class="community-photo-primary">
-      <img src="/images/community/photo-3.jpeg" alt="FinOps Weekly Los Angeles attendees gathered at Common Space Brewery" loading="lazy">
-    </figure>
+    <div class="community-visual-stage" aria-label="April 9, 2026 FinOps Weekly Los Angeles event materials">
+      <figure class="community-group-photo">
+        <img src="/images/community/photo-1.jpg" alt="FinOps Weekly Los Angeles attendees smiling together at Common Space Brewery" loading="lazy">
+      </figure>
+      <figure class="community-flyer">
+        <img src="/images/event-poster-vol01.png" alt="April 9, 2026 FinOps Weekly Los Angeles flyer featuring Diana Molski" loading="lazy">
+      </figure>
+    </div>
   </div>
 </section>
 

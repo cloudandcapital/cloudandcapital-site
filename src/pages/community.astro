@@ -1,8 +1,180 @@
 ---
-import ArchitectureRoute from '../components/ArchitectureRoute.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { events } from '../data/siteContent';
+
+const [upcoming, past] = events;
+const communityPhotos = [
+  {
+    src: '/images/community/photo-3.jpeg',
+    alt: 'FinOps Weekly Los Angeles attendees gathered around a long table at Common Space Brewery',
+    className: 'community-photo-main',
+  },
+  {
+    src: '/images/community/photo-1.jpg',
+    alt: 'FinOps Weekly Los Angeles attendees at a brewery table',
+    className: 'community-photo-support community-photo-group',
+  },
+  {
+    src: '/images/community/photo-2.jpeg',
+    alt: 'FinOps Weekly Los Angeles presentation at Common Space Brewery',
+    className: 'community-photo-support community-photo-presentation',
+  },
+];
 ---
 
-<BaseLayout title="Community | Cloud & Capital" description="FinOps Weekly Los Angeles community and events.">
-  <ArchitectureRoute label="Community" title="FinOps Weekly Los Angeles." description="Community events and photos are being organized here. The approved homepage remains unchanged during this architecture stage." />
+<BaseLayout
+  title="Community | Cloud & Capital"
+  description="FinOps Weekly Los Angeles brings finance, engineering, and cloud practitioners together for practical conversations about modern technology spend."
+>
+  <main id="main-content" class="community-page">
+    <section class="community-hero" aria-labelledby="community-title">
+      <div class="community-container community-hero-grid">
+        <div>
+          <p class="community-label">Community</p>
+          <h1 id="community-title">FinOps Weekly<br /><em>Los Angeles</em></h1>
+        </div>
+        <div class="community-hero-copy">
+          <p>FinOps Weekly Los Angeles brings finance, engineering, and cloud practitioners together for practical conversations about modern technology spend.</p>
+          <p>Produced by FinOps Weekly and SmartClouds and hosted locally by Diana Molski, Los Angeles regional leader.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="upcoming-event" aria-labelledby="upcoming-title">
+      <div class="community-container">
+        <p class="community-label community-label-light">Upcoming event</p>
+        <article class="upcoming-event-inner">
+          <div class="upcoming-date" aria-label={upcoming.date}>
+            <span>August</span>
+            <strong>27</strong>
+            <span>2026</span>
+          </div>
+          <div class="upcoming-copy">
+            <p class="event-meta">{upcoming.status} · {upcoming.date} · {upcoming.volume}</p>
+            <h2 id="upcoming-title">{upcoming.title}</h2>
+            <div class="event-detail">
+              <p><strong>{upcoming.speaker}</strong><br />{upcoming.speakerRole}</p>
+              <p class="event-location">{upcoming.location}</p>
+            </div>
+            <p class="event-description">{upcoming.description}</p>
+            <div class="upcoming-actions">
+              <a href={upcoming.registrationUrl} target="_blank" rel="noopener noreferrer">Register for the event <span aria-hidden="true">→</span></a>
+              <p>{upcoming.sponsor}</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="past-event" aria-labelledby="past-event-title">
+      <div class="community-container">
+        <div class="past-event-heading">
+          <div>
+            <p class="community-label">From the community</p>
+            <p class="event-meta">{past.status} · {past.date} · {past.volume}</p>
+            <h2 id="past-event-title">{past.title}</h2>
+          </div>
+          <div>
+            <p>{past.description}</p>
+            <p class="past-location">{past.location}</p>
+            <p class="past-sponsor">{past.sponsor}</p>
+          </div>
+        </div>
+        <div class="community-gallery" aria-label="April 9, 2026 FinOps Weekly Los Angeles event photographs">
+          {communityPhotos.map((photo) => (
+            <figure class={photo.className}>
+              <img src={photo.src} alt={photo.alt} loading="lazy" />
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="community-cta" aria-labelledby="community-cta-title">
+      <div class="community-container community-cta-inner">
+        <div>
+          <p class="community-label community-label-gold">Stay in the loop</p>
+          <h2 id="community-cta-title">Get event updates.</h2>
+        </div>
+        <a href="mailto:diana@cloudandcapital.com?subject=FinOps%20Weekly%20Los%20Angeles">Get event updates <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
 </BaseLayout>
+
+<style>
+  .community-page { overflow: hidden; background: #f5eee9; }
+  .community-container { width: calc(100% - 7rem); margin: 0 auto; }
+  .community-label, .event-meta, .upcoming-actions p, .past-sponsor, .past-location { margin: 0; font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .15em; line-height: 1.55; text-transform: uppercase; }
+  .community-label { color: #6b8e7f; }
+  .community-label::after { content: ''; display: inline-block; width: 3rem; height: 1px; margin: 0 0 .25rem .8rem; background: currentColor; opacity: .55; }
+  .community-hero { padding: clamp(6rem, 8vw, 7rem) 0 clamp(4.5rem, 5.5vw, 5.5rem); }
+  .community-hero-grid, .upcoming-event-inner, .past-event-heading, .community-cta-inner { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(3.5rem, 5vw, 5.5rem); align-items: start; }
+  .community-hero h1, .upcoming-copy h2, .past-event-heading h2, .community-cta h2 { margin: 1.25rem 0 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; letter-spacing: -.035em; }
+  .community-hero h1 { max-width: 10ch; font-size: clamp(3.15rem, 5vw, 5.25rem); line-height: .93; color: #000; }
+  .community-hero h1 em { color: #6b8e7f; font-style: italic; }
+  .community-hero-copy { align-self: end; padding-bottom: .4rem; }
+  .community-hero-copy p { max-width: 47ch; margin: 0; font-family: 'DM Sans', sans-serif; font-size: clamp(.95rem, 1.4vw, 1.08rem); line-height: 1.82; color: #4a4a4a; }
+  .community-hero-copy p + p { margin-top: 1.2rem; }
+
+  .upcoming-event { padding: clamp(4.5rem, 5.5vw, 5.5rem) 0; background: #000; color: #f5eee9; }
+  .community-label-light { color: #ddb977; }
+  .upcoming-event-inner { margin-top: 1.8rem; padding: clamp(2.1rem, 3vw, 3rem) 0; border-top: 1px solid rgba(168,192,181,.7); border-bottom: 1px solid rgba(245,238,233,.16); }
+  .upcoming-date { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-height: 25rem; padding-right: clamp(1rem, 5vw, 4rem); border-right: 1px solid rgba(245,238,233,.16); color: #ddb977; }
+  .upcoming-date span { font-family: 'DM Mono', monospace; font-size: .63rem; letter-spacing: .2em; text-transform: uppercase; }
+  .upcoming-date strong { margin: .25rem 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(9rem, 15vw, 15rem); font-weight: 300; line-height: .65; letter-spacing: -.08em; color: #f5eee9; }
+  .upcoming-copy { padding-left: clamp(0rem, 1vw, 1rem); }
+  .event-meta { color: #a8c0b5; }
+  .upcoming-copy h2 { max-width: 15ch; margin-top: 1.4rem; font-size: clamp(2.75rem, 4.55vw, 4.8rem); line-height: .96; color: #f5eee9; }
+  .event-detail { margin-top: 2rem; padding-top: 1.4rem; border-top: 1px solid rgba(245,238,233,.16); }
+  .event-detail p { margin: 0; font-family: 'DM Sans', sans-serif; font-size: .9rem; line-height: 1.7; color: rgba(245,238,233,.72); }
+  .event-detail strong { color: #f5eee9; font-weight: 500; }
+  .event-detail .event-location { margin-top: 1rem; font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: #ddb977; }
+  .event-description { max-width: 50ch; margin: 1.5rem 0 0; font-family: 'DM Sans', sans-serif; font-size: .9rem; line-height: 1.8; color: rgba(245,238,233,.62); }
+  .upcoming-actions { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; margin-top: 2rem; }
+  .upcoming-actions a, .community-cta a { display: inline-block; padding: .95rem 1.25rem; background: #6b8e7f; color: #fff; font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; transition: background .2s; }
+  .upcoming-actions a:hover { background: #86a89a; }
+  .upcoming-actions p { color: rgba(245,238,233,.46); text-align: right; }
+
+  .past-event { padding: clamp(4.5rem, 5.5vw, 5.5rem) 0; background: #fbfaf7; }
+  .past-event-heading { padding-bottom: clamp(2.25rem, 3.5vw, 3.25rem); border-bottom: 1px solid rgba(0,0,0,.14); }
+  .past-event-heading h2 { max-width: 15ch; font-size: clamp(2.7rem, 4.3vw, 4.6rem); line-height: .97; color: #000; }
+  .past-event-heading > div:last-child { padding-top: 2.4rem; }
+  .past-event-heading > div:last-child > p:first-child { max-width: 47ch; margin: 0; font-family: 'DM Sans', sans-serif; font-size: .93rem; line-height: 1.82; color: #4a4a4a; }
+  .past-location { margin-top: 1.35rem; color: #55796c; }
+  .past-sponsor { margin-top: .55rem; color: #8b7560; }
+  .community-gallery { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(13rem, .75fr); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); padding-top: clamp(2rem, 3vw, 2.75rem); }
+  .community-gallery figure { margin: 0; overflow: hidden; background: #e6ddd4; }
+  .community-gallery img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(.92) contrast(1.02); transition: transform .35s ease; }
+  .community-gallery figure:hover img { transform: scale(1.025); }
+  .community-photo-main { grid-row: span 2; min-height: 35rem; }
+  .community-photo-main img { object-position: center 52%; }
+  .community-photo-group { min-height: 16rem; }
+  .community-photo-group img { object-position: center 45%; }
+  .community-photo-presentation { min-height: 16rem; }
+  .community-photo-presentation img { object-position: center 52%; }
+
+  .community-cta { padding: clamp(4.5rem, 5.5vw, 5.5rem) 0; background: #3d6055; }
+  .community-cta-inner { align-items: center; }
+  .community-label-gold { color: #ddb977; }
+  .community-cta h2 { font-size: clamp(2.5rem, 4vw, 4.25rem); line-height: .98; color: #fff; }
+  .community-cta a { justify-self: end; background: #fff; color: #3d6055; }
+  .community-cta a:hover { background: #f5eee9; }
+
+  @media (max-width: 900px) {
+    .community-hero-grid, .upcoming-event-inner, .past-event-heading, .community-cta-inner { grid-template-columns: 1fr; }
+    .community-hero-grid { gap: 2rem; }.community-hero-copy { padding: 0; }
+    .upcoming-date { min-height: 0; padding: 0 0 2rem; border: 0; border-bottom: 1px solid rgba(245,238,233,.16); }
+    .upcoming-date strong { font-size: clamp(7rem, 22vw, 11rem); }.upcoming-copy { padding: 2.25rem 0 0; }
+    .past-event-heading > div:last-child { padding-top: 1.5rem; }
+    .community-gallery { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
+    .community-photo-main { grid-column: span 2; grid-row: auto; min-height: 29rem; }
+    .community-cta-inner { gap: 2rem; }.community-cta a { justify-self: start; }
+  }
+  @media (max-width: 720px) {
+    .community-container { width: calc(100% - 2.5rem); }
+    .community-hero { padding-top: 6.75rem; }.community-hero h1 { font-size: clamp(2.9rem, 13.5vw, 4rem); }
+    .upcoming-actions { align-items: flex-start; flex-direction: column; }.upcoming-actions p { text-align: left; }
+    .community-gallery { gap: .8rem; }.community-photo-main { min-height: 19rem; }.community-photo-group, .community-photo-presentation { min-height: 11rem; }
+  }
+</style>

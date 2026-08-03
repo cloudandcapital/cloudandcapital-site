@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { events } from '../data/siteContent';
 
-const [upcoming, past] = events;
+const [upcoming] = events;
 const communityPhotos = [
   {
     src: '/images/community/photo-3.jpeg',
@@ -34,8 +34,7 @@ const communityPhotos = [
           <h1 id="community-title">FinOps Weekly<br /><em>Los Angeles</em></h1>
         </div>
         <div class="community-hero-copy">
-          <p>FinOps Weekly Los Angeles brings finance, engineering, and cloud practitioners together for practical conversations about modern technology spend.</p>
-          <p>Produced by FinOps Weekly and SmartClouds and hosted locally by Diana Molski, Los Angeles regional leader.</p>
+          <p>FinOps Weekly Los Angeles is a local room for finance, engineering, and cloud practitioners working through the economics of modern technology spend. Hosted locally by Diana Molski, Los Angeles regional lead.</p>
         </div>
       </div>
     </section>
@@ -50,17 +49,16 @@ const communityPhotos = [
             <span>2026</span>
           </div>
           <div class="upcoming-copy">
-            <p class="event-meta">{upcoming.status} · {upcoming.date} · {upcoming.volume}</p>
-            <h2 id="upcoming-title">{upcoming.title}</h2>
+            <p class="event-series">FinOps Weekly Meetup <span>Powered by Infracost</span></p>
+            <p class="event-meta">Thursday, August 27, 2026 · 6:30 PM–9:00 PM</p>
+            <h2 id="upcoming-title">Shifting FinOps Left All the Way to the AI Code Generator</h2>
             <div class="event-detail">
-              <p><strong>{upcoming.speaker}</strong><br />{upcoming.speakerRole}</p>
-              <p class="event-location">{upcoming.location}</p>
+              <p class="event-kicker">Featured speaker</p>
+              <p><strong>Hassan Khajeh Hosseini</strong><br />CEO of Infracost and FinOps Foundation Governing Board Member</p>
+              <p class="event-location">Venue to be announced</p>
             </div>
-            <p class="event-description">{upcoming.description}</p>
-            <div class="upcoming-actions">
-              <a href={upcoming.registrationUrl} target="_blank" rel="noopener noreferrer">Register for the event <span aria-hidden="true">→</span></a>
-              <p>{upcoming.sponsor}</p>
-            </div>
+            <p class="event-description">A practical session on bringing cloud cost awareness earlier into the development lifecycle.</p>
+            <a class="event-register" href={upcoming.registrationUrl} target="_blank" rel="noopener noreferrer">Register for the event <span aria-hidden="true">→</span></a>
           </div>
         </article>
       </div>
@@ -71,13 +69,13 @@ const communityPhotos = [
         <div class="past-event-heading">
           <div>
             <p class="community-label">From the community</p>
-            <p class="event-meta">{past.status} · {past.date} · {past.volume}</p>
-            <h2 id="past-event-title">{past.title}</h2>
+            <p class="event-meta">April 9, 2026 · Common Space Brewery · Hawthorne, California</p>
+            <h2 id="past-event-title">The first LA gathering.</h2>
           </div>
           <div>
-            <p>{past.description}</p>
-            <p class="past-location">{past.location}</p>
-            <p class="past-sponsor">{past.sponsor}</p>
+            <p>The first FinOps Weekly Los Angeles meetup brought practitioners together for an informal evening of shared operating experience.</p>
+            <p class="past-sessions">Sessions: “My FinOps Journey” and “Using AI to Put the Ops in FinOps”</p>
+            <p class="past-sponsor">Sponsored by Wiv.ai</p>
           </div>
         </div>
         <div class="community-gallery" aria-label="April 9, 2026 FinOps Weekly Los Angeles event photographs">
@@ -105,43 +103,44 @@ const communityPhotos = [
 <style>
   .community-page { overflow: hidden; background: #f5eee9; }
   .community-container { width: calc(100% - 7rem); margin: 0 auto; }
-  .community-label, .event-meta, .upcoming-actions p, .past-sponsor, .past-location { margin: 0; font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .15em; line-height: 1.55; text-transform: uppercase; }
+  .community-label, .event-meta, .event-series, .event-kicker, .past-sponsor, .past-location, .past-sessions { margin: 0; font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .15em; line-height: 1.55; text-transform: uppercase; }
   .community-label { color: #6b8e7f; }
   .community-label::after { content: ''; display: inline-block; width: 3rem; height: 1px; margin: 0 0 .25rem .8rem; background: currentColor; opacity: .55; }
-  .community-hero { padding: clamp(6rem, 8vw, 7rem) 0 clamp(4.5rem, 5.5vw, 5.5rem); }
+  .community-hero { padding: clamp(5.5rem, 6.5vw, 6.25rem) 0 clamp(3.25rem, 4.25vw, 4.25rem); }
   .community-hero-grid, .upcoming-event-inner, .past-event-heading, .community-cta-inner { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(3.5rem, 5vw, 5.5rem); align-items: start; }
   .community-hero h1, .upcoming-copy h2, .past-event-heading h2, .community-cta h2 { margin: 1.25rem 0 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; letter-spacing: -.035em; }
   .community-hero h1 { max-width: 10ch; font-size: clamp(3.15rem, 5vw, 5.25rem); line-height: .93; color: #000; }
   .community-hero h1 em { color: #6b8e7f; font-style: italic; }
-  .community-hero-copy { align-self: end; padding-bottom: .4rem; }
-  .community-hero-copy p { max-width: 47ch; margin: 0; font-family: 'DM Sans', sans-serif; font-size: clamp(.95rem, 1.4vw, 1.08rem); line-height: 1.82; color: #4a4a4a; }
-  .community-hero-copy p + p { margin-top: 1.2rem; }
+  .community-hero-copy { align-self: center; }
+  .community-hero-copy p { max-width: 49ch; margin: 0; font-family: 'DM Sans', sans-serif; font-size: clamp(.95rem, 1.4vw, 1.08rem); line-height: 1.82; color: #4a4a4a; }
 
-  .upcoming-event { padding: clamp(4.5rem, 5.5vw, 5.5rem) 0; background: #000; color: #f5eee9; }
+  .upcoming-event { padding: clamp(3.75rem, 4.75vw, 4.75rem) 0; background: #000; color: #f5eee9; }
   .community-label-light { color: #ddb977; }
-  .upcoming-event-inner { margin-top: 1.8rem; padding: clamp(2.1rem, 3vw, 3rem) 0; border-top: 1px solid rgba(168,192,181,.7); border-bottom: 1px solid rgba(245,238,233,.16); }
-  .upcoming-date { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-height: 25rem; padding-right: clamp(1rem, 5vw, 4rem); border-right: 1px solid rgba(245,238,233,.16); color: #ddb977; }
+  .upcoming-event-inner { grid-template-columns: minmax(11rem, .42fr) minmax(0, 1fr); margin-top: 1.5rem; padding: clamp(1.75rem, 2.5vw, 2.5rem) 0; border-top: 1px solid rgba(168,192,181,.7); border-bottom: 1px solid rgba(245,238,233,.16); }
+  .upcoming-date { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-height: 20rem; padding-right: clamp(1rem, 3vw, 2.5rem); border-right: 1px solid rgba(245,238,233,.16); color: #ddb977; }
   .upcoming-date span { font-family: 'DM Mono', monospace; font-size: .63rem; letter-spacing: .2em; text-transform: uppercase; }
-  .upcoming-date strong { margin: .25rem 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(9rem, 15vw, 15rem); font-weight: 300; line-height: .65; letter-spacing: -.08em; color: #f5eee9; }
-  .upcoming-copy { padding-left: clamp(0rem, 1vw, 1rem); }
+  .upcoming-date strong { margin: .25rem 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(7.5rem, 10vw, 10rem); font-weight: 300; line-height: .65; letter-spacing: -.08em; color: #f5eee9; }
+  .upcoming-copy { padding-left: clamp(.5rem, 2vw, 1.75rem); }
   .event-meta { color: #a8c0b5; }
-  .upcoming-copy h2 { max-width: 15ch; margin-top: 1.4rem; font-size: clamp(2.75rem, 4.55vw, 4.8rem); line-height: .96; color: #f5eee9; }
-  .event-detail { margin-top: 2rem; padding-top: 1.4rem; border-top: 1px solid rgba(245,238,233,.16); }
+  .event-series { color: #ddb977; }
+  .event-series span::before { content: ' · '; color: rgba(245,238,233,.38); }
+  .upcoming-copy .event-meta { margin-top: .55rem; }
+  .upcoming-copy h2 { max-width: 18ch; margin-top: 1.1rem; font-size: clamp(2.4rem, 3.75vw, 3.8rem); line-height: .98; color: #f5eee9; }
+  .event-detail { margin-top: 1.6rem; padding-top: 1.2rem; border-top: 1px solid rgba(245,238,233,.16); }
   .event-detail p { margin: 0; font-family: 'DM Sans', sans-serif; font-size: .9rem; line-height: 1.7; color: rgba(245,238,233,.72); }
   .event-detail strong { color: #f5eee9; font-weight: 500; }
+  .event-detail .event-kicker { margin-bottom: .55rem; color: #a8c0b5; font-size: .56rem; }
   .event-detail .event-location { margin-top: 1rem; font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: #ddb977; }
-  .event-description { max-width: 50ch; margin: 1.5rem 0 0; font-family: 'DM Sans', sans-serif; font-size: .9rem; line-height: 1.8; color: rgba(245,238,233,.62); }
-  .upcoming-actions { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; margin-top: 2rem; }
-  .upcoming-actions a, .community-cta a { display: inline-block; padding: .95rem 1.25rem; background: #6b8e7f; color: #fff; font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; transition: background .2s; }
-  .upcoming-actions a:hover { background: #86a89a; }
-  .upcoming-actions p { color: rgba(245,238,233,.46); text-align: right; }
+  .event-description { max-width: 48ch; margin: 1.2rem 0 0; font-family: 'DM Sans', sans-serif; font-size: .9rem; line-height: 1.8; color: rgba(245,238,233,.62); }
+  .event-register, .community-cta a { display: inline-block; margin-top: 1.65rem; padding: .95rem 1.25rem; background: #6b8e7f; color: #fff; font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; transition: background .2s; }
+  .event-register:hover { background: #86a89a; }
 
   .past-event { padding: clamp(4.5rem, 5.5vw, 5.5rem) 0; background: #fbfaf7; }
   .past-event-heading { padding-bottom: clamp(2.25rem, 3.5vw, 3.25rem); border-bottom: 1px solid rgba(0,0,0,.14); }
   .past-event-heading h2 { max-width: 15ch; font-size: clamp(2.7rem, 4.3vw, 4.6rem); line-height: .97; color: #000; }
   .past-event-heading > div:last-child { padding-top: 2.4rem; }
   .past-event-heading > div:last-child > p:first-child { max-width: 47ch; margin: 0; font-family: 'DM Sans', sans-serif; font-size: .93rem; line-height: 1.82; color: #4a4a4a; }
-  .past-location { margin-top: 1.35rem; color: #55796c; }
+  .past-sessions { margin-top: 1.25rem; color: #55796c; }
   .past-sponsor { margin-top: .55rem; color: #8b7560; }
   .community-gallery { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(13rem, .75fr); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); padding-top: clamp(2rem, 3vw, 2.75rem); }
   .community-gallery figure { margin: 0; overflow: hidden; background: #e6ddd4; }
@@ -158,13 +157,13 @@ const communityPhotos = [
   .community-cta-inner { align-items: center; }
   .community-label-gold { color: #ddb977; }
   .community-cta h2 { font-size: clamp(2.5rem, 4vw, 4.25rem); line-height: .98; color: #fff; }
-  .community-cta a { justify-self: end; background: #fff; color: #3d6055; }
+  .community-cta a { justify-self: end; margin-top: 0; background: #fff; color: #3d6055; }
   .community-cta a:hover { background: #f5eee9; }
 
   @media (max-width: 900px) {
     .community-hero-grid, .upcoming-event-inner, .past-event-heading, .community-cta-inner { grid-template-columns: 1fr; }
     .community-hero-grid { gap: 2rem; }.community-hero-copy { padding: 0; }
-    .upcoming-date { min-height: 0; padding: 0 0 2rem; border: 0; border-bottom: 1px solid rgba(245,238,233,.16); }
+    .upcoming-event-inner { grid-template-columns: 1fr; }.upcoming-date { min-height: 0; padding: 0 0 1.75rem; border: 0; border-bottom: 1px solid rgba(245,238,233,.16); }
     .upcoming-date strong { font-size: clamp(7rem, 22vw, 11rem); }.upcoming-copy { padding: 2.25rem 0 0; }
     .past-event-heading > div:last-child { padding-top: 1.5rem; }
     .community-gallery { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
@@ -174,7 +173,6 @@ const communityPhotos = [
   @media (max-width: 720px) {
     .community-container { width: calc(100% - 2.5rem); }
     .community-hero { padding-top: 6.75rem; }.community-hero h1 { font-size: clamp(2.9rem, 13.5vw, 4rem); }
-    .upcoming-actions { align-items: flex-start; flex-direction: column; }.upcoming-actions p { text-align: left; }
     .community-gallery { gap: .8rem; }.community-photo-main { min-height: 19rem; }.community-photo-group, .community-photo-presentation { min-height: 11rem; }
   }
 </style>

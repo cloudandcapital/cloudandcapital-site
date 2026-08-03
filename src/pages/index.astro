@@ -3026,6 +3026,7 @@ section#discipline > div:first-child{
 .community-event-meta{
   margin-top:1.65rem;
   color:var(--sage);
+  white-space:nowrap;
 }
 .community-venue{
   margin:1rem 0 0;
@@ -3045,7 +3046,7 @@ section#discipline > div:first-child{
 .community-detail-label{margin-bottom:.3rem;color:var(--sage);}
 .community-details p:not(.community-detail-label){
   margin:0;
-  font-size:.78rem;
+  font-size:.84rem;
   line-height:1.7;
   color:var(--ink-muted);
 }
@@ -3054,14 +3055,14 @@ section#discipline > div:first-child{
   position:relative;
   min-height:clamp(27rem,38vw,33rem);
   overflow:hidden;
-  background:#24211d;
+  background:#687a70;
 }
 .community-visual-stage figure{margin:0;}
 .community-group-photo{
   position:absolute;
-  top:clamp(1.5rem,3vw,2.75rem);
-  right:clamp(1.25rem,2.75vw,2.5rem);
-  bottom:clamp(1.5rem,3vw,2.75rem);
+  top:clamp(1.35rem,2.7vw,2.45rem);
+  right:clamp(1.15rem,2.45vw,2.25rem);
+  bottom:clamp(1.35rem,2.7vw,2.45rem);
   left:30%;
   overflow:hidden;
 }
@@ -3077,7 +3078,7 @@ section#discipline > div:first-child{
   position:absolute;
   z-index:1;
   top:50%;
-  left:clamp(1.25rem,3vw,2.75rem);
+  left:clamp(1.15rem,2.7vw,2.45rem);
   width:clamp(15rem,28vw,20rem);
   transform:translateY(-50%);
   border:1px solid rgba(244,239,230,.24);
@@ -3100,12 +3101,16 @@ section#discipline > div:first-child{
     flex-direction:column;
     gap:1.1rem;
     min-height:0;
-    padding:1.25rem;
+    padding:1.1rem;
   }
   .community-flyer,
   .community-group-photo{position:static;transform:none;width:100%;}
   .community-flyer{align-self:center;max-width:16rem;}
   .community-group-photo{aspect-ratio:4 / 3;}
+}
+
+@media (max-width:600px){
+  .community-event-meta{white-space:normal;}
 }
 
 </style>

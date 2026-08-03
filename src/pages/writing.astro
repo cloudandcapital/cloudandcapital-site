@@ -44,7 +44,6 @@ const archive = writing.slice(1);
           <p>{newsletter.description}</p>
           <div class="newsletter-actions">
             <a href={newsletter.subscribeHref} target="_blank" rel="noopener noreferrer">Subscribe on Substack <span aria-hidden="true">→</span></a>
-            <a href={newsletter.latestIssueHref} target="_blank" rel="noopener noreferrer">Latest issue <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
@@ -122,7 +121,7 @@ const archive = writing.slice(1);
   .manuscript-annotation > p { margin-bottom: .35rem; color: #55796c; }
   .manuscript-annotation em { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1rem, 1.6vw, 1.3rem); line-height: 1.08; }
   .manuscript-meta { position: absolute; left: clamp(1.35rem, 2.5vw, 2.25rem); bottom: 1.55rem; color: #3d6055; }
-  .newsletter-feature { padding: clamp(4rem, 7vw, 6.5rem) clamp(1.5rem, 5vw, 4.5rem); background: #000; color: #f5eee9; }
+  .newsletter-feature { padding: clamp(3.25rem, 5.5vw, 5rem) clamp(1.5rem, 5vw, 4.5rem); background: #000; color: #f5eee9; }
   .newsletter-feature-inner { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(17rem, .9fr); gap: clamp(3rem, 8vw, 9rem); max-width: 88rem; }
   .section-label-light { color: #ddb977; }.section-label-light::after { opacity: .4; }
   .newsletter-feature h2 { max-width: 18ch; margin: 0; font-size: clamp(2.4rem, 4.275vw, 4.5rem); line-height: .99; color: #f5eee9; }
@@ -130,21 +129,21 @@ const archive = writing.slice(1);
   .newsletter-feature-detail > p { max-width: 44ch; margin: 0; font-family: 'DM Sans', sans-serif; font-size: .94rem; line-height: 1.85; color: rgba(245,238,233,.68); }
   .newsletter-actions { display: flex; flex-wrap: wrap; gap: .85rem; margin-top: 2rem; }
   .newsletter-actions a, .featured-article-copy > span, .archive-link { font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .12em; line-height: 1.5; text-transform: uppercase; text-decoration: none; }
-  .newsletter-actions a:first-child { padding: .9rem 1.2rem; background: #6b8e7f; color: #fff; }
-  .newsletter-actions a:last-child { padding: .9rem 1.2rem; border: 1px solid rgba(245,238,233,.32); color: #f5eee9; }
+  .newsletter-actions a { padding: .9rem 1.2rem; background: #6b8e7f; color: #fff; }
   .newsletter-actions a:hover { background: #86a89a; border-color: #86a89a; }
-  .featured-article { padding-top: clamp(2.75rem, 4vw, 3.75rem); padding-bottom: clamp(2.75rem, 4.5vw, 3.75rem); background: #fbfaf7; }
+  .featured-article { padding-top: clamp(2.5rem, 3.5vw, 3.25rem); padding-bottom: clamp(2.5rem, 4vw, 3.25rem); background: #fbfaf7; }
   .featured-article-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; margin-bottom: 1.5rem; }
+  .featured-article-heading .section-label { margin-bottom: 0; }
   .featured-article-heading > p:last-child { margin: 0; font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: #8b8b8b; }
-  .featured-article-link { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: clamp(2.25rem, 5vw, 4.5rem); padding: clamp(1.75rem, 2.5vw, 2.25rem) 0 clamp(1.75rem, 2.75vw, 2.25rem); border-top: 2px solid #6b8e7f; border-bottom: 1px solid rgba(0,0,0,.13); color: inherit; text-decoration: none; }
-  .featured-article-copy { padding: .5rem clamp(1.5rem, 5vw, 4.5rem) 1rem 0; display: flex; flex-direction: column; justify-content: flex-start; }
+  .featured-article-link { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: clamp(2.25rem, 5vw, 4.5rem); padding: clamp(2.1rem, 2.75vw, 2.5rem) 0 clamp(1.75rem, 2.5vw, 2.25rem); border-top: 2px solid #6b8e7f; border-bottom: 1px solid rgba(0,0,0,.13); color: inherit; text-decoration: none; }
+  .featured-article-copy { width: min(100%, 33.75rem); padding: .25rem clamp(1.5rem, 5vw, 4.5rem) 1rem 0; display: flex; flex-direction: column; justify-content: flex-start; }
   .article-meta { margin: 0 0 .9rem; font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .13em; line-height: 1.5; text-transform: uppercase; color: #6b8e7f; }
   .featured-article-copy .article-meta { white-space: nowrap; }
   .article-meta span::before { content: '·'; margin: 0 .5rem; color: #b88c45; }
   .featured-article-copy h2 { max-width: 15ch; margin: 0 0 1.25rem; font-size: clamp(2.5rem, 4.2vw, 4.45rem); line-height: .99; }
-  .featured-article-copy > p { max-width: 38ch; margin: 0; font-family: 'DM Sans', sans-serif; font-size: .93rem; line-height: 1.83; color: #4a4a4a; }
+  .featured-article-copy > p { max-width: 44ch; margin: 0; font-family: 'DM Sans', sans-serif; font-size: .93rem; line-height: 1.83; color: #4a4a4a; }
   .featured-article-copy > span { margin-top: 2.25rem; color: #3d6055; }
-  .featured-article-image { height: clamp(26.25rem, 30vw, 28.125rem); overflow: hidden; background: #ebe3db; }
+  .featured-article-image { height: clamp(25rem, 29vw, 26.25rem); overflow: hidden; background: #ebe3db; }
   .featured-article-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
   .featured-article-link:hover .featured-article-image img { transform: scale(1.025); }
   .featured-article-link:hover .featured-article-copy > span { text-decoration: underline; text-underline-offset: .3em; }

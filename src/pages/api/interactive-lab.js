@@ -94,7 +94,7 @@ async function callModel(readiness) {
       system: [{ type: 'text', text: buildSystemPrompt(readiness), cache_control: { type: 'ephemeral' } }],
       messages: [{ role: 'user', content: buildUserPrompt(readiness) }],
     }),
-    signal: AbortSignal.timeout(45000),
+    signal: AbortSignal.timeout(60000),
   });
 
   if (!response.ok) {

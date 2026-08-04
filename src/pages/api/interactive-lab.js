@@ -89,12 +89,12 @@ async function callModel(readiness) {
     },
     body: JSON.stringify({
       model: 'claude-sonnet-4-6',
-      max_tokens: 3000,
+      max_tokens: 2200,
       temperature: 0.2,
       system: [{ type: 'text', text: buildSystemPrompt(readiness), cache_control: { type: 'ephemeral' } }],
       messages: [{ role: 'user', content: buildUserPrompt(readiness) }],
     }),
-    signal: AbortSignal.timeout(60000),
+    signal: AbortSignal.timeout(90000),
   });
 
   if (!response.ok) {

@@ -7,7 +7,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="eyebrow">Cloud &amp; Capital · Diagnostic</p>
       <h1>The Technology Cost <em>Signal Audit</em></h1>
       <p class="dek">Set a scope, answer 12 questions, and receive a practical profile of how technology cost moves from data to decision.</p>
-      <div class="meta"><span>5 minutes</span><span>No sign-up</span><span>Immediate results</span><span>No identity data</span></div>
+      <div class="meta"><span>12 questions</span><span>5 minutes</span><span>No sign-up</span><span>Immediate results</span></div>
     </header>
 
     <section id="auditStage" class="stage" aria-labelledby="stageTitle">
@@ -20,7 +20,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <fieldset><legend>Assessment scope</legend><div id="targetScopes" class="choices"></div></fieldset>
           <fieldset><legend>Which technology spend is in scope? <span>Select one or more</span></legend><div id="technologyScopes" class="choices compact"></div></fieldset>
           <p id="setupError" class="error" role="alert"></p>
-          <div class="controls end"><button class="button primary" type="button" id="beginButton">Begin the 12 questions <span aria-hidden="true">→</span></button></div>
+          <div class="controls end"><button class="button primary" type="button" id="beginButton">Begin the audit <span aria-hidden="true">→</span></button></div>
         </div>
 
         <div id="questionPanel" class="panel question-panel" hidden>
@@ -120,5 +120,225 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .map-plot::before { left: 50%; top: 0; bottom: 0; width: 1px; }
     .map-plot::after { top: 50%; left: 0; right: 0; height: 1px; }
     .result-header h2 { font-size: clamp(3rem, 5vw, 4.6rem); overflow-wrap: normal; word-break: keep-all; }
+
+    /* Shared audit grid: hero copy and every panel use one outer rail and inset. */
+    .audit-main {
+      --audit-rail: 1080px;
+      --audit-inset: 52px;
+      padding: 5.25rem 1.5rem 6rem;
+    }
+    .audit-main .rail,
+    .audit-main .stage,
+    .audit-main .results-rail {
+      width: min(100%, var(--audit-rail));
+      max-width: var(--audit-rail);
+      margin-inline: auto;
+    }
+    .audit-main .stage,
+    .audit-main .results-rail {
+      scroll-margin-top: 5.25rem;
+    }
+    .audit-main .hero {
+      padding: 2.25rem var(--audit-inset) 2rem;
+    }
+    .audit-main .hero h1 {
+      width: min(100%, 790px);
+      max-width: 790px;
+      margin: .65rem 0 1rem;
+      font-size: clamp(4.5rem, 5.45vw, 4.95rem);
+      line-height: .92;
+      letter-spacing: -.025em;
+    }
+    .audit-main .hero .dek {
+      max-width: 680px;
+      margin: 0;
+      color: #3f3a35;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.55;
+    }
+    .audit-main .meta {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 1.5rem;
+      padding-block: .85rem;
+      border-top: 1px solid #cfc5b9;
+      border-bottom: 1px solid #cfc5b9;
+      color: #504a44;
+      font-size: .67rem;
+    }
+    .audit-main .meta span {
+      padding-inline: 1rem;
+      text-align: center;
+      border-left: 1px solid #d8cec2;
+    }
+    .audit-main .meta span:first-child {
+      padding-left: 0;
+      text-align: left;
+      border-left: 0;
+    }
+    .audit-main .meta span:last-child {
+      padding-right: 0;
+      text-align: right;
+    }
+    .audit-main .panel {
+      min-height: 0;
+      padding: 48px var(--audit-inset) 52px;
+      border: 1px solid #d3c8bb;
+      border-top: 3px solid #607969;
+      box-shadow: none;
+    }
+    .audit-main .setup-panel h2 {
+      margin: .25rem 0 .6rem;
+      font-size: clamp(3rem, 3.75vw, 3.5rem);
+      line-height: 1;
+    }
+    .audit-main .setup-panel .intro {
+      margin-bottom: 2rem;
+      color: #504a44;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .96rem;
+      line-height: 1.55;
+    }
+    .audit-main .setup-panel fieldset {
+      margin: 1.65rem 0 0;
+    }
+    .audit-main .setup-panel fieldset > legend {
+      display: flex;
+      width: 100%;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: .8rem;
+      color: #282420;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .88rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .audit-main .setup-panel legend span {
+      margin-left: 1rem;
+      color: #6a6259;
+      font-family: 'DM Mono', monospace;
+      font-size: .57rem;
+      font-weight: 400;
+    }
+    .audit-main .choice span {
+      min-height: 60px;
+      padding: .85rem 1rem .85rem 3rem;
+      border-color: #cec3b6;
+      color: #332f2a;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem;
+      line-height: 1.4;
+      transition: border-color .16s ease, background-color .16s ease, box-shadow .16s ease;
+    }
+    .audit-main .choice span::before {
+      left: 1.15rem;
+      width: 17px;
+      height: 17px;
+      border-color: #786f65;
+      background: #fff;
+    }
+    .audit-main .choice:hover span {
+      border-color: #748a7b;
+      background: #f8faf6;
+    }
+    .audit-main .choice input:checked + span {
+      border-color: #506c5b;
+      background: #e8eee7;
+      box-shadow: inset 3px 0 #506c5b;
+    }
+    .audit-main .choice input:checked + span::before {
+      border-color: #405b4b;
+      background: #405b4b;
+      box-shadow: inset 0 0 0 4px #e8eee7;
+    }
+    .audit-main .choice input:checked + span::after {
+      display: none;
+    }
+    .audit-main .choice input[type='checkbox']:checked + span::before {
+      border-radius: 2px;
+      background: #405b4b;
+      box-shadow: none;
+    }
+    .audit-main .choice input[type='checkbox']:checked + span::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 1.48rem;
+      top: 50%;
+      width: 5px;
+      height: 9px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      border-radius: 0;
+      transform: translateY(-58%) rotate(45deg);
+    }
+    .audit-main .compact .choice:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+    .audit-main .setup-panel .controls {
+      margin-top: 36px;
+    }
+    .audit-main .setup-panel .button.primary {
+      min-width: 180px;
+      min-height: 48px;
+      font-size: .72rem;
+    }
+
+    @media (max-width: 760px) {
+      .audit-main {
+        --audit-inset: 20px;
+        padding: 4.5rem .75rem 3rem;
+      }
+      .audit-main .hero {
+        padding: 2rem var(--audit-inset) 1.4rem;
+      }
+      .audit-main .hero h1 {
+        font-size: clamp(3.15rem, 14vw, 4rem);
+        line-height: .94;
+      }
+      .audit-main .hero .dek {
+        font-size: .98rem;
+      }
+      .audit-main .meta {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 1.25rem;
+        padding-block: 0;
+      }
+      .audit-main .meta span,
+      .audit-main .meta span:first-child,
+      .audit-main .meta span:last-child {
+        padding: .7rem .35rem;
+        text-align: left;
+        border-left: 0;
+        border-top: 1px solid #d8cec2;
+      }
+      .audit-main .meta span:nth-child(-n+2) { border-top: 0; }
+      .audit-main .meta span:nth-child(even) { text-align: right; }
+      .audit-main .panel {
+        padding: 30px var(--audit-inset) 34px;
+      }
+      .audit-main .setup-panel h2 {
+        font-size: clamp(2.5rem, 12vw, 3rem);
+      }
+      .audit-main .setup-panel fieldset > legend {
+        display: block;
+      }
+      .audit-main .setup-panel legend span {
+        display: block;
+        margin: .25rem 0 0;
+      }
+      .audit-main .compact .choice:last-child:nth-child(odd) {
+        grid-column: auto;
+      }
+      .audit-main .setup-panel .controls {
+        margin-top: 32px;
+      }
+      .audit-main .setup-panel .button.primary {
+        width: 100%;
+      }
+    }
   </style>
 </BaseLayout>

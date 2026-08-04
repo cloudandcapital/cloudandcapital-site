@@ -20,10 +20,10 @@ const imageUrl = new URL(image, siteUrl);
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
-<link rel="icon" href="/favicon.ico" sizes="any" />
-<link rel="shortcut icon" href="/icon.png" />
-<link rel="apple-touch-icon" href="/icon.png" />
+<!-- One versioned icon source prevents route-specific or cached framework fallbacks. -->
+<link rel="icon" href="/icon.png?v=cloud-and-capital" type="image/png" />
+<link rel="shortcut icon" href="/icon.png?v=cloud-and-capital" type="image/png" />
+<link rel="apple-touch-icon" href="/icon.png?v=cloud-and-capital" />
 <link rel="canonical" href={canonicalUrl} />
 <title>{title}</title>
 {description && <meta name="description" content={description} />}

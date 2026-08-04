@@ -283,9 +283,9 @@ import SignalAuditResults from "../components/SignalAuditResults.astro";
       $("resultTitle").textContent = result.archetype.name;
       $("resultMeaning").textContent = result.archetype.meaning;
       $("scopeLabel").textContent = labelFor(TARGET_SCOPES, state.targetScope);
-      $("technologyLabel").textContent = state.technologyScopes
-        .map((id) => labelFor(TECHNOLOGY_SCOPES, id))
-        .join(" · ");
+      $("technologyLabel").innerHTML = state.technologyScopes
+        .map((id) => `<span>${labelFor(TECHNOLOGY_SCOPES, id)}</span>`)
+        .join("");
       $("confidenceLabel").textContent =
         `${result.answeredCount}/12 scored answers · ${result.confidence}% evidence coverage`;
       $("axisSignalScore").textContent =
@@ -298,8 +298,13 @@ import SignalAuditResults from "../components/SignalAuditResults.astro";
           : `${result.axes.decisionIntegration}%`;
       $("evidenceScore").textContent = `${result.confidence}%`;
       if (result.valid) {
+        $("mapPoint").hidden = false;
         $("mapPoint").style.left = `${result.axes.signalReadiness}%`;
         $("mapPoint").style.bottom = `${result.axes.decisionIntegration}%`;
+        $("mapPoint").classList.toggle(
+          "edge-right",
+          result.axes.signalReadiness > 84,
+        );
         $("mapDescription").textContent =
           `Signal Readiness ${result.axes.signalReadiness}%. Decision Integration ${result.axes.decisionIntegration}%. Pattern: ${result.archetype.name}.`;
       } else {

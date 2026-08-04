@@ -20,7 +20,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <fieldset><legend>Assessment scope</legend><div id="targetScopes" class="choices"></div></fieldset>
           <fieldset><legend>Which technology spend is in scope? <span>Select one or more</span></legend><div id="technologyScopes" class="choices compact"></div></fieldset>
           <p id="setupError" class="error" role="alert"></p>
-          <div class="controls end"><button class="button primary" type="button" id="beginButton">Begin the audit <span aria-hidden="true">→</span></button></div>
+          <div class="controls end"><button class="button primary" type="button" id="beginButton" disabled>Begin the audit <span aria-hidden="true">→</span></button></div>
         </div>
 
         <div id="questionPanel" class="panel question-panel" hidden>
@@ -28,7 +28,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div id="segments" class="segments" aria-hidden="true"></div>
           <fieldset id="questionFieldset"><legend id="questionPrompt"></legend><p id="questionExample" class="question-example"></p><div id="answerChoices" class="choices answers"></div></fieldset>
           <p id="answerError" class="error" role="alert"></p>
-          <div class="controls"><button class="button secondary" type="button" id="previousButton">← Previous</button><button class="button primary" type="button" id="nextButton">Next →</button></div>
+          <div class="controls"><button class="button secondary" type="button" id="previousButton">← Previous</button><button class="button primary" type="button" id="nextButton" disabled>Next →</button></div>
         </div>
       </form>
     </section>
@@ -72,14 +72,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const question = QUESTIONS[state.index]; const dimensionIndex = DIMENSIONS.findIndex((item) => item.id === question.dimension); const dimension = DIMENSIONS[dimensionIndex];
       $('dimensionName').textContent = dimension.name; $('progressText').textContent = `Question ${state.index + 1} of ${QUESTIONS.length}`; $('questionNumber').textContent = String(state.index + 1).padStart(2, '0');
       $('questionPrompt').textContent = question.prompt; $('questionExample').textContent = question.example; $('questionExample').hidden = !question.example;
-      $('answerChoices').innerHTML = question.options.slice().reverse().map((option) => `<label class="choice answer"><input type="radio" name="answer" value="${option.id}" ${state.answers[question.id] === option.id ? 'checked' : ''}><span><b>${option.score === null ? '—' : option.score}</b>${option.label}</span></label>`).join('');
+      const displayOptions = [...question.options.filter((option) => option.score !== null).reverse(), ...question.options.filter((option) => option.score === null)];
+      $('answerChoices').innerHTML = displayOptions.map((option) => `<label class="choice answer${option.score === null ? ' unscored' : ''}"><input type="radio" name="answer" value="${option.id}" ${state.answers[question.id] === option.id ? 'checked' : ''}><span>${option.label}</span></label>`).join('');
       [...$('segments').children].forEach((segment, index) => { segment.className = index < dimensionIndex ? 'done' : index === dimensionIndex ? 'active' : ''; });
-      $('previousButton').textContent = state.index === 0 ? '← Scope' : '← Previous'; $('nextButton').textContent = state.index === QUESTIONS.length - 1 ? 'See my signal map →' : 'Next →'; $('answerError').textContent = '';
+      $('previousButton').textContent = state.index === 0 ? '← Back to scope' : '← Previous'; $('nextButton').textContent = state.index === QUESTIONS.length - 1 ? 'See my signal map →' : 'Next →'; $('nextButton').disabled = !state.answers[question.id]; $('answerError').textContent = '';
       $('questionFieldset').focus({ preventScroll: true }); announce(`${dimension.name}. Question ${state.index + 1} of 12.`);
     }
+    function updateSetupButton() {
+      $('beginButton').disabled = !document.querySelector('input[name="target-scope"]:checked') || !document.querySelector('input[name="technology-scope"]:checked');
+    }
+    $('auditForm').addEventListener('change', (event) => {
+      const changedInput = event.target;
+      if (!(changedInput instanceof HTMLInputElement)) return;
+      if (changedInput.matches('input[name="target-scope"], input[name="technology-scope"]')) updateSetupButton();
+      if (changedInput.matches('input[name="answer"]')) $('nextButton').disabled = false;
+    });
     $('beginButton').addEventListener('click', () => {
       const target = document.querySelector('input[name="target-scope"]:checked'); const tech = [...document.querySelectorAll('input[name="technology-scope"]:checked')];
-      if (!target || !tech.length) { $('setupError').textContent = 'Choose one assessment scope and at least one technology category.'; return; }
+      if (!target || !tech.length) { $('setupError').textContent = 'Choose one assessment scope and at least one technology category.'; updateSetupButton(); return; }
       state.targetScope = target.value; state.technologyScopes = tech.map((input) => input.value); $('setupPanel').hidden = true; $('questionPanel').hidden = false; renderQuestion(); $('auditStage').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     $('nextButton').addEventListener('click', () => { const selected = document.querySelector('input[name="answer"]:checked'); if (!selected) { $('answerError').textContent = 'Choose an answer, including outside my visibility if appropriate.'; return; } state.answers[QUESTIONS[state.index].id] = selected.value; if (state.index < QUESTIONS.length - 1) { state.index++; renderQuestion(); } else showResults(); });
@@ -105,7 +115,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
     $('printButton').addEventListener('click', () => window.print());
     $('copyButton').addEventListener('click', async () => { const text = `${$('resultTitle').textContent}\n${$('mapDescription').textContent}\n30-day move: ${$('moveText').textContent}\nKPI: ${$('measureText').textContent}`; await navigator.clipboard.writeText(text); $('copyButton').textContent = 'Copied'; setTimeout(() => $('copyButton').textContent = 'Copy Summary', 1800); });
-    $('retakeButton').addEventListener('click', () => { state.answers = {}; state.index = 0; state.result = null; $('results').hidden = true; $('auditStage').hidden = false; $('setupPanel').hidden = false; $('questionPanel').hidden = true; $('mapPoint').hidden = false; window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    $('retakeButton').addEventListener('click', () => { state.answers = {}; state.index = 0; state.result = null; $('results').hidden = true; $('auditStage').hidden = false; $('setupPanel').hidden = false; $('questionPanel').hidden = true; $('mapPoint').hidden = false; updateSetupButton(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
   </script>
 
   <style is:global>
@@ -262,6 +272,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       background: #405b4b;
       box-shadow: none;
     }
+    .audit-main .choice input {
+      inset: auto;
+      top: 50%;
+      left: 1.15rem;
+      width: 1px;
+      height: 1px;
+      transform: translateY(-50%);
+    }
     .audit-main .choice input[type='checkbox']:checked + span::after {
       content: '';
       display: block;
@@ -387,10 +405,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       outline-offset: -3px;
     }
     .audit-main .answer span {
-      padding-left: 3.65rem;
+      padding-left: 3rem;
     }
     .audit-main .answer span::before {
-      left: 2.25rem;
+      left: 1.15rem;
+    }
+    .audit-main .answer.unscored {
+      margin-top: 8px;
+      border-top: 1px solid #bdb3a7;
+    }
+    .audit-main .button:disabled,
+    .audit-main .button:disabled:hover {
+      border-color: #c8c2b8;
+      background: #d9ddd5;
+      color: #7c7a73;
+      cursor: not-allowed;
+      opacity: 1;
+      transform: none;
     }
 
     @media (max-width: 760px) {

@@ -7,8 +7,10 @@ const ipRequests = new Map<string, { count: number; resetAt: number }>()
 
 const RATE_LIMITED_ROUTES = ['/api/interactive-lab', '/api/signal-audit']
 
+// Best-effort per-instance guard only. Serverless instances do not share this map,
+// so this is intentionally not presented as a durable global rate limiter.
 const RATE_LIMIT_MESSAGE =
-  "Market Tape is free and always will be — but to keep it that way, there's a limit of 10 requests per hour. Come back soon."
+  "This interactive tool has reached its temporary request limit. Please come back soon."
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const { pathname } = context.url
@@ -32,7 +34,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (record.count >= RATE_LIMIT) {
     return new Response(JSON.stringify({ error: RATE_LIMIT_MESSAGE }), {
       status: 429,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
     })
   }
 

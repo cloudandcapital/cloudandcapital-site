@@ -68,7 +68,10 @@ Rules:
 - Recommendation confidence reflects evidence quality, not writing confidence.
 - No HTML, markdown, tables, bullets, citations, or disclaimers inside fields.
 - No generic FinOps slogans, false precision, or authoritative claims about a vendor's commercial terms.
-- Keep each field concise enough for a one-page decision brief.`;
+- Return exactly three options and three next actions.
+- Include no more than three working assumptions and three thresholds.
+- Keep every prose field to one sentence and no more than 35 words.
+- Keep the complete response under 1,400 words so the JSON is never truncated.`;
 }
 
 function buildUserPrompt(readiness) {

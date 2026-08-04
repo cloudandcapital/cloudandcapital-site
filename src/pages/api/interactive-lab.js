@@ -1,111 +1,190 @@
-const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
-  'Content-Type': 'application/json',
+import {
+  DECISION_TYPES,
+  MAX_DECISION_CHARS,
+  assessReadiness,
+  findUnsupportedNumbers,
+  validateBrief,
+} from '../../lib/interactive-lab.js';
+
+const JSON_HEADERS = {
+  'Content-Type': 'application/json; charset=utf-8',
+  'Cache-Control': 'no-store',
 };
 
-const PERSPECTIVE_CONTEXT = {
-  finops: 'You are analyzing this decision through a FinOps lens — the discipline of bringing cost into engineering and business decisions. Focus on how cost signal moves through the decision, where commitment pressure exists, and how to preserve optionality while managing spend.',
-  finance: 'You are analyzing this decision through a Finance lens — capital allocation, risk management, forecasting accuracy, and commitment structure. Focus on how this decision shapes the financial profile of the organization, the real cost of capital, and downside protection.',
-  engineering: 'You are analyzing this decision through an Engineering lens — architecture cost, operational burden, technical tradeoffs, and team capacity. Focus on what this decision means for the system, the team, and the long-term cost of ownership.',
-};
-
-export async function OPTIONS() {
-  return new Response(null, { status: 200, headers: CORS_HEADERS });
+function json(body, status = 200) {
+  return new Response(JSON.stringify(body), { status, headers: JSON_HEADERS });
 }
 
-const MAX_INPUT_CHARS = 2000;
+function buildSourceText(readiness) {
+  return [readiness.decision, ...Object.values(readiness.answers)].join('\n');
+}
 
-export async function POST({ request }) {
-  const { decision, perspective } = await request.json();
+function buildSystemPrompt(readiness) {
+  return `You are the analytical engine for the Cloud & Capital Interactive Lab, a finance-native decision-framing instrument for technology spend.
 
-  if (!decision || !perspective) {
-    return new Response(
-      JSON.stringify({ error: 'Missing required fields: decision, perspective' }),
-      { status: 400, headers: CORS_HEADERS }
-    );
-  }
+The user has already supplied a decision and answered a set of evidence questions. Create a concise, meeting-ready decision brief. The brief must help Finance, FinOps, and Engineering discuss the same decision from shared facts.
 
-  if (typeof decision === 'string' && decision.length > MAX_INPUT_CHARS) {
-    return new Response(
-      JSON.stringify({ error: 'Decision too long. Please keep it under 2,000 characters.' }),
-      { status: 400, headers: CORS_HEADERS }
-    );
-  }
+Decision family: ${readiness.typeLabel}
 
-  const perspContext = PERSPECTIVE_CONTEXT[perspective];
-  if (!perspContext) {
-    return new Response(
-      JSON.stringify({ error: 'Invalid perspective. Must be: finops, finance, or engineering' }),
-      { status: 400, headers: CORS_HEADERS }
-    );
-  }
-
-  const systemPrompt = `You are the voice of Cloud & Capital — a finance-native cloud economics brand. Your writing is calm, authoritative, and specific. You write for operators, not tourists. No filler, no generic hedging, no AI-sounding phrases.
-
-${perspContext}
-
-You will receive a decision someone is navigating. You must return a structured JSON response with exactly these fields:
-
+Return only valid JSON matching this exact structure:
 {
-  "framed_decision": "One sharp sentence (max 25 words) that restates the decision in its true frame. Use italics via <em>tags</em> to emphasize the key tension. This is the thing they'll screenshot.",
-  "cost_location": "2-3 sentences (max 45 words) on where cost actually lives in this decision — not the obvious line item, but the structural place where value is being created or destroyed.",
-  "real_tradeoff": "2-3 sentences (max 45 words) on the actual tradeoff — not the stated one. What are they really choosing between?",
-  "hidden_risk": "2-3 sentences (max 45 words) on the risk that's easy to miss. The thing that bites 6-12 months later, not the obvious one.",
-  "what_to_watch": "2-3 sentences (max 45 words) on the one signal or metric that will tell them if this decision is working. Be specific.",
-  "the_move": "2-3 sentences (max 55 words) on what a sharp operator would do. Concrete, actionable, not hedged. This is the payoff.",
-  "flexibility_score": <number from 0 to 100, where 0 = maximum commitment/locked in, 100 = maximum flexibility/optionality preserved. This reflects where the CURRENT direction of the decision sits, not where it should go.>
+  "decision_summary": "One neutral sentence describing the actual decision and central tension.",
+  "posture": { "label": "Explore | Stage | Commit", "rationale": "Why this posture fits the supplied evidence." },
+  "known_facts": ["Three to six facts drawn only from the user's text."],
+  "working_assumptions": [{ "assumption": "An inference needed to reason", "why_it_matters": "How it could change the decision" }],
+  "options": [{
+    "name": "A real option",
+    "economics": "Cost, value, or exposure using only supplied figures",
+    "operational_effect": "What changes for the system or team",
+    "reversibility": "High, medium, or low with a short explanation",
+    "risk": "The principal downside",
+    "evidence_needed": "The evidence required before choosing"
+  }],
+  "lenses": {
+    "finops": { "view": "Cost, allocation, usage, and accountability perspective", "need": "What FinOps still needs" },
+    "finance": { "view": "Capital, budget, margin, and downside perspective", "need": "What Finance still needs" },
+    "engineering": { "view": "Architecture, delivery, reliability, and operating burden perspective", "need": "What Engineering still needs" }
+  },
+  "common_ground": "Where all three disciplines agree.",
+  "unresolved_tension": "The tradeoff that cannot be resolved from current evidence.",
+  "economics": {
+    "available": true,
+    "analysis": "What can and cannot be concluded economically from supplied evidence.",
+    "thresholds": [{ "metric": "A decision variable", "trigger": "A supplied or explicitly qualitative threshold", "meaning": "How it changes the choice", "basis": "User fact or working assumption" }]
+  },
+  "recommendation": { "move": "A concrete, staged recommendation", "confidence": "Low | Medium | High", "rationale": "Why confidence is at this level" },
+  "change_the_answer": ["Two to four developments that would reverse or materially alter the recommendation."],
+  "next_actions": [{ "action": "A specific action", "owner": "A role, not a named person", "evidence": "What the action should produce", "timing": "A practical qualitative timing" }]
 }
 
 Rules:
-- Return ONLY the JSON object, no preamble, no markdown fences
-- Write like a peer giving sharp advice, not a consultant hedging
-- Be specific to the decision — no generic FinOps bromides
-- Use "you/your" to address them directly
-- No bullet points within fields — clean prose only
-- The framed_decision should feel like a line someone would write on a whiteboard`;
+- Treat every supplied statement as user-provided context, not independently verified truth.
+- Never invent prices, percentages, utilization levels, time periods, savings, ROI, or break-even points.
+- Do not introduce any numeric value that does not appear in the user's supplied text. Use qualitative language when figures are absent.
+- Set economics.available to true only when the supplied facts support a defensible comparison. Explain missing inputs when false.
+- Include two to four genuinely different options. Waiting or staging may be an option when relevant.
+- The three lenses must be substantively different, not paraphrases.
+- Prefer Stage when uncertainty is material and a reversible evidence-gathering step exists.
+- Recommendation confidence reflects evidence quality, not writing confidence.
+- No HTML, markdown, tables, bullets, citations, or disclaimers inside fields.
+- No generic FinOps slogans, false precision, or authoritative claims about a vendor's commercial terms.
+- Keep each field concise enough for a one-page decision brief.`;
+}
+
+function buildUserPrompt(readiness) {
+  const evidence = readiness.questions
+    .map((question) => `${question.label}:\n${readiness.answers[question.id]}`)
+    .join('\n\n');
+
+  return `Decision:\n${readiness.decision}\n\nUser-supplied evidence:\n${evidence}`;
+}
+
+async function callModel(readiness) {
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': import.meta.env.ANTHROPIC_API_KEY,
+      'anthropic-version': '2023-06-01',
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 3000,
+      temperature: 0.2,
+      system: [{ type: 'text', text: buildSystemPrompt(readiness), cache_control: { type: 'ephemeral' } }],
+      messages: [{ role: 'user', content: buildUserPrompt(readiness) }],
+    }),
+    signal: AbortSignal.timeout(45000),
+  });
+
+  if (!response.ok) {
+    const detail = await response.text();
+    console.error('Interactive Lab model error:', response.status, detail.slice(0, 500));
+    throw new Error('MODEL_REQUEST_FAILED');
+  }
+
+  const data = await response.json();
+  const raw = data.content?.find((part) => part.type === 'text')?.text || '';
+  const cleaned = raw.replace(/^```json\s*/i, '').replace(/```\s*$/i, '').trim();
+  let brief;
 
   try {
-    const anthropicResponse = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': import.meta.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 1500,
-        system: [{ type: 'text', text: systemPrompt, cache_control: { type: 'ephemeral' } }],
-        messages: [{ role: 'user', content: `Decision to frame:\n\n${decision}` }],
-      }),
-    });
-
-    if (!anthropicResponse.ok) {
-      const errText = await anthropicResponse.text();
-      console.error('Anthropic API error:', errText);
-      return new Response(JSON.stringify({ error: 'AI service error' }), { status: 500, headers: CORS_HEADERS });
-    }
-
-    const data = await anthropicResponse.json();
-    const text = data.content?.[0]?.text || '';
-    const cleaned = text.replace(/```json\s*/g, '').replace(/```\s*$/g, '').trim();
-
-    let parsed;
-    try {
-      parsed = JSON.parse(cleaned);
-    } catch (parseErr) {
-      console.error('JSON parse error:', parseErr, 'Raw text:', text);
-      return new Response(JSON.stringify({ error: 'Failed to parse AI response' }), { status: 500, headers: CORS_HEADERS });
-    }
-
-    return new Response(JSON.stringify(parsed), {
-      status: 200,
-      headers: { ...CORS_HEADERS, 'Cache-Control': 's-maxage=14400, stale-while-revalidate=86400' },
-    });
-  } catch (err) {
-    console.error('Handler error:', err);
-    return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500, headers: CORS_HEADERS });
+    brief = JSON.parse(cleaned);
+  } catch (error) {
+    console.error('Interactive Lab JSON parse error:', error, raw.slice(0, 500));
+    throw new Error('INVALID_MODEL_JSON');
   }
+
+  if (!validateBrief(brief)) {
+    console.error('Interactive Lab schema validation failed');
+    throw new Error('INVALID_MODEL_SCHEMA');
+  }
+
+  const unsupportedNumbers = findUnsupportedNumbers(brief, buildSourceText(readiness));
+  if (unsupportedNumbers.length) {
+    console.error('Interactive Lab unsupported numeric claims:', unsupportedNumbers);
+    throw new Error('UNSUPPORTED_NUMERIC_CLAIM');
+  }
+
+  return brief;
+}
+
+export async function POST({ request }) {
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return json({ error: 'The request must contain valid JSON.' }, 400);
+  }
+
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return json({ error: 'Invalid request.' }, 400);
+  }
+
+  if (typeof body.decision !== 'string' || !body.decision.trim()) {
+    return json({ error: 'Describe the decision before continuing.' }, 400);
+  }
+
+  if (body.decision.length > MAX_DECISION_CHARS) {
+    return json({ error: `Keep the decision under ${MAX_DECISION_CHARS.toLocaleString()} characters.` }, 400);
+  }
+
+  const readiness = assessReadiness({
+    decision: body.decision,
+    decisionType: body.decisionType,
+    answers: body.answers,
+  });
+
+  const context = {
+    decisionType: readiness.decisionType,
+    typeLabel: readiness.typeLabel,
+    eyebrow: readiness.eyebrow,
+    questions: readiness.questions,
+    answers: readiness.answers,
+    missing: readiness.missing,
+  };
+
+  if (body.stage === 'questions' || !readiness.ready) {
+    return json({ status: 'needs_context', ...context });
+  }
+
+  if (body.stage !== 'brief') {
+    return json({ error: 'Invalid stage. Use questions or brief.' }, 400);
+  }
+
+  try {
+    const brief = await callModel(readiness);
+    return json({ status: 'ready', ...context, brief });
+  } catch (error) {
+    console.error('Interactive Lab handler error:', error);
+    return json({ error: 'The Lab could not produce a validated brief. Your inputs are still here—please try again.' }, 502);
+  }
+}
+
+export async function GET() {
+  return json({
+    name: 'Cloud & Capital Interactive Lab',
+    version: 2,
+    decisionTypes: Object.fromEntries(Object.entries(DECISION_TYPES).map(([key, value]) => [key, value.label])),
+  });
 }

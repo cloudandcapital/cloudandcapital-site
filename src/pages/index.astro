@@ -3159,6 +3159,25 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
 .about-v4-final-btn-sage{background:#f5eee9;color:#3d6055;}
 .about-v4-final-btn-sage:hover{background:#eadfce;}
 
+/* ── Final homepage correction pass ────────────────────── */
+.hero-left,.hero-right{border-right:none!important;}
+.hero-stats{border-left:none!important;}
+@media (min-width:901px){h1.hero-headline{font-size:clamp(3.05rem,4.55vw,4.85rem);}.work-rail-chat{padding-top:3.15rem;}}
+.writing-home-actions .btn-sage{color:#fff!important;background:var(--sage)!important;}
+.writing-home-actions .btn-outline{color:var(--ink)!important;background:transparent!important;}
+.writing-home-actions .btn:hover{transform:translateY(-1px);}
+.writing-home-actions .btn:focus-visible,.about-v4-final-btn:focus-visible{outline:2px solid currentColor;outline-offset:3px;}
+.about-v4-final{padding-left:clamp(1.5rem,4vw,4.5rem);padding-right:clamp(1.5rem,4vw,4.5rem);}
+.about-v4-final::before{display:none;}
+.about-v4-final-meta{max-width:1280px;margin:0 auto 2rem;padding-top:0;}
+.about-v4-final-grid{max-width:1280px;margin:0 auto;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(3rem,8vw,8rem);justify-content:normal;}
+.about-v4-final-heading{padding-top:.1rem;}
+.about-v4-final-right{max-width:42rem;padding-top:0;}
+.about-v4-final-headline{margin:0;}
+.about-v4-final-certs{max-width:100%;color:rgba(245,238,233,.8)!important;}
+.about-v4-final-certs a{color:#f5eee9!important;}
+@media (max-width:700px){.about-v4-final-grid{grid-template-columns:1fr;gap:1.75rem;}.about-v4-final-meta{margin-bottom:1.5rem;}}
+
 </style>
 
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -3379,19 +3398,11 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
   </div>
 
   <div class="about-v4-final-grid">
-    <aside class="about-v4-final-left">
-      <div class="about-v4-final-portrait">
-        <img src="/images/diana-portrait.jpg" alt="Diana Molski portrait" loading="lazy">
-      </div>
-      <div class="about-v4-final-caption">
-        <div class="about-v4-final-caption-name">Diana Molski</div>
-        <div class="about-v4-final-caption-range">Founder, Cloud &amp; Capital</div>
-        <div class="about-v4-final-caption-range">AI Spend <span class="sep">·</span> FinOps <span class="sep">·</span> Markets</div>
-      </div>
-    </aside>
+    <div class="about-v4-final-heading">
+      <h2 class="about-v4-final-headline">Finance native.<br>Systems builder.</h2>
+    </div>
 
     <div class="about-v4-final-right">
-      <h2 class="about-v4-final-headline">Finance native.<br>Systems builder.</h2>
       <p class="about-v4-final-lede">My background is in finance, including Morgan Stanley and equity trading. Through Cloud &amp; Capital, I build open source FinOps tools and research the decisions shaping cloud, SaaS, and AI infrastructure spend.</p>
       <p class="about-v4-final-body">The work sits where finance and engineering meet: allocation, commitments, utilization, and the operating choices that shape the bill.</p>
 

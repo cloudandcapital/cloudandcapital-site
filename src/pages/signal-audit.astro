@@ -340,5 +340,72 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         width: 100%;
       }
     }
+
+    /* Open editorial selection lists: one ruled field, not detached cards. */
+    .audit-main .panel {
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      border-left-color: transparent;
+    }
+    .audit-main .choices {
+      gap: 0;
+      overflow: hidden;
+      border-top: 1px solid #c9beb1;
+      border-bottom: 1px solid #c9beb1;
+    }
+    .audit-main .choice span {
+      min-height: 62px;
+      padding-top: 19px;
+      padding-bottom: 19px;
+      border: 0;
+      border-bottom: 1px solid #d8cec2;
+      background: transparent;
+      box-shadow: none;
+    }
+    .audit-main #targetScopes .choice:nth-child(odd) span,
+    .audit-main #technologyScopes .choice:nth-child(odd):not(:last-child) span {
+      border-right: 1px solid #d8cec2;
+    }
+    .audit-main #targetScopes .choice:nth-last-child(-n + 2) span,
+    .audit-main #technologyScopes .choice:last-child span,
+    .audit-main .answers .choice:last-child span {
+      border-bottom: 0;
+    }
+    .audit-main .choice:hover span {
+      border-color: #c8d0c7;
+      background: #f0f3ed;
+    }
+    .audit-main .choice input:checked + span {
+      border-color: #bdc9be;
+      background: #e5ece4;
+      box-shadow: inset 3px 0 #506c5b;
+    }
+    .audit-main .choice input:focus-visible + span {
+      position: relative;
+      z-index: 1;
+      outline: 2px solid #a65f3d;
+      outline-offset: -3px;
+    }
+    .audit-main .answer span {
+      padding-left: 3.65rem;
+    }
+    .audit-main .answer span::before {
+      left: 2.25rem;
+    }
+
+    @media (max-width: 760px) {
+      .audit-main #targetScopes .choice:nth-child(odd) span,
+      .audit-main #technologyScopes .choice:nth-child(odd):not(:last-child) span {
+        border-right: 0;
+      }
+      .audit-main #targetScopes .choice:nth-last-child(-n + 2) span {
+        border-bottom: 1px solid #d8cec2;
+      }
+      .audit-main #targetScopes .choice:last-child span,
+      .audit-main #technologyScopes .choice:last-child span,
+      .audit-main .answers .choice:last-child span {
+        border-bottom: 0;
+      }
+    }
   </style>
 </BaseLayout>

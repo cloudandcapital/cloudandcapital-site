@@ -1,13 +1,24 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SignalAuditResults from "../components/SignalAuditResults.astro";
 ---
-<BaseLayout title="Technology Cost Signal Audit | Cloud & Capital" description="Set a scope, answer 12 questions, and receive a practical profile of how technology cost moves from data to decision.">
+
+<BaseLayout
+  title="Technology Cost Signal Audit | Cloud & Capital"
+  description="Set a scope, answer 12 questions, and receive a practical profile of how technology cost moves from data to decision."
+>
   <main class="audit-main">
     <header class="hero rail">
       <p class="eyebrow">Cloud &amp; Capital · Diagnostic</p>
       <h1>The Technology Cost <em>Signal Audit</em></h1>
-      <p class="dek">Set a scope, answer 12 questions, and receive a practical profile of how technology cost moves from data to decision.</p>
-      <div class="meta"><span>12 questions</span><span>5 minutes</span><span>No sign-up</span><span>Immediate results</span></div>
+      <p class="dek">
+        Set a scope, answer 12 questions, and receive a practical profile of how
+        technology cost moves from data to decision.
+      </p>
+      <div class="meta">
+        <span>12 questions</span><span>5 minutes</span><span>No sign-up</span
+        ><span>Immediate results</span>
+      </div>
     </header>
 
     <section id="auditStage" class="stage" aria-labelledby="stageTitle">
@@ -16,121 +27,670 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div id="setupPanel" class="panel setup-panel">
           <p class="step-label">Set the boundary</p>
           <h2 id="stageTitle">What are you assessing?</h2>
-          <p class="intro">Choose a useful boundary. Your choices personalize examples and guidance; they do not affect the score.</p>
-          <fieldset><legend>Assessment scope</legend><div id="targetScopes" class="choices"></div></fieldset>
-          <fieldset><legend>Which technology spend is in scope? <span>Select one or more</span></legend><div id="technologyScopes" class="choices compact"></div></fieldset>
+          <p class="intro">
+            Choose a useful boundary. Your choices personalize examples and
+            guidance; they do not affect the score.
+          </p>
+          <fieldset>
+            <legend>Assessment scope</legend><div
+              id="targetScopes"
+              class="choices"
+            >
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend
+              >Which technology spend is in scope? <span
+                >Select one or more</span
+              ></legend
+            ><div id="technologyScopes" class="choices compact"></div>
+          </fieldset>
           <p id="setupError" class="error" role="alert"></p>
-          <div class="controls end"><button class="button primary" type="button" id="beginButton" disabled>Begin the audit <span aria-hidden="true">→</span></button></div>
+          <div class="controls end">
+            <button
+              class="button primary"
+              type="button"
+              id="beginButton"
+              disabled
+              >Begin the audit <span aria-hidden="true">→</span></button>
+          </div>
         </div>
 
         <div id="questionPanel" class="panel question-panel" hidden>
-          <div class="progress-head"><div><p id="dimensionName" class="step-label"></p><p id="progressText" class="progress-text"></p></div><span id="questionNumber" class="question-number"></span></div>
+          <div class="progress-head">
+            <div>
+              <p id="dimensionName" class="step-label"></p><p
+                id="progressText"
+                class="progress-text"
+              >
+              </p>
+            </div><span id="questionNumber" class="question-number"></span>
+          </div>
           <div id="segments" class="segments" aria-hidden="true"></div>
-          <fieldset id="questionFieldset"><legend id="questionPrompt"></legend><p id="questionExample" class="question-example"></p><div id="answerChoices" class="choices answers"></div></fieldset>
+          <fieldset id="questionFieldset">
+            <legend id="questionPrompt"></legend><p
+              id="questionExample"
+              class="question-example"
+            >
+            </p><div id="answerChoices" class="choices answers"></div>
+          </fieldset>
           <p id="answerError" class="error" role="alert"></p>
-          <div class="controls"><button class="button secondary" type="button" id="previousButton">← Previous</button><button class="button primary" type="button" id="nextButton" disabled>Next →</button></div>
+          <div class="controls">
+            <button class="button secondary" type="button" id="previousButton"
+              >← Previous</button
+            ><button
+              class="button primary"
+              type="button"
+              id="nextButton"
+              disabled>Next →</button>
+          </div>
         </div>
       </form>
     </section>
 
-    <section id="results" class="results-rail" aria-labelledby="resultTitle" hidden>
-      <header class="result-header">
-        <div><p class="eyebrow light">Your operating pattern</p><h2 id="resultTitle"></h2><p id="resultMeaning" class="result-meaning"></p></div>
-        <div class="result-scope"><span id="scopeLabel"></span><span id="technologyLabel"></span><span id="confidenceLabel"></span></div>
-      </header>
-
-      <div class="result-grid">
-        <figure class="signal-map" aria-labelledby="mapTitle mapDescription">
-          <figcaption><p class="step-label">Signal map</p><h3 id="mapTitle">Information quality × decision integration</h3></figcaption>
-          <div class="map-plot" id="mapPlot"><span class="quadrant q1">Decisions ahead<br>of the data</span><span class="quadrant q2">Decision-<br>embedded</span><span class="quadrant q3">Invoice-led</span><span class="quadrant q4">Visible, not<br>embedded</span><span id="mapPoint" class="map-point"><b>You</b></span></div>
-          <div class="axis axis-x">Signal Readiness <span>→</span></div><div class="axis axis-y">Decision Integration <span>→</span></div>
-          <p id="mapDescription" class="map-description"></p>
-        </figure>
-        <section class="dimension-profile" aria-labelledby="dimensionsTitle"><p class="step-label">Four-dimension profile</p><h3 id="dimensionsTitle">Where the signal holds—and where it breaks</h3><div id="dimensionCards"></div></section>
-      </div>
-
-      <section class="move-card" aria-labelledby="moveTitle"><div><p class="step-label">Prioritized 30-day move</p><h3 id="moveTitle"></h3><p id="moveText"></p></div><div class="move-details"><p><strong>Suggested owners</strong><span id="ownerText"></span></p><p><strong>Suggested KPI</strong><span id="measureText"></span></p></div></section>
-      <section class="discussion"><p class="step-label">Take into the next team discussion</p><h3>Three questions worth answering together</h3><ol id="discussionQuestions"></ol></section>
-      <section class="interpretation" aria-labelledby="interpretationTitle"><div class="interpretation-head"><div><p class="step-label">Secondary perspective</p><h3 id="interpretationTitle">AI-assisted interpretation</h3></div><span id="aiStatus" role="status">Adding context…</span></div><div class="interpretation-grid"><div><h4>Pattern read</h4><p id="patternRead"></p></div><div><h4>Decision implication</h4><p id="decisionImplication"></p></div><div><h4>Scope watchpoint</h4><p id="scopeWatchpoint"></p></div></div><p class="privacy-note">To create this interpretation, the selected scope choices and answers are sent to the configured AI provider. The audit collects no name, company, email, or free-text business information.</p></section>
-      <section class="actions" aria-label="Report actions"><button class="button primary" id="printButton">Print or Save as PDF</button><button class="button secondary" id="copyButton">Copy Summary</button><button class="button secondary" id="retakeButton">Retake Audit</button><a class="button link-button" href="/interactive-lab">Explore the Interactive Lab →</a></section>
-      <aside class="methodology"><h3>Methodology and privacy</h3><p>This is a directional self-assessment, not a certification or external benchmark. It is informed by concepts from the <a href="https://www.finops.org/insights/2026-finops-framework/">FinOps Framework</a> and <a href="https://www.finops.org/wg/finops-assessment/">FinOps Assessment Guide</a>, used under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Cloud &amp; Capital adapted those concepts independently; the FinOps Foundation does not endorse this assessment. Appropriate practice depends on organizational need—not every advanced practice is universally necessary.</p><p>Answers are held in this page for the current session and are not paired with identity or contact information.</p></aside>
-    </section>
+    <SignalAuditResults />
   </main>
 
   <script>
-    import { DIMENSIONS, QUESTIONS, TARGET_SCOPES, TECHNOLOGY_SCOPES, fallbackInterpretation, scoreAudit } from '../lib/signal-audit.js';
+    import {
+      DIMENSIONS,
+      QUESTIONS,
+      TARGET_SCOPES,
+      TECHNOLOGY_SCOPES,
+      fallbackInterpretation,
+      scoreAudit,
+    } from "../lib/signal-audit.js";
     const $ = (id) => document.getElementById(id);
-    const state = { targetScope: '', technologyScopes: [], answers: {}, index: 0, result: null };
-    const createChoice = (item, type, name) => `<label class="choice"><input type="${type}" name="${name}" value="${item.id}"><span>${item.label}</span></label>`;
-    $('targetScopes').innerHTML = TARGET_SCOPES.map((item) => createChoice(item, 'radio', 'target-scope')).join('');
-    $('technologyScopes').innerHTML = TECHNOLOGY_SCOPES.map((item) => createChoice(item, 'checkbox', 'technology-scope')).join('');
-    $('segments').innerHTML = DIMENSIONS.map((item) => `<span title="${item.name}"></span>`).join('');
-    const announce = (text) => { $('liveStatus').textContent = text; };
-    const labelFor = (items, id) => items.find((item) => item.id === id)?.label || id;
+    const state = {
+      targetScope: "",
+      technologyScopes: [],
+      answers: {},
+      index: 0,
+      result: null,
+    };
+    const createChoice = (item, type, name) =>
+      `<label class="choice"><input type="${type}" name="${name}" value="${item.id}"><span>${item.label}</span></label>`;
+    $("targetScopes").innerHTML = TARGET_SCOPES.map((item) =>
+      createChoice(item, "radio", "target-scope"),
+    ).join("");
+    $("technologyScopes").innerHTML = TECHNOLOGY_SCOPES.map((item) =>
+      createChoice(item, "checkbox", "technology-scope"),
+    ).join("");
+    $("segments").innerHTML = DIMENSIONS.map(
+      (item) => `<span title="${item.name}"></span>`,
+    ).join("");
+    const announce = (text) => {
+      $("liveStatus").textContent = text;
+    };
+    const labelFor = (items, id) =>
+      items.find((item) => item.id === id)?.label || id;
 
     function renderQuestion() {
-      const question = QUESTIONS[state.index]; const dimensionIndex = DIMENSIONS.findIndex((item) => item.id === question.dimension); const dimension = DIMENSIONS[dimensionIndex];
-      $('dimensionName').textContent = dimension.name; $('progressText').textContent = `Question ${state.index + 1} of ${QUESTIONS.length}`; $('questionNumber').textContent = String(state.index + 1).padStart(2, '0');
-      $('questionPrompt').textContent = question.prompt; $('questionExample').textContent = question.example; $('questionExample').hidden = !question.example;
-      const displayOptions = [...question.options.filter((option) => option.score !== null).reverse(), ...question.options.filter((option) => option.score === null)];
-      $('answerChoices').innerHTML = displayOptions.map((option) => `<label class="choice answer${option.score === null ? ' unscored' : ''}"><input type="radio" name="answer" value="${option.id}" ${state.answers[question.id] === option.id ? 'checked' : ''}><span>${option.label}</span></label>`).join('');
-      [...$('segments').children].forEach((segment, index) => { segment.className = index < dimensionIndex ? 'done' : index === dimensionIndex ? 'active' : ''; });
-      $('previousButton').textContent = state.index === 0 ? '← Back to scope' : '← Previous'; $('nextButton').textContent = state.index === QUESTIONS.length - 1 ? 'See my signal map →' : 'Next →'; $('nextButton').disabled = !state.answers[question.id]; $('answerError').textContent = '';
-      $('questionFieldset').focus({ preventScroll: true }); announce(`${dimension.name}. Question ${state.index + 1} of 12.`);
+      const question = QUESTIONS[state.index];
+      const dimensionIndex = DIMENSIONS.findIndex(
+        (item) => item.id === question.dimension,
+      );
+      const dimension = DIMENSIONS[dimensionIndex];
+      $("dimensionName").textContent = dimension.name;
+      $("progressText").textContent =
+        `Question ${state.index + 1} of ${QUESTIONS.length}`;
+      $("questionNumber").textContent = String(state.index + 1).padStart(
+        2,
+        "0",
+      );
+      $("questionPrompt").textContent = question.prompt;
+      $("questionExample").textContent = question.example;
+      $("questionExample").hidden = !question.example;
+      const displayOptions = [
+        ...question.options.filter((option) => option.score !== null).reverse(),
+        ...question.options.filter((option) => option.score === null),
+      ];
+      $("answerChoices").innerHTML = displayOptions
+        .map(
+          (option) =>
+            `<label class="choice answer${option.score === null ? " unscored" : ""}"><input type="radio" name="answer" value="${option.id}" ${state.answers[question.id] === option.id ? "checked" : ""}><span>${option.label}</span></label>`,
+        )
+        .join("");
+      [...$("segments").children].forEach((segment, index) => {
+        segment.className =
+          index < dimensionIndex
+            ? "done"
+            : index === dimensionIndex
+              ? "active"
+              : "";
+      });
+      $("previousButton").textContent =
+        state.index === 0 ? "← Back to scope" : "← Previous";
+      $("nextButton").textContent =
+        state.index === QUESTIONS.length - 1 ? "See my signal map →" : "Next →";
+      $("nextButton").disabled = !state.answers[question.id];
+      $("answerError").textContent = "";
+      $("questionFieldset").focus({ preventScroll: true });
+      announce(`${dimension.name}. Question ${state.index + 1} of 12.`);
     }
     function updateSetupButton() {
-      $('beginButton').disabled = !document.querySelector('input[name="target-scope"]:checked') || !document.querySelector('input[name="technology-scope"]:checked');
+      $("beginButton").disabled =
+        !document.querySelector('input[name="target-scope"]:checked') ||
+        !document.querySelector('input[name="technology-scope"]:checked');
     }
-    $('auditForm').addEventListener('change', (event) => {
+    $("auditForm").addEventListener("change", (event) => {
       const changedInput = event.target;
       if (!(changedInput instanceof HTMLInputElement)) return;
-      if (changedInput.matches('input[name="target-scope"], input[name="technology-scope"]')) updateSetupButton();
-      if (changedInput.matches('input[name="answer"]')) $('nextButton').disabled = false;
+      if (
+        changedInput.matches(
+          'input[name="target-scope"], input[name="technology-scope"]',
+        )
+      )
+        updateSetupButton();
+      if (changedInput.matches('input[name="answer"]'))
+        $("nextButton").disabled = false;
     });
-    $('beginButton').addEventListener('click', () => {
-      const target = document.querySelector('input[name="target-scope"]:checked'); const tech = [...document.querySelectorAll('input[name="technology-scope"]:checked')];
-      if (!target || !tech.length) { $('setupError').textContent = 'Choose one assessment scope and at least one technology category.'; updateSetupButton(); return; }
-      state.targetScope = target.value; state.technologyScopes = tech.map((input) => input.value); $('setupPanel').hidden = true; $('questionPanel').hidden = false; renderQuestion(); $('auditStage').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    $("beginButton").addEventListener("click", () => {
+      const target = document.querySelector(
+        'input[name="target-scope"]:checked',
+      );
+      const tech = [
+        ...document.querySelectorAll('input[name="technology-scope"]:checked'),
+      ];
+      if (!target || !tech.length) {
+        $("setupError").textContent =
+          "Choose one assessment scope and at least one technology category.";
+        updateSetupButton();
+        return;
+      }
+      state.targetScope = target.value;
+      state.technologyScopes = tech.map((input) => input.value);
+      $("setupPanel").hidden = true;
+      $("questionPanel").hidden = false;
+      renderQuestion();
+      $("auditStage").scrollIntoView({ behavior: "smooth", block: "start" });
     });
-    $('nextButton').addEventListener('click', () => { const selected = document.querySelector('input[name="answer"]:checked'); if (!selected) { $('answerError').textContent = 'Choose an answer, including outside my visibility if appropriate.'; return; } state.answers[QUESTIONS[state.index].id] = selected.value; if (state.index < QUESTIONS.length - 1) { state.index++; renderQuestion(); } else showResults(); });
-    $('previousButton').addEventListener('click', () => { const selected = document.querySelector('input[name="answer"]:checked'); if (selected) state.answers[QUESTIONS[state.index].id] = selected.value; if (state.index === 0) { $('questionPanel').hidden = true; $('setupPanel').hidden = false; $('stageTitle').focus?.(); } else { state.index--; renderQuestion(); } });
+    $("nextButton").addEventListener("click", () => {
+      const selected = document.querySelector('input[name="answer"]:checked');
+      if (!selected) {
+        $("answerError").textContent =
+          "Choose an answer, including outside my visibility if appropriate.";
+        return;
+      }
+      state.answers[QUESTIONS[state.index].id] = selected.value;
+      if (state.index < QUESTIONS.length - 1) {
+        state.index++;
+        renderQuestion();
+      } else showResults();
+    });
+    $("previousButton").addEventListener("click", () => {
+      const selected = document.querySelector('input[name="answer"]:checked');
+      if (selected) state.answers[QUESTIONS[state.index].id] = selected.value;
+      if (state.index === 0) {
+        $("questionPanel").hidden = true;
+        $("setupPanel").hidden = false;
+        $("stageTitle").focus?.();
+      } else {
+        state.index--;
+        renderQuestion();
+      }
+    });
 
-    const discussionFor = (id) => ({
-      'signal-clarity': ['Which material spend still lacks a useful owner or driver?', 'How quickly can we explain the last meaningful variance?', 'What evidence would make the next forecast more decision-ready?'],
-      'economic-context': ['Which unit best connects our largest cost to value?', 'What material category or dependency is missing from our full-cost view?', 'Which decision would change if this unit measure were visible?'],
-      'decision-timing': ['What is the next material choice we can influence before commitment?', 'Which assumptions and alternatives should be visible at that point?', 'Who needs decision-relevant economics—not more detail—to choose well?'],
-      'operating-response': ['Who can act when the next material signal appears?', 'What response time and decision rights are appropriate?', 'Where will we record the choice, owner, and outcome?'],
-    }[id]);
-    function renderInterpretation(value) { $('patternRead').textContent = value.pattern_read; $('decisionImplication').textContent = value.decision_implication; $('scopeWatchpoint').textContent = value.scope_watchpoint; }
-    async function showResults() {
-      state.result = scoreAudit(state.answers); const result = state.result; const fallback = fallbackInterpretation(result, { targetScope: labelFor(TARGET_SCOPES, state.targetScope), technologyScopes: state.technologyScopes.map((id) => labelFor(TECHNOLOGY_SCOPES, id)) }); renderInterpretation(fallback);
-      $('auditStage').hidden = true; $('results').hidden = false; $('resultTitle').textContent = result.archetype.name; $('resultMeaning').textContent = result.archetype.meaning;
-      $('scopeLabel').textContent = labelFor(TARGET_SCOPES, state.targetScope); $('technologyLabel').textContent = state.technologyScopes.map((id) => labelFor(TECHNOLOGY_SCOPES, id)).join(' · '); $('confidenceLabel').textContent = `${result.answeredCount}/12 scored answers · ${result.confidence}% evidence coverage`;
-      if (result.valid) { $('mapPoint').style.left = `${result.axes.signalReadiness}%`; $('mapPoint').style.bottom = `${result.axes.decisionIntegration}%`; $('mapDescription').textContent = `Signal Readiness ${result.axes.signalReadiness}%. Decision Integration ${result.axes.decisionIntegration}%. Pattern: ${result.archetype.name}.`; } else { $('mapPoint').hidden = true; $('mapDescription').textContent = 'Limited Visibility: both axes require valid scores in their component dimensions and at least eight scored answers overall.'; }
-      $('dimensionCards').innerHTML = DIMENSIONS.map((dimension) => { const item = result.dimensions[dimension.id]; return `<article class="dimension-row"><div><h4>${dimension.name}</h4><p>${dimension.description}</p></div><div class="dimension-score"><strong>${item.score === null ? '—' : `${item.score}%`}</strong><span>${item.label} · ${item.answered}/3 answered</span></div></article>`; }).join('');
-      const strongest = DIMENSIONS.find((item) => item.id === result.strongest)?.name || 'Needs more evidence'; const weakest = DIMENSIONS.find((item) => item.id === result.weakest)?.name; $('dimensionsTitle').textContent = `Strongest: ${strongest} · Priority handoff: ${weakest}`;
-      $('moveTitle').textContent = result.priority.title; $('moveText').textContent = result.priority.move; $('ownerText').textContent = result.priority.owners; $('measureText').textContent = result.priority.measures.join(' · '); $('discussionQuestions').innerHTML = discussionFor(result.weakest).map((text) => `<li>${text}</li>`).join('');
-      $('results').scrollIntoView({ behavior: 'smooth', block: 'start' }); $('resultTitle').focus?.();
-      try { const response = await fetch('/api/signal-audit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ targetScope: state.targetScope, technologyScopes: state.technologyScopes, answers: state.answers }) }); const data = await response.json(); if (data.interpretation) renderInterpretation(data.interpretation); $('aiStatus').textContent = data.source === 'ai' ? 'AI context added' : 'Deterministic interpretation'; } catch { $('aiStatus').textContent = 'Deterministic interpretation'; }
+    const discussionFor = (id) =>
+      ({
+        "signal-clarity": [
+          "Which material spend still lacks a useful owner or driver?",
+          "How quickly can we explain the last meaningful variance?",
+          "What evidence would make the next forecast more decision-ready?",
+        ],
+        "economic-context": [
+          "Which unit best connects our largest cost to value?",
+          "What material category or dependency is missing from our full-cost view?",
+          "Which decision would change if this unit measure were visible?",
+        ],
+        "decision-timing": [
+          "What is the next material choice we can influence before commitment?",
+          "Which assumptions and alternatives should be visible at that point?",
+          "Who needs decision-relevant economics—not more detail—to choose well?",
+        ],
+        "operating-response": [
+          "Who can act when the next material signal appears?",
+          "What response time and decision rights are appropriate?",
+          "Where will we record the choice, owner, and outcome?",
+        ],
+      })[id];
+    function participantSafeCopy(value) {
+      return value
+        .replace(/zero[- ]score axis/gi, "lowest-confidence area")
+        .replace(/zero[- ]score/gi, "lowest-confidence");
     }
-    $('printButton').addEventListener('click', () => window.print());
-    $('copyButton').addEventListener('click', async () => { const text = `${$('resultTitle').textContent}\n${$('mapDescription').textContent}\n30-day move: ${$('moveText').textContent}\nKPI: ${$('measureText').textContent}`; await navigator.clipboard.writeText(text); $('copyButton').textContent = 'Copied'; setTimeout(() => $('copyButton').textContent = 'Copy Summary', 1800); });
-    $('retakeButton').addEventListener('click', () => { state.answers = {}; state.index = 0; state.result = null; $('results').hidden = true; $('auditStage').hidden = false; $('setupPanel').hidden = false; $('questionPanel').hidden = true; $('mapPoint').hidden = false; updateSetupButton(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    function renderInterpretation(value) {
+      $("patternRead").textContent = participantSafeCopy(value.pattern_read);
+      $("decisionImplication").textContent = participantSafeCopy(
+        value.decision_implication,
+      );
+      $("scopeWatchpoint").textContent = participantSafeCopy(
+        value.scope_watchpoint,
+      );
+    }
+    async function showResults() {
+      state.result = scoreAudit(state.answers);
+      const result = state.result;
+      const fallback = fallbackInterpretation(result, {
+        targetScope: labelFor(TARGET_SCOPES, state.targetScope),
+        technologyScopes: state.technologyScopes.map((id) =>
+          labelFor(TECHNOLOGY_SCOPES, id),
+        ),
+      });
+      renderInterpretation(fallback);
+      $("auditStage").hidden = true;
+      $("results").hidden = false;
+      $("resultTitle").textContent = result.archetype.name;
+      $("resultMeaning").textContent = result.archetype.meaning;
+      $("scopeLabel").textContent = labelFor(TARGET_SCOPES, state.targetScope);
+      $("technologyLabel").textContent = state.technologyScopes
+        .map((id) => labelFor(TECHNOLOGY_SCOPES, id))
+        .join(" · ");
+      $("confidenceLabel").textContent =
+        `${result.answeredCount}/12 scored answers · ${result.confidence}% evidence coverage`;
+      $("axisSignalScore").textContent =
+        result.axes.signalReadiness === null
+          ? "—"
+          : `${result.axes.signalReadiness}%`;
+      $("axisDecisionScore").textContent =
+        result.axes.decisionIntegration === null
+          ? "—"
+          : `${result.axes.decisionIntegration}%`;
+      $("evidenceScore").textContent = `${result.confidence}%`;
+      if (result.valid) {
+        $("mapPoint").style.left = `${result.axes.signalReadiness}%`;
+        $("mapPoint").style.bottom = `${result.axes.decisionIntegration}%`;
+        $("mapDescription").textContent =
+          `Signal Readiness ${result.axes.signalReadiness}%. Decision Integration ${result.axes.decisionIntegration}%. Pattern: ${result.archetype.name}.`;
+      } else {
+        $("mapPoint").hidden = true;
+        $("mapDescription").textContent =
+          "Limited Visibility: both axes require valid scores in their component dimensions and at least eight scored answers overall.";
+      }
+      $("dimensionCards").innerHTML = DIMENSIONS.map((dimension) => {
+        const item = result.dimensions[dimension.id];
+        const score = item.score ?? 0;
+        return `<article class="profile-row${dimension.id === result.weakest ? " priority" : ""}"><div class="profile-row-head"><h5>${dimension.name}</h5><strong class="profile-row-score">${item.score === null ? "—" : `${item.score}%`}</strong></div><p class="profile-row-description">${dimension.description}</p><div class="profile-track" aria-hidden="true"><span style="width:${score}%"></span></div><div class="profile-row-meta"><span>${item.label}</span><span>${item.answered} of 3 answered</span></div></article>`;
+      }).join("");
+      const strongest =
+        DIMENSIONS.find((item) => item.id === result.strongest)?.name ||
+        "Needs more evidence";
+      const weakest = DIMENSIONS.find(
+        (item) => item.id === result.weakest,
+      )?.name;
+      $("strongestFinding").textContent = strongest;
+      $("priorityFinding").textContent = weakest;
+      $("moveTitle").textContent = result.priority.title;
+      $("moveText").textContent = result.priority.move;
+      $("ownerText").textContent = result.priority.owners;
+      $("measureText").textContent = result.priority.measures.join(" · ");
+      $("discussionQuestions").innerHTML = discussionFor(result.weakest)
+        .map((text) => `<li>${text}</li>`)
+        .join("");
+      $("results").scrollIntoView({ behavior: "smooth", block: "start" });
+      $("resultTitle").focus?.();
+      try {
+        const response = await fetch("/api/signal-audit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            targetScope: state.targetScope,
+            technologyScopes: state.technologyScopes,
+            answers: state.answers,
+          }),
+        });
+        const data = await response.json();
+        if (data.interpretation) renderInterpretation(data.interpretation);
+        $("aiStatus").textContent =
+          data.source === "ai"
+            ? "AI context added"
+            : "Deterministic interpretation";
+      } catch {
+        $("aiStatus").textContent = "Deterministic interpretation";
+      }
+    }
+    $("printButton").addEventListener("click", () => window.print());
+    async function copyResultSummary(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        const temporary = document.createElement("textarea");
+        temporary.value = text;
+        temporary.setAttribute("readonly", "");
+        temporary.style.position = "fixed";
+        temporary.style.opacity = "0";
+        document.body.appendChild(temporary);
+        temporary.select();
+        const copied = document.execCommand("copy");
+        temporary.remove();
+        return copied;
+      }
+    }
+    $("copyButton").addEventListener("click", async () => {
+      const text = `${$("resultTitle").textContent}\n${$("mapDescription").textContent}\n30-day move: ${$("moveText").textContent}\nKPI: ${$("measureText").textContent}`;
+      if (await copyResultSummary(text)) {
+        $("copyButton").textContent = "Copied";
+        setTimeout(() => ($("copyButton").textContent = "Copy Summary"), 1800);
+      }
+    });
+    $("retakeButton").addEventListener("click", () => {
+      state.answers = {};
+      state.index = 0;
+      state.result = null;
+      $("results").hidden = true;
+      $("auditStage").hidden = false;
+      $("setupPanel").hidden = false;
+      $("questionPanel").hidden = true;
+      $("mapPoint").hidden = false;
+      updateSetupButton();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   </script>
 
   <style is:global>
-    :global(body){background:#f3ede5;color:#1d1a17;font-family:'DM Sans',sans-serif} .audit-main{padding:7rem 1.5rem 6rem}.rail,.stage{width:min(100%,1080px);margin-inline:auto}.hero{padding:3.5rem 1rem 2.5rem}.eyebrow,.step-label,.meta,.progress-text,.question-number,.result-scope,.axis,.interpretation h4{font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.13em;font-size:.66rem}.eyebrow{color:#516b5c}.hero h1,.panel h2,.result-header h2,h3,fieldset>legend{font-family:'Cormorant Garamond',serif;font-weight:400}.hero h1{font-size:clamp(3rem,7vw,5.4rem);line-height:.93;max-width:800px;margin:.8rem 0 1.25rem}.hero em{color:#516b5c}.dek{max-width:670px;font-size:1.12rem;line-height:1.65;color:#4d4842}.meta{display:flex;flex-wrap:wrap;gap:.75rem 1.75rem;margin-top:1.8rem;color:#6b6258}.stage{max-width:940px}.panel{background:#fbf8f3;border:1px solid #d8cec1;padding:clamp(1.5rem,5vw,4rem);box-shadow:0 12px 35px rgba(52,39,26,.05)}.panel h2{font-size:clamp(2.3rem,5vw,3.8rem);margin:.3rem 0}.intro{color:#645d55;margin:0 0 2rem;max-width:650px}fieldset{border:0;padding:0;margin:2rem 0;min-width:0}fieldset>legend{font-size:1.55rem;margin-bottom:1rem}legend span{font:400 .62rem 'DM Mono';text-transform:uppercase;letter-spacing:.1em;color:#716b64;margin-left:.5rem}.choices{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}.choice{display:block;position:relative;cursor:pointer}.choice input{position:absolute;opacity:0;inset:0}.choice span{display:flex;align-items:center;min-height:58px;padding:.85rem 1rem .85rem 2.8rem;border:1px solid #d8cec1;background:#fff;line-height:1.4}.choice span:before{content:'';position:absolute;left:1rem;width:16px;height:16px;border:1px solid #8c8175;border-radius:50%}.choice input[type=checkbox]+span:before{border-radius:2px}.choice input:checked+span{border-color:#607969;background:#edf1eb;box-shadow:inset 3px 0 #607969}.choice input:checked+span:after{content:'';position:absolute;left:1.32rem;width:7px;height:7px;border-radius:50%;background:#405b4b}.choice input[type=checkbox]:checked+span:after{border-radius:0}.choice input:focus-visible+span{outline:3px solid #c78655;outline-offset:2px}.controls{display:flex;justify-content:space-between;gap:1rem;margin-top:2rem}.controls.end{justify-content:flex-end}.button{border:1px solid #3b4f43;padding:.9rem 1.25rem;font:500 .7rem 'DM Mono';letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;background:transparent;color:#26372d}.button.primary{background:#3b4f43;color:white}.button:hover{transform:translateY(-1px)}.error{color:#8c3e2c;min-height:1.5em}.progress-head{display:flex;justify-content:space-between;align-items:flex-start}.question-number{font-size:2rem;color:#998d80}.segments{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin:1rem 0 3rem}.segments span{height:4px;background:#ddd4c9}.segments .done{background:#97aa9d}.segments .active{background:#405b4b}.question-panel fieldset>legend{font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.15;max-width:760px}.question-example{color:#6b6258;font-size:.88rem;max-width:680px}.answers{grid-template-columns:1fr}.answer span{padding-left:3.5rem;min-height:70px}.answer b{position:absolute;left:1rem;font:400 .68rem 'DM Mono';color:#6b6258}.answer span:before{left:2.25rem}.answer input:checked+span:after{left:2.57rem}.results-rail{width:min(100%,1120px);margin-inline:auto}.result-header{background:#201e1b;color:#f6efe5;padding:clamp(2rem,5vw,4rem);display:grid;grid-template-columns:1.5fr 1fr;gap:3rem}.result-header h2{font-size:clamp(3rem,6vw,5.5rem);margin:.4rem 0}.result-meaning{max-width:670px;line-height:1.7;color:#d8d0c7}.eyebrow.light{color:#a8baa9}.result-scope{display:flex;flex-direction:column;gap:1rem;justify-content:end;color:#bfb7ad}.result-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:1px;background:#d5cabd;border:1px solid #d5cabd}.signal-map,.dimension-profile{margin:0;background:#fbf8f3;padding:clamp(1.5rem,4vw,3rem)}h3{font-size:2rem;margin:.4rem 0 1.5rem}.map-plot{position:relative;aspect-ratio:1;border:1px solid #9f958a;background:linear-gradient(90deg,transparent 49.8%,#c9bfb3 50%,transparent 50.2%),linear-gradient(0deg,transparent 49.8%,#c9bfb3 50%,transparent 50.2%)}.quadrant{position:absolute;font:400 .56rem 'DM Mono';text-transform:uppercase;letter-spacing:.08em;color:#8a8177}.q1{top:1rem;left:1rem}.q2{top:1rem;right:1rem;text-align:right}.q3{bottom:1rem;left:1rem}.q4{bottom:1rem;right:1rem;text-align:right}.map-point{position:absolute;transform:translate(-50%,50%);width:38px;height:38px;border-radius:50%;background:#b56d48;border:4px solid #fff;box-shadow:0 0 0 2px #543421;display:grid;place-items:center;z-index:2}.map-point b{font:500 .45rem 'DM Mono';text-transform:uppercase;color:#fff}.axis{text-align:center;margin-top:.75rem}.axis-y{writing-mode:vertical-rl;transform:rotate(180deg);position:absolute;display:none}.map-description{font-size:.8rem;color:#625b53;margin-top:1rem}.dimension-row{padding:1rem 0;border-top:1px solid #ddd3c7;display:grid;grid-template-columns:1fr auto;gap:1rem}.dimension-row h4{font-size:1rem;margin:0}.dimension-row p{font-size:.76rem;color:#6b6258;margin:.25rem 0}.dimension-score{text-align:right}.dimension-score strong{font:400 1.7rem 'Cormorant Garamond'}.dimension-score span{display:block;font:.55rem 'DM Mono';text-transform:uppercase;color:#6b6258}.move-card{background:#dfe7de;border:1px solid #b5c1b5;padding:clamp(1.5rem,5vw,4rem);display:grid;grid-template-columns:1.4fr 1fr;gap:4rem}.move-card h3{font-size:2.8rem}.move-card p{line-height:1.7}.move-details strong,.move-details span{display:block}.move-details strong{font:.6rem 'DM Mono';text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem}.discussion,.interpretation,.methodology{background:#fbf8f3;border:1px solid #d5cabd;padding:clamp(1.5rem,4vw,3rem);margin-top:1rem}.discussion ol{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding-left:1.25rem}.discussion li{padding-left:.5rem;line-height:1.6}.interpretation{background:#eee7dd}.interpretation-head{display:flex;justify-content:space-between;gap:1rem}.interpretation-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}.interpretation p{line-height:1.65}.privacy-note,.methodology p{font-size:.78rem;color:#6a6259}.actions{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0}.methodology h3{font-size:1.5rem}.methodology a{color:#405b4b}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}[hidden]{display:none!important}
-    @media(max-width:760px){.audit-main{padding:5rem .75rem 3rem}.hero{padding:2.5rem .5rem 1.5rem}.choices,.result-header,.result-grid,.move-card,.discussion ol,.interpretation-grid{grid-template-columns:1fr}.panel{padding:1.25rem}.meta{gap:.6rem 1rem}.result-header{gap:1rem}.move-card{gap:1rem}.interpretation-head{display:block}.controls{align-items:stretch}.button{padding:.85rem .75rem}.answers .choice span{font-size:.9rem}.result-scope{margin-top:1rem}.discussion ol{gap:1rem}.map-plot{max-width:430px}}
-    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}.button:hover{transform:none}}
-    @media print{ :global(.site-nav),:global(footer),.hero,#auditStage,.actions,.interpretation{display:none!important}.audit-main{padding:0;background:#fff}.results-rail{width:100%}.result-header{break-inside:avoid}.signal-map,.dimension-profile,.move-card,.discussion,.methodology{break-inside:avoid}.result-header{-webkit-print-color-adjust:exact;print-color-adjust:exact}.map-point{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+    :global(body) {
+      background: #f3ede5;
+      color: #1d1a17;
+      font-family: "DM Sans", sans-serif;
+    }
+    .audit-main {
+      padding: 7rem 1.5rem 6rem;
+    }
+    .rail,
+    .stage {
+      width: min(100%, 1080px);
+      margin-inline: auto;
+    }
+    .hero {
+      padding: 3.5rem 1rem 2.5rem;
+    }
+    .eyebrow,
+    .step-label,
+    .meta,
+    .progress-text,
+    .question-number {
+      font-family: "DM Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.66rem;
+    }
+    .eyebrow {
+      color: #516b5c;
+    }
+    .hero h1,
+    .panel h2,
+    fieldset > legend {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 400;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 5.4rem);
+      line-height: 0.93;
+      max-width: 800px;
+      margin: 0.8rem 0 1.25rem;
+    }
+    .hero em {
+      color: #516b5c;
+    }
+    .dek {
+      max-width: 670px;
+      font-size: 1.12rem;
+      line-height: 1.65;
+      color: #4d4842;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.75rem;
+      margin-top: 1.8rem;
+      color: #6b6258;
+    }
+    .stage {
+      max-width: 940px;
+    }
+    .panel {
+      background: #fbf8f3;
+      border: 1px solid #d8cec1;
+      padding: clamp(1.5rem, 5vw, 4rem);
+      box-shadow: 0 12px 35px rgba(52, 39, 26, 0.05);
+    }
+    .panel h2 {
+      font-size: clamp(2.3rem, 5vw, 3.8rem);
+      margin: 0.3rem 0;
+    }
+    .intro {
+      color: #645d55;
+      margin: 0 0 2rem;
+      max-width: 650px;
+    }
+    fieldset {
+      border: 0;
+      padding: 0;
+      margin: 2rem 0;
+      min-width: 0;
+    }
+    fieldset > legend {
+      font-size: 1.55rem;
+      margin-bottom: 1rem;
+    }
+    legend span {
+      font: 400 0.62rem "DM Mono";
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #716b64;
+      margin-left: 0.5rem;
+    }
+    .choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+    }
+    .choice {
+      display: block;
+      position: relative;
+      cursor: pointer;
+    }
+    .choice input {
+      position: absolute;
+      opacity: 0;
+      inset: 0;
+    }
+    .choice span {
+      display: flex;
+      align-items: center;
+      min-height: 58px;
+      padding: 0.85rem 1rem 0.85rem 2.8rem;
+      border: 1px solid #d8cec1;
+      background: #fff;
+      line-height: 1.4;
+    }
+    .choice span:before {
+      content: "";
+      position: absolute;
+      left: 1rem;
+      width: 16px;
+      height: 16px;
+      border: 1px solid #8c8175;
+      border-radius: 50%;
+    }
+    .choice input[type="checkbox"] + span:before {
+      border-radius: 2px;
+    }
+    .choice input:checked + span {
+      border-color: #607969;
+      background: #edf1eb;
+      box-shadow: inset 3px 0 #607969;
+    }
+    .choice input:checked + span:after {
+      content: "";
+      position: absolute;
+      left: 1.32rem;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #405b4b;
+    }
+    .choice input[type="checkbox"]:checked + span:after {
+      border-radius: 0;
+    }
+    .choice input:focus-visible + span {
+      outline: 3px solid #c78655;
+      outline-offset: 2px;
+    }
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .controls.end {
+      justify-content: flex-end;
+    }
+    .button {
+      border: 1px solid #3b4f43;
+      padding: 0.9rem 1.25rem;
+      font: 500 0.7rem "DM Mono";
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      color: #26372d;
+    }
+    .button.primary {
+      background: #3b4f43;
+      color: white;
+    }
+    .button:hover {
+      transform: translateY(-1px);
+    }
+    .error {
+      color: #8c3e2c;
+      min-height: 1.5em;
+    }
+    .progress-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .question-number {
+      font-size: 2rem;
+      color: #998d80;
+    }
+    .segments {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      margin: 1rem 0 3rem;
+    }
+    .segments span {
+      height: 4px;
+      background: #ddd4c9;
+    }
+    .segments .done {
+      background: #97aa9d;
+    }
+    .segments .active {
+      background: #405b4b;
+    }
+    .question-panel fieldset > legend {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      max-width: 760px;
+    }
+    .question-example {
+      color: #6b6258;
+      font-size: 0.88rem;
+      max-width: 680px;
+    }
+    .answers {
+      grid-template-columns: 1fr;
+    }
+    .answer span {
+      padding-left: 3.5rem;
+      min-height: 70px;
+    }
+    .answer b {
+      position: absolute;
+      left: 1rem;
+      font: 400 0.68rem "DM Mono";
+      color: #6b6258;
+    }
+    .answer span:before {
+      left: 2.25rem;
+    }
+    .answer input:checked + span:after {
+      left: 2.57rem;
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    [hidden] {
+      display: none !important;
+    }
+    @media (max-width: 760px) {
+      .audit-main {
+        padding: 5rem 0.75rem 3rem;
+      }
+      .hero {
+        padding: 2.5rem 0.5rem 1.5rem;
+      }
+      .choices {
+        grid-template-columns: 1fr;
+      }
+      .panel {
+        padding: 1.25rem;
+      }
+      .meta {
+        gap: 0.6rem 1rem;
+      }
+      .controls {
+        align-items: stretch;
+      }
+      .button {
+        padding: 0.85rem 0.75rem;
+      }
+      .answers .choice span {
+        font-size: 0.9rem;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+      .button:hover {
+        transform: none;
+      }
+    }
+    @media print {
+      :global(.site-nav),
+      :global(footer),
+      .hero,
+      #auditStage,
+      .audit-main {
+        padding: 0;
+        background: #fff;
+      }
+      .results-rail {
+        width: 100%;
+      }
+    }
   </style>
   <style is:global>
-    .map-plot { background: none; }
-    .map-plot::before, .map-plot::after { content: ''; position: absolute; background: #c9bfb3; }
-    .map-plot::before { left: 50%; top: 0; bottom: 0; width: 1px; }
-    .map-plot::after { top: 50%; left: 0; right: 0; height: 1px; }
-    .result-header h2 { font-size: clamp(3rem, 5vw, 4.6rem); overflow-wrap: normal; word-break: keep-all; }
-
     /* Shared audit grid: hero copy and every panel use one outer rail and inset. */
     .audit-main {
       --audit-rail: 1080px;
@@ -154,16 +714,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .audit-main .hero h1 {
       width: min(100%, 790px);
       max-width: 790px;
-      margin: .65rem 0 1rem;
+      margin: 0.65rem 0 1rem;
       font-size: clamp(4.5rem, 5.45vw, 4.95rem);
-      line-height: .92;
-      letter-spacing: -.025em;
+      line-height: 0.92;
+      letter-spacing: -0.025em;
     }
     .audit-main .hero .dek {
       max-width: 680px;
       margin: 0;
       color: #3f3a35;
-      font-family: 'DM Sans', sans-serif;
+      font-family: "DM Sans", sans-serif;
       font-size: 1.05rem;
       line-height: 1.55;
     }
@@ -172,11 +732,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       grid-template-columns: repeat(4, 1fr);
       gap: 0;
       margin-top: 1.5rem;
-      padding-block: .85rem;
+      padding-block: 0.85rem;
       border-top: 1px solid #cfc5b9;
       border-bottom: 1px solid #cfc5b9;
       color: #504a44;
-      font-size: .67rem;
+      font-size: 0.67rem;
     }
     .audit-main .meta span {
       padding-inline: 1rem;
@@ -200,15 +760,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       box-shadow: none;
     }
     .audit-main .setup-panel h2 {
-      margin: .25rem 0 .6rem;
+      margin: 0.25rem 0 0.6rem;
       font-size: clamp(3rem, 3.75vw, 3.5rem);
       line-height: 1;
     }
     .audit-main .setup-panel .intro {
       margin-bottom: 2rem;
       color: #504a44;
-      font-family: 'DM Sans', sans-serif;
-      font-size: .96rem;
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.96rem;
       line-height: 1.55;
     }
     .audit-main .setup-panel fieldset {
@@ -219,29 +779,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       width: 100%;
       align-items: baseline;
       justify-content: space-between;
-      margin-bottom: .8rem;
+      margin-bottom: 0.8rem;
       color: #282420;
-      font-family: 'DM Sans', sans-serif;
-      font-size: .88rem;
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.88rem;
       font-weight: 500;
       line-height: 1.4;
     }
     .audit-main .setup-panel legend span {
       margin-left: 1rem;
       color: #6a6259;
-      font-family: 'DM Mono', monospace;
-      font-size: .57rem;
+      font-family: "DM Mono", monospace;
+      font-size: 0.57rem;
       font-weight: 400;
     }
     .audit-main .choice span {
       min-height: 60px;
-      padding: .85rem 1rem .85rem 3rem;
+      padding: 0.85rem 1rem 0.85rem 3rem;
       border-color: #cec3b6;
       color: #332f2a;
-      font-family: 'DM Sans', sans-serif;
-      font-size: .9rem;
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.9rem;
       line-height: 1.4;
-      transition: border-color .16s ease, background-color .16s ease, box-shadow .16s ease;
+      transition:
+        border-color 0.16s ease,
+        background-color 0.16s ease,
+        box-shadow 0.16s ease;
     }
     .audit-main .choice span::before {
       left: 1.15rem;
@@ -267,7 +830,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .audit-main .choice input:checked + span::after {
       display: none;
     }
-    .audit-main .choice input[type='checkbox']:checked + span::before {
+    .audit-main .choice input[type="checkbox"]:checked + span::before {
       border-radius: 2px;
       background: #405b4b;
       box-shadow: none;
@@ -280,8 +843,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       height: 1px;
       transform: translateY(-50%);
     }
-    .audit-main .choice input[type='checkbox']:checked + span::after {
-      content: '';
+    .audit-main .choice input[type="checkbox"]:checked + span::after {
+      content: "";
       display: block;
       position: absolute;
       left: 1.48rem;
@@ -302,23 +865,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .audit-main .setup-panel .button.primary {
       min-width: 180px;
       min-height: 48px;
-      font-size: .72rem;
+      font-size: 0.72rem;
     }
 
     @media (max-width: 760px) {
       .audit-main {
         --audit-inset: 20px;
-        padding: 4.5rem .75rem 3rem;
+        padding: 4.5rem 0.75rem 3rem;
       }
       .audit-main .hero {
         padding: 2rem var(--audit-inset) 1.4rem;
       }
       .audit-main .hero h1 {
         font-size: clamp(3.15rem, 14vw, 4rem);
-        line-height: .94;
+        line-height: 0.94;
       }
       .audit-main .hero .dek {
-        font-size: .98rem;
+        font-size: 0.98rem;
       }
       .audit-main .meta {
         grid-template-columns: repeat(2, 1fr);
@@ -328,13 +891,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       .audit-main .meta span,
       .audit-main .meta span:first-child,
       .audit-main .meta span:last-child {
-        padding: .7rem .35rem;
+        padding: 0.7rem 0.35rem;
         text-align: left;
         border-left: 0;
         border-top: 1px solid #d8cec2;
       }
-      .audit-main .meta span:nth-child(-n+2) { border-top: 0; }
-      .audit-main .meta span:nth-child(even) { text-align: right; }
+      .audit-main .meta span:nth-child(-n + 2) {
+        border-top: 0;
+      }
+      .audit-main .meta span:nth-child(even) {
+        text-align: right;
+      }
       .audit-main .panel {
         padding: 30px var(--audit-inset) 34px;
       }
@@ -346,7 +913,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
       .audit-main .setup-panel legend span {
         display: block;
-        margin: .25rem 0 0;
+        margin: 0.25rem 0 0;
       }
       .audit-main .compact .choice:last-child:nth-child(odd) {
         grid-column: auto;
@@ -426,7 +993,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     @media (max-width: 760px) {
       .audit-main #targetScopes .choice:nth-child(odd) span,
-      .audit-main #technologyScopes .choice:nth-child(odd):not(:last-child) span {
+      .audit-main
+        #technologyScopes
+        .choice:nth-child(odd):not(:last-child)
+        span {
         border-right: 0;
       }
       .audit-main #targetScopes .choice:nth-last-child(-n + 2) span {

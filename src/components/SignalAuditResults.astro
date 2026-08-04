@@ -1,0 +1,219 @@
+<section id="results" class="results-rail brief" aria-labelledby="resultTitle" hidden>
+  <header class="brief-masthead">
+    <div class="brief-masthead-copy">
+      <p class="step-label">Your operating pattern</p>
+      <h2 id="resultTitle"></h2>
+      <p id="resultMeaning" class="brief-meaning"></p>
+    </div>
+    <div class="brief-summary" aria-label="Result summary">
+      <div class="brief-metrics">
+        <div><strong id="axisSignalScore">—</strong><span>Signal Readiness</span></div>
+        <div><strong id="axisDecisionScore">—</strong><span>Decision Integration</span></div>
+        <div><strong id="evidenceScore">—</strong><span>Evidence coverage</span></div>
+      </div>
+      <dl class="brief-scope">
+        <div><dt>Assessment scope</dt><dd id="scopeLabel"></dd></div>
+        <div><dt>Technology scope</dt><dd id="technologyLabel"></dd></div>
+        <div class="sr-only"><dt>Confidence</dt><dd id="confidenceLabel"></dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <section class="brief-profile" aria-labelledby="profileTitle">
+    <div class="brief-section-heading">
+      <p class="step-label">Your signal profile</p>
+      <h3 id="profileTitle">Where information becomes decision-ready</h3>
+    </div>
+    <div class="brief-profile-grid">
+      <figure class="brief-map" aria-labelledby="mapTitle mapDescription">
+        <figcaption><h4 id="mapTitle">Signal map</h4></figcaption>
+        <div class="brief-map-frame">
+          <div class="brief-axis-y">Decision Integration <span>→</span></div>
+          <div class="brief-map-plot" id="mapPlot">
+            <span class="brief-quadrant quadrant-nw">Decisions ahead of the data</span>
+            <span class="brief-quadrant quadrant-ne">Decision-embedded</span>
+            <span class="brief-quadrant quadrant-sw">Invoice-led</span>
+            <span class="brief-quadrant quadrant-se">Visible, not embedded</span>
+            <span id="mapPoint" class="brief-map-point" aria-hidden="true"><i></i><b>You</b></span>
+          </div>
+          <div class="brief-axis-x">Signal Readiness <span>→</span></div>
+        </div>
+        <p id="mapDescription" class="brief-map-description"></p>
+      </figure>
+
+      <section class="brief-dimensions" aria-labelledby="dimensionsTitle">
+        <h4 id="dimensionsTitle">Four-dimension profile</h4>
+        <div class="brief-findings">
+          <p><span>Strongest signal</span><strong id="strongestFinding">—</strong></p>
+          <p class="priority"><span>Priority handoff</span><strong id="priorityFinding">—</strong></p>
+        </div>
+        <div id="dimensionCards"></div>
+      </section>
+    </div>
+  </section>
+
+  <section class="brief-move" aria-labelledby="moveTitle">
+    <div>
+      <p class="step-label">Prioritized 30-day move</p>
+      <h3 id="moveTitle"></h3>
+      <p id="moveText"></p>
+    </div>
+    <div class="brief-move-details">
+      <p><strong>Suggested owners</strong><span id="ownerText"></span></p>
+      <p><strong>Suggested KPI</strong><span id="measureText"></span></p>
+    </div>
+  </section>
+
+  <section class="brief-discussion" aria-labelledby="discussionTitle">
+    <p class="step-label">Take into the next team discussion</p>
+    <h3 id="discussionTitle">Three questions worth answering together</h3>
+    <ol id="discussionQuestions"></ol>
+  </section>
+
+  <section class="brief-interpretation" aria-labelledby="interpretationTitle">
+    <div class="brief-section-heading">
+      <p class="step-label">Secondary perspective</p>
+      <h3 id="interpretationTitle">AI-assisted interpretation</h3>
+      <span id="aiStatus" class="sr-only" role="status">Adding context…</span>
+    </div>
+    <div class="brief-interpretation-grid">
+      <section><h4>Pattern read</h4><p id="patternRead"></p></section>
+      <section><h4>Decision implication</h4><p id="decisionImplication"></p></section>
+      <section><h4>Scope watchpoint</h4><p id="scopeWatchpoint"></p></section>
+    </div>
+    <p class="brief-privacy">To create this interpretation, the selected scope choices and answers are sent to the configured AI provider. The audit collects no name, company, email, or free-text business information.</p>
+  </section>
+
+  <section class="brief-actions" aria-label="Report actions">
+    <div class="brief-actions-main">
+      <button class="button primary" id="printButton">Print or Save as PDF</button>
+      <button class="button secondary" id="copyButton">Copy Summary</button>
+    </div>
+    <div class="brief-actions-quiet">
+      <button class="brief-text-action" id="retakeButton">Retake audit</button>
+      <a class="brief-text-action" href="/interactive-lab">Explore the Interactive Lab →</a>
+    </div>
+  </section>
+
+  <details class="brief-methodology">
+    <summary>Methodology and privacy</summary>
+    <div>
+      <p>This is a directional self-assessment, not a certification or external benchmark. It is informed by concepts from the <a href="https://www.finops.org/insights/2026-finops-framework/">FinOps Framework</a> and <a href="https://www.finops.org/wg/finops-assessment/">FinOps Assessment Guide</a>, used under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Cloud &amp; Capital adapted those concepts independently; the FinOps Foundation does not endorse this assessment. Appropriate practice depends on organizational need—not every advanced practice is universally necessary.</p>
+      <p>Answers are held in this page for the current session and are not paired with identity or contact information.</p>
+    </div>
+  </details>
+</section>
+
+<style is:global>
+  .brief { color: #211e1a; font-family: 'DM Sans', sans-serif; }
+  .brief h2, .brief h3, .brief .brief-metrics strong { font-family: 'Cormorant Garamond', serif; font-weight: 400; }
+  .brief h3 { margin: .35rem 0 1.25rem; font-size: clamp(2rem, 3.2vw, 2.8rem); line-height: 1.05; }
+  .brief-masthead { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr); gap: 4.5rem; padding: 54px 52px 50px; border-top: 3px solid #607969; border-bottom: 1px solid #cfc4b7; background: #f8f3ec; }
+  .brief-masthead h2 { max-width: 620px; margin: .4rem 0 1rem; font-size: clamp(4rem, 5vw, 4.6rem); line-height: .92; letter-spacing: -.025em; }
+  .brief-meaning { max-width: 620px; margin: 0; color: #45403a; font-size: 1.05rem; line-height: 1.65; }
+  .brief-summary { align-self: end; }
+  .brief-metrics { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #bdb2a5; border-bottom: 1px solid #bdb2a5; }
+  .brief-metrics div { padding: 1rem .8rem; border-left: 1px solid #d5cabd; }
+  .brief-metrics div:first-child { padding-left: 0; border-left: 0; }
+  .brief-metrics strong { display: block; font-size: 2.65rem; line-height: 1; color: #405b4b; }
+  .brief-metrics span, .brief-scope dt, .brief-findings span, .brief-move-details strong, .brief-interpretation h4 { display: block; margin-top: .35rem; color: #686158; font: 400 .6rem/1.4 'DM Mono', monospace; letter-spacing: .09em; text-transform: uppercase; }
+  .brief-scope { margin: 1.25rem 0 0; }
+  .brief-scope div { display: grid; grid-template-columns: 120px 1fr; gap: 1rem; padding-top: .65rem; }
+  .brief-scope dt { margin: 0; }
+  .brief-scope dd { margin: 0; color: #39342e; font-size: .88rem; line-height: 1.45; }
+  .brief-profile, .brief-discussion, .brief-interpretation { padding: 56px 52px; border-bottom: 1px solid #cfc4b7; }
+  .brief-section-heading { margin-bottom: 1.5rem; }
+  .brief-profile-grid { display: grid; grid-template-columns: minmax(0, 42fr) minmax(0, 58fr); gap: 4rem; align-items: start; }
+  .brief-map { margin: 0; max-width: 410px; }
+  .brief-map h4, .brief-dimensions > h4 { margin: 0 0 1.1rem; font: 500 1rem/1.4 'DM Sans', sans-serif; }
+  .brief-map-frame { position: relative; padding-left: 25px; }
+  .brief-map-plot { position: relative; width: 100%; aspect-ratio: 1; border: 1px solid #aca195; background: #f7f1e9; }
+  .brief-map-plot::before, .brief-map-plot::after { content: ''; position: absolute; background: #c9bfb3; }
+  .brief-map-plot::before { top: 0; bottom: 0; left: 50%; width: 1px; }
+  .brief-map-plot::after { top: 50%; right: 0; left: 0; height: 1px; }
+  .brief-quadrant { position: absolute; max-width: 42%; color: #71695f; font: 500 .7rem/1.25 'DM Sans', sans-serif; }
+  .quadrant-nw { top: .8rem; left: .8rem; }
+  .quadrant-ne { top: .8rem; right: .8rem; text-align: right; }
+  .quadrant-sw { bottom: .8rem; left: .8rem; }
+  .quadrant-se { right: .8rem; bottom: .8rem; text-align: right; }
+  .brief-map-point { position: absolute; z-index: 2; display: flex; align-items: center; gap: .45rem; transform: translate(-10px, 50%); white-space: nowrap; }
+  .brief-map-point i { display: block; width: 22px; height: 22px; border: 4px solid #fff; border-radius: 50%; background: #b56d48; box-shadow: 0 0 0 2px #6f422d; }
+  .brief-map-point b { padding: .22rem .4rem; background: #f7f1e9; color: #3d3028; font: 500 .65rem 'DM Mono', monospace; text-transform: uppercase; }
+  .brief-axis-x, .brief-axis-y { color: #575149; font: 400 .61rem 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+  .brief-axis-x { margin-top: .7rem; text-align: center; }
+  .brief-axis-y { position: absolute; top: 50%; left: -76px; transform: rotate(-90deg); white-space: nowrap; }
+  .brief-map-description { margin: 1rem 0 0 25px; color: #4e4841; font-size: .9rem; line-height: 1.5; }
+  .brief-findings { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: .35rem; border-top: 1px solid #c9beb1; border-bottom: 1px solid #c9beb1; }
+  .brief-findings p { margin: 0; padding: .9rem 1rem .9rem 0; }
+  .brief-findings p + p { padding-left: 1rem; border-left: 1px solid #d8cec2; }
+  .brief-findings strong { display: block; margin-top: .25rem; font-size: .95rem; }
+  .brief-findings .priority strong { color: #9b593a; }
+  .profile-row { padding: 1rem 0; border-bottom: 1px solid #ddd3c7; }
+  .profile-row-head { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: baseline; }
+  .profile-row h5 { margin: 0; font: 500 1rem 'DM Sans', sans-serif; }
+  .profile-row-score { font: 400 1.85rem 'Cormorant Garamond', serif; }
+  .profile-row-description { margin: .25rem 0 .65rem; color: #5f5850; font-size: .84rem; line-height: 1.45; }
+  .profile-row-meta { display: flex; justify-content: space-between; gap: 1rem; margin-top: .5rem; color: #6d655c; font: 400 .58rem 'DM Mono', monospace; letter-spacing: .06em; text-transform: uppercase; }
+  .profile-track { height: 5px; overflow: hidden; background: #ddd5ca; }
+  .profile-track span { display: block; height: 100%; background: #607969; }
+  .profile-row.priority .profile-track span { background: #a75f40; }
+  .brief-move { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr); gap: 4rem; padding: 52px; background: #dfe7de; border-bottom: 1px solid #b5c1b5; }
+  .brief-move h3 { margin-bottom: .8rem; }
+  .brief-move p { margin: 0; font-size: 1rem; line-height: 1.65; }
+  .brief-move-details { align-self: center; }
+  .brief-move-details p { padding: 1rem 0; border-top: 1px solid #aebbac; }
+  .brief-move-details span { display: block; margin-top: .45rem; color: #363d37; font-size: .9rem; line-height: 1.5; }
+  .brief-discussion ol { margin: 1.5rem 0 0; padding: 0; list-style: none; counter-reset: questions; }
+  .brief-discussion li { display: grid; grid-template-columns: 48px 1fr; gap: 1rem; padding: 1.25rem 0; border-top: 1px solid #d4cabf; font-size: 1rem; line-height: 1.55; counter-increment: questions; }
+  .brief-discussion li::before { content: '0' counter(questions); color: #607969; font: 400 .75rem 'DM Mono', monospace; letter-spacing: .08em; }
+  .brief-interpretation { background: #eee7dd; }
+  .brief-interpretation-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+  .brief-interpretation-grid section { padding-top: 1rem; border-top: 1px solid #c8bdb0; }
+  .brief-interpretation h4 { margin: 0 0 .65rem; }
+  .brief-interpretation-grid p { margin: 0; color: #403a34; font-size: 1rem; line-height: 1.65; }
+  .brief-privacy { margin: 2rem 0 0; padding-top: 1rem; border-top: 1px solid #d2c8bc; color: #625b53; font-size: .88rem; line-height: 1.55; }
+  .brief-actions { display: flex; justify-content: space-between; gap: 2rem; align-items: center; padding: 30px 52px; border-bottom: 1px solid #cfc4b7; }
+  .brief-actions-main, .brief-actions-quiet { display: flex; gap: .75rem; align-items: center; }
+  .brief-text-action { padding: .5rem; border: 0; background: transparent; color: #405b4b; font: 500 .75rem 'DM Sans', sans-serif; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .brief-methodology { padding: 0 52px; border-bottom: 1px solid #cfc4b7; }
+  .brief-methodology summary { padding: 1.25rem 0; color: #37322d; font: 500 .9rem 'DM Sans', sans-serif; cursor: pointer; }
+  .brief-methodology > div { max-width: 860px; padding: 0 0 1.75rem; }
+  .brief-methodology p { color: #514b44; font-size: .95rem; line-height: 1.65; }
+  .brief-methodology a { color: #405b4b; }
+
+  @media (max-width: 760px) {
+    .brief-masthead, .brief-profile-grid, .brief-move { grid-template-columns: 1fr; }
+    .brief-masthead { gap: 2rem; padding: 38px 20px 34px; }
+    .brief-masthead h2 { font-size: clamp(3.2rem, 16vw, 4rem); }
+    .brief-metrics strong { font-size: 2rem; }
+    .brief-metrics span { font-size: .52rem; }
+    .brief-scope div { grid-template-columns: 105px 1fr; }
+    .brief-profile, .brief-discussion, .brief-interpretation { padding: 40px 20px; }
+    .brief-profile-grid { gap: 3rem; }
+    .brief-map { width: 100%; max-width: 100%; }
+    .brief-map-frame { padding-left: 22px; }
+    .brief-quadrant { font-size: .62rem; }
+    .brief-findings { grid-template-columns: 1fr; }
+    .brief-findings p + p { padding-left: 0; border-top: 1px solid #d8cec2; border-left: 0; }
+    .brief-move { gap: 1.5rem; padding: 40px 20px; }
+    .brief-interpretation-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .brief-actions { display: block; padding: 28px 20px; }
+    .brief-actions-main { display: grid; grid-template-columns: 1fr; }
+    .brief-actions-main .button { width: 100%; }
+    .brief-actions-quiet { justify-content: space-between; margin-top: 1rem; }
+    .brief-methodology { padding: 0 20px; }
+  }
+
+  @media print {
+    .brief { width: 100%; }
+    .brief-masthead, .brief-profile, .brief-move, .brief-discussion, .brief-interpretation { break-inside: avoid; }
+    .brief-masthead { padding: 28px 32px; }
+    .brief-masthead h2 { font-size: 46pt; }
+    .brief-profile, .brief-discussion, .brief-interpretation, .brief-move { padding: 28px 32px; }
+    .brief-actions { display: none !important; }
+    .brief-methodology { padding: 0 32px; }
+    .brief-methodology summary { display: none; }
+    .brief-methodology:not([open]) > *:not(summary) { display: block !important; }
+    .brief-map-plot, .profile-track, .brief-map-point i { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
+</style>

@@ -1,7 +1,6 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { latestIssue } from '../data/homeContent';
-import { footerLinks, navigation } from '../data/siteContent';
+import { footerLinks, navigation, writingFeatured } from '../data/siteContent';
 ---
 
 <SiteLayout
@@ -3139,6 +3138,27 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
 @media (max-width:900px){.hero-left{border-right:none;}.hero-viz{min-height:260px;height:260px;}.writing-editorial{grid-template-columns:1fr!important;}.wf-inner{min-height:0!important;}.community-feature{grid-template-columns:1fr;}}
 @media (max-width:600px){section#discipline > div:first-child{padding:1.8rem 1.25rem!important;}.writing{padding-top:3.25rem!important;padding-bottom:2.75rem!important;}.writing-editorial{margin:0 1.25rem!important;}.writing-home-actions{padding:1.25rem 1.25rem 0;}.about-v4-final{padding-top:3.25rem!important;padding-bottom:3.25rem!important;}.community{padding-top:3.1rem!important;padding-bottom:3.1rem!important;}.community-visual-stage{min-height:0;}}
 
+/* ── Focused homepage rhythm pass ─────────────────────── */
+.hero-left{border-right:none!important;}
+@media (min-width:901px){
+  .hero{min-height:690px;}
+  .hero-right{padding-top:5rem!important;}
+  .hero-viz{min-height:380px;max-height:410px;}
+}
+.work-inner{padding-top:4.5rem!important;}
+.work .work-intro{font-style:italic!important;color:rgba(244,239,230,.86)!important;margin-bottom:2.5rem!important;}
+.writing{background:#eadfce;}
+.writing-home-actions .btn{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;padding:.92rem 1.35rem;}
+.writing-home-actions .btn-outline{border-color:rgba(25,23,20,.45);color:var(--ink);}
+.about-v4-final{max-width:none;background:#3d6055;color:#f5eee9;}
+.about-v4-final::before{background:rgba(245,238,233,.22);}
+.about-v4-final-label,.about-v4-final-caption-range,.about-v4-final-body{color:rgba(245,238,233,.72);}
+.about-v4-final-label::before,.about-v4-final-caption{border-color:rgba(245,238,233,.22);}
+.about-v4-final-caption-name,.about-v4-final-headline,.about-v4-final-lede{color:#f5eee9;}
+.about-v4-final-portrait{border:1px solid rgba(245,238,233,.28);box-shadow:0 18px 38px rgba(0,0,0,.2);}
+.about-v4-final-btn-sage{background:#f5eee9;color:#3d6055;}
+.about-v4-final-btn-sage:hover{background:#eadfce;}
+
 </style>
 
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -3193,27 +3213,6 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
     </div>
   </div>
 </section>
-
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span class="mi">Cloud Economics</span><span class="ms">◆</span>
-    <span class="mi">AI Spend</span><span class="ms">◆</span>
-    <span class="mi">FinOps Tools</span><span class="ms">◆</span>
-    <span class="mi">Finance × Engineering</span><span class="ms">◆</span>
-    <span class="mi">Markets &amp; Mimosas</span>
-  </div>
-</div>
-
-<!-- DISCIPLINE -->
-<section id="discipline" style="background:#D8EAD9;">
-  <div style="padding:2.5rem 3.5rem 3rem;">
-    <div class="section-label" style="color:var(--sage);margin-bottom:.75rem;">Discipline</div>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.75rem,3vw,3rem);font-weight:400;font-style:italic;color:var(--sage-dark);line-height:1.2;max-width:28ch;margin:0;">Cost is shaped before it is reported.</h2>
-  </div>
-</section>
-
-
 
 <style>
 .cdb{position:relative;width:100%;height:200px;background:#ffffff;overflow:hidden;isolation:isolate;}
@@ -3275,7 +3274,7 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
 <section class="work" id="work">
   <div class="work-inner reveal">
     <div class="section-label" style="color:rgba(244,239,230,.35);">Work</div>
-    <h2 class="work-intro">Tools for the decisions behind the bill.</h2>
+    <h2 class="work-intro">Cost is shaped before it is reported.</h2>
 
     <div class="work-editorial-grid">
 
@@ -3300,9 +3299,9 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
             </div>
 
             <div class="work-chat-bubble work-chat-bubble-ai work-chat-bubble-ai-main">
-              <strong>EC2 jumped 154% in one day</strong>, from <strong>$482</strong> to <strong>$1,226</strong>. It is now the largest cost driver at <strong>40.5% of cloud spend</strong>.<br><br>
-              I also found <strong>19 unused SaaS licenses</strong> costing <strong>$242 per month</strong>, while AI spend rose <strong>12.4%</strong>.<br><br>
-              <strong>Start with the EC2 spike. Was this a planned launch or uncontrolled autoscaling?</strong>
+              <strong>EC2 jumped 154% in one day, from $482 to $1,226.</strong> It is now the largest cost driver at <strong>40.5% of cloud spend.</strong><br><br>
+              I also found <strong>19 unused SaaS licenses costing $242 per month.</strong> AI spend rose <strong>12.4%</strong>, which is worth checking against token volume and model mix before it becomes the next material driver.<br><br>
+              <strong>Start with EC2, then validate the AI increase. Was this a planned launch or uncontrolled autoscaling?</strong>
             </div>
           </div>
 
@@ -3398,7 +3397,7 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
 
 <div class="about-v4-final-certs"><span class="credential-unit">FinOps Certified Practitioner</span><span class="credential-separator" aria-hidden="true"> · </span><span class="credential-unit">FinOps Certified FOCUS Analyst</span><span class="credential-separator" aria-hidden="true"> · </span><span class="credential-unit">AWS Certified Cloud Practitioner</span><span class="credential-separator" aria-hidden="true"> · </span><span class="credential-unit">Microsoft Azure AI Fundamentals</span><span class="credential-separator" aria-hidden="true"> · </span><span class="credential-unit">Stacklet FinOps Governance for Cloud &amp; AI</span></div>
 <div class="about-v4-final-certs" style="margin-top:.35rem;"><a href="https://hub.pointfive.co/inefficiencies/overcommitted-savings-plans-after-temporary-ai-inference-demand-spikes?cloud-services=aws-savings-plans" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:.2em;">Contributor, PointFive Cloud Efficiency Hub</a></div>
-<div class="about-v4-final-ctas"><a href="/about" class="about-v4-final-btn">More about Diana</a><a href="mailto:diana@cloudandcapital.com" class="about-v4-final-btn about-v4-final-btn-sage">Contact</a></div>
+<div class="about-v4-final-ctas"><a href="mailto:diana@cloudandcapital.com" class="about-v4-final-btn about-v4-final-btn-sage">Contact</a></div>
     </div>
   </div>
 </section>
@@ -3446,7 +3445,7 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
       </div>
       <div class="newsletter-actions">
         <a href="https://cloudandcapital.substack.com" class="btn btn-sage" target="_blank" rel="noopener noreferrer">Subscribe on Substack</a>
-        <a href={latestIssue.url} class="btn btn-outline-w" target="_blank" rel="noopener noreferrer">Latest post →</a>
+        <a href={writingFeatured.href} class="btn btn-outline-w" target="_blank" rel="noopener noreferrer">Latest post →</a>
       </div>
     </div>
   </div>
@@ -3455,18 +3454,18 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
   <div class="writing-editorial">
 
     <!-- Featured card: Markets & Mimosas column -->
-    <a href={latestIssue.url} class="writing-featured reveal" target="_blank" rel="noopener noreferrer">
+    <a href={writingFeatured.href} class="writing-featured reveal" target="_blank" rel="noopener noreferrer">
       <div class="wf-inner">
         <!-- Left: text -->
         <div class="wf-content">
           <div class="wf-eyebrow">Markets &amp; Mimosas · Latest</div>
-          <div class="wf-title">{latestIssue.title}</div>
-          <div class="wf-desc">{latestIssue.description}</div>
+          <div class="wf-title">{writingFeatured.title}</div>
+          <div class="wf-desc">{writingFeatured.description}</div>
           <div class="wf-cta">Read latest →</div>
         </div>
         <!-- Right: image -->
         <div class="wf-img-wrap">
-          <img src={latestIssue.image} alt={latestIssue.imageAlt} class="wf-img" loading="lazy">
+          <img src={writingFeatured.image} alt={writingFeatured.imageAlt} class="wf-img" loading="lazy">
         </div>
       </div>
     </a>
@@ -3490,8 +3489,8 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
   </div>
 
   <div class="writing-home-actions">
-    <a href="/writing">Explore all writing →</a>
-    <a href="https://cloudandcapital.substack.com" target="_blank" rel="noopener noreferrer">Subscribe on Substack →</a>
+    <a class="btn btn-sage" href="/writing">Explore all writing</a>
+    <a class="btn btn-outline" href="https://cloudandcapital.substack.com" target="_blank" rel="noopener noreferrer">Subscribe on Substack</a>
   </div>
 
 </section>

@@ -1,6 +1,6 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { latestIssue } from '../data/homeContent';
+import { footerLinks, navigation, writingFeatured } from '../data/siteContent';
 ---
 
 <SiteLayout
@@ -2983,9 +2983,238 @@ section#discipline > div:first-child{
 .f-nav a{color:rgba(244,239,230,.48);}
 .f-copy{color:rgba(244,239,230,.36);}
 
+/* ── Community record ─────────────────────────────────── */
+.community{
+  padding:clamp(4.25rem,6vw,6rem) clamp(1.5rem,4vw,4.5rem) !important;
+  background:var(--white);
+}
+.community-feature{
+  display:grid;
+  grid-template-columns:minmax(0,.78fr) minmax(28rem,1.08fr);
+  gap:clamp(2.75rem,6vw,6.75rem);
+  align-items:center;
+}
+.community-copy .section-label{margin-bottom:1.1rem;}
+.community-copy h2{
+  margin:0;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.35rem,4vw,4.25rem);
+  font-weight:300;
+  line-height:.99;
+  letter-spacing:-.035em;
+  color:var(--ink);
+}
+.community-copy h2 em{font-style:italic;color:var(--sage);}
+.community-copy > p{
+  max-width:48ch;
+  margin:1.35rem 0 0;
+  font-size:.92rem;
+  line-height:1.82;
+  color:var(--ink-muted);
+}
+.community-event-meta,
+.community-detail-label,
+.community-record-sponsor{
+  margin:0;
+  font-family:'DM Mono',monospace;
+  font-size:.56rem;
+  letter-spacing:.14em;
+  line-height:1.65;
+  text-transform:uppercase;
+}
+.community-event-meta{
+  margin-top:1.65rem;
+  color:var(--sage);
+  white-space:nowrap;
+}
+.community-venue{
+  margin:1rem 0 0;
+  font-family:'DM Sans',sans-serif;
+  font-size:.88rem;
+  line-height:1.7;
+  color:var(--ink-muted);
+}
+.community-details{
+  display:grid;
+  grid-template-columns:1.3fr .9fr;
+  gap:1.25rem;
+  margin-top:1.35rem;
+  padding-top:1.35rem;
+  border-top:1px solid var(--rule);
+}
+.community-detail-label{margin-bottom:.3rem;color:var(--sage);}
+.community-details p:not(.community-detail-label){
+  margin:0;
+  font-size:.84rem;
+  line-height:1.7;
+  color:var(--ink-muted);
+}
+.community-record-sponsor{margin-top:1.4rem;color:var(--ink-faint);}
+.community-visual-stage{
+  position:relative;
+  min-height:clamp(27rem,38vw,33rem);
+  overflow:hidden;
+  background:#687a71;
+}
+.community-visual-stage figure{margin:0;}
+.community-group-photo{
+  position:absolute;
+  top:clamp(1.2rem,2.45vw,2.25rem);
+  right:clamp(1.15rem,2.45vw,2.25rem);
+  bottom:clamp(1.35rem,2.7vw,2.45rem);
+  left:28.5%;
+  overflow:hidden;
+}
+.community-group-photo img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 42%;
+  filter:saturate(.92) contrast(1.02);
+}
+.community-flyer{
+  position:absolute;
+  z-index:1;
+  left:clamp(1.45rem,3vw,2.7rem);
+  width:clamp(14.1rem,26.3vw,18.75rem);
+  top:calc(50% + .55rem);
+  transform:translateY(-50%);
+  border:1px solid rgba(244,239,230,.24);
+  background:#151c67;
+  box-shadow:0 1.2rem 2.75rem rgba(0,0,0,.3),0 .2rem .7rem rgba(0,0,0,.18);
+}
+.community-flyer img{display:block;width:100%;height:auto;}
+
 @media (max-width:600px){
   .credential-unit{white-space:normal;}
+  .community{padding:3.75rem 1.5rem !important;}
+  .community-feature{
+    grid-template-columns:1fr;
+    gap:2rem;
+  }
+  .community-copy h2{font-size:clamp(2.35rem,11vw,3.25rem);}
+  .community-details{grid-template-columns:1fr;gap:1rem;}
+  .community-visual-stage{
+    display:flex;
+    flex-direction:column;
+    gap:1.1rem;
+    min-height:0;
+    padding:1rem;
+  }
+  .community-flyer,
+  .community-group-photo{position:static;transform:none;width:100%;}
+  .community-flyer{align-self:center;max-width:15rem;}
+  .community-group-photo{aspect-ratio:4 / 3;}
 }
+
+@media (max-width:600px){
+  .community-event-meta{white-space:normal;}
+}
+
+/* ── Homepage editorial reduction ─────────────────────── */
+main{display:flex;flex-direction:column;}
+.work{order:1;}.writing{order:2;}.about-v4-final{order:3;}.community{order:4;}.cta-band{order:5;}
+@media (min-width:901px){
+  .hero{min-height:650px;}
+  .hero-left{padding-top:5.25rem;padding-bottom:3.5rem;border-right:none;}
+  .hero-right{padding-top:4.1rem!important;padding-bottom:2rem!important;}
+  .hero-viz{min-height:300px;max-height:330px;flex:none;}
+  .hero-stats{min-height:154px;}
+}
+section#discipline{padding:0!important;}
+section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!important;}
+.work-inner{padding-top:5rem!important;padding-bottom:4rem!important;}
+.newsletter-strip{display:none!important;}
+.writing{padding-top:4.25rem!important;padding-bottom:3.5rem!important;}
+.writing > .section-label,.writing-intro{padding-left:clamp(1.5rem,4vw,4.5rem)!important;}
+.writing-intro{margin-bottom:1.75rem!important;max-width:33ch;}
+.writing-editorial{margin:0 clamp(1.5rem,4vw,4.5rem)!important;grid-template-columns:minmax(0,1.2fr) minmax(18rem,.8fr)!important;}
+.wf-inner{min-height:220px!important;}.wf-content{padding:2rem!important;}.writing-small{padding:1.35rem 1.6rem!important;}.ws-desc{display:none;}
+.writing-home-actions{display:flex;gap:1.5rem;flex-wrap:wrap;padding:1.5rem clamp(1.5rem,4vw,4.5rem) 0;}
+.writing-home-actions a{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;}
+.about-v4-final{padding-top:4rem!important;padding-bottom:3.75rem!important;}.about-v4-final-grid{gap:3.25rem;}.about-v4-final-right::before{display:none;}.about-v4-final-lede{margin-bottom:1rem;}.about-v4-final-body{margin-bottom:.6rem;}.about-v4-final-certs{margin-top:1.25rem;}
+.community{padding-top:3.75rem!important;padding-bottom:3.75rem!important;}.community-visual-stage{min-height:clamp(22rem,30vw,27rem);}.community-copy > p{margin-top:1rem;}.community-record-sponsor{margin-top:1.15rem;}
+@media (max-width:900px){.hero-left{border-right:none;}.hero-viz{min-height:260px;height:260px;}.writing-editorial{grid-template-columns:1fr!important;}.wf-inner{min-height:0!important;}.community-feature{grid-template-columns:1fr;}}
+@media (max-width:600px){section#discipline > div:first-child{padding:1.8rem 1.25rem!important;}.writing{padding-top:3.25rem!important;padding-bottom:2.75rem!important;}.writing-editorial{margin:0 1.25rem!important;}.writing-home-actions{padding:1.25rem 1.25rem 0;}.about-v4-final{padding-top:3.25rem!important;padding-bottom:3.25rem!important;}.community{padding-top:3.1rem!important;padding-bottom:3.1rem!important;}.community-visual-stage{min-height:0;}}
+
+/* ── Focused homepage rhythm pass ─────────────────────── */
+.hero-left{border-right:none!important;}
+@media (min-width:901px){
+  .hero{min-height:690px;}
+  .hero-right{padding-top:5rem!important;}
+  .hero-viz{min-height:380px;max-height:410px;}
+}
+.work-inner{padding-top:4.5rem!important;}
+.work .work-intro{font-style:italic!important;color:rgba(244,239,230,.86)!important;margin-bottom:2.5rem!important;}
+.writing{background:#eadfce;}
+.writing-home-actions .btn{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;padding:.92rem 1.35rem;}
+.writing-home-actions .btn-outline{border-color:rgba(25,23,20,.45);color:var(--ink);}
+.about-v4-final{max-width:none;background:#3d6055;color:#f5eee9;}
+.about-v4-final::before{background:rgba(245,238,233,.22);}
+.about-v4-final-label,.about-v4-final-caption-range,.about-v4-final-body{color:rgba(245,238,233,.72);}
+.about-v4-final-label::before,.about-v4-final-caption{border-color:rgba(245,238,233,.22);}
+.about-v4-final-caption-name,.about-v4-final-headline,.about-v4-final-lede{color:#f5eee9;}
+.about-v4-final-portrait{border:1px solid rgba(245,238,233,.28);box-shadow:0 18px 38px rgba(0,0,0,.2);}
+.about-v4-final-btn-sage{background:#f5eee9;color:#3d6055;}
+.about-v4-final-btn-sage:hover{background:#eadfce;}
+
+/* ── Final homepage correction pass ────────────────────── */
+.hero-left,.hero-right{border-right:none!important;}
+.hero-stats{border-left:none!important;}
+@media (min-width:901px){h1.hero-headline{font-size:clamp(3.05rem,4.55vw,4.85rem);}.work-rail-chat{padding-top:3.15rem;}}
+.writing-home-actions .btn-sage{color:#fff!important;background:var(--sage)!important;}
+.writing-home-actions .btn-outline{color:var(--ink)!important;background:transparent!important;}
+.writing-home-actions .btn:hover{transform:translateY(-1px);}
+.writing-home-actions .btn:focus-visible,.about-v4-final-btn:focus-visible{outline:2px solid currentColor;outline-offset:3px;}
+.about-v4-final{padding-left:clamp(1.5rem,4vw,4.5rem);padding-right:clamp(1.5rem,4vw,4.5rem);}
+.about-v4-final::before{display:none;}
+.about-v4-final-meta{max-width:1280px;margin:0 auto 2rem;padding-top:0;}
+.about-v4-final-grid{max-width:1280px;margin:0 auto;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(3rem,8vw,8rem);justify-content:normal;}
+.about-v4-final-heading{padding-top:.1rem;}
+.about-v4-final-right{max-width:42rem;padding-top:0;}
+.about-v4-final-headline{margin:0;}
+.about-v4-final-certs{max-width:100%;color:rgba(245,238,233,.8)!important;}
+.about-v4-final-certs a{color:#f5eee9!important;}
+@media (max-width:700px){.about-v4-final-grid{grid-template-columns:1fr;gap:1.75rem;}.about-v4-final-meta{margin-bottom:1.5rem;}}
+
+/* ── Surgical homepage correction pass ─────────────────── */
+.hero-left,.hero-right,.hero-stats{border-left:none!important;border-right:none!important;}
+@media (min-width:901px){
+  .hero-viz{min-height:405px;max-height:435px;}
+  .work-rail-chat{padding-top:2.4rem;}
+}
+.about-v4-final{
+  width:100vw;
+  max-width:none;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding:3.25rem clamp(1.5rem,4vw,4.5rem)!important;
+  background:#3d6055;
+}
+.about-v4-final-grid{
+  grid-template-columns:minmax(0,.66fr) minmax(0,1fr);
+  gap:clamp(2.5rem,6vw,6rem);
+  align-items:center;
+}
+.about-v4-final-meta{margin-bottom:1.6rem;}
+.about-v4-final-positioning{margin:1rem 0 0;font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;line-height:1.35;color:rgba(245,238,233,.72);}
+.about-v4-final-lede{max-width:44ch;}
+.about-v4-final-body{max-width:54ch;}
+@media (max-width:700px){.about-v4-final{padding-top:2.75rem!important;padding-bottom:2.9rem!important;}.about-v4-final-grid{grid-template-columns:1fr;gap:1.5rem;}}
+
+/* ── Final homepage polish pass ────────────────────────── */
+.hero-left{background:transparent;}
+.about-v4-final{padding-top:2.5rem!important;padding-bottom:2.55rem!important;}
+.about-v4-final-meta{margin-bottom:1.25rem;}
+.about-v4-final-grid{align-items:start;}
+.about-v4-final-heading{align-self:start;}
+@media (max-width:700px){.about-v4-final{padding-top:2.25rem!important;padding-bottom:2.35rem!important;}.about-v4-final-meta{margin-bottom:1.1rem;}.about-v4-final-grid{gap:1.3rem;}}
+
+/* ── Final signature and CTA polish ────────────────────── */
+.about-signature{display:block;width:clamp(17rem,21.5vw,19.1rem);height:auto;margin-top:1.35rem;opacity:.83;}
+.cta-band{background:#2b2622;}
+@media (max-width:700px){.about-signature{width:clamp(11.875rem,52vw,13.75rem);margin-top:1.1rem;}}
 
 </style>
 
@@ -2999,20 +3228,7 @@ section#discipline > div:first-child{
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links" id="nav-links">
-    <li><a href="#discipline">Discipline</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#community">Community</a></li>
-    <li><a href="#writing">Writing</a></li>
-    <li class="nav-has-dropdown" id="nav-tools">
-      <button type="button" class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false" aria-controls="nav-tools-menu" id="nav-tools-btn">Tools <span class="nav-chevron">▾</span></button>
-      <ul class="nav-dropdown-menu" id="nav-tools-menu">
-        <li><a href="https://market-tape.cloudandcapital.com" target="_blank" rel="noopener noreferrer">Market Tape</a></li>
-        <li><a href="/signal-audit">Signal Audit</a></li>
-        <li><a href="/interactive-lab">Interactive Lab</a></li>
-        <li><a href="https://guard.cloudandcapital.com" target="_blank" rel="noopener noreferrer">Cloud Cost Guard + Lumen</a></li>
-      </ul>
-    </li>
+    {navigation.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
   </ul>
 </nav>
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
@@ -3050,63 +3266,10 @@ section#discipline > div:first-child{
       <div class="mini-stat"><div class="s-num">CLOUD</div><div class="s-lbl">AWS · AZURE · GCP</div></div>
       <div class="mini-stat"><div class="s-num g">AI</div><div class="s-lbl">Spend · Infrastructure</div></div>
       <div class="mini-stat"><div class="s-num g">SAAS</div><div class="s-lbl">LICENSES · RENEWALS</div></div>
-      <div class="mini-stat"><div class="s-num">LA</div><div class="s-lbl">FinOps community</div></div>
+      <div class="mini-stat"><div class="s-num">CAPITAL</div><div class="s-lbl">RISK · ALLOCATION</div></div>
     </div>
   </div>
 </section>
-
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span class="mi">Cloud Economics</span><span class="ms">◆</span>
-    <span class="mi">AI Spend</span><span class="ms">◆</span>
-    <span class="mi">FinOps Tools</span><span class="ms">◆</span>
-    <span class="mi">Finance × Engineering</span><span class="ms">◆</span>
-    <span class="mi">Markets &amp; Mimosas</span>
-  </div>
-</div>
-
-<!-- DISCIPLINE -->
-<section id="discipline" style="background:#D8EAD9;">
-  <div style="padding:2.5rem 3.5rem 3rem;">
-    <div class="section-label" style="color:var(--sage);margin-bottom:.75rem;">Discipline</div>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.75rem,3vw,3rem);font-weight:400;font-style:italic;color:var(--sage-dark);line-height:1.2;max-width:28ch;margin:0;">Cost is shaped before it is reported.</h2>
-  </div>
-
-  <!-- Card row -->
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:rgba(90,126,94,.18);">
-
-    <div style="background:var(--white);padding:1.75rem 1.75rem 1.5rem;">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:300;color:rgba(90,126,94,.18);line-height:1;margin-bottom:.75rem;">01</div>
-      <div class="discipline-card-title">The invoice is already too late.</div>
-      <div class="discipline-card-copy">Architecture choices, vendor agreements, and reservation logic shape cost before reporting begins. By the time the number surfaces, the decision behind it is already old.</div>
-    </div>
-
-    <div style="background:var(--white);padding:1.75rem 1.75rem 1.5rem;">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:300;color:rgba(90,126,94,.18);line-height:1;margin-bottom:.75rem;">02</div>
-      <div class="discipline-card-title">Cost is a design input, not a report.</div>
-      <div class="discipline-card-copy">Strong teams build cost into architecture reviews, vendor commitments, and roadmap decisions. The report comes later. The economic decision does not.</div>
-    </div>
-
-    <div style="background:var(--white);padding:1.75rem 1.75rem 1.5rem;">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:300;color:rgba(90,126,94,.18);line-height:1;margin-bottom:.75rem;">03</div>
-      <div class="discipline-card-title">Finance and engineering need one language.</div>
-      <div class="discipline-card-copy">A shared cost model lets finance and engineering make the decision together, without a translation layer or another reporting cycle.</div>
-    </div>
-
-    <div style="background:#304D35;padding:1.5rem 1.75rem 1.5rem;display:flex;flex-direction:column;">
-      <div style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(212,232,214,.45);margin-bottom:.85rem;">What changes</div>
-      <div style="font-family:'DM Sans',sans-serif;font-size:.95rem;color:rgba(212,232,214,.9);line-height:1.7;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.07);">Cost gets modeled early, before commitments start to compound.</div>
-      <div style="font-family:'DM Sans',sans-serif;font-size:.95rem;color:rgba(212,232,214,.9);line-height:1.7;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.07);">Utilization becomes a core operating metric, not an afterthought.</div>
-      <div style="font-family:'DM Sans',sans-serif;font-size:.95rem;color:rgba(212,232,214,.9);line-height:1.7;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.07);">Architecture decisions carry explicit economic tradeoffs.</div>
-      <div style="font-family:'DM Sans',sans-serif;font-size:.95rem;color:rgba(212,232,214,.9);line-height:1.7;padding:.55rem 0;">Finance and engineering work from a shared cost language instead of translating after the fact.</div>
-    </div>
-
-  </div>
-
-</section>
-
-
 
 <style>
 .cdb{position:relative;width:100%;height:200px;background:#ffffff;overflow:hidden;isolation:isolate;}
@@ -3168,7 +3331,7 @@ section#discipline > div:first-child{
 <section class="work" id="work">
   <div class="work-inner reveal">
     <div class="section-label" style="color:rgba(244,239,230,.35);">Work</div>
-    <h2 class="work-intro">Tools for the decisions behind the bill.</h2>
+    <h2 class="work-intro">Cost is shaped before it is reported.</h2>
 
     <div class="work-editorial-grid">
 
@@ -3193,9 +3356,9 @@ section#discipline > div:first-child{
             </div>
 
             <div class="work-chat-bubble work-chat-bubble-ai work-chat-bubble-ai-main">
-              <strong>EC2 jumped 154% in one day</strong>, from <strong>$482</strong> to <strong>$1,226</strong>. It is now the largest cost driver at <strong>40.5% of cloud spend</strong>.<br><br>
-              I also found <strong>19 unused SaaS licenses</strong> costing <strong>$242 per month</strong>, while AI spend rose <strong>12.4%</strong>.<br><br>
-              <strong>Start with the EC2 spike. Was this a planned launch or uncontrolled autoscaling?</strong>
+              <strong>EC2 jumped 154% in one day, from $482 to $1,226.</strong> It is now the largest cost driver at <strong>40.5% of cloud spend.</strong><br><br>
+              I also found <strong>19 unused SaaS licenses costing $242 per month.</strong> AI spend rose <strong>12.4%</strong>, which is worth checking against token volume and model mix before it becomes the next material driver.<br><br>
+              <strong>Start with EC2, then validate the AI increase. Was this a planned launch or uncontrolled autoscaling?</strong>
             </div>
           </div>
 
@@ -3273,54 +3436,15 @@ section#discipline > div:first-child{
   </div>
 
   <div class="about-v4-final-grid">
-    <aside class="about-v4-final-left">
-      <div class="about-v4-final-portrait">
-        <img src="/images/diana-portrait.jpg" alt="Diana Molski portrait" loading="lazy">
-      </div>
-      <div class="about-v4-final-caption">
-        <div class="about-v4-final-caption-name">Diana Molski</div>
-        <div class="about-v4-final-caption-range">Founder, Cloud &amp; Capital</div>
-        <div class="about-v4-final-caption-range">AI Spend <span class="sep">·</span> FinOps <span class="sep">·</span> Markets</div>
-      </div>
-    </aside>
+    <div class="about-v4-final-heading">
+      <h2 class="about-v4-final-headline">Finance native.<br>Systems builder.</h2>
+      <p class="about-v4-final-positioning">Where finance and engineering meet.</p>
+      <img class="about-signature" src="/images/diana-molski-signature-clean-cream.png" alt="Diana Molski signature" loading="lazy" />
+    </div>
 
     <div class="about-v4-final-right">
-      <h2 class="about-v4-final-headline">Finance native.<br>Systems builder.</h2>
-      <div class="about-v4-final-fragment" aria-hidden="true">
-        <div class="about-frag-card about-frag-card-terminal">
-          <div class="about-frag-terminal-top">
-            <span>cc://decision-layer</span>
-            <span>live</span>
-          </div>
-
-          <div class="about-frag-terminal-screen">
-            <div class="term-line"><span class="prompt">&gt;</span> ingest cloud_costs.csv</div>
-            <div class="term-line"><span class="prompt">&gt;</span> normalize usage, commitments, variance</div>
-            <div class="term-line"><span class="prompt">&gt;</span> anomaly trace: compute +18.4%</div>
-            <div class="term-line"><span class="prompt">&gt;</span> model decision path…</div>
-            <div class="term-line term-line-live">
-              <span class="prompt">&gt;</span>
-              <span class="typing">updating decision layer</span><span class="cursor"></span>
-            </div>
-          </div>
-
-          <div class="about-frag-terminal-bottom">
-            <span>systems active</span>
-            <span>pre‑invoice view</span>
-          </div>
-        </div>
-      </div>
-
-
-      <p class="about-v4-final-lede">My background is in finance, including Morgan Stanley and equity trading. Today I apply that risk and allocation lens to cloud, SaaS, and AI infrastructure spend.</p>
-
-      <p class="about-v4-final-body">Through Cloud &amp; Capital, I build open source FinOps tools, decision systems, and research for the point where finance and engineering meet. The goal is to make the economic consequence visible while there is still time to change the decision.</p>
-
-      <p class="about-v4-final-body">I also serve as the Los Angeles regional leader for FinOps Weekly, helping bring practitioners across finance, engineering, and cloud together around the operating reality behind the bill.</p>
-
-      <div class="about-thesis">
-        <p>"Most teams still see cost after it happens. The real work sits earlier, inside the decisions that create it."</p>
-      </div>
+      <p class="about-v4-final-lede">My background is in finance, including Morgan Stanley and equity trading. Through Cloud &amp; Capital, I build open source FinOps tools and research the decisions shaping cloud, SaaS, and AI infrastructure spend.</p>
+      <p class="about-v4-final-body">The work sits where finance and engineering meet: allocation, commitments, utilization, and the operating choices that shape the bill.</p>
 
 <div class="about-v4-final-certs"><span class="credential-unit">FinOps Certified Practitioner</span><span class="credential-separator" aria-hidden="true"> · </span><span class="credential-unit">FinOps Certified FOCUS Analyst</span><span class="credential-separator" aria-hidden="true"> · </span><span class="credential-unit">AWS Certified Cloud Practitioner</span><span class="credential-separator" aria-hidden="true"> · </span><span class="credential-unit">Microsoft Azure AI Fundamentals</span><span class="credential-separator" aria-hidden="true"> · </span><span class="credential-unit">Stacklet FinOps Governance for Cloud &amp; AI</span></div>
 <div class="about-v4-final-certs" style="margin-top:.35rem;"><a href="https://hub.pointfive.co/inefficiencies/overcommitted-savings-plans-after-temporary-ai-inference-demand-spikes?cloud-services=aws-savings-plans" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:.2em;">Contributor, PointFive Cloud Efficiency Hub</a></div>
@@ -3332,65 +3456,21 @@ section#discipline > div:first-child{
 <!-- COMMUNITY -->
 
 <section class="community" id="community">
-  <div class="community-top">
-    <div class="reveal">
+  <div class="community-feature reveal">
+    <div class="community-copy">
       <div class="section-label">Community</div>
-      <h2 class="comm-heading">FinOps Weekly<br><em style="font-style:italic;color:var(--ink-muted);">Los Angeles</em></h2>
-      <div class="comm-collab">In partnership with</div>
-      <div class="comm-collab-logos" aria-hidden="true">
-        <img src="/images/finops-weekly-logo.png" alt="" class="comm-collab-logo comm-collab-logo-fw" loading="lazy">
-        <img src="/images/sponsor-logo.webp" alt="" class="comm-collab-logo comm-collab-logo-sc" loading="lazy">
-      </div>
-      <p class="comm-body">FinOps Weekly Los Angeles brings finance, engineering, and cloud practitioners together for practical conversations about modern technology spend. Produced by FinOps Weekly and SmartClouds and hosted locally by Diana Molski, Los Angeles regional leader.</p>
-      <a href="mailto:diana@cloudandcapital.com?subject=FinOps%20Weekly%20Los%20Angeles" class="btn btn-sage">Get Event Updates</a>
+      <h2>A FinOps gathering<br><em>in Los Angeles.</em></h2>
+      <p>In April 2026, Diana helped organize and host the first FinOps Weekly Los Angeles meetup in partnership with FinOps Weekly and SmartClouds, bringing finance, engineering, cloud, and FinOps practitioners together at Common Space Brewery.</p>
+      <p class="community-event-meta">April 2026 · Common Space Brewery · Hawthorne</p>
+      <p class="community-record-sponsor">Speakers from Ulta Beauty and Wiv.ai · Sponsored by Wiv.ai</p>
     </div>
-
-    <div class="event-stack reveal d2">
-      <article class="ev-card ev-card-feature ev-card-upcoming">
-        <div class="ev-feature-layout">
-          <div class="ev-feature-copy">
-            <div class="ev-tag">Upcoming · August 27, 2026 · Vol. 02</div>
-            <div class="ev-title">Shifting FinOps Left All the Way to the AI Code Generator</div>
-            <div class="ev-speaker-line"><strong>Hassan Khajeh Hosseini</strong><br>CEO, Infracost · FinOps Foundation Governing Board Member</div>
-            <div class="ev-meta" style="margin-top:.6rem;font-family:'DM Mono',monospace;font-size:.53rem;letter-spacing:.1em;text-transform:uppercase;">Location TBA</div>
-            <div class="ev-meta">Learn how engineering teams can bring cloud cost awareness earlier into the development lifecycle and build more cost efficient software from the start.</div>
-            <a href="https://luma.com/b128j01h" target="_blank" rel="noopener noreferrer" class="ev-register">Register for the event →</a>
-            <div class="ev-sponsor ev-sponsor-dark">Sponsored by Infracost</div>
-          </div>
-        </div>
-      </article>
-      <article class="ev-card ev-card-feature">
-        <div class="ev-feature-layout">
-          <div class="ev-feature-copy">
-            <div class="ev-tag">Past event · April 9, 2026 · Hawthorne, CA · Vol. 01</div>
-            <div class="ev-title">Using AI to Put the Ops in FinOps</div>
-            <div class="ev-meta">Common Space Brewery · South Bay.</div>
-            <div class="ev-meta" style="margin-top:.6rem;">Our first LA FinOps Meetup brought finance, engineering, and cloud practitioners together for an informal evening on FinOps, AI, and the operating work behind modern technology spend.</div>
-            <div class="ev-meta" style="margin-top:.5rem;">Featuring sessions from Ulta Beauty and Wiv.ai on real world FinOps and AI in practice.</div>
-            <div class="ev-sponsor ev-sponsor-dark">Sponsored by Wiv.ai</div>
-          </div>
-          <div class="ev-poster-wrap">
-            <img src="/images/event-poster-vol01.png" alt="Using AI to Put the Ops in FinOps poster" class="ev-poster" loading="lazy">
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-
-  <div class="photos-section reveal">
-    <div class="photos-label">
-      <span>From the community</span>
-      <div>
-        <button type="button" class="ph-nav-btn" id="ph-prev" aria-label="Previous event photo">←</button>
-        <button type="button" class="ph-nav-btn" id="ph-next" aria-label="Next event photo">→</button>
-      </div>
-    </div>
-    <div class="photos-viewport" role="region" aria-label="FinOps Weekly Los Angeles event photos">
-      <div class="photos-track" id="ph-track">
-        <div class="photo-slide"><img src="/images/community/photo-1.jpg" alt="FinOps Weekly LA event" loading="lazy"></div>
-        <div class="photo-slide"><img src="/images/community/photo-2.jpeg" alt="FinOps Weekly LA event" loading="lazy"></div>
-        <div class="photo-slide"><img src="/images/community/photo-3.jpeg" alt="FinOps Weekly LA event" loading="lazy"></div>
-      </div>
+    <div class="community-visual-stage" aria-label="April 9, 2026 FinOps Weekly Los Angeles event materials">
+      <figure class="community-group-photo">
+        <img src="/images/community/photo-1.jpg" alt="FinOps Weekly Los Angeles attendees smiling together at Common Space Brewery" loading="lazy">
+      </figure>
+      <figure class="community-flyer">
+        <img src="/images/event-poster-vol01.png" alt="April 9, 2026 FinOps Weekly Los Angeles flyer featuring Diana Molski" loading="lazy">
+      </figure>
     </div>
   </div>
 </section>
@@ -3416,7 +3496,7 @@ section#discipline > div:first-child{
       </div>
       <div class="newsletter-actions">
         <a href="https://cloudandcapital.substack.com" class="btn btn-sage" target="_blank" rel="noopener noreferrer">Subscribe on Substack</a>
-        <a href={latestIssue.url} class="btn btn-outline-w" target="_blank" rel="noopener noreferrer">Latest post →</a>
+        <a href={writingFeatured.href} class="btn btn-outline-w" target="_blank" rel="noopener noreferrer">Latest post →</a>
       </div>
     </div>
   </div>
@@ -3425,18 +3505,18 @@ section#discipline > div:first-child{
   <div class="writing-editorial">
 
     <!-- Featured card: Markets & Mimosas column -->
-    <a href={latestIssue.url} class="writing-featured reveal" target="_blank" rel="noopener noreferrer">
+    <a href={writingFeatured.href} class="writing-featured reveal" target="_blank" rel="noopener noreferrer">
       <div class="wf-inner">
         <!-- Left: text -->
         <div class="wf-content">
           <div class="wf-eyebrow">Markets &amp; Mimosas · Latest</div>
-          <div class="wf-title">{latestIssue.title}</div>
-          <div class="wf-desc">{latestIssue.description}</div>
+          <div class="wf-title">{writingFeatured.title}</div>
+          <div class="wf-desc">{writingFeatured.description}</div>
           <div class="wf-cta">Read latest →</div>
         </div>
         <!-- Right: image -->
         <div class="wf-img-wrap">
-          <img src={latestIssue.image} alt={latestIssue.imageAlt} class="wf-img" loading="lazy">
+          <img src={writingFeatured.image} alt={writingFeatured.imageAlt} class="wf-img" loading="lazy">
         </div>
       </div>
     </a>
@@ -3459,6 +3539,10 @@ section#discipline > div:first-child{
 
   </div>
 
+  <div class="writing-home-actions">
+    <a class="btn btn-sage" href="/writing">Explore all writing</a>
+    <a class="btn btn-outline" href="https://cloudandcapital.substack.com" target="_blank" rel="noopener noreferrer">Subscribe on Substack</a>
+  </div>
 
 </section>
 
@@ -3475,13 +3559,7 @@ section#discipline > div:first-child{
 <footer>
   <a class="f-logo" href="/">Cloud & Capital</a>
   <ul class="f-nav">
-    <li><a href="#discipline">Discipline</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#community">Community</a></li>
-    <li><a href="#writing">Writing</a></li>
-    <li><a href="https://market-tape.cloudandcapital.com" target="_blank" rel="noopener noreferrer">Market Tape</a></li>
-    <li><a href="https://www.linkedin.com/in/dianalyst" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+    {footerLinks.map((link) => <li><a href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>{link.label}</a></li>)}
   </ul>
   <span class="f-copy">© 2026 Cloud & Capital · diana@cloudandcapital.com</span>
 </footer>
@@ -3519,37 +3597,6 @@ section#discipline > div:first-child{
     });
   },{threshold:0.35}).observe(s);
 })();
-// Photo carousel
-let pos = 0;
-const track = document.getElementById('ph-track');
-const getSlides = () => track ? track.querySelectorAll('.photo-slide') : [];
-const slideW = () => { const s = getSlides(); return s.length ? s[0].offsetWidth + 16 : 0; };
-const visibleCount = () => {
-  if (!track) return 3;
-  const vpW = track.parentElement.offsetWidth;
-  const sw = slideW();
-  return sw > 0 ? Math.max(1, Math.floor(vpW / sw)) : 3;
-};
-const maxPos = () => Math.max(0, getSlides().length - visibleCount());
-const goTo = (n) => {
-  pos = Math.max(0, Math.min(n, maxPos()));
-  track.style.transform = `translateX(-${pos * slideW()}px)`;
-};
-const phNext = document.getElementById('ph-next');
-const phPrev = document.getElementById('ph-prev');
-if (phNext) phNext.addEventListener('click', () => goTo(pos + 1));
-if (phPrev) phPrev.addEventListener('click', () => goTo(pos - 1));
-
-// Touch swipe support
-if (track) {
-  let touchStartX = 0;
-  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend', e => {
-    const dx = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(dx) > 40) { goTo(dx > 0 ? pos + 1 : pos - 1); }
-  }, { passive: true });
-}
-
 // Animated market chart
 (function(){
   const canvas = document.getElementById('market-canvas');
@@ -3664,22 +3711,6 @@ if (track) {
       toggle.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     });
-  });
-})();
-
-// Tools dropdown toggle
-(function() {
-  var btn = document.getElementById('nav-tools-btn');
-  var item = document.getElementById('nav-tools');
-  if (!btn || !item) return;
-  btn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    var isOpen = item.classList.toggle('is-open');
-    btn.setAttribute('aria-expanded', isOpen);
-  });
-  document.addEventListener('click', function() {
-    item.classList.remove('is-open');
-    btn.setAttribute('aria-expanded', 'false');
   });
 })();
 

@@ -1,0 +1,62 @@
+---
+interface Props {
+  label: string;
+  title: string;
+  description: string;
+}
+
+const { label, title, description } = Astro.props;
+---
+
+<main class="architecture-route">
+  <div class="architecture-route-inner">
+    <p class="architecture-route-label">{label}</p>
+    <h1>{title}</h1>
+    <p>{description}</p>
+    <a href="/">Back to Cloud &amp; Capital</a>
+  </div>
+</main>
+
+<style>
+  .architecture-route {
+    min-height: calc(100vh - 8rem);
+    display: grid;
+    align-items: center;
+    padding: 8rem clamp(1.5rem, 5vw, 4.5rem) 4rem;
+    background: #f5eee9;
+  }
+  .architecture-route-inner { max-width: 42rem; }
+  .architecture-route-label {
+    margin: 0 0 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: .65rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #6b8e7f;
+  }
+  h1 {
+    margin: 0 0 1.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1;
+    color: #000;
+  }
+  p {
+    max-width: 36rem;
+    margin: 0 0 2rem;
+    color: #4a4a4a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+  a {
+    color: #3d6055;
+    font-family: 'DM Mono', monospace;
+    font-size: .65rem;
+    letter-spacing: .12em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  a:hover { text-decoration: underline; }
+</style>

@@ -3178,6 +3178,31 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
 .about-v4-final-certs a{color:#f5eee9!important;}
 @media (max-width:700px){.about-v4-final-grid{grid-template-columns:1fr;gap:1.75rem;}.about-v4-final-meta{margin-bottom:1.5rem;}}
 
+/* ── Surgical homepage correction pass ─────────────────── */
+.hero-left,.hero-right,.hero-stats{border-left:none!important;border-right:none!important;}
+@media (min-width:901px){
+  .hero-viz{min-height:405px;max-height:435px;}
+  .work-rail-chat{padding-top:2.4rem;}
+}
+.about-v4-final{
+  width:100vw;
+  max-width:none;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  padding:3.25rem clamp(1.5rem,4vw,4.5rem)!important;
+  background:#3d6055;
+}
+.about-v4-final-grid{
+  grid-template-columns:minmax(0,.66fr) minmax(0,1fr);
+  gap:clamp(2.5rem,6vw,6rem);
+  align-items:center;
+}
+.about-v4-final-meta{margin-bottom:1.6rem;}
+.about-v4-final-positioning{margin:1rem 0 0;font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;line-height:1.35;color:rgba(245,238,233,.72);}
+.about-v4-final-lede{max-width:44ch;}
+.about-v4-final-body{max-width:54ch;}
+@media (max-width:700px){.about-v4-final{padding-top:2.75rem!important;padding-bottom:2.9rem!important;}.about-v4-final-grid{grid-template-columns:1fr;gap:1.5rem;}}
+
 </style>
 
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -3400,6 +3425,7 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
   <div class="about-v4-final-grid">
     <div class="about-v4-final-heading">
       <h2 class="about-v4-final-headline">Finance native.<br>Systems builder.</h2>
+      <p class="about-v4-final-positioning">Where finance and engineering meet.</p>
     </div>
 
     <div class="about-v4-final-right">

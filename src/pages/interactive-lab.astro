@@ -33,6 +33,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .lab-workspace { display: grid; grid-template-columns: minmax(360px, 42%) minmax(0, 58%); min-height: 650px; }
     .lab-input-pane { padding: 2.5rem 2.6rem 2.75rem; border-right: 1px solid var(--border); background: #fff; }
     .lab-output-pane { position: relative; min-width: 0; padding: 2.5rem 2.8rem 3rem; background: #fbf9f6; }
+    .lab-workspace.is-results { display: block; min-height: 0; }
+    .lab-workspace.is-results .lab-input-pane { display: none; }
+    .lab-workspace.is-results .lab-output-pane { width: 100%; padding: 3rem 3.5rem 3.5rem; }
     .pane-eyebrow { margin-bottom: .7rem; font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--forest-deep); font-weight: 500; }
     .pane-heading { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.55rem); line-height: 1.12; font-weight: 400; letter-spacing: -.02em; }
     .pane-intro { margin-top: .8rem; font-family: var(--font-body); font-size: 1.08rem; line-height: 1.55; color: var(--text-muted); }
@@ -91,6 +94,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     .decision-brief { animation: briefIn .35s ease; }
     @keyframes briefIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .context-summary { margin-bottom: 1.8rem; border: 1px solid var(--border); background: #fff; }
+    .context-summary summary { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; padding: .9rem 1rem; cursor: pointer; list-style: none; }
+    .context-summary summary::-webkit-details-marker { display: none; }
+    .context-summary-label { font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: var(--forest-deep); font-weight: 500; }
+    .context-summary-decision { flex: 1; overflow: hidden; color: var(--text-muted); font-family: var(--font-body); font-size: .94rem; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
+    .context-summary-toggle { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-light); }
+    .context-summary[open] .context-summary-toggle { visibility: hidden; }
+    .context-summary-body { padding: 0 1rem 1rem; border-top: 1px solid var(--border); }
+    .context-summary-list { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem 1.25rem; padding: 1rem 0; }
+    .context-summary-item dt { font-size: .59rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-light); }
+    .context-summary-item dd { margin-top: .25rem; font-family: var(--font-body); font-size: .92rem; line-height: 1.4; color: var(--text-muted); }
+    .context-summary-actions { display: flex; justify-content: flex-end; }
     .brief-header { padding-bottom: 1.8rem; border-bottom: 1px solid var(--border-strong); }
     .brief-header-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
     .brief-posture { padding: .38rem .62rem; border: 1px solid var(--forest); color: var(--forest-deep); font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; }
@@ -109,10 +124,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .assumption-item span { display: block; margin-top: .12rem; }
 
     .options-wrap { overflow-x: auto; }
-    .options-table { width: 100%; min-width: 690px; border-collapse: collapse; background: #fff; font-size: .76rem; }
-    .options-table th { padding: .7rem .65rem; border: 1px solid var(--border); background: #f2ece6; text-align: left; font-size: .59rem; letter-spacing: .09em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
-    .options-table td { padding: .78rem .65rem; border: 1px solid var(--border); vertical-align: top; line-height: 1.42; color: var(--text-muted); }
-    .options-table td:first-child { font-family: var(--font-display); font-size: .95rem; color: var(--text); }
+    .decision-matrix { width: 100%; table-layout: fixed; border-collapse: collapse; background: #fff; }
+    .decision-matrix th, .decision-matrix td { padding: .9rem 1rem; border: 1px solid var(--border); text-align: left; vertical-align: top; }
+    .decision-matrix thead th { background: #f2ece6; font-family: var(--font-display); font-size: 1rem; line-height: 1.25; color: var(--text); font-weight: 400; }
+    .decision-matrix thead th:first-child { width: 15%; font-family: var(--font-ui); font-size: .59rem; letter-spacing: .09em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
+    .decision-matrix tbody th { width: 15%; background: #f8f4f0; font-size: .6rem; letter-spacing: .09em; text-transform: uppercase; color: var(--forest-deep); font-weight: 500; }
+    .decision-matrix td { font-family: var(--font-body); font-size: .92rem; line-height: 1.45; color: var(--text-muted); }
+    .matrix-mobile { display: none; }
+    .matrix-option { background: #fff; border: 1px solid var(--border); }
+    .matrix-option + .matrix-option { margin-top: 1rem; }
+    .matrix-option h4 { padding: .9rem 1rem; background: #f2ece6; font-family: var(--font-display); font-size: 1.1rem; line-height: 1.25; font-weight: 400; }
+    .matrix-option dl { padding: 0 1rem; }
+    .matrix-option-row { display: grid; grid-template-columns: 7rem 1fr; gap: .75rem; padding: .8rem 0; border-top: 1px solid var(--border); }
+    .matrix-option-row dt { font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; color: var(--forest-deep); font-weight: 500; }
+    .matrix-option-row dd { font-family: var(--font-body); font-size: .92rem; line-height: 1.42; color: var(--text-muted); }
     .lens-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; }
     .lens-card { padding: 1rem; background: #fff; border-top: 2px solid var(--forest); }
     .lens-card h4 { font-family: var(--font-display); font-size: 1.15rem; font-style: italic; font-weight: 400; }
@@ -147,6 +172,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       .lab-workspace { grid-template-columns: 1fr; }
       .lab-input-pane { border-right: 0; border-bottom: 1px solid var(--border); }
       .lab-output-pane { min-height: 560px; }
+      .lab-workspace.is-results .lab-output-pane { min-height: 0; padding: 2.5rem 2.6rem 3rem; }
     }
 
     @media (max-width: 640px) {
@@ -159,9 +185,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       .lab-step { justify-content: center; padding: .8rem .35rem; gap: .35rem; letter-spacing: .08em; }
       .lab-step-number { display: none; }
       .lab-input-pane, .lab-output-pane { padding: 1.6rem 1rem 2rem; }
+      .lab-workspace.is-results .lab-output-pane { padding: 1.6rem 1rem 2rem; }
       .scenario-button { padding: .78rem; }
       .form-actions { position: sticky; bottom: 0; z-index: 10; margin: 1.2rem -1rem -2rem; padding: .8rem 1rem calc(.8rem + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); border-top: 1px solid var(--border); }
       .facts-grid, .lens-grid, .tension-grid { grid-template-columns: 1fr; }
+      .context-summary summary { align-items: flex-start; flex-wrap: wrap; }
+      .context-summary-decision { order: 3; flex-basis: 100%; white-space: normal; }
+      .context-summary-list { grid-template-columns: 1fr; }
+      .decision-matrix { display: none; }
+      .matrix-mobile { display: block; }
+      .matrix-option-row { grid-template-columns: 1fr; gap: .25rem; }
       .brief-placeholder-top { flex-direction: column; gap: .6rem; }
       .brief-outline { grid-template-columns: 1fr; }
       .outline-item + .outline-item { border-left: 0; border-top: 1px solid var(--border); }
@@ -174,7 +207,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
 
     @media print {
-      .site-nav, .site-footer, .lab-hero, .lab-rail, .lab-input-pane, .brief-actions, .copy-state { display: none !important; }
+      .site-nav, .site-footer, .lab-hero, .lab-rail, .lab-input-pane, .context-summary, .brief-actions, .copy-state { display: none !important; }
       body { background: #fff; }
       .lab-shell { max-width: none; padding: 0; }
       .lab-frame { border: 0; box-shadow: none; }
@@ -207,7 +240,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="lab-step" id="stepBrief"><span class="lab-step-number">03</span> Brief</div>
       </div>
 
-      <div class="lab-workspace">
+      <div class="lab-workspace" id="labWorkspace">
         <aside class="lab-input-pane">
           <div id="decisionStage">
             <div class="pane-eyebrow">Start with the decision</div>
@@ -278,6 +311,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
 
           <article class="decision-brief" id="briefState" tabindex="-1" hidden>
+            <details class="context-summary" id="contextSummary">
+              <summary><span class="context-summary-label">Context supplied</span><span class="context-summary-decision" id="contextSummaryDecision"></span><span class="context-summary-toggle">View details</span></summary>
+              <div class="context-summary-body"><dl class="context-summary-list" id="contextSummaryList"></dl><div class="context-summary-actions"><button type="button" class="lab-button lab-button-quiet" id="summaryEditBtn">Edit context</button></div></div>
+            </details>
             <header class="brief-header">
               <div class="brief-header-top"><span class="memo-label">Cloud &amp; Capital · Decision Brief</span><span class="brief-posture" id="briefPosture"></span></div>
               <h2 class="brief-title" id="briefTitle"></h2>
@@ -285,7 +322,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </header>
 
             <section class="brief-section"><h3>Facts and assumptions</h3><div class="facts-grid"><div class="fact-column"><h4>Known facts</h4><ul class="brief-list" id="knownFacts"></ul></div><div class="fact-column"><h4>Working assumptions</h4><ul class="brief-list" id="workingAssumptions"></ul></div></div></section>
-            <section class="brief-section"><h3>Option comparison</h3><div class="options-wrap"><table class="options-table"><thead><tr><th>Option</th><th>Economics</th><th>Operating effect</th><th>Reversibility</th><th>Risk</th><th>Evidence needed</th></tr></thead><tbody id="optionsBody"></tbody></table></div></section>
+            <section class="brief-section"><h3>Option comparison</h3><div id="optionMatrix"></div></section>
             <section class="brief-section"><h3>Cross-functional view</h3><div class="lens-grid" id="lensGrid"></div><div class="tension-grid"><div class="tension-card"><strong>Common ground</strong><p id="commonGround"></p></div><div class="tension-card"><strong>Unresolved tension</strong><p id="unresolvedTension"></p></div></div></section>
             <section class="brief-section"><h3>Economics and thresholds</h3><div class="economics-callout"><p class="brief-section-copy" id="economicsAnalysis"></p></div><div class="threshold-list" id="thresholdList"></div></section>
             <section class="brief-section"><h3>Recommendation</h3><div class="recommendation"><div class="recommendation-top"><span>The next move</span><span id="confidenceLabel"></span></div><p class="recommendation-move" id="recommendationMove"></p><p class="recommendation-rationale" id="recommendationRationale"></p></div></section>
@@ -339,6 +376,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
 
     function showDecisionStage() {
+      $('labWorkspace').classList.remove('is-results');
       $('decisionStage').hidden = false;
       $('contextStage').hidden = true;
       setStep(0);
@@ -347,6 +385,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
 
     function showContextStage() {
+      $('labWorkspace').classList.remove('is-results');
       $('decisionStage').hidden = true;
       $('contextStage').hidden = false;
       setStep(1);
@@ -453,10 +492,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     $('backBtn').addEventListener('click', showDecisionStage);
     $('resetBtn').addEventListener('click', resetLab);
     $('anotherBtn').addEventListener('click', resetLab);
-    $('editBtn').addEventListener('click', () => {
+    function editContext() {
       showContextStage();
       $('contextFields').querySelector('textarea')?.focus();
-    });
+    }
+    $('editBtn').addEventListener('click', editContext);
+    $('summaryEditBtn').addEventListener('click', editContext);
 
     function resetLab() {
       clearInterval(thinkingTimer);
@@ -503,7 +544,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         if (data.status !== 'ready' || !data.brief) throw new Error('The Lab needs more context before it can generate the brief.');
         state.brief = data.brief;
         renderBrief(data.brief);
+        renderContextSummary();
         stopThinking();
+        $('labWorkspace').classList.add('is-results');
         $('briefState').hidden = false;
         $('briefState').focus({ preventScroll: true });
         if (window.innerWidth < 980) $('briefState').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -536,12 +579,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         li.append(makeElement('strong', '', item.assumption), makeElement('span', '', item.why_it_matters));
       });
 
-      $('optionsBody').replaceChildren();
-      brief.options.forEach((option) => {
-        const row = document.createElement('tr');
-        ['name', 'economics', 'operational_effect', 'reversibility', 'risk', 'evidence_needed'].forEach((key) => row.append(makeElement('td', '', option[key])));
-        $('optionsBody').append(row);
-      });
+      renderOptionMatrix(brief.options);
 
       $('lensGrid').replaceChildren();
       [['finops', 'FinOps'], ['finance', 'Finance'], ['engineering', 'Engineering']].forEach(([key, label]) => {
@@ -575,6 +613,62 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         ['action', 'owner', 'evidence', 'timing'].forEach((key) => row.append(makeElement('td', '', action[key])));
         $('actionsBody').append(row);
       });
+    }
+
+    function renderContextSummary() {
+      $('contextSummary').open = false;
+      $('contextSummaryDecision').textContent = decisionInput.value.trim();
+      const list = $('contextSummaryList');
+      list.replaceChildren();
+      state.questions.forEach((question) => {
+        const item = makeElement('div', 'context-summary-item');
+        item.append(makeElement('dt', '', question.label), makeElement('dd', '', state.answers[question.id] || ''));
+        list.append(item);
+      });
+    }
+
+    function renderOptionMatrix(options) {
+      const criteria = [
+        ['economics', 'Economics'],
+        ['operational_effect', 'Operating effect'],
+        ['reversibility', 'Reversibility'],
+        ['risk', 'Risk'],
+        ['evidence_needed', 'Evidence needed'],
+      ];
+      const container = $('optionMatrix');
+      container.replaceChildren();
+
+      const table = makeElement('table', 'decision-matrix');
+      const head = document.createElement('thead');
+      const headRow = document.createElement('tr');
+      headRow.append(makeElement('th', '', 'Criterion'));
+      options.forEach((option) => headRow.append(makeElement('th', '', option.name)));
+      head.append(headRow);
+      const body = document.createElement('tbody');
+      criteria.forEach(([key, label]) => {
+        const row = document.createElement('tr');
+        const rowHeader = makeElement('th', '', label);
+        rowHeader.scope = 'row';
+        row.append(rowHeader);
+        options.forEach((option) => row.append(makeElement('td', '', option[key])));
+        body.append(row);
+      });
+      table.append(head, body);
+
+      const mobile = makeElement('div', 'matrix-mobile');
+      options.forEach((option) => {
+        const card = makeElement('section', 'matrix-option');
+        card.append(makeElement('h4', '', option.name));
+        const list = document.createElement('dl');
+        criteria.forEach(([key, label]) => {
+          const row = makeElement('div', 'matrix-option-row');
+          row.append(makeElement('dt', '', label), makeElement('dd', '', option[key]));
+          list.append(row);
+        });
+        card.append(list);
+        mobile.append(card);
+      });
+      container.append(table, mobile);
     }
 
     function briefToText(brief) {

@@ -569,6 +569,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       });
     }
 
+    function withSentencePunctuation(value) {
+      const text = value.trim();
+      return /[.!?]$/.test(text) ? text : `${text}.`;
+    }
+
     function renderBrief(brief) {
       $('briefPosture').textContent = brief.posture.label;
       $('briefTitle').textContent = brief.decision_summary;
@@ -599,7 +604,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       } else {
         brief.economics.thresholds.forEach((threshold) => {
           const item = makeElement('div', 'threshold-item');
-          item.append(makeElement('strong', '', `${threshold.metric} · ${threshold.trigger}`), makeElement('span', '', `${threshold.meaning} Basis: ${threshold.basis}.`));
+          item.append(
+            makeElement('strong', '', `${threshold.metric} · ${threshold.trigger}`),
+            makeElement('span', '', `${withSentencePunctuation(threshold.meaning)} Basis: ${withSentencePunctuation(threshold.basis)}`),
+          );
           $('thresholdList').append(item);
         });
       }
@@ -678,7 +686,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         ...brief.working_assumptions.map((item) => `- ${item.assumption} — ${item.why_it_matters}`), '', 'OPTIONS',
       ];
       brief.options.forEach((option) => lines.push(`${option.name}\nEconomics: ${option.economics}\nOperating effect: ${option.operational_effect}\nReversibility: ${option.reversibility}\nRisk: ${option.risk}\nEvidence needed: ${option.evidence_needed}`, ''));
-      lines.push('CROSS-FUNCTIONAL VIEW', `FinOps: ${brief.lenses.finops.view} Needs: ${brief.lenses.finops.need}`, `Finance: ${brief.lenses.finance.view} Needs: ${brief.lenses.finance.need}`, `Engineering: ${brief.lenses.engineering.view} Needs: ${brief.lenses.engineering.need}`, '', `Common ground: ${brief.common_ground}`, `Unresolved tension: ${brief.unresolved_tension}`, '', 'ECONOMICS', brief.economics.analysis, '', 'RECOMMENDATION', brief.recommendation.move, `${brief.recommendation.confidence} confidence — ${brief.recommendation.rationale}`, '', 'WHAT WOULD CHANGE THE ANSWER', ...brief.change_the_answer.map((item) => `- ${item}`), '', 'NEXT ACTIONS');
+      lines.push('CROSS-FUNCTIONAL VIEW', `FinOps: ${brief.lenses.finops.view} Needs: ${brief.lenses.finops.need}`, `Finance: ${brief.lenses.finance.view} Needs: ${brief.lenses.finance.need}`, `Engineering: ${brief.lenses.engineering.view} Needs: ${brief.lenses.engineering.need}`, '', `Common ground: ${brief.common_ground}`, `Unresolved tension: ${brief.unresolved_tension}`, '', 'ECONOMICS & THRESHOLDS', brief.economics.analysis);
+      brief.economics.thresholds.forEach((threshold) => lines.push('', `Metric: ${threshold.metric}`, `Trigger: ${threshold.trigger}`, `Meaning: ${withSentencePunctuation(threshold.meaning)} Basis: ${withSentencePunctuation(threshold.basis)}`));
+      lines.push('', 'RECOMMENDATION', brief.recommendation.move, `${brief.recommendation.confidence} confidence — ${brief.recommendation.rationale}`, '', 'WHAT WOULD CHANGE THE ANSWER', ...brief.change_the_answer.map((item) => `- ${item}`), '', 'NEXT ACTIONS');
       brief.next_actions.forEach((action) => lines.push(`- ${action.action} | Owner: ${action.owner} | Evidence: ${action.evidence} | Timing: ${action.timing}`));
       lines.push('', 'AI-generated decision aid. Validate provider terms, calculations, and financially consequential decisions against primary data before acting.');
       return lines.join('\n');

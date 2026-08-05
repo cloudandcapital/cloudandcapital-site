@@ -84,7 +84,7 @@ function buildUserPrompt(readiness) {
 
 async function callModel(readiness) {
   let correction = '';
-  for (let attempt = 0; attempt < 2; attempt += 1) {
+  for (let attempt = 0; attempt < 3; attempt += 1) {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -133,7 +133,7 @@ async function callModel(readiness) {
     if (!unsupportedNumbers.length) return brief;
 
     console.error('Interactive Lab unsupported numeric claims:', unsupportedNumbers);
-    if (attempt === 1) throw new Error('UNSUPPORTED_NUMERIC_CLAIM');
+    if (attempt === 2) throw new Error('UNSUPPORTED_NUMERIC_CLAIM');
     correction = `\n\nYour previous draft was rejected because it introduced these unsupported numeric claims: ${unsupportedNumbers.join(', ')}. Regenerate the complete JSON from scratch. Do not use those claims, calculate derived figures, or replace them with new numbers. Use qualitative language to describe comparisons whose figures were not explicitly supplied.`;
   }
   throw new Error('UNSUPPORTED_NUMERIC_CLAIM');

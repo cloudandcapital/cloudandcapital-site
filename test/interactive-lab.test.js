@@ -82,6 +82,7 @@ test('validates the complete decision brief contract', () => {
 test('accepts equivalent number words, digits, hyphenated durations, and ranges', () => {
   const source = 'A two-year term needs two engineers, takes four to six months, is due in 45 days, and grew 3x.';
   assert.deepEqual(findUnsupportedNumbers({ move: 'Use a 2-year term with 2 engineers over 4–6 months before the 45-day deadline after growing three times.' }, source), []);
+  assert.deepEqual(findUnsupportedNumbers({ move: 'Plan for a six-month migration.' }, source), []);
 });
 
 test('accepts equivalent currency shorthand, expanded amounts, and percent formatting', () => {
@@ -103,6 +104,7 @@ test('retries once after unsupported model claims and returns only the validated
   const originalFetch = globalThis.fetch;
   const drafts = [
     { ...validBrief, recommendation: { ...validBrief.recommendation, move: 'Commit $720K.' } },
+    { ...validBrief, recommendation: { ...validBrief.recommendation, move: 'Remove 160 seats.' } },
     { ...validBrief, recommendation: { ...validBrief.recommendation, move: 'Keep the $360,000 baseline.' } },
   ];
   let calls = 0;
@@ -130,7 +132,7 @@ test('retries once after unsupported model claims and returns only the validated
     const response = await POST({ request });
     const body = await response.json();
     assert.equal(response.status, 200);
-    assert.equal(calls, 2);
+    assert.equal(calls, 3);
     assert.equal(body.brief.recommendation.move, 'Keep the $360,000 baseline.');
   } finally {
     globalThis.fetch = originalFetch;

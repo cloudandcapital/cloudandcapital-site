@@ -152,7 +152,7 @@ const NUMBER_WORD_VALUES = new Map([
 ]);
 
 const NUMBER_ATOM = '(?:\\d[\\d,]*(?:\\.\\d+)?|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|thirty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|forty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|fifty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|sixty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|seventy(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|eighty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|ninety(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?)';
-const NUMBER_CLAIM_PATTERN = new RegExp(`([$€£])?\\s*(${NUMBER_ATOM})(?:\\s*(?:-|–|—|to)\\s*(${NUMBER_ATOM}))?\\s*([kKmM])?(?:\\s*-\\s*)?\\s*(%|percent(?:age)?|years?|months?|weeks?|days?|hours?|engineers?|users?|seats?|licenses?|licences?|quarters?|x|times?)?`, 'gi');
+const NUMBER_CLAIM_PATTERN = new RegExp(`([$€£])?\\s*(${NUMBER_ATOM})(?:\\s*(?:-|–|—|to)\\s*(${NUMBER_ATOM}))?([kKmM])?(?:\\s*-\\s*)?\\s*(%|percent(?:age)?|years?|months?|weeks?|days?|hours?|engineers?|users?|seats?|licenses?|licences?|quarters?|x|times?)?`, 'gi');
 
 function parseNumberAtom(atom) {
   if (/^\d/.test(atom)) return Number(atom.replace(/,/g, ''));
@@ -182,6 +182,11 @@ function extractNumericClaims(text) {
 }
 
 export function findUnsupportedNumbers(value, sourceText) {
-  const allowed = new Set(extractNumericClaims(sourceText).map(({ signature }) => signature));
+  const allowed = new Set();
+  for (const { signature } of extractNumericClaims(sourceText)) {
+    allowed.add(signature);
+    const [value, unit] = signature.split('|');
+    if (value.includes('..')) value.split('..').forEach((endpoint) => allowed.add(`${endpoint}|${unit}`));
+  }
   return [...new Set(extractNumericClaims(JSON.stringify(value)).filter(({ signature }) => !allowed.has(signature)).map(({ raw }) => raw))];
 }

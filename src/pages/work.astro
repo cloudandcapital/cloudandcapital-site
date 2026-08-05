@@ -99,7 +99,8 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
               <div><dt>Output</dt><dd>Weakest link + priority move</dd></div>
             </dl>
             <div class="tool-action">
-              <p>Leave with the weakest link, the operating pattern behind it, and practical next moves.</p>
+              <p class="action-label">Leave with</p>
+              <p class="tool-deliverable">Weakest link, operating pattern, and priority moves.</p>
               <a href={signalAudit.href}>Take the Signal Audit <span aria-hidden="true">→</span></a>
             </div>
           </article>
@@ -117,7 +118,8 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
               <div><dt>Output</dt><dd>Decision brief + next actions</dd></div>
             </dl>
             <div class="tool-action">
-              <p>Separate facts from assumptions, compare the real options, expose the economics, and leave with a recommendation and next actions.</p>
+              <p class="action-label">Leave with</p>
+              <p class="tool-deliverable">Compared options, explicit economics, and a decision-ready brief.</p>
               <a href={interactiveLab.href}>Build a Decision Brief <span aria-hidden="true">→</span></a>
             </div>
           </article>
@@ -130,7 +132,7 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
               <p class="tool-meta">Market context</p>
               <h3>{marketTape.title}</h3>
             </div>
-            <p>A live view of the rates, sectors, commodities, and risk signals shaping technology capital and infrastructure decisions.</p>
+            <p>Live market signals shaping technology capital and infrastructure decisions.</p>
             <a href={marketTape.href} target="_blank" rel="noopener noreferrer">Open Market Tape <span aria-hidden="true">→</span></a>
           </div>
         </article>
@@ -231,33 +233,39 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
   .section-heading h2, .pipeline-heading h2, .work-cta h2 { margin: 0; font-size: clamp(2.25rem, 4vw, 4rem); line-height: 1.03; letter-spacing: -.025em; }
   .section-heading > p:last-child { max-width: 51ch; margin: 0; padding: .55rem 0 .55rem clamp(1.5rem, 3vw, 3rem); border-left: 1px solid rgba(107,142,127,.5); font-family: 'DM Sans', sans-serif; font-size: .95rem; line-height: 1.75; color: #4a4a4a; }
   .decision-suite { border-top: 2px solid #6b8e7f; border-bottom: 1px solid rgba(0,0,0,.14); }
-  .decision-tool { display: grid; grid-template-columns: minmax(20rem, 1.35fr) minmax(13rem, .8fr) minmax(17rem, 1.05fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; padding: clamp(2rem, 3vw, 2.75rem); background: #fff; }
+  .decision-tool { display: grid; grid-template-columns: minmax(20rem, 1.35fr) minmax(13rem, .8fr) minmax(17rem, 1.05fr); gap: clamp(2rem, 4vw, 4.5rem); align-items: start; padding: clamp(1.75rem, 2.6vw, 2.4rem); background: #fff; }
   .decision-tool + .decision-tool { border-top: 1px solid rgba(0,0,0,.12); background: #edf3ee; }
   .tool-summary .tool-meta { margin: 0 0 .75rem; color: #4f7567; }
   .tool-summary h3, .market-context h3 { margin: 0; font-size: clamp(2.15rem, 2.75vw, 3rem); line-height: 1; letter-spacing: -.025em; }
-  .tool-summary > p:not(.tool-meta), .tool-action p, .market-context > div > p { margin: .9rem 0 0; font-family: 'DM Sans', sans-serif; font-size: .88rem; line-height: 1.68; color: #4a4a4a; }
+  .tool-summary > p:not(.tool-meta), .market-context > div > p { margin: .9rem 0 0; font-family: 'DM Sans', sans-serif; font-size: .88rem; line-height: 1.68; color: #4a4a4a; }
   .tool-summary > p:not(.tool-meta) { max-width: 46ch; }
   .tool-facts { margin: 0; }
   .tool-facts div { padding: .6rem 0; border-top: 1px solid rgba(0,0,0,.1); }.tool-facts div:last-child { border-bottom: 1px solid rgba(0,0,0,.1); }
   .tool-facts dt { font-family: 'DM Mono', monospace; font-size: .55rem; letter-spacing: .13em; line-height: 1.4; text-transform: uppercase; color: #6b8e7f; }
   .tool-facts dd { margin: .24rem 0 0; font-family: 'DM Sans', sans-serif; font-size: .82rem; line-height: 1.45; color: #292929; }
-  .tool-action { display: flex; min-height: 11.5rem; flex-direction: column; }
-  .tool-action p { margin-top: 0; }
-  .tool-action a, .market-context a { display: inline-flex; min-height: 44px; align-self: flex-start; align-items: center; justify-content: center; margin-top: auto; padding: .75rem 1rem; border: 1px solid #6b8e7f; font-family: 'DM Mono', monospace; font-size: .61rem; letter-spacing: .12em; line-height: 1.5; text-transform: uppercase; text-decoration: none; color: #3d6055; transition: background .18s, color .18s; }
+  .tool-action { display: flex; flex-direction: column; }
+  .tool-action .action-label { margin: 0 0 .45rem; font-family: 'DM Mono', monospace; font-size: .55rem; letter-spacing: .13em; line-height: 1.4; text-transform: uppercase; color: #6b8e7f; }
+  .tool-action .tool-deliverable { max-width: 28ch; margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.28rem; line-height: 1.24; color: #292929; }
+  .tool-action a, .market-context a { display: inline-flex; min-height: 44px; align-self: flex-start; align-items: center; justify-content: center; margin-top: 1.35rem; padding: .75rem 1rem; border: 1px solid #6b8e7f; font-family: 'DM Mono', monospace; font-size: .61rem; letter-spacing: .12em; line-height: 1.5; text-transform: uppercase; text-decoration: none; color: #3d6055; transition: background .18s, color .18s; }
   .tool-action a:hover { background: #3d6055; color: #fff; }
   .market-context { margin-top: 1.25rem; padding: 1.35rem clamp(1.5rem, 3vw, 2.75rem); background: #f7f5f1; border-top: 1px solid rgba(0,0,0,.12); border-bottom: 1px solid rgba(0,0,0,.12); }
-  .market-context > div { display: grid; grid-template-columns: minmax(14rem, .8fr) minmax(20rem, 1.5fr) auto; gap: clamp(1.5rem, 4vw, 4.5rem); align-items: center; }
+  .market-context > div { display: grid; grid-template-columns: minmax(14rem, .9fr) minmax(18rem, 1.25fr) auto; gap: clamp(1.5rem, 4vw, 4.5rem); align-items: center; }
   .market-identity .tool-meta { margin: 0 0 .45rem; color: #8a7044; }.market-context h3 { font-size: clamp(1.7rem, 2.2vw, 2.25rem); }
   .market-context > div > p { margin: 0; }.market-context a { margin-top: 0; border-color: rgba(107,142,127,.55); white-space: nowrap; }.market-context a:hover { background: #edf3ee; color: #213b32; }
   .interactive-tools + .pipeline { padding-top: clamp(3rem, 5vw, 4.5rem); }
-  .pipeline { padding-top: clamp(4rem, 7vw, 6.25rem); padding-bottom: clamp(3.5rem, 5vw, 4.75rem); display: grid; grid-template-columns: minmax(15rem, .7fr) minmax(0, 1.3fr); gap: clamp(2.5rem, 8vw, 8rem); background: #fbfaf7; }
-  .pipeline-heading > p:not(.section-label) { max-width: 31ch; margin: 1.4rem 0 2rem; font-family: 'DM Sans', sans-serif; font-size: .9rem; line-height: 1.8; color: #4a4a4a; }
-  .pipeline-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(0,0,0,.16); }
-  .pipeline-list li { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr) auto; gap: 1rem; align-items: baseline; padding: 1.45rem 0; border-bottom: 1px solid rgba(0,0,0,.16); }
-  .pipeline-number { font-family: 'DM Mono', monospace; font-size: .59rem; letter-spacing: .08em; color: #6b8e7f; }
+  .pipeline { padding-top: clamp(4rem, 7vw, 6.25rem); padding-bottom: clamp(3.5rem, 5vw, 4.75rem); display: grid; grid-template-columns: minmax(15rem, .7fr) minmax(0, 1.3fr); gap: clamp(2.5rem, 8vw, 8rem); background: #19241f; color: #f5eee9; border-top: 1px solid rgba(168,192,181,.28); }
+  .pipeline .section-label { color: #a8c0b5; }
+  .pipeline-heading h2, .pipeline-list h3 { color: #f5eee9; }
+  .pipeline-heading > p:not(.section-label) { max-width: 31ch; margin: 1.4rem 0 2rem; font-family: 'DM Sans', sans-serif; font-size: .9rem; line-height: 1.8; color: rgba(245,238,233,.67); }
+  .pipeline-heading > a, .pipeline-list a { color: #a8c0b5; }
+  .pipeline-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(245,238,233,.17); }
+  .pipeline-list li { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr) auto; gap: 1rem; align-items: baseline; padding: 1.45rem 0; border-bottom: 1px solid rgba(245,238,233,.17); }
+  .pipeline-number { font-family: 'DM Mono', monospace; font-size: .59rem; letter-spacing: .08em; color: #c9a961; }
   .pipeline-list h3 { margin: 0 0 .35rem; font-size: clamp(1.25rem, 2vw, 1.62rem); line-height: 1.08; }
-  .pipeline-list p { margin: 0; font-family: 'DM Sans', sans-serif; font-size: .83rem; line-height: 1.65; color: #4a4a4a; }
+  .pipeline-list p { margin: 0; font-family: 'DM Sans', sans-serif; font-size: .83rem; line-height: 1.65; color: rgba(245,238,233,.64); }
   .pipeline-list a { white-space: nowrap; }
+  .pipeline a:focus-visible { outline: 2px solid #f5eee9; outline-offset: .35rem; }
+  .pipeline + .work-cta { border-top: 1px solid rgba(245,238,233,.22); }
   .work-cta { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: end; padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 5vw, 4.5rem); background: #3d6055; }
   .section-label-gold { color: #ddb977; }.section-label-gold::after { opacity: .45; }
   .work-cta h2 { max-width: 23ch; color: #fff; }
@@ -270,7 +278,7 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
     .flagship-copy { min-height: auto; border-right: none; border-bottom: 1px solid rgba(245,238,233,.13); }
     .flagship-visual { min-height: 30rem; }.pipeline { gap: 3rem; }
     .section-heading { grid-template-columns: 1fr; gap: 1.5rem; }.section-heading .section-label { grid-column: 1; margin-bottom: 0; }.section-heading > p:last-child { max-width: 58ch; padding-left: 1.5rem; }
-    .decision-tool { grid-template-columns: minmax(0, 1.2fr) minmax(13rem, .8fr); }.tool-action { grid-column: 1 / -1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; align-items: center; }.tool-action a { margin-top: 0; }
+    .decision-tool { grid-template-columns: minmax(0, 1.2fr) minmax(13rem, .8fr); }.tool-action { grid-column: 1 / -1; min-height: 0; }.tool-action a { margin-top: 1.15rem; }
     .market-context > div { grid-template-columns: minmax(12rem, .75fr) minmax(0, 1.25fr); }.market-context a { grid-column: 2; }
   }
   @media (max-width: 720px) {

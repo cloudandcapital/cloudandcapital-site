@@ -79,9 +79,24 @@ test('validates the complete decision brief contract', () => {
   assert.equal(validateBrief({ ...validBrief, posture: { label: 'Certain', rationale: 'No.' } }), false);
 });
 
-test('detects numeric claims that were not supplied by the user', () => {
-  assert.deepEqual(findUnsupportedNumbers({ move: 'Commit 40% after 90 days.' }, '$500K over 12 months.'), ['40%', '90']);
+test('accepts equivalent number words, digits, hyphenated durations, and ranges', () => {
+  const source = 'A two-year term needs two engineers and takes four to six months.';
+  assert.deepEqual(findUnsupportedNumbers({ move: 'Use a 2-year term with 2 engineers over 4–6 months.' }, source), []);
+});
+
+test('accepts equivalent currency shorthand, expanded amounts, and percent formatting', () => {
+  const source = 'Current spend is $360K and increased 33%.';
+  assert.deepEqual(findUnsupportedNumbers({ move: 'The $360,000 baseline increased 33 percent.' }, source), []);
+  assert.deepEqual(findUnsupportedNumbers({ move: 'The $2.4M baseline matches $2,400,000.' }, 'The baseline is $2.4M.'), []);
+  assert.deepEqual(findUnsupportedNumbers({ move: 'Growth reached 33%.' }, 'Growth reached thirty-three percent.'), []);
+});
+
+test('continues rejecting unsupported numbers, arithmetic, changed units, and magnitudes', () => {
+  assert.deepEqual(findUnsupportedNumbers({ move: 'Commit 40% after 90 days.' }, '$500K over 12 months.'), ['40%', '90 days']);
   assert.deepEqual(findUnsupportedNumbers({ move: 'Commit 12%.' }, 'The target is 12%.'), []);
+  assert.deepEqual(findUnsupportedNumbers({ move: 'Use 12 engineers.' }, 'The work takes 12 months.'), ['12 engineers']);
+  assert.deepEqual(findUnsupportedNumbers({ move: 'Spend is $360,000.' }, 'Spend is $360.'), ['$360,000']);
+  assert.deepEqual(findUnsupportedNumbers({ move: 'The annual total is $720K.' }, 'Spend is $360K for two years.'), ['$720K']);
 });
 
 test('questions stage never calls the model and returns targeted context', async () => {

@@ -92,7 +92,7 @@ async function callModel(readiness) {
     },
     body: JSON.stringify({
       model: 'claude-sonnet-4-6',
-      max_tokens: 2200,
+      max_tokens: 3200,
       temperature: 0.2,
       system: [{ type: 'text', text: buildSystemPrompt(readiness), cache_control: { type: 'ephemeral' } }],
       messages: [{ role: 'user', content: buildUserPrompt(readiness) }],
@@ -108,6 +108,10 @@ async function callModel(readiness) {
 
   const data = await response.json();
   const raw = data.content?.find((part) => part.type === 'text')?.text || '';
+  if (data.stop_reason === 'max_tokens') {
+    console.error('Interactive Lab model output truncated at max_tokens');
+    throw new Error('MODEL_OUTPUT_TRUNCATED');
+  }
   const cleaned = raw.replace(/^```json\s*/i, '').replace(/```\s*$/i, '').trim();
   let brief;
 

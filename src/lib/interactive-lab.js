@@ -144,9 +144,43 @@ export function validateBrief(value) {
   return true;
 }
 
+const NUMBER_WORD_VALUES = new Map([
+  ['zero', 0], ['one', 1], ['two', 2], ['three', 3], ['four', 4], ['five', 5], ['six', 6], ['seven', 7], ['eight', 8], ['nine', 9],
+  ['ten', 10], ['eleven', 11], ['twelve', 12], ['thirteen', 13], ['fourteen', 14], ['fifteen', 15], ['sixteen', 16], ['seventeen', 17],
+  ['eighteen', 18], ['nineteen', 19], ['twenty', 20], ['thirty', 30], ['forty', 40], ['fifty', 50], ['sixty', 60], ['seventy', 70],
+  ['eighty', 80], ['ninety', 90],
+]);
+
+const NUMBER_ATOM = '(?:\\d[\\d,]*(?:\\.\\d+)?|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|thirty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|forty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|fifty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|sixty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|seventy(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|eighty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|ninety(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?)';
+const NUMBER_CLAIM_PATTERN = new RegExp(`([$€£])?\\s*(${NUMBER_ATOM})(?:\\s*(?:-|–|—|to)\\s*(${NUMBER_ATOM}))?\\s*([kKmM])?\\s*(%|percent(?:age)?|years?|months?|weeks?|days?|hours?|engineers?|users?|seats?|licenses?|licences?|quarters?|x)?`, 'gi');
+
+function parseNumberAtom(atom) {
+  if (/^\d/.test(atom)) return Number(atom.replace(/,/g, ''));
+  return atom.toLowerCase().split(/[- ]/).reduce((total, word) => total + (NUMBER_WORD_VALUES.get(word) || 0), 0);
+}
+
+function normalizeUnit(unit = '') {
+  const normalized = unit.toLowerCase();
+  if (normalized === '%' || normalized.startsWith('percent')) return 'percent';
+  if (normalized === 'x') return 'multiple';
+  return normalized.replace(/s$/, '');
+}
+
+function extractNumericClaims(text) {
+  const claims = [];
+  for (const match of String(text).matchAll(NUMBER_CLAIM_PATTERN)) {
+    const [raw, currency, firstAtom, secondAtom, magnitude, rawUnit] = match;
+    const scale = magnitude?.toLowerCase() === 'k' ? 1000 : magnitude?.toLowerCase() === 'm' ? 1000000 : 1;
+    const first = parseNumberAtom(firstAtom) * scale;
+    const second = secondAtom ? parseNumberAtom(secondAtom) * scale : null;
+    const unit = currency ? `currency:${currency}` : normalizeUnit(rawUnit);
+    const value = second === null ? String(first) : `${first}..${second}`;
+    claims.push({ raw: raw.trim(), signature: `${value}|${unit}` });
+  }
+  return claims;
+}
+
 export function findUnsupportedNumbers(value, sourceText) {
-  const numberPattern = /(?<![\w.])\d+(?:[.,]\d+)?%?/g;
-  const allowed = new Set((String(sourceText).match(numberPattern) || []).map((number) => number.replace(',', '')));
-  const output = JSON.stringify(value);
-  return [...new Set((output.match(numberPattern) || []).map((number) => number.replace(',', '')).filter((number) => !allowed.has(number)))];
+  const allowed = new Set(extractNumericClaims(sourceText).map(({ signature }) => signature));
+  return [...new Set(extractNumericClaims(JSON.stringify(value)).filter(({ signature }) => !allowed.has(signature)).map(({ raw }) => raw))];
 }

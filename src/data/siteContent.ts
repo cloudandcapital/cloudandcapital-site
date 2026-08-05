@@ -55,7 +55,7 @@ export const tools = [
     title: 'Interactive Lab',
     label: 'Interactive · Tool',
     description:
-      'Model GPU commitments, SaaS renewals, and build versus buy decisions from finance, FinOps, and engineering perspectives.',
+      'Turn one real cloud, AI, SaaS, or technology-spend question into a structured decision brief grounded in the context you provide.',
     href: '/interactive-lab',
   },
 ];

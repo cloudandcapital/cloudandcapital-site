@@ -2570,12 +2570,70 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   transition: color .2s;
 }
 .work-4col-link:hover { color: var(--sage); }
+.work-decision-bridge {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: minmax(12rem,.72fr) minmax(0,1.28fr);
+  gap: clamp(2rem,4vw,4rem);
+  padding: 2.25rem 2rem 2.4rem;
+}
+.work-decision-intro h3 {
+  max-width: 13ch;
+  margin: 0 0 1.4rem;
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 1.65rem;
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--cream);
+}
+.work-decision-all,
+.work-decision-tool a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  font-family: 'DM Mono',monospace;
+  font-size: .65rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--sage-light);
+  text-decoration: none;
+}
+.work-decision-all:hover,
+.work-decision-tool a:hover { color: var(--sage); }
+.work-decision-tools { border-top: 1px solid rgba(255,255,255,.12); }
+.work-decision-tool {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.work-decision-tool h4 {
+  margin: 0 0 .35rem;
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--cream);
+}
+.work-decision-tool p {
+  max-width: 43ch;
+  margin: 0;
+  font-size: .82rem;
+  line-height: 1.7;
+  color: rgba(244,239,230,.74);
+}
 @media (max-width: 1024px) {
   .work-bottom-4col { grid-template-columns: 1fr 1fr; }
+  .work-decision-bridge { grid-column: 1 / -1; }
 }
 @media (max-width: 600px) {
   .work-bottom-4col { grid-template-columns: 1fr; }
   .work-4col-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .work-decision-bridge { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 1.5rem 2.2rem; }
+  .work-decision-intro h3 { max-width: 18ch; }
+  .work-decision-tool { grid-template-columns: 1fr; gap: .65rem; }
 }
 
 /* ── Hero tagline spacing ── */
@@ -3409,18 +3467,28 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
         <a href="https://market-tape.cloudandcapital.com" target="_blank" rel="noopener noreferrer" class="work-4col-link">Launch Dashboard →</a>
       </div>
 
-      <div class="work-4col-card">
-        <div class="work-4col-tag">Interactive · Tool</div>
-        <div class="work-4col-title">Signal Audit</div>
-        <div class="work-4col-desc">A five minute diagnostic showing where cost enters the decision chain before it reaches the invoice.</div>
-        <a href="/signal-audit" class="work-4col-link">Take the Audit →</a>
-      </div>
-
-      <div class="work-4col-card">
-        <div class="work-4col-tag">Interactive · Tool</div>
-        <div class="work-4col-title">Interactive Lab</div>
-        <div class="work-4col-desc">Model GPU commitments, SaaS renewals, and build versus buy decisions from finance, FinOps, and engineering perspectives.</div>
-        <a href="/interactive-lab" class="work-4col-link">Open Lab →</a>
+      <div class="work-decision-bridge">
+        <div class="work-decision-intro">
+          <div class="work-4col-tag">Decision tools</div>
+          <h3>Assess the system.<br />Work the decision.</h3>
+          <a href="/work" class="work-decision-all">Explore all work →</a>
+        </div>
+        <div class="work-decision-tools">
+          <div class="work-decision-tool">
+            <div>
+              <h4>Signal Audit</h4>
+              <p>Assess where cost accountability breaks down.</p>
+            </div>
+            <a href="/signal-audit">Take the Audit →</a>
+          </div>
+          <div class="work-decision-tool">
+            <div>
+              <h4>Interactive Lab</h4>
+              <p>Turn a real cloud, AI, SaaS, or technology-spend question into a decision-ready brief.</p>
+            </div>
+            <a href="/interactive-lab">Open Lab →</a>
+          </div>
+        </div>
       </div>
 
     </div><!-- end work-bottom-4col -->

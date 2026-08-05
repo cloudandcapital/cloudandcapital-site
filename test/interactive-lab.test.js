@@ -100,12 +100,12 @@ test('continues rejecting unsupported numbers, arithmetic, changed units, and ma
   assert.deepEqual(findUnsupportedNumbers({ move: 'The annual total is $720K.' }, 'Spend is $360K for two years.'), ['$720K']);
 });
 
-test('retries once after unsupported model claims and returns only the validated replacement', async () => {
+test('retries unsupported model claims and removes only claims that remain after the bounded retries', async () => {
   const originalFetch = globalThis.fetch;
   const drafts = [
     { ...validBrief, recommendation: { ...validBrief.recommendation, move: 'Commit $720K.' } },
     { ...validBrief, recommendation: { ...validBrief.recommendation, move: 'Remove 160 seats.' } },
-    { ...validBrief, recommendation: { ...validBrief.recommendation, move: 'Keep the $360,000 baseline.' } },
+    { ...validBrief, recommendation: { ...validBrief.recommendation, move: 'Keep the $360,000 baseline without claiming $120K in savings.' } },
   ];
   let calls = 0;
   globalThis.fetch = async () => new Response(JSON.stringify({
@@ -133,7 +133,8 @@ test('retries once after unsupported model claims and returns only the validated
     const body = await response.json();
     assert.equal(response.status, 200);
     assert.equal(calls, 3);
-    assert.equal(body.brief.recommendation.move, 'Keep the $360,000 baseline.');
+    assert.equal(body.brief.recommendation.move, 'Keep the $360,000 baseline without claiming an unspecified figure in savings.');
+    assert.deepEqual(findUnsupportedNumbers(body.brief, '$360K per year.'), []);
   } finally {
     globalThis.fetch = originalFetch;
   }

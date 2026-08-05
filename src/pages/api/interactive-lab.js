@@ -82,6 +82,18 @@ function buildUserPrompt(readiness) {
   return `Decision:\n${readiness.decision}\n\nUser-supplied evidence:\n${evidence}`;
 }
 
+function redactUnsupportedClaims(value, unsupportedClaims) {
+  const claims = [...unsupportedClaims].sort((left, right) => right.length - left.length);
+  if (typeof value === 'string') {
+    return claims.reduce((text, claim) => text.split(claim).join('an unspecified figure'), value);
+  }
+  if (Array.isArray(value)) return value.map((item) => redactUnsupportedClaims(item, claims));
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, redactUnsupportedClaims(item, claims)]));
+  }
+  return value;
+}
+
 async function callModel(readiness) {
   let correction = '';
   for (let attempt = 0; attempt < 3; attempt += 1) {
@@ -133,7 +145,14 @@ async function callModel(readiness) {
     if (!unsupportedNumbers.length) return brief;
 
     console.error('Interactive Lab unsupported numeric claims:', unsupportedNumbers);
-    if (attempt === 2) throw new Error('UNSUPPORTED_NUMERIC_CLAIM');
+    if (attempt === 2) {
+      const redacted = redactUnsupportedClaims(brief, unsupportedNumbers);
+      if (validateBrief(redacted) && !findUnsupportedNumbers(redacted, buildSourceText(readiness)).length) {
+        console.error('Interactive Lab removed unsupported numeric claims after bounded regeneration');
+        return redacted;
+      }
+      throw new Error('UNSUPPORTED_NUMERIC_CLAIM');
+    }
     correction = `\n\nYour previous draft was rejected because it introduced these unsupported numeric claims: ${unsupportedNumbers.join(', ')}. Regenerate the complete JSON from scratch. Do not use those claims, calculate derived figures, or replace them with new numbers. Use qualitative language to describe comparisons whose figures were not explicitly supplied.`;
   }
   throw new Error('UNSUPPORTED_NUMERIC_CLAIM');

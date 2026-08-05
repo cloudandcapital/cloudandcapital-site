@@ -47,7 +47,7 @@ export const tools = [
     slug: 'signal-audit',
     title: 'Signal Audit',
     label: 'Interactive · Tool',
-    description: 'A five minute diagnostic showing where cost enters the decision chain before it reaches the invoice.',
+    description: 'A five-minute diagnostic showing where cost enters the decision chain before it reaches the invoice.',
     href: '/signal-audit',
   },
   {

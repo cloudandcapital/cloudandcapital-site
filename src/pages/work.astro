@@ -132,7 +132,7 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
               <p class="tool-meta">Market context</p>
               <h3>{marketTape.title}</h3>
             </div>
-            <p>Live market signals shaping technology capital and infrastructure decisions.</p>
+            <p>Live market signals shaping technology<br class="market-description-break" /> capital and infrastructure decisions.</p>
             <a href={marketTape.href} target="_blank" rel="noopener noreferrer">Open Market Tape <span aria-hidden="true">→</span></a>
           </div>
         </article>
@@ -267,7 +267,7 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
   .pipeline-list a { white-space: nowrap; }
   .pipeline a:focus-visible { outline: 2px solid #f5eee9; outline-offset: .35rem; }
   .pipeline + .work-cta { border-top: 1px solid rgba(221,185,119,.55); }
-  .work-cta { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: end; padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 5vw, 4.5rem); background: #3d6055; }
+  .work-cta { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: center; padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 5vw, 4.5rem); background: #3d6055; }
   .section-label-gold { color: #ddb977; }.section-label-gold::after { opacity: .45; }
   .work-cta h2 { max-width: 23ch; color: #fff; }
   .work-cta > a { padding: .9rem 1.45rem; background: #fff; color: #3d6055; font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
@@ -287,7 +287,7 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
     .flagship-visual { grid-template-columns: 1fr; min-height: 0; transform: translateY(22px); }.lumen-panel { min-height: 18rem; }.cost-shape-panel { border-top: 1px solid rgba(117, 96, 73, .18); border-left: none; }
     .decision-diagram { min-height: 26rem; }.diagram-layers { grid-template-rows: repeat(3, minmax(4.65rem, auto)); margin-top: 1rem; margin-bottom: 1.35rem; }.diagram-layer { min-height: 4.65rem; }
     .decision-tool { grid-template-columns: 1fr; gap: 1.4rem; padding: 1.75rem; }.tool-action { grid-column: 1; display: flex; gap: 0; align-items: stretch; }.tool-action a { width: 100%; margin-top: .9rem; }
-    .market-context > div { grid-template-columns: 1fr; gap: .8rem; }.market-context a { grid-column: 1; width: 100%; margin-top: .3rem; }
+    .market-context > div { grid-template-columns: 1fr; gap: .8rem; }.market-context a { grid-column: 1; width: 100%; margin-top: .3rem; }.market-description-break { display: none; }
     .work-cta { grid-template-columns: 1fr; align-items: start; }.work-cta > a { justify-self: start; }
   }
   @media (max-width: 480px) {

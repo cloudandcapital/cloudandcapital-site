@@ -2586,6 +2586,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   line-height: 1.12;
   color: var(--cream);
 }
+.work-decision-intro { display: flex; flex-direction: column; }
 .work-decision-all,
 .work-decision-tool a {
   display: inline-flex;
@@ -2600,6 +2601,14 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 }
 .work-decision-all:hover,
 .work-decision-tool a:hover { color: var(--sage); }
+.work-decision-all {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: .7rem 1rem;
+  background: var(--sage-light);
+  color: var(--ink);
+}
+.work-decision-all:hover { background: var(--sage); color: var(--ink); }
 .work-decision-tools { border-top: 1px solid rgba(255,255,255,.12); }
 .work-decision-tool {
   display: grid;

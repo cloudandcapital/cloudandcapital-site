@@ -250,19 +250,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <div class="section-rule"></div>
             <div class="scenario-label">Starter cases</div>
             <div class="scenario-list" id="scenarioList">
-              <button type="button" class="scenario-button" data-type="commitment" data-decision="Our engineering team wants to commit $500K for a year of reserved GPU capacity. Finance wants quarterly flexibility, and we do not yet know whether workload demand will scale or plateau.">
+              <button type="button" class="scenario-button" data-type="commitment" data-analytics-scenario="gpu_commitment" data-decision="Our engineering team wants to commit $500K for a year of reserved GPU capacity. Finance wants quarterly flexibility, and we do not yet know whether workload demand will scale or plateau.">
                 <span class="scenario-index">i</span><span><span class="scenario-name">GPU commitment</span><span class="scenario-summary">One-year capacity commitment with uncertain demand</span></span>
               </button>
-              <button type="button" class="scenario-button" data-type="renewal" data-decision="Our Datadog contract renews in 60 days. Spend has grown 3x in two years, and we do not know which teams or telemetry types caused the increase.">
+              <button type="button" class="scenario-button" data-type="renewal" data-analytics-scenario="saas_renewal" data-decision="Our Datadog contract renews in 60 days. Spend has grown 3x in two years, and we do not know which teams or telemetry types caused the increase.">
                 <span class="scenario-index">ii</span><span><span class="scenario-name">SaaS renewal</span><span class="scenario-summary">A major renewal after rapid spend growth</span></span>
               </button>
-              <button type="button" class="scenario-button" data-type="build_buy" data-decision="Our customer-facing AI feature costs $40K per month on the Claude API and spend is growing. Leadership wants to compare optimization, a smaller model, and building in-house.">
+              <button type="button" class="scenario-button" data-type="build_buy" data-analytics-scenario="ai_build_or_buy" data-decision="Our customer-facing AI feature costs $40K per month on the Claude API and spend is growing. Leadership wants to compare optimization, a smaller model, and building in-house.">
                 <span class="scenario-index">iii</span><span><span class="scenario-name">AI build or buy</span><span class="scenario-summary">Rising model cost and margin pressure</span></span>
               </button>
-              <button type="button" class="scenario-button" data-type="cost_review" data-decision="Our AWS bill reached $180K per month, finance is asking for reductions, and we have not completed a full cost review in 18 months.">
+              <button type="button" class="scenario-button" data-type="cost_review" data-analytics-scenario="cost_review" data-decision="Our AWS bill reached $180K per month, finance is asking for reductions, and we have not completed a full cost review in 18 months.">
                 <span class="scenario-index">iv</span><span><span class="scenario-name">Cost review</span><span class="scenario-summary">A large bill with limited recent analysis</span></span>
               </button>
-              <button type="button" class="scenario-button" data-type="architecture" data-decision="We are a 50-person company running entirely on AWS. Leadership wants multi-cloud resilience and negotiating leverage, while engineering expects significant operating cost.">
+              <button type="button" class="scenario-button" data-type="architecture" data-analytics-scenario="multi_cloud" data-decision="We are a 50-person company running entirely on AWS. Leadership wants multi-cloud resilience and negotiating leverage, while engineering expects significant operating cost.">
                 <span class="scenario-index">v</span><span><span class="scenario-name">Multi-cloud</span><span class="scenario-summary">Resilience narrative versus operating complexity</span></span>
               </button>
             </div>
@@ -346,6 +346,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     const errorMsg = $('errorMsg');
     const outputPane = $('outputPane');
     let thinkingTimer = null;
+    let toolSessionStarted = false;
+    let toolCompletionTracked = false;
 
     function setError(message = '') {
       errorMsg.textContent = message;
@@ -403,6 +405,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     document.querySelectorAll('.scenario-button').forEach((button) => {
       button.addEventListener('click', () => {
+        window.ccTrack?.('starter_scenario_selected', { scenario: button.dataset.analyticsScenario, tool: 'interactive_lab' });
         document.querySelectorAll('.scenario-button').forEach((item) => item.classList.remove('is-selected'));
         button.classList.add('is-selected');
         state.selectedScenario = button;
@@ -440,6 +443,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       contextBtn.disabled = true;
       contextBtn.textContent = 'Reading the decision…';
       setError();
+      if (!toolSessionStarted) {
+        window.ccTrack?.('tool_start', { tool: 'interactive_lab', entry: state.selectedScenario ? 'starter_scenario' : 'decision_form' });
+        toolSessionStarted = true;
+      }
       try {
         const data = await callLab({ stage: 'questions', decision, decisionType: state.decisionType || undefined });
         state.decisionType = data.decisionType;
@@ -448,7 +455,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         renderContextFields(data);
         showContextStage();
         $('contextFields').querySelector('textarea')?.focus();
+        window.ccTrack?.('lab_stage_result', { stage: 'questions', result: 'success' });
       } catch (error) {
+        window.ccTrack?.('lab_stage_result', { stage: 'questions', result: 'failure' });
         setError(error.message);
       } finally {
         contextBtn.textContent = 'Build the context →';
@@ -493,6 +502,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     $('resetBtn').addEventListener('click', resetLab);
     $('anotherBtn').addEventListener('click', resetLab);
     function editContext() {
+      if (toolSessionStarted) window.ccTrack?.('tool_output_action', { tool: 'interactive_lab', action: 'edit' });
       showContextStage();
       $('contextFields').querySelector('textarea')?.focus();
     }
@@ -500,6 +510,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     $('summaryEditBtn').addEventListener('click', editContext);
 
     function resetLab() {
+      if (toolSessionStarted) window.ccTrack?.('tool_output_action', { tool: 'interactive_lab', action: 'reset' });
+      toolSessionStarted = false;
+      toolCompletionTracked = false;
       clearInterval(thinkingTimer);
       state.decisionType = '';
       state.questions = [];
@@ -550,7 +563,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         $('briefState').hidden = false;
         $('briefState').focus({ preventScroll: true });
         if (window.innerWidth < 980) $('briefState').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.ccTrack?.('lab_stage_result', { stage: 'brief', result: 'success' });
+        if (!toolCompletionTracked) {
+          window.ccTrack?.('tool_complete', { tool: 'interactive_lab', result: 'completed' });
+          toolCompletionTracked = true;
+        }
       } catch (error) {
+        window.ccTrack?.('lab_stage_result', { stage: 'brief', result: 'failure' });
         stopThinking();
         setStep(1);
         showPlaceholder('context');
@@ -698,11 +717,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       if (!state.brief) return;
       try {
         await navigator.clipboard.writeText(briefToText(state.brief));
+        window.ccTrack?.('tool_output_action', { tool: 'interactive_lab', action: 'copy' });
         $('copyState').textContent = 'Decision brief copied.';
       } catch {
         $('copyState').textContent = 'Copy was blocked by the browser. Use Print / Save PDF instead.';
       }
     });
-    $('printBtn').addEventListener('click', () => window.print());
+    $('printBtn').addEventListener('click', () => {
+      if (!state.brief) return;
+      window.ccTrack?.('tool_output_action', { tool: 'interactive_lab', action: 'print' });
+      window.print();
+    });
   </script>
 </BaseLayout>

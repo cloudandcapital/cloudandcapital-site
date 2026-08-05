@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import '../styles/type.css';
 import HeadMeta from '../components/HeadMeta.astro';
+import Analytics from '../components/Analytics.astro';
 import { footerLinks, navigation } from '../data/siteContent';
 
 interface Props {
@@ -20,13 +21,7 @@ const {
 <html lang="en">
   <head>
     <HeadMeta title={title} description={description} noindex={noindex} />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GXRMNTEB3B"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-GXRMNTEB3B');
-    </script>
+    <Analytics />
   </head>
   <body>
     <style>

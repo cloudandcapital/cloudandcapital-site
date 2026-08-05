@@ -1,6 +1,6 @@
 import { defineMiddleware } from 'astro:middleware'
 
-const RATE_LIMIT = 10
+const RATE_LIMIT = 20
 const WINDOW_MS = 60 * 60 * 1000
 
 const ipRequests = new Map<string, { count: number; resetAt: number }>()
@@ -15,6 +15,10 @@ const RATE_LIMIT_MESSAGE =
 export const onRequest = defineMiddleware(async (context, next) => {
   const { pathname } = context.url
   if (!RATE_LIMITED_ROUTES.some(r => pathname.startsWith(r))) {
+    return next()
+  }
+
+  if (context.request.method !== 'POST') {
     return next()
   }
 

@@ -83,57 +83,60 @@ function buildUserPrompt(readiness) {
 }
 
 async function callModel(readiness) {
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': import.meta.env.ANTHROPIC_API_KEY,
-      'anthropic-version': '2023-06-01',
-    },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 3200,
-      temperature: 0.2,
-      system: [{ type: 'text', text: buildSystemPrompt(readiness), cache_control: { type: 'ephemeral' } }],
-      messages: [{ role: 'user', content: buildUserPrompt(readiness) }],
-    }),
-    signal: AbortSignal.timeout(90000),
-  });
+  let correction = '';
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': import.meta.env?.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 3200,
+        temperature: 0.2,
+        system: [{ type: 'text', text: buildSystemPrompt(readiness), cache_control: { type: 'ephemeral' } }],
+        messages: [{ role: 'user', content: `${buildUserPrompt(readiness)}${correction}` }],
+      }),
+      signal: AbortSignal.timeout(90000),
+    });
 
-  if (!response.ok) {
-    const detail = await response.text();
-    console.error('Interactive Lab model error:', response.status, detail.slice(0, 500));
-    throw new Error('MODEL_REQUEST_FAILED');
-  }
+    if (!response.ok) {
+      const detail = await response.text();
+      console.error('Interactive Lab model error:', response.status, detail.slice(0, 500));
+      throw new Error('MODEL_REQUEST_FAILED');
+    }
 
-  const data = await response.json();
-  const raw = data.content?.find((part) => part.type === 'text')?.text || '';
-  if (data.stop_reason === 'max_tokens') {
-    console.error('Interactive Lab model output truncated at max_tokens');
-    throw new Error('MODEL_OUTPUT_TRUNCATED');
-  }
-  const cleaned = raw.replace(/^```json\s*/i, '').replace(/```\s*$/i, '').trim();
-  let brief;
+    const data = await response.json();
+    const raw = data.content?.find((part) => part.type === 'text')?.text || '';
+    if (data.stop_reason === 'max_tokens') {
+      console.error('Interactive Lab model output truncated at max_tokens');
+      throw new Error('MODEL_OUTPUT_TRUNCATED');
+    }
+    const cleaned = raw.replace(/^```json\s*/i, '').replace(/```\s*$/i, '').trim();
+    let brief;
 
-  try {
-    brief = JSON.parse(cleaned);
-  } catch (error) {
-    console.error('Interactive Lab JSON parse error:', error, raw.slice(0, 500));
-    throw new Error('INVALID_MODEL_JSON');
-  }
+    try {
+      brief = JSON.parse(cleaned);
+    } catch (error) {
+      console.error('Interactive Lab JSON parse error:', error, raw.slice(0, 500));
+      throw new Error('INVALID_MODEL_JSON');
+    }
 
-  if (!validateBrief(brief)) {
-    console.error('Interactive Lab schema validation failed');
-    throw new Error('INVALID_MODEL_SCHEMA');
-  }
+    if (!validateBrief(brief)) {
+      console.error('Interactive Lab schema validation failed');
+      throw new Error('INVALID_MODEL_SCHEMA');
+    }
 
-  const unsupportedNumbers = findUnsupportedNumbers(brief, buildSourceText(readiness));
-  if (unsupportedNumbers.length) {
+    const unsupportedNumbers = findUnsupportedNumbers(brief, buildSourceText(readiness));
+    if (!unsupportedNumbers.length) return brief;
+
     console.error('Interactive Lab unsupported numeric claims:', unsupportedNumbers);
-    throw new Error('UNSUPPORTED_NUMERIC_CLAIM');
+    if (attempt === 1) throw new Error('UNSUPPORTED_NUMERIC_CLAIM');
+    correction = `\n\nYour previous draft was rejected because it introduced these unsupported numeric claims: ${unsupportedNumbers.join(', ')}. Regenerate the complete JSON from scratch. Do not use those claims, calculate derived figures, or replace them with new numbers. Use qualitative language to describe comparisons whose figures were not explicitly supplied.`;
   }
-
-  return brief;
+  throw new Error('UNSUPPORTED_NUMERIC_CLAIM');
 }
 
 export async function POST({ request }) {

@@ -152,7 +152,7 @@ const NUMBER_WORD_VALUES = new Map([
 ]);
 
 const NUMBER_ATOM = '(?:\\d[\\d,]*(?:\\.\\d+)?|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|thirty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|forty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|fifty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|sixty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|seventy(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|eighty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|ninety(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?)';
-const NUMBER_CLAIM_PATTERN = new RegExp(`([$€£])?\\s*(${NUMBER_ATOM})(?:\\s*(?:-|–|—|to)\\s*(${NUMBER_ATOM}))?\\s*([kKmM])?\\s*(%|percent(?:age)?|years?|months?|weeks?|days?|hours?|engineers?|users?|seats?|licenses?|licences?|quarters?|x)?`, 'gi');
+const NUMBER_CLAIM_PATTERN = new RegExp(`([$€£])?\\s*(${NUMBER_ATOM})(?:\\s*(?:-|–|—|to)\\s*(${NUMBER_ATOM}))?\\s*([kKmM])?(?:\\s*-\\s*)?\\s*(%|percent(?:age)?|years?|months?|weeks?|days?|hours?|engineers?|users?|seats?|licenses?|licences?|quarters?|x|times?)?`, 'gi');
 
 function parseNumberAtom(atom) {
   if (/^\d/.test(atom)) return Number(atom.replace(/,/g, ''));
@@ -162,7 +162,7 @@ function parseNumberAtom(atom) {
 function normalizeUnit(unit = '') {
   const normalized = unit.toLowerCase();
   if (normalized === '%' || normalized.startsWith('percent')) return 'percent';
-  if (normalized === 'x') return 'multiple';
+  if (normalized === 'x' || normalized === 'time' || normalized === 'times') return 'multiple';
   return normalized.replace(/s$/, '');
 }
 
@@ -170,6 +170,7 @@ function extractNumericClaims(text) {
   const claims = [];
   for (const match of String(text).matchAll(NUMBER_CLAIM_PATTERN)) {
     const [raw, currency, firstAtom, secondAtom, magnitude, rawUnit] = match;
+    if (!currency && !magnitude && !rawUnit && !/^\d/.test(firstAtom)) continue;
     const scale = magnitude?.toLowerCase() === 'k' ? 1000 : magnitude?.toLowerCase() === 'm' ? 1000000 : 1;
     const first = parseNumberAtom(firstAtom) * scale;
     const second = secondAtom ? parseNumberAtom(secondAtom) * scale : null;

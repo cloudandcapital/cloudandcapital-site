@@ -80,8 +80,8 @@ test('validates the complete decision brief contract', () => {
 });
 
 test('accepts equivalent number words, digits, hyphenated durations, and ranges', () => {
-  const source = 'A two-year term needs two engineers and takes four to six months.';
-  assert.deepEqual(findUnsupportedNumbers({ move: 'Use a 2-year term with 2 engineers over 4–6 months.' }, source), []);
+  const source = 'A two-year term needs two engineers, takes four to six months, is due in 45 days, and grew 3x.';
+  assert.deepEqual(findUnsupportedNumbers({ move: 'Use a 2-year term with 2 engineers over 4–6 months before the 45-day deadline after growing three times.' }, source), []);
 });
 
 test('accepts equivalent currency shorthand, expanded amounts, and percent formatting', () => {
@@ -97,6 +97,44 @@ test('continues rejecting unsupported numbers, arithmetic, changed units, and ma
   assert.deepEqual(findUnsupportedNumbers({ move: 'Use 12 engineers.' }, 'The work takes 12 months.'), ['12 engineers']);
   assert.deepEqual(findUnsupportedNumbers({ move: 'Spend is $360,000.' }, 'Spend is $360.'), ['$360,000']);
   assert.deepEqual(findUnsupportedNumbers({ move: 'The annual total is $720K.' }, 'Spend is $360K for two years.'), ['$720K']);
+});
+
+test('retries once after unsupported model claims and returns only the validated replacement', async () => {
+  const originalFetch = globalThis.fetch;
+  const drafts = [
+    { ...validBrief, recommendation: { ...validBrief.recommendation, move: 'Commit $720K.' } },
+    { ...validBrief, recommendation: { ...validBrief.recommendation, move: 'Keep the $360,000 baseline.' } },
+  ];
+  let calls = 0;
+  globalThis.fetch = async () => new Response(JSON.stringify({
+    stop_reason: 'end_turn',
+    content: [{ type: 'text', text: JSON.stringify(drafts[calls++]) }],
+  }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+
+  try {
+    const request = new Request('https://cloudandcapital.com/api/interactive-lab', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        stage: 'brief',
+        decision: 'Choose whether to renew the monitoring platform.',
+        decisionType: 'renewal',
+        answers: {
+          alternatives: 'Renew or renegotiate the current agreement.',
+          exposure: 'Current spend is $360K per year.',
+          demand: 'Critical monitoring is actively used.',
+          constraint: 'Service continuity must be protected.',
+        },
+      }),
+    });
+    const response = await POST({ request });
+    const body = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(calls, 2);
+    assert.equal(body.brief.recommendation.move, 'Keep the $360,000 baseline.');
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });
 
 test('questions stage never calls the model and returns targeted context', async () => {

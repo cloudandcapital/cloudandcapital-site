@@ -207,6 +207,7 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
   .flagship-actions { display: flex; flex-wrap: wrap; gap: 1.25rem 1.5rem; align-items: center; margin-top: 2.25rem; }
   .flagship-actions a, .pipeline-heading > a, .pipeline-list a { font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .12em; line-height: 1.5; text-transform: uppercase; text-decoration: none; color: #6b8e7f; }
   .flagship-actions a { color: #86a89a; }
+  .flagship-actions a > span[aria-hidden="true"], .tool-action a > span[aria-hidden="true"], .market-context a > span[aria-hidden="true"], .pipeline a > span[aria-hidden="true"], .work-cta > a > span[aria-hidden="true"] { margin-left: .45em; }
   .flagship-actions a:hover, .pipeline-heading > a:hover, .pipeline-list a:hover { text-decoration: underline; text-underline-offset: .3em; }
   .interactive-tools a:focus-visible { outline: 2px solid #3d6055; outline-offset: .35rem; }
   .flagship-actions span { font-family: 'DM Mono', monospace; font-size: .57rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(245,238,233,.57); }
@@ -254,18 +255,18 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
   .market-context > div > p { margin: 0; }.market-context a { margin-top: 0; border-color: rgba(107,142,127,.55); white-space: nowrap; }.market-context a:hover { background: #edf3ee; color: #213b32; }
   .interactive-tools + .pipeline { padding-top: clamp(3rem, 5vw, 4.5rem); }
   .pipeline { padding-top: clamp(4rem, 7vw, 6.25rem); padding-bottom: clamp(3.5rem, 5vw, 4.75rem); display: grid; grid-template-columns: minmax(15rem, .7fr) minmax(0, 1.3fr); gap: clamp(2.5rem, 8vw, 8rem); background: #19241f; color: #f5eee9; border-top: 1px solid rgba(168,192,181,.28); }
-  .pipeline .section-label { color: #a8c0b5; }
+  .pipeline .section-label { color: #b8cec3; }
   .pipeline-heading h2, .pipeline-list h3 { color: #f5eee9; }
-  .pipeline-heading > p:not(.section-label) { max-width: 31ch; margin: 1.4rem 0 2rem; font-family: 'DM Sans', sans-serif; font-size: .9rem; line-height: 1.8; color: rgba(245,238,233,.67); }
-  .pipeline-heading > a, .pipeline-list a { color: #a8c0b5; }
-  .pipeline-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(245,238,233,.17); }
-  .pipeline-list li { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr) auto; gap: 1rem; align-items: baseline; padding: 1.45rem 0; border-bottom: 1px solid rgba(245,238,233,.17); }
-  .pipeline-number { font-family: 'DM Mono', monospace; font-size: .59rem; letter-spacing: .08em; color: #c9a961; }
+  .pipeline-heading > p:not(.section-label) { max-width: 31ch; margin: 1.4rem 0 2rem; font-family: 'DM Sans', sans-serif; font-size: .9rem; line-height: 1.8; color: rgba(245,238,233,.72); }
+  .pipeline-heading > a, .pipeline-list a { color: #b8cec3; }
+  .pipeline-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(245,238,233,.23); }
+  .pipeline-list li { display: grid; grid-template-columns: 3.25rem minmax(0, 1fr) auto; gap: 1rem; align-items: baseline; padding: 1.45rem 0; border-bottom: 1px solid rgba(245,238,233,.23); }
+  .pipeline-number { font-family: 'DM Mono', monospace; font-size: .59rem; letter-spacing: .08em; color: #d4b16e; }
   .pipeline-list h3 { margin: 0 0 .35rem; font-size: clamp(1.25rem, 2vw, 1.62rem); line-height: 1.08; }
-  .pipeline-list p { margin: 0; font-family: 'DM Sans', sans-serif; font-size: .83rem; line-height: 1.65; color: rgba(245,238,233,.64); }
+  .pipeline-list p { margin: 0; font-family: 'DM Sans', sans-serif; font-size: .83rem; line-height: 1.65; color: rgba(245,238,233,.72); }
   .pipeline-list a { white-space: nowrap; }
   .pipeline a:focus-visible { outline: 2px solid #f5eee9; outline-offset: .35rem; }
-  .pipeline + .work-cta { border-top: 1px solid rgba(245,238,233,.22); }
+  .pipeline + .work-cta { border-top: 1px solid rgba(221,185,119,.55); }
   .work-cta { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: end; padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 5vw, 4.5rem); background: #3d6055; }
   .section-label-gold { color: #ddb977; }.section-label-gold::after { opacity: .45; }
   .work-cta h2 { max-width: 23ch; color: #fff; }

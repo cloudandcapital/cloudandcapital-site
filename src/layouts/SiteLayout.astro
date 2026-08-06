@@ -11,6 +11,7 @@ import '@fontsource/dm-sans/500.css';
 import '@fontsource/dm-mono/300.css';
 import '@fontsource/dm-mono/400.css';
 import HeadMeta from '../components/HeadMeta.astro';
+import Analytics from '../components/Analytics.astro';
 
 interface Props {
   title?: string;
@@ -28,13 +29,7 @@ const {
 <html lang="en">
   <head>
     <HeadMeta title={title} description={description} noindex={noindex} />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GXRMNTEB3B"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-GXRMNTEB3B');
-    </script>
+    <Analytics />
   </head>
   <body>
     <slot />

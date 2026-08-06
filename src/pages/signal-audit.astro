@@ -200,6 +200,7 @@ import SignalAuditResults from "../components/SignalAuditResults.astro";
       }
       state.targetScope = target.value;
       state.technologyScopes = tech.map((input) => input.value);
+      window.ccTrack?.("tool_start", { tool: "signal_audit", entry: "audit_setup" });
       $("setupPanel").hidden = true;
       $("questionPanel").hidden = false;
       renderQuestion();
@@ -270,6 +271,7 @@ import SignalAuditResults from "../components/SignalAuditResults.astro";
     }
     async function showResults() {
       state.result = scoreAudit(state.answers);
+      window.ccTrack?.("tool_complete", { tool: "signal_audit", result: "completed" });
       const result = state.result;
       const fallback = fallbackInterpretation(result, {
         targetScope: labelFor(TARGET_SCOPES, state.targetScope),
@@ -354,7 +356,10 @@ import SignalAuditResults from "../components/SignalAuditResults.astro";
         $("aiStatus").textContent = "Deterministic interpretation";
       }
     }
-    $("printButton").addEventListener("click", () => window.print());
+    $("printButton").addEventListener("click", () => {
+      window.ccTrack?.("tool_output_action", { tool: "signal_audit", action: "print" });
+      window.print();
+    });
     async function copyResultSummary(text) {
       try {
         await navigator.clipboard.writeText(text);
@@ -375,11 +380,13 @@ import SignalAuditResults from "../components/SignalAuditResults.astro";
     $("copyButton").addEventListener("click", async () => {
       const text = `${$("resultTitle").textContent}\n${$("mapDescription").textContent}\n30-day move: ${$("moveText").textContent}\nKPI: ${$("measureText").textContent}`;
       if (await copyResultSummary(text)) {
+        window.ccTrack?.("tool_output_action", { tool: "signal_audit", action: "copy" });
         $("copyButton").textContent = "Copied";
         setTimeout(() => ($("copyButton").textContent = "Copy Summary"), 1800);
       }
     });
     $("retakeButton").addEventListener("click", () => {
+      window.ccTrack?.("tool_output_action", { tool: "signal_audit", action: "retake" });
       state.answers = {};
       state.index = 0;
       state.result = null;

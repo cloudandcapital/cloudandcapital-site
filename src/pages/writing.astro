@@ -42,7 +42,7 @@ const archive = writing.slice(1);
         <div class="newsletter-feature-detail">
           <p>{newsletter.description}</p>
           <div class="newsletter-actions">
-            <a href={newsletter.subscribeHref} target="_blank" rel="noopener noreferrer">Subscribe on Substack <span aria-hidden="true">→</span></a>
+            <a href={newsletter.subscribeHref} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="writing_newsletter">Subscribe on Substack <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
@@ -53,7 +53,7 @@ const archive = writing.slice(1);
         <div class="featured-article-heading">
           <p class="section-label">Featured</p>
         </div>
-        <a class="featured-article-link" href={writingFeatured.href} target="_blank" rel="noopener noreferrer">
+        <a class="featured-article-link" href={writingFeatured.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="writing_featured">
           <div class="featured-article-copy">
             <p class="article-meta">{writingFeatured.date} <span>{writingFeatured.topic}</span></p>
             <h2 id="featured-title">{writingFeatured.title}</h2>
@@ -75,7 +75,7 @@ const archive = writing.slice(1);
         </div>
         <div class="archive-grid">
           {archive.map((article) => (
-            <a href={article.href} target="_blank" rel="noopener noreferrer" class="archive-entry">
+            <a href={article.href} target="_blank" rel="noopener noreferrer" class="archive-entry" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="writing_archive">
               <div class="archive-image">
                 <img src={article.archiveImage} alt={article.archiveImageAlt} loading="lazy" />
               </div>
@@ -97,7 +97,7 @@ const archive = writing.slice(1);
           <p class="section-label section-label-gold">From research to systems</p>
           <h2 id="writing-cta-title">See the tools behind<br class="writing-cta-break" /> the analysis.</h2>
         </div>
-        <a href="/work">Explore the work <span aria-hidden="true">→</span></a>
+        <a href="/work" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="writing_contact">Explore the work <span aria-hidden="true">→</span></a>
       </div>
     </section>
   </main>

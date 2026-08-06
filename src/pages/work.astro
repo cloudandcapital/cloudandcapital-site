@@ -49,7 +49,7 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
             <h2 id="flagship-title">Cloud Cost Guard <span>+ Lumen</span></h2>
             <p>{flagship.description}</p>
             <div class="flagship-actions">
-              <a href={flagship.href} target="_blank" rel="noopener noreferrer">View live dashboard <span aria-hidden="true">→</span></a>
+              <a href={flagship.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="work_flagship">View live dashboard <span aria-hidden="true">→</span></a>
               <span>Cloud · AI · SaaS</span>
             </div>
           </div>
@@ -101,7 +101,7 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
             <div class="tool-action">
               <p class="action-label">Leave with</p>
               <p class="tool-deliverable">Weakest link, operating pattern, and priority moves.</p>
-              <a href={signalAudit.href}>Take the Signal Audit <span aria-hidden="true">→</span></a>
+              <a href={signalAudit.href} data-analytics-event="cta_click" data-analytics-destination="signal_audit" data-analytics-source="work_decision_tools">Take the Signal Audit <span aria-hidden="true">→</span></a>
             </div>
           </article>
         )}
@@ -120,7 +120,7 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
             <div class="tool-action">
               <p class="action-label">Leave with</p>
               <p class="tool-deliverable">Compared options, explicit economics, and a decision-ready brief.</p>
-              <a href={interactiveLab.href}>Build a Decision Brief <span aria-hidden="true">→</span></a>
+              <a href={interactiveLab.href} data-analytics-event="cta_click" data-analytics-destination="interactive_lab" data-analytics-source="work_decision_tools">Build a Decision Brief <span aria-hidden="true">→</span></a>
             </div>
           </article>
         )}
@@ -133,7 +133,7 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
               <h3>{marketTape.title}</h3>
             </div>
             <p>Live market signals shaping technology<br class="market-description-break" /> capital and infrastructure decisions.</p>
-            <a href={marketTape.href} target="_blank" rel="noopener noreferrer">Open Market Tape <span aria-hidden="true">→</span></a>
+            <a href={marketTape.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="market_tape" data-analytics-source="work_market_context">Open Market Tape <span aria-hidden="true">→</span></a>
           </div>
         </article>
       )}
@@ -144,7 +144,7 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
         <p class="section-label">Open source pipeline</p>
         <h2 id="pipeline-title">The Six Tool Pipeline</h2>
         <p>Six open source FinOps tools spanning allocation, anomaly detection, resilience economics, AI spend, SaaS, and executive reporting.</p>
-        <a href="https://github.com/cloudandcapital" target="_blank" rel="noopener noreferrer">View the pipeline on GitHub <span aria-hidden="true">→</span></a>
+        <a href="https://github.com/cloudandcapital" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="github_pipeline" data-analytics-source="work_pipeline">View the pipeline on GitHub <span aria-hidden="true">→</span></a>
       </div>
       <ol class="pipeline-list">
         {openSourceTools.map((tool, index) => (
@@ -154,7 +154,7 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
               <h3>{tool.title}</h3>
               <p>{tool.description}</p>
             </div>
-            <a href={tool.href} target="_blank" rel="noopener noreferrer" aria-label={`View ${tool.title} on GitHub`}>GitHub <span aria-hidden="true">→</span></a>
+            <a href={tool.href} target="_blank" rel="noopener noreferrer" aria-label={`View ${tool.title} on GitHub`} data-analytics-event="cta_click" data-analytics-destination="github_pipeline" data-analytics-source="work_pipeline">GitHub <span aria-hidden="true">→</span></a>
           </li>
         ))}
       </ol>
@@ -165,7 +165,7 @@ const marketTape = tools.find((tool) => tool.slug === 'market-tape');
         <p class="section-label section-label-gold">Start a conversation</p>
         <h2 id="work-cta-title">Working on cloud economics, FinOps, or AI infrastructure?</h2>
       </div>
-      <a href={contactLink.href}>{contactLink.label} <span aria-hidden="true">→</span></a>
+      <a href={contactLink.href} data-analytics-event="cta_click" data-analytics-destination="contact" data-analytics-source="work_contact">{contactLink.label} <span aria-hidden="true">→</span></a>
     </section>
   </main>
 </BaseLayout>

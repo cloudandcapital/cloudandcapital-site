@@ -85,7 +85,7 @@ const contactEmail = contactLink.href.replace(/^mailto:/, '');
       <div class="section-heading">
         <p class="section-label">Decision tools</p>
         <h2 id="interactive-title">Start with the system.<br />Then work the decision.</h2>
-        <p>Use the tools separately or in sequence: diagnose where cost accountability breaks down, then turn a live technology-spend question into a decision-ready brief.</p>
+        <p>Use the tools separately or in sequence: diagnose where cost accountability breaks down, then turn a live question about technology spend into a structured decision brief.</p>
       </div>
       <div class="decision-suite">
         {signalAudit && (
@@ -121,7 +121,7 @@ const contactEmail = contactLink.href.replace(/^mailto:/, '');
             </dl>
             <div class="tool-action">
               <p class="action-label">Leave with</p>
-              <p class="tool-deliverable">Compared options, explicit economics, and a decision-ready brief.</p>
+              <p class="tool-deliverable">Compared options, explicit economics, and a structured decision brief.</p>
               <a href={interactiveLab.href} data-analytics-event="cta_click" data-analytics-destination="interactive_lab" data-analytics-source="work_decision_tools">Build a Decision Brief <span aria-hidden="true">→</span></a>
             </div>
           </article>
@@ -222,9 +222,9 @@ const contactEmail = contactLink.href.replace(/^mailto:/, '');
   .flagship-actions span { font-family: 'DM Mono', monospace; font-size: .57rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(245,238,233,.57); }
   .flagship-visual { display: grid; grid-template-columns: 1.1fr .9fr; overflow: hidden; border: 1px solid rgba(117, 96, 73, .3); border-radius: 20px; background: #f5eee9; transform: translateY(30px); }
   .lumen-panel, .cost-shape-panel { min-width: 0; padding: clamp(1.35rem, 2.4vw, 2rem); background: #f5eee9; color: #000; }
-  .lumen-panel { display: flex; flex-direction: column; justify-content: center; }
+  .lumen-panel { display: flex; flex-direction: column; justify-content: flex-start; }
   .visual-kicker { margin: 0 0 1.5rem; font-family: 'DM Mono', monospace; font-size: .56rem; letter-spacing: .14em; text-transform: uppercase; color: #6b8e7f; }
-  .work-rail-chat { padding: 2.1rem 1rem 1.2rem 1.15rem; display: flex; flex-direction: column; }
+  .work-rail-chat { padding: 2rem 1rem 1.2rem 1.15rem; display: flex; flex-direction: column; }
   .work-rail-kicker { min-height: .8rem; margin-bottom: .95rem; font-family: 'DM Mono', monospace; font-size: .52rem; letter-spacing: .12em; text-transform: uppercase; color: #6f8f7a; }
   .work-chat-bubble { max-width: 90%; margin-bottom: .75rem; padding: .84rem .98rem; border-radius: 18px; font-family: 'DM Sans', sans-serif; font-size: .84rem; line-height: 1.72; }
   .work-chat-bubble-user { margin-left: auto; background: #b89a68; color: #fff; font-family: 'Cormorant Garamond', serif; font-size: 1.02rem; font-style: italic; line-height: 1.35; }
@@ -234,7 +234,7 @@ const contactEmail = contactLink.href.replace(/^mailto:/, '');
   .cost-shape-panel { display: flex; flex-direction: column; border-left: 1px solid rgba(117, 96, 73, .18); }
   .donut { width: min(11rem, 100%); aspect-ratio: 1; margin: .25rem auto 1rem; border-radius: 50%; background: conic-gradient(#6b8e7f 0 88.1%, #a7b6d8 88.1% 95.7%, #c9a961 95.7% 100%); position: relative; }
   .donut::after { content: ''; position: absolute; inset: 23%; border-radius: 50%; background: #f5eee9; }
-  .cost-shape-title { margin: .25rem 0 1rem; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.25rem; line-height: 1.1; }
+  .cost-shape-title { margin: .25rem 0 1rem; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.25rem; line-height: 1.1; text-align: center; }
   .cost-shape-panel ul { list-style: none; margin: auto 0 0; padding: 0; }
   .cost-shape-panel li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .45rem; align-items: center; padding: .52rem 0; border-top: 1px solid rgba(0,0,0,.08); font-family: 'DM Mono', monospace; font-size: .54rem; letter-spacing: .04em; line-height: 1.35; color: #4a4a4a; }
   .cost-shape-panel strong { color: #000; font-weight: 400; }
@@ -251,7 +251,7 @@ const contactEmail = contactLink.href.replace(/^mailto:/, '');
   .decision-tool + .decision-tool { border-top: 1px solid rgba(0,0,0,.12); background: #edf3ee; }
   .tool-summary .tool-meta { margin: 0 0 .75rem; color: #4f7567; }
   .tool-summary h3, .market-context h3 { margin: 0; font-size: clamp(2.15rem, 2.75vw, 3rem); line-height: 1; letter-spacing: -.025em; }
-  .tool-summary > p:not(.tool-meta), .market-context > div > p { margin: .9rem 0 0; font-family: 'DM Sans', sans-serif; font-size: .88rem; line-height: 1.68; color: #4a4a4a; }
+  .tool-summary > p:not(.tool-meta) { margin: .9rem 0 0; font-family: 'DM Sans', sans-serif; font-size: .88rem; line-height: 1.68; color: #4a4a4a; }
   .tool-summary > p:not(.tool-meta) { max-width: 46ch; }
   .tool-facts { margin: 0; }
   .tool-facts div { padding: .7rem 0; border-top: 1px solid rgba(0,0,0,.1); }.tool-facts div:last-child { border-bottom: 1px solid rgba(0,0,0,.1); }
@@ -265,7 +265,7 @@ const contactEmail = contactLink.href.replace(/^mailto:/, '');
   .market-context { margin-top: 1.25rem; padding: 1.35rem var(--tool-grid-inset); background: #f7f5f1; border-top: 1px solid rgba(0,0,0,.12); border-bottom: 1px solid rgba(0,0,0,.12); }
   .market-context > div { display: grid; grid-template-columns: var(--tool-grid-columns); gap: var(--tool-grid-gap); align-items: center; }
   .market-identity .tool-meta { margin: 0 0 .45rem; color: #8a7044; }.market-context h3 { font-size: clamp(1.7rem, 2.2vw, 2.25rem); }
-  .market-context > div > p { margin: 0; }.market-context a { justify-self: start; align-self: center; margin-top: 0; white-space: nowrap; }
+  .market-context > div > p { margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.05rem; font-weight: 500; line-height: 1.28; letter-spacing: -.005em; color: #292929; }.market-context a { justify-self: start; align-self: center; margin-top: 0; white-space: nowrap; }
   .interactive-tools + .pipeline { padding-top: clamp(3rem, 5vw, 4.5rem); }
   .pipeline { padding-top: clamp(4rem, 7vw, 6.25rem); padding-bottom: clamp(3.5rem, 5vw, 4.75rem); display: grid; grid-template-columns: minmax(15rem, .7fr) minmax(0, 1.3fr); gap: clamp(2.5rem, 8vw, 8rem); background: #19241f; color: #f5eee9; border-top: 1px solid rgba(168,192,181,.28); }
   .pipeline .section-label { color: #b8cec3; }

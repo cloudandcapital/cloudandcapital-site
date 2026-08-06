@@ -55,7 +55,7 @@ export const tools = [
     title: 'Interactive Lab',
     label: 'Interactive · Tool',
     description:
-      'Turn one real cloud, AI, SaaS, or technology-spend question into a structured decision brief grounded in the context you provide.',
+      'Turn one real question about cloud, AI, SaaS, or technology spend into a structured decision brief grounded in the context you provide.',
     href: '/interactive-lab',
   },
 ];
@@ -63,7 +63,7 @@ export const tools = [
 export const openSourceTools = [
   {
     title: 'FinOps Lite',
-    description: 'Reconcile AWS Cost Explorer service and daily views, then emit versioned CCAC output for downstream analysis.',
+    description: 'Reconcile AWS Cost Explorer service and daily views into one dependable cost dataset for downstream analysis.',
     href: 'https://github.com/cloudandcapital/finops-lite',
     external: true,
   },
@@ -81,7 +81,7 @@ export const openSourceTools = [
   },
   {
     title: 'AI Cost Lens',
-    description: 'Attribute AI usage cost by provider, model, project, team, and task, with provenance-preserving CCAC output.',
+    description: 'Attribute AI usage cost by provider, model, project, team, and task while preserving source provenance.',
     href: 'https://github.com/cloudandcapital/ai-cost-lens',
     external: true,
   },

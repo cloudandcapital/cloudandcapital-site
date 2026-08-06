@@ -1,4 +1,6 @@
 ---
+import CostGuardDashboard from './CostGuardDashboard.astro';
+
 interface Props {
   analyticsSource: string;
 }
@@ -17,39 +19,7 @@ const { analyticsSource } = Astro.props;
     </div>
   </div>
 
-  <div class="cost-guard-dashboard" aria-label="Illustrative Cloud Cost Guard and Lumen analysis">
-    <div class="cost-guard-rail">
-      <div class="cost-guard-chat">
-        <div class="cost-guard-kicker">Lumen analysis</div>
-        <div class="cost-guard-question">What’s bleeding money right now?</div>
-        <div class="cost-guard-response">
-          <strong>EC2 jumped 154% in one day, from $482 to $1,226.</strong> It is now the largest cost driver at <strong>40.5% of cloud spend.</strong><br /><br />
-          I also found <strong>19 unused SaaS licenses costing $242 per month.</strong> AI spend rose <strong>12.4%</strong>, which is worth checking against token volume and model mix before it becomes the next material driver.<br /><br />
-          <strong>Start with EC2, then validate the AI increase. Was this a planned launch or uncontrolled autoscaling?</strong>
-        </div>
-      </div>
-
-      <div class="cost-guard-signal">
-        <div class="cost-guard-kicker">Current cost shape</div>
-        <svg class="cost-guard-donut" viewBox="0 0 180 180" aria-hidden="true">
-          <g transform="translate(90 90) rotate(-90)">
-            <circle r="54" cx="0" cy="0" fill="none" stroke="rgba(25,23,20,.08)" stroke-width="24"></circle>
-            <circle r="54" cx="0" cy="0" fill="none" stroke="#6D8F72" stroke-width="24" stroke-linecap="butt" stroke-dasharray="248 91.29"></circle>
-            <circle r="54" cx="0" cy="0" fill="none" stroke="#A7B6D8" stroke-width="24" stroke-linecap="butt" stroke-dasharray="27 312.29" stroke-dashoffset="-253"></circle>
-            <circle r="54" cx="0" cy="0" fill="none" stroke="#D6B07A" stroke-width="24" stroke-linecap="butt" stroke-dasharray="16 323.29" stroke-dashoffset="-286"></circle>
-            <circle r="54" cx="0" cy="0" fill="none" stroke="#C9C4B8" stroke-width="24" stroke-linecap="butt" stroke-dasharray="12 327.29" stroke-dashoffset="-305"></circle>
-          </g>
-          <circle cx="90" cy="90" r="36" fill="var(--white)" />
-        </svg>
-        <div class="cost-guard-signal-title">Tech spend by scope</div>
-        <div class="cost-guard-legend">
-          <div><span class="dot green"></span><span>Cloud infrastructure</span><strong>88.1%</strong></div>
-          <div><span class="dot blue"></span><span>SaaS tools</span><strong>7.6%</strong></div>
-          <div><span class="dot gold"></span><span>AI / LLM</span><strong>4.3%</strong></div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <CostGuardDashboard />
 </div>
 
 <style>
@@ -63,21 +33,6 @@ const { analyticsSource } = Astro.props;
   .cost-guard-actions a:hover { text-decoration: underline; text-underline-offset: .3em; }
   .cost-guard-actions a:focus-visible { outline: 2px solid var(--cream); outline-offset: .35rem; }
   .cost-guard-actions span { color: rgba(244,239,230,.62); font-family: 'DM Mono', monospace; font-size: .59rem; letter-spacing: .1em; text-transform: uppercase; }
-  .cost-guard-dashboard { padding: 1.2rem; background: var(--ink); border-left: 1px solid rgba(25,23,20,.08); }
-  .cost-guard-rail { display: grid; grid-template-columns: minmax(0,1.08fr) minmax(260px,.92fr); min-height: 100%; align-items: start; background: #f5efe8; border: 1px solid rgba(0,0,0,.08); }
-  .cost-guard-chat { padding: 2rem 1rem 1.2rem 1.15rem; display: flex; flex-direction: column; border-right: 1px solid rgba(25,23,20,.06); }
-  .cost-guard-signal { padding: 2rem 1.15rem 1.2rem; display: flex; flex-direction: column; justify-content: flex-start; }
-  .cost-guard-kicker { min-height: .8rem; margin-bottom: .95rem; color: var(--gold); font-family: 'DM Mono', monospace; font-size: .52rem; letter-spacing: .12em; text-transform: uppercase; }
-  .cost-guard-question, .cost-guard-response { border-radius: 18px; padding: .84rem .98rem; margin-bottom: .75rem; }
-  .cost-guard-question { max-width: 90%; margin-left: auto; background: #b89a68; color: var(--white); font-family: 'Cormorant Garamond', serif; font-size: 1.02rem; font-style: italic; line-height: 1.35; }
-  .cost-guard-response { max-width: 100%; background: rgba(25,23,20,.06); color: #514b42; font-family: 'DM Sans', sans-serif; font-size: .79rem; line-height: 1.62; }
-  .cost-guard-response strong { color: #1d1b18; font-weight: 700; }
-  .cost-guard-donut { display: block; width: 150px; height: 150px; margin: .1rem auto .95rem; }
-  .cost-guard-signal-title { margin-bottom: .5rem; color: var(--ink); font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; line-height: 1.08; text-align: center; }
-  .cost-guard-legend { display: grid; gap: .6rem; width: 100%; }
-  .cost-guard-legend > div { display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: .55rem; align-items: center; color: var(--ink-muted); font-size: .74rem; }
-  .cost-guard-legend strong { min-width: 48px; color: var(--ink-soft); font-family: 'DM Mono', monospace; font-size: .61rem; font-weight: 400; letter-spacing: .06em; text-align: right; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; }.green { background: #6D8F72; }.blue { background: #A7B6D8; }.gold { background: #D6B07A; }
-  @media (max-width: 1024px) { .cost-guard-rail { grid-template-columns: 1fr; }.cost-guard-chat { border-right: none; border-bottom: 1px solid rgba(25,23,20,.06); } }
-  @media (max-width: 720px) { .cost-guard-feature { grid-template-columns: 1fr; }.cost-guard-copy { min-height: auto; padding: 2.5rem 1.25rem; }.cost-guard-dashboard { min-height: 0; padding: .65rem; } .cost-guard-title { white-space: normal; } }
+  @media (max-width: 1024px) { .cost-guard-feature { grid-template-columns: 1fr; }.cost-guard-copy { min-height: auto; } }
+  @media (max-width: 720px) { .cost-guard-copy { padding: 2.5rem 1.25rem; } .cost-guard-title { white-space: normal; } }
 </style>

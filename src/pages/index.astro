@@ -2573,7 +2573,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 .work-decision-bridge {
   grid-column: span 2;
   display: grid;
-  grid-template-columns: minmax(12rem,.72fr) minmax(0,1.28fr);
+  grid-template-columns: minmax(0,1.28fr) minmax(12rem,.72fr);
   gap: clamp(2rem,4vw,4rem);
   padding: 2.25rem 2rem 2.4rem;
 }
@@ -2586,7 +2586,12 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   line-height: 1.12;
   color: var(--cream);
 }
-.work-decision-intro { display: flex; flex-direction: column; }
+.work-decision-intro {
+  display: flex;
+  flex-direction: column;
+  padding-left: clamp(1.5rem,3vw,2.75rem);
+  border-left: 1px solid rgba(255,255,255,.12);
+}
 .work-decision-all,
 .work-decision-tool a {
   display: inline-flex;
@@ -2641,6 +2646,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   .work-bottom-4col { grid-template-columns: 1fr; }
   .work-4col-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
   .work-decision-bridge { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 1.5rem 2.2rem; }
+  .work-decision-intro { padding-left: 0; border-left: none; }
   .work-decision-intro h3 { max-width: 18ch; }
   .work-decision-tool { grid-template-columns: 1fr; gap: .65rem; }
 }
@@ -3477,11 +3483,6 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
       </div>
 
       <div class="work-decision-bridge">
-        <div class="work-decision-intro">
-          <div class="work-4col-tag">Decision tools</div>
-          <h3>Assess the system.<br />Work the decision.</h3>
-          <a href="/work" class="work-decision-all" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_work">Explore all work →</a>
-        </div>
         <div class="work-decision-tools">
           <div class="work-decision-tool">
             <div>
@@ -3497,6 +3498,11 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
             </div>
             <a href="/interactive-lab" data-analytics-event="cta_click" data-analytics-destination="interactive_lab" data-analytics-source="homepage_work">Open Lab →</a>
           </div>
+        </div>
+        <div class="work-decision-intro">
+          <div class="work-4col-tag">Decision tools</div>
+          <h3>Assess the system.<br />Work the decision.</h3>
+          <a href="/work" class="work-decision-all" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_work">Explore all work →</a>
         </div>
       </div>
 

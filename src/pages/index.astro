@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { footerLinks, navigation, writingFeatured } from '../data/siteContent';
+import CostGuardFeature from '../components/CostGuardFeature.astro';
 ---
 
 <SiteLayout
@@ -3407,60 +3408,7 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
     <div class="section-label" style="color:rgba(244,239,230,.35);">Work</div>
     <h2 class="work-intro">Cost is shaped before it is reported.</h2>
 
-    <div class="work-editorial-grid">
-
-      <div class="work-feature-copy">
-        <div class="work-feature-meta">Dashboard · AI Analyst · Live</div>
-        <div class="work-feature-title">Cloud Cost Guard + Lumen</div>
-        <div class="work-feature-desc">Cloud, AI, and SaaS spend in one dashboard. Lumen surfaces anomalies, cost drivers, forecasts, and investigation paths in plain English.</div>
-        <div class="work-feature-actions">
-          <a href="https://guard.cloudandcapital.com" target="_blank" rel="noopener noreferrer" class="work-feature-link" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="homepage_work">View live dashboard →</a>
-          <span class="work-feature-tech">CLOUD · AI · SAAS</span>
-        </div>
-      </div>
-
-      <div class="work-feature-right">
-        <div class="work-feature-rail">
-
-          <div class="work-rail-chat">
-            <div class="work-rail-kicker">Lumen analysis</div>
-
-            <div class="work-chat-bubble work-chat-bubble-user">
-              What’s bleeding money right now?
-            </div>
-
-            <div class="work-chat-bubble work-chat-bubble-ai work-chat-bubble-ai-main">
-              <strong>EC2 jumped 154% in one day, from $482 to $1,226.</strong> It is now the largest cost driver at <strong>40.5% of cloud spend.</strong><br><br>
-              I also found <strong>19 unused SaaS licenses costing $242 per month.</strong> AI spend rose <strong>12.4%</strong>, which is worth checking against token volume and model mix before it becomes the next material driver.<br><br>
-              <strong>Start with EC2, then validate the AI increase. Was this a planned launch or uncontrolled autoscaling?</strong>
-            </div>
-          </div>
-
-          <div class="work-rail-signal">
-            <div class="work-rail-signal-kicker">Current cost shape</div>
-
-            <svg class="work-rail-donut" viewBox="0 0 180 180" aria-hidden="true">
-              <g transform="translate(90 90) rotate(-90)">
-                <circle r="54" cx="0" cy="0" fill="none" stroke="rgba(25,23,20,.08)" stroke-width="24"></circle>
-                <circle r="54" cx="0" cy="0" fill="none" stroke="#6D8F72" stroke-width="24" stroke-linecap="butt" stroke-dasharray="248 91.29"></circle>
-                <circle r="54" cx="0" cy="0" fill="none" stroke="#A7B6D8" stroke-width="24" stroke-linecap="butt" stroke-dasharray="27 312.29" stroke-dashoffset="-253"></circle>
-                <circle r="54" cx="0" cy="0" fill="none" stroke="#D6B07A" stroke-width="24" stroke-linecap="butt" stroke-dasharray="16 323.29" stroke-dashoffset="-286"></circle>
-                <circle r="54" cx="0" cy="0" fill="none" stroke="#C9C4B8" stroke-width="24" stroke-linecap="butt" stroke-dasharray="12 327.29" stroke-dashoffset="-305"></circle>
-              </g>
-              <circle cx="90" cy="90" r="36" fill="var(--white)"></circle>
-            </svg>
-
-            <div class="work-rail-signal-title">Tech spend by scope</div>
-            <div class="work-rail-legend">
-              <div class="work-rail-item"><span class="dot green"></span><span>Cloud infrastructure</span><strong>88.1%</strong></div>
-              <div class="work-rail-item"><span class="dot blue"></span><span>SaaS tools</span><strong>7.6%</strong></div>
-              <div class="work-rail-item"><span class="dot gold"></span><span>AI / LLM</span><strong>4.3%</strong></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- end work-editorial-grid -->
+    <CostGuardFeature analyticsSource="homepage_work" />
 
     <!-- 4-card bottom row -->
     <div class="work-bottom-4col">

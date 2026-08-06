@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CostGuardFeature from '../components/CostGuardFeature.astro';
 import { contactLink, openSourceTools, tools } from '../data/siteContent';
 
 const flagship = tools.find((tool) => tool.slug === 'cloud-cost-guard-lumen');
@@ -42,42 +43,9 @@ const contactEmail = contactLink.href.replace(/^mailto:/, '');
     {flagship && (
       <section class="flagship" aria-labelledby="flagship-title">
         <div class="flagship-intro">
-          <p class="section-label section-label-dark">Flagship system</p>
+          <p id="flagship-title" class="section-label section-label-dark">Flagship system</p>
         </div>
-        <div class="flagship-grid">
-          <div class="flagship-copy">
-            <p class="tool-meta">{flagship.label}</p>
-            <h2 id="flagship-title">Cloud Cost Guard <span>+ Lumen</span></h2>
-            <p>{flagship.description}</p>
-            <div class="flagship-actions">
-              <a href={flagship.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="work_flagship">View live dashboard <span aria-hidden="true">→</span></a>
-              <span>Cloud · AI · SaaS</span>
-            </div>
-          </div>
-          <div class="flagship-visual" aria-label="Illustrative Cloud Cost Guard and Lumen analysis">
-            <div class="lumen-panel work-rail-chat">
-              <div class="work-rail-kicker">Lumen analysis</div>
-              <div class="work-chat-bubble work-chat-bubble-user">What’s bleeding money right now?</div>
-              <div class="work-chat-bubble work-chat-bubble-ai work-chat-bubble-ai-main">
-                <strong>EC2 jumped 154% in one day, from $482 to $1,226.</strong>
-                It is now the largest cost driver at <strong>40.5% of cloud spend.</strong><br /><br />
-                I also found <strong>19 unused SaaS licenses costing $242 per month.</strong>
-                AI spend rose <strong>12.4%</strong>, which is worth checking against token volume and model mix before it becomes the next material driver.<br /><br />
-                <strong>Start with EC2, then validate the AI increase. Was this a planned launch or uncontrolled autoscaling?</strong>
-              </div>
-            </div>
-            <div class="cost-shape-panel">
-              <p class="visual-kicker">Current cost shape</p>
-              <div class="donut" aria-hidden="true"></div>
-              <p class="cost-shape-title">Tech spend by scope</p>
-              <ul>
-                <li><span class="dot cloud"></span><span>Cloud infrastructure</span><strong>88.1%</strong></li>
-                <li><span class="dot saas"></span><span>SaaS tools</span><strong>7.6%</strong></li>
-                <li><span class="dot ai"></span><span>AI / LLM</span><strong>4.3%</strong></li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <CostGuardFeature analyticsSource="work_flagship" />
       </section>
     )}
 

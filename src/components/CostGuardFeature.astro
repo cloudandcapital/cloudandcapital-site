@@ -19,7 +19,9 @@ const { analyticsSource } = Astro.props;
     </div>
   </div>
 
-  <CostGuardDashboard />
+  <div class="cost-guard-dashboard-frame">
+    <CostGuardDashboard />
+  </div>
 </div>
 
 <style>
@@ -33,6 +35,8 @@ const { analyticsSource } = Astro.props;
   .cost-guard-actions a:hover { text-decoration: underline; text-underline-offset: .3em; }
   .cost-guard-actions a:focus-visible { outline: 2px solid var(--cream); outline-offset: .35rem; }
   .cost-guard-actions span { color: rgba(244,239,230,.62); font-family: 'DM Mono', monospace; font-size: .59rem; letter-spacing: .1em; text-transform: uppercase; }
+  .cost-guard-dashboard-frame { display: flex; align-items: center; padding-block: 1.2rem; background: var(--ink); }
+  .cost-guard-dashboard-frame :global(.cost-guard-dashboard) { width: 100%; }
   @media (max-width: 1024px) { .cost-guard-feature { grid-template-columns: 1fr; }.cost-guard-copy { min-height: auto; } }
-  @media (max-width: 720px) { .cost-guard-copy { padding: 2.5rem 1.25rem; } .cost-guard-title { white-space: normal; } }
+  @media (max-width: 720px) { .cost-guard-copy { padding: 2.5rem 1.25rem; }.cost-guard-dashboard-frame { padding-block: .65rem; } .cost-guard-title { white-space: normal; } }
 </style>

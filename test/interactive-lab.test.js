@@ -85,6 +85,20 @@ test('accepts equivalent number words, digits, hyphenated durations, and ranges'
   assert.deepEqual(findUnsupportedNumbers({ move: 'Plan for a six-month migration.' }, source), []);
 });
 
+test('normalizes written and digit forms for product count nouns', () => {
+  const countNouns = ['anomalies', 'services', 'teams', 'accounts', 'requests', 'workloads', 'incidents', 'outages', 'resources', 'models', 'environments'];
+  for (const noun of countNouns) {
+    assert.deepEqual(findUnsupportedNumbers({ fact: `14 ${noun}` }, `Fourteen ${noun}`), [], noun);
+  }
+  assert.deepEqual(findUnsupportedNumbers({ fact: '14 anomalies lack owners.' }, 'Fourteen recent anomalies lack owners.'), []);
+});
+
+test('keeps count and measurement units sensitive', () => {
+  assert.deepEqual(findUnsupportedNumbers({ fact: 'Review 14 days.' }, 'There are 14 anomalies.'), ['14 days']);
+  assert.deepEqual(findUnsupportedNumbers({ fact: 'Review 14 services.' }, 'There are 14 teams.'), ['14 services']);
+  assert.deepEqual(findUnsupportedNumbers({ fact: 'Review 14 incidents.' }, 'There are fourteen outages.'), ['14 incidents']);
+});
+
 test('accepts equivalent currency shorthand, expanded amounts, and percent formatting', () => {
   const source = 'Current spend is $360K and increased 33%.';
   assert.deepEqual(findUnsupportedNumbers({ move: 'The $360,000 baseline increased 33 percent.' }, source), []);
@@ -100,7 +114,7 @@ test('continues rejecting unsupported numbers, arithmetic, changed units, and ma
   assert.deepEqual(findUnsupportedNumbers({ move: 'The annual total is $720K.' }, 'Spend is $360K for two years.'), ['$720K']);
 });
 
-test('retries unsupported model claims and removes only claims that remain after the bounded retries', async () => {
+test('three failed regeneration attempts return a clean 502 without a corrupted brief', async () => {
   const originalFetch = globalThis.fetch;
   const drafts = [
     { ...validBrief, recommendation: { ...validBrief.recommendation, move: 'Commit $720K.' } },
@@ -131,10 +145,43 @@ test('retries unsupported model claims and removes only claims that remain after
     });
     const response = await POST({ request });
     const body = await response.json();
-    assert.equal(response.status, 200);
+    assert.equal(response.status, 502);
     assert.equal(calls, 3);
-    assert.equal(body.brief.recommendation.move, 'Keep the $360,000 baseline without claiming an unspecified figure in savings.');
-    assert.deepEqual(findUnsupportedNumbers(body.brief, '$360K per year.'), []);
+    assert.equal(body.brief, undefined);
+    assert.match(body.error, /inputs are still here/i);
+    assert.doesNotMatch(JSON.stringify(body), /unspecified figure/i);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test('a successful response never contains the malformed fallback phrase', async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => new Response(JSON.stringify({
+    stop_reason: 'end_turn',
+    content: [{ type: 'text', text: JSON.stringify(validBrief) }],
+  }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+
+  try {
+    const request = new Request('https://cloudandcapital.com/api/interactive-lab', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        stage: 'brief',
+        decision: 'Choose whether to reserve GPU capacity for stable demand.',
+        decisionType: 'commitment',
+        answers: {
+          alternatives: 'Reserve capacity, stage the commitment, or wait.',
+          exposure: 'Commercial terms have been supplied for review.',
+          demand: 'A stable baseline is documented in the usage history.',
+          constraint: 'Capacity and cash flexibility must both be protected.',
+        },
+      }),
+    });
+    const response = await POST({ request });
+    const body = await response.json();
+    assert.equal(response.status, 200);
+    assert.doesNotMatch(JSON.stringify(body), /unspecified figure/i);
   } finally {
     globalThis.fetch = originalFetch;
   }

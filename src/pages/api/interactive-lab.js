@@ -45,7 +45,7 @@ Return only valid JSON matching this exact structure:
     "finance": { "view": "Capital, budget, margin, and downside perspective", "need": "What Finance still needs" },
     "engineering": { "view": "Architecture, delivery, reliability, and operating burden perspective", "need": "What Engineering still needs" }
   },
-  "common_ground": "Where all three disciplines agree.",
+  "common_ground": "An evidence-supported shared constraint or likely alignment; do not invent consensus.",
   "unresolved_tension": "The tradeoff that cannot be resolved from current evidence.",
   "economics": {
     "available": true,
@@ -62,13 +62,17 @@ Rules:
 - Never invent prices, percentages, utilization levels, time periods, savings, ROI, or break-even points.
 - Do not introduce any numeric value that does not appear in the user's supplied text. Use qualitative language when figures are absent.
 - Set economics.available to true only when the supplied facts support a defensible comparison. Explain missing inputs when false.
-- Include two to four genuinely different options. Waiting or staging may be an option when relevant.
+- Preserve every materially distinct option supplied by the user, including partial renewal, unless it is a duplicate or genuinely infeasible. Include two to four genuinely different options.
 - The three lenses must be substantively different, not paraphrases.
-- Prefer Stage when uncertainty is material and a reversible evidence-gathering step exists.
+- Use Explore when critical evidence is missing and no defensible action is ready; Stage when uncertainty is material and a reversible evidence-gathering move exists; Commit when evidence is sufficient, constraints are satisfied, and downside is bounded.
 - Recommendation confidence reflects evidence quality, not writing confidence.
+- Do not claim that stakeholders agree unless the supplied context reports agreement. Frame common_ground as a supported shared constraint or likely alignment instead.
+- Do not describe an extension as having no commercial commitment unless its price and terms are supplied.
+- Do not introduce punitive governance actions, access restrictions, contractual claims, or absolute conclusions unsupported by the supplied evidence.
+- Do not call a target unreachable merely because one lever disappears when other levers have not been examined.
 - No HTML, markdown, tables, bullets, citations, or disclaimers inside fields.
 - No generic FinOps slogans, false precision, or authoritative claims about a vendor's commercial terms.
-- Return exactly three options and three next actions.
+- Return between two and four options so every materially distinct supplied option is represented, and return exactly three next actions.
 - Include no more than three working assumptions and three thresholds.
 - Keep every prose field to one sentence and no more than 35 words.
 - Keep the complete response under 1,400 words so the JSON is never truncated.`;
@@ -80,18 +84,6 @@ function buildUserPrompt(readiness) {
     .join('\n\n');
 
   return `Decision:\n${readiness.decision}\n\nUser-supplied evidence:\n${evidence}`;
-}
-
-function redactUnsupportedClaims(value, unsupportedClaims) {
-  const claims = [...unsupportedClaims].sort((left, right) => right.length - left.length);
-  if (typeof value === 'string') {
-    return claims.reduce((text, claim) => text.split(claim).join('an unspecified figure'), value);
-  }
-  if (Array.isArray(value)) return value.map((item) => redactUnsupportedClaims(item, claims));
-  if (value && typeof value === 'object') {
-    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, redactUnsupportedClaims(item, claims)]));
-  }
-  return value;
 }
 
 async function callModel(readiness) {
@@ -146,11 +138,6 @@ async function callModel(readiness) {
 
     console.error('Interactive Lab unsupported numeric claims:', unsupportedNumbers);
     if (attempt === 2) {
-      const redacted = redactUnsupportedClaims(brief, unsupportedNumbers);
-      if (validateBrief(redacted) && !findUnsupportedNumbers(redacted, buildSourceText(readiness)).length) {
-        console.error('Interactive Lab removed unsupported numeric claims after bounded regeneration');
-        return redacted;
-      }
       throw new Error('UNSUPPORTED_NUMERIC_CLAIM');
     }
     correction = `\n\nYour previous draft was rejected because it introduced these unsupported numeric claims: ${unsupportedNumbers.join(', ')}. Regenerate the complete JSON from scratch. Do not use those claims, calculate derived figures, or replace them with new numbers. Use qualitative language to describe comparisons whose figures were not explicitly supplied.`;

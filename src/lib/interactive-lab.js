@@ -151,8 +151,11 @@ const NUMBER_WORD_VALUES = new Map([
   ['eighty', 80], ['ninety', 90],
 ]);
 
-const NUMBER_ATOM = '(?:\\d[\\d,]*(?:\\.\\d+)?|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|thirty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|forty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|fifty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|sixty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|seventy(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|eighty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|ninety(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?)';
-const NUMBER_CLAIM_PATTERN = new RegExp(`([$€£])?\\s*(${NUMBER_ATOM})(?:\\s*(?:-|–|—|to)\\s*(${NUMBER_ATOM}))?([kKmM])?(?:\\s*-\\s*)?\\s*(%|percent(?:age)?|years?|months?|weeks?|days?|hours?|engineers?|users?|seats?|licenses?|licences?|quarters?|x|times?)?`, 'gi');
+const NUMBER_WORD_ATOM = '(?:zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|thirty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|forty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|fifty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|sixty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|seventy(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|eighty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|ninety(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?)\\b';
+const NUMBER_ATOM = `(?:\\d[\\d,]*(?:\\.\\d+)?|${NUMBER_WORD_ATOM})`;
+const COUNT_UNIT = 'anomal(?:y|ies)|services?|teams?|accounts?|requests?|workloads?|incidents?|outages?|resources?|models?|environments?';
+const STANDARD_UNIT = '%|percent(?:age)?|years?|months?|weeks?|days?|hours?|engineers?|users?|seats?|licenses?|licences?|quarters?|x|times?';
+const NUMBER_CLAIM_PATTERN = new RegExp(`([$€£])?\\s*(${NUMBER_ATOM})(?:\\s*(?:-|–|—|to)\\s*(${NUMBER_ATOM}))?([kKmM])?(?:\\s*-\\s*)?(?:(?:\\s+recent)?\\s+(${COUNT_UNIT})|\\s*(${STANDARD_UNIT}))?`, 'gi');
 
 function parseNumberAtom(atom) {
   if (/^\d/.test(atom)) return Number(atom.replace(/,/g, ''));
@@ -163,13 +166,15 @@ function normalizeUnit(unit = '') {
   const normalized = unit.toLowerCase();
   if (normalized === '%' || normalized.startsWith('percent')) return 'percent';
   if (normalized === 'x' || normalized === 'time' || normalized === 'times') return 'multiple';
+  if (normalized === 'anomalies') return 'anomaly';
   return normalized.replace(/s$/, '');
 }
 
 function extractNumericClaims(text) {
   const claims = [];
   for (const match of String(text).matchAll(NUMBER_CLAIM_PATTERN)) {
-    const [raw, currency, firstAtom, secondAtom, magnitude, rawUnit] = match;
+    const [raw, currency, firstAtom, secondAtom, magnitude, countUnit, standardUnit] = match;
+    const rawUnit = countUnit || standardUnit;
     if (!currency && !magnitude && !rawUnit && !/^\d/.test(firstAtom)) continue;
     const scale = magnitude?.toLowerCase() === 'k' ? 1000 : magnitude?.toLowerCase() === 'm' ? 1000000 : 1;
     const first = parseNumberAtom(firstAtom) * scale;

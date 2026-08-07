@@ -27,7 +27,7 @@ const scenarios = [
     answers: { alternatives: 'Use the vendor model, optimize the current path, or build internally.', exposure: 'Unit cost is known but future volume is uncertain.', demand: 'Quality and latency requirements are documented.', constraint: 'The team has limited model operations capacity.' },
   },
   {
-    name: 'Cloud cost review', type: 'cost_review', posture: 'Stage', required: ['14 anomalies', 'owners'], forbidden: ['GPU', 'renewal'],
+    name: 'Cloud cost review', type: 'cost_review', posture: 'Stage', required: ['(?:14|fourteen(?: recent)?) anomalies', 'owners'], forbidden: ['GPU', 'renewal'],
     decision: 'Run a cloud cost review without damaging reliability.',
     answers: { alternatives: 'Remove waste, improve accountability, or reprioritize unfunded work.', exposure: 'The baseline is known but the savings target needs validation.', demand: 'Fourteen recent anomalies lack owners and allocation is incomplete.', constraint: 'Reliability, security, and the product roadmap must be protected.' },
   },

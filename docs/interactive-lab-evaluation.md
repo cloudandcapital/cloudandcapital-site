@@ -16,4 +16,10 @@ VERCEL_PROTECTION_BYPASS=your-protected-preview-bypass-secret \
 npm run evaluate:interactive-lab
 ```
 
+When the local Vercel CLI is authenticated for the linked project, it can supply the protection bypass automatically without handling a secret directly:
+
+```bash
+VERCEL_DEPLOYMENT=https://your-preview.vercel.app npm run evaluate:interactive-lab
+```
+
 Use a local environment or protected preview, not the production endpoint. The seven scenarios cover SaaS renewal, GPU commitment, AI build-or-buy, cloud cost review, multi-cloud, a high-evidence Commit control, and an underdetermined Explore control. The runner checks schema validity, expected posture, supplied evidence, scenario specificity, terminology leakage, numeric grounding, malformed fallback text, and distinct recommendations.

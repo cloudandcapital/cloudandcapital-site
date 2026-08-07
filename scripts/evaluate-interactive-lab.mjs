@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 
 import { findUnsupportedNumbers, validateBrief } from '../src/lib/interactive-lab.js';
 
 const endpoint = process.env.INTERACTIVE_LAB_URL;
-if (!endpoint) {
-  console.error('Set INTERACTIVE_LAB_URL to a local or protected-preview /api/interactive-lab endpoint.');
+const vercelDeployment = process.env.VERCEL_DEPLOYMENT;
+if (!endpoint && !vercelDeployment) {
+  console.error('Set INTERACTIVE_LAB_URL or VERCEL_DEPLOYMENT to a local or protected-preview endpoint.');
   process.exit(2);
 }
 
@@ -51,6 +53,23 @@ if (process.env.VERCEL_PROTECTION_BYPASS) {
   headers['x-vercel-protection-bypass'] = process.env.VERCEL_PROTECTION_BYPASS;
 }
 
+async function requestBrief(body) {
+  if (vercelDeployment) {
+    const result = spawnSync('npx', [
+      '--yes', 'vercel@latest', 'curl', '/api/interactive-lab', '--deployment', vercelDeployment, '--',
+      '--silent', '--request', 'POST', '--header', 'Content-Type: application/json', '--data', JSON.stringify(body),
+    ], { encoding: 'utf8', timeout: 130000 });
+    if (result.error) throw result.error;
+    if (result.status !== 0) throw new Error(result.stderr.trim() || `vercel curl exited ${result.status}`);
+    return { status: 200, payload: JSON.parse(result.stdout) };
+  }
+
+  const response = await fetch(endpoint, {
+    method: 'POST', headers, body: JSON.stringify(body), signal: AbortSignal.timeout(120000),
+  });
+  return { status: response.status, payload: await response.json() };
+}
+
 const recommendations = [];
 let failed = false;
 
@@ -66,14 +85,8 @@ function similarity(left, right) {
 
 for (const scenario of scenarios) {
   try {
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({ stage: 'brief', decision: scenario.decision, decisionType: scenario.type, answers: scenario.answers }),
-      signal: AbortSignal.timeout(120000),
-    });
-    const payload = await response.json();
-    assert.equal(response.status, 200, payload.error || `HTTP ${response.status}`);
+    const { status, payload } = await requestBrief({ stage: 'brief', decision: scenario.decision, decisionType: scenario.type, answers: scenario.answers });
+    assert.equal(status, 200, payload.error || `HTTP ${status}`);
     assert.equal(payload.status, 'ready');
     assert.equal(validateBrief(payload.brief), true, 'invalid brief schema');
     assert.equal(payload.brief.posture.label, scenario.posture, `expected ${scenario.posture} posture`);

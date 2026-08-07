@@ -1,0 +1,42 @@
+---
+import CostGuardDashboard from './CostGuardDashboard.astro';
+
+interface Props {
+  analyticsSource: string;
+}
+
+const { analyticsSource } = Astro.props;
+---
+
+<div class="cost-guard-feature">
+  <div class="cost-guard-copy">
+    <div class="cost-guard-meta">Dashboard · AI Analyst · Live</div>
+    <div class="cost-guard-title">Cloud Cost Guard + Lumen</div>
+    <div class="cost-guard-description">Cloud, AI, and SaaS spend in one dashboard. Lumen surfaces anomalies, cost drivers, forecasts, and investigation paths in plain English.</div>
+    <div class="cost-guard-actions">
+      <a href="https://guard.cloudandcapital.com" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source={analyticsSource}>View live dashboard →</a>
+      <span>Cloud · AI · SaaS</span>
+    </div>
+  </div>
+
+  <div class="cost-guard-dashboard-frame">
+    <CostGuardDashboard />
+  </div>
+</div>
+
+<style>
+  .cost-guard-feature { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border: 1px solid rgba(255,255,255,.08); border-top: 2px solid var(--sage); }
+  .cost-guard-copy { min-height: 420px; padding: 3.45rem 3.1rem; display: flex; flex-direction: column; justify-content: center; background: var(--ink); }
+  .cost-guard-meta { margin-bottom: 1rem; font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+  .cost-guard-title { margin-bottom: 1.2rem; font-family: 'Cormorant Garamond', serif; font-size: 2.55rem; font-weight: 400; line-height: 1.04; color: var(--cream); white-space: nowrap; }
+  .cost-guard-description { max-width: 39ch; margin-bottom: .95rem; font-size: .9rem; line-height: 1.85; color: rgba(244,239,230,.72); }
+  .cost-guard-actions { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; }
+  .cost-guard-actions a { color: var(--sage); font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; }
+  .cost-guard-actions a:hover { text-decoration: underline; text-underline-offset: .3em; }
+  .cost-guard-actions a:focus-visible { outline: 2px solid var(--cream); outline-offset: .35rem; }
+  .cost-guard-actions span { color: rgba(244,239,230,.62); font-family: 'DM Mono', monospace; font-size: .59rem; letter-spacing: .1em; text-transform: uppercase; }
+  .cost-guard-dashboard-frame { display: flex; align-items: center; padding-block: 1.2rem; background: var(--ink); }
+  .cost-guard-dashboard-frame :global(.cost-guard-dashboard) { width: 100%; }
+  @media (max-width: 1024px) { .cost-guard-feature { grid-template-columns: 1fr; }.cost-guard-copy { min-height: auto; } }
+  @media (max-width: 720px) { .cost-guard-copy { padding: 2.5rem 1.25rem; }.cost-guard-dashboard-frame { padding-block: .65rem; } .cost-guard-title { white-space: normal; } }
+</style>

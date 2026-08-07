@@ -55,7 +55,7 @@ export const tools = [
     title: 'Interactive Lab',
     label: 'Interactive · Tool',
     description:
-      'Turn one real cloud, AI, SaaS, or technology-spend question into a structured decision brief grounded in the context you provide.',
+      'Turn one real question about cloud, AI, SaaS, or technology spend into a structured decision brief grounded in the context you provide.',
     href: '/interactive-lab',
   },
 ];
@@ -63,7 +63,7 @@ export const tools = [
 export const openSourceTools = [
   {
     title: 'FinOps Lite',
-    description: 'Analyze AWS, Azure, and GCP spend in one working view, with FOCUS 1.0 export for FinOps workflows.',
+    description: 'Reconcile AWS Cost Explorer service and daily views into one dependable cost dataset for downstream analysis.',
     href: 'https://github.com/cloudandcapital/finops-lite',
     external: true,
   },
@@ -81,19 +81,19 @@ export const openSourceTools = [
   },
   {
     title: 'AI Cost Lens',
-    description: 'Track AI and LLM spend across usage sources, with FOCUS 1.0 compliant output.',
+    description: 'Attribute AI usage cost by provider, model, project, team, and task while preserving source provenance.',
     href: 'https://github.com/cloudandcapital/ai-cost-lens',
     external: true,
   },
   {
     title: 'SaaS Cost Analyzer',
-    description: 'Track license utilization, per-seat cost analysis, and renewal forecasting for finance teams.',
+    description: 'Review utilization, seat economics, ownership evidence, and renewal exposure without turning missing data into savings claims.',
     href: 'https://github.com/cloudandcapital/saas-cost-analyzer',
     external: true,
   },
   {
     title: 'Tech Spend Command Center',
-    description: 'Bring cloud, SaaS, and AI spend into one executive operating view.',
+    description: 'Validate five analytical results into one hash-locked trusted report without combining incompatible accounting boundaries.',
     href: 'https://github.com/cloudandcapital/tech-spend-command-center',
     external: true,
   },

@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { footerLinks, navigation, writingFeatured } from '../data/siteContent';
+import CostGuardFeature from '../components/CostGuardFeature.astro';
 ---
 
 <SiteLayout
@@ -938,6 +939,7 @@ footer{background:var(--ink);padding:2.5rem 3.5rem;display:flex;align-items:cent
   line-height:1.08;
   color:var(--ink);
   margin-bottom:.5rem;
+  text-align:center;
 }
 .work-rail-signal-note{
   font-size:.79rem;
@@ -2573,7 +2575,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
 .work-decision-bridge {
   grid-column: span 2;
   display: grid;
-  grid-template-columns: minmax(12rem,.72fr) minmax(0,1.28fr);
+  grid-template-columns: minmax(0,1.28fr) minmax(12rem,.72fr);
   gap: clamp(2rem,4vw,4rem);
   padding: 2.25rem 2rem 2.4rem;
 }
@@ -2586,7 +2588,12 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   line-height: 1.12;
   color: var(--cream);
 }
-.work-decision-intro { display: flex; flex-direction: column; }
+.work-decision-intro {
+  display: flex;
+  flex-direction: column;
+  padding-left: clamp(1.5rem,3vw,2.75rem);
+  border-left: 1px solid rgba(255,255,255,.12);
+}
 .work-decision-all,
 .work-decision-tool a {
   display: inline-flex;
@@ -2641,6 +2648,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   .work-bottom-4col { grid-template-columns: 1fr; }
   .work-4col-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
   .work-decision-bridge { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 1.5rem 2.2rem; }
+  .work-decision-intro { padding-left: 0; border-left: none; }
   .work-decision-intro h3 { max-width: 18ch; }
   .work-decision-tool { grid-template-columns: 1fr; gap: .65rem; }
 }
@@ -3229,7 +3237,7 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
 /* ── Final homepage correction pass ────────────────────── */
 .hero-left,.hero-right{border-right:none!important;}
 .hero-stats{border-left:none!important;}
-@media (min-width:901px){h1.hero-headline{font-size:clamp(3.05rem,4.55vw,4.85rem);}.work-rail-chat{padding-top:3.15rem;}}
+@media (min-width:901px){h1.hero-headline{font-size:clamp(3.05rem,4.55vw,4.85rem);}.work-rail-chat{padding-top:2rem;}}
 .writing-home-actions .btn-sage{color:#fff!important;background:var(--sage)!important;}
 .writing-home-actions .btn-outline{color:var(--ink)!important;background:transparent!important;}
 .writing-home-actions .btn:hover{transform:translateY(-1px);}
@@ -3249,7 +3257,7 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
 .hero-left,.hero-right,.hero-stats{border-left:none!important;border-right:none!important;}
 @media (min-width:901px){
   .hero-viz{min-height:405px;max-height:435px;}
-  .work-rail-chat{padding-top:2.4rem;}
+  .work-rail-chat{padding-top:2rem;}
 }
 .about-v4-final{
   width:100vw;
@@ -3400,62 +3408,7 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
     <div class="section-label" style="color:rgba(244,239,230,.35);">Work</div>
     <h2 class="work-intro">Cost is shaped before it is reported.</h2>
 
-    <div class="work-editorial-grid">
-
-      <div class="work-feature-copy">
-        <div class="work-feature-meta">Dashboard · AI Analyst · Live</div>
-        <div class="work-feature-title">Cloud Cost Guard + Lumen</div>
-        <div class="work-feature-desc">Cloud, AI, and SaaS spend in one dashboard. Lumen surfaces anomalies, cost drivers, forecasts, and investigation paths in plain English.</div>
-        <div class="work-feature-actions">
-          <a href="https://guard.cloudandcapital.com" target="_blank" rel="noopener noreferrer" class="work-feature-link" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="homepage_work">View live dashboard →</a>
-          <span class="work-feature-tech">CLOUD · AI · SAAS</span>
-        </div>
-      </div>
-
-      <div class="work-feature-right">
-        <div class="work-feature-rail">
-
-          <div class="work-rail-chat">
-            <div class="work-rail-kicker">Lumen analysis</div>
-
-            <div class="work-chat-bubble work-chat-bubble-user">
-              What’s bleeding money right now?
-            </div>
-
-            <div class="work-chat-bubble work-chat-bubble-ai work-chat-bubble-ai-main">
-              <strong>EC2 jumped 154% in one day, from $482 to $1,226.</strong> It is now the largest cost driver at <strong>40.5% of cloud spend.</strong><br><br>
-              I also found <strong>19 unused SaaS licenses costing $242 per month.</strong> AI spend rose <strong>12.4%</strong>, which is worth checking against token volume and model mix before it becomes the next material driver.<br><br>
-              <strong>Start with EC2, then validate the AI increase. Was this a planned launch or uncontrolled autoscaling?</strong>
-            </div>
-          </div>
-
-          <div class="work-rail-signal">
-            <div class="work-rail-signal-kicker">Current cost shape</div>
-
-            <svg class="work-rail-donut" viewBox="0 0 180 180" aria-hidden="true">
-              <g transform="translate(90 90) rotate(-90)">
-                <circle r="54" cx="0" cy="0" fill="none" stroke="rgba(25,23,20,.08)" stroke-width="24"></circle>
-                <circle r="54" cx="0" cy="0" fill="none" stroke="#6D8F72" stroke-width="24" stroke-linecap="butt" stroke-dasharray="248 91.29"></circle>
-                <circle r="54" cx="0" cy="0" fill="none" stroke="#A7B6D8" stroke-width="24" stroke-linecap="butt" stroke-dasharray="27 312.29" stroke-dashoffset="-253"></circle>
-                <circle r="54" cx="0" cy="0" fill="none" stroke="#D6B07A" stroke-width="24" stroke-linecap="butt" stroke-dasharray="16 323.29" stroke-dashoffset="-286"></circle>
-                <circle r="54" cx="0" cy="0" fill="none" stroke="#C9C4B8" stroke-width="24" stroke-linecap="butt" stroke-dasharray="12 327.29" stroke-dashoffset="-305"></circle>
-              </g>
-              <circle cx="90" cy="90" r="36" fill="var(--white)"></circle>
-            </svg>
-
-            <div class="work-rail-signal-title">Tech spend by scope</div>
-            <div class="work-rail-signal-note">A second signal beside the conversation. Allocation, concentration, and where the real weight sits.</div>
-
-            <div class="work-rail-legend">
-              <div class="work-rail-item"><span class="dot green"></span><span>Cloud infrastructure</span><strong>88.1%</strong></div>
-              <div class="work-rail-item"><span class="dot blue"></span><span>SaaS tools</span><strong>7.6%</strong></div>
-              <div class="work-rail-item"><span class="dot gold"></span><span>AI / LLM</span><strong>4.3%</strong></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- end work-editorial-grid -->
+    <CostGuardFeature analyticsSource="homepage_work" />
 
     <!-- 4-card bottom row -->
     <div class="work-bottom-4col">
@@ -3464,7 +3417,7 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
         <div class="work-4col-tag">Open Source · Pipeline</div>
         <div class="work-4col-title">The Six-Tool Pipeline</div>
         <div class="work-4col-desc">
-          Six open source FinOps tools spanning allocation, anomaly detection, resilience economics, AI spend, SaaS, and executive reporting. MIT licensed and built to run, not just demo.
+          Six open source FinOps tools spanning allocation, anomaly detection, resilience economics, AI spend, SaaS, and executive reporting.
         </div>
         <a href="https://github.com/cloudandcapital" target="_blank" rel="noopener noreferrer" class="work-4col-link" data-analytics-event="cta_click" data-analytics-destination="github_pipeline" data-analytics-source="homepage_work">View on GitHub →</a>
       </div>
@@ -3477,11 +3430,6 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
       </div>
 
       <div class="work-decision-bridge">
-        <div class="work-decision-intro">
-          <div class="work-4col-tag">Decision tools</div>
-          <h3>Assess the system.<br />Work the decision.</h3>
-          <a href="/work" class="work-decision-all" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_work">Explore all work →</a>
-        </div>
         <div class="work-decision-tools">
           <div class="work-decision-tool">
             <div>
@@ -3493,10 +3441,15 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
           <div class="work-decision-tool">
             <div>
               <h4>Interactive Lab</h4>
-              <p>Turn a real cloud, AI, SaaS, or technology-spend question into a decision-ready brief.</p>
+              <p>Turn a real question about cloud, AI, SaaS, or technology spend into a structured decision brief.</p>
             </div>
             <a href="/interactive-lab" data-analytics-event="cta_click" data-analytics-destination="interactive_lab" data-analytics-source="homepage_work">Open Lab →</a>
           </div>
+        </div>
+        <div class="work-decision-intro">
+          <div class="work-4col-tag">Decision tools</div>
+          <h3>Assess the system.<br />Work the decision.</h3>
+          <a href="/work" class="work-decision-all" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_work">Explore all work →</a>
         </div>
       </div>
 

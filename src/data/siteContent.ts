@@ -112,7 +112,7 @@ export const featuredWriting = {
   archiveImageAlt: 'Who Gets Stuck With the Bill? published cover artwork',
 };
 
-export const writingFeatured = {
+export const marketsMimosasLatest = {
   title: 'There Was No Opting Out',
   topic: 'Markets & Mimosas',
   date: 'August 2, 2026',
@@ -124,17 +124,30 @@ export const writingFeatured = {
   archiveImageAlt: 'There Was No Opting Out Markets & Mimosas',
 };
 
+export const writingFeatured = {
+  title: 'The Decision Layer',
+  topic: 'The Decision Layer · Issue No. 1',
+  date: 'August 14, 2026',
+  href: 'https://cloudandcapital.substack.com/p/the-decision-layer',
+  description: 'The choices that shape technology cost before the bill arrives.',
+  image: '/images/writing/the-decision-layer.png',
+  imageAlt: 'Editorial cover for The Decision Layer showing three architectural gates leading to a ledger',
+  archiveImage: '/images/writing/the-decision-layer.png',
+  archiveImageAlt: 'Editorial cover for The Decision Layer showing three architectural gates leading to a ledger',
+};
+
 export const newsletter = {
   label: 'Cloud & Capital · Substack',
   title: 'Markets, AI spend, and what the bill is actually telling you.',
   description:
-    'Markets & Mimosas is the Cloud & Capital newsletter on markets, AI infrastructure, cloud spend, and the decisions behind the bill. Published on weekends.',
+    'Markets & Mimosas is the Cloud & Capital newsletter on markets, AI infrastructure, cloud spend, and the decisions behind the bill. Published twice monthly.',
   subscribeHref: 'https://cloudandcapital.substack.com',
-  latestIssueHref: writingFeatured.href,
+  latestIssueHref: marketsMimosasLatest.href,
 };
 
 export const writing = [
   writingFeatured,
+  marketsMimosasLatest,
   featuredWriting,
   {
     title: 'When Capital Becomes Compute',

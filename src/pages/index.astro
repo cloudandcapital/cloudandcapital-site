@@ -1,6 +1,6 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { footerLinks, navigation, writingFeatured } from '../data/siteContent';
+import { featuredWriting, footerLinks, marketsMimosasLatest, navigation, writingFeatured } from '../data/siteContent';
 import CostGuardFeature from '../components/CostGuardFeature.astro';
 ---
 
@@ -2300,19 +2300,20 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   background: var(--cream-dark);
   margin: 0 3px 0 0;
   border-radius: 2px;
+  aspect-ratio: 40 / 21;
+  align-self: center;
 }
 .wf-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
   display: block;
 }
 /* Mobile: image on top, text below */
 @media (max-width: 900px) {
   .wf-inner {
     grid-template-columns: 1fr;
-    grid-template-rows: 220px auto;
+    grid-template-rows: auto auto;
   }
   .wf-img-wrap { order: -1; }
 }
@@ -2337,7 +2338,7 @@ section#discipline > div[style*="display:grid"] > div:nth-child(-n+3) {
   .newsletter-actions { flex-direction: column !important; min-width: 0 !important; width: 100%; }
   .newsletter-actions .btn { width: 100% !important; text-align: center !important; }
   .writing-editorial { margin-top: 12px !important; gap: 8px !important; background: var(--rule) !important; }
-  .wf-inner { grid-template-columns: 1fr !important; grid-template-rows: 200px auto; }
+  .wf-inner { grid-template-columns: 1fr !important; grid-template-rows: auto auto; }
   .wf-img-wrap { order: -1 !important; margin: 0 !important; border-radius: 0 !important; }
   .wf-content { padding: 2rem 1.5rem !important; }
   .writing-small { padding: 2rem 1.5rem !important; }
@@ -3521,12 +3522,12 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
     <div class="newsletter-body">
       <div class="newsletter-left">
         <div class="newsletter-desc">
-          <p style="margin:0;"><span style="color:rgba(244,239,230,.85);font-weight:500;">Markets &amp; Mimosas</span> is the Cloud &amp; Capital newsletter on markets, AI infrastructure, cloud spend, and the decisions behind the bill. Published every other Friday.</p>
+          <p style="margin:0;"><span style="color:rgba(244,239,230,.85);font-weight:500;">Markets &amp; Mimosas</span> is the Cloud &amp; Capital newsletter on markets, AI infrastructure, cloud spend, and the decisions behind the bill. Published twice monthly.</p>
         </div>
       </div>
       <div class="newsletter-actions">
         <a href="https://cloudandcapital.substack.com" class="btn btn-sage" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">Subscribe on Substack</a>
-        <a href={writingFeatured.href} class="btn btn-outline-w" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">Latest post →</a>
+        <a href={marketsMimosasLatest.href} class="btn btn-outline-w" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">Latest post →</a>
       </div>
     </div>
   </div>
@@ -3534,15 +3535,15 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
   <!-- Editorial grid -->
   <div class="writing-editorial">
 
-    <!-- Featured card: Markets & Mimosas column -->
+    <!-- Featured essay -->
     <a href={writingFeatured.href} class="writing-featured reveal" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">
       <div class="wf-inner">
         <!-- Left: text -->
         <div class="wf-content">
-          <div class="wf-eyebrow">Markets &amp; Mimosas · Latest</div>
+          <div class="wf-eyebrow">The Decision Layer · Issue No. 1 · Featured</div>
           <div class="wf-title">{writingFeatured.title}</div>
           <div class="wf-desc">{writingFeatured.description}</div>
-          <div class="wf-cta">Read latest →</div>
+          <div class="wf-cta">Read essay →</div>
         </div>
         <!-- Right: image -->
         <div class="wf-img-wrap">
@@ -3553,16 +3554,16 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
 
     <!-- Right stack -->
     <div class="writing-stack">
-      <a href="https://cloudandcapital.substack.com/p/when-capital-becomes-compute" class="writing-small reveal d1" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">
-        <div class="ws-cat">Capital Layer</div>
-        <div class="ws-title">When Capital Becomes Compute</div>
-        <div class="ws-desc">How capital turns into infrastructure in the AI era, and why the financial models haven't caught up.</div>
+      <a href={marketsMimosasLatest.href} class="writing-small reveal d1" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">
+        <div class="ws-cat">{marketsMimosasLatest.topic}</div>
+        <div class="ws-title">{marketsMimosasLatest.title}</div>
+        <div class="ws-desc">{marketsMimosasLatest.description}</div>
         <div class="ws-cta">Read essay →</div>
       </a>
-      <a href="https://cloudandcapital.substack.com/p/deploying-fast-thinking-slow" class="writing-small reveal d2" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">
-        <div class="ws-cat">Deployment Rhythm</div>
-        <div class="ws-title">Deploying Fast, Thinking Slow</div>
-        <div class="ws-desc">Why shipping fast has a way of becoming tomorrow's bill.</div>
+      <a href={featuredWriting.href} class="writing-small reveal d2" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">
+        <div class="ws-cat">{featuredWriting.topic}</div>
+        <div class="ws-title">{featuredWriting.title}</div>
+        <div class="ws-desc">{featuredWriting.description}</div>
         <div class="ws-cta">Read essay →</div>
       </a>
     </div>

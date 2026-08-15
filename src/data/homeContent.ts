@@ -1,6 +1,6 @@
-import { featuredWriting } from './siteContent';
+import { marketsMimosasLatest } from './siteContent';
 
 export const latestIssue = {
-  ...featuredWriting,
-  url: featuredWriting.href,
+  ...marketsMimosasLatest,
+  url: marketsMimosasLatest.href,
 };

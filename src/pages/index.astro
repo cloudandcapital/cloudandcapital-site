@@ -3301,10 +3301,33 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
 .about-v4-final-heading{align-self:start;}
 @media (max-width:700px){.about-v4-final{padding-top:2.25rem!important;padding-bottom:2.35rem!important;}.about-v4-final-meta{margin-bottom:1.1rem;}.about-v4-final-grid{gap:1.3rem;}}
 
-/* ── Final signature and CTA polish ────────────────────── */
-.about-signature{display:block;width:clamp(17rem,21.5vw,19.1rem);height:auto;margin-top:1.35rem;opacity:.83;}
+/* ── Founder portrait and CTA polish ───────────────────── */
+.about-founder{width:clamp(15.5rem,21vw,18.5rem);margin-top:1.65rem;}
+.about-founder-portrait{
+  position:relative;
+  width:100%;
+  aspect-ratio:1;
+  overflow:hidden;
+  border-radius:50%;
+  background:var(--cream-dark);
+  box-shadow:0 24px 46px rgba(20,35,29,.28),0 0 0 1px rgba(245,238,233,.4),0 0 0 9px rgba(245,238,233,.07);
+}
+.about-founder-portrait img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+  transform:scale(1.035);
+}
+.about-founder-caption{margin-top:1.25rem;padding-top:1rem;border-top:1px solid rgba(245,238,233,.24);}
+.about-founder-name{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:500;font-style:italic;line-height:1.1;color:var(--cream);}
+.about-founder-role{margin-top:.45rem;font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(245,238,233,.68);}
 .cta-band{background:#2b2622;}
-@media (max-width:700px){.about-signature{width:clamp(11.875rem,52vw,13.75rem);margin-top:1.1rem;}}
+@media (max-width:700px){
+  .about-founder{width:min(15rem,72vw);margin:1.5rem auto 0;}
+  .about-founder-caption{text-align:center;}
+}
 
 </style>
 
@@ -3497,7 +3520,15 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
     <div class="about-v4-final-heading">
       <h2 class="about-v4-final-headline">Finance native.<br>Systems builder.</h2>
       <p class="about-v4-final-positioning">Where finance and engineering meet.</p>
-      <img class="about-signature" src="/images/diana-molski-signature-clean-cream.png" alt="Diana Molski signature" loading="lazy" />
+      <figure class="about-founder">
+        <div class="about-founder-portrait">
+          <img src="/images/diana-molski-portrait.png" alt="Portrait of Diana Molski" loading="lazy" />
+        </div>
+        <figcaption class="about-founder-caption">
+          <div class="about-founder-name">Diana Molski</div>
+          <div class="about-founder-role">Founder, Cloud &amp; Capital</div>
+        </figcaption>
+      </figure>
     </div>
 
     <div class="about-v4-final-right">

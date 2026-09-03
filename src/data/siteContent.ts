@@ -113,15 +113,16 @@ export const featuredWriting = {
 };
 
 export const marketsMimosasLatest = {
-  title: 'There Was No Opting Out',
+  title: 'The Grid Sent the Bill Back',
   topic: 'Markets & Mimosas',
-  date: 'August 2, 2026',
-  href: 'https://cloudandcapital.substack.com/p/there-was-no-opting-out',
-  description: 'Microsoft paid through capex. CoreWeave paid through debt. Apple paid through the supply chain.',
+  date: 'August 31, 2026',
+  href: 'https://cloudandcapital.substack.com/p/the-grid-sent-the-bill-back',
+  description:
+    'AI demand is forcing utilities, regulators, and large customers to decide who pays for the grid built ahead of it.',
   image: '/images/writing/markets-mimosas-hero.png',
-  imageAlt: 'There Was No Opting Out Markets & Mimosas',
+  imageAlt: 'The Grid Sent the Bill Back Markets & Mimosas',
   archiveImage: '/images/writing/markets-mimosas-hero.png',
-  archiveImageAlt: 'There Was No Opting Out Markets & Mimosas',
+  archiveImageAlt: 'The Grid Sent the Bill Back Markets & Mimosas',
 };
 
 export const writingFeatured = {

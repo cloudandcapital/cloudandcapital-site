@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { featuredWriting, footerLinks, marketsMimosasLatest, navigation, writingFeatured } from '../data/siteContent';
-import CostGuardFeature from '../components/CostGuardFeature.astro';
+import AICostLensFeature from '../components/AICostLensFeature.astro';
 ---
 
 <SiteLayout
@@ -3487,18 +3487,18 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
     <div class="section-label" style="color:rgba(244,239,230,.35);">Work</div>
     <h2 class="work-intro">Cost is shaped before it is reported.</h2>
 
-    <CostGuardFeature analyticsSource="homepage_work" />
+    <AICostLensFeature analyticsSource="homepage_work" />
 
     <!-- 4-card bottom row -->
     <div class="work-bottom-4col">
 
       <div class="work-4col-card">
-        <div class="work-4col-tag">Open Source · Pipeline</div>
-        <div class="work-4col-title">The Six-Tool Pipeline</div>
+        <div class="work-4col-tag">Live system</div>
+        <div class="work-4col-title">Cloud Cost Guard + Lumen</div>
         <div class="work-4col-desc">
-          Six open source FinOps tools spanning allocation, anomaly detection, resilience economics, AI spend, SaaS, and executive reporting.
+          Cloud, AI, and SaaS spend in one dashboard. Lumen surfaces anomalies, cost drivers, forecasts, and investigation paths in plain English.
         </div>
-        <a href="https://github.com/cloudandcapital" target="_blank" rel="noopener noreferrer" class="work-4col-link" data-analytics-event="cta_click" data-analytics-destination="github_pipeline" data-analytics-source="homepage_work">View on GitHub →</a>
+        <a href="https://guard.cloudandcapital.com" target="_blank" rel="noopener noreferrer" class="work-4col-link" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="homepage_work">View live dashboard →</a>
       </div>
 
       <div class="work-4col-card">

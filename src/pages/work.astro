@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CostGuardDashboard from '../components/CostGuardDashboard.astro';
 import { contactLink, openSourceTools, tools } from '../data/siteContent';
 
-const flagship = tools.find((tool) => tool.slug === 'cloud-cost-guard-lumen');
+const flagship = tools.find((tool) => tool.slug === 'ai-cost-lens');
+const cloudCostGuard = tools.find((tool) => tool.slug === 'cloud-cost-guard-lumen');
 const signalAudit = tools.find((tool) => tool.slug === 'signal-audit');
 const interactiveLab = tools.find((tool) => tool.slug === 'interactive-lab');
 const marketTape = tools.find((tool) => tool.slug === 'market-tape');
@@ -48,14 +48,17 @@ const contactEmail = contactLink.href.replace(/^mailto:/, '');
         <div class="flagship-grid">
           <div class="flagship-copy">
             <p class="tool-meta">{flagship.label}</p>
-            <h2 id="flagship-title">Cloud Cost Guard <span>+ Lumen</span></h2>
+            <h2 id="flagship-title">{flagship.title}</h2>
             <p>{flagship.description}</p>
             <div class="flagship-actions">
-              <a href={flagship.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="work_flagship">View live dashboard <span aria-hidden="true">→</span></a>
-              <span>Cloud · AI · SaaS</span>
+              <a href={flagship.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="work_flagship">Open AI Cost Lens <span aria-hidden="true">→</span></a>
+              <a href={flagship.sourceHref} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens_github" data-analytics-source="work_flagship">View source <span aria-hidden="true">→</span></a>
+              <span>Provider neutral · Local first</span>
             </div>
           </div>
-          <CostGuardDashboard />
+          <a class="flagship-screenshot" href={flagship.href} target="_blank" rel="noopener noreferrer" aria-label="Open the live AI Cost Lens tool" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="work_flagship">
+            <img src="/images/ai-cost-lens-cost-anatomy.jpg" alt="AI Cost Lens showing model, infrastructure, and human review cost across two AI routes" width="1348" height="926" />
+          </a>
         </div>
       </section>
     )}
@@ -67,6 +70,25 @@ const contactEmail = contactLink.href.replace(/^mailto:/, '');
         <p>Use the tools separately or in sequence: diagnose where cost accountability breaks down, then turn a live question about technology spend into a structured decision brief.</p>
       </div>
       <div class="decision-suite">
+        {cloudCostGuard && (
+          <article class="decision-tool">
+            <div class="tool-summary">
+              <p class="tool-meta">Live system</p>
+              <h3>{cloudCostGuard.title}</h3>
+              <p>{cloudCostGuard.description}</p>
+            </div>
+            <dl class="tool-facts">
+              <div><dt>Coverage</dt><dd>Cloud · AI · SaaS</dd></div>
+              <div><dt>Process</dt><dd>Anomaly and driver analysis</dd></div>
+              <div><dt>Output</dt><dd>Forecasts + investigation paths</dd></div>
+            </dl>
+            <div class="tool-action">
+              <p class="action-label">Use it for</p>
+              <p class="tool-deliverable">Ongoing visibility into the costs shaping the bill.</p>
+              <a href={cloudCostGuard.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="work_decision_tools">View live dashboard <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        )}
         {signalAudit && (
           <article class="decision-tool">
             <div class="tool-summary">
@@ -199,6 +221,10 @@ const contactEmail = contactLink.href.replace(/^mailto:/, '');
   .flagship-actions a:hover, .pipeline-heading > a:hover, .pipeline-list a:hover { text-decoration: underline; text-underline-offset: .3em; }
   .interactive-tools a:focus-visible { outline: 2px solid #3d6055; outline-offset: .35rem; }
   .flagship-actions span { font-family: 'DM Mono', monospace; font-size: .57rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(245,238,233,.57); }
+  .flagship-screenshot { min-width: 0; display: flex; align-items: center; overflow: hidden; margin: 1.5rem; background: #f5eee9; box-shadow: 0 22px 55px rgba(0,0,0,.34); }
+  .flagship-screenshot img { display: block; width: 100%; height: auto; transition: transform .35s ease; }
+  .flagship-screenshot:hover img { transform: scale(1.012); }
+  .flagship-screenshot:focus-visible { outline: 2px solid #f5eee9; outline-offset: .35rem; }
   .flagship-visual { display: grid; grid-template-columns: 1.1fr .9fr; overflow: hidden; border: 1px solid rgba(117, 96, 73, .3); border-radius: 20px; background: #f5eee9; transform: translateY(30px); }
   .lumen-panel, .cost-shape-panel { min-width: 0; padding: clamp(1.35rem, 2.4vw, 2rem); background: #f5eee9; color: #000; }
   .lumen-panel { display: flex; flex-direction: column; justify-content: flex-start; }

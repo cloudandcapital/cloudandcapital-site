@@ -10,12 +10,14 @@ test('AI Cost Lens uses the branded route and redirects to the hosted tool', asy
     source('src/data/siteContent.ts'),
     source('src/pages/ai-cost-lens.astro'),
   ]);
-  assert.equal([...component.matchAll(/href="\/ai-cost-lens"/g)].length, 2);
-  assert.ok(!component.includes('https://ai-cost-lens-decision.polush.chatgpt.site'));
+  assert.equal([...component.matchAll(/href="https:\/\/lens\.cloudandcapital\.com"/g)].length, 2);
+  for (const text of [component, data, redirect]) {
+    assert.doesNotMatch(text, /(?:chatgpt\.site|vercel\.app)/);
+  }
   assert.match(component, /href="https:\/\/github\.com\/cloudandcapital\/ai-cost-lens" target="_blank"/);
   const tool = data.match(/\{\s*slug: 'ai-cost-lens',[\s\S]*?\}/)?.[0];
   assert.ok(tool, 'AI Cost Lens tool entry exists');
-  assert.match(tool, /href: '\/ai-cost-lens'/);
-  assert.doesNotMatch(tool, /external:\s*true/);
-  assert.match(redirect, /return Astro\.redirect\('https:\/\/ai-cost-lens-decision\.polush\.chatgpt\.site', 302\);/);
+  assert.match(tool, /href: 'https:\/\/lens\.cloudandcapital\.com'/);
+  assert.match(tool, /external:\s*true/);
+  assert.match(redirect, /return Astro\.redirect\('https:\/\/lens\.cloudandcapital\.com', 302\);/);
 });

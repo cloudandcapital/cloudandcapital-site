@@ -1,4 +1,4 @@
-# Cloud & Capital — Website
+# Cloud & Capital website
 
 Production site for [cloudandcapital.com](https://cloudandcapital.com).
 
@@ -6,15 +6,16 @@ Built with [Astro](https://astro.build), deployed on Vercel.
 
 ## What this is
 
-Cloud & Capital is a technology economics and FinOps practice. The site covers Diana's advisory work, open-source tools, writing (Markets & Mimosas on Substack), and community events (FinOps Weekly LA).
+Cloud & Capital is a technology economics and FinOps practice. The site covers Diana's advisory work, open source tools, writing (Markets & Mimosas on Substack), and community events (FinOps Weekly LA).
 
 ## Pages
 
 | Route | Description |
 |---|---|
-| `/` | Main site — discipline, work, about, community, writing |
-| `/signal-audit` | Signal Audit — 5-minute cost diagnostic tool |
-| `/interactive-lab` | Interactive Lab — AI-powered analysis tool |
+| `/` | Main site: discipline, work, about, community, writing |
+| `/ai-cost-lens` | AI Cost Lens branded route: 302 redirect to https://ai-cost-lens-decision.polush.chatgpt.site |
+| `/signal-audit` | Signal Audit: 5-minute cost diagnostic tool |
+| `/interactive-lab` | Interactive Lab: decision briefs powered by Claude |
 | `404` | Branded not-found page |
 
 ## Stack
@@ -41,7 +42,8 @@ npm run preview    # preview build locally
 
 ## Key files
 
-- `src/pages/index.astro` — main site (all sections inline)
-- `src/layouts/SiteLayout.astro` — layout for main site + 404
-- `src/layouts/BaseLayout.astro` — layout for Signal Audit + Interactive Lab
-- `public/images/` — all site images including OG image
+- `src/pages/index.astro`: main site
+- `src/pages/ai-cost-lens.astro`: branded AI Cost Lens redirect
+- `src/layouts/SiteLayout.astro`: layout for main site + 404
+- `src/layouts/BaseLayout.astro`: layout for Signal Audit + Interactive Lab
+- `public/images/`: all site images including OG image

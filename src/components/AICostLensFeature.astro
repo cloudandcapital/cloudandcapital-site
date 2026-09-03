@@ -1,0 +1,50 @@
+---
+interface Props {
+  analyticsSource: string;
+}
+
+const { analyticsSource } = Astro.props;
+---
+
+<div class="ai-cost-lens-feature">
+  <div class="ai-cost-lens-copy">
+    <div class="ai-cost-lens-meta">New tool · Open source · Live</div>
+    <h3 class="ai-cost-lens-title">AI Cost Lens</h3>
+    <p class="ai-cost-lens-question">What did one ready result really cost?</p>
+    <p class="ai-cost-lens-description">Turn AI bills, usage, and outcome evidence into the cost of usable work. Compare providers or routes without mistaking a cheaper model bill for a real saving.</p>
+    <div class="ai-cost-lens-actions">
+      <a href="/ai-cost-lens" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source={analyticsSource}>Open AI Cost Lens →</a>
+      <a class="ai-cost-lens-source" href="https://github.com/cloudandcapital/ai-cost-lens" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens_github" data-analytics-source={analyticsSource}>View source →</a>
+      <span>Provider neutral · Local first</span>
+    </div>
+  </div>
+
+  <a class="ai-cost-lens-preview" href="/ai-cost-lens" target="_blank" rel="noopener noreferrer" aria-label="Open the live AI Cost Lens tool" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source={analyticsSource}>
+    <div class="ai-cost-lens-preview-bar" aria-hidden="true">
+      <span>AI Cost Lens</span>
+      <span>Finance first</span>
+    </div>
+    <img src="/images/ai-cost-lens-cost-anatomy-wide.png" alt="AI Cost Lens breaking down model usage, shared infrastructure, and human review costs across two AI routes" loading="lazy" width="2048" height="901" />
+  </a>
+</div>
+
+<style>
+  .ai-cost-lens-feature { display: grid; grid-template-columns: minmax(19rem,.78fr) minmax(0,1.22fr); overflow: hidden; border: 1px solid rgba(255,255,255,.1); border-top: 2px solid var(--sage); background: var(--ink); }
+  .ai-cost-lens-copy { min-height: 430px; padding: clamp(2.6rem,4vw,4rem) clamp(2rem,3.6vw,3.5rem); display: flex; flex-direction: column; justify-content: center; }
+  .ai-cost-lens-meta { margin-bottom: 1rem; font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+  .ai-cost-lens-title { margin: 0 0 .65rem; font-family: 'Cormorant Garamond', serif; font-size: clamp(2.9rem,4.5vw,4.7rem); font-weight: 400; line-height: .98; color: var(--cream); }
+  .ai-cost-lens-question { max-width: 22ch; margin: 0 0 1.35rem; font-family: 'Cormorant Garamond', serif; font-size: clamp(1.25rem,1.8vw,1.65rem); font-style: italic; line-height: 1.25; color: rgba(244,239,230,.58); }
+  .ai-cost-lens-description { max-width: 42ch; margin: 0; font-size: .9rem; line-height: 1.82; color: rgba(244,239,230,.74); }
+  .ai-cost-lens-actions { display: flex; flex-wrap: wrap; gap: 1rem 1.4rem; align-items: center; margin-top: 2rem; }
+  .ai-cost-lens-actions a { font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; color: var(--sage-light); }
+  .ai-cost-lens-actions .ai-cost-lens-source { color: rgba(244,239,230,.64); }
+  .ai-cost-lens-actions a:hover { text-decoration: underline; text-underline-offset: .3em; }
+  .ai-cost-lens-actions a:focus-visible, .ai-cost-lens-preview:focus-visible { outline: 2px solid var(--cream); outline-offset: .35rem; }
+  .ai-cost-lens-actions span { width: 100%; font-family: 'DM Mono', monospace; font-size: .57rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(244,239,230,.5); }
+  .ai-cost-lens-preview { min-width: 0; margin: 1.35rem; align-self: center; overflow: hidden; background: #f5eee9; border: 1px solid rgba(244,239,230,.22); box-shadow: 0 24px 55px rgba(0,0,0,.28); color: var(--ink); text-decoration: none; }
+  .ai-cost-lens-preview-bar { display: flex; justify-content: space-between; gap: 1rem; padding: .8rem 1rem; border-bottom: 1px solid rgba(25,23,20,.12); font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(25,23,20,.54); }
+  .ai-cost-lens-preview img { display: block; width: 100%; height: auto; transition: transform .35s ease; }
+  .ai-cost-lens-preview:hover img { transform: scale(1.012); }
+  @media (max-width: 1024px) { .ai-cost-lens-feature { grid-template-columns: 1fr; }.ai-cost-lens-copy { min-height: auto; }.ai-cost-lens-preview { margin-top: 0; } }
+  @media (max-width: 600px) { .ai-cost-lens-copy { padding: 2.5rem 1.5rem; }.ai-cost-lens-preview { margin: 0 1rem 1rem; }.ai-cost-lens-preview-bar { padding: .65rem .75rem; }.ai-cost-lens-preview-bar span:last-child { display: none; } }
+</style>

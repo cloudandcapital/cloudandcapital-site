@@ -26,6 +26,15 @@ export const contactLink: SiteLink = {
 
 export const tools = [
   {
+    slug: 'ai-cost-lens',
+    title: 'AI Cost Lens',
+    label: 'New · Open Source · Live',
+    description:
+      'Turn AI bills, usage, and outcome evidence into the cost of usable work. Compare providers or routes without mistaking a cheaper model bill for a real saving.',
+    href: '/ai-cost-lens',
+    sourceHref: 'https://github.com/cloudandcapital/ai-cost-lens',
+  },
+  {
     slug: 'cloud-cost-guard-lumen',
     title: 'Cloud Cost Guard + Lumen',
     label: 'Dashboard · AI Analyst · Live',
@@ -81,7 +90,7 @@ export const openSourceTools = [
   },
   {
     title: 'AI Cost Lens',
-    description: 'Attribute AI usage cost by provider, model, project, team, and task while preserving source provenance.',
+    description: 'Compare AI cost per usable result across providers or routes while keeping financial evidence and savings gates explicit.',
     href: 'https://github.com/cloudandcapital/ai-cost-lens',
     external: true,
   },

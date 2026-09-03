@@ -1,6 +1,6 @@
 const schema = Object.freeze({
   cta_click: Object.freeze({
-    destination: Object.freeze(['work', 'signal_audit', 'interactive_lab', 'market_tape', 'cloud_cost_guard', 'github_pipeline', 'writing', 'substack', 'contact']),
+    destination: Object.freeze(['work', 'signal_audit', 'interactive_lab', 'market_tape', 'cloud_cost_guard', 'ai_cost_lens', 'ai_cost_lens_github', 'github_pipeline', 'writing', 'substack', 'contact']),
     source: Object.freeze(['homepage_hero', 'homepage_work', 'homepage_writing', 'homepage_contact', 'work_flagship', 'work_decision_tools', 'work_market_context', 'work_pipeline', 'work_contact', 'writing_newsletter', 'writing_featured', 'writing_archive', 'writing_contact', 'signal_audit_results']),
   }),
   tool_start: Object.freeze({

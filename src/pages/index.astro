@@ -3141,17 +3141,23 @@ section#discipline > div:first-child{
 }
 .community-record-sponsor{margin-top:1.4rem;color:var(--ink-faint);}
 .community-visual-stage{
-  display:grid;
-  grid-template-columns:minmax(7.5rem,.42fr) minmax(0,1.58fr);
-  gap:clamp(1.25rem,2.4vw,2.25rem);
-  align-items:center;
-  min-height:clamp(27rem,38vw,33rem);
-  padding:clamp(1.25rem,2.45vw,2.25rem);
+  --community-photo-width:71%;
+  --community-photo-right:clamp(1.25rem,2.4vw,2rem);
+  --community-flyer-width:clamp(17rem,25vw,18rem);
+  --community-overlap:2rem;
+  position:relative;
+  aspect-ratio:1.5 / 1;
+  min-height:clamp(25rem,34vw,30rem);
   background:#687a71;
 }
 .community-visual-stage figure{margin:0;}
 .community-group-photo{
-  grid-column:2;
+  position:absolute;
+  z-index:1;
+  top:50%;
+  right:var(--community-photo-right);
+  width:var(--community-photo-width);
+  transform:translateY(-50%);
   overflow:hidden;
 }
 .community-group-photo img{
@@ -3161,16 +3167,21 @@ section#discipline > div:first-child{
   filter:saturate(.92) contrast(1.02);
 }
 .community-flyer{
-  grid-column:1;
-  grid-row:1;
-  width:100%;
-  max-width:9.5rem;
-  justify-self:center;
-  border:1px solid rgba(244,239,230,.24);
+  position:absolute;
+  z-index:2;
+  top:50%;
+  right:calc(var(--community-photo-right) + var(--community-photo-width) - var(--community-overlap));
+  width:var(--community-flyer-width);
+  transform:translateY(-50%);
+  border:1px solid rgba(244,239,230,.64);
   background:#151c67;
-  box-shadow:0 .8rem 1.8rem rgba(0,0,0,.18);
+  box-shadow:0 1.15rem 2.5rem rgba(22,32,28,.28),0 .25rem .75rem rgba(22,32,28,.16);
 }
 .community-flyer img{display:block;width:100%;height:auto;}
+
+@media (min-width:601px) and (max-width:900px){
+  .community-visual-stage{--community-flyer-width:16rem;}
+}
 
 @media (max-width:600px){
   .credential-unit{white-space:normal;}
@@ -3182,14 +3193,29 @@ section#discipline > div:first-child{
   .community-copy h2{font-size:clamp(2.35rem,11vw,3.25rem);}
   .community-details{grid-template-columns:1fr;gap:1rem;}
   .community-visual-stage{
+    display:grid;
     grid-template-columns:1fr;
     gap:1.1rem;
+    aspect-ratio:auto;
     min-height:0;
     padding:1rem;
   }
-  .community-flyer{align-self:center;max-width:15rem;}
-  .community-flyer{grid-column:1;grid-row:1;}
-  .community-group-photo{grid-column:1;grid-row:2;}
+  .community-flyer,
+  .community-group-photo{
+    position:static;
+    transform:none;
+  }
+  .community-flyer{
+    grid-column:1;
+    grid-row:1;
+    width:min(15rem,72vw);
+    justify-self:center;
+  }
+  .community-group-photo{
+    grid-column:1;
+    grid-row:2;
+    width:100%;
+  }
 }
 
 @media (max-width:600px){
@@ -3218,7 +3244,7 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
 .writing-home-actions{display:flex;gap:1.5rem;flex-wrap:wrap;padding:1.5rem clamp(1.5rem,4vw,4.5rem) 0;}
 .writing-home-actions a{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);text-decoration:none;}
 .about-v4-final{padding-top:4rem!important;padding-bottom:3.75rem!important;}.about-v4-final-grid{gap:3.25rem;}.about-v4-final-right::before{display:none;}.about-v4-final-lede{margin-bottom:1rem;}.about-v4-final-body{margin-bottom:.6rem;}.about-v4-final-certs{margin-top:1.25rem;}
-.community{padding-top:3.75rem!important;padding-bottom:3.75rem!important;}.community-visual-stage{min-height:clamp(22rem,30vw,27rem);}.community-copy > p{margin-top:1rem;}.community-record-sponsor{margin-top:1.15rem;}
+.community{padding-top:3.75rem!important;padding-bottom:3.75rem!important;}.community-copy > p{margin-top:1rem;}.community-record-sponsor{margin-top:1.15rem;}
 @media (max-width:900px){.hero-left{border-right:none;}.hero-viz{min-height:260px;height:260px;}.writing-editorial{grid-template-columns:1fr!important;}.wf-inner{min-height:0!important;}.community-feature{grid-template-columns:1fr;}}
 @media (max-width:600px){section#discipline > div:first-child{padding:1.8rem 1.25rem!important;}.writing{padding-top:3.25rem!important;padding-bottom:2.75rem!important;}.writing-editorial{margin:0 1.25rem!important;}.writing-home-actions{padding:1.25rem 1.25rem 0;}.about-v4-final{padding-top:3.25rem!important;padding-bottom:3.25rem!important;}.community{padding-top:3.1rem!important;padding-bottom:3.1rem!important;}.community-visual-stage{min-height:0;}}
 

@@ -31,9 +31,8 @@ export const tools = [
     label: 'New · Open Source · Live',
     description:
       'Turn AI bills, usage, and outcome evidence into the cost of usable work. Compare providers or routes without mistaking a cheaper model bill for a real saving.',
-    href: 'https://ai-cost-lens-decision.polush.chatgpt.site',
+    href: '/ai-cost-lens',
     sourceHref: 'https://github.com/cloudandcapital/ai-cost-lens',
-    external: true,
   },
   {
     slug: 'cloud-cost-guard-lumen',

@@ -3302,15 +3302,16 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
 @media (max-width:700px){.about-v4-final{padding-top:2.25rem!important;padding-bottom:2.35rem!important;}.about-v4-final-meta{margin-bottom:1.1rem;}.about-v4-final-grid{gap:1.3rem;}}
 
 /* ── Founder portrait and CTA polish ───────────────────── */
-.about-founder{width:min(12.5rem,100%);margin:1.35rem auto 0;}
+.about-founder{display:flex;align-items:center;gap:1.2rem;width:100%;margin:1.35rem 0 0;}
 .about-founder-portrait{
   position:relative;
-  width:100%;
+  flex:0 0 9.5rem;
+  width:9.5rem;
   aspect-ratio:1;
   overflow:hidden;
   border-radius:50%;
   background:var(--cream-dark);
-  box-shadow:0 24px 46px rgba(20,35,29,.28),0 0 0 1px rgba(245,238,233,.4),0 0 0 9px rgba(245,238,233,.07);
+  border:1px solid rgba(245,238,233,.42);
 }
 .about-founder-portrait img{
   width:100%;
@@ -3320,12 +3321,14 @@ section#discipline > div:first-child{padding:2.25rem clamp(1.5rem,4vw,4.5rem)!im
   object-position:center;
   transform:scale(1.035);
 }
-.about-founder-caption{margin-top:.85rem;text-align:center;}
+.about-founder-caption{text-align:left;}
 .about-founder-name{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:500;font-style:italic;line-height:1.1;color:var(--cream);}
 .about-founder-role{margin-top:.3rem;font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(245,238,233,.68);}
 .cta-band{background:#2b2622;}
 @media (max-width:700px){
-  .about-founder{width:min(11.5rem,58vw);margin:1.2rem auto 0;}
+  .about-founder{flex-direction:column;gap:.8rem;margin-top:1.2rem;}
+  .about-founder-portrait{flex-basis:auto;width:min(11.5rem,58vw);}
+  .about-founder-caption{text-align:center;}
 }
 
 </style>

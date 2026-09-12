@@ -1,0 +1,75 @@
+<div class="artwork-stack" aria-hidden="true" data-hero-artwork>
+  <div class="artwork-paper">
+    <svg viewBox="0 0 560 490" focusable="false">
+      <defs>
+        <pattern id="hero-paper-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+          <path d="M32 0H0V32" fill="none" stroke="#617b68" stroke-opacity=".09" stroke-width=".7" />
+        </pattern>
+        <linearGradient id="hero-line-wash" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#819782" stop-opacity=".19" />
+          <stop offset="1" stop-color="#819782" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <rect x="25" y="27" width="510" height="434" fill="url(#hero-paper-grid)" />
+      <text class="strategy" x="39" y="263">strategy</text>
+      <path class="wash" d="M35 266 C77 262 91 193 139 205 S207 271 255 210 S308 103 355 139 S428 177 470 116 S508 91 528 70 L528 318 L35 318Z" fill="url(#hero-line-wash)" />
+      <g class="bars" fill="#809681">
+        <rect class="bar" x="62" y="347" width="24" height="65" rx="3" style="--delay: .25s" />
+        <rect class="bar" x="99" y="307" width="24" height="105" rx="3" style="--delay: .32s" />
+        <rect class="bar" x="136" y="329" width="24" height="83" rx="3" style="--delay: .39s" />
+        <rect class="bar" x="173" y="279" width="24" height="133" rx="3" style="--delay: .46s" />
+        <rect class="bar" x="210" y="303" width="24" height="109" rx="3" fill="#bcc8b5" style="--delay: .53s" />
+      </g>
+      <g class="allocation" fill="none" stroke-width="19">
+        <path class="trace ring" pathLength="1" stroke="#3d6055" d="M360 400 A77 77 0 1 1 473 300" />
+        <path class="trace ring ring-clay" pathLength="1" stroke="#be9076" d="M482 311 A77 77 0 0 1 478 378" />
+        <path class="trace ring ring-gold" pathLength="1" stroke="#c4ad76" d="M472 387 A77 77 0 0 1 430 414" />
+      </g>
+      <path class="trace line" pathLength="1" d="M35 266 C77 262 91 193 139 205 S207 271 255 210 S308 103 355 139 S428 177 470 116 S508 91 528 70" fill="none" stroke="#3d6055" stroke-width="3.4" stroke-linecap="round" />
+      <text class="word markets" x="63" y="134">markets</text>
+      <text class="word costs" x="117" y="451">costs</text>
+      <text class="word ai" x="376" y="348">AI</text>
+      <g fill="none" stroke="#b78360" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path class="trace annotation" pathLength="1" d="M345 111 C317 96 301 113 304 137 C307 164 352 171 365 150 C379 127 354 104 329 106" />
+        <path class="trace annotation arrow" pathLength="1" d="M389 78 Q382 97 363 109 M362 99 L361 112 L374 109" />
+      </g>
+    </svg>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-hero-artwork]').forEach((artwork) => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        artwork.classList.add('has-entered');
+        observer.disconnect();
+      }
+    }, { threshold: .2 });
+    observer.observe(artwork);
+  });
+</script>
+
+<style>
+  .artwork-stack { position: relative; isolation: isolate; min-width: 0; }
+  .artwork-stack::before { content: ''; position: absolute; inset: 12px -5px -12px 12px; z-index: -1; border-radius: 22px; border: 1px solid rgba(105, 130, 107, .18); background: #dfe5da; transform: rotate(2deg); }
+  .artwork-paper { position: relative; border: 1px solid rgba(105, 130, 107, .22); border-radius: 21px; background: linear-gradient(135deg, #fffdf8, #f4f0e7); box-shadow: 0 28px 65px -22px rgba(38, 54, 44, .3), 0 5px 15px rgba(38, 54, 44, .04); }
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  text { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 400; }
+  .strategy { font-size: 133px; letter-spacing: -5px; fill: #3d6055; opacity: .065; }
+  .word { font-size: 38px; fill: #3d6055; }
+  .costs { fill: #836b51; }
+  .ai { font-size: 43px; fill: #46584c; }
+  .bar { transform-box: fill-box; transform-origin: center bottom; }
+  .has-entered .line { animation: draw .85s cubic-bezier(.22, .61, .36, 1) both; }
+  .has-entered .bar { animation: rise .5s ease both; animation-delay: var(--delay); }
+  .has-entered .ring { animation: draw .6s ease .45s both; }
+  .has-entered .ring-clay { animation-delay: .55s; }
+  .has-entered .ring-gold { animation-delay: .65s; }
+  .has-entered .annotation { animation: draw .35s ease 1s both; }
+  .has-entered .arrow { animation-delay: 1.12s; }
+  @keyframes draw { from { stroke-dasharray: 1; stroke-dashoffset: 1; } to { stroke-dasharray: 1; stroke-dashoffset: 0; } }
+  @keyframes rise { from { transform: scaleY(.05); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+  @media (max-width: 480px) { .word { font-size: 42px; } .ai { font-size: 46px; } }
+  @media (prefers-reduced-motion: reduce) { .artwork-stack * { animation: none !important; transition: none !important; } }
+</style>

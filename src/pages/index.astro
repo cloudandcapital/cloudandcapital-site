@@ -26,7 +26,6 @@ const featuredArticles = [marketsMimosasLatest, writingFeatured, featuredWriting
     <section class="hero" aria-labelledby="home-title">
       <div class="shell hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Turning numbers into strategy.</p>
           <h1 id="home-title">
             Before you invest it, spend it, or build with it,
             <span class="scribbled-word">understand it.<svg viewBox="0 0 250 26" preserveAspectRatio="none" aria-hidden="true"><path d="M4 18 C55 6 111 27 246 10" /><path d="M18 22 C91 13 161 23 226 15" /></svg></span>
@@ -35,11 +34,11 @@ const featuredArticles = [marketsMimosasLatest, writingFeatured, featuredWriting
           <p class="hero-byline">By Diana Molski · Finance analyst and builder</p>
           <div class="hero-actions">
             <a class="button button-primary" href="#tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_hero">Explore the tools</a>
-            <a class="text-action text-action-dark" href="/writing" data-analytics-event="cta_click" data-analytics-destination="writing" data-analytics-source="homepage_hero">Read the writing <span aria-hidden="true">→</span></a>
+            <a class="button hero-secondary" href="/writing" data-analytics-event="cta_click" data-analytics-destination="writing" data-analytics-source="homepage_hero">Read the writing</a>
           </div>
         </div>
 
-        <div class="hero-visual" data-reveal>
+        <div class="hero-visual">
           <DecisionDesk />
         </div>
       </div>
@@ -404,8 +403,8 @@ const featuredArticles = [marketsMimosasLatest, writingFeatured, featuredWriting
   .text-action-light { color: #b9cec5; }
 
   .hero { padding: clamp(7.6rem, 10vw, 9rem) 0 clamp(4.25rem, 7vw, 6rem); background: #f5eee9; }
-  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(28rem, .95fr); gap: clamp(3rem, 7vw, 6.5rem); align-items: center; }
-  .hero-copy h1 { max-width: 13ch; margin-top: 1.35rem; font-size: clamp(3.7rem, 5.55vw, 5.75rem); line-height: .93; letter-spacing: -.042em; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(3rem, 7vw, 6.5rem); align-items: center; }
+  .hero-copy h1 { max-width: 13ch; margin-top: 0; font-size: clamp(3.7rem, 5.55vw, 5.75rem); line-height: .93; letter-spacing: -.042em; }
   .scribbled-word { position: relative; display: inline-block; font-style: italic; color: #3d6055; white-space: nowrap; }
   .scribbled-word svg { position: absolute; left: -.08em; right: -.08em; bottom: -.16em; width: calc(100% + .16em); height: .28em; overflow: visible; }
   .scribbled-word path { fill: none; stroke: #c29260; stroke-width: 2.2; stroke-linecap: round; opacity: .75; stroke-dasharray: 260; stroke-dashoffset: 260; animation: scribble-in 1.1s ease forwards 1s; }
@@ -415,7 +414,10 @@ const featuredArticles = [marketsMimosasLatest, writingFeatured, featuredWriting
   .hero-actions,
   .writing-actions,
   .contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.4rem; margin-top: 1.8rem; }
-  .hero-visual { min-width: 0; }
+  .hero-visual { min-width: 0; padding: .75rem .5rem 1.25rem; }
+  .hero-actions .button { min-height: 48px; border-radius: 8px; padding: .9rem 1.25rem; }
+  .hero-actions .hero-secondary { background: #e2e8df; color: #2e4e44; border-color: #cbd7cd; }
+  .hero-actions .hero-secondary:hover { background: #d5dfd2; }
 
   .proof { background: #211f1b; color: #f5eee9; }
   .proof-grid { display: grid; grid-template-columns: 1.05fr 1.25fr 1.1fr .85fr; }
@@ -624,7 +626,6 @@ const featuredArticles = [marketsMimosasLatest, writingFeatured, featuredWriting
     .writing-actions,
     .contact-actions { flex-direction: column; align-items: flex-start; }
     .button { width: 100%; text-align: center; }
-    .hero-actions .text-action { justify-self: start; }
     .proof-grid { grid-template-columns: 1fr; }
     .proof-item,
     .proof-item:first-child,

@@ -5,17 +5,19 @@ export type SiteLink = {
 };
 
 export const navigation: SiteLink[] = [
-  { label: 'Work', href: '/work' },
+  { label: 'Tools', href: '/work' },
   { label: 'Writing', href: '/writing' },
   { label: 'About', href: '/#about' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 export const footerLinks: SiteLink[] = [
   { label: 'Home', href: '/' },
-  { label: 'Work', href: '/work' },
+  { label: 'Tools', href: '/work' },
   { label: 'Writing', href: '/writing' },
   { label: 'About', href: '/#about' },
   { label: 'Market Tape', href: 'https://market-tape.cloudandcapital.com', external: true },
+  { label: 'Substack', href: 'https://cloudandcapital.substack.com', external: true },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/dianalyst', external: true },
 ];
 
@@ -30,7 +32,7 @@ export const tools = [
     title: 'AI Cost Lens',
     label: 'New · Open Source · Live',
     description:
-      'Turn AI bills, usage, and outcome evidence into the cost of usable work. Compare providers or routes without mistaking a cheaper model bill for a real saving.',
+      'Bring AI bills, usage, infrastructure, and human review into one comparison so you can see what a usable result really cost.',
     href: 'https://lens.cloudandcapital.com',
     external: true,
     sourceHref: 'https://github.com/cloudandcapital/ai-cost-lens',
@@ -40,7 +42,7 @@ export const tools = [
     title: 'Cloud Cost Guard + Lumen',
     label: 'Dashboard · AI Analyst · Live',
     description:
-      'Cloud, AI, and SaaS spend in one dashboard. Lumen surfaces anomalies, cost drivers, forecasts, and investigation paths in plain English.',
+      'Investigate cloud, AI, and SaaS spend in one place. Lumen points to anomalies, cost drivers, forecasts, and the next question to ask.',
     href: 'https://guard.cloudandcapital.com',
     external: true,
   },
@@ -49,7 +51,7 @@ export const tools = [
     title: 'Market Tape',
     label: 'Interactive · Tool',
     description:
-      'A live market dashboard tracking the rates, sectors, commodities, and risk signals shaping technology capital and infrastructure decisions.',
+      'A live dashboard tracking 52 rates, sectors, commodities, and risk signals that affect technology and infrastructure spending.',
     href: 'https://market-tape.cloudandcapital.com',
     external: true,
   },
@@ -149,9 +151,9 @@ export const writingFeatured = {
 
 export const newsletter = {
   label: 'Cloud & Capital · Substack',
-  title: 'Markets, AI spend, and what the bill is actually telling you.',
+  title: 'Money, markets, AI, and the business behind the numbers.',
   description:
-    'Markets & Mimosas is the Cloud & Capital newsletter on markets, AI infrastructure, cloud spend, and the decisions behind the bill. Published twice monthly.',
+    'Cloud & Capital covers markets and investing, practical AI, business costs, and technology economics. Markets & Mimosas is the recurring market column. Published twice monthly.',
   subscribeHref: 'https://cloudandcapital.substack.com',
   latestIssueHref: marketsMimosasLatest.href,
 };
@@ -191,26 +193,13 @@ export const writing = [
 
 export const events = [
   {
-    status: 'Upcoming',
-    date: 'August 27, 2026',
-    volume: 'Vol. 02',
-    title: 'Shifting FinOps Left All the Way to the AI Code Generator',
-    speaker: 'Hassan Khajeh Hosseini',
-    speakerRole: 'CEO, Infracost · FinOps Foundation Governing Board Member',
-    location: 'Location TBA',
-    description:
-      'Learn how engineering teams can bring cloud cost awareness earlier into the development lifecycle and build more cost efficient software from the start.',
-    registrationUrl: 'https://luma.com/b128j01h',
-    sponsor: 'Sponsored by Infracost',
-  },
-  {
     status: 'Past event',
-    date: 'April 9, 2026',
+    date: 'April 2026',
     volume: 'Vol. 01',
     title: 'Using AI to Put the Ops in FinOps',
-    location: 'Common Space Brewery · South Bay',
+    location: 'Common Space Brewery · Hawthorne, California',
     description:
-      'Our first LA FinOps Meetup brought finance, engineering, and cloud practitioners together for an informal evening on FinOps, AI, and the operating work behind modern technology spend.',
+      'Diana organized and hosted the first FinOps Weekly Los Angeles meetup, bringing finance, engineering, cloud, and FinOps practitioners together with speakers from Ulta Beauty and Wiv.ai.',
     sponsor: 'Sponsored by Wiv.ai',
     image: '/images/event-poster-vol01.png',
     imageAlt: 'Using AI to Put the Ops in FinOps poster',
@@ -220,11 +209,11 @@ export const events = [
 export const about = {
   name: 'Diana Molski',
   founderLabel: 'Founder, Cloud & Capital',
-  heading: 'Finance native. Systems builder.',
+  heading: "Hi, I'm Diana.",
   biography: [
-    'My background is in finance, including Morgan Stanley and equity trading. Today I apply that risk and allocation lens to cloud, SaaS, and AI infrastructure spend.',
-    'Through Cloud & Capital, I build open source FinOps tools, decision systems, and research for the point where finance and engineering meet. The goal is to make the economic consequence visible while there is still time to change the decision.',
-    'I also serve as the Los Angeles regional leader for FinOps Weekly, helping bring practitioners across finance, engineering, and cloud together around the operating reality behind the bill.',
+    'I started my career at Morgan Stanley and later traded equities. I earned my B.S. in Business Administration, Finance from California State University, Dominguez Hills.',
+    'Today I work across forecasting, financial modeling, cost analysis, cloud and AI economics, and public tools. I am comfortable moving between a spreadsheet, a dataset, a dashboard, and a conversation with finance or technical teams.',
+    'In April 2026, I organized and hosted the first FinOps Weekly Los Angeles meetup, bringing finance, engineering, cloud, and FinOps people into the same room.',
   ],
   credentials: [
     'FinOps Certified Practitioner',

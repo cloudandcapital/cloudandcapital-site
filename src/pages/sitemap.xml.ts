@@ -4,6 +4,7 @@ const pages = [
   '/',
   '/work',
   '/writing',
+  '/ai-cost-lens',
   '/signal-audit',
   '/interactive-lab',
 ];

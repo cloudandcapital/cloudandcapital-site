@@ -6,13 +6,15 @@ Built with [Astro](https://astro.build), deployed on Vercel.
 
 ## What this is
 
-Cloud & Capital is a technology economics and FinOps practice. The site covers Diana's advisory work, open source tools, writing (Markets & Mimosas on Substack), and community events (FinOps Weekly LA).
+Cloud & Capital is Diana Molski's home for useful financial tools, clear analysis, and practical resources. It serves people learning about money, businesses trying to understand their costs, and teams managing cloud and AI spend.
 
 ## Pages
 
 | Route | Description |
 |---|---|
-| `/` | Main site: discipline, work, about, community, writing |
+| `/` | Main site: interactive Invest / Spend / Build decision desk, audience pathways, featured tools, writing, professional background, and contact |
+| `/work` | Tools and open source work across AI economics, technology costs, and markets |
+| `/writing` | Cloud & Capital articles and Substack archive |
 | `/ai-cost-lens` | Convenient 302 redirect to the AI Cost Lens production domain, https://lens.cloudandcapital.com |
 | `/signal-audit` | Signal Audit: 5-minute cost diagnostic tool |
 | `/interactive-lab` | Interactive Lab: decision briefs powered by Claude |
@@ -44,6 +46,6 @@ npm run preview    # preview build locally
 
 - `src/pages/index.astro`: main site
 - `src/pages/ai-cost-lens.astro`: branded AI Cost Lens redirect
-- `src/layouts/SiteLayout.astro`: layout for main site + 404
-- `src/layouts/BaseLayout.astro`: layout for Signal Audit + Interactive Lab
+- `src/layouts/SiteLayout.astro`: compact layout for the 404 page
+- `src/layouts/BaseLayout.astro`: shared navigation and footer for the main site and tools
 - `public/images/`: all site images including OG image

@@ -17,12 +17,14 @@ interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
+  showFooter?: boolean;
 }
 
 const {
   title = 'Cloud & Capital',
   description = 'Turning numbers into strategy',
   noindex = false,
+  showFooter = true,
 } = Astro.props;
 ---
 
@@ -33,8 +35,10 @@ const {
   </head>
   <body>
     <slot />
-    <footer style="text-align:center;padding:1.5rem;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,0,0,0.3);border-top:1px solid rgba(0,0,0,0.07);">
-      © 2026 Cloud &amp; Capital · AI Spend · FinOps · Markets
-    </footer>
+    {showFooter && (
+      <footer style="text-align:center;padding:1.5rem;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,0,0,0.3);border-top:1px solid rgba(0,0,0,0.07);">
+        © 2026 Cloud &amp; Capital · Finance · AI · Markets · Systems
+      </footer>
+    )}
   </body>
 </html>

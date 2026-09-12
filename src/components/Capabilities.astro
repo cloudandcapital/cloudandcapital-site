@@ -1,0 +1,195 @@
+<section class="capabilities" id="capabilities" aria-labelledby="capabilities-title">
+  <div class="capabilities-inner">
+    <div class="capabilities-heading">
+      <div class="capabilities-label">What I can do</div>
+      <h2 id="capabilities-title">I dig into the numbers, build useful tools, and explain what I found.</h2>
+    </div>
+
+    <div class="capabilities-list">
+      <article class="capability">
+        <span class="capability-number" aria-hidden="true">01</span>
+        <h3>Figure out what changed</h3>
+        <p>I work across forecasts, budgets, actuals, usage, and unit costs to find the real driver behind a number.</p>
+      </article>
+
+      <article class="capability">
+        <span class="capability-number" aria-hidden="true">02</span>
+        <h3>Build what the question needs</h3>
+        <p>I use Excel, SQL, Python, Power BI, and web apps. The format depends on the question and who needs to use the answer.</p>
+      </article>
+
+      <article class="capability">
+        <span class="capability-number" aria-hidden="true">03</span>
+        <h3>Make it clear</h3>
+        <p>I can work with finance and technical teams and explain what the data shows, what it does not, and what I would look at next.</p>
+      </article>
+    </div>
+
+    <div class="capabilities-partner" aria-label="Claude Partner Network membership">
+      <img
+        src="/images/claude-partner-badge-claude-code.png"
+        alt="Claude Code Partner Badge"
+        width="52"
+        height="52"
+        loading="lazy"
+      />
+      <p>Cloud &amp; Capital is a registered member of the Claude Partner Network.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .capabilities {
+    width: 100%;
+    padding: clamp(4rem, 7vw, 6.5rem) clamp(1.5rem, 4vw, 4.5rem);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--cream);
+    color: var(--ink);
+    scroll-margin-top: 5rem;
+  }
+
+  .capabilities-inner {
+    width: min(100%, 1280px);
+    margin: 0 auto;
+  }
+
+  .capabilities-heading {
+    display: grid;
+    grid-template-columns: minmax(14rem, 0.62fr) minmax(0, 1.38fr);
+    gap: clamp(2rem, 7vw, 7rem);
+    align-items: start;
+  }
+
+  .capabilities-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 0.6rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+
+  .capabilities-label::after {
+    content: '';
+    width: 3rem;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .capabilities h2 {
+    max-width: 18ch;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.25rem, 3.8vw, 4rem);
+    font-weight: 300;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+  }
+
+  .capabilities-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .capability {
+    padding: 2.25rem clamp(1.25rem, 2.5vw, 2.4rem) 2.5rem;
+    border-right: 1px solid var(--rule);
+  }
+
+  .capability:first-child {
+    padding-left: 0;
+  }
+
+  .capability:last-child {
+    padding-right: 0;
+    border-right: 0;
+  }
+
+  .capability-number {
+    display: block;
+    margin-bottom: 1.25rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    color: var(--sage);
+  }
+
+  .capability h3 {
+    margin: 0 0 0.75rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.55rem, 2vw, 2rem);
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
+  .capability p {
+    max-width: 33ch;
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: 0.88rem;
+    line-height: 1.75;
+  }
+
+  .capabilities-partner {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-top: 1.5rem;
+  }
+
+  .capabilities-partner img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    flex: 0 0 auto;
+  }
+
+  .capabilities-partner p {
+    max-width: 36ch;
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: 0.76rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 800px) {
+    .capabilities-heading {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    .capabilities-label {
+      padding-top: 0;
+    }
+
+    .capabilities h2 {
+      max-width: 16ch;
+    }
+
+    .capabilities-list {
+      grid-template-columns: 1fr;
+    }
+
+    .capability,
+    .capability:first-child,
+    .capability:last-child {
+      padding: 1.75rem 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .capability:last-child {
+      border-bottom: 0;
+    }
+
+    .capability p {
+      max-width: 50ch;
+    }
+  }
+</style>

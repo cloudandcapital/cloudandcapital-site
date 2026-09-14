@@ -49,3 +49,15 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
+
+/* Shared outer guide for the homepage profile, contact, and footer. */
+.site-shell {
+  width: min(calc(100% - 4rem), 78rem);
+  margin-inline: auto;
+}
+@media (max-width: 1020px) {
+  .site-shell { width: min(calc(100% - 3rem), 78rem); }
+}
+@media (max-width: 760px) {
+  .site-shell { width: min(calc(100% - 2.5rem), 78rem); }
+}

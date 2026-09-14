@@ -44,7 +44,7 @@ test('the shared loader disables advertising signals and layouts contain no dupl
 });
 
 test('all static CTA metadata is complete and accepted by the allowlist', async () => {
-  const files = ['src/pages/index.astro', 'src/pages/work.astro', 'src/pages/writing.astro', 'src/components/SignalAuditResults.astro'];
+  const files = ['src/pages/index.astro', 'src/pages/tools.astro', 'src/pages/writing.astro', 'src/components/SignalAuditResults.astro'];
   let count = 0;
   for (const file of files) {
     const text = await source(file);
@@ -52,6 +52,12 @@ test('all static CTA metadata is complete and accepted by the allowlist', async 
       count += 1;
       const destination = tag[0].match(/data-analytics-destination="([^"]+)"/)?.[1];
       const sourceValue = tag[0].match(/data-analytics-source="([^"]+)"/)?.[1];
+      if (tag[0].includes('data-analytics-destination={item.destination}')) {
+        for (const rowDestination of ['cloud_cost_guard', 'market_tape', 'signal_audit', 'interactive_lab']) {
+          assert.ok(validateAnalyticsEvent('cta_click', { destination: rowDestination, source: sourceValue }), `${file}: ${rowDestination}`);
+        }
+        continue;
+      }
       assert.ok(validateAnalyticsEvent('cta_click', { destination, source: sourceValue }), `${file}: ${tag[0]}`);
     }
   }

@@ -1,0 +1,250 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { contactLink, openSourceTools, tools } from '../data/siteContent';
+
+const lens = tools.find((tool) => tool.slug === 'ai-cost-lens');
+const guard = tools.find((tool) => tool.slug === 'cloud-cost-guard-lumen');
+const tape = tools.find((tool) => tool.slug === 'market-tape');
+const audit = tools.find((tool) => tool.slug === 'signal-audit');
+const lab = tools.find((tool) => tool.slug === 'interactive-lab');
+
+const supportingTools = [
+  audit && { tool: audit, status: 'Diagnostic', question: 'Where does the decision chain break?', description: 'A five-minute diagnostic showing where cost enters the decision chain before it reaches the invoice, with a weakest-link assessment and priority move.', action: 'Start Signal Audit', destination: 'signal_audit' },
+  lab && { tool: lab, status: 'Guided lab', question: 'What changes when the assumptions change?', description: 'Turn one real question about cloud, AI, SaaS, or technology spend into a structured decision brief grounded in the context you provide.', action: 'Open Interactive Lab', destination: 'interactive_lab' },
+].filter((item) => item !== undefined);
+
+// AI Cost Lens is featured above; these five repository destinations were checked separately.
+const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost Lens');
+---
+
+<BaseLayout title="Tools | Cloud & Capital" description="Free tools for understanding markets, business decisions, cloud spend, and AI costs.">
+  <main id="main-content" class="tools-page">
+    <section class="tools-hero" aria-labelledby="tools-title">
+      <div class="site-shell hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">Tools</p>
+          <h1 id="tools-title"><span>Start with the question.</span><span>Follow the number.</span></h1>
+          <p>Free tools for understanding markets, business decisions, cloud spend, and AI costs.</p>
+        </div>
+        <div class="tool-index" role="img" aria-label="Research index: cost, signal, evidence, decision.">
+          <div class="index-heading" aria-hidden="true"><span>Cloud &amp; Capital</span><span>Working index</span></div>
+          <div class="index-entries" aria-hidden="true">
+            <div><span>Cost</span><small>What was spent</small></div>
+            <div><span>Signal</span><small>What moved</small></div>
+            <div><span>Evidence</span><small>What holds up</small></div>
+            <div><span>Decision</span><small>What comes next</small></div>
+          </div>
+          <div class="index-footer" aria-hidden="true">Follow the number to the question beneath it.</div>
+        </div>
+      </div>
+    </section>
+
+    {lens && (
+      <section class="lens-section" aria-labelledby="lens-title">
+        <div class="site-shell">
+          <p class="eyebrow eyebrow-light">Featured tool · AI economics</p>
+          <div class="lens-layout">
+            <div class="lens-copy">
+              <h2 id="lens-title">AI Cost Lens</h2>
+              <p class="lens-question">What did one usable result really cost?</p>
+              <p class="lens-description">{lens.description}</p>
+              <div class="lens-actions">
+                <a class="lens-open" href={lens.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="work_flagship"><span>Open AI Cost Lens</span><span aria-hidden="true">→</span></a>
+                <a class="lens-source" href={lens.sourceHref} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens_github" data-analytics-source="work_flagship"><span>View the source</span><span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+            <a class="flagship-window" href={lens.href} target="_blank" rel="noopener noreferrer" aria-label="Open AI Cost Lens" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="work_flagship">
+              <span class="window-bar" aria-hidden="true"><span class="window-dots"><i></i><i></i><i></i></span><span>lens.cloudandcapital.com</span></span>
+              <span class="window-canvas"><img src="/images/ai-cost-lens-cost-anatomy-wide.png" alt="AI Cost Lens comparing the full cost of two AI production routes" width="2190" height="964" loading="lazy" /></span>
+            </a>
+          </div>
+          <dl class="lens-notes">
+            <div><dt>The question</dt><dd>What did one usable AI result cost?</dd></div>
+            <div><dt>You bring</dt><dd>Usage, infrastructure, and human review costs.</dd></div>
+            <div><dt>You leave with</dt><dd>A comparison of routes after quality and rework.</dd></div>
+          </dl>
+        </div>
+      </section>
+    )}
+
+    <section class="starting-section" aria-labelledby="starting-title">
+      <div class="site-shell">
+        <p class="eyebrow">Choose a starting point</p>
+        <h2 id="starting-title">Choose where to begin.</h2>
+        <div class="product-features">
+          {guard && (
+            <a class="product-feature guard-feature" href={guard.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="work_decision_tools">
+              <div class="product-copy"><span class="product-status">Live tool</span><h3>Cloud Cost Guard</h3><p class="product-question">What moved the bill?</p><p>Investigate cloud, AI, and SaaS spend in one place. Lumen points to anomalies, cost drivers, and forecasts so you know what to investigate next.</p><span class="product-action"><span>Open Cloud Cost Guard</span><span aria-hidden="true">→</span></span></div>
+              <div class="product-media" aria-hidden="true"><img src="/images/cloud-cost-guard-spend-reconciliation.jpg" alt="" width="1216" height="474" loading="lazy" /></div>
+            </a>
+          )}
+          {tape && (
+            <a class="product-feature tape-feature" href={tape.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="market_tape" data-analytics-source="work_decision_tools">
+              <div class="product-media" aria-hidden="true"><img src="/images/market-tape-internals-momentum.jpg" alt="" width="1104" height="430" loading="lazy" /></div>
+              <div class="product-copy"><span class="product-status">Market view</span><h3>Market Tape</h3><p class="product-question">What is moving across the market?</p><p>Follow 52 rates, sectors, commodities, and risk signals in one live view of technology and infrastructure spending.</p><span class="product-action"><span>Open Market Tape</span><span aria-hidden="true">→</span></span></div>
+            </a>
+          )}
+        </div>
+        <div class="supporting-tools">
+          {supportingTools.map((item) => (
+            <a class="supporting-tool" href={item.tool.href} data-analytics-event="cta_click" data-analytics-destination={item.destination} data-analytics-source="work_decision_tools">
+              <span class="product-status">{item.status}</span><h3>{item.tool.title}</h3><p class="product-question">{item.question}</p><p>{item.description}</p><span class="product-action"><span>{item.action}</span><span aria-hidden="true">→</span></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="open-section" aria-labelledby="open-title">
+      <div class="site-shell">
+        <div class="open-layout">
+          <div class="open-heading"><p class="eyebrow">Built in the open</p><h2 id="open-title"><span>More experiments</span><span>and source code.</span></h2></div>
+          <div class="open-panel">
+            <div class="open-list">
+              {moreCode.map((project) => (
+                <a class="open-row" href={project.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="github_pipeline" data-analytics-source="work_pipeline">
+                  <span class="open-name">{project.title}</span><span class="open-description">{project.description}</span><span class="open-arrow" aria-hidden="true">→</span>
+                </a>
+              ))}
+            </div>
+            <a class="open-all" href="https://github.com/cloudandcapital" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="github_pipeline" data-analytics-source="work_pipeline"><span>View all on GitHub</span><span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-strip" aria-labelledby="contact-strip-title">
+      <div class="site-shell contact-layout"><p class="eyebrow">Start a conversation</p><h2 id="contact-strip-title">Have a number you want to make sense of?</h2><a href={contactLink.href} data-analytics-event="cta_click" data-analytics-destination="contact" data-analytics-source="work_contact"><span>Email Diana</span><svg class="contact-heart" aria-hidden="true" viewBox="0 0 16 16" fill="none"><path d="M8 13.5C5.9 11.7 2.1 8.7 2.2 5.7c.1-1.7 2.2-2.7 3.7-1.7.8.5 1.3 1.1 2.1 1.8.7-1 1.5-1.9 2.6-2 2.2-.2 3.7 1.7 3.1 3.7-.7 2.3-3.5 4.7-5.7 6Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" /></svg><span aria-hidden="true">→</span></a></div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .tools-page { color: #24211e; font-family: 'Jost', system-ui, sans-serif; }
+  .tools-page :is(h1,h2,h3,p) { margin: 0; }
+  .tools-page :is(h1,h2,h3) { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; }
+  .tools-page a { color: inherit; text-decoration: none; }
+  .tools-page a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+  .eyebrow, .product-status { font: 500 .68rem/1.5 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
+  .eyebrow { color: #3d6055; }
+  .eyebrow-light { color: #d4e0d6; }
+  .tools-hero { padding: clamp(6.05rem, 8.1vw, 7.4rem) 0 clamp(2.95rem, 4.5vw, 3.95rem); background: var(--cream); }
+  .hero-layout { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: clamp(2rem, 4vw, 4rem); align-items: center; }
+  .hero-copy h1 { margin-top: 1.4rem; font-size: clamp(3.4rem, 4.2vw, 4.5rem); line-height: .96; letter-spacing: -.035em; }
+  .hero-copy h1 span { display: block; }
+  .hero-copy > p:last-child { max-width: 42ch; margin-top: 1.6rem; color: #4a4a4a; font-size: 1rem; line-height: 1.75; }
+  .tool-index { min-width: 0; padding: 1.8rem 2.1rem 1.5rem; border: 1px solid rgba(36,35,31,.2); background: #f9f5ee; }
+  .index-heading, .index-footer { display: flex; justify-content: space-between; gap: 1rem; color: #4b4942; font: 500 .6rem/1.5 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
+  .index-heading { padding-bottom: 1rem; border-bottom: 1px solid rgba(36,35,31,.23); }
+  .index-entries { padding: 1rem 0; }
+  .index-entries > div { display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; min-height: 3.7rem; padding: .45rem 0; border-bottom: 1px solid rgba(36,35,31,.18); }
+  .index-entries span { font: 400 clamp(2rem, 3vw, 2.75rem)/1 'Cormorant Garamond', Georgia, serif; text-transform: uppercase; color: #3d6055; }
+  .index-entries > div:nth-child(2) span { color: #805751; }
+  .index-entries > div:nth-child(4) span { color: #2f2927; }
+  .index-entries small { color: #6c665f; font: .6rem/1.5 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; }
+  .index-footer { justify-content: flex-end; padding-top: .75rem; }
+  .lens-section { padding: clamp(3.6rem, 5vw, 4.8rem) 0; background: #3d6055; color: #f5eee9; }
+  .lens-layout { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(2rem, 4vw, 4rem); align-items: center; margin-top: 1.25rem; }
+  .lens-copy h2 { font-size: clamp(3.5rem, 5vw, 5rem); line-height: .96; }
+  .lens-question { margin-top: 1rem !important; font: italic 400 clamp(1.55rem, 2.2vw, 2rem)/1.2 'Cormorant Garamond', Georgia, serif; }
+  .lens-description { max-width: 46ch; margin-top: 1.3rem !important; color: #e4eee6; font-size: .97rem; line-height: 1.75; }
+  .lens-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1rem; margin-top: 1.8rem; }
+  .lens-actions a, .open-all, .contact-layout a { display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; font: 500 .72rem/1.4 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+  .lens-open { padding: .85rem 1.25rem; background: var(--cream); color: #2f2927 !important; border-radius: 8px; }
+  .lens-open:hover { background: var(--cream-dark); }
+  .lens-source { padding: .85rem 1.25rem; border: 1px solid rgba(245,238,233,.58); border-radius: 8px; }
+  .lens-source:hover { background: rgba(245,238,233,.1); }
+  .open-all > span:first-child { border-bottom: 1px solid currentColor; }
+  .lens-actions a > span:last-child, .open-all > span:last-child, .contact-layout a > span:last-child, .product-action > span:last-child, .open-arrow { display: inline-block; font-size: 1.25rem; line-height: 1; transition: transform .2s ease; }
+  .lens-actions a:hover > span:last-child, .lens-actions a:focus-visible > span:last-child, .open-all:hover > span:last-child, .open-all:focus-visible > span:last-child, .contact-layout a:hover > span:last-child, .contact-layout a:focus-visible > span:last-child, .tools-page a:hover .product-action > span:last-child, .tools-page a:focus-visible .product-action > span:last-child, .tools-page a:hover .open-arrow, .tools-page a:focus-visible .open-arrow { transform: translateX(3px); }
+  .flagship-window { position: relative; isolation: isolate; display: block; min-width: 0; margin: 0 14px 14px 0; border: 0; border-radius: 16px; background: #faf6ef; color: #625d55; text-decoration: none; box-shadow: 0 15px 30px -16px rgba(24,40,32,.45); transition: transform 220ms ease, box-shadow 220ms ease; }
+  .flagship-window::before { content: ''; position: absolute; inset: 16px -16px -16px 16px; z-index: -1; background: #dfe3d7; border-radius: 16px; }
+  .window-bar { position: relative; display: flex; justify-content: center; align-items: center; min-height: 2rem; padding: .6rem 2.7rem; border-radius: 16px 16px 0 0; background: #faf6ef; border-bottom: 1px solid rgba(36,33,30,.1); font: .48rem 'DM Mono',monospace; color: #68635b; }
+  .window-dots { position: absolute; left: .85rem; display: flex; gap: .3rem; }
+  .window-dots i { width: 5px; height: 5px; border-radius: 50%; background: #bbb4a8; }
+  .window-canvas { display: block; border-radius: 0 0 16px 16px; overflow: hidden; }
+  .flagship-window img { display: block; width: 100%; height: auto; border-radius: 0 0 16px 16px; transform: none; }
+  .flagship-window:hover, .flagship-window:focus-visible { transform: translateY(-5px); box-shadow: 0 20px 34px -16px rgba(24,40,32,.5); }
+  .lens-notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin: 1.8rem 0 0; padding-top: 1.25rem; border-top: 1px solid rgba(245,238,233,.3); }
+  .lens-notes dt { color: #d4e0d6; font: 500 .62rem/1.5 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
+  .lens-notes dd { max-width: 28ch; margin: .5rem 0 0; color: #faf6ef; font-size: 1.0625rem; line-height: 1.6; }
+  .starting-section { padding: clamp(4.5rem, 7vw, 6.5rem) 0; background: var(--cream); }
+  .starting-section h2 { margin-top: .9rem; font-size: clamp(2.75rem, 4vw, 4rem); line-height: 1.04; }
+  .product-features { display: grid; gap: 1.5rem; margin-top: 2.5rem; }
+  .product-feature { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2rem, 4vw, 4rem); align-items: center; min-width: 0; padding: clamp(2rem, 4vw, 3.5rem); transition: background-color .2s ease; }
+  .guard-feature { background: #edf2ec; }
+  .guard-feature:hover, .guard-feature:focus-visible { background: #e6ede5; }
+  .tape-feature { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); background: var(--cream); border-top: 1px solid rgba(128,87,81,.48); }
+  .tape-feature:hover, .tape-feature:focus-visible { background: var(--cream-dark); }
+  .product-status { color: #3d6055; }
+  .tape-feature .product-status { color: #805751; }
+  .product-copy h3, .supporting-tool h3 { margin-top: .75rem; font-size: clamp(2.7rem, 3.5vw, 3.7rem); line-height: 1; }
+  .product-question { margin-top: 1rem !important; font: italic 400 clamp(1.5rem, 2vw, 1.9rem)/1.2 'Cormorant Garamond', Georgia, serif; }
+  .product-copy > p:not(.product-question), .supporting-tool > p:not(.product-question) { max-width: 54ch; margin-top: 1rem; color: #4b4942; font-size: .96rem; line-height: 1.72; }
+  .product-action { display: inline-flex; align-items: center; gap: .7rem; min-height: 44px; margin-top: 1.5rem; color: #3d6055; font: 500 .72rem/1.4 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+  .product-feature .product-action { padding: .85rem 1.2rem; background: #3d6055; color: #f5eee9; border-radius: 8px; }
+  .tape-feature .product-action { background: #805751; }
+  .product-media { display: flex; align-items: center; min-width: 0; height: clamp(13rem, 17vw, 16rem); }
+  .product-media img { display: block; width: 100%; height: 100%; object-fit: contain; border: 1px solid rgba(36,35,31,.12); border-radius: 8px; }
+  .supporting-tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+  .supporting-tool { display: flex; flex-direction: column; min-width: 0; padding: 2rem 2.2rem; border-top: 1px solid rgba(36,35,31,.22); background: var(--cream); transition: background-color .2s ease; }
+  .supporting-tool:hover, .supporting-tool:focus-visible { background: #e8ede7; }
+  .supporting-tool h3 { font-size: clamp(2.2rem, 2.7vw, 2.8rem); }
+  .supporting-tool .product-question { font-size: 1.55rem; }
+  .supporting-tool > p:not(.product-question) { font-size: .9rem; }
+  .supporting-tool .product-action { align-self: flex-start; margin-top: auto; padding: .7rem .9rem; border: 1px solid #3d6055; font-size: .78rem; }
+  .open-section { padding: clamp(2.8rem, 4vw, 3.6rem) 0; background: var(--cream); }
+  .open-layout { display: grid; grid-template-columns: minmax(0, .43fr) minmax(0, .57fr); gap: clamp(2rem, 4vw, 4rem); align-items: start; }
+  .open-heading h2 { margin-top: .8rem; font-size: clamp(2.15rem, 2.75vw, 2.8rem); line-height: 1.04; }
+  .open-heading h2 span { display: block; }
+  .open-panel { min-width: 0; padding: .5rem 1.75rem .75rem; background: #3d6055; color: #f5eee9; }
+  .open-row { display: grid; grid-template-columns: minmax(10rem, .65fr) minmax(0, 1.35fr) auto; gap: 1rem; align-items: center; min-height: 4.3rem; padding: .65rem 0; border-bottom: 1px solid rgba(245,238,233,.22); transition: background-color .2s ease; }
+  .open-row:hover, .open-row:focus-visible { background: rgba(245,238,233,.06); }
+  .open-name { font: 400 1.35rem/1.1 'Cormorant Garamond', Georgia, serif; }
+  .open-description { color: #e5eee6; font-size: .83rem; line-height: 1.5; }
+  .open-arrow { color: #f5eee9; }
+  .open-all { margin-top: .8rem; color: #e5eee6 !important; }
+  .contact-strip { padding: 2rem 0; background: color-mix(in srgb, #c2aaa1 70%, #8f665f); }
+  .contact-layout { display: grid; grid-template-columns: minmax(10rem, .25fr) minmax(0, .5fr) minmax(10rem, .25fr); align-items: center; gap: 1.5rem; }
+  .contact-layout .eyebrow { color: #2f2927; }
+  .contact-layout h2 { max-width: 22ch; font-size: clamp(2rem, 2.65vw, 2.7rem); line-height: 1.05; }
+  .contact-layout a { justify-self: end; justify-content: center; min-height: 56px; padding: .9rem 1.7rem; background: var(--cream); color: #2f2927; white-space: nowrap; }
+  .contact-layout a:hover { background: var(--cream-dark); }
+  .contact-heart { width: 13px; height: 13px; color: #805751; }
+  @media (max-width: 1024px) {
+    .hero-layout, .lens-layout { grid-template-columns: 1fr; }
+    .tool-index { max-width: 44rem; }
+    .flagship-window { max-width: 48rem; }
+    .product-feature, .tape-feature { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 2rem; }
+    .tape-feature { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); }
+    .open-layout { grid-template-columns: 1fr; gap: 1.8rem; }
+    .contact-layout { grid-template-columns: minmax(0, .35fr) minmax(0, .65fr); }
+    .contact-layout a { grid-column: 2; justify-self: start; }
+  }
+  @media (max-width: 800px) {
+    .product-feature, .tape-feature { grid-template-columns: 1fr; }
+    .tape-feature .product-media { grid-row: 2; }
+    .product-media { height: auto; }
+    .product-media img { height: auto; }
+    .supporting-tools { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .tools-hero { padding: 6.5rem 0 3.3rem; }
+    .hero-copy h1 { font-size: clamp(3.1rem, 11vw, 4.4rem); }
+    .tool-index { padding-inline: 1.25rem; }
+    .index-entries small { display: none; }
+    .lens-notes { grid-template-columns: 1fr; gap: .9rem; }
+    .lens-notes div { border-bottom: 1px solid rgba(245,238,233,.2); padding-bottom: .8rem; }
+    .product-feature { padding: 1.75rem; }
+    .supporting-tool { padding: 1.75rem; }
+    .open-panel { padding-inline: 1.25rem; }
+    .open-row { grid-template-columns: 1fr auto; gap: .3rem 1rem; }
+    .open-description { grid-column: 1; }
+    .open-arrow { grid-column: 2; grid-row: 1 / 3; align-self: center; }
+    .contact-layout { grid-template-columns: 1fr; gap: 1rem; }
+    .contact-layout a { grid-column: 1; justify-self: stretch; justify-content: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tools-page a, .tools-page a > span:last-child, .tools-page a .product-action > span:last-child, .tools-page a .open-arrow { transition: none; }
+  }
+</style>

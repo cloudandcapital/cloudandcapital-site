@@ -5,20 +5,18 @@ export type SiteLink = {
 };
 
 export const navigation: SiteLink[] = [
-  { label: 'Tools', href: '/work' },
-  { label: 'Writing', href: '/writing' },
+  { label: 'Tools', href: '/tools' },
+  { label: 'Writing', href: '/#writing' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
 ];
 
 export const footerLinks: SiteLink[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Tools', href: '/work' },
-  { label: 'Writing', href: '/writing' },
+  { label: 'Tools', href: '/#tools' },
+  { label: 'Writing', href: '/#writing' },
   { label: 'About', href: '/#about' },
-  { label: 'Market Tape', href: 'https://market-tape.cloudandcapital.com', external: true },
+  { label: 'Contact', href: '/#contact' },
   { label: 'Substack', href: 'https://cloudandcapital.substack.com', external: true },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/dianalyst', external: true },
 ];
 
 export const contactLink: SiteLink = {
@@ -142,7 +140,7 @@ export const writingFeatured = {
   topic: 'The Decision Layer · Issue No. 1',
   date: 'August 14, 2026',
   href: 'https://cloudandcapital.substack.com/p/the-decision-layer',
-  description: 'The choices that shape technology cost before the bill arrives.',
+  description: 'Technology costs take shape long before the bill arrives: in what gets built, what gets locked in, and what quietly becomes the default.',
   image: '/images/writing/the-decision-layer.png',
   imageAlt: 'Editorial cover for The Decision Layer showing three architectural gates leading to a ledger',
   archiveImage: '/images/writing/the-decision-layer.png',
@@ -209,20 +207,20 @@ export const events = [
 export const about = {
   name: 'Diana Molski',
   founderLabel: 'Founder, Cloud & Capital',
-  heading: "Hi, I'm Diana.",
+  headingLead: 'I’m Diana.',
+  headingMiddle: 'I follow the number',
+  headingItalic: 'until it makes sense.',
   biography: [
-    'I started my career at Morgan Stanley and later traded equities. I earned my B.S. in Business Administration, Finance from California State University, Dominguez Hills.',
-    'Today I work across forecasting, financial modeling, cost analysis, cloud and AI economics, and public tools. I am comfortable moving between a spreadsheet, a dataset, a dashboard, and a conversation with finance or technical teams.',
-    'In April 2026, I organized and hosted the first FinOps Weekly Los Angeles meetup, bringing finance, engineering, cloud, and FinOps people into the same room.',
+    'My background is in finance: Morgan Stanley, equity trading, and a B.S. in Business Administration, Finance. Today I use that foundation to investigate what cloud, software, and AI actually cost.',
+    'I build tools and write about the questions I’m genuinely trying to answer: what moved, what it really cost, and whether the decision still holds up when you trace it back to the evidence.',
   ],
   credentials: [
-    'FinOps Certified Practitioner',
-    'FinOps Certified FOCUS Analyst',
-    'AWS Certified Cloud Practitioner',
-    'Microsoft Azure AI Fundamentals',
-    'Stacklet FinOps Governance for Cloud & AI',
+    { category: 'FINOPS', detail: 'FinOps Certified Practitioner · FinOps Certified FOCUS Analyst' },
+    { category: 'CLOUD + AI', detail: 'AWS Certified Cloud Practitioner · Microsoft Azure AI Fundamentals' },
+    { category: 'GOVERNANCE', detail: 'Stacklet FinOps Governance for Cloud & AI' },
+    { category: 'AI BUILDING', detail: 'Claude Partner Badge · Claude Code' },
   ],
-  recognition: 'Contributor, PointFive Cloud Efficiency Hub',
+  recognition: 'PointFive Cloud Efficiency Hub',
   recognitionUrl:
     'https://hub.pointfive.co/inefficiencies/overcommitted-savings-plans-after-temporary-ai-inference-demand-spikes?cloud-services=aws-savings-plans',
 };

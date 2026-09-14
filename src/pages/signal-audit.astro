@@ -401,11 +401,6 @@ import SignalAuditResults from "../components/SignalAuditResults.astro";
   </script>
 
   <style is:global>
-    :global(body) {
-      background: #f3ede5;
-      color: #1d1a17;
-      font-family: "DM Sans", sans-serif;
-    }
     .audit-main {
       padding: 7rem 1.5rem 6rem;
     }
@@ -689,14 +684,6 @@ import SignalAuditResults from "../components/SignalAuditResults.astro";
       }
     }
     @media print {
-      :global(.site-nav),
-      :global(footer),
-      .hero,
-      #auditStage,
-      .audit-main {
-        padding: 0;
-        background: #fff;
-      }
       .results-rail {
         width: 100%;
       }

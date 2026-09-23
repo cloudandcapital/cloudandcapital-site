@@ -30,7 +30,7 @@ export const tools = [
     title: 'AI Cost Lens',
     label: 'New · Open Source · Live',
     description:
-      'Bring AI bills, usage, infrastructure, and human review into one comparison so you can see what a usable result really cost.',
+      'Estimate a route from published prices, review a bill with the usage you have, and calculate cost per ready result when you can verify outcomes.',
     href: 'https://lens.cloudandcapital.com',
     external: true,
     sourceHref: 'https://github.com/cloudandcapital/ai-cost-lens',
@@ -91,7 +91,7 @@ export const openSourceTools = [
   },
   {
     title: 'AI Cost Lens',
-    description: 'Compare AI cost per usable result across providers or routes while keeping financial evidence and savings gates explicit.',
+    description: 'Review AI price scenarios and bills; compare cost per ready result when matched usage and outcome evidence is available.',
     href: 'https://github.com/cloudandcapital/ai-cost-lens',
     external: true,
   },

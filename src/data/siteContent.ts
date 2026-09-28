@@ -212,7 +212,7 @@ export const about = {
   headingItalic: 'money question.',
   biography: [
     'I started out as a beauty advisor, then worked in pet salons before moving into finance. I still love makeup and animals. I’ve followed and traded the markets since 2019, earned a finance degree, and worked in wealth management at Morgan Stanley.',
-    'I write Markets & Mimosas because I like answering the questions people actually ask, especially when a headline and the numbers tell different stories. I build free tools too, because sometimes you need to see where the money went before the conversation makes any sense.',
+    'I write about markets, money, and what I’m learning as I build Cloud & Capital. I like answering the questions people actually ask, whether that leads to a market headline, a business or AI bill, or something from my own life. I make free tools too, because sometimes you need to see the numbers for yourself.',
   ],
   credentials: [
     { category: 'FINOPS', detail: 'FinOps Certified Practitioner · FinOps Certified FOCUS Analyst' },

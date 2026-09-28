@@ -211,7 +211,7 @@ export const about = {
   headingMiddle: 'I like a good',
   headingItalic: 'money question.',
   biography: [
-    'Before finance, I worked as a beauty advisor and in pet salons. I’ve always had a mix of interests, and I began following markets in 2020. I earned a finance degree and worked in wealth management at Morgan Stanley.',
+    'I started out as a beauty advisor, then worked in pet salons. I began following the markets in 2020, earned a finance degree, and later worked in wealth management at Morgan Stanley.',
     'These days I build free tools and write about markets, money, and what I’m learning. Some questions turn into articles. Others turn into tools people can actually use.',
   ],
   credentials: [

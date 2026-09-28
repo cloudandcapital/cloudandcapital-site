@@ -123,16 +123,16 @@ export const featuredWriting = {
 };
 
 export const marketsMimosasLatest = {
-  title: 'The Grid Sent the Bill Back',
+  title: 'The Nasdaq Hit a Record. Your Account Might Not Agree.',
   topic: 'Markets & Mimosas',
-  date: 'August 31, 2026',
-  href: 'https://cloudandcapital.substack.com/p/the-grid-sent-the-bill-back',
+  date: 'September 27, 2026',
+  href: 'https://cloudandcapital.substack.com/p/the-nasdaq-hit-a-record-your-account',
   description:
-    'AI demand is forcing utilities, regulators, and large customers to decide who pays for the grid built ahead of it.',
+    'The Nasdaq hit a record while smaller stocks fell. I looked at who was actually rising, what oil and rates were doing, and how the AI buildout is being paid for.',
   image: '/images/writing/markets-mimosas-hero.png',
-  imageAlt: 'The Grid Sent the Bill Back Markets & Mimosas',
+  imageAlt: 'Markets & Mimosas illustration',
   archiveImage: '/images/writing/markets-mimosas-hero.png',
-  archiveImageAlt: 'The Grid Sent the Bill Back Markets & Mimosas',
+  archiveImageAlt: 'Markets & Mimosas artwork',
 };
 
 export const writingFeatured = {
@@ -212,7 +212,7 @@ export const about = {
   headingItalic: 'money question.',
   biography: [
     'I started out as a beauty advisor, then worked in pet salons before moving into finance. I still love makeup and animals. I’ve followed and traded the markets since 2019, earned a finance degree, and worked in wealth management at Morgan Stanley.',
-    'I write about markets, money, and what I’m learning as I build Cloud & Capital. I like answering the questions people actually ask, whether that leads to a market headline, a business or AI bill, or something from my own life. I make free tools too, because sometimes you need to see the numbers for yourself.',
+    'Now I follow markets, build free tools, and write about the questions people actually ask. Some start with an investing headline. Others come from a business or AI bill, or from something I’m learning while building a tool. I want Cloud & Capital to have room for my own experiences too.',
   ],
   credentials: [
     { category: 'FINOPS', detail: 'FinOps Certified Practitioner · FinOps Certified FOCUS Analyst' },

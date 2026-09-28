@@ -212,7 +212,7 @@ export const about = {
   headingItalic: 'money question.',
   biography: [
     'I started out as a beauty advisor, then worked in pet salons before moving into finance. I still love makeup and animals. I’ve followed and traded the markets since 2019, earned a finance degree, and worked in wealth management at Morgan Stanley.',
-    'Now I follow markets, build free tools, and write about the questions people actually ask. Some start with an investing headline. Others come from a business or AI bill, or from something I’m learning while building a tool. I want Cloud & Capital to have room for my own experiences too.',
+    'Now I follow markets, build free tools, and write about the questions people actually ask. Some start with an investing headline. Others come from a business or AI bill, or from something I’m learning while building a tool.',
   ],
   credentials: [
     { category: 'FINOPS', detail: 'FinOps Certified Practitioner · FinOps Certified FOCUS Analyst' },

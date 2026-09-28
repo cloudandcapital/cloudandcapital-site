@@ -211,8 +211,8 @@ export const about = {
   headingMiddle: 'I like a good',
   headingItalic: 'money question.',
   biography: [
-    'I started out as a beauty advisor, then worked in pet salons before moving into finance. I still love makeup and animals. I’ve followed and traded the markets since 2019, earned a finance degree, and worked in wealth management at Morgan Stanley.',
-    'Now I follow markets, build free tools, and write about the questions people actually ask. Some start with an investing headline. Others come from a business or AI bill, or from something I’m learning while building a tool.',
+    'I started out as a beauty advisor, then worked in pet salons before moving into finance. Makeup, animals, and trading are still my top three favorite things. I’ve followed and traded markets since 2019, earned a finance degree, and worked in wealth management at Morgan Stanley.',
+    'These days I follow markets, build free tools, and write about what I’m seeing and learning. I like answering the questions people actually ask, especially when a headline sounds certain and the numbers tell another story. Sometimes I talk it through in an article. Sometimes I build a tool so I can see the math for myself.',
   ],
   credentials: [
     { category: 'FINOPS', detail: 'FinOps Certified Practitioner · FinOps Certified FOCUS Analyst' },

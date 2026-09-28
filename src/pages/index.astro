@@ -31,11 +31,11 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
             Before you invest it, spend it, or build with it,
             <span class="scribbled-word">understand it.<svg viewBox="0 0 250 26" preserveAspectRatio="none" aria-hidden="true"><path d="M4 18 C55 6 111 27 246 10" /><path d="M18 22 C91 13 161 23 226 15" /></svg></span>
           </h1>
-          <p class="hero-lede">I’m Diana. I write about markets and money, and I build free tools for business, cloud, and AI costs. If a headline and the numbers tell different stories, I want to know why.</p>
-          <p class="hero-byline">By Diana Molski · Finance analyst and builder</p>
+          <p class="hero-lede">I’m Diana. I follow markets, build free tools, and write about the money questions that come up in business and real life. If a headline and the numbers tell different stories, I want to know why.</p>
+          <p class="hero-byline">Diana Molski · Finance analyst, trader, and builder</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#writing" data-analytics-event="cta_click" data-analytics-destination="writing" data-analytics-source="homepage_hero">Read the writing</a>
-            <a class="button hero-secondary" href="#tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_hero">Explore the tools</a>
+            <a class="button button-primary" href="#tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_hero">Explore the tools</a>
+            <a class="button hero-secondary" href="#writing" data-analytics-event="cta_click" data-analytics-destination="writing" data-analytics-source="homepage_hero">Read the writing</a>
           </div>
         </div>
 
@@ -188,7 +188,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
           {featuredArticles.map((article, index) => (
             <a class="article-card" href={article.href} target="_blank" rel="noopener noreferrer" data-reveal data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">
               <div class="article-copy">
-                {index === 0 && <p class="article-latest">Featured essay</p>}
+                {index < 2 && <p class="article-latest">{index === 0 ? 'Featured essay' : 'Latest'}</p>}
                 <p class="card-label">{article.topic.replace(' · Issue No. 1', '').replace(' · Issue no. 1', '')} · {article.date}</p>
                 <h3>{article.title}</h3>
                 <p>{article.description}</p>

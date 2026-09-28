@@ -123,16 +123,16 @@ export const featuredWriting = {
 };
 
 export const marketsMimosasLatest = {
-  title: 'The Grid Sent the Bill Back',
+  title: 'The Nasdaq Hit a Record. Your Account Might Not Agree.',
   topic: 'Markets & Mimosas',
-  date: 'August 31, 2026',
-  href: 'https://cloudandcapital.substack.com/p/the-grid-sent-the-bill-back',
+  date: 'September 27, 2026',
+  href: 'https://cloudandcapital.substack.com/p/the-nasdaq-hit-a-record-your-account',
   description:
-    'AI demand is forcing utilities, regulators, and large customers to decide who pays for the grid built ahead of it.',
+    'The Nasdaq hit a record while smaller stocks fell. I looked at who was actually rising, what oil and rates were doing, and how the AI buildout is being paid for.',
   image: '/images/writing/markets-mimosas-hero.png',
-  imageAlt: 'The Grid Sent the Bill Back Markets & Mimosas',
+  imageAlt: 'Markets & Mimosas illustration',
   archiveImage: '/images/writing/markets-mimosas-hero.png',
-  archiveImageAlt: 'The Grid Sent the Bill Back Markets & Mimosas',
+  archiveImageAlt: 'Markets & Mimosas artwork',
 };
 
 export const writingFeatured = {

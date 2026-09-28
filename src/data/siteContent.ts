@@ -212,7 +212,7 @@ export const about = {
   headingItalic: 'money question.',
   biography: [
     'Before finance, I worked as a beauty advisor and in pet salons. I’ve always had a mix of interests, and I began following markets in 2020. I earned a finance degree and worked in wealth management at Morgan Stanley.',
-    'These days I build free tools and write about markets, money, and what I’m learning. I like answering the questions people actually ask, especially when a headline sounds certain and the numbers tell another story. Some questions turn into articles. Others turn into tools people can actually use.',
+    'These days I build free tools and write about markets, money, and what I’m learning. Some questions turn into articles. Others turn into tools people can actually use.',
   ],
   credentials: [
     { category: 'FINOPS', detail: 'FinOps Certified Practitioner · FinOps Certified FOCUS Analyst' },

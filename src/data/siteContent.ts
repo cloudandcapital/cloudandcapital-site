@@ -207,12 +207,12 @@ export const events = [
 export const about = {
   name: 'Diana Molski',
   founderLabel: 'Founder, Cloud & Capital',
-  headingLead: 'I’m Diana.',
-  headingMiddle: 'I follow the number',
-  headingItalic: 'until it makes sense.',
+  headingLead: 'Hi, I’m Diana.',
+  headingMiddle: 'I like a good',
+  headingItalic: 'money question.',
   biography: [
-    'My background is in finance: Morgan Stanley, equity trading, and a B.S. in Business Administration, Finance. Today I use that foundation to investigate what cloud, software, and AI actually cost.',
-    'I build tools and write about the questions I’m genuinely trying to answer: what moved, what it really cost, and whether the decision still holds up when you trace it back to the evidence.',
+    'I started out as a beauty advisor, then worked in pet salons before moving into finance. I still love makeup and animals. I’ve followed and traded the markets since 2019, earned a finance degree, and worked in wealth management at Morgan Stanley.',
+    'I write Markets & Mimosas because I like answering the questions people actually ask, especially when a headline and the numbers tell different stories. I also build free tools for looking more closely at business, cloud, and AI spending.',
   ],
   credentials: [
     { category: 'FINOPS', detail: 'FinOps Certified Practitioner · FinOps Certified FOCUS Analyst' },

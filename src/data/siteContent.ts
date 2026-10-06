@@ -5,6 +5,7 @@ export type SiteLink = {
 };
 
 export const navigation: SiteLink[] = [
+  { label: 'Services', href: '/services' },
   { label: 'Tools', href: '/tools' },
   { label: 'Writing', href: '/#writing' },
   { label: 'About', href: '/#about' },
@@ -12,6 +13,7 @@ export const navigation: SiteLink[] = [
 ];
 
 export const footerLinks: SiteLink[] = [
+  { label: 'Services', href: '/services' },
   { label: 'Tools', href: '/#tools' },
   { label: 'Writing', href: '/#writing' },
   { label: 'About', href: '/#about' },

@@ -6,6 +6,8 @@ const pages = [
   '/services/examples',
   '/learn',
   '/resources/software-renewal',
+  '/insights',
+  '/insights/is-this-software-worth-it',
   '/tools',
   '/signal-audit',
   '/interactive-lab',

@@ -8,7 +8,7 @@ export const navigation: SiteLink[] = [
   { label: 'Services', href: '/services' },
   { label: 'Learn', href: '/learn' },
   { label: 'Tools', href: '/tools' },
-  { label: 'Writing', href: '/#writing' },
+  { label: 'Insights', href: '/insights' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
 ];
@@ -17,7 +17,7 @@ export const footerLinks: SiteLink[] = [
   { label: 'Services', href: '/services' },
   { label: 'Learn', href: '/learn' },
   { label: 'Tools', href: '/#tools' },
-  { label: 'Writing', href: '/#writing' },
+  { label: 'Insights', href: '/insights' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
   { label: 'Substack', href: 'https://cloudandcapital.substack.com', external: true },
@@ -53,7 +53,7 @@ export const tools = [
     title: 'Market Tape',
     label: 'Interactive · Tool',
     description:
-      'A live dashboard tracking 52 rates, sectors, commodities, and risk signals that affect technology and infrastructure spending.',
+      'Explore rates, sectors, commodities, and market context in a research dashboard.',
     href: 'https://market-tape.cloudandcapital.com',
     external: true,
   },
@@ -216,7 +216,7 @@ export const about = {
   headingItalic: 'money question.',
   biography: [
     'I started out as a beauty advisor, then worked in pet salons. I began following the markets in 2020, earned a finance degree, and later worked in wealth management at Morgan Stanley.',
-    'These days I build free tools and write about markets, money, and what I’m learning. Some questions turn into articles. Others turn into tools people can actually use.',
+    'Today I help service businesses understand technology costs, improve recurring reporting, and put practical changes to work. I also build free tools, write Markets & Mimosas, and teach investing and trading concepts through worked examples.',
   ],
   credentials: [
     { category: 'FINOPS', detail: 'FinOps Certified Practitioner · FinOps Certified FOCUS Analyst' },

@@ -31,7 +31,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
             Before you invest it, spend it, or build with it,
             <span class="scribbled-word">understand it.<svg viewBox="0 0 250 26" preserveAspectRatio="none" aria-hidden="true"><path d="M4 18 C55 6 111 27 246 10" /><path d="M18 22 C91 13 161 23 226 15" /></svg></span>
           </h1>
-          <p class="hero-lede">I’m Diana. I follow markets, build free tools, and write about the money questions that come up in business and real life. If a headline and the numbers tell different stories, I want to know why.</p>
+          <p class="hero-lede">I’m Diana. I help service businesses make sense of technology costs and recurring reporting. I also build tools, teach investing concepts, and write about markets and money. If the story and the numbers disagree, I want to know why.</p>
           <p class="hero-byline">Diana Molski · Finance analyst and tool builder</p>
           <div class="hero-actions">
             <a class="button button-primary" href="#tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_hero">Explore the tools</a>
@@ -145,7 +145,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
               <p class="card-label">Markets</p>
               <h3>{marketTape.title}</h3>
               <p class="tool-question">What is moving across the market?</p>
-              <p>Follow 52 rates, sectors, commodities, and risk signals in one live view.</p>
+              <p>Explore rates, sectors, commodities, and market context in a research dashboard.</p>
               <span class="tool-card-action"><span>Open Market Tape</span><span aria-hidden="true">→</span></span>
             </a>
           )}
@@ -213,7 +213,8 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
         </div>
 
         <div class="writing-actions">
-          <a class="button button-primary" href={newsletter.subscribeHref} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">View all writing</a>
+          <a class="button button-primary" href="/insights">Explore business insights</a>
+          <a class="button button-secondary" href={newsletter.subscribeHref} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">Read Markets &amp; Mimosas</a>
         </div>
       </div>
     </section>
@@ -668,6 +669,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
   .writing-section .section-heading h2 { text-wrap: balance; }
   .writing-section .article-copy > span { margin-top: auto; }
   .writing-section .writing-actions { margin-top: 1.5rem; }
+  .writing-section .writing-actions .button-secondary { color:#3d6055; border-color:#3d6055; background:transparent; }
   @media (max-width: 760px) { .writing-section .article-copy > span { margin-top: 0; } }
 
   .tools-section .tool-card > p:not(.card-label):not(.tool-question) { max-width: none; text-wrap: balance; }

@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import article from '../../data/softwareValueArticle.json';
+import '../../styles/services.css';
+---
+<BaseLayout title="Insights | Cloud & Capital" description="Practical explanations of business costs, technology, and the decisions behind the numbers, by Diana Molski.">
+  <main id="main-content" class="offer-page">
+    <section class="offer-shell offer-intro">
+      <p class="offer-eyebrow">Insights · Diana Molski</p>
+      <h1>A good question.<br /><em>A clearer answer.</em></h1>
+      <p class="offer-summary">Financial reasoning, practical technology, and the work that happens between buying a tool and getting a useful result.</p>
+    </section>
+    <section class="offer-shell fit-band" aria-labelledby="software-title">
+      <p class="offer-eyebrow">Technology that earns its keep</p>
+      <h2 id="software-title"><a href="/insights/is-this-software-worth-it">{article.title}</a></h2>
+      <p>{article.description}</p>
+      <a class="offer-button" href="/insights/is-this-software-worth-it">Read the explanation →</a>
+    </section>
+    <section class="offer-shell process-band">
+      <h2>For the market conversation</h2>
+      <p>Markets &amp; Mimosas brings the money, markets, and occasional raised eyebrow. Read the publication on Substack.</p>
+      <a href="https://cloudandcapital.substack.com">Read Markets &amp; Mimosas →</a>
+    </section>
+  </main>
+</BaseLayout>
+<style>
+  #software-title a{font:inherit;color:inherit;text-decoration-thickness:1px;}
+</style>

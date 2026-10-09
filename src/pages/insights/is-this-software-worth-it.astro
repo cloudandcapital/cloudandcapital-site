@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import article from '../../data/softwareValueArticle.json';
+import '../../styles/services.css';
+---
+<BaseLayout title={`${article.title} | Cloud & Capital`} description={article.description}>
+  <main id="main-content" class="offer-page article-page">
+    <article class="offer-shell article-body">
+      <header>
+        <a href="/insights">← All insights</a>
+        <p class="offer-eyebrow">Technology that earns its keep</p>
+        <h1>{article.title}</h1>
+        <p class="byline">By {article.author}</p>
+      </header>
+      {article.intro.map(paragraph => <p>{paragraph}</p>)}
+      {article.sections.map(section => <section><h2>{section.heading}</h2>{section.paragraphs.map(paragraph => <p>{paragraph}</p>)}</section>)}
+      <aside class="article-next" aria-labelledby="next-step-title">
+        <h2 id="next-step-title">Start with one renewal.</h2>
+        <p>Use the free checklist to examine the bill, the work, and what changing tools would involve.</p>
+        <div class="offer-actions"><a class="offer-button" href="/resources/software-renewal">Use the renewal checklist →</a><a href="/services#technology-cost-review">Explore the Technology Cost Review →</a></div>
+      </aside>
+    </article>
+  </main>
+</BaseLayout>
+<style>
+  .article-body{max-width:49rem;padding-top:3rem;padding-bottom:5rem;}
+  header{margin-bottom:2.5rem;}
+  header > a{font-family:var(--font-ui);font-size:.95rem;}
+  header .offer-eyebrow{margin-top:2rem;}
+  h1{font-size:clamp(2.8rem,6vw,4.8rem);line-height:1.08;}
+  .byline{font-family:var(--font-ui);font-size:1rem;margin-top:1.3rem;}
+  .article-body > p,.article-body section p{font-family:var(--font-ui);font-size:1.12rem;line-height:1.85;margin:1.2rem 0;}
+  .article-body section{margin-top:2.7rem;}
+  .article-body h2{font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.18;}
+  .article-next{margin-top:3rem;padding:2rem;background:var(--sage-light,#e5ebe3);border-radius:5px;}
+  .article-next p{font-family:var(--font-ui);line-height:1.7;}
+  @media(max-width:560px){.article-body{padding-top:2rem;}.article-next{padding:1.25rem;}}
+</style>

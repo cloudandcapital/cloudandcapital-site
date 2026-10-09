@@ -40,10 +40,20 @@
 .business-services .service-card-cta{display:flex;align-items:center;justify-content:space-between;margin-top:.1rem;padding:1.1rem 0;border-top:1px solid #d9dbd0;font-size:.86rem;text-decoration:none}
 .business-services .service-card-cta span{font-size:1.3rem}
 .business-services .service-choice-note{margin:1.8rem auto 0;max-width:70ch;text-align:center;font-size:.94rem;color:#62665c}
-.business-services .services-method{padding-block:4rem;background:#e4e8db}
+.business-services .services-method{padding-block:3.5rem;background:#e4e8db}
+.business-services .method-heading{text-align:center;margin-bottom:2rem}
+.business-services .method-heading h2{margin:.6rem 0 .8rem;font-size:clamp(2.4rem,4vw,3rem);line-height:1.08}
+.business-services .method-heading>p:last-child{color:#5d6655}
 .business-services .method-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3rem;list-style:none;padding:0;margin:0}
-.business-services .method-number{display:inline-block;font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;font-style:italic;color:#6d8463;border-bottom:1px solid #a9b69f;margin-bottom:1rem}
-.business-services .method-steps h3{font-size:1.8rem;margin:0 0 .7rem}.business-services .method-steps p{max-width:31ch;color:#5d6655}
+.business-services .method-steps li{position:relative;padding:0 1rem}
+.business-services .method-steps li:not(:last-child)::after{content:'→';position:absolute;right:-1.8rem;top:3rem;font-size:1.5rem;color:#82917a}
+.business-services .method-visual{display:flex;align-items:center;gap:1.3rem;margin-bottom:1.25rem}
+.business-services .method-visual svg{width:116px;height:110px;flex-shrink:0}
+.business-services .method-number{font-family:'Cormorant Garamond',Georgia,serif;font-size:3.4rem;line-height:1;color:#8b9b80;font-style:italic;border:0;margin:0}
+.business-services .method-steps h3{font-size:1.9rem;margin:0 0 .65rem}.business-services .method-steps p{max-width:32ch;color:#5d6655;line-height:1.65}
+.business-services .method-footnote{border-top:1px solid #c5cebb;margin:2rem auto 0;padding-top:1.1rem;text-align:center;font-size:.85rem;color:#5d6655}
+@media(max-width:768px){.business-services .method-steps{grid-template-columns:1fr;gap:1.5rem}.business-services .method-steps li{padding:0 0 1.5rem;border-bottom:1px solid #c5cebb;display:grid;grid-template-columns:110px 1fr;column-gap:1.5rem}.business-services .method-visual{grid-row:1/3;display:block;margin:0}.business-services .method-visual svg{width:100px;height:95px}.business-services .method-number{display:block;text-align:center;font-size:2rem;margin-top:.25rem}.business-services .method-steps li:not(:last-child)::after{display:none}.business-services .method-steps li:last-child{border:0;padding-bottom:0}.business-services .method-steps h3{align-self:end}.business-services .method-footnote{margin-top:1.5rem}}
+@media(max-width:380px){.business-services .method-steps li{grid-template-columns:80px 1fr;column-gap:1rem}.business-services .method-visual svg{width:80px;height:80px}}
 .business-services .services-about{display:grid;grid-template-columns:.75fr 1.25fr;gap:5rem;align-items:center;padding-block:4.5rem}
 .business-services .services-portrait{max-width:23rem;padding:1rem}
 .business-services .services-portrait img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:50%}
@@ -87,7 +97,7 @@
 }
 @media(max-width:540px){
   .business-services h1{font-size:clamp(2.8rem,12.9vw,3.3rem)}.business-services .services-lede{font-size:1.1rem}.business-services .services-actions{gap:1rem}.business-services .services-hero-art{width:85%;max-width:19rem}.business-services .service-card{display:block}.business-services .service-card-art{padding:0 .75rem}.business-services .service-card-content{padding:1.5rem 1.5rem 0}.business-services .service-card h3{min-height:0;max-width:none}
-  .business-services .method-steps{grid-template-columns:1fr;gap:1.6rem}.business-services .method-steps li{padding-left:3.5rem;position:relative}.business-services .method-number{position:absolute;left:0;top:0}.business-services .method-steps p{max-width:none}.business-services .services-about{grid-template-columns:1fr;gap:2rem}.business-services .services-portrait{width:13rem;margin-inline:auto}
+  .business-services .method-steps{grid-template-columns:1fr;gap:1.6rem}.business-services .method-steps p{max-width:none}.business-services .services-about{grid-template-columns:1fr;gap:2rem}.business-services .services-portrait{width:13rem;margin-inline:auto}
   .business-services .services-proof{padding-block:3rem}.business-services .services-faq{grid-template-columns:1fr;padding-block:3rem}.business-services .resource-feature{gap:1rem}.business-services .resource-mark{width:65px;flex-basis:65px}.business-services .resource-feature h3{font-size:1.8rem}.business-services .services-contact{padding-block:3rem}
 }
 

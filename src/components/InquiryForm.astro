@@ -1,0 +1,34 @@
+---
+interface Props { kind: 'business' | 'learning'; }
+const { kind } = Astro.props;
+const learning = kind === 'learning';
+---
+<form data-inquiry data-kind={kind} hidden>
+  <div class="fields"><label for={`${kind}-name`}>Name<input id={`${kind}-name`} name="name" autocomplete="name" required maxlength="80" /></label><label for={`${kind}-email`}>Email<input id={`${kind}-email`} name="email" type="email" autocomplete="email" required maxlength="120" /></label></div>
+  {!learning && <label for={`${kind}-role`}>Business / role <span>(optional)</span><input id={`${kind}-role`} name="role" maxlength="120" /></label>}
+  <label for={`${kind}-question`}>{learning ? 'What would you like to understand?' : 'What decision or recurring task needs help?'}<textarea id={`${kind}-question`} name="question" required maxlength="550" rows="4"></textarea></label>
+  <details><summary>A little more context (optional)</summary><label for={`${kind}-tools`}>{learning ? 'Current knowledge and tools' : 'Current tools'}<input id={`${kind}-tools`} name="tools" maxlength="200" /></label>{!learning && <label for={`${kind}-frequency`}>How often does it happen, and what does it affect?<input id={`${kind}-frequency`} name="frequency" maxlength="200" /></label>}<div class="fields"><label for={`${kind}-timing`}>Preferred timing<input id={`${kind}-timing`} name="timing" maxlength="80" /></label><label for={`${kind}-budget`}>Budget<select id={`${kind}-budget`} name="budget"><option value="">Select if useful</option><option>Not sure yet</option><option>Under $300</option><option>$300–$600</option><option>$600–$1,500</option><option>$1,500+</option></select></label></div></details>
+  <p class="email-note">This opens a draft in your email app. Review it and send when you’re ready. Your details aren’t submitted through this website.</p>
+  <button type="submit" class="offer-button">Open email draft →</button>
+</form>
+<p class="email-fallback">You can also email <a href={learning ? 'mailto:diana@cloudandcapital.com?subject=Lesson%20inquiry' : 'mailto:diana@cloudandcapital.com?subject=Business%20inquiry'}>diana@cloudandcapital.com</a> directly.</p>
+<script>
+  import { createInquiryMailto } from '../lib/inquiry.js';
+  document.querySelectorAll<HTMLFormElement>('[data-inquiry]').forEach(form => {
+    form.hidden = false;
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const values = Object.fromEntries(new FormData(form).entries());
+      window.location.href = createInquiryMailto(form.dataset.kind, values);
+    });
+  });
+</script>
+<style>
+  form{max-width:48rem;margin-top:1.8rem;} label{display:block;font-family:var(--font-ui);font-size:1rem;margin-bottom:1.1rem;} label span{font-size:.85rem;}
+  input,textarea,select{display:block;width:100%;background:var(--cream);color:#242b28;border:1px solid #809386;border-radius:3px;padding:.75rem;font:inherit;margin-top:.35rem;}
+  input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #36594c;outline-offset:2px;}
+  .fields{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;} summary{cursor:pointer;margin-bottom:1rem;}
+  .email-note,.email-fallback{font-family:var(--font-ui);font-size:.93rem;line-height:1.6;margin-top:1rem;}
+  @media(max-width:560px){.fields{grid-template-columns:1fr;gap:0;}}
+</style>

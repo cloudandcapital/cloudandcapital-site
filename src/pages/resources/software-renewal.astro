@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { renewalQuestions } from '../../data/softwareRenewal';
+import '../../styles/services.css';
+---
+<BaseLayout title="Before You Renew That Software | Cloud & Capital" description="Eight practical questions about cost, use, dependencies, and switching work before renewing a software subscription. Free checklist.">
+  <main id="main-content" class="offer-page"><div class="offer-shell"><p class="offer-eyebrow">A free decision checklist</p><h1>Before you renew<br /><em>that software.</em></h1><p class="offer-lede">Your software has a renewal date. It deserves a little performance review.</p><p>Pick one subscription. Bring the bill and a recent example of how it is used. Work through these questions.</p><div class="offer-actions no-print"><a class="offer-button" href="/downloads/software-renewal.html" download>Download the checklist</a><button type="button" class="offer-button" id="print-checklist">Print / save as PDF</button></div><ol class="checklist">{renewalQuestions.map(q => <li><h2>{q.title}</h2><p>{q.detail}</p></li>)}</ol><section class="process-band"><h2>Choose one next step.</h2><p>Keep it, adjust it, compare alternatives, or investigate further. Write down your reason, the person responsible, and a date to revisit the decision.</p><p>If the decision is straightforward, you can handle it yourself. If the costs or dependencies remain tangled, <a href="/services#inquiry">tell me the question</a>.</p></section><aside class="fit-band no-print"><h3>Want more money, markets, and practical technology?</h3><p>Markets &amp; Mimosas is where I write about the questions behind the numbers. The checklist is free to use without subscribing.</p><a href="https://cloudandcapital.substack.com">Explore Markets &amp; Mimosas →</a></aside></div></main>
+</BaseLayout>
+<script>document.getElementById('print-checklist')?.addEventListener('click',()=>window.print());</script>

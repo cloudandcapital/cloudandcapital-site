@@ -1,60 +1,36 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import InquiryForm from '../components/InquiryForm.astro';
+import '../styles/services.css';
 ---
-
-<BaseLayout title="AI Opportunity & Cost Review Services | Cloud & Capital" description="Work with Diana Molski to identify practical AI opportunities for your business and understand AI and cloud spending.">
-  <main id="main-content" class="services">
-    <section class="intro shell" aria-labelledby="services-title">
-      <p class="eyebrow">Work with Cloud &amp; Capital</p>
-      <h1 id="services-title">Make technology work<br/><em>for your business.</em></h1>
-      <p class="lede">Find practical ways to use AI—and understand what your AI and cloud services are costing.</p>
-      <div class="actions"><a class="button button-primary" href="mailto:diana@cloudandcapital.com?subject=Cost%20review%20inquiry">Tell me about your business <span aria-hidden="true">→</span></a><a class="download" href="/downloads/cloud-and-capital-services-overview.pdf" download>Download the one-page overview</a></div>
+<BaseLayout title="Business Services | Cloud & Capital" description="Understand technology costs, improve recurring reporting, and put one useful change to work. Finance-led reviews and practical setup with Diana Molski.">
+  <main id="main-content" class="offer-page">
+    <section class="offer-shell offer-intro" aria-labelledby="services-title">
+      <p class="offer-eyebrow">Finance judgment. Practical technology.</p>
+      <h1 id="services-title">Know what’s worth<br /><em>doing next.</em></h1>
+      <p class="offer-lede">Your technology bills keep arriving. Your reports still take too long. And apparently you’re supposed to add AI to all of it.</p>
+      <p class="offer-summary">I help service businesses understand their technology costs, improve recurring reporting, and make practical changes using the tools they already have.</p>
+      <div class="offer-actions"><a class="offer-button" href="#inquiry">Tell me what’s getting stuck →</a><a href="/services/examples">See example reviews</a></div>
+      <p class="offer-route">Here for the markets? <a href="/learn">Explore investing &amp; trading lessons →</a></p>
     </section>
-
-    <section class="fit shell" aria-labelledby="fit-title">
-      <p class="eyebrow">A good fit</p>
-      <h2 id="fit-title">A useful starting point for your next technology decision.</h2>
-      <p>You run a small business and want useful ways to start using AI. Or your business has meaningful AI or cloud spending, a rising bill, or an unclear cost decision.</p>
-      <p>Referral partners: introduce me to the business owner or the person responsible for the budget or workflow. We can start with a conversation about their question and available data.</p>
+    <section class="offer-shell fit-band" aria-labelledby="fit-title"><p class="offer-eyebrow">Start with a real question</p><h2 id="fit-title">A growing bill. A recurring report.<br />A process that needs babysitting.</h2><p>These services suit owners and operations leads of agencies, consultancies, and similar service businesses with a specific decision to make, records to work from, and someone who can put the result to use.</p><p>If the answer is a simple fix you can handle yourself, that’s a useful answer too.</p></section>
+    <section class="offer-shell service-list" aria-label="Business offers">
+      <article id="technology-cost-review" class="service-row">
+        <div><p class="offer-eyebrow">01 · Technology Cost Review</p><h2>Know what you’re paying for.<br /><em>And what deserves a second look.</em></h2></div>
+        <div><p>Bring a confusing software bill, an upcoming renewal, or a question about overlapping tools. We’ll look at cost, use, dependencies, and the work involved in changing anything.</p><p class="scope-note">One business · up to 10 software or AI subscriptions · three recent billing months, plus annual charges and renewal terms.</p><ul><li>A reconciled spending summary.</li><li>Keep, review, or change options with their assumptions.</li><li>A prioritized action list, including what needs checking.</li></ul><p>Cancellations and migrations are separate. Detailed cloud allocation, commitments, or architecture need their own FinOps scope.</p><a href="/services/examples#cost">See a fictional cost review →</a></div>
+      </article>
+      <article id="workflow-review" class="service-row">
+        <div><p class="offer-eyebrow">02 · AI &amp; Workflow Review</p><h2>Find where the work<br /><em>gets stuck.</em></h2></div>
+        <div><p>Bring the recurring task that keeps stealing your afternoon. We’ll map the steps and compare a simpler process, existing features, conventional automation, and AI.</p><p class="scope-note">One workflow · up to three tools · two or three redacted examples.</p><ul><li>A current-process map with bottlenecks and missing information.</li><li>Options with costs, checking, and maintenance considered.</li><li>One pilot outline with a success measure and a named owner.</li></ul><p>The review gives you a plan you can use independently. Building it is separately scoped.</p><a href="/services/examples#workflow">See a fictional workflow review →</a></div>
+      </article>
+      <article id="practical-setup" class="service-row">
+        <div><p class="offer-eyebrow">03 · Practical Setup</p><h2>Put one useful<br /><em>improvement to work.</em></h2></div>
+        <div><p>Once the result is clear, I can help configure a project-cost reporting template, improve an intake-to-report process, or build a small automation.</p><p class="scope-note">One agreed result · up to three compatible tools · individually quoted.</p><ul><li>A configured template, workflow, or small tool.</li><li>Checks for normal use, missing inputs, and relevant failures.</li><li>Instructions, a walkthrough, and a clear handoff.</li></ul><p>A paid review isn’t required when the setup scope is clear. New features and ongoing support are agreed separately.</p></div>
+      </article>
     </section>
-
-    <section class="offers shell" aria-label="Review services">
-      <article><p class="eyebrow">01 · AI opportunity review</p><h2>Where could AI help your business?</h2><p>Discuss repetitive tasks, current tools, and everyday bottlenecks. Identify a few workflows where AI could help, considering human review, sensitive information, and likely tool costs.</p><p>Start with one process: drafting routine replies, preparing a first draft of a document, or organizing information for someone to check. The right idea depends on the work and the information involved.</p><p class="takeaway">Receive prioritized ideas and one proposed pilot, with a simple way to check whether it helps. Building or integrating that pilot is a separate scope.</p></article>
-      <article><p class="eyebrow">02 · AI &amp; cloud cost review</p><h2>What is driving the bill—and what needs attention?</h2><p>Review supplied bills and usage exports to explain cost drivers and allocation gaps. Assess opportunities such as model selection, caching, batch processing, and cloud usage where the evidence supports them.</p><p>Where checked outcomes exist, compare cost per usable result, including retries and rework. Your team defines and checks what counts as usable; billing data alone cannot establish output quality.</p><p class="takeaway">Receive a spending summary, prioritized findings, and recommended next steps with assumptions and dependencies. Operational changes are validated with your team.</p></article>
-    </section>
-
-    <section class="process shell" aria-labelledby="process-title"><p class="eyebrow">A practical starting point</p><h2 id="process-title">Start small. Get a clear next step.</h2><div class="steps"><div><h3>Define the question</h3><p>Choose one business workflow or one area of spending. Agree the available information, scope, deliverables, and fee before work begins.</p></div><div><h3>Review the evidence</h3><p>Review your process or supplied cost records alongside the business context. Make gaps and assumptions visible.</p></div><div><h3>Decide what to do</h3><p>Walk through the findings and priorities. Implementation and ongoing support are scoped separately.</p></div></div></section>
-
-    <section class="about-review shell" aria-labelledby="reviewer-title"><div><p class="eyebrow">Your reviewer</p><h2 id="reviewer-title">Hi, I’m Diana.</h2><p>I bring a finance background and FinOps training to the questions behind technology spending. I built <a href="https://lens.cloudandcapital.com">AI Cost Lens</a> and <a href="https://guard.cloudandcapital.com">Cloud Cost Guard</a> to make cost evidence easier to understand.</p><p class="credentials">B.S. Business Administration, Finance · FinOps Certified Practitioner · FinOps Certified FOCUS Analyst · AWS Certified Cloud Practitioner</p><p class="credentials">Interested in investing basics? Explore my <a href="/#writing">educational writing</a>.</p></div><aside><h3>Have a workflow, bill, or decision you need another set of eyes on?</h3><p>Tell me what you are working on and what you want to improve or understand.</p><a href="mailto:diana@cloudandcapital.com">diana@cloudandcapital.com →</a></aside></section>
+    <section class="offer-shell process-band" aria-labelledby="process-title"><p class="offer-eyebrow">Useful answers. A defined scope.</p><h2 id="process-title">Here’s how we work.</h2><div class="offer-grid"><div><h3>Start in writing</h3><p>Tell me the question, tools, and what happens when the process doesn’t work. We can use a call or recorded walkthrough if it helps.</p></div><div><h3>Agree the work</h3><p>You receive the scope, inputs, fixed quote, timing, and handoff terms before paid work begins.</p></div><div><h3>Get a usable result</h3><p>Receive the findings or agreed setup, with assumptions, checks, and a practical next step.</p></div></div></section>
+    <section class="offer-shell reviewer" aria-labelledby="reviewer-title"><div><p class="offer-eyebrow">Your reviewer &amp; builder</p><h2 id="reviewer-title">Hi, I’m Diana.</h2><p>I earned my degree in finance and worked in wealth management at Morgan Stanley. Today I bring that financial perspective to business costs, reporting, and the practical use of technology.</p><p>I built <a href="https://lens.cloudandcapital.com">AI Cost Lens</a> and <a href="https://guard.cloudandcapital.com">Cloud Cost Guard</a> to make cost evidence easier to understand. What do the numbers actually support?</p><p class="scope-note">B.S. Business Administration, Finance · FinOps Certified Practitioner · FinOps Certified FOCUS Analyst · AWS Certified Cloud Practitioner · Microsoft Azure AI Fundamentals</p></div><aside><p class="offer-eyebrow">Before you renew</p><h3>Your software deserves a little performance review.</h3><p>Eight questions to help you decide whether to keep, adjust, or investigate a subscription.</p><a href="/resources/software-renewal">Use the free checklist →</a></aside></section>
+    <section class="offer-shell faq" aria-labelledby="faq-title"><h2 id="faq-title">A few practical questions</h2><details><summary>Do I have to buy new software?</summary><p>Existing tools and simpler processes are considered first. Any proposed external cost is made explicit.</p></details><details><summary>Is implementation included in a review?</summary><p>A review provides findings and the next step. Setup is separately scoped and quoted when useful.</p></details><details><summary>Do we need a call?</summary><p>We can begin in writing. A call or recorded walkthrough is available when helpful.</p></details><details><summary>What will it cost?</summary><p>You receive a defined scope and fixed quote before work begins. Setup fees depend on the result and systems involved.</p></details><details><summary>Are savings guaranteed?</summary><p>Findings explain evidence and assumptions. Time freed up is kept separate from cash savings; a recommendation may be to keep the existing system.</p></details></section>
+    <section id="inquiry" class="offer-shell contact-band" aria-labelledby="inquiry-title"><p class="offer-eyebrow">Let’s start with the question</p><h2 id="inquiry-title">Tell me what’s getting stuck.</h2><p>A few lines are enough. Leave out financial records, passwords, and sensitive client information.</p><InquiryForm kind="business" /></section>
   </main>
 </BaseLayout>
-
-<style>
-  .services { padding: 9rem 0 5rem; color: #242b28; }
-  .shell { width: min(calc(100% - 4rem), 72rem); margin-inline: auto; }
-  .eyebrow { font-family: var(--font-ui); font-size: .78rem; font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: #4d6e63; margin-bottom: 1rem; }
-  h1,h2,h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.14; }
-  h1 { font-size: clamp(2.8rem, 6vw, 5.4rem); letter-spacing: -.045em; }
-  h1 em { color: #4d6e63; font-weight: 400; }
-  h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 1.3rem; }
-  h3 { font-size: 1.5rem; margin-bottom: .9rem; }
-  p { font-family: var(--font-ui); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1rem; }
-  .lede { max-width: 43rem; font-size: 1.2rem; margin-top: 1.7rem; }
-  .actions { display:flex; align-items:center; gap:1.7rem; flex-wrap:wrap; margin: 2rem 0 4rem; }
-  .button { padding: 1rem 1.4rem; background:#4d6e63; color:white; font-family:var(--font-ui); text-decoration:none; border-radius:3px; }
-  .download, a { color:#36594c; text-underline-offset: .25em; }
-  a:focus-visible { outline: 2px solid #36594c; outline-offset:5px; }
-  .fit { background: #e1e8df; padding: 2.3rem 2.6rem; }
-  .fit h2 { max-width: 45rem; }
-  .fit p { max-width: 58rem; }
-  .offers { display:grid; grid-template-columns:1fr 1fr; gap:4rem; padding-block:4rem; }
-  .offers article { min-width:0; }
-  .takeaway { color:#36594c; border-left:3px solid #b78678; padding-left:1.2rem; margin-top:1.6rem; }
-  .process { padding-block:3rem; border-block:1px solid #c9d1c8; }
-  .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:2.7rem; margin-top:2rem; }
-  .about-review { display:grid; grid-template-columns:1.2fr 1fr; gap:4rem; padding-top:4rem; }
-  .credentials { font-size:.88rem; color:#505a54; }
-  aside { background:#4d6e63; color:white; padding:2.3rem; }
-  aside a { color:white; font-family:var(--font-ui); overflow-wrap:anywhere; }
-  @media(max-width:760px) { .services {padding-top:7rem;} .shell {width:calc(100% - 2.5rem);} .fit {padding:1.6rem;} .offers,.steps,.about-review {grid-template-columns:1fr;gap:2rem;} .offers {padding-block:3rem;} .about-review {padding-top:3rem;} .actions {gap:1rem;} }
-</style>

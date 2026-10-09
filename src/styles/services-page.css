@@ -1,4 +1,4 @@
-.business-services{padding:0;overflow:clip;--service-ink:#252c26;--service-green:#47695b;color:var(--service-ink)}
+.offer-page.business-services{padding:0;overflow:clip;--service-ink:#252c26;--service-green:#47695b;color:var(--service-ink)}
 .business-services .services-shell{width:min(calc(100% - 4rem),78rem);margin-inline:auto}
 .business-services h1,.business-services h2,.business-services h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;letter-spacing:-.035em;text-wrap:balance}
 .business-services p,.business-services a,.business-services li,.business-services summary{font-family:'Jost',system-ui,sans-serif;font-size:1rem;line-height:1.65}

@@ -93,6 +93,7 @@
 
 /* Final service-page polish. */
 .business-services .service-card h3 span{display:block}
+.business-services .setup-card h3{max-width:none}
 .business-services .service-scope summary,.business-services .services-faq summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;list-style:none;min-height:32px}
 .business-services summary::-webkit-details-marker{display:none}
 .business-services .service-scope summary::after,.business-services .services-faq summary::after{content:'+';font-size:1.2rem;font-weight:400;color:#6b8262}

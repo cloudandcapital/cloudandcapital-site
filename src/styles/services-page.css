@@ -5,7 +5,7 @@
 .business-services p{margin:0;text-wrap:pretty}.business-services em{color:var(--service-green)}
 .business-services h2{font-size:clamp(2.3rem,3.4vw,3.4rem);line-height:1.07;margin:0}
 .business-services .service-kicker{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--service-green);margin-bottom:1rem}
-.business-services .services-hero{display:grid;grid-template-columns:1.08fr 1fr;gap:3.5rem;align-items:center;padding-block:9.5rem 4.5rem}
+.business-services .services-hero{display:grid;grid-template-columns:1.08fr 1fr;gap:3.5rem;align-items:center;padding-block:8.5rem 4rem}
 .business-services h1{font-size:clamp(3.4rem,5.5vw,5.4rem);line-height:.98;margin:0 0 1.8rem}
 .business-services .services-lede{font-size:1.18rem;max-width:43ch;line-height:1.65}
 .business-services .services-aside{margin-top:.9rem;color:#75675c;font-size:.98rem}
@@ -17,13 +17,13 @@
 .business-services .service-jump-links{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.35rem 0;border-block:1px solid #c7cebf}
 .business-services .service-jump-links span{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:1.2rem;color:#72675b}
 .business-services .service-jump-links a{font-size:.88rem;text-decoration:none}
-.business-services .offers-section{padding-block:5rem}
+.business-services .offers-section{padding-block:4.25rem}
 .business-services .services-section-heading{display:flex;gap:3rem;align-items:end;justify-content:space-between;margin-bottom:2.5rem}
 .business-services .services-section-heading>p{max-width:41ch;color:#62665c}
-.business-services .service-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;align-items:start}
-.business-services .service-card{border:1px solid #cdd0c4;border-radius:10px;overflow:hidden;background:#faf7f1}
+.business-services .service-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;align-items:stretch}
+.business-services .service-card{border:1px solid #cdd0c4;border-radius:10px;overflow:hidden;background:#faf7f1;display:flex;flex-direction:column}
 .business-services .service-card-art{background:#e1e7d9}.business-services .workflow-card .service-card-art{background:#eddcd5}.business-services .setup-card .service-card-art{background:#e6e2d4}
-.business-services .service-card-content{padding:1.8rem 1.8rem 0}
+.business-services .service-card-content{padding:1.8rem 1.8rem 0;display:flex;flex-direction:column;flex:1}
 .business-services .service-card h3{font-size:2.45rem;line-height:1.05;margin:0 0 1rem;min-height:2.1em;max-width:12ch}
 .business-services .service-card .service-kicker{font-size:.57rem}
 .business-services .service-card .service-question{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:1.32rem;color:var(--service-green);margin-bottom:.6rem}
@@ -33,7 +33,7 @@
 .business-services .service-deliverables ul{list-style:none;padding:0;margin:0 0 1.35rem;min-height:6.25rem}
 .business-services .service-deliverables li{position:relative;padding-left:1.35rem;margin-bottom:.4rem;font-size:.95rem}
 .business-services .service-deliverables li::before{content:'✓';position:absolute;left:0;color:#6b8262}
-.business-services .service-scope{border-top:1px solid #d9dbd0;padding:.8rem 0}
+.business-services .service-scope{border-top:1px solid #d9dbd0;padding:.8rem 0;margin-top:auto}
 .business-services .service-scope summary{cursor:pointer;color:#4d5c4c;font-size:.88rem}
 .business-services .service-scope p{font-size:.92rem;margin-top:.8rem;color:#5b6257}
 .business-services .service-scope a{display:inline-block;font-size:.9rem;margin-top:.8rem}
@@ -44,7 +44,7 @@
 .business-services .method-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3rem;list-style:none;padding:0;margin:0}
 .business-services .method-number{display:inline-block;font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;font-style:italic;color:#6d8463;border-bottom:1px solid #a9b69f;margin-bottom:1rem}
 .business-services .method-steps h3{font-size:1.8rem;margin:0 0 .7rem}.business-services .method-steps p{max-width:31ch;color:#5d6655}
-.business-services .services-about{display:grid;grid-template-columns:.75fr 1.25fr;gap:5rem;align-items:center;padding-block:5.5rem}
+.business-services .services-about{display:grid;grid-template-columns:.75fr 1.25fr;gap:5rem;align-items:center;padding-block:4.5rem}
 .business-services .services-portrait{max-width:23rem;padding:1rem}
 .business-services .services-portrait img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:50%}
 .business-services .services-portrait p{text-align:center;font-family:'DM Mono',monospace;text-transform:uppercase;font-size:.58rem;letter-spacing:.08em;margin-top:1.1rem}
@@ -90,3 +90,15 @@
   .business-services .method-steps{grid-template-columns:1fr;gap:1.6rem}.business-services .method-steps li{padding-left:3.5rem;position:relative}.business-services .method-number{position:absolute;left:0;top:0}.business-services .method-steps p{max-width:none}.business-services .services-about{grid-template-columns:1fr;gap:2rem}.business-services .services-portrait{width:13rem;margin-inline:auto}
   .business-services .services-proof{padding-block:3rem}.business-services .services-faq{grid-template-columns:1fr;padding-block:3rem}.business-services .resource-feature{gap:1rem}.business-services .resource-mark{width:65px;flex-basis:65px}.business-services .resource-feature h3{font-size:1.8rem}.business-services .services-contact{padding-block:3rem}
 }
+
+/* Final service-page polish. */
+.business-services .service-card h3 span{display:block}
+.business-services .service-scope summary,.business-services .services-faq summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;list-style:none;min-height:32px}
+.business-services summary::-webkit-details-marker{display:none}
+.business-services .service-scope summary::after,.business-services .services-faq summary::after{content:'+';font-size:1.2rem;font-weight:400;color:#6b8262}
+.business-services details[open]>summary::after{content:'−'}
+.business-services .service-jump-links a{display:inline-flex;align-items:center;min-height:44px}
+.business-services .service-card-cta span{transition:transform .18s ease}
+.business-services .service-card-cta:hover span{transform:translate(2px,-2px)}
+@media(max-width:540px){.business-services .service-card h3 span{display:inline}}
+@media(prefers-reduced-motion:reduce){.business-services .service-card-cta span{transition:none}}

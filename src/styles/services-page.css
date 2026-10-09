@@ -71,14 +71,19 @@
 .business-services .services-proof .service-text-link{color:#edf0e5;border-color:#94a78b}
 .business-services .services-proof figure{min-width:0;margin:0}.business-services .services-proof img{width:100%;height:auto;border-radius:5px;border:1px solid #849079}
 .business-services .services-proof figcaption{font-family:'Jost',system-ui,sans-serif;font-size:.75rem;color:#b9c6b1;margin-top:.7rem}
-.business-services .services-extras{display:grid;grid-template-columns:1.3fr .7fr;gap:3rem;padding-block:4rem;border-bottom:1px solid #c7cebf}
-.business-services .resource-feature{display:flex;gap:1.6rem;align-items:center;text-decoration:none}
-.business-services .resource-feature h3,.business-services .learning-feature h3{font-size:2rem;line-height:1.1;margin:0 0 .6rem}
-.business-services .resource-feature p:not(.service-kicker),.business-services .learning-feature p:not(.service-kicker){color:#62665c;margin-bottom:1rem}
-.business-services .resource-mark{width:100px;flex:0 0 100px;background:#e4e8db;border-radius:50% 50% 8px 8px}
-.business-services .resource-mark svg{fill:none;stroke:#66815f;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.business-services .learning-feature{padding-left:3rem;border-left:1px solid #c7cebf}
-.business-services .services-faq{display:grid;grid-template-columns:.7fr 1.3fr;gap:4rem;padding-block:4rem}
+.business-services .services-extras{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;padding-block:3.5rem 1rem}
+.business-services .extra-panel{display:grid;grid-template-columns:1fr 110px;gap:1.25rem;align-items:center;padding:2rem;text-decoration:none;border-radius:12px}
+.business-services .checklist-panel{background:#e4e8db}.business-services .lessons-panel{background:#eeded6}
+.business-services .extra-panel .extra-copy{min-width:0}
+.business-services .extra-panel h3{font-size:2.15rem;line-height:1.1;margin:.7rem 0 1rem}
+.business-services .extra-panel p:not(.service-kicker){color:#5f655a;font-size:.94rem;margin-bottom:1.25rem;max-width:34ch}
+.business-services .extra-panel>svg{width:110px;height:auto}
+.business-services .extra-panel .service-text-link{font-size:.88rem}
+.business-services .extra-panel:hover .service-text-link{color:#8a5e59;border-color:#8a5e59}
+@media(max-width:1100px){.business-services .extra-panel{grid-template-columns:1fr 80px;padding:1.5rem;gap:1rem}.business-services .extra-panel>svg{width:80px}.business-services .extra-panel h3{font-size:1.85rem}}
+@media(max-width:768px){.business-services .services-extras{grid-template-columns:1fr;gap:1rem}.business-services .extra-panel{grid-template-columns:1fr 100px}.business-services .extra-panel>svg{width:100px}}
+@media(max-width:540px){.business-services .extra-panel{grid-template-columns:1fr 70px;padding:1.35rem;gap:.7rem}.business-services .extra-panel>svg{width:70px}.business-services .extra-panel h3{font-size:1.8rem}}
+.business-services .services-faq{display:grid;grid-template-columns:.7fr 1.3fr;gap:4rem;padding-block:2.5rem 3.5rem}
 .business-services .services-faq details{border-bottom:1px solid #c7cebf;padding:1.1rem 0}.business-services .services-faq summary{cursor:pointer}
 .business-services .services-faq details p{margin-top:1rem;color:#62665c;max-width:60ch}
 .business-services .services-contact{padding-block:4.5rem;background:#dce4d5}

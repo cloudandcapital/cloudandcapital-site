@@ -10,6 +10,9 @@ const learning = kind === 'learning';
   <details><summary>A little more context (optional)</summary><label for={`${kind}-tools`}>{learning ? 'Current knowledge and tools' : 'Current tools'}<input id={`${kind}-tools`} name="tools" maxlength="200" /></label>{!learning && <label for={`${kind}-frequency`}>How often does it happen, and what does it affect?<input id={`${kind}-frequency`} name="frequency" maxlength="200" /></label>}<div class="fields"><label for={`${kind}-timing`}>Preferred timing<input id={`${kind}-timing`} name="timing" maxlength="80" /></label><label for={`${kind}-budget`}>Budget<select id={`${kind}-budget`} name="budget"><option value="">Select if useful</option><option>Not sure yet</option><option>Under $300</option><option>$300–$600</option><option>$600–$1,500</option><option>$1,500+</option></select></label></div></details>
   <p class="email-note">This opens a draft in your email app. Review it and send when you’re ready. Your details aren’t submitted through this website.</p>
   <button type="submit" class="offer-button">Open email draft →</button>
+  <button type="button" class="copy-button" data-copy-inquiry>Copy email text</button>
+  <p data-copy-status role="status" aria-live="polite" class="email-note"></p>
+  <label data-copy-preview hidden for={`${kind}-preview`}>Your inquiry message<textarea id={`${kind}-preview`} readonly rows="8"></textarea></label>
 </form>
 <p class="email-fallback">You can also email <a href={learning ? 'mailto:diana@cloudandcapital.com?subject=Lesson%20inquiry' : 'mailto:diana@cloudandcapital.com?subject=Business%20inquiry'}>diana@cloudandcapital.com</a> directly.</p>
 <script>
@@ -22,6 +25,25 @@ const learning = kind === 'learning';
       const values = Object.fromEntries(new FormData(form).entries());
       window.location.href = createInquiryMailto(form.dataset.kind, values);
     });
+    form.querySelector<HTMLButtonElement>('[data-copy-inquiry]')?.addEventListener('click', async () => {
+      if (!form.reportValidity()) return;
+      const values = Object.fromEntries(new FormData(form).entries());
+      const draft = new URL(createInquiryMailto(form.dataset.kind, values));
+      const text = `To: ${draft.pathname}\nSubject: ${draft.searchParams.get('subject')}\n\n${draft.searchParams.get('body')}`;
+      const preview = form.querySelector<HTMLLabelElement>('[data-copy-preview]');
+      const textarea = preview?.querySelector('textarea');
+      const status = form.querySelector<HTMLElement>('[data-copy-status]');
+      if (preview && textarea) { textarea.value = text; preview.hidden = false; }
+      try {
+        if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+        await navigator.clipboard.writeText(text);
+        if (status) status.textContent = 'Copied. Paste this into your email and send it to diana@cloudandcapital.com.';
+      } catch {
+        textarea?.focus();
+        textarea?.select();
+        if (status) status.textContent = 'Copy the message below and paste it into an email to diana@cloudandcapital.com.';
+      }
+    });
   });
 </script>
 <style>
@@ -30,5 +52,8 @@ const learning = kind === 'learning';
   input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #36594c;outline-offset:2px;}
   .fields{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;} summary{cursor:pointer;margin-bottom:1rem;}
   .email-note,.email-fallback{font-family:var(--font-ui);font-size:.93rem;line-height:1.6;margin-top:1rem;}
+  .copy-button{min-height:44px;padding:.75rem 1rem;margin-left:.6rem;border:1px solid #36594c;border-radius:3px;background:transparent;color:#36594c;font:inherit;cursor:pointer;}
+  [data-copy-status]:empty{display:none;}
+  [data-copy-preview]{margin-top:1rem;}
   @media(max-width:560px){.fields{grid-template-columns:1fr;gap:0;}}
 </style>

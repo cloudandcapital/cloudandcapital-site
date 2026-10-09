@@ -51,16 +51,18 @@
 .business-services .method-visual svg{width:116px;height:110px;flex-shrink:0}
 .business-services .method-number{font-family:'Cormorant Garamond',Georgia,serif;font-size:3.4rem;line-height:1;color:#8b9b80;font-style:italic;border:0;margin:0}
 .business-services .method-steps h3{font-size:1.9rem;margin:0 0 .65rem}.business-services .method-steps p{max-width:32ch;color:#5d6655;line-height:1.65}
-.business-services .method-footnote{border-top:1px solid #c5cebb;margin:2rem auto 0;padding-top:1.1rem;text-align:center;font-size:.85rem;color:#5d6655}
-@media(max-width:768px){.business-services .method-steps{grid-template-columns:1fr;gap:1.5rem}.business-services .method-steps li{padding:0 0 1.5rem;border-bottom:1px solid #c5cebb;display:grid;grid-template-columns:110px 1fr;column-gap:1.5rem}.business-services .method-visual{grid-row:1/3;display:block;margin:0}.business-services .method-visual svg{width:100px;height:95px}.business-services .method-number{display:block;text-align:center;font-size:2rem;margin-top:.25rem}.business-services .method-steps li:not(:last-child)::after{display:none}.business-services .method-steps li:last-child{border:0;padding-bottom:0}.business-services .method-steps h3{align-self:end}.business-services .method-footnote{margin-top:1.5rem}}
+
+@media(max-width:768px){.business-services .method-steps{grid-template-columns:1fr;gap:1.5rem}.business-services .method-steps li{padding:0 0 1.5rem;border-bottom:1px solid #c5cebb;display:grid;grid-template-columns:110px 1fr;column-gap:1.5rem}.business-services .method-visual{grid-row:1/3;display:block;margin:0}.business-services .method-visual svg{width:100px;height:95px}.business-services .method-number{display:block;text-align:center;font-size:2rem;margin-top:.25rem}.business-services .method-steps li:not(:last-child)::after{display:none}.business-services .method-steps li:last-child{border:0;padding-bottom:0}.business-services .method-steps h3{align-self:end}}
 @media(max-width:380px){.business-services .method-steps li{grid-template-columns:80px 1fr;column-gap:1rem}.business-services .method-visual svg{width:80px;height:80px}}
 .business-services .services-about{display:grid;grid-template-columns:.75fr 1.25fr;gap:5rem;align-items:center;padding-block:4.5rem}
 .business-services .services-portrait{max-width:23rem;padding:1rem}
-.business-services .services-portrait img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:50%}
+.business-services .services-portrait img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:50%}
 .business-services .services-portrait p{text-align:center;font-family:'DM Mono',monospace;text-transform:uppercase;font-size:.58rem;letter-spacing:.08em;margin-top:1.1rem}
-.business-services .services-about h2{margin-bottom:1.5rem}.business-services .services-about>div>p:not(.service-kicker){max-width:53ch;margin-bottom:1rem}
-.business-services .services-credentials{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.4rem 0}
-.business-services .services-credentials span{font-family:'Jost',system-ui,sans-serif;font-size:.78rem;color:#59624f;border:1px solid #bbc4b1;border-radius:3px;padding:.3rem .6rem}
+.business-services .services-about h2{margin-bottom:1.5rem}.business-services .services-about>div:not(.services-portrait)>p:not(.service-kicker){max-width:53ch;margin-bottom:1rem}
+.business-services .services-credentials{display:flex;flex-wrap:wrap;gap:.4rem 1rem;list-style:none;padding:0;margin:1.4rem 0}
+.business-services .services-credentials li{font-family:'Jost',system-ui,sans-serif;font-size:.85rem;color:#59624f;line-height:1.6}
+.business-services .services-credentials li+li::before{content:"·";margin-right:1rem;color:#859477}
+@media(max-width:540px){.business-services .services-credentials{display:block}.business-services .services-credentials li+li::before{content:none}}
 .business-services .services-proof{background:#283c32;padding-block:4.5rem;color:#f5eee9}
 .business-services .proof-grid{display:grid;grid-template-columns:.8fr 1.2fr;align-items:center;gap:3.5rem}
 .business-services .services-proof h2{margin-bottom:1.4rem;font-size:clamp(2rem,3vw,3rem)}

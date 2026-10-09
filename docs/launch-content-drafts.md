@@ -1,6 +1,6 @@
 # First coordinated content drafts
 
-Private drafts for the new service direction. Nothing here is published. The first website article reuses the completed brand-voice exercise; its numerical example is fictional. Match each CTA to the implemented route after the website draft is approved.
+Editorial drafts for the new service direction. Nothing here is published. The first website article reuses the completed brand-voice exercise; its numerical example is fictional. Match each CTA to the implemented route after the website draft is approved.
 
 ## Website blog
 

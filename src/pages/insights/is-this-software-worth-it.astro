@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExtrasArtwork from '../../components/ExtrasArtwork.astro';
+import '../../styles/editorial-pages.css';
 import article from '../../data/softwareValueArticle.json';
 import '../../styles/services.css';
 ---
@@ -10,7 +12,7 @@ import '../../styles/services.css';
         <a href="/insights">← All insights</a>
         <p class="offer-eyebrow">Technology that earns its keep</p>
         <h1>{article.title}</h1>
-        <p class="byline">By {article.author}</p>
+        <p class="byline">By {article.author}</p><div class="article-art"><ExtrasArtwork kind="renewal" /></div>
       </header>
       {article.intro.map(paragraph => <p>{paragraph}</p>)}
       {article.sections.map(section => <section><h2>{section.heading}</h2>{section.paragraphs.map(paragraph => <p>{paragraph}</p>)}</section>)}
@@ -25,6 +27,8 @@ import '../../styles/services.css';
 <style>
   .article-body{max-width:49rem;padding-top:3rem;padding-bottom:5rem;}
   header{margin-bottom:2.5rem;}
+  .article-art{background:#e9ece1;border-radius:6px;margin-top:2rem;padding:1.5rem;display:flex;justify-content:center;}
+  .article-art :global(svg){width:270px;max-width:100%;height:180px;}
   header > a{font-family:var(--font-ui);font-size:.95rem;}
   header .offer-eyebrow{margin-top:2rem;}
   h1{font-size:clamp(2.8rem,6vw,4.8rem);line-height:1.08;}

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/services.css';
+import '../../styles/editorial-pages.css';
 const rows = [
   ['Core collaboration',120,120,120,'Essential shared work; retain'],
   ['Accounting',60,60,60,'Essential records; retain'],
@@ -13,7 +14,7 @@ const totals = [1,2,3].map(i => rows.reduce((sum,row) => sum + Number(row[i]),0)
 const money = (value: number) => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(value);
 ---
 <BaseLayout title="Example Reviews | Cloud & Capital" description="Fictional demonstrations of a Technology Cost Review and an AI & Workflow Review, with labeled assumptions, calculations, and next steps.">
-  <main id="main-content" class="offer-page"><div class="offer-shell">
+  <main id="main-content" class="offer-page example-page"><div class="offer-shell">
     <p class="offer-eyebrow">What the work can look like</p><h1>Two questions.<br /><em>Two useful reviews.</em></h1>
     <div class="example-note"><p><strong>Fictional examples.</strong> The businesses, records, costs, timings, and outcomes below are invented to demonstrate the proposed services. These are not client results or testimonials.</p></div>
     <div class="offer-actions"><a href="#cost">Technology costs</a><a href="#workflow">Recurring reporting</a><a href="/services">Back to services →</a></div>

@@ -1,28 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExtrasArtwork from '../../components/ExtrasArtwork.astro';
 import article from '../../data/softwareValueArticle.json';
+import { writingFeatured, writing } from '../../data/siteContent';
 import '../../styles/services.css';
+import '../../styles/editorial-pages.css';
+const selected = [writingFeatured, ...writing.filter(item => ['When Capital Becomes Compute','Deploying Fast, Thinking Slow'].includes(item.title))];
 ---
-<BaseLayout title="Insights | Cloud & Capital" description="Practical explanations of business costs, technology, and the decisions behind the numbers, by Diana Molski.">
-  <main id="main-content" class="offer-page">
-    <section class="offer-shell offer-intro">
-      <p class="offer-eyebrow">Insights · Diana Molski</p>
-      <h1>A good question.<br /><em>A clearer answer.</em></h1>
-      <p class="offer-summary">Financial reasoning, practical technology, and the work that happens between buying a tool and getting a useful result.</p>
-    </section>
-    <section class="offer-shell fit-band" aria-labelledby="software-title">
-      <p class="offer-eyebrow">Technology that earns its keep</p>
-      <h2 id="software-title"><a href="/insights/is-this-software-worth-it">{article.title}</a></h2>
-      <p>{article.description}</p>
-      <a class="offer-button" href="/insights/is-this-software-worth-it">Read the explanation →</a>
-    </section>
-    <section class="offer-shell process-band">
-      <h2>For the market conversation</h2>
-      <p>Markets &amp; Mimosas brings the money, markets, and occasional raised eyebrow. Read the publication on Substack.</p>
-      <a href="https://cloudandcapital.substack.com">Read Markets &amp; Mimosas →</a>
-    </section>
+<BaseLayout title="Insights | Cloud & Capital" description="Clear explanations of money, markets, technology costs, and the decisions behind the numbers. Articles by Diana Molski.">
+  <main id="main-content" class="offer-page editorial-page insights-page">
+    <section class="offer-shell insights-intro"><p class="offer-eyebrow">Insights · Diana Molski</p><h1>A good question.<br /><em>A clearer answer.</em></h1><p class="editorial-lede">Money, markets, and technology—with the numbers explained and room for a raised eyebrow.</p></section>
+    <section class="offer-shell featured-insight" aria-labelledby="software-title"><div class="featured-art"><ExtrasArtwork kind="renewal" /></div><div><p class="offer-eyebrow">Business costs · Featured read</p><h2 id="software-title"><a href="/insights/is-this-software-worth-it">{article.title}</a></h2><p>{article.description}</p><a class="quiet-link" href="/insights/is-this-software-worth-it">Read the article →</a></div></section>
+    <section class="offer-shell editorial-section"><div class="editorial-heading"><div><p class="offer-eyebrow">From the archive</p><h2>Follow the money.</h2></div><p>Writing on cloud economics, AI infrastructure, and the decisions that shape the bill.</p></div><div class="reading-grid">{selected.map(item=><a class="reading-card" href={item.href} target="_blank" rel="noopener noreferrer"><img src={item.archiveImage} alt={item.archiveImageAlt} width="800" height="500" loading="lazy"/><div><p class="offer-eyebrow">{item.topic}</p><h3>{item.title}</h3><p>{item.description}</p><span class="quiet-link">Read on Substack ↗</span></div></a>)}</div></section>
+    <section class="mimosas-band"><div class="offer-shell mimosas-feature"><img src="/images/writing/markets-mimosas-hero.png" alt="A mimosa overlooking the coast at sunset" width="2048" height="1152" loading="lazy"/><div><p class="offer-eyebrow">Markets &amp; Mimosas</p><h2>The market conversation.<br /><em>With a little personality.</em></h2><p>Money, markets, AI, and the business behind the numbers. Like talking it through with a smart friend over mimosas.</p><a class="offer-button" href="https://cloudandcapital.substack.com" target="_blank" rel="noopener noreferrer">Read Markets &amp; Mimosas ↗</a></div></div></section>
   </main>
 </BaseLayout>
-<style>
-  #software-title a{font:inherit;color:inherit;text-decoration-thickness:1px;}
-</style>

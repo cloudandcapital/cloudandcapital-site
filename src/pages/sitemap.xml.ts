@@ -2,6 +2,12 @@ import type { APIRoute } from 'astro';
 
 const pages = [
   '/',
+  '/services',
+  '/services/examples',
+  '/learn',
+  '/resources/software-renewal',
+  '/insights',
+  '/insights/is-this-software-worth-it',
   '/tools',
   '/signal-audit',
   '/interactive-lab',

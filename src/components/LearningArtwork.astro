@@ -1,0 +1,22 @@
+---
+interface Props { kind: 'hero' | 'invest' | 'chart' | 'trade'; }
+const { kind } = Astro.props;
+---
+<div class:list={['learning-artwork',kind]} aria-hidden="true">
+<svg viewBox={kind === 'hero' ? '0 0 500 420' : '0 0 240 150'} focusable="false">
+{kind === 'hero' ? <>
+  <ellipse cx="250" cy="207" rx="216" ry="164" fill="#e1e6d9"/>
+  <g transform="translate(102 61) rotate(-7 110 96)"><rect width="257" height="201" rx="9" fill="#fffaf2" stroke="#65816b" stroke-width="1.7"/><path d="M0 29h257" stroke="#b7c4ad"/><circle cx="17" cy="15" r="3" fill="#c09288"/><circle cx="29" cy="15" r="3" fill="#b2c5a3"/><path d="M29 60v112h200M29 105h200M29 139h200" stroke="#d5ddcd" fill="none"/><path d="m42 147 35-21 33 9 34-47 37 17 31-37" stroke="#6e8d75" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="144" cy="88" r="6" fill="#c09288"/></g>
+  <g transform="translate(78 249) rotate(5 86 52)"><path d="M0 5c38-12 58-7 86 5 30-12 51-17 86-5v99c-35-7-56-5-86 8-28-13-48-15-86-8z" fill="#efe0d2" stroke="#a97b70" stroke-width="1.6"/><path d="M86 10v102M20 30h42M20 46h47M20 62h35M105 30h42M105 46h47M105 62h35" fill="none" stroke="#bc9e8f" stroke-width="2" stroke-linecap="round"/></g>
+  <g transform="translate(318 272)"><ellipse cx="48" cy="59" rx="53" ry="13" fill="#c5d1bb"/><path d="M20 17h53v32c0 19-53 19-53 0z" fill="#deb6ae" stroke="#a67c73" stroke-width="1.6"/><path d="M73 23c27-2 22 27 0 23" fill="none" stroke="#a67c73" stroke-width="2"/><ellipse cx="46" cy="17" rx="26" ry="7" fill="#fffaf2" stroke="#a67c73" stroke-width="1.6"/><path d="M38 0c-9-8 10-12 0-20m17 20c-9-8 10-12 0-20" fill="none" stroke="#819278" stroke-width="1.6"/></g>
+</> : kind === 'invest' ? <>
+  <ellipse cx="124" cy="119" rx="77" ry="10" fill="#bdcdb3"/>
+  {[0,1,2].map(n=><g transform={`translate(${49+n*49} ${85-n*23})`}><rect width="43" height={32+n*23} rx="4" fill={n===1?'#d8b5a7':'#8ba582'} stroke="#648167"/><ellipse cx="21" cy="0" rx="21" ry="6" fill="#f8f1e2" stroke="#648167"/></g>)}
+</> : kind === 'chart' ? <>
+  <rect x="40" y="24" width="163" height="103" rx="6" fill="#fffaf2" stroke="#a17b73" stroke-width="1.5"/><path d="M40 43h163M60 59v48h122" fill="none" stroke="#d1b8aa"/><path d="m67 95 24-13 19 8 29-31 17 12 22-8" fill="none" stroke="#6d876c" stroke-width="2.7" stroke-linecap="round"/>
+</> : <>
+  <rect x="36" y="32" width="88" height="84" rx="5" fill="#fffaf2" stroke="#71846b" stroke-width="1.5"/><path d="M36 48h88M54 65h51M54 81h37M54 97h51" stroke="#b6c6aa" stroke-width="3"/>
+  <circle cx="155" cy="84" r="37" fill="#e1c5b5" stroke="#a47f73" stroke-width="1.5"/><path d="M155 59v27l16 10" fill="none" stroke="#a47f73" stroke-width="2.5" stroke-linecap="round"/>
+</>}
+</svg></div>
+<style>.learning-artwork svg{display:block;width:100%;height:auto;}</style>

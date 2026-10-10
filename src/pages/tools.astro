@@ -9,6 +9,7 @@ const audit = tools.find((tool) => tool.slug === 'signal-audit');
 const lab = tools.find((tool) => tool.slug === 'interactive-lab');
 
 const supportingTools = [
+  { tool: { title: 'Software Renewal Checklist', href: '/resources/software-renewal' }, status: 'Free worksheet', question: 'Is this subscription worth keeping?', description: 'Eight questions about the bill, how it is used, and what changing tools would involve. Download a two-page PDF with space for your answers.', action: 'Get the renewal worksheet', destination: 'work' },
   audit && { tool: audit, status: 'Diagnostic', question: 'Where does the decision chain break?', description: 'A five-minute diagnostic showing where cost enters the decision chain before it reaches the invoice, with a weakest-link assessment and priority move.', action: 'Start Signal Audit', destination: 'signal_audit' },
   lab && { tool: lab, status: 'Guided lab', question: 'What changes when the assumptions change?', description: 'Turn one real question about cloud, AI, SaaS, or technology spend into a structured decision brief grounded in the context you provide.', action: 'Open Interactive Lab', destination: 'interactive_lab' },
 ].filter((item) => item !== undefined);
@@ -74,14 +75,14 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
         <div class="product-features">
           {guard && (
             <a class="product-feature guard-feature" href={guard.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="work_decision_tools">
-              <div class="product-copy"><span class="product-status">Live tool</span><h3>Cloud Cost Guard</h3><p class="product-question">What moved the bill?</p><p>Investigate cloud, AI, and SaaS spend in one place. Lumen points to anomalies, cost drivers, and forecasts so you know what to investigate next.</p><span class="product-action"><span>Open Cloud Cost Guard</span><span aria-hidden="true">→</span></span></div>
+              <div class="product-copy"><span class="product-status">Live tool</span><h3>Cloud Cost Guard</h3><p class="product-question">What moved the bill?</p><p>Investigate cloud, AI, and SaaS spend in one place. Review cost drivers, anomalies, and the records behind the bill.</p><span class="product-action"><span>Open Cloud Cost Guard</span><span aria-hidden="true">→</span></span></div>
               <div class="product-media" aria-hidden="true"><img src="/images/cloud-cost-guard-spend-reconciliation.jpg" alt="" width="1216" height="474" loading="lazy" /></div>
             </a>
           )}
           {tape && (
             <a class="product-feature tape-feature" href={tape.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="market_tape" data-analytics-source="work_decision_tools">
               <div class="product-media" aria-hidden="true"><img src="/images/market-tape-internals-momentum.jpg" alt="" width="1104" height="430" loading="lazy" /></div>
-              <div class="product-copy"><span class="product-status">Market view</span><h3>Market Tape</h3><p class="product-question">What is moving across the market?</p><p>Follow 52 rates, sectors, commodities, and risk signals in one live view of technology and infrastructure spending.</p><span class="product-action"><span>Open Market Tape</span><span aria-hidden="true">→</span></span></div>
+              <div class="product-copy"><span class="product-status">Market view</span><h3>Market Tape</h3><p class="product-question">What is moving across the market?</p><p>Explore rates, sectors, commodities, and market context in a research dashboard.</p><span class="product-action"><span>Open Market Tape</span><span aria-hidden="true">→</span></span></div>
             </a>
           )}
         </div>
@@ -186,7 +187,7 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
   .tape-feature .product-action { background: #805751; }
   .product-media { display: flex; align-items: center; min-width: 0; height: clamp(13rem, 17vw, 16rem); }
   .product-media img { display: block; width: 100%; height: 100%; object-fit: contain; border: 1px solid rgba(36,35,31,.12); border-radius: 8px; }
-  .supporting-tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+  .supporting-tools { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
   .supporting-tool { display: flex; flex-direction: column; min-width: 0; padding: 2rem 2.2rem; border-top: 1px solid rgba(36,35,31,.22); background: var(--cream); transition: background-color .2s ease; }
   .supporting-tool:hover, .supporting-tool:focus-visible { background: #e8ede7; }
   .supporting-tool h3 { font-size: clamp(2.2rem, 2.7vw, 2.8rem); }

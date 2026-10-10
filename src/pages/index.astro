@@ -31,11 +31,11 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
             Before you invest it, spend it, or build with it,
             <span class="scribbled-word">understand it.<svg viewBox="0 0 250 26" preserveAspectRatio="none" aria-hidden="true"><path d="M4 18 C55 6 111 27 246 10" /><path d="M18 22 C91 13 161 23 226 15" /></svg></span>
           </h1>
-          <p class="hero-lede">I’m Diana. I follow markets, build free tools, and write about the money questions that come up in business and real life. If a headline and the numbers tell different stories, I want to know why.</p>
+          <p class="hero-lede">I’m Diana. I help service businesses make sense of technology costs and recurring reporting. I also build tools, teach investing concepts, and write about markets and money. If the story and the numbers disagree, I want to know why.</p>
           <p class="hero-byline">Diana Molski · Finance analyst and tool builder</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_hero">Explore the tools</a>
-            <a class="button hero-secondary" href="#writing" data-analytics-event="cta_click" data-analytics-destination="writing" data-analytics-source="homepage_hero">Read the writing</a>
+            <a class="button button-primary" href="/services" data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_hero">Explore business services</a>
+            <a class="button hero-secondary" href="#tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_hero">Explore the tools</a>
           </div>
         </div>
 
@@ -55,27 +55,27 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
         </div>
 
         <div class="path-grid">
-          <a class="path-card" href="/#writing" data-reveal data-analytics-event="cta_click" data-analytics-destination="writing" data-analytics-source="homepage_path_personal">
+          <a class="path-card" href="/learn" data-reveal data-analytics-event="cta_click" data-analytics-destination="writing" data-analytics-source="homepage_path_personal">
             <div class="path-number">01</div>
             <p class="card-label">Your money</p>
-            <h3>Learn what the market is doing and why.</h3>
-            <p>Articles about markets, investing, and the money questions people actually ask.</p>
-            <span class="path-action"><span>Browse the articles</span><span aria-hidden="true">→</span></span>
+            <h3>Understand investing and trading.</h3>
+            <p>Tailored investing and trading lessons, worked examples, and guided practice.</p>
+            <span class="path-action"><span>Explore learning</span><span aria-hidden="true">→</span></span>
           </a>
 
-          <a class="path-card path-card-tint" href="#contact" data-reveal data-analytics-event="cta_click" data-analytics-destination="contact" data-analytics-source="homepage_path_business">
+          <a class="path-card path-card-tint" href="/services" data-reveal data-analytics-event="cta_click" data-analytics-destination="contact" data-analytics-source="homepage_path_business">
             <div class="path-number">02</div>
             <p class="card-label">Your business</p>
             <h3>Know where the money and time are going.</h3>
-            <p>Budgets, forecasts, software costs, AI workflows, and clearer systems for everyday business decisions.</p>
-            <span class="path-action"><span>Tell me about your business</span><span aria-hidden="true">→</span></span>
+            <p>Technology cost reviews, recurring reporting, and practical improvements using the tools you already have.</p>
+            <span class="path-action"><span>Explore business services</span><span aria-hidden="true">→</span></span>
           </a>
 
           <a class="path-card" href="/tools" data-reveal data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_path_team">
             <div class="path-number">03</div>
             <p class="card-label">Your technology spend</p>
             <h3>See what cloud and AI are actually costing.</h3>
-            <p>Allocation, forecasts, unit economics, anomalies, commitments, SaaS licenses, and the cost behind AI results.</p>
+            <p>Explore cloud and AI cost analysis, decision tools, and open-source finance projects.</p>
             <span class="path-action"><span>Explore the technical work</span><span aria-hidden="true">→</span></span>
           </a>
         </div>
@@ -129,7 +129,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
               <p class="card-label">Cloud, AI, and SaaS</p>
               <h3>Cloud Cost Guard</h3>
               <p class="tool-question">Why did the bill move?</p>
-              <p>Trace cost drivers, flag anomalies, and forecast the next bill.</p>
+              <p>Trace cost drivers, review anomalies, and understand the records behind the bill.</p>
               <span class="tool-card-action"><span>Open Cloud Cost Guard</span><span aria-hidden="true">→</span></span>
             </a>
           )}
@@ -145,7 +145,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
               <p class="card-label">Markets</p>
               <h3>{marketTape.title}</h3>
               <p class="tool-question">What is moving across the market?</p>
-              <p>Follow 52 rates, sectors, commodities, and risk signals in one live view.</p>
+              <p>Explore rates, sectors, commodities, and market context in a research dashboard.</p>
               <span class="tool-card-action"><span>Open Market Tape</span><span aria-hidden="true">→</span></span>
             </a>
           )}
@@ -213,7 +213,8 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
         </div>
 
         <div class="writing-actions">
-          <a class="button button-primary" href={newsletter.subscribeHref} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">View all writing</a>
+          <a class="button button-primary" href="/insights">Explore business insights</a>
+          <a class="button button-secondary" href={newsletter.subscribeHref} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">Read Markets &amp; Mimosas</a>
         </div>
       </div>
     </section>
@@ -415,7 +416,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
   .about-section { padding: clamp(4.25rem, 6vw, 5.6rem) 0; background: #3d6055; color: #f5eee9; }
   .about-grid { display: grid; grid-template-columns: minmax(0, .38fr) minmax(0, .62fr); gap: clamp(3.5rem, 6vw, 5.5rem); align-items: start; }
   .about-identity { min-width: 0; }
-  .about-portrait { display: block; width: 12rem; height: 12rem; margin-top: 1.5rem; border: 1px solid rgba(245, 238, 233, .68); border-radius: 50%; object-fit: cover; object-position: center; }
+  .about-portrait { display: block; width: 240px; height: 240px; margin-top: 1.5rem; border: 1px solid rgba(245, 238, 233, .68); border-radius: 50%; object-fit: cover; object-position: center; }
   .about-location { margin-top: .85rem; color: rgba(245, 238, 233, .8); font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .045em; line-height: 1.5; }
   .about-identity h2 { max-width: 15ch; margin-top: 2.25rem; font-size: clamp(2.55rem, 3.3vw, 3.25rem); line-height: 1.04; letter-spacing: -.035em; text-wrap: balance; }
   .about-identity h2 > span, .about-identity h2 em { display: block; }
@@ -505,7 +506,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
     .article-grid { gap: 1.25rem; background: transparent; border: 0; }
     .article-card { border-top: 1px solid rgba(25, 23, 20, .14); border-bottom: 1px solid rgba(25, 23, 20, .14); }
     .article-copy { min-height: 14rem; padding-inline: 0; }
-    .about-portrait { width: 10rem; height: 10rem; }
+    .about-portrait { width: 240px; height: 240px; }
   }
 
   @media (max-width: 480px) {
@@ -668,6 +669,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
   .writing-section .section-heading h2 { text-wrap: balance; }
   .writing-section .article-copy > span { margin-top: auto; }
   .writing-section .writing-actions { margin-top: 1.5rem; }
+  .writing-section .writing-actions .button-secondary { color:#3d6055; border-color:#3d6055; background:transparent; }
   @media (max-width: 760px) { .writing-section .article-copy > span { margin-top: 0; } }
 
   .tools-section .tool-card > p:not(.card-label):not(.tool-question) { max-width: none; text-wrap: balance; }
@@ -803,4 +805,5 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
   }
   .tools-section .tool-actions a.tool-source .tool-source-arrow::before,
   .tools-section .tool-actions a.tool-source .tool-source-arrow::after { content: none; }
+  @media(max-width:650px){.about-portrait{width:180px;height:180px;}}
 </style>

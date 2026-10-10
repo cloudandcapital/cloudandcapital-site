@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExtrasArtwork from '../../components/ExtrasArtwork.astro';
+import { renewalQuestions } from '../../data/softwareRenewal';
+import '../../styles/services.css';
+import '../../styles/editorial-pages.css';
+---
+<BaseLayout title="Before You Renew That Software | Cloud & Capital" description="Eight questions about cost, use, dependencies, and switching work before renewing a software subscription. Free downloadable worksheet.">
+<main id="main-content" class="offer-page editorial-page resource-page">
+<section class="offer-shell editorial-hero"><div><p class="offer-eyebrow">Free worksheet · Eight questions</p><h1><span class="renewal-title-line">Before you renew</span><br/><em>that software.</em></h1><p class="editorial-lede">Your software has a renewal date. It deserves a little performance review.</p><p>Pick one subscription. Bring the bill and a recent example of how it is used.</p><div class="offer-actions"><a class="offer-button" href="/downloads/before-you-renew-that-software.pdf" download>Download the PDF →</a><a class="quiet-link" href="#questions">Read the questions ↓</a></div><p class="small-note">Two pages, with space for your answers. No signup required.</p></div><div class="editorial-hero-art"><ExtrasArtwork kind="renewal"/></div></section>
+<section id="questions" class="offer-shell editorial-section"><p class="offer-eyebrow">Work through one decision</p><ol class="question-grid">{renewalQuestions.map(q=><li><h2>{q.title}</h2><p>{q.detail}</p></li>)}</ol></section>
+<section class="offer-shell resource-next"><p class="offer-eyebrow">Then choose a next step</p><h2>Keep. Adjust. Compare.<br/><em>Or investigate a little further.</em></h2><p>Write down your reason, who will act, and when you’ll revisit the decision. A clear answer may be all you need.</p><a class="quiet-link" href="/services#inquiry">Still tangled? Tell me the question →</a></section>
+</main></BaseLayout>

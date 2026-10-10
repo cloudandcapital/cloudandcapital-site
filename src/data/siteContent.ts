@@ -5,15 +5,19 @@ export type SiteLink = {
 };
 
 export const navigation: SiteLink[] = [
+  { label: 'Services', href: '/services' },
+  { label: 'Investing & Trading', href: '/learn' },
   { label: 'Tools', href: '/tools' },
-  { label: 'Writing', href: '/#writing' },
+  { label: 'Insights', href: '/insights' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
 ];
 
 export const footerLinks: SiteLink[] = [
-  { label: 'Tools', href: '/#tools' },
-  { label: 'Writing', href: '/#writing' },
+  { label: 'Services', href: '/services' },
+  { label: 'Investing & Trading', href: '/learn' },
+  { label: 'Tools', href: '/tools' },
+  { label: 'Insights', href: '/insights' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
   { label: 'Substack', href: 'https://cloudandcapital.substack.com', external: true },
@@ -40,7 +44,7 @@ export const tools = [
     title: 'Cloud Cost Guard + Lumen',
     label: 'Dashboard · AI Analyst · Live',
     description:
-      'Investigate cloud, AI, and SaaS spend in one place. Lumen points to anomalies, cost drivers, forecasts, and the next question to ask.',
+      'Investigate cloud, AI, and SaaS spend in one place. Review cost drivers, anomalies, and the next question to ask.',
     href: 'https://guard.cloudandcapital.com',
     external: true,
   },
@@ -49,7 +53,7 @@ export const tools = [
     title: 'Market Tape',
     label: 'Interactive · Tool',
     description:
-      'A live dashboard tracking 52 rates, sectors, commodities, and risk signals that affect technology and infrastructure spending.',
+      'Explore rates, sectors, commodities, and market context in a research dashboard.',
     href: 'https://market-tape.cloudandcapital.com',
     external: true,
   },
@@ -103,7 +107,7 @@ export const openSourceTools = [
   },
   {
     title: 'Tech Spend Command Center',
-    description: 'Validate five analytical results into one hash-locked trusted report without combining incompatible accounting boundaries.',
+    description: 'Bring analytical results into one traceable report while keeping their accounting boundaries explicit.',
     href: 'https://github.com/cloudandcapital/tech-spend-command-center',
     external: true,
   },
@@ -151,7 +155,7 @@ export const newsletter = {
   label: 'Cloud & Capital · Substack',
   title: 'Money, markets, AI, and the business behind the numbers.',
   description:
-    'Cloud & Capital covers markets and investing, practical AI, business costs, and technology economics. Markets & Mimosas is the recurring market column. Published twice monthly.',
+    'Cloud & Capital covers markets and investing, AI, business costs, and technology economics. Markets & Mimosas follows the questions behind the headlines.',
   subscribeHref: 'https://cloudandcapital.substack.com',
   latestIssueHref: marketsMimosasLatest.href,
 };
@@ -212,7 +216,7 @@ export const about = {
   headingItalic: 'money question.',
   biography: [
     'I started out as a beauty advisor, then worked in pet salons. I began following the markets in 2020, earned a finance degree, and later worked in wealth management at Morgan Stanley.',
-    'These days I build free tools and write about markets, money, and what I’m learning. Some questions turn into articles. Others turn into tools people can actually use.',
+    'Today I help service businesses understand technology costs, improve recurring reporting, and put practical changes to work. I also build free tools, write Markets & Mimosas, and teach investing and trading concepts through worked examples.',
   ],
   credentials: [
     { category: 'FINOPS', detail: 'FinOps Certified Practitioner · FinOps Certified FOCUS Analyst' },

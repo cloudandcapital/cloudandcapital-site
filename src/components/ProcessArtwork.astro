@@ -1,0 +1,10 @@
+---
+interface Props { kind: 'email' | 'scope' | 'handoff'; }
+const { kind } = Astro.props;
+---
+<svg viewBox="0 0 130 120" aria-hidden="true" focusable="false">
+  <ellipse cx="65" cy="60" rx="60" ry="54" fill={kind === 'scope' ? '#e7cfc6' : kind === 'email' ? '#f3eee2' : '#d0dbc6'} />
+  {kind === 'email' && <g transform="rotate(-7 65 63)"><rect x="22" y="38" width="86" height="57" rx="5" fill="#fffaf1" stroke="#637e68" stroke-width="1.7"/><path d="m24 41 41 29 41-29M24 93l29-26m53 26L77 67" fill="none" stroke="#637e68" stroke-width="1.7"/><rect x="41" y="22" width="48" height="39" rx="4" fill="#d4dfc9" stroke="#637e68" stroke-width="1.5"/><path d="M51 33h28M51 42h20" stroke="#809578" stroke-width="2.5" stroke-linecap="round"/></g>}
+  {kind === 'scope' && <g transform="rotate(6 65 60)"><rect x="34" y="22" width="64" height="81" rx="5" fill="#fffaf1" stroke="#946f68" stroke-width="1.7"/><rect x="51" y="17" width="30" height="12" rx="4" fill="#c09288"/><path d="m45 46 4 4 7-9m-11 26 4 4 7-9m-11 26 4 4 7-9" fill="none" stroke="#637e68" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M63 46h22M63 67h22M63 88h16" stroke="#c9b7a5" stroke-width="3" stroke-linecap="round"/></g>}
+  {kind === 'handoff' && <><rect x="20" y="29" width="87" height="62" rx="5" fill="#fffaf1" stroke="#637e68" stroke-width="1.7"/><path d="M20 43h87" stroke="#acbca0"/><circle cx="29" cy="36" r="2" fill="#c09288"/><circle cx="36" cy="36" r="2" fill="#9eaf91"/><path d="M33 56h36M33 67h25M33 78h31" stroke="#b1c2a3" stroke-width="4" stroke-linecap="round"/><circle cx="96" cy="86" r="22" fill="#6f896f"/><path d="m85 86 8 8 15-18" fill="none" stroke="#fffaf1" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></>}
+</svg>

@@ -6,9 +6,9 @@ Built with [Astro](https://astro.build), deployed on Vercel.
 
 ## What this is
 
-Cloud & Capital is Diana Molski's home for financial tools, technology-cost analysis, money and markets education, and small-business services. The site connects her finance and FinOps background with usable resources and clear starting points for visitors.
+Cloud & Capital is Diana Molski's home for financial tools, technology-cost analysis, money and markets education, and business services. The site connects her finance and FinOps background with usable resources and clear starting points for visitors.
 
-Business services are Technology Cost Review, AI & Workflow Review, and Tool & Automation Setup. Investing & Trading is a separate education path. Insights houses website articles and walkthroughs; Markets & Mimosas is the distinct newsletter.
+Business services are Technology Cost Review for growing technology teams with material cloud, AI or software costs; AI & Workflow Review for service businesses with recurring manual work; and Tool & Automation Setup for a defined business project. Fit depends on materiality and complexity, not company size alone. A few low-cost subscriptions are usually better served by free resources. Investing & Trading is a separate education path. Insights houses website articles and walkthroughs; Markets & Mimosas is the distinct newsletter.
 
 ## Pages
 

@@ -416,7 +416,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
   .about-section { padding: clamp(4.25rem, 6vw, 5.6rem) 0; background: #3d6055; color: #f5eee9; }
   .about-grid { display: grid; grid-template-columns: minmax(0, .38fr) minmax(0, .62fr); gap: clamp(3.5rem, 6vw, 5.5rem); align-items: start; }
   .about-identity { min-width: 0; }
-  .about-portrait { display: block; width: 12rem; height: 12rem; margin-top: 1.5rem; border: 1px solid rgba(245, 238, 233, .68); border-radius: 50%; object-fit: cover; object-position: center; }
+  .about-portrait { display: block; width: 240px; height: 240px; margin-top: 1.5rem; border: 1px solid rgba(245, 238, 233, .68); border-radius: 50%; object-fit: cover; object-position: center; }
   .about-location { margin-top: .85rem; color: rgba(245, 238, 233, .8); font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .045em; line-height: 1.5; }
   .about-identity h2 { max-width: 15ch; margin-top: 2.25rem; font-size: clamp(2.55rem, 3.3vw, 3.25rem); line-height: 1.04; letter-spacing: -.035em; text-wrap: balance; }
   .about-identity h2 > span, .about-identity h2 em { display: block; }
@@ -506,7 +506,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
     .article-grid { gap: 1.25rem; background: transparent; border: 0; }
     .article-card { border-top: 1px solid rgba(25, 23, 20, .14); border-bottom: 1px solid rgba(25, 23, 20, .14); }
     .article-copy { min-height: 14rem; padding-inline: 0; }
-    .about-portrait { width: 10rem; height: 10rem; }
+    .about-portrait { width: 240px; height: 240px; }
   }
 
   @media (max-width: 480px) {
@@ -805,4 +805,5 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
   }
   .tools-section .tool-actions a.tool-source .tool-source-arrow::before,
   .tools-section .tool-actions a.tool-source .tool-source-arrow::after { content: none; }
+  @media(max-width:650px){.about-portrait{width:180px;height:180px;}}
 </style>

@@ -121,3 +121,7 @@
 @media(max-width:540px){.business-services .service-card h3 span{display:inline}}
 @media(prefers-reduced-motion:reduce){.business-services .service-card-cta span{transition:none}}
 
+
+.business-services .services-portrait{width:240px;max-width:100%;padding:0;margin-inline:auto}
+.business-services .services-portrait img{width:240px;height:240px;max-width:100%}
+@media(max-width:650px){.business-services .services-portrait{width:180px}.business-services .services-portrait img{width:180px;height:180px}}

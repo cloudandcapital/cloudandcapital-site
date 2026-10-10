@@ -5,3 +5,6 @@
 .editorial-page.offer-page{padding-top:5rem}
 .editorial-page .featured-insight h2 a{font:inherit;line-height:inherit;letter-spacing:inherit}
 .example-page>.offer-shell{max-width:64rem}.example-page .example-section>p,.example-page .example-section>ol,.example-page .example-section>ul{max-width:52rem}.example-page .example-note{border-left:3px solid #7c9279;border-radius:0 6px 6px 0}.example-page .example-section{padding-block:4rem}.example-page .example-section h3{margin-top:2rem}.example-page .table-scroll{border:1px solid #d4d9cc;border-radius:6px}
+
+.learning-page .markets-title-line{white-space:nowrap}
+@media(max-width:650px){.learning-page h1{font-size:clamp(1.75rem,8.5vw,3.5rem)}}

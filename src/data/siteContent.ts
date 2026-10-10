@@ -107,7 +107,7 @@ export const openSourceTools = [
   },
   {
     title: 'Tech Spend Command Center',
-    description: 'Validate five analytical results into one hash-locked trusted report without combining incompatible accounting boundaries.',
+    description: 'Bring analytical results into one traceable report while keeping their accounting boundaries explicit.',
     href: 'https://github.com/cloudandcapital/tech-spend-command-center',
     external: true,
   },

@@ -216,7 +216,7 @@ export const about = {
   headingItalic: 'money question.',
   biography: [
     'I started out as a beauty advisor, then worked in pet salons. I began following the markets in 2020, earned a finance degree, and later worked in wealth management at Morgan Stanley.',
-    'Today I help service businesses understand technology costs, improve recurring reporting, and put practical changes to work. I also build free tools, write Markets & Mimosas, and teach investing and trading concepts through worked examples.',
+    'Today I help growing tech teams understand cloud, AI, and software costs, and service businesses improve recurring reporting and put useful tools to work. I also build free tools, write Markets & Mimosas, and teach investing and trading concepts through worked examples.',
   ],
   credentials: [
     { category: 'FINOPS', detail: 'FinOps Certified Practitioner · FinOps Certified FOCUS Analyst' },

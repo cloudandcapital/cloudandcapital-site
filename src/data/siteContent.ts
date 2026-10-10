@@ -16,7 +16,7 @@ export const navigation: SiteLink[] = [
 export const footerLinks: SiteLink[] = [
   { label: 'Services', href: '/services' },
   { label: 'Investing & Trading', href: '/learn' },
-  { label: 'Tools', href: '/#tools' },
+  { label: 'Tools', href: '/tools' },
   { label: 'Insights', href: '/insights' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
@@ -44,7 +44,7 @@ export const tools = [
     title: 'Cloud Cost Guard + Lumen',
     label: 'Dashboard · AI Analyst · Live',
     description:
-      'Investigate cloud, AI, and SaaS spend in one place. Lumen points to anomalies, cost drivers, forecasts, and the next question to ask.',
+      'Investigate cloud, AI, and SaaS spend in one place. Review cost drivers, anomalies, and the next question to ask.',
     href: 'https://guard.cloudandcapital.com',
     external: true,
   },
@@ -155,7 +155,7 @@ export const newsletter = {
   label: 'Cloud & Capital · Substack',
   title: 'Money, markets, AI, and the business behind the numbers.',
   description:
-    'Cloud & Capital covers markets and investing, practical AI, business costs, and technology economics. Markets & Mimosas is the recurring market column. Published twice monthly.',
+    'Cloud & Capital covers markets and investing, AI, business costs, and technology economics. Markets & Mimosas follows the questions behind the headlines.',
   subscribeHref: 'https://cloudandcapital.substack.com',
   latestIssueHref: marketsMimosasLatest.href,
 };

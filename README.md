@@ -6,18 +6,27 @@ Built with [Astro](https://astro.build), deployed on Vercel.
 
 ## What this is
 
-Cloud & Capital is Diana Molski's home for useful financial tools, clear analysis, and practical resources. It serves people learning about money, businesses trying to understand their costs, and teams managing cloud and AI spend.
+Cloud & Capital is Diana Molski's home for financial tools, technology-cost analysis, money and markets education, and small-business services. The site connects her finance and FinOps background with usable resources and clear starting points for visitors.
+
+Business services are Technology Cost Review, AI & Workflow Review, and Tool & Automation Setup. Investing & Trading is a separate education path. Insights houses website articles and walkthroughs; Markets & Mimosas is the distinct newsletter.
 
 ## Pages
 
 | Route | Description |
-|---|---|
-| `/` | Main site: interactive Invest / Spend / Build decision desk, audience pathways, featured tools, writing, professional background, and contact |
-| `/work` | Tools and open source work across AI economics, technology costs, and markets |
-| `/writing` | Cloud & Capital articles and Substack archive |
-| `/ai-cost-lens` | Convenient 302 redirect to the AI Cost Lens production domain, https://lens.cloudandcapital.com |
-| `/signal-audit` | Signal Audit: 5-minute cost diagnostic tool |
-| `/interactive-lab` | Interactive Lab: decision briefs powered by Claude |
+| --- | --- |
+| `/` | Brand introduction, audience pathways, featured work, background and contact |
+| `/services` | Three business services, process, background and inquiry form |
+| `/services/examples` | Illustrative service examples |
+| `/tools` | Financial and technology-cost tools, open-source work and renewal worksheet |
+| `/learn` | Investing and beginner trading lesson topics and inquiry form |
+| `/insights` | Website article index and Markets & Mimosas introduction |
+| `/insights/is-this-software-worth-it` | Software-value article |
+| `/resources/software-renewal` | Eight-question software renewal worksheet and PDF download |
+| `/work` | Legacy redirect to `/tools` |
+| `/writing` | Legacy redirect to the configured newsletter subscription destination |
+| `/ai-cost-lens` | Redirect to https://lens.cloudandcapital.com |
+| `/signal-audit` | Cost diagnostic tool |
+| `/interactive-lab` | Decision briefs powered by Claude |
 | `404` | Branded not-found page |
 
 ## Stack

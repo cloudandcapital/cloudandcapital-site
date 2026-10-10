@@ -8,3 +8,6 @@
 
 .learning-page .markets-title-line{white-space:nowrap}
 @media(max-width:650px){.learning-page h1{font-size:clamp(1.75rem,8.5vw,3.5rem)}}
+
+.resource-page .renewal-title-line{white-space:nowrap}
+@media(max-width:650px){.resource-page h1{font-size:clamp(1.75rem,8.5vw,3.5rem)}}

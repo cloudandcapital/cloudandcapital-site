@@ -244,6 +244,7 @@ export const about = {
     'Today I help growing tech teams understand cloud, AI, and software costs, and service businesses improve recurring reporting and put useful tools to work. I also build free tools, write Markets & Mimosas, and teach investing and trading concepts through worked examples.',
   ],
   credentials: [
+    { category: 'BOOKKEEPING', detail: 'Intuit Certified Bookkeeping Professional' },
     { category: 'FINOPS', detail: 'FinOps Certified Practitioner · FinOps Certified FOCUS Analyst' },
     { category: 'CLOUD + AI', detail: 'AWS Certified Cloud Practitioner · Microsoft Azure AI Fundamentals' },
     { category: 'GOVERNANCE', detail: 'Stacklet FinOps Governance for Cloud & AI' },

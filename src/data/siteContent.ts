@@ -126,7 +126,7 @@ export const featuredWriting = {
   archiveImageAlt: 'Who Gets Stuck With the Bill? published cover artwork',
 };
 
-export const marketsMimosasLatest = {
+export const marketsMimosasSeptember27 = {
   title: 'The Nasdaq Hit a Record. Your Account Might Not Agree.',
   topic: 'Markets & Mimosas',
   date: 'September 27, 2026',
@@ -137,6 +137,19 @@ export const marketsMimosasLatest = {
   imageAlt: 'Markets & Mimosas illustration',
   archiveImage: '/images/writing/markets-mimosas-hero.png',
   archiveImageAlt: 'Markets & Mimosas artwork',
+};
+
+export const marketsMimosasLatest = {
+  title: 'The AI Memory Boom Reached the Raspberry Pi',
+  topic: 'Markets & Mimosas',
+  date: 'October 11, 2026',
+  href: 'https://cloudandcapital.substack.com/p/the-ai-memory-boom-is-making-fortunes',
+  description:
+    'The shortage is real. The profits are enormous. The market question is how much of that good news investors have already paid for.',
+  image: '/images/writing/markets-mimosas-hero.png',
+  imageAlt: 'A mimosa overlooking the coast at sunset',
+  archiveImage: '/images/writing/markets-mimosas-hero.png',
+  archiveImageAlt: 'Markets & Mimosas series artwork: a mimosa overlooking the coast at sunset',
 };
 
 export const writingFeatured = {
@@ -163,6 +176,7 @@ export const newsletter = {
 export const writing = [
   writingFeatured,
   marketsMimosasLatest,
+  marketsMimosasSeptember27,
   featuredWriting,
   {
     title: 'When Capital Becomes Compute',

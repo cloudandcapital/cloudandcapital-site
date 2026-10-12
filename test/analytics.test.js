@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { runInNewContext } from 'node:vm';
 
 import { ANALYTICS_SCHEMA, createAnalyticsTracker, validateAnalyticsEvent } from '../src/lib/analytics.js';
 
@@ -76,4 +77,45 @@ test('tool wiring covers lifecycle events and reset is session-gated and clears 
   for (const action of ['copy', 'print', 'edit', 'reset']) assert.match(lab, new RegExp(`action: '${action}'`));
   assert.match(lab, /if \(toolSessionStarted\) window\.ccTrack\?\.\('tool_output_action', \{ tool: 'interactive_lab', action: 'reset' \}\);\s*toolSessionStarted = false;\s*toolCompletionTracked = false;/);
   for (const scenario of ANALYTICS_SCHEMA.starter_scenario_selected.scenario) assert.match(lab, new RegExp(`data-analytics-scenario="${scenario}"`));
+});
+
+
+test('homepage path destinations describe their actual links', async () => {
+  const homepage = await source('src/pages/index.astro');
+  for (const [pathSource, destination] of [
+    ['homepage_path_personal', 'learn'],
+    ['homepage_path_business', 'services'],
+  ]) {
+    const tag = [...homepage.matchAll(/<a\b[^>]*>/g)]
+      .find(([tag]) => tag.includes(`data-analytics-source="${pathSource}"`))?.[0];
+    assert.ok(tag, `missing ${pathSource}`);
+    assert.equal(tag.match(/href="([^"]+)"/)?.[1], `/${destination}`);
+    assert.equal(tag.match(/data-analytics-destination="([^"]+)"/)?.[1], destination);
+    assert.ok(validateAnalyticsEvent('cta_click', { destination, source: pathSource }));
+  }
+});
+
+
+test('the actual Google wrapper queues Arguments objects and preserves every command value', async () => {
+  const component = await source('src/components/Analytics.astro');
+  const wrapper = component.match(/window\.gtag = window\.gtag \|\| function \([^)]*\) \{[^}]*\};/)?.[0];
+  assert.ok(wrapper, 'expected the existing regular-function wrapper');
+  const window = { dataLayer: [] };
+  runInNewContext(wrapper, { window });
+  const timestamp = new Date('2026-10-12T19:00:00Z');
+  const privacy = { allow_google_signals: false, allow_ad_personalization_signals: false };
+  const properties = { destination: 'learn', source: 'homepage_path_personal' };
+  const commands = [
+    ['js', timestamp],
+    ['config', 'G-GXRMNTEB3B', privacy],
+    ['event', 'cta_click', properties],
+  ];
+  for (const command of commands) window.gtag(...command);
+  assert.equal(window.dataLayer.length, commands.length);
+  window.dataLayer.forEach((queued, index) => {
+    assert.equal(Array.isArray(queued), false, `${commands[index][0]} must not queue an Array`);
+    assert.equal(Object.prototype.toString.call(queued), '[object Arguments]');
+    assert.deepEqual(Array.from(queued), commands[index]);
+    commands[index].forEach((value, argumentIndex) => assert.strictEqual(queued[argumentIndex], value));
+  });
 });

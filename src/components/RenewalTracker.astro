@@ -1,0 +1,44 @@
+---
+import '../styles/renewal-tracker.css';
+---
+<main id="renewal-tracker" class="renewal-tracker">
+  <header class="rt-hero">
+    <div><p class="rt-kicker">Cloud & Capital · Free resource</p><h1>Give your software<br/><em>a date in the diary.</em></h1><p class="rt-intro">Know what leaves the account, when to review it, and who will make the call.</p><a href="https://cloudandcapital.com/resources/software-renewal">Use the companion renewal worksheet ↗</a></div>
+    <aside class="rt-example"><p class="rt-kicker">Three subscriptions, two useful numbers</p><p class="rt-example-value">$89 <span>/ month equivalent</span></p><p>$19 monthly + $240 ÷ 12 + $600 ÷ 12.</p><hr/><p class="rt-example-value">$859 <span>due in one month</span></p><p>$19 + $240 + $600, if both annual bills fall in that month. Other months require $19; over a full year, both views total $1,068. Assumes one $19 charge that month, unchanged USD prices, no extra tax or fees, and ongoing billing. All three subscriptions are illustrative.</p></aside>
+  </header>
+  <section class="rt-workspace" aria-labelledby="rt-title">
+    <div class="rt-section-heading"><div><p class="rt-kicker">Your renewal diary · USD only</p><h2 id="rt-title">A little planning, fewer surprises.</h2></div><button type="button" class="rt-primary" id="rt-add">Add a subscription</button></div>
+    <div id="rt-mode" class="rt-banner"></div>
+    <p id="rt-feedback" role="status" aria-live="polite"></p>
+    <div class="rt-summary">
+      <div><p>Monthly equivalent</p><strong id="rt-monthly">$89.00</strong><p class="rt-help">Ongoing charges spread across their billing periods. This is a budget comparison, not a payment schedule.</p></div>
+      <div><label for="rt-month">Charges due in</label><input id="rt-month" type="month" min="1900-01" max="9999-12" placeholder="YYYY-MM" aria-describedby="rt-cash-note"/><strong id="rt-cash">$859.00</strong><p id="rt-cash-note" class="rt-help">From recorded billing dates.</p></div>
+    </div>
+    <details class="rt-assumptions"><summary>How dates and totals work</summary><p>Enter a <b>recent or next expected charge</b> as the billing date. Future charges repeat from that date at the recorded frequency and price. A 31st billing day becomes the last day in a shorter month, then returns to the 31st. Check your vendor’s actual billing rules.</p><p>Renewal is when the agreement renews. The notice deadline is when you must act to prevent it. They can be different from the charge date. These two dates are never inferred or repeated automatically. Record exact dates from your terms; put deadline times and time zones in notes.</p><p>“Cancel” is a decision only. Charges stay in the projection until you mark billing ended after confirmation. Ended subscriptions stay in your records, but are excluded from future totals and calendar exports. Amounts include only what you enter; include tax or fees in the charge if needed.</p></details>
+    <div class="rt-list-heading"><h3>Subscriptions</h3><span id="rt-count"></span></div>
+    <div id="rt-records"></div>
+    <section class="rt-calendar" aria-labelledby="rt-dates-title"><h3 id="rt-dates-title">Dates to put in the diary</h3><p class="rt-help">Recorded renewal and notice dates, plus charges projected for your selected month. Past dates stay visible until you update the record.</p><ul id="rt-dates"></ul></section>
+    <section class="rt-storage" aria-labelledby="rt-storage-title"><h3 id="rt-storage-title">Keep a copy you can come back to.</h3><p>Saving a subscription stores the whole diary in this browser’s local storage, on this device and website address. Subscription details are not sent to Cloud & Capital. It does not sync between devices or browsers. Clearing browser data can remove it; private browsing may discard it. Export a CSV backup.</p><p id="rt-save-status" role="status">Illustrative examples are not saved.</p><p id="rt-storage-feedback" role="status" aria-live="polite"></p><div class="rt-actions"><button id="rt-export" type="button">Export CSV</button><label class="rt-file-label" for="rt-import">Import tracker CSV</label><input type="file" id="rt-import" accept=".csv,text/csv"/><button id="rt-ics" type="button">Export calendar (.ics)</button></div><p class="rt-help">CSV includes all fields and can be imported back into this tracker. Keep dates as YYYY-MM-DD when editing; spreadsheet date formats are not guessed. Import replaces your current diary only after you confirm. Calendar export covers 12 months starting with your selected month, with dated all-day events and no automatic reminders. Calendar apps control their own alerts; re-importing may duplicate events. Missing dates are not exported.</p><div class="rt-actions"><button id="rt-demo" type="button">View illustrative examples</button><button id="rt-clear" type="button">Clear saved diary</button><button id="rt-recover" type="button" hidden>Download unreadable saved data</button></div></section>
+  </section>
+  <footer class="rt-footer"><p>For the decision itself, use <a href="https://cloudandcapital.com/resources/software-renewal">Before you renew that software</a>. This free tracker helps you keep the dates together.</p></footer>
+  <dialog id="rt-editor" aria-labelledby="rt-editor-title"><form id="rt-form"><div class="rt-section-heading"><h2 id="rt-editor-title">Add a subscription</h2><button type="button" id="rt-close" aria-label="Close subscription editor">Close</button></div><p id="rt-form-error" role="alert"></p><input name="id" type="hidden"/>
+    <div class="rt-form-grid">
+      <label>Vendor / tool<input name="vendor" required maxlength="120" autocomplete="off"/></label>
+      <label>Actual charge (USD)<input name="charge" type="text" inputmode="decimal" required placeholder="240.00" aria-describedby="rt-charge-help"/></label>
+      <label>Billing frequency<select name="frequency"><option value="monthly">Monthly</option><option value="quarterly">Quarterly</option><option value="annually">Annually</option></select></label>
+      <label>Billing state<select name="billingState"><option value="ongoing">Ongoing billing</option><option value="ended">Billing ended (confirmed)</option></select></label>
+      <p id="rt-charge-help" class="rt-help rt-full">Enter the full payment for that billing period. For $240 paid once a year, enter 240 and choose Annually.</p>
+      <label>Billing date<input name="billingDate" type="date" min="1900-01-01" max="9999-12-31"/><span>A recent or next charge date that anchors the billing schedule.</span></label>
+      <label>Renewal date<input name="renewalDate" type="date" min="1900-01-01" max="9999-12-31"/><span>Date the agreement renews.</span></label>
+      <label>Cancellation / notice deadline<input name="noticeDate" type="date" min="1900-01-01" max="9999-12-31"/><span>Last date to act under your terms.</span></label>
+      <label>Decision owner<input name="owner" maxlength="120" autocomplete="off"/><span>Who will make and carry out the decision?</span></label>
+      <label>Decision / status<select name="decision"><option>Review needed</option><option>Keep</option><option>Adjust plan</option><option>Compare alternatives</option><option>Cancel</option></select></label>
+      <p class="rt-help">Dates and owner can be left blank while you investigate. Missing information will be flagged.</p>
+      <label class="rt-full">Notes<textarea name="notes" rows="3" maxlength="3000" placeholder="Plan, what it does, dependencies, terms, deadline time zone, and next action"></textarea></label>
+    </div><label class="rt-illustrative"><input name="illustrative" type="checkbox" value="true" aria-describedby="rt-illustrative-help"/> This record is illustrative (example data)</label><p id="rt-illustrative-help" class="rt-help">Illustrative records are labeled and included in totals. Uncheck only after replacing the example details with your own subscription.</p><p id="rt-example-edit" class="rt-help" hidden>Saving from the example view keeps only this subscription in your diary. Its illustrative label is preserved unless you uncheck it.</p><div class="rt-actions"><button type="submit" class="rt-primary">Save subscription</button><button type="button" id="rt-cancel">Discard changes</button></div></form></dialog>
+  <dialog id="rt-confirm" aria-labelledby="rt-confirm-title" aria-describedby="rt-confirm-message"><h2 id="rt-confirm-title">Confirm change</h2><p id="rt-confirm-message"></p><div class="rt-actions"><button type="button" id="rt-confirm-no">Go back</button><button type="button" id="rt-confirm-yes" class="rt-primary">Confirm</button></div></dialog>
+</main>
+<script>
+  import { startTracker } from '../lib/renewal-tracker-ui.js';
+  startTracker(document.getElementById('renewal-tracker'));
+</script>

@@ -1,5 +1,7 @@
 # build output
 dist/
+# self-contained review output (regenerate from tracked tracker source)
+prototype/
 # generated types
 .astro/
 

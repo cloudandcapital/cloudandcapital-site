@@ -9,6 +9,7 @@ const pages = [
   '/insights',
   '/insights/is-this-software-worth-it',
   '/tools',
+  '/tools/software-renewal-tracker',
   '/signal-audit',
   '/interactive-lab',
 ];

@@ -3,6 +3,18 @@
   --cream: #F5EEE9;
   --cream-dark: #EBE3DB;
   --cream-mid: #DDD5CA;
+  /* Shared homepage surfaces and accents, used throughout the site. */
+  --clay: #C2AAA1;
+  --clay-hover: #BAA197;
+  --rose: #B78384;
+  --rose-hover: #AF7D7F;
+  --sage-surface: #DDE3D7;
+  --sage-surface-hover: #D3DBCC;
+  --sage-strong: #AFB8A8;
+  --brand-green: #3D6055;
+  --brand-green-hover: #2E4E44;
+  --brand-ink: #24211E;
+  --sand: #EADFCE;
   --soft-white: #FFFFFF;
   --pure-white: #FFFFFF;
   --near-black: #1A1A1A;

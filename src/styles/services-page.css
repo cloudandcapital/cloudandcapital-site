@@ -22,7 +22,7 @@
 .business-services .services-section-heading>p{max-width:41ch;color:#62665c}
 .business-services .service-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;align-items:stretch}
 .business-services .service-card{border:1px solid #cdd0c4;border-radius:10px;overflow:hidden;background:#faf7f1;display:flex;flex-direction:column}
-.business-services .service-card-art{background:#e1e7d9}.business-services .workflow-card .service-card-art{background:#eddcd5}.business-services .setup-card .service-card-art{background:#e6e2d4}
+.business-services .service-card-art{background:var(--sage-surface)}.business-services .workflow-card .service-card-art{background:var(--clay)}.business-services .setup-card .service-card-art{background:var(--sand)}
 .business-services .service-card-content{padding:1.8rem 1.8rem 0;display:flex;flex-direction:column;flex:1}
 .business-services .service-card h3{font-size:2.45rem;line-height:1.05;margin:0 0 1rem;min-height:2.1em;max-width:12ch}
 .business-services .service-card .service-kicker{font-size:.57rem}
@@ -40,7 +40,7 @@
 .business-services .service-card-cta{display:flex;align-items:center;justify-content:space-between;margin-top:.1rem;padding:1.1rem 0;border-top:1px solid #d9dbd0;font-size:.86rem;text-decoration:none}
 .business-services .service-card-cta span{font-size:1.3rem}
 .business-services .service-choice-note{margin:1.8rem auto 0;max-width:70ch;text-align:center;font-size:.94rem;color:#62665c}
-.business-services .services-method{padding-block:3.5rem;background:#e4e8db}
+.business-services .services-method{padding-block:3.5rem;background:var(--sage-surface)}
 .business-services .method-heading{text-align:center;margin-bottom:2rem}
 .business-services .method-heading h2{margin:.6rem 0 .8rem;font-size:clamp(2.4rem,4vw,3rem);line-height:1.08}
 .business-services .method-heading>p:last-child{color:#5d6655}
@@ -63,7 +63,7 @@
 .business-services .services-credentials li{font-family:'Jost',system-ui,sans-serif;font-size:.85rem;color:#59624f;line-height:1.6}
 .business-services .services-credentials li+li::before{content:"·";margin-right:1rem;color:#859477}
 @media(max-width:540px){.business-services .services-credentials{display:block}.business-services .services-credentials li+li::before{content:none}}
-.business-services .services-proof{background:#283c32;padding-block:4.5rem;color:#f5eee9}
+.business-services .services-proof{background:var(--brand-green);padding-block:4.5rem;color:#f5eee9}
 .business-services .proof-grid{display:grid;grid-template-columns:.8fr 1.2fr;align-items:center;gap:3.5rem}
 .business-services .services-proof h2{margin-bottom:1.4rem;font-size:clamp(2rem,3vw,3rem)}
 .business-services .services-proof em,.business-services .services-proof .service-kicker{color:#bccbab}
@@ -73,7 +73,7 @@
 .business-services .services-proof figcaption{font-family:'Jost',system-ui,sans-serif;font-size:.75rem;color:#b9c6b1;margin-top:.7rem}
 .business-services .services-extras{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;padding-block:3.5rem 1rem}
 .business-services .extra-panel{display:grid;grid-template-columns:1fr 110px;gap:1.25rem;align-items:center;padding:2rem;text-decoration:none;border-radius:12px}
-.business-services .checklist-panel{background:#e4e8db}.business-services .lessons-panel{background:#eeded6}
+.business-services .checklist-panel{background:var(--sage-surface)}.business-services .lessons-panel{background:var(--clay)}
 .business-services .extra-panel .extra-copy{min-width:0}
 .business-services .extra-panel h3{font-size:2.15rem;line-height:1.1;margin:.7rem 0 1rem}
 .business-services .extra-panel p:not(.service-kicker){color:#5f655a;font-size:.94rem;margin-bottom:1.25rem;max-width:34ch}
@@ -86,7 +86,7 @@
 .business-services .services-faq{display:grid;grid-template-columns:.7fr 1.3fr;gap:4rem;padding-block:2.5rem 3.5rem}
 .business-services .services-faq details{border-bottom:1px solid #c7cebf;padding:1.1rem 0}.business-services .services-faq summary{cursor:pointer}
 .business-services .services-faq details p{margin-top:1rem;color:#62665c;max-width:60ch}
-.business-services .services-contact{padding-block:4.5rem;background:#dce4d5}
+.business-services .services-contact{padding-block:4.5rem;background:var(--clay)}
 .business-services .services-contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:5rem;align-items:start}
 .business-services .services-contact h2{font-size:clamp(3rem,5vw,4.6rem);margin-bottom:1.5rem}
 .business-services .services-contact-grid>div>p:not(.service-kicker){max-width:34ch;margin-bottom:1rem}

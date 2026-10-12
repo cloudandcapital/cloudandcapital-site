@@ -17,3 +17,19 @@ test('latest issue advances to October 11 while retaining September 27 in the ar
   assert.ok(writing.includes(marketsMimosasLatest));
   await access(new URL(`public${marketsMimosasLatest.image}`, root));
 });
+
+
+test('homepage rotates newest reads and retires older articles to the archive', async () => {
+  const { homepageWriting, writing, writingFeatured, marketsMimosasLatest,
+    marketsMimosasSeptember27, featuredWriting, selectHomepageWriting } =
+    await import('../src/data/siteContent.ts');
+  assert.deepEqual(homepageWriting.map(article => article.href),
+    [writingFeatured.href, marketsMimosasLatest.href, marketsMimosasSeptember27.href]);
+  assert.ok(writing.includes(featuredWriting));
+  const nextArticle = { ...marketsMimosasLatest, title: 'Next published read',
+    href: 'https://cloudandcapital.substack.com/p/next-read', date: 'October 18, 2026' };
+  const nextHomepage = selectHomepageWriting([...writing, nextArticle]);
+  assert.deepEqual(nextHomepage.map(article => article.href),
+    [writingFeatured.href, nextArticle.href, marketsMimosasLatest.href]);
+  assert.ok(writing.includes(marketsMimosasSeptember27));
+});

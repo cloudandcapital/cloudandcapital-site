@@ -207,6 +207,17 @@ export const writing = [
   },
 ];
 
+// Keep the featured essay while rotating the two recent reads by publication date.
+// Adding a dated article to writing moves the former latest into the previous slot.
+export function selectHomepageWriting(articles: typeof writing, featured = writingFeatured) {
+  const recent = [...articles]
+    .filter((article) => article.href !== featured.href)
+    .sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+  return [featured, ...recent.slice(0, 2)];
+}
+
+export const homepageWriting = selectHomepageWriting(writing);
+
 export const events = [
   {
     status: 'Past event',

@@ -5,10 +5,8 @@ import {
   about,
   contactLink,
   newsletter,
-  featuredWriting,
-  marketsMimosasLatest,
   tools,
-  writingFeatured,
+  homepageWriting,
 } from '../data/siteContent';
 
 const aiCostLens = tools.find((tool) => tool.slug === 'ai-cost-lens');
@@ -16,7 +14,7 @@ const cloudCostGuard = tools.find((tool) => tool.slug === 'cloud-cost-guard-lume
 const marketTape = tools.find((tool) => tool.slug === 'market-tape');
 const signalAudit = tools.find((tool) => tool.slug === 'signal-audit');
 const interactiveLab = tools.find((tool) => tool.slug === 'interactive-lab');
-const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting];
+const featuredArticles = homepageWriting;
 ---
 
 <BaseLayout
@@ -188,7 +186,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
           {featuredArticles.map((article, index) => (
             <a class="article-card" href={article.href} target="_blank" rel="noopener noreferrer" data-reveal data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">
               <div class="article-copy">
-                {index < 2 && <p class="article-latest">{index === 0 ? 'Featured essay' : 'Latest'}</p>}
+                <p class="article-latest">{index === 0 ? 'Featured essay' : index === 1 ? 'Latest' : 'Previously'}</p>
                 <p class="card-label">{article.topic.replace(' · Issue No. 1', '').replace(' · Issue no. 1', '')} · {article.date}</p>
                 <h3>{article.title}</h3>
                 <p>{article.description}</p>
@@ -383,8 +381,8 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
   .hero-actions .button, .writing-actions .button { min-height: 48px; border-radius: 8px; padding: .9rem 1.25rem; color: #f5eee9; }
   .hero-actions .button:focus-visible, .writing-actions .button:focus-visible { outline-color: #3d6055; }
   .hero-actions .hero-secondary:focus-visible { outline-color: #8f6265; }
-  .hero-actions .hero-secondary { background: #b78384; color: #24211e; border-color: transparent; }
-  .hero-actions .hero-secondary:hover { background: #af7d7f; }
+  .hero-actions .hero-secondary { background: var(--rose); color: #24211e; border-color: transparent; }
+  .hero-actions .hero-secondary:hover { background: var(--rose-hover); }
 
   .paths { padding: clamp(4.5rem, 7vw, 6.25rem) 0; background: #fbfaf7; }
   .section-heading { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(20rem, .9fr); gap: clamp(2.5rem, 7vw, 6.5rem); align-items: end; }
@@ -393,7 +391,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
   .path-grid { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 2.25rem; border-top: 0; border-bottom: 1px solid rgba(25, 23, 20, .14); }
   .path-card { position: relative; min-height: 20.5rem; padding: 2.2rem; display: flex; flex-direction: column; border-right: 1px solid rgba(25, 23, 20, .12); }
   .path-card:last-child { border-right: 0; }
-  .path-card-tint { background: #afb8a8; }
+  .path-card-tint { background: var(--sage-strong); }
   .path-number { position: absolute; top: 1.875rem; right: 1.875rem; color: rgba(61, 96, 85, .22); font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(5.75rem, 7vw, 7rem); font-weight: 400; line-height: .8; letter-spacing: -.065em; pointer-events: none; }
   .card-label { color: #4f7167; }
   .path-card h3 { max-width: 13ch; margin-top: 1.2rem; font-size: clamp(1.9rem, 2.5vw, 2.65rem); line-height: 1.03; letter-spacing: -.025em; }
@@ -404,7 +402,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
   .tool-card a:hover { text-decoration: underline; text-underline-offset: .32rem; }
   .education-note { margin-top: 1rem; color: #79726b; font-size: .7rem; line-height: 1.55; }
 
-  .writing-section { padding: clamp(4.25rem, 6vw, 5.6rem) 0; background: #eadfce; }
+  .writing-section { padding: clamp(4.25rem, 6vw, 5.6rem) 0; background: var(--sand); }
   .article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 2rem; background: rgba(25, 23, 20, .14); border-top: 1px solid rgba(25, 23, 20, .14); border-bottom: 1px solid rgba(25, 23, 20, .14); }
   .article-card { min-width: 0; background: #f5eee9; color: inherit; text-decoration: none; }
   .article-copy { min-height: 16rem; padding: 1.55rem; display: flex; flex-direction: column; }
@@ -438,7 +436,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
   .contribution-link span:last-child { display: inline-block; flex: none; font-size: 1.25rem; line-height: 1; text-decoration: none; transition: transform 200ms ease; }
   .contribution-link:hover span:last-child, .contribution-link:focus-visible span:last-child { transform: translateX(4px); }
 
-  .contact-section { padding: 3.5rem 0 2rem; background: color-mix(in srgb, var(--contact-mix-base, #c2aaa1) 70%, #8f665f); color: #2f2927; }
+  .contact-section { padding: 3.5rem 0 2rem; background: var(--clay); color: #2f2927; }
   .contact-inner { text-align: center; }
   .contact-section .eyebrow { justify-content: center; gap: .8rem; color: #2f2927; }
   .contact-section .eyebrow::before, .contact-section .eyebrow::after { content: ''; width: 2.4rem; height: 1px; background: currentColor; opacity: .3; }
@@ -542,12 +540,11 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
 
 
   .hero, .paths {
-    --rose: #b78384;
     --dark-rose: #82585b;
     --pale-rose: #f4ecea;
   }
   .path-card { --path-accent: #2b4236; --path-rule: #5e776b; --path-hover: #a7b0a0; --path-rule-hover: #50675c; border-top: 2px solid var(--path-rule); transition: background-color 200ms ease, border-top-color 200ms ease; }
-  .path-card:first-child { --path-accent: #493029; --path-rule: #8f665f; background: #c2aaa1; --path-hover: #baa197; --path-rule-hover: #7e5750; }
+  .path-card:first-child { --path-accent: #493029; --path-rule: #8f665f; background: var(--clay); --path-hover: #baa197; --path-rule-hover: #7e5750; }
   .path-card:last-child { --path-accent: #34463b; --path-rule: #53675e; background: #bdb7ac; --path-hover: #b4aea2; --path-rule-hover: #45594e; }
   .path-card .card-label, .path-card a { color: var(--path-accent); }
   .path-card .path-number { color: var(--path-rule); opacity: .14; }
@@ -621,7 +618,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
   .tools-section .tool-actions { align-items: center; }
   .tools-section .tool-actions .tool-launch { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-height: 48px; padding: .9rem 1.25rem; border: 1px solid transparent; border-radius: 8px; font: .62rem/1.4 'DM Mono',monospace; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; transition: background-color 220ms ease, border-color 220ms ease; }
   .tools-section .tool-actions .tool-launch { background: #faf6ef; color: #385748; }
-  .tools-section .tool-actions .tool-launch:hover { background: #e8ede7; }
+  .tools-section .tool-actions .tool-launch:hover { background: var(--sage-surface-hover); }
   .tools-section .tool-actions .tool-launch:focus-visible { outline-color: #faf6ef; }
   .tools-section .tool-card { padding: clamp(1.5rem,2.5vw,2rem); }
   .tools-section .tool-preview { margin-bottom: 2rem; }
@@ -654,8 +651,8 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
   .writing-section .article-card:focus-visible { outline: 2px solid #3d6055; outline-offset: 5px; }
   .writing-section .writing-actions { margin-top: 2rem; }
   .writing-section .writing-actions .button { min-height: 48px; border-radius: 8px; padding: .9rem 1.25rem; gap: .65rem; }
-  .writing-section .writing-secondary { background: #c58f91; color: #2f2927; }
-  .writing-section .writing-secondary:hover { background: #b97f82; }
+  .writing-section .writing-secondary { background: var(--rose); color: #2f2927; }
+  .writing-section .writing-secondary:hover { background: var(--rose-hover); }
   .writing-section .writing-actions a:focus-visible { outline-color: #3d6055; }
   @media (max-width: 760px) { .writing-section .section-heading h2 span { display: inline; } .writing-section .article-copy { min-height: auto; padding-block: 1.5rem; } .writing-section .article-copy > span { padding-top: 1.5rem; } }
   @media (prefers-reduced-motion: reduce) { .writing-section .article-copy > span span { transition: none; transform: none !important; } }
@@ -678,7 +675,7 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
   .tools-section .small-tool p { max-width: none; }
   .tools-section .small-tool strong { position: static; grid-column: 2; grid-row: 1 / 3; align-self: center; margin-right: .3rem; }
   .tools-section .tool-card:first-child > p:not(.card-label):not(.tool-question) { max-width: none; text-wrap: wrap; }
-  .tools-section .tool-card:first-child { background: #dde3d7; }
+  .tools-section .tool-card:first-child { background: var(--sage-surface); }
   .tools-section .tool-card:first-child .tool-preview::before { background: #bbc7b6; }
   .tools-section .tool-card:first-child > .card-label,
   .tools-section .tool-card:first-child > a { color: #536659; }
@@ -806,4 +803,15 @@ const featuredArticles = [writingFeatured, marketsMimosasLatest, featuredWriting
   .tools-section .tool-actions a.tool-source .tool-source-arrow::before,
   .tools-section .tool-actions a.tool-source .tool-source-arrow::after { content: none; }
   @media(max-width:650px){.about-portrait{width:180px;height:180px;}}
+  /* Give every article action the same inset and space above it. */
+  .writing-section .article-card:not(:first-child) { display: flex; flex-direction: column; }
+  .writing-section .article-copy { flex: 1; padding-bottom: 2rem; }
+  .writing-section .article-card:first-child .article-copy { padding-bottom: 2rem; }
+  .writing-section .article-copy > p:not(.card-label):not(.article-latest) { margin-bottom: 1.5rem; }
+  .writing-section .article-copy > span,
+  .writing-section .article-card:first-child .article-copy > span { margin-top: auto; padding-top: 0; }
+  @media (max-width: 600px) {
+    .writing-section .article-copy,
+    .writing-section .article-card:first-child .article-copy { padding-bottom: 1.8rem; }
+  }
 </style>

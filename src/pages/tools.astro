@@ -144,7 +144,7 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
   .index-entries > div:nth-child(4) span { color: #2f2927; }
   .index-entries small { color: #6c665f; font: .6rem/1.5 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; }
   .index-footer { justify-content: flex-end; padding-top: .75rem; }
-  .lens-section { padding: clamp(3.6rem, 5vw, 4.8rem) 0; background: #3d6055; color: #f5eee9; }
+  .lens-section { padding: clamp(3.6rem, 5vw, 4.8rem) 0; background: var(--brand-green); color: #f5eee9; }
   .lens-layout { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(2rem, 4vw, 4rem); align-items: center; margin-top: 1.25rem; }
   .lens-copy h2 { font-size: clamp(3.5rem, 5vw, 5rem); line-height: .96; }
   .lens-question { margin-top: 1rem !important; font: italic 400 clamp(1.55rem, 2.2vw, 2rem)/1.2 'Cormorant Garamond', Georgia, serif; }
@@ -169,12 +169,12 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
   .lens-notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin: 1.8rem 0 0; padding-top: 1.25rem; border-top: 1px solid rgba(245,238,233,.3); }
   .lens-notes dt { color: #d4e0d6; font: 500 .62rem/1.5 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
   .lens-notes dd { max-width: 28ch; margin: .5rem 0 0; color: #faf6ef; font-size: 1.0625rem; line-height: 1.6; }
-  .starting-section { padding: clamp(4.5rem, 7vw, 6.5rem) 0; background: var(--cream); }
+  .starting-section { padding: clamp(4.5rem, 7vw, 6.5rem) 0 clamp(2rem, 3vw, 3rem); background: var(--cream); }
   .starting-section h2 { margin-top: .9rem; font-size: clamp(2.75rem, 4vw, 4rem); line-height: 1.04; }
   .product-features { display: grid; gap: 1.5rem; margin-top: 2.5rem; }
   .product-feature { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2rem, 4vw, 4rem); align-items: center; min-width: 0; padding: clamp(2rem, 4vw, 3.5rem); transition: background-color .2s ease; }
-  .guard-feature { background: #edf2ec; }
-  .guard-feature:hover, .guard-feature:focus-visible { background: #e6ede5; }
+  .guard-feature { background: var(--sage-surface); }
+  .guard-feature:hover, .guard-feature:focus-visible { background: var(--sage-surface-hover); }
   .tape-feature { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); background: var(--cream); border-top: 1px solid rgba(128,87,81,.48); }
   .tape-feature:hover, .tape-feature:focus-visible { background: var(--cream-dark); }
   .product-status { color: #3d6055; }
@@ -183,29 +183,29 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
   .product-question { margin-top: 1rem !important; font: italic 400 clamp(1.5rem, 2vw, 1.9rem)/1.2 'Cormorant Garamond', Georgia, serif; }
   .product-copy > p:not(.product-question), .supporting-tool > p:not(.product-question) { max-width: 54ch; margin-top: 1rem; color: #4b4942; font-size: .96rem; line-height: 1.72; }
   .product-action { display: inline-flex; align-items: center; gap: .7rem; min-height: 44px; margin-top: 1.5rem; color: #3d6055; font: 500 .72rem/1.4 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
-  .product-feature .product-action { padding: .85rem 1.2rem; background: #3d6055; color: #f5eee9; border-radius: 8px; }
-  .tape-feature .product-action { background: #805751; }
+  .product-feature .product-action { padding: .85rem 1.2rem; background: var(--brand-green); color: #f5eee9; border-radius: 8px; }
+  .tape-feature .product-action { background: var(--clay); color: var(--brand-ink); }
   .product-media { display: flex; align-items: center; min-width: 0; height: clamp(13rem, 17vw, 16rem); }
   .product-media img { display: block; width: 100%; height: 100%; object-fit: contain; border: 1px solid rgba(36,35,31,.12); border-radius: 8px; }
   .supporting-tools { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
   .supporting-tool { display: flex; flex-direction: column; min-width: 0; padding: 2rem 2.2rem; border-top: 1px solid rgba(36,35,31,.22); background: var(--cream); transition: background-color .2s ease; }
-  .supporting-tool:hover, .supporting-tool:focus-visible { background: #e8ede7; }
+  .supporting-tool:hover, .supporting-tool:focus-visible { background: var(--sage-surface-hover); }
   .supporting-tool h3 { font-size: clamp(2.2rem, 2.7vw, 2.8rem); }
   .supporting-tool .product-question { font-size: 1.55rem; }
-  .supporting-tool > p:not(.product-question) { font-size: .9rem; }
-  .supporting-tool .product-action { align-self: flex-start; margin-top: auto; padding: .7rem .9rem; border: 1px solid #3d6055; font-size: .78rem; }
+  .supporting-tool > p:not(.product-question) { font-size: .9rem; margin-bottom: 1.5rem; }
+  .supporting-tool .product-action { align-self: flex-start; margin-top: auto; padding: .7rem .9rem; border: 1px solid #3d6055; font-size: .78rem; border-radius: 8px; }
   .open-section { padding: clamp(2.8rem, 4vw, 3.6rem) 0; background: var(--cream); }
   .open-layout { display: grid; grid-template-columns: minmax(0, .43fr) minmax(0, .57fr); gap: clamp(2rem, 4vw, 4rem); align-items: start; }
   .open-heading h2 { margin-top: .8rem; font-size: clamp(2.15rem, 2.75vw, 2.8rem); line-height: 1.04; }
   .open-heading h2 span { display: block; }
-  .open-panel { min-width: 0; padding: .5rem 1.75rem .75rem; background: #3d6055; color: #f5eee9; }
+  .open-panel { min-width: 0; padding: .5rem 1.75rem .75rem; background: var(--brand-green); color: #f5eee9; }
   .open-row { display: grid; grid-template-columns: minmax(10rem, .65fr) minmax(0, 1.35fr) auto; gap: 1rem; align-items: center; min-height: 4.3rem; padding: .65rem 0; border-bottom: 1px solid rgba(245,238,233,.22); transition: background-color .2s ease; }
   .open-row:hover, .open-row:focus-visible { background: rgba(245,238,233,.06); }
   .open-name { font: 400 1.35rem/1.1 'Cormorant Garamond', Georgia, serif; }
   .open-description { color: #e5eee6; font-size: .83rem; line-height: 1.5; }
   .open-arrow { color: #f5eee9; }
   .open-all { margin-top: .8rem; color: #e5eee6 !important; }
-  .contact-strip { padding: 2rem 0; background: color-mix(in srgb, var(--contact-mix-base, #c2aaa1) 70%, #8f665f); }
+  .contact-strip { padding: 2rem 0; background: var(--clay); }
   .contact-layout { display: grid; grid-template-columns: minmax(10rem, .25fr) minmax(0, .5fr) minmax(10rem, .25fr); align-items: center; gap: 1.5rem; }
   .contact-layout .eyebrow { color: #2f2927; }
   .contact-layout h2 { max-width: 22ch; font-size: clamp(2rem, 2.65vw, 2.7rem); line-height: 1.05; }

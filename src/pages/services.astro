@@ -6,8 +6,26 @@ import ProcessArtwork from '../components/ProcessArtwork.astro';
 import ExtrasArtwork from '../components/ExtrasArtwork.astro';
 import '../styles/services.css';
 import '../styles/services-page.css';
+const serviceCatalog = {
+  '@type': 'OfferCatalog',
+  '@id': 'https://cloudandcapital.com/services#catalog',
+  name: 'Cloud & Capital business services',
+  itemListElement: [
+    { name: 'Technology Cost Review', serviceType: 'Cloud, AI and software cost analysis', anchor: 'technology-cost-review', description: 'A reconciled cost baseline, growth drivers, and a prioritized action plan for startups and growing tech teams with meaningful technology spend.' },
+    { name: 'AI & Workflow Review', serviceType: 'AI and workflow review', anchor: 'workflow-review', description: 'A review of one recurring task for a service business, with a workflow map, recommended change, and scoped implementation plan.' },
+    { name: 'Tool & Automation Setup', serviceType: 'Tool and automation setup', anchor: 'practical-setup', description: 'One agreed setup across compatible tools, with checks, instructions, and a handoff.' },
+  ].map(({ name, serviceType, anchor, description }) => ({
+    '@type': 'Offer',
+    itemOffered: {
+      '@type': 'Service', name, serviceType, description,
+      '@id': `https://cloudandcapital.com/services#${anchor}`,
+      url: `https://cloudandcapital.com/services#${anchor}`,
+      provider: { '@id': 'https://cloudandcapital.com/#organization' },
+    },
+  })),
+};
 ---
-<BaseLayout title="Business Services | Cloud & Capital" description="Cloud, AI and software cost reviews for growing tech teams, plus workflow reviews and tool setup for service businesses. Defined scope and clear next steps with Diana Molski.">
+<BaseLayout title="AI & Cloud Cost Reviews, Workflow Consulting | Cloud & Capital" description="Review AI, cloud, and SaaS spending, assess one recurring workflow, or set up a defined automation. For startups and service businesses, with an agreed scope and quote." structuredData={[serviceCatalog]}>
   <main id="main-content" class="offer-page business-services">
     <section class="services-shell services-hero" aria-labelledby="services-title">
       <div class="services-hero-copy">

@@ -4,8 +4,18 @@ import ExtrasArtwork from '../../components/ExtrasArtwork.astro';
 import '../../styles/editorial-pages.css';
 import article from '../../data/softwareValueArticle.json';
 import '../../styles/services.css';
+const articleSchema = {
+  '@type': 'BlogPosting',
+  '@id': 'https://cloudandcapital.com/insights/is-this-software-worth-it#article',
+  headline: article.title,
+  description: article.description,
+  author: { '@id': 'https://cloudandcapital.com/#diana' },
+  publisher: { '@id': 'https://cloudandcapital.com/#organization' },
+  mainEntityOfPage: { '@id': 'https://cloudandcapital.com/insights/is-this-software-worth-it#webpage' },
+  inLanguage: 'en',
+};
 ---
-<BaseLayout title={`${article.title} | Cloud & Capital`} description={article.description}>
+<BaseLayout title={`${article.title} | Cloud & Capital`} description={article.description} structuredData={[articleSchema]} type="article">
   <main id="main-content" class="offer-page article-page">
     <article class="offer-shell article-body">
       <header>

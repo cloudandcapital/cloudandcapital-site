@@ -1,9 +1,13 @@
 ---
+import { canonicalPath, createSiteGraph, serializeJsonLd } from '../lib/seo.js';
+
 interface Props {
   title: string;
   description?: string;
   noindex?: boolean;
   image?: string;
+  structuredData?: Record<string, unknown>[];
+  type?: 'website' | 'article';
 }
 
 const {
@@ -11,11 +15,14 @@ const {
   description = '',
   noindex = false,
   image = '/images/og-image.png',
+  structuredData = [],
+  type = 'website',
 } = Astro.props;
 
 const siteUrl = Astro.site ?? new URL('https://cloudandcapital.com');
-const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
+const canonicalUrl = new URL(canonicalPath(Astro.url.pathname), siteUrl);
 const imageUrl = new URL(image, siteUrl);
+const graph = createSiteGraph({ siteUrl, pathname: Astro.url.pathname, title, description, entities: structuredData });
 ---
 
 <meta charset="utf-8" />
@@ -29,7 +36,7 @@ const imageUrl = new URL(image, siteUrl);
 {description && <meta name="description" content={description} />}
 {noindex && <meta name="robots" content="noindex, nofollow" />}
 <meta name="theme-color" content="#F5EEE9" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content={type} />
 <meta property="og:site_name" content="Cloud & Capital" />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:title" content={title} />
@@ -39,3 +46,4 @@ const imageUrl = new URL(image, siteUrl);
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description || 'Turning numbers into strategy'} />
 <meta name="twitter:image" content={imageUrl} />
+{!noindex && <script type="application/ld+json" set:html={serializeJsonLd(graph)} />}

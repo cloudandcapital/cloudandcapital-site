@@ -10,18 +10,22 @@ interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
+  structuredData?: Record<string, unknown>[];
+  type?: 'website' | 'article';
 }
 
 const {
   title = 'Cloud & Capital',
   description = '',
   noindex = false,
+  structuredData = [],
+  type = 'website',
 } = Astro.props;
 ---
 
 <html lang="en">
   <head>
-    <HeadMeta title={title} description={description} noindex={noindex} />
+    <HeadMeta title={title} description={description} noindex={noindex} structuredData={structuredData} type={type} />
     <Analytics />
   </head>
   <body>

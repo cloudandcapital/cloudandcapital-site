@@ -6,18 +6,18 @@ export type SiteLink = {
 
 export const navigation: SiteLink[] = [
   { label: 'Services', href: '/services' },
-  { label: 'Investing & Trading', href: '/learn' },
   { label: 'Tools', href: '/tools' },
   { label: 'Insights', href: '/insights' },
+  { label: 'Investing & Trading', href: '/learn' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
 ];
 
 export const footerLinks: SiteLink[] = [
   { label: 'Services', href: '/services' },
-  { label: 'Investing & Trading', href: '/learn' },
   { label: 'Tools', href: '/tools' },
   { label: 'Insights', href: '/insights' },
+  { label: 'Investing & Trading', href: '/learn' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
   { label: 'Substack', href: 'https://cloudandcapital.substack.com', external: true },

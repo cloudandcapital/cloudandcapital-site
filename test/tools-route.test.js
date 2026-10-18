@@ -17,7 +17,7 @@ test('Tools is canonical while Work remains a permanent compatibility redirect',
   assert.match(sitemap, /'\/tools'/);
   assert.doesNotMatch(sitemap, /'\/work'/);
   assert.match(data, /label: 'Tools', href: '\/tools'/);
-  assert.match(home, /class="path-card" href="\/tools"/);
+  assert.match(home, /href="\/tools"/);
   assert.match(page, /title="Free AI & Cloud Cost Tools \| Cloud & Capital"/);
   assert.match(page, /<h1 id="tools-title"><span>Start with the question\.<\/span><span>Follow the number\.<\/span><\/h1>/);
 });

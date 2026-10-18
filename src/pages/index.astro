@@ -476,7 +476,7 @@ const featuredArticles = homepageWriting;
   .contact-email-card:hover .contact-email-arrow, .contact-email-card:focus-visible .contact-email-arrow { transform: translateX(3px); }
   .contact-section .contact-email-card, .contact-section .contact-email-card:hover, .contact-section .contact-email-card:focus-visible,
   .contact-section .contact-email-card span, .contact-section .contact-email-card:hover span, .contact-section .contact-email-card:focus-visible span { text-decoration: none; border-bottom: 0; }
-  @media (min-width: 1200px) { .contact-copy > p { white-space: nowrap; } }
+  .contact-copy > p { max-width: 65ch; margin-inline: auto; }
 
   @keyframes scribble-in { to { stroke-dashoffset: 0; } }
   @keyframes signal-ping { 0% { box-shadow: 0 0 0 0 rgba(201, 143, 127, .5); } 70%, 100% { box-shadow: 0 0 0 .55rem rgba(201, 143, 127, 0); } }

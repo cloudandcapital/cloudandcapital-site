@@ -25,8 +25,8 @@ const featuredArticles = homepageWriting;
         <div class="hero-copy">
           <p class="eyebrow">Business services · Finance &amp; technology</p>
           <h1 id="home-title">Better decisions about your tools, your costs, <em>and your time.</em></h1>
-          <p class="hero-lede">I’m Diana. I help small businesses and growing tech teams understand technology spending, improve recurring work, and put useful tools in place.</p>
-          <p class="hero-context">Maybe your cloud or AI bill keeps growing. Maybe the same report takes hours every month. Or you know what needs improving and want help building it. We’ll start with the question you need answered.</p>
+          <p class="hero-lede">I’m Diana. I help small businesses and growing tech teams understand their tech spending, simplify repetitive tasks, and build tools that fit how they work.</p>
+          <p class="hero-context">Cloud &amp; Capital is also where I share free tools and what I’m learning about money, AI, and technology. Try a tool, read something, or bring me a business question.</p>
           <p class="hero-byline">Diana Molski · Finance analyst and tool builder</p>
           <div class="hero-actions">
             <a class="button button-primary" href="/services" data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_hero">Explore business services</a>
@@ -471,9 +471,9 @@ const featuredArticles = homepageWriting;
     --dark-rose: #82585b;
     --pale-rose: #f4ecea;
   }
-  .path-card { --path-accent: #3e5946; --path-rule: #cbd6c5; --path-hover: #e0e7d9; --path-rule-hover: #9aaf93; transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease; }
-  .path-card:first-child { --path-accent: #785752; --path-rule: #dfc7c0; background: #f6e7e2; --path-hover: #f0ded8; --path-rule-hover: #b48c82; }
-  .path-card:last-child { --path-accent: #5c594b; --path-rule: #ded3c4; background: #f5efe5; --path-hover: #efe6d8; --path-rule-hover: #b9a68c; }
+  .path-card { --path-accent: #3e5946; --path-rule: #cbd6c5; --path-underline: #789382; --path-hover: #e0e7d9; --path-rule-hover: #9aaf93; transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease; }
+  .path-card:first-child { --path-accent: #785752; --path-rule: #dfc7c0; --path-underline: #b78384; background: #f6e7e2; --path-hover: #f0ded8; --path-rule-hover: #b48c82; }
+  .path-card:last-child { --path-accent: #5c594b; --path-rule: #ded3c4; --path-underline: #a18b70; background: #f5efe5; --path-hover: #efe6d8; --path-rule-hover: #b9a68c; }
   .path-card .card-label, .path-card a { color: var(--path-accent); }
   .path-card .path-number { color: var(--path-rule); opacity: .14; }
   @media (max-width: 767px) { .path-card .path-number { font-size: 4.5rem; } }
@@ -757,7 +757,10 @@ const featuredArticles = homepageWriting;
     position: absolute;
     inset: auto 0 -.11em;
     height: .19em;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 12' preserveAspectRatio='none'%3E%3Cpath d='M3 7C58 3 156 3 237 6' fill='none' stroke='%23b78384' stroke-width='1.75' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+    --question-curve: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 12' preserveAspectRatio='none'%3E%3Cpath d='M3 7C58 3 156 3 237 6' fill='none' stroke='%23000' stroke-width='1.75' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+    background-color: var(--path-underline);
+    -webkit-mask: var(--question-curve) center / 100% 100% no-repeat;
+    mask: var(--question-curve) center / 100% 100% no-repeat;
     pointer-events: none;
   }
   .path-card .path-deliverable { margin-bottom: 1.6rem; padding-top: 1rem; border-top: 1px solid var(--path-rule); font-size: .85rem; }

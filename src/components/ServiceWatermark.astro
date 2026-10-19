@@ -1,0 +1,28 @@
+---
+interface Props { kind: 'cost' | 'workflow' | 'setup'; }
+const { kind } = Astro.props;
+---
+<svg class="service-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  {kind === 'cost' && <>
+    <path d="M24 12h52v76l-8-5-9 5-9-5-9 5-9-5-8 5Z" fill="currentColor" fill-opacity=".12" />
+    <path d="M36 29h28M36 43h18M36 57h28M36 71h10m10 0h8" />
+  </>}
+  {kind === 'workflow' && <>
+    <circle cx="50" cy="50" r="36" fill="currentColor" fill-opacity=".12" />
+    <path d="M50 21v5m29 24h-5M50 79v-5M21 50h5M50 33v17l17 10" />
+    <circle cx="50" cy="50" r="2" fill="currentColor" stroke="none" />
+  </>}
+  {kind === 'setup' && <>
+    <path d="m50 8 23 13v26L50 60 27 47V21Z" fill="currentColor" fill-opacity=".12" />
+    <path d="m27 21 23 13 23-13M50 34v26" />
+    <path d="m27 47 23 13v26L27 99 4 86V60Z" fill="currentColor" fill-opacity=".12" />
+    <path d="m4 60 23 13 23-13M27 73v26" />
+    <path d="m73 47 23 13v26L73 99 50 86V60Z" fill="currentColor" fill-opacity=".12" />
+    <path d="m50 60 23 13 23-13M73 73v26" />
+  </>}
+</svg>
+
+<style>
+  .service-watermark { position: absolute; top: 1.7rem; right: 1.65rem; width: 6rem; height: 6rem; color: var(--path-accent, #3d6055); opacity: .14; pointer-events: none; }
+  @media (max-width: 760px) { .service-watermark { top: 1.5rem; right: 1.25rem; width: 5rem; height: 5rem; } }
+</style>

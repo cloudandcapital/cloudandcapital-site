@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BusinessArtwork from '../components/BusinessArtwork.astro';
+import ServiceWatermark from '../components/ServiceWatermark.astro';
 import {
   about,
   contactLink,
@@ -50,7 +51,7 @@ const featuredArticles = homepageWriting;
         </div>
         <div class="path-grid">
           <a class="path-card" href="/services" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_business">
-            <div class="path-number" aria-hidden="true">01</div>
+            <ServiceWatermark kind="cost" />
             <p class="card-label">Technology Cost Review</p>
             <h3>“Why does the bill keep growing?”</h3>
             <p>For teams with meaningful cloud, AI, or software costs. Understand what’s driving the bill and what deserves attention.</p>
@@ -58,7 +59,7 @@ const featuredArticles = homepageWriting;
             <span class="path-action"><span>Explore the cost review</span><span aria-hidden="true">→</span></span>
           </a>
           <a class="path-card path-card-tint" href="/services#workflow-review" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_workflow">
-            <div class="path-number" aria-hidden="true">02</div>
+            <ServiceWatermark kind="workflow" />
             <p class="card-label">AI &amp; Workflow Review</p>
             <h3>“Why does this take so long?”</h3>
             <p>For service businesses moving the same information between emails, documents, and spreadsheets. Review one recurring task.</p>
@@ -66,7 +67,7 @@ const featuredArticles = homepageWriting;
             <span class="path-action"><span>Explore the workflow review</span><span aria-hidden="true">→</span></span>
           </a>
           <a class="path-card" href="/services#practical-setup" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_setup">
-            <div class="path-number" aria-hidden="true">03</div>
+            <ServiceWatermark kind="setup" />
             <p class="card-label">Tool &amp; Automation Setup</p>
             <h3>“Can you help me build it?”</h3>
             <p>For a defined project: a reporting template, connected tools, or a small automation. Start here when you know what you need.</p>
@@ -558,6 +559,7 @@ const featuredArticles = homepageWriting;
 
   .paths .paths-heading { display: block; }
   .paths .paths-heading h2 { max-width: none; width: fit-content; padding-right: 1.5rem; text-wrap: balance; }
+  .paths .paths-heading > p { max-width: none; margin-top: 1rem; text-wrap: wrap; }
 
 
   .hero, .paths {
@@ -841,7 +843,7 @@ const featuredArticles = homepageWriting;
   .hero-context { max-width: 58ch; margin-top: 1rem; color: #4a4a4a; font-size: .95rem; line-height: 1.75; }
   .hero-byline { font-size: .68rem; }
   .hero-visual { align-self: center; }
-  .path-card .card-label { max-width: 22ch; min-height: 2.9em; position: relative; z-index: 1; }
+  .path-card .card-label { max-width: none; min-height: 0; position: relative; z-index: 1; text-wrap: wrap; }
   .path-card h3 { max-width: 17ch; font-size: clamp(1.9rem, 2.4vw, 2.6rem); }
   .path-card .path-deliverable { margin-bottom: 1.6rem; font-size: .85rem; }
   .path-deliverable strong { font-weight: 500; }

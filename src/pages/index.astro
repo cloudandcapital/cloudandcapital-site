@@ -53,7 +53,7 @@ const featuredArticles = homepageWriting;
           <a class="path-card" href="/services" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_business">
             <ServiceWatermark kind="cost" />
             <p class="card-label">Technology Cost Review</p>
-            <h3>“Why does the bill keep growing?”</h3>
+            <h3 class="cost-question"><span>“Why does the</span> <span>bill keep growing?”</span></h3>
             <p>For teams with meaningful cloud, AI, or software costs. Understand what’s driving the bill and what deserves attention.</p>
             <p class="path-deliverable"><strong>You leave with</strong> a cost baseline, an explanation of the changes, and prioritized next steps.</p>
             <span class="path-action"><span>Explore the cost review</span><span aria-hidden="true">→</span></span>
@@ -410,10 +410,9 @@ const featuredArticles = homepageWriting;
   .section-heading { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(20rem, .9fr); gap: clamp(2.5rem, 7vw, 6.5rem); align-items: end; }
   .section-heading h2 { max-width: 18ch; margin-top: .9rem; font-size: clamp(2.65rem, 4vw, 4.2rem); line-height: .99; letter-spacing: -.035em; }
   .section-heading > p { max-width: 39ch; padding-left: 1.4rem; border-left: 2px solid rgba(107, 142, 127, .4); color: #4a4a4a; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.08rem, 1.55vw, 1.35rem); line-height: 1.52; text-wrap: balance; }
-  .path-grid { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 2.25rem; border-top: 0; border-bottom: 1px solid rgba(25, 23, 20, .14); }
-  .path-card { position: relative; min-height: 20.5rem; padding: 2.2rem; display: flex; flex-direction: column; border-right: 1px solid rgba(25, 23, 20, .12); }
-  .path-card:last-child { border-right: 0; }
-  .path-card-tint { background: var(--sage-strong); }
+  .path-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.15rem; margin-top: 2.25rem; }
+  .path-card { position: relative; min-width: 0; min-height: 20.5rem; padding: 2rem; display: flex; flex-direction: column; border: 1px solid var(--path-rule); border-radius: 12px; box-shadow: 0 8px 22px rgba(41, 49, 39, .055); }
+  .path-card-tint { background: #e8ece2; }
   .path-number { position: absolute; top: 1.875rem; right: 1.875rem; color: rgba(61, 96, 85, .22); font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(5.75rem, 7vw, 7rem); font-weight: 400; line-height: .8; letter-spacing: -.065em; pointer-events: none; }
   .card-label { color: #4f7167; }
   .path-card h3 { max-width: 13ch; margin-top: 1.2rem; font-size: clamp(1.9rem, 2.5vw, 2.65rem); line-height: 1.03; letter-spacing: -.025em; }
@@ -566,19 +565,19 @@ const featuredArticles = homepageWriting;
     --dark-rose: #82585b;
     --pale-rose: #f4ecea;
   }
-  .path-card { --path-accent: #2b4236; --path-rule: #5e776b; --path-hover: #a7b0a0; --path-rule-hover: #50675c; border-top: 2px solid var(--path-rule); transition: background-color 200ms ease, border-top-color 200ms ease; }
-  .path-card:first-child { --path-accent: #493029; --path-rule: #8f665f; background: var(--clay); --path-hover: #baa197; --path-rule-hover: #7e5750; }
-  .path-card:last-child { --path-accent: #34463b; --path-rule: #53675e; background: #bdb7ac; --path-hover: #b4aea2; --path-rule-hover: #45594e; }
+  .path-card { --path-accent: #3e5946; --path-rule: #cbd6c5; --path-hover: #e0e7d9; --path-rule-hover: #9aaf93; transition: background-color 200ms ease, border-color 200ms ease; }
+  .path-card:first-child { --path-accent: #785752; --path-rule: #dfc7c0; background: #f6e7e2; --path-hover: #f0ded8; --path-rule-hover: #b48c82; }
+  .path-card:last-child { --path-accent: #5c594b; --path-rule: #ded3c4; background: #f5efe5; --path-hover: #efe6d8; --path-rule-hover: #b9a68c; }
   .path-card .card-label, .path-card a { color: var(--path-accent); }
   .path-card .path-number { color: var(--path-rule); opacity: .14; }
   @media (max-width: 767px) { .path-card .path-number { font-size: 4.5rem; } }
   .path-card a:focus-visible { outline-color: var(--path-accent); }
   :global(.reveal-ready) .path-card[data-reveal] { transition: opacity .7s ease, transform .7s ease, background-color 200ms ease, border-top-color 200ms ease; }
   .path-card a span { display: inline-block; transition: transform 200ms ease; }
-  .path-card:focus-within { background: var(--path-hover); border-top-color: var(--path-rule-hover); }
+  .path-card:focus-within { background: var(--path-hover); border-color: var(--path-rule-hover); }
   .path-card:focus-within a span { transform: translateX(4px); }
   @media (hover: hover) {
-    .path-card:hover { background: var(--path-hover); border-top-color: var(--path-rule-hover); }
+    .path-card:hover { background: var(--path-hover); border-color: var(--path-rule-hover); }
     .path-card:hover a span { transform: translateX(4px); }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -845,6 +844,8 @@ const featuredArticles = homepageWriting;
   .hero-visual { align-self: center; }
   .path-card .card-label { max-width: none; min-height: 0; position: relative; z-index: 1; text-wrap: wrap; }
   .path-card h3 { max-width: 17ch; font-size: clamp(1.9rem, 2.4vw, 2.6rem); }
+  .path-card .cost-question { max-width: none; }
+  .cost-question > span { display: block; }
   .path-card .path-deliverable { margin-bottom: 1.6rem; font-size: .85rem; }
   .path-deliverable strong { font-weight: 500; }
   .path-number { opacity: .65; }
@@ -879,4 +880,10 @@ const featuredArticles = homepageWriting;
   @media (max-width: 1020px) { .hero-copy h1 { max-width: 18ch; } .hero-visual { width: min(100%, 34rem); justify-self: center; } }
   @media (max-width: 760px) { .example-grid, .learning-grid { grid-template-columns: minmax(0, 1fr); } .path-card .card-label { min-height: auto; } .path-card h3 { max-width: 21ch; } .path-card .path-deliverable { margin-bottom: 0; } .review-examples { padding-block: 3.5rem; } .hero-visual { width: min(100%, 30rem); } .hero-actions { gap: .8rem; } .hero-actions .button { flex: 1 1 auto; text-align: center; justify-content: center; } }
   @media (prefers-reduced-motion: reduce) { .example-card { transition: none; } }
+  @media (max-width: 1020px) {
+    .paths .path-grid { grid-template-columns: minmax(0, 1fr); }
+    .paths .path-card { min-height: auto; margin-inline: 0; padding: 2rem; border: 1px solid var(--path-rule); }
+    .paths .path-card h3 { max-width: 24ch; }
+    .paths .path-action { margin-top: 1.5rem; }
+  }
 </style>

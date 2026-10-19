@@ -4,9 +4,9 @@ import { tools } from '../data/siteContent';
 const lens = tools.find(tool => tool.slug === 'ai-cost-lens');
 const guard = tools.find(tool => tool.slug === 'cloud-cost-guard-lumen');
 const choices = [
-  lens && { goal: 'Understand my AI costs.', name: 'AI Cost Lens', category: 'AI spending', description: 'Estimate an AI task’s cost, review a bill, or compare options with the usage and results you have.', href: lens.href, action: 'Explore AI costs', destination: 'ai_cost_lens', external: true, image: '/images/ai-cost-lens-cost-anatomy-wide.png', imageAlt: 'AI Cost Lens example comparing model, infrastructure, and human review costs for two AI routes', imageWidth: 2190, imageHeight: 964 },
-  guard && { goal: 'Find out why the bill grew.', name: 'Cloud Cost Guard', category: 'Technology spending', description: 'Explore cloud, AI, and software spending. See what changed and which records explain it.', href: guard.href, action: 'Explore the spending', destination: 'cloud_cost_guard', external: true, image: '/images/cloud-cost-guard-spend-reconciliation.jpg', imageAlt: 'Cloud Cost Guard screen showing reconciled cloud, AI, and software spending', imageWidth: 1216, imageHeight: 474 },
-  { goal: 'Keep track of renewals.', name: 'Software Renewal Tracker', category: 'Software subscriptions', description: 'Keep software charges, renewal dates, and cancellation deadlines together. See what is due each month.', href: '/tools/software-renewal-tracker', action: 'Open the renewal tracker', destination: 'software_renewal_tracker', external: false, image: '/images/software-renewal-tracker-preview.jpg', imageAlt: 'Software Renewal Tracker showing monthly equivalent costs, upcoming charges, and an illustrative subscription record', imageWidth: 1109, imageHeight: 765 },
+  lens && { goal: 'Understand my AI costs.', name: 'AI Cost Lens', category: 'AI spending', description: 'Estimate an AI task, review a bill, or compare options using the numbers you have.', result: 'A clear cost breakdown, including review and rework time when you add it.', href: lens.href, action: 'Open AI Cost Lens', destination: 'ai_cost_lens', external: true, image: '/images/ai-cost-lens-cost-anatomy-wide.png', imageAlt: 'AI Cost Lens example comparing model, infrastructure, and human review costs for two AI routes', imageWidth: 2190, imageHeight: 964 },
+  guard && { goal: 'Find out why the bill grew.', name: 'Cloud Cost Guard', category: 'Technology spending · Demo', description: 'Explore a sample cloud, AI, and software bill, with the records behind each total.', result: 'See what drove the costs and which questions deserve a closer look.', href: guard.href, action: 'Explore the demo', destination: 'cloud_cost_guard', external: true, image: '/images/cloud-cost-guard-spend-reconciliation.jpg', imageAlt: 'Cloud Cost Guard screen showing reconciled cloud, AI, and software spending', imageWidth: 1216, imageHeight: 474 },
+  { goal: 'Keep track of renewals.', name: 'Software Renewal Tracker', category: 'Software subscriptions', description: 'Add your software charges, renewal dates, and cancellation deadlines.', result: 'See what is due each month and when to decide whether to keep a subscription.', href: '/tools/software-renewal-tracker', action: 'Open the renewal tracker', destination: 'software_renewal_tracker', external: false, image: '/images/software-renewal-tracker-preview.jpg', imageAlt: 'Software Renewal Tracker showing monthly equivalent costs, upcoming charges, and an illustrative subscription record', imageWidth: 1109, imageHeight: 765 },
 ].filter(Boolean);
 ---
 <section class="free-tools" id="tools" aria-labelledby="tools-title">
@@ -14,7 +14,7 @@ const choices = [
     <div class="tools-intro" data-reveal>
       <p class="tools-eyebrow">Free tools</p>
       <h2 id="tools-title">Find a tool for the task.</h2>
-      <p>Choose what you want to understand or get organized.</p>
+      <p>Understand an AI bill, explore technology costs, or get ahead of software renewals.</p>
     </div>
     <div class="tool-choices">
       {choices.map(choice => choice && (
@@ -24,6 +24,7 @@ const choices = [
             <h3>{choice.name}</h3>
             <p class="tool-question">{choice.goal}</p>
             <p class="tool-description">{choice.description}</p>
+            <p class="tool-result"><span>What you get</span>{choice.result}</p>
             <span class="tool-action"><ActionLabel label={choice.action} /></span>
           </div>
           <div class="tool-window">
@@ -56,7 +57,11 @@ const choices = [
   .tool-choice h3 { margin-top: .8rem; font: 400 clamp(2.3rem, 3.2vw, 3.2rem)/1.02 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; }
   .tool-choice:first-child h3 { font-size: clamp(3rem, 4.1vw, 4.3rem); }
   .tool-question { margin-top: 1rem; font: italic 400 1.55rem/1.2 'Cormorant Garamond', Georgia, serif; }
-  .tool-description { margin: .9rem 0 1.5rem; color: #44483f; font-size: .9rem; line-height: 1.75; }
+  .tool-description { margin: .9rem 0; color: #44483f; font-size: .9rem; line-height: 1.75; }
+  .tool-result { margin: 0 0 1.5rem; padding-top: .9rem; border-top: 1px solid #3d605526; font-size: .9rem; line-height: 1.65; }
+  .tool-result > span { display: block; margin-bottom: .35rem; font: 500 .61rem/1.5 'DM Mono', monospace; letter-spacing: .07em; text-transform: uppercase; color: var(--tool-accent); }
+  .tool-choice:first-child .tool-result { border-color: #faf6ef40; }
+  .tool-choice:last-child .tool-result { border-color: #89534f30; }
   .tool-action { margin-top: auto; color: var(--tool-accent); }
   .tool-choice:first-child .tool-description { color: #faf6ef; }
   .tool-window { position: relative; isolation: isolate; min-width: 0; margin: 0 10px 10px 0; border-radius: 12px; background: #faf6ef; color: #625d55; box-shadow: 0 12px 26px -16px #18282073; }

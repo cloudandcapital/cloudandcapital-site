@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BusinessArtwork from '../components/BusinessArtwork.astro';
 import ServiceWatermark from '../components/ServiceWatermark.astro';
+import ExampleAccent from '../components/ExampleAccent.astro';
 import {
   about,
   contactLink,
@@ -86,12 +87,14 @@ const featuredArticles = homepageWriting;
         </div>
         <div class="example-grid">
           <a href="/services/examples#cost" class="example-card" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_examples">
-            <p class="card-label">Technology costs</p><h3>A growing product.<br />An even faster-growing bill.</h3>
+            <div class="example-card-top"><p class="card-label">Technology costs</p><ExampleAccent kind="cost" /></div>
+            <h3><span>A growing product.</span> <span>An even faster growing bill.</span></h3>
             <p>Follow three months of spending and investigate why the AI cost per accepted result rose.</p>
             <span class="example-action"><span>See the cost review</span><span class="link-arrow" aria-hidden="true">→</span></span>
           </a>
           <a href="/services/examples#workflow" class="example-card" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_examples">
-            <p class="card-label">Recurring work</p><h3>The same numbers.<br />Copied into every report.</h3>
+            <div class="example-card-top"><p class="card-label">Recurring work</p><ExampleAccent kind="workflow" /></div>
+            <h3><span>The same numbers.</span> <span>Copied into every report.</span></h3>
             <p>See why a controlled reporting template could be a better first step than adding AI.</p>
             <span class="example-action"><span>See the workflow review</span><span class="link-arrow" aria-hidden="true">→</span></span>
           </a>
@@ -850,10 +853,19 @@ const featuredArticles = homepageWriting;
   .path-action { font-size: .75rem; letter-spacing: .015em; }
   .service-scope-note { margin-top: 1.3rem; color: #595b52; font-size: .85rem; line-height: 1.6; }
   .review-examples { padding: 4.5rem 0; background: #e9eee6; }
+  .review-examples .section-heading { display: block; }
+  .review-examples .section-heading h2 { max-width: none; font-size: clamp(2.2rem, 4vw, 4.2rem); line-height: 1.06; }
   .example-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1.6rem; }
-  .example-card { display: flex; flex-direction: column; padding: clamp(1.75rem, 3vw, 2.8rem); border: 1px solid #c2cdbf; color: #24211e; text-decoration: none; background: #f8f8f1; transition: background-color .2s; }
+  .example-card { display: flex; flex-direction: column; min-width: 0; padding: clamp(1.75rem, 3vw, 2.8rem); border: 1px solid #c2cdbf; border-radius: 12px; box-shadow: 0 8px 22px rgba(41,49,39,.055); color: #24211e; text-decoration: none; background: #f8f8f1; transition: background-color .2s; }
   .example-card:last-child { background: #f4ebe5; border-color: #d6c7bd; }
-  .example-card h3 { margin: 1.4rem 0 1rem; font-size: clamp(2rem, 3vw, 3rem); line-height: 1.05; }
+  .example-card-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .example-card-top .card-label { margin: 0; }
+  .example-card h3 { margin: 1.3rem 0 1rem; font-size: clamp(1.8rem, 2.7vw, 2.5rem); line-height: 1.12; letter-spacing: -.025em; }
+  .example-card h3 > span { display: block; }
+  .example-card > p:not(.card-label) { margin-bottom: 1.6rem; }
+  @media (min-width: 1021px) { .review-examples .section-heading h2, .example-card h3 > span { white-space: nowrap; } }
+  @media (max-width: 1020px) { .example-grid { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 480px) { .example-card h3 { font-size: clamp(1.65rem, 7.2vw, 2rem); } }
   .example-card > p:not(.card-label) { max-width: 46ch; font-size: .95rem; line-height: 1.7; }
   .example-action { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 44px; margin-top: auto; padding-top: 2rem; color: #3d6055; font: 500 .8rem/1.5 'DM Mono', monospace; }
   .example-card:hover { background: #f0f3e9; }

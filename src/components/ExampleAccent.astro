@@ -1,0 +1,35 @@
+---
+interface Props { kind: 'cost' | 'workflow'; }
+const { kind } = Astro.props;
+---
+<div class:list={['example-accent', kind]} aria-hidden="true">
+  <div class="accent-back"></div>
+  <div class="accent-sheet">
+    <div class="accent-heading"></div>
+    {kind === 'cost' ? (
+      <div class="accent-bars"><i></i><i></i><i></i><i></i></div>
+    ) : (
+      <div class="accent-rows"><i></i><i></i><i></i></div>
+    )}
+  </div>
+  {kind === 'cost' ? <div class="accent-marker"><span></span></div> : <div class="accent-check"><svg viewBox="0 0 24 24" fill="none"><path d="m6 12 4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></div>}
+</div>
+<style>
+  .example-accent { position: relative; flex: 0 0 auto; width: 7.5rem; height: 5rem; }
+  .accent-back { position: absolute; inset: 8px 13px 4px 15px; border: 1px solid #b4c3b1; border-radius: 8px; background: #dce4d7; transform: rotate(8deg); box-shadow: 3px 5px 9px #3e59460c; }
+  .accent-sheet { position: absolute; inset: 5px 16px 5px 10px; padding: 11px 12px; border: 1px solid #d7d9cb; border-radius: 8px; background: linear-gradient(145deg, #fffef8, #f1f0e5); transform: rotate(-7deg); box-shadow: 2px 3px 0 #b5bfa640, 6px 9px 14px #3e59461a; }
+  .accent-heading { width: 43%; height: 3px; border-radius: 2px; background: #81947d; opacity: .65; }
+  .accent-bars { display: flex; align-items: end; gap: 6px; height: 32px; margin-top: 6px; border-bottom: 1px solid #b8c3af; }
+  .accent-bars i { width: 10px; height: 35%; border-radius: 3px 3px 0 0; background: #aabb9f; box-shadow: inset -2px 0 #839a7c33; }
+  .accent-bars i:nth-child(2) { height: 54%; }
+  .accent-bars i:nth-child(3) { height: 73%; }
+  .accent-bars i:last-child { height: 100%; background: #c49385; }
+  .accent-marker { position: absolute; right: 8px; top: 1px; width: 21px; height: 21px; border: 1px solid #ceaa9c; border-radius: 50%; background: #edd7cb; box-shadow: 1px 3px 0 #b58d7e40, 3px 5px 9px #78575214; }
+  .accent-marker span { display: block; width: 5px; height: 5px; margin: 7px; border-radius: 50%; background: #a97769; }
+  .workflow .accent-back { background: #e6d6cb; border-color: #cfb7a9; }
+  .accent-rows { display: grid; gap: 6px; margin-top: 10px; }
+  .accent-rows i { display: block; height: 5px; border-radius: 2px; background: linear-gradient(90deg, #9daf98 0 12%, transparent 12% 23%, #c8cfbd 23% 100%); }
+  .accent-rows i:last-child { width: 75%; }
+  .accent-check { position: absolute; bottom: 0; right: 7px; width: 28px; height: 28px; border: 1px solid #a2b69b; border-radius: 8px; background: linear-gradient(145deg, #dce7d5, #b9cbb1); color: #4e6b46; transform: rotate(7deg); box-shadow: 1px 3px 0 #8da38150, 3px 5px 9px #3e59461a; }
+  .accent-check svg { display: block; width: 24px; height: 24px; margin: 1px; }
+</style>

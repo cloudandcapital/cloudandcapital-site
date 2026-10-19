@@ -4,7 +4,7 @@ Created October 19, 2026 with the built-in image-generation tool using the image
 
 Project asset: `public/images/tools-folder-3d.webp`, 512 × 512 RGBA. The transparent generated PNG was proportionally resized and converted to WebP; its composition and transparency are preserved. The original PNG remains in the generation output folder.
 
-The folder sits in normal document flow directly underneath the homepage Browse all free tools button, centred, with a responsive 120–144px display width. The art is decorative: empty alt text, aria-hidden, no pointer events, explicit intrinsic dimensions, lazy loading, and async decoding. Its ivory, sage, and rose-glass surfaces echo the existing service illustrations.
+The folder sits in normal document flow directly above the homepage Browse all free tools button, centred, with a responsive 120–144px display width. The art is decorative: empty alt text, aria-hidden, no pointer events, explicit intrinsic dimensions, lazy loading, and async decoding. Its ivory, sage, and rose-glass surfaces echo the existing service illustrations.
 
 ## Final generation prompt
 

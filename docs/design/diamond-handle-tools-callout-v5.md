@@ -4,7 +4,7 @@ Hero asset: `public/images/cloud-capital-hero-diamond-v5.webp` (1402 × 1122, tr
 
 Created with the built-in image-generation tool, then packaged as WebP with transparency preserved. The entire magnifying-glass handle is covered in closely set diamonds. Its smaller size, pink rim, white cloud, and black dollar sign remain.
 
-The hero buttons return to sage and clay pink. The clay-pink button reads "Try the tools" and keeps its existing #tools destination and analytics. A script-lettered "they’re free!" note with a curved arrow sits above it in normal document flow so it does not collide with nearby content as the buttons stack. The note is a font-independent SVG (`public/images/free-tools-note.svg`) using outlined Z003 cursive lettering and a drawn arrow. Its image alternative text makes the free offer accessible.
+The hero buttons return to sage and clay pink. The clay-pink button reads "Try the tools" and keeps its existing #tools destination and analytics. A thin black, hand-drawn "they’re free!" note sits to its right, with a curved arrow pointing left toward the button's right edge. The note is positioned relative to the button so it adds no height above the button row. On mobile, horizontal space beside the button keeps the note within the viewport. The font-independent SVG (`public/images/free-tools-note.svg`) uses custom monoline pen paths for both lettering and arrow. Its image alternative text makes the free offer accessible.
 
 ## Final image prompt
 

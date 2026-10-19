@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BusinessArtwork from '../components/BusinessArtwork.astro';
 import ServiceWatermark from '../components/ServiceWatermark.astro';
-import ExampleAccent from '../components/ExampleAccent.astro';
 import {
   about,
   contactLink,
@@ -87,13 +86,13 @@ const featuredArticles = homepageWriting;
         </div>
         <div class="example-grid">
           <a href="/services/examples#cost" class="example-card" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_examples">
-            <div class="example-card-top"><p class="card-label">Technology costs</p><ExampleAccent kind="cost" /></div>
+            <p class="card-label">Technology costs</p>
             <h3><span>A growing product.</span> <span>An even faster growing bill.</span></h3>
             <p>Follow three months of spending and investigate why the AI cost per accepted result rose.</p>
             <span class="example-action"><span>See the cost review</span><span class="link-arrow" aria-hidden="true">→</span></span>
           </a>
           <a href="/services/examples#workflow" class="example-card" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_examples">
-            <div class="example-card-top"><p class="card-label">Recurring work</p><ExampleAccent kind="workflow" /></div>
+            <p class="card-label">Recurring work</p>
             <h3><span>The same numbers.</span> <span>Copied into every report.</span></h3>
             <p>See why a controlled reporting template could be a better first step than adding AI.</p>
             <span class="example-action"><span>See the workflow review</span><span class="link-arrow" aria-hidden="true">→</span></span>
@@ -121,7 +120,7 @@ const featuredArticles = homepageWriting;
               <p>Estimate a route from published prices. With matched cost, usage, and checked outcomes, see whether a cheaper option still holds up after quality and rework.</p>
               <div class="tool-actions">
                 <a class="tool-launch" href={aiCostLens.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="homepage_featured_tools">Open AI Cost Lens <span class="link-arrow" aria-hidden="true">→</span></a>
-                <a class="tool-source" href={aiCostLens.sourceHref} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens_github" data-analytics-source="homepage_featured_tools"><span class="tool-source-label">View the source</span><span class="tool-source-arrow" aria-hidden="true">→</span></a>
+                <a class="tool-source" href={aiCostLens.sourceHref} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens_github" data-analytics-source="homepage_featured_tools"><span class="tool-source-label">View the source</span><span class="tool-source-arrow link-arrow" aria-hidden="true">→</span></a>
               </div>
             </div>
             <a class="flagship-window" href={aiCostLens.href} target="_blank" rel="noopener noreferrer" aria-label="Open AI Cost Lens" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="homepage_featured_tools">
@@ -168,16 +167,14 @@ const featuredArticles = homepageWriting;
           </div>
           {signalAudit && (
             <a class="small-tool" href={signalAudit.href} data-analytics-event="cta_click" data-analytics-destination="signal_audit" data-analytics-source="homepage_featured_tools">
-              <span>Signal Audit</span>
+              <span class="small-tool-label"><span>Signal Audit</span><span class="link-arrow" aria-hidden="true">→</span></span>
               <p>Find where technology cost accountability is breaking down.</p>
-              <strong class="link-arrow" aria-hidden="true">→</strong>
             </a>
           )}
           {interactiveLab && (
             <a class="small-tool" href={interactiveLab.href} data-analytics-event="cta_click" data-analytics-destination="interactive_lab" data-analytics-source="homepage_featured_tools">
-              <span>Interactive Lab</span>
+              <span class="small-tool-label"><span>Interactive Lab</span><span class="link-arrow" aria-hidden="true">→</span></span>
               <p>Organize the evidence around a real technology spend decision.</p>
-              <strong class="link-arrow" aria-hidden="true">→</strong>
             </a>
           )}
         </div>
@@ -858,8 +855,6 @@ const featuredArticles = homepageWriting;
   .example-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1.6rem; }
   .example-card { display: flex; flex-direction: column; min-width: 0; padding: clamp(1.75rem, 3vw, 2.8rem); border: 1px solid #c2cdbf; border-radius: 12px; box-shadow: 0 8px 22px rgba(41,49,39,.055); color: #24211e; text-decoration: none; background: #f8f8f1; transition: background-color .2s; }
   .example-card:last-child { background: #f4ebe5; border-color: #d6c7bd; }
-  .example-card-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-  .example-card-top .card-label { margin: 0; }
   .example-card h3 { margin: 1.3rem 0 1rem; font-size: clamp(1.8rem, 2.7vw, 2.5rem); line-height: 1.12; letter-spacing: -.025em; }
   .example-card h3 > span { display: block; }
   .example-card > p:not(.card-label) { margin-bottom: 1.6rem; }
@@ -900,7 +895,7 @@ const featuredArticles = homepageWriting;
   .home :is(.path-action, .example-action, .tool-card-action, .article-action, .text-action, .tool-source, .learning-market-link, .browse-tools-link, .contribution-link):is(a, span) {
     display: inline-flex;
     align-items: center;
-    gap: 1rem;
+    gap: .45rem;
     min-height: 50px;
     font: 500 .75rem/1.4 'DM Mono', monospace;
     letter-spacing: .015em;
@@ -908,8 +903,8 @@ const featuredArticles = homepageWriting;
     text-decoration: none;
   }
   .home :is(.path-action, .example-action, .tool-card-action, .article-action):is(a, span) {
-    width: 100%;
-    justify-content: space-between;
+    width: fit-content;
+    justify-content: flex-start;
     padding-top: .35rem;
   }
   .home :is(.path-action, .example-action, .tool-card-action, .article-action, .text-action, .tool-source, .learning-market-link, .browse-tools-link, .contribution-link):is(a, span) > span:first-child {
@@ -936,4 +931,17 @@ const featuredArticles = homepageWriting;
     .home .link-arrow { transition: none; }
     .home a:is(:hover, :focus-visible) .link-arrow { transform: none; }
   }
+
+  .home .tools-section .small-tool { grid-template-columns: minmax(0, 1fr); }
+  .home .tools-section .small-tool > .small-tool-label {
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+    gap: .45rem;
+    font: 500 .75rem/1.4 'DM Mono', monospace;
+    letter-spacing: .015em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .home .small-tool-label > span:first-child { text-decoration: underline; text-underline-offset: .28rem; }
 </style>

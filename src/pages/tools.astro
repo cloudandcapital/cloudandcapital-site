@@ -73,6 +73,10 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
         <p class="eyebrow">Choose a starting point</p>
         <h2 id="starting-title">Choose where to begin.</h2>
         <div class="product-features">
+          <a class="product-feature renewal-feature" href="/tools/software-renewal-tracker" data-analytics-event="cta_click" data-analytics-destination="software_renewal_tracker" data-analytics-source="work_decision_tools">
+            <div class="product-copy"><span class="product-status">Free tracker</span><h3>Software Renewal Tracker</h3><p class="product-question">What renews next, and when do I need to decide?</p><p>Add your software charges, renewal dates, and cancellation deadlines. See upcoming charges and monthly equivalent costs in one place.</p><span class="product-action"><span>Open the renewal tracker</span><span aria-hidden="true">→</span></span></div>
+            <div class="product-media"><img src="/images/software-renewal-tracker-preview.jpg" alt="Software Renewal Tracker showing upcoming charges, monthly equivalent costs, and an example subscription record" width="1109" height="765" loading="lazy" /></div>
+          </a>
           {guard && (
             <a class="product-feature guard-feature" href={guard.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="work_decision_tools">
               <div class="product-copy"><span class="product-status">Interactive demo</span><h3>Cloud Cost Guard</h3><p class="product-question">What moved the bill?</p><p>Explore a sample cloud, AI, and software bill. Follow the records behind the totals to see what drove the costs and which questions to ask next.</p><span class="product-action"><span>Explore the cost demo</span><span aria-hidden="true">→</span></span></div>
@@ -175,6 +179,9 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
   .product-feature { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2rem, 4vw, 4rem); align-items: center; min-width: 0; padding: clamp(2rem, 4vw, 3.5rem); transition: background-color .2s ease; }
   .guard-feature { background: var(--sage-surface); }
   .guard-feature:hover, .guard-feature:focus-visible { background: var(--sage-surface-hover); }
+  .renewal-feature { border: 1px solid #d5b4aa; border-radius: 16px; background: #f3e2dc; }
+  .renewal-feature:hover, .renewal-feature:focus-visible { background: #ecd6cf; }
+  .renewal-feature .product-status { color: #89534f; }
   .tape-feature { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); background: var(--cream); border-top: 1px solid rgba(128,87,81,.48); }
   .tape-feature:hover, .tape-feature:focus-visible { background: var(--cream-dark); }
   .product-status { color: #3d6055; }
@@ -184,6 +191,7 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
   .product-copy > p:not(.product-question), .supporting-tool > p:not(.product-question) { max-width: 54ch; margin-top: 1rem; color: #4b4942; font-size: .96rem; line-height: 1.72; }
   .product-action { display: inline-flex; align-items: center; gap: .7rem; min-height: 44px; margin-top: 1.5rem; color: #3d6055; font: 500 .72rem/1.4 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
   .product-feature .product-action { padding: .85rem 1.2rem; background: var(--brand-green); color: #f5eee9; border-radius: 8px; }
+  .renewal-feature .product-action { background: #89534f; }
   .tape-feature .product-action { background: var(--rose); color: var(--brand-ink); }
   .tape-feature:hover .product-action { background: var(--rose-hover); }
   .product-media { display: flex; align-items: center; min-width: 0; height: clamp(13rem, 17vw, 16rem); }

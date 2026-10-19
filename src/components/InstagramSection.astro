@@ -1,0 +1,39 @@
+---
+import ActionLabel from './ActionLabel.astro';
+import { instagramPosts, instagramProfile } from '../data/instagram';
+---
+<section class="instagram-section" aria-labelledby="instagram-title">
+  <div class="instagram-shell">
+    <div class="instagram-intro" data-reveal>
+      <div><p class="instagram-eyebrow">From Instagram</p><h2 id="instagram-title">A little money talk.<br />A little everyday life.</h2></div>
+      <p>Money, markets, useful AI, and the occasional reminder to go outside.</p>
+    </div>
+    <div class="instagram-grid" data-reveal>
+      {instagramPosts.map(post => (
+        <a class="instagram-post" href={post.href} target="_blank" rel="noopener noreferrer" aria-label={`${post.alt} — open on Instagram`} data-analytics-event="cta_click" data-analytics-destination="instagram" data-analytics-source="homepage_instagram">
+          <img src={post.image} alt={post.alt} width={post.width} height={post.height} loading="lazy" decoding="async" />
+          <span class="post-type">{post.type}</span>
+        </a>
+      ))}
+    </div>
+    <a class="instagram-follow" href={instagramProfile} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="instagram" data-analytics-source="homepage_instagram"><ActionLabel label="Follow @cloud.and.capital" /></a>
+  </div>
+</section>
+<style>
+  .instagram-section { padding: clamp(3.5rem, 6vw, 5.5rem) 0; color: #24211e; background: #f3e4de; border-top: 1px solid #dec9bf; }
+  .instagram-shell { width: min(calc(100% - 4rem), 78rem); margin-inline: auto; }
+  .instagram-intro { display: flex; justify-content: space-between; align-items: end; gap: 2rem; }
+  .instagram-eyebrow { display: flex; align-items: center; gap: .75rem; color: #89534f; font: 500 .65rem/1.5 'DM Mono', monospace; letter-spacing: .09em; text-transform: uppercase; }
+  .instagram-eyebrow::after { content: ''; width: 2.7rem; height: 1px; background: currentColor; opacity: .7; }
+  .instagram-intro h2 { margin-top: .9rem; font: 400 clamp(2.65rem, 4vw, 4.2rem)/1.02 'Cormorant Garamond', Georgia, serif; letter-spacing: -.035em; }
+  .instagram-intro > p { max-width: 30ch; color: #65534c; font-size: 1rem; line-height: 1.75; }
+  .instagram-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .8rem; margin-top: 2.5rem; }
+  .instagram-post { position: relative; display: block; min-width: 0; aspect-ratio: 4 / 5; padding: .35rem; border: 1px solid #dac2b8; border-radius: 12px; background: #faf6f0; overflow: hidden; box-shadow: 0 6px 16px #7857520d; }
+  .instagram-post img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
+  .post-type { position: absolute; right: .65rem; top: .65rem; padding: .2rem .4rem; border: 1px solid #d9c5bd; border-radius: 4px; background: #faf6f0ed; color: #684d46; font: 500 .53rem/1.4 'DM Mono', monospace; text-transform: uppercase; }
+  .instagram-follow { display: inline-block; margin-top: 1.2rem; color: #89534f; text-decoration: none; }
+  .instagram-post:focus-visible, .instagram-follow:focus-visible { outline: 3px solid #89534f; outline-offset: 4px; }
+  .instagram-post:hover { border-color: #a5756b; }
+  @media (max-width: 1020px) { .instagram-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 760px) { .instagram-shell { width: calc(100% - 2.5rem); } .instagram-intro { display: block; } .instagram-intro > p { margin-top: 1.2rem; max-width: 40ch; } .instagram-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; margin-top: 2rem; } }
+</style>

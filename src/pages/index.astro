@@ -2,19 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BusinessArtwork from '../components/BusinessArtwork.astro';
 import ServiceWatermark from '../components/ServiceWatermark.astro';
+import HomepageTools from '../components/HomepageTools.astro';
+import InstagramSection from '../components/InstagramSection.astro';
 import {
   about,
   contactLink,
   newsletter,
-  tools,
   homepageWriting,
 } from '../data/siteContent';
 
-const aiCostLens = tools.find((tool) => tool.slug === 'ai-cost-lens');
-const cloudCostGuard = tools.find((tool) => tool.slug === 'cloud-cost-guard-lumen');
-const marketTape = tools.find((tool) => tool.slug === 'market-tape');
-const signalAudit = tools.find((tool) => tool.slug === 'signal-audit');
-const interactiveLab = tools.find((tool) => tool.slug === 'interactive-lab');
 const featuredArticles = homepageWriting;
 ---
 
@@ -79,108 +75,7 @@ const featuredArticles = homepageWriting;
       </div>
     </section>
 
-    <section class="review-examples" aria-labelledby="examples-title">
-      <div class="shell">
-        <div class="section-heading" data-reveal>
-          <div><p class="eyebrow">Sample reviews</p><h2 id="examples-title">See what a review looks like.</h2></div>
-        </div>
-        <div class="example-grid">
-          <a href="/services/examples#cost" class="example-card" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_examples">
-            <p class="card-label">Technology Cost Review</p>
-            <h3>Find what’s driving the bill.</h3>
-            <p>Walk through a sample review of three months of cloud, AI, and software spending. See what changed, what needs checking, and the recommended next steps.</p>
-            <span class="example-action"><span>View the sample cost review</span><span class="link-arrow" aria-hidden="true">→</span></span>
-          </a>
-          <a href="/services/examples#workflow" class="example-card" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_examples">
-            <p class="card-label">Workflow Review</p>
-            <h3>Make monthly reporting easier.</h3>
-            <p>Walk through a sample review of a monthly reporting task. See where the time goes and why a shared template is the recommended starting point.</p>
-            <span class="example-action"><span>View the sample workflow review</span><span class="link-arrow" aria-hidden="true">→</span></span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="tools-section" id="tools" aria-labelledby="tools-title">
-      <div class="shell">
-        <div class="section-heading tools-heading" data-reveal>
-          <div>
-            <p class="eyebrow eyebrow-light">Tools</p>
-            <h2 id="tools-title">Tools for real questions.</h2>
-          </div>
-          <p>Everything here is free to use. Open a tool, see the method, or look through the code.<br /><a class="browse-tools-link" href="/tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_featured_tools"><span>Browse all free tools</span><span class="link-arrow" aria-hidden="true">→</span></a></p>
-        </div>
-
-        {aiCostLens && (
-          <article class="flagship-tool" data-reveal>
-            <div class="flagship-copy">
-              <p class="card-label card-label-gold">Featured tool · AI economics</p>
-              <h3>{aiCostLens.title}</h3>
-              <p class="tool-question">What did one usable result really cost?</p>
-              <p>Estimate a route from published prices. With matched cost, usage, and checked outcomes, see whether a cheaper option still holds up after quality and rework.</p>
-              <div class="tool-actions">
-                <a class="tool-launch" href={aiCostLens.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="homepage_featured_tools">Open AI Cost Lens <span class="link-arrow" aria-hidden="true">→</span></a>
-                <a class="tool-source" href={aiCostLens.sourceHref} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens_github" data-analytics-source="homepage_featured_tools"><span class="tool-source-label">View the source</span><span class="tool-source-arrow link-arrow" aria-hidden="true">→</span></a>
-              </div>
-            </div>
-            <a class="flagship-window" href={aiCostLens.href} target="_blank" rel="noopener noreferrer" aria-label="Open AI Cost Lens" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="homepage_featured_tools">
-              <span class="window-bar" aria-hidden="true">
-                <span class="window-dots"><i></i><i></i><i></i></span>
-                <span>lens.cloudandcapital.com · illustrative example</span>
-              </span>
-              <span class="window-canvas">
-                <img src="/images/ai-cost-lens-cost-anatomy-wide.png" alt="AI Cost Lens illustrative example comparing the full cost of two AI routes" width="2190" height="964" loading="lazy" />
-              </span>
-            </a>
-          </article>
-        )}
-
-        <div class="tool-grid">
-          {cloudCostGuard && (
-            <a class="tool-card" href={cloudCostGuard.href} target="_blank" rel="noopener noreferrer" data-reveal data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="homepage_featured_tools">
-              <div class="tool-preview">
-                <div class="preview-surface">
-                  <div class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>guard.cloudandcapital.com</span></div>
-                  <img src="/images/cloud-cost-guard-spend-reconciliation.jpg" alt="Published technology spend, passed reconciliation, and Cloud, Direct AI, and SaaS breakdown" width="1216" height="474" loading="lazy" />
-                </div>
-              </div>
-              <p class="card-label">Cloud, AI, and SaaS</p>
-              <h3>Cloud Cost Guard</h3>
-              <p class="tool-question">Why did the bill move?</p>
-              <p>Trace cost drivers, review anomalies, and understand the records behind the bill.</p>
-              <span class="tool-card-action"><span>Open Cloud Cost Guard</span><span class="link-arrow" aria-hidden="true">→</span></span>
-            </a>
-          )}
-
-          <a class="tool-card renewal-feature" href="/resources/software-renewal" data-reveal data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_featured_tools">
-            <div class="renewal-art" aria-hidden="true"><span>Before you renew.</span><svg viewBox="0 0 210 110" fill="none"><path d="M40 22H171M40 55H171M40 88H135" stroke="currentColor" stroke-width="2" opacity=".25"/><path d="m15 18 5 5 10-12m-15 40 5 5 10-12m-15 40 5 5 10-12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <p class="card-label">Free worksheet</p><h3>Software Renewal Checklist</h3>
-            <p class="tool-question">Is this subscription worth keeping?</p>
-            <p>Eight questions about the bill, how the tool is used, and what changing it would involve.</p>
-            <span class="tool-card-action"><span>Get the checklist</span><span class="link-arrow" aria-hidden="true">→</span></span>
-          </a>
-        </div>
-
-        <div class="smaller-tools" data-reveal>
-          <div class="smaller-tools-intro">
-            <h3 class="card-label">More tools</h3>
-          </div>
-          {signalAudit && (
-            <a class="small-tool" href={signalAudit.href} data-analytics-event="cta_click" data-analytics-destination="signal_audit" data-analytics-source="homepage_featured_tools">
-              <span class="small-tool-label"><span>Signal Audit</span><span class="link-arrow" aria-hidden="true">→</span></span>
-              <p>Find where technology cost accountability is breaking down.</p>
-            </a>
-          )}
-          {interactiveLab && (
-            <a class="small-tool" href={interactiveLab.href} data-analytics-event="cta_click" data-analytics-destination="interactive_lab" data-analytics-source="homepage_featured_tools">
-              <span class="small-tool-label"><span>Interactive Lab</span><span class="link-arrow" aria-hidden="true">→</span></span>
-              <p>Organize the evidence around a real technology spend decision.</p>
-            </a>
-          )}
-        </div>
-        <div class="tool-review-invitation" data-reveal><p>Want help making sense of your own technology spending?</p><a class="text-action" href="/services#technology-cost-review" data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_featured_tools"><span>Explore a Technology Cost Review</span><span class="link-arrow" aria-hidden="true">→</span></a></div>
-      </div>
-    </section>
+    <HomepageTools />
 
     <section class="about-section" id="about" aria-labelledby="about-title">
       <div class="site-shell">
@@ -255,15 +150,7 @@ const featuredArticles = homepageWriting;
       </div>
     </section>
 
-    <section class="learning-section" aria-labelledby="learning-title">
-      <div class="shell learning-grid">
-        <div data-reveal><p class="eyebrow">Investing &amp; trading</p><h2 id="learning-title">Here for your own money questions?</h2></div>
-        <div data-reveal><p>Learn investing and trading concepts through one-to-one lessons, worked examples, and guided practice. Bring the questions you’ve been wanting to ask.</p><a class="text-action" href="/learn" data-analytics-event="cta_click" data-analytics-destination="learn" data-analytics-source="homepage_path_personal"><span>Explore investing &amp; trading lessons</span><span class="link-arrow" aria-hidden="true">→</span></a>
-          {marketTape && <a class="learning-market-link" href={marketTape.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="market_tape" data-analytics-source="homepage_writing"><span>Explore market context in Market Tape</span><span class="link-arrow" aria-hidden="true">→</span></a>}
-          <p class="education-note">Education and research only. Cloud &amp; Capital does not provide personal investment advice.</p>
-        </div>
-      </div>
-    </section>
+    <InstagramSection />
 
     <section class="contact-section" id="contact" aria-labelledby="contact-title">
       <div class="site-shell contact-inner" data-reveal>
@@ -849,27 +736,6 @@ const featuredArticles = homepageWriting;
   .path-number { opacity: .65; }
   .path-action { font-size: .75rem; letter-spacing: .015em; }
   .service-scope-note { margin-top: 1.3rem; color: #595b52; font-size: .85rem; line-height: 1.6; }
-  .review-examples { --example-clay: #89534f; padding: 4.5rem 0; background: #e9eee6; }
-  .review-examples .eyebrow { color: var(--example-clay); }
-  .review-examples .eyebrow::after { opacity: .7; }
-  .review-examples .section-heading { display: block; }
-  .review-examples .section-heading h2 { max-width: none; font-size: clamp(2.2rem, 4vw, 4.2rem); line-height: 1.06; }
-  .example-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1.6rem; }
-  .example-card { display: flex; flex-direction: column; min-width: 0; padding: clamp(1.75rem, 3vw, 2.8rem); border: 1px solid #c2cdbf; border-radius: 12px; box-shadow: 0 8px 22px rgba(41,49,39,.055); color: #24211e; text-decoration: none; background: #f8f8f1; transition: background-color .2s; }
-  .example-card:last-child { background: #f3e2dc; border-color: #d5b4aa; box-shadow: inset 0 3px 0 #b47d76, 0 8px 22px rgba(41,49,39,.055); }
-  .example-card:last-child .card-label, .example-card:last-child .example-action { color: var(--example-clay); }
-  .example-card h3 { margin: 1.3rem 0 1rem; font-size: clamp(1.8rem, 2.7vw, 2.5rem); line-height: 1.12; letter-spacing: -.025em; }
-  .example-card h3 > span { display: block; }
-  .example-card > p:not(.card-label) { margin-bottom: 1.6rem; }
-  @media (min-width: 1021px) { .review-examples .section-heading h2, .example-card h3 > span { white-space: nowrap; } }
-  @media (max-width: 1020px) { .example-grid { grid-template-columns: minmax(0, 1fr); } }
-  @media (max-width: 480px) { .example-card h3 { font-size: clamp(1.65rem, 7.2vw, 2rem); } }
-  .example-card > p:not(.card-label) { max-width: 46ch; font-size: .95rem; line-height: 1.7; }
-  .example-action { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 44px; margin-top: auto; padding-top: 2rem; color: #3d6055; font: 500 .8rem/1.5 'DM Mono', monospace; }
-  .example-card:hover { background: #f0f3e9; }
-  .example-card:last-child:hover { background: #ecd6cf; }
-  .example-card:last-child:focus-visible { outline-color: var(--example-clay); }
-  .example-card:focus-visible { outline: 3px solid #3d6055; outline-offset: 4px; }
   .tools-section .renewal-art { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 1.5rem; min-height: 195px; margin-bottom: 2rem; background: #f4e8df; color: #805751; border-radius: 14px; }
   .renewal-art > span { max-width: 8ch; font: italic 2.7rem/1 'Cormorant Garamond', Georgia, serif; }
   .renewal-art svg { width: 45%; max-width: 210px; }

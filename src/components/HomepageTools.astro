@@ -1,0 +1,61 @@
+---
+import ActionLabel from './ActionLabel.astro';
+import { tools } from '../data/siteContent';
+const lens = tools.find(tool => tool.slug === 'ai-cost-lens');
+const guard = tools.find(tool => tool.slug === 'cloud-cost-guard-lumen');
+const choices = [
+  lens && { goal: 'Understand my AI costs.', name: 'AI Cost Lens', category: 'AI spending', description: 'Estimate an AI task’s cost, review a bill, or compare options with the usage and results you have.', href: lens.href, action: 'Explore AI costs', destination: 'ai_cost_lens', external: true },
+  guard && { goal: 'Find out why the bill grew.', name: 'Cloud Cost Guard', category: 'Technology spending', description: 'Explore cloud, AI, and software spending. See what changed and which records explain it.', href: guard.href, action: 'Explore the spending', destination: 'cloud_cost_guard', external: true },
+  { goal: 'Keep track of renewals.', name: 'Software Renewal Tracker', category: 'Software subscriptions', description: 'Keep software charges, renewal dates, and cancellation deadlines together. See what is due each month.', href: '/tools/software-renewal-tracker', action: 'Open the renewal tracker', destination: 'software_renewal_tracker', external: false },
+].filter(Boolean);
+---
+<section class="free-tools" id="tools" aria-labelledby="tools-title">
+  <div class="tools-shell">
+    <div class="tools-intro" data-reveal>
+      <p class="tools-eyebrow">Free tools</p>
+      <h2 id="tools-title">Find a tool for the task.</h2>
+      <p>Choose what you want to understand or get organized.</p>
+    </div>
+    <div class="tool-choices">
+      {choices.map(choice => choice && (
+        <a class="tool-choice" href={choice.href} target={choice.external ? '_blank' : undefined} rel={choice.external ? 'noopener noreferrer' : undefined} data-reveal data-analytics-event="cta_click" data-analytics-destination={choice.destination} data-analytics-source="homepage_featured_tools">
+          <p class="tool-category">{choice.category}</p>
+          <h3>{choice.goal}</h3>
+          <p class="tool-name">{choice.name}</p>
+          <p class="tool-description">{choice.description}</p>
+          <span class="tool-action"><ActionLabel label={choice.action} /></span>
+        </a>
+      ))}
+    </div>
+    <div class="tools-more" data-reveal>
+      <p>Looking for market research, worksheets, or more ways to explore?</p>
+      <a href="/tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_featured_tools"><ActionLabel label="Browse all free tools" /></a>
+    </div>
+  </div>
+</section>
+<style>
+  .free-tools { padding: clamp(3.5rem, 6vw, 5.5rem) 0; background: #e9eee6; color: #24211e; }
+  .tools-shell { width: min(calc(100% - 4rem), 78rem); margin-inline: auto; }
+  .tools-eyebrow, .tool-category, .tool-name { font: 500 .65rem/1.5 'DM Mono', monospace; letter-spacing: .09em; text-transform: uppercase; }
+  .tools-eyebrow { display: flex; align-items: center; gap: .75rem; color: #89534f; }
+  .tools-eyebrow::after { content: ''; width: 2.7rem; height: 1px; background: currentColor; opacity: .7; }
+  .tools-intro h2 { margin-top: .9rem; font: 400 clamp(2.65rem, 4vw, 4.2rem)/1.05 'Cormorant Garamond', Georgia, serif; letter-spacing: -.035em; }
+  .tools-intro > p:last-child { margin-top: 1rem; color: #51564e; font-size: 1rem; line-height: 1.7; }
+  .tool-choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.15rem; margin-top: 2.25rem; }
+  .tool-choice { --tool-accent: #3d6055; display: flex; flex-direction: column; min-width: 0; padding: 2rem; border: 1px solid #ccd6c6; border-radius: 12px; background: #faf9f3; color: inherit; text-decoration: none; box-shadow: 0 8px 22px #2931270e; transition: background-color 200ms ease, border-color 200ms ease; }
+  .tool-choice:last-child { --tool-accent: #89534f; border-color: #d5b4aa; background: #f3e2dc; box-shadow: inset 0 3px 0 #b47d76, 0 8px 22px #2931270e; }
+  .tool-category { color: var(--tool-accent); }
+  .tool-choice h3 { margin-top: 1.4rem; font: 400 clamp(1.9rem, 2.5vw, 2.6rem)/1.05 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; text-wrap: balance; }
+  .tool-name { margin-top: 1rem; color: var(--tool-accent); letter-spacing: .025em; }
+  .tool-description { margin: .9rem 0 1.5rem; color: #44483f; font-size: .9rem; line-height: 1.75; }
+  .tool-action { margin-top: auto; color: var(--tool-accent); }
+  .tool-choice:hover { background: #f0f3e9; border-color: #a4b59c; }
+  .tool-choice:last-child:hover { background: #ecd6cf; border-color: #b47d76; }
+  .tool-choice:focus-visible, .tools-more a:focus-visible { outline: 3px solid #89534f; outline-offset: 4px; }
+  .tools-more { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem 2rem; padding-top: 1.6rem; }
+  .tools-more p { color: #51564e; font-size: .9rem; line-height: 1.7; }
+  .tools-more a { color: #3d6055; text-decoration: none; }
+  @media (max-width: 1020px) { .tool-choices { grid-template-columns: minmax(0, 1fr); } .tool-choice h3 { text-wrap: wrap; } }
+  @media (max-width: 760px) { .tools-shell { width: calc(100% - 2.5rem); } .tool-choice { padding: 1.75rem; } }
+  @media (prefers-reduced-motion: reduce) { .tool-choice { transition: none; } }
+</style>

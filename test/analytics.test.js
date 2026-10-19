@@ -45,7 +45,7 @@ test('the shared loader disables advertising signals and layouts contain no dupl
 });
 
 test('all static CTA metadata is complete and accepted by the allowlist', async () => {
-  const files = ['src/pages/index.astro', 'src/pages/tools.astro', 'src/pages/writing.astro', 'src/components/SignalAuditResults.astro'];
+  const files = ['src/pages/index.astro', 'src/pages/tools.astro', 'src/pages/writing.astro', 'src/components/SignalAuditResults.astro', 'src/components/HomepageTools.astro', 'src/components/InstagramSection.astro'];
   let count = 0;
   for (const file of files) {
     const text = await source(file);
@@ -53,6 +53,12 @@ test('all static CTA metadata is complete and accepted by the allowlist', async 
       count += 1;
       const destination = tag[0].match(/data-analytics-destination="([^"]+)"/)?.[1];
       const sourceValue = tag[0].match(/data-analytics-source="([^"]+)"/)?.[1];
+      if (tag[0].includes('data-analytics-destination={choice.destination}')) {
+        for (const rowDestination of ['ai_cost_lens', 'cloud_cost_guard', 'software_renewal_tracker']) {
+          assert.ok(validateAnalyticsEvent('cta_click', { destination: rowDestination, source: sourceValue }), `${file}: ${rowDestination}`);
+        }
+        continue;
+      }
       if (tag[0].includes('data-analytics-destination={item.destination}')) {
         for (const rowDestination of ['cloud_cost_guard', 'market_tape', 'signal_audit', 'interactive_lab']) {
           assert.ok(validateAnalyticsEvent('cta_click', { destination: rowDestination, source: sourceValue }), `${file}: ${rowDestination}`);
@@ -82,14 +88,15 @@ test('tool wiring covers lifecycle events and reset is session-gated and clears 
 
 test('homepage path destinations describe their actual links', async () => {
   const homepage = await source('src/pages/index.astro');
-  for (const [pathSource, destination] of [
-    ['homepage_path_personal', 'learn'],
-    ['homepage_path_business', 'services'],
+  for (const [pathSource, destination, href] of [
+    ['homepage_path_business', 'services', '/services'],
+    ['homepage_path_workflow', 'services', '/services#workflow-review'],
+    ['homepage_path_setup', 'services', '/services#practical-setup'],
   ]) {
     const tag = [...homepage.matchAll(/<a\b[^>]*>/g)]
       .find(([tag]) => tag.includes(`data-analytics-source="${pathSource}"`))?.[0];
     assert.ok(tag, `missing ${pathSource}`);
-    assert.equal(tag.match(/href="([^"]+)"/)?.[1], `/${destination}`);
+    assert.equal(tag.match(/href="([^"]+)"/)?.[1], href);
     assert.equal(tag.match(/data-analytics-destination="([^"]+)"/)?.[1], destination);
     assert.ok(validateAnalyticsEvent('cta_click', { destination, source: pathSource }));
   }

@@ -14,7 +14,6 @@ const choices = [
     <div class="tools-intro" data-reveal>
       <p class="tools-eyebrow">Free tools</p>
       <h2 id="tools-title">Find a tool for the task.</h2>
-      <p>Understand an AI bill, explore technology costs, or get ahead of software renewals.</p>
     </div>
     <div class="tool-choices">
       {choices.map(choice => choice && (
@@ -37,6 +36,7 @@ const choices = [
     <div class="tools-more" data-reveal>
       <p>Looking for market research, worksheets, or more ways to explore?</p>
       <a href="/tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_featured_tools"><ActionLabel label="Browse all free tools" /></a>
+      <img class="tools-folder" src="/images/tools-folder-3d.webp" alt="" aria-hidden="true" width="512" height="512" loading="lazy" decoding="async" />
     </div>
   </div>
 </section>
@@ -47,7 +47,6 @@ const choices = [
   .tools-eyebrow { display: flex; align-items: center; gap: .75rem; color: #4f7567; font-size: .61rem; font-weight: 400; letter-spacing: .16em; }
   .tools-eyebrow::after { content: ''; width: 2.7rem; height: 1px; background: currentColor; opacity: .42; }
   .tools-intro h2 { margin-top: .9rem; font: 400 clamp(2.65rem, 4vw, 4.2rem)/.99 'Cormorant Garamond', Georgia, serif; letter-spacing: -.035em; }
-  .tools-intro > p:last-child { margin-top: 1rem; padding-left: 1.4rem; border-left: 2px solid rgba(107, 142, 127, .4); color: #4a4a4a; font: 400 clamp(1.08rem, 1.55vw, 1.35rem)/1.52 'Cormorant Garamond', Georgia, serif; }
   .tool-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
   .tool-choice { --tool-accent: #3e5946; display: flex; flex-direction: column; gap: 1.8rem; min-width: 0; padding: clamp(1.75rem, 3vw, 2.6rem); border: 1px solid #cbd6c5; border-radius: 12px; background: #fcfbf8; color: inherit; text-decoration: none; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 12px 24px -16px rgba(41, 49, 39, .24); transition: background-color 200ms ease, border-color 200ms ease; }
   .tool-choice:first-child { --tool-accent: #faf6ef; --feature-padding: clamp(2rem, 3.5vw, 3.3rem); --feature-overhang: clamp(1rem, calc(50vw - 40rem), 3rem); display: grid; grid-column: 1 / -1; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); align-items: center; gap: clamp(1.8rem, 3vw, 3rem); padding: var(--feature-padding); background-color: #4f7167; background-image: radial-gradient(ellipse at 80% 40%, #edf4df1f, transparent 58%); border-color: #4f7167; color: #faf6ef; }
@@ -79,6 +78,7 @@ const choices = [
   .tool-choice:focus-visible, .tools-more a:focus-visible { outline: 3px solid #89534f; outline-offset: 4px; }
   .tools-more { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid #3d605526; text-align: center; }
   .tools-more p { max-width: 58ch; color: #51564e; font-size: .95rem; line-height: 1.65; }
+  .tools-folder { display: block; flex: none; width: clamp(7.5rem, 11vw, 9rem); height: auto; margin-top: -.3rem; margin-bottom: -2.5rem; pointer-events: none; user-select: none; }
   .tools-more a { display: inline-flex; align-items: center; justify-content: center; width: min(100%, 22rem); min-height: 56px; padding: .35rem 1.65rem; border: 1px solid #9b6d6e; border-radius: 8px; background: var(--rose); color: var(--brand-ink); text-decoration: none; box-shadow: 0 8px 16px -10px #78575255; transition: background-color 200ms ease, box-shadow 200ms ease; }
   .tools-more a:hover { background: var(--rose-hover); box-shadow: 0 10px 18px -10px #78575266; }
   .tools-more a :global(.action-label) { min-height: 44px; font-size: .78rem; letter-spacing: .065em; }

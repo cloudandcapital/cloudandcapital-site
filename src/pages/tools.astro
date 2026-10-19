@@ -56,7 +56,7 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
             </div>
             <a class="flagship-window" href={lens.href} target="_blank" rel="noopener noreferrer" aria-label="Open AI Cost Lens" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="work_flagship">
               <span class="window-bar" aria-hidden="true"><span class="window-dots"><i></i><i></i><i></i></span><span>lens.cloudandcapital.com · illustrative example</span></span>
-              <span class="window-canvas"><img src="/images/ai-cost-lens-cost-anatomy-wide.png" alt="AI Cost Lens illustrative example comparing the full cost of two AI routes" width="2190" height="964" loading="lazy" /></span>
+              <span class="window-canvas"><img src="/images/ai-cost-lens-anatomy-preview.jpg" alt="AI Cost Lens illustrative example comparing the full cost of two AI routes" width="1315" height="492" loading="lazy" /></span>
             </a>
           </div>
           <dl class="lens-notes">
@@ -75,12 +75,12 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
         <div class="product-features">
           <a class="product-feature renewal-feature" href="/tools/software-renewal-tracker" data-analytics-event="cta_click" data-analytics-destination="software_renewal_tracker" data-analytics-source="work_decision_tools">
             <div class="product-copy"><span class="product-status">Free tracker</span><h3>Software Renewal Tracker</h3><p class="product-question">What renews next, and when do I need to decide?</p><p>Add your software charges, renewal dates, and cancellation deadlines. See upcoming charges and monthly equivalent costs in one place.</p><span class="product-action"><span>Open the renewal tracker</span><span aria-hidden="true">→</span></span></div>
-            <div class="product-media"><img src="/images/software-renewal-tracker-preview.jpg" alt="Software Renewal Tracker showing upcoming charges, monthly equivalent costs, and an example subscription record" width="1109" height="765" loading="lazy" /></div>
+            <div class="product-media"><img src="/images/software-renewal-project-desk.jpg" alt="Software Renewal Tracker showing the Project desk subscription, renewal date, and notice deadline" width="1168" height="455" loading="lazy" /></div>
           </a>
           {guard && (
             <a class="product-feature guard-feature" href={guard.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="work_decision_tools">
               <div class="product-copy"><span class="product-status">Interactive demo</span><h3>Cloud Cost Guard</h3><p class="product-question">What moved the bill?</p><p>Explore a sample cloud, AI, and software bill. Follow the records behind the totals to see what drove the costs and which questions to ask next.</p><span class="product-action"><span>Explore the cost demo</span><span aria-hidden="true">→</span></span></div>
-              <div class="product-media" aria-hidden="true"><img src="/images/cloud-cost-guard-spend-reconciliation.jpg" alt="" width="1216" height="474" loading="lazy" /></div>
+              <div class="product-media" aria-hidden="true"><img src="/images/cloud-cost-guard-summary-preview.jpg" alt="" width="1216" height="474" loading="lazy" /></div>
             </a>
           )}
           {tape && (
@@ -196,6 +196,8 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
   .tape-feature:hover .product-action { background: var(--rose-hover); }
   .product-media { display: flex; align-items: center; min-width: 0; height: clamp(13rem, 17vw, 16rem); }
   .product-media img { display: block; width: 100%; height: 100%; object-fit: contain; border: 1px solid rgba(36,35,31,.12); border-radius: 8px; }
+  .renewal-feature .product-media, .guard-feature .product-media { height: auto; }
+  .renewal-feature .product-media img, .guard-feature .product-media img { height: auto; }
   .supporting-tools { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
   .supporting-tool { display: flex; flex-direction: column; min-width: 0; padding: 2rem 2.2rem; border-top: 1px solid rgba(36,35,31,.22); background: var(--cream); transition: background-color .2s ease; }
   .supporting-tool:hover, .supporting-tool:focus-visible { background: var(--sage-surface-hover); }

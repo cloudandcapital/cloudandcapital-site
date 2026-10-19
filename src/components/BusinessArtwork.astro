@@ -1,41 +1,16 @@
 <div class="business-art" aria-hidden="true">
-  <div class="art-heading"><span>Cloud &amp; Capital</span><span>A closer look</span></div>
-  <p class="art-question">What’s it<br /><em>really costing?</em></p>
-  <div class="spend-lines">
-    <div><span>Cloud</span><i style="--bar-width:82%"></i></div>
-    <div><span>AI</span><i style="--bar-width:55%"></i></div>
-    <div><span>Software</span><i style="--bar-width:68%"></i></div>
-  </div>
-  <div class="work-path">
-    <span class="work-label">And where does the time go?</span>
-    <svg viewBox="0 0 420 100" fill="none" focusable="false">
-      <path d="M65 48H185M235 48H355" stroke="#9aaa98" stroke-width="1.5"/>
-      <path d="m174 43 8 5-8 5m170-10 8 5-8 5" stroke="#9aaa98" stroke-width="1.5" stroke-linecap="round"/>
-      <circle cx="45" cy="48" r="25" fill="#e7ece3"/><rect x="31" y="38" width="28" height="20" rx="2" stroke="#557365" stroke-width="1.5"/><path d="m32 39 13 11 13-11" stroke="#557365" stroke-width="1.5"/>
-      <circle cx="210" cy="48" r="25" fill="#eee1db"/><rect x="198" y="34" width="24" height="28" rx="2" stroke="#8f6265" stroke-width="1.5"/><path d="M198 43H222M198 52H222M207 34V62" stroke="#8f6265" stroke-width="1.2"/>
-      <circle cx="375" cy="48" r="25" fill="#e7ece3"/><path d="m362 49 9 9 17-20" stroke="#557365" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <text x="45" y="96" text-anchor="middle">Inputs</text><text x="210" y="96" text-anchor="middle">The work</text><text x="375" y="96" text-anchor="middle">A useful result</text>
-    </svg>
-  </div>
-  <p class="art-footer">The bill is only part of the story.</p>
+  <img
+    src="/images/cloud-capital-hero-3d.webp"
+    alt=""
+    width="1402"
+    height="1122"
+    fetchpriority="high"
+    decoding="async"
+  />
 </div>
 
 <style>
-  .business-art { position: relative; isolation: isolate; padding: clamp(1.7rem,3.2vw,3rem); border: 1px solid #d5dccc; border-radius: 22px; background: #fbfaf4; color: #3d6055; box-shadow: 0 24px 50px -25px #26362c45; }
-  .business-art::before { position: absolute; content: ''; z-index: -1; inset: 12px -10px -12px 10px; border: 1px solid #c8d0c2; border-radius: 22px; background: #e4e8de; transform: rotate(2deg); }
-  .art-heading { display: flex; justify-content: space-between; gap: 1rem; font: .6rem/1.5 'DM Mono',monospace; text-transform: uppercase; letter-spacing: .1em; color: #687663; }
-  .art-question { margin: 2rem 0 1.8rem; font: 400 clamp(2.9rem,4.5vw,4.8rem)/.95 'Cormorant Garamond',Georgia,serif; letter-spacing: -.035em; }
-  .art-question em { color: #8f6265; font-weight: 400; }
-  .spend-lines { display: grid; gap: .8rem; margin: 0 0 2rem; }
-  .spend-lines > div { display: grid; grid-template-columns: 5rem 1fr; align-items: center; gap: 1rem; }
-  .spend-lines span { font: .7rem/1.5 'DM Mono',monospace; color: #52624f; }
-  .spend-lines i { display: block; width: var(--bar-width); height: 10px; background: #9bac91; border-radius: 2px; }
-  .spend-lines > div:nth-child(2) i { background: #c39595; }
-  .spend-lines > div:nth-child(3) i { background: #c7b58b; }
-  .work-path { padding-top: 1.5rem; border-top: 1px solid #d5dccf; }
-  .work-label { font: italic 1.65rem/1.2 'Cormorant Garamond',Georgia,serif; }
-  .work-path svg { display: block; width: 100%; height: auto; margin-top: 1rem; overflow: visible; }
-  .work-path text { fill: #5b6657; font: 11px 'DM Sans',sans-serif; }
-  .art-footer { margin: 1.5rem 0 0; color: #67725f; font: .7rem/1.5 'DM Mono',monospace; }
-  @media(max-width:760px) { .art-question { font-size: clamp(2.8rem,12vw,4rem); } .art-heading { font-size: .56rem; } .work-label { font-size: 1.5rem; } }
+  .business-art { position: relative; width: calc(100% + 3.5rem); margin-inline: -1.75rem; }
+  .business-art img { display: block; width: 100%; height: auto; }
+  @media (max-width: 1020px) { .business-art { width: 100%; margin-inline: 0; } }
 </style>

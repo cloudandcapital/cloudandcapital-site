@@ -20,10 +20,11 @@ const artwork = {
 />
 
 <style>
-  .service-watermark { position: absolute; top: 3.4rem; right: 1.1rem; width: 7.5rem; height: 7.5rem; object-fit: contain; pointer-events: none; }
-  .service-watermark[data-kind="cost"] { width: 7rem; height: 7rem; }
+  /* Account for transparent canvas margins so the visible objects align with the names. */
+  .service-watermark { display: block; width: 7.5rem; height: 7.5rem; margin-block: -1rem; margin-inline: -.5rem -.75rem; object-fit: contain; pointer-events: none; }
+  .service-watermark[data-kind="cost"] { width: 7rem; height: 7rem; margin-block: -.75rem; }
   @media (max-width: 760px) {
-    .service-watermark { top: 3.25rem; right: 1rem; width: 6.75rem; height: 6.75rem; }
-    .service-watermark[data-kind="cost"] { width: 6.25rem; height: 6.25rem; }
+    .service-watermark { width: 6.75rem; height: 6.75rem; margin-block: -.625rem; margin-inline: -.625rem -.875rem; }
+    .service-watermark[data-kind="cost"] { width: 6.25rem; height: 6.25rem; margin-block: -.375rem; }
   }
 </style>

@@ -50,24 +50,30 @@ const featuredArticles = homepageWriting;
         </div>
         <div class="path-grid">
           <a class="path-card" href="/services#technology-cost-review" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_business">
-            <ServiceWatermark kind="cost" />
-            <p class="card-label">Technology Cost Review</p>
+            <div class="path-card-header">
+              <p class="card-label">Technology Cost Review</p>
+              <ServiceWatermark kind="cost" />
+            </div>
             <h3 class="cost-question"><span>“Why does the</span> <span>bill keep growing?”</span></h3>
             <p>For growing tech teams with cloud, AI, or software bills that are getting harder to explain. We’ll find out what’s driving the costs.</p>
             <p class="path-deliverable"><strong>You leave with</strong> a clear spending breakdown, an explanation of what changed, and prioritized next steps.</p>
             <span class="path-action"><span>Explore the cost review</span><span class="link-arrow" aria-hidden="true">→</span></span>
           </a>
           <a class="path-card path-card-tint" href="/services#workflow-review" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_workflow">
-            <ServiceWatermark kind="workflow" />
-            <p class="card-label">AI &amp; Workflow Review</p>
+            <div class="path-card-header">
+              <p class="card-label">AI &amp; Workflow Review</p>
+              <ServiceWatermark kind="workflow" />
+            </div>
             <h3>“Why does this take so long?”</h3>
             <p>For businesses spending too much time moving information between emails, documents, and spreadsheets. We’ll look at one recurring task.</p>
             <p class="path-deliverable"><strong>You leave with</strong> a map of the task and a plan for making it easier, including whether AI would help.</p>
             <span class="path-action"><span>Explore the workflow review</span><span class="link-arrow" aria-hidden="true">→</span></span>
           </a>
           <a class="path-card" href="/services#practical-setup" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_setup">
-            <ServiceWatermark kind="setup" />
-            <p class="card-label">Tool &amp; Automation Setup</p>
+            <div class="path-card-header">
+              <p class="card-label">Tool &amp; Automation Setup</p>
+              <ServiceWatermark kind="setup" />
+            </div>
             <h3>“Can you help me build it?”</h3>
             <p>For a project you already have in mind: a reporting template, connected tools, or a small automation. I’ll build and test the agreed setup.</p>
             <p class="path-deliverable"><strong>You leave with</strong> your setup, tested and ready to use, with instructions.</p>
@@ -315,7 +321,8 @@ const featuredArticles = homepageWriting;
   .path-card-tint { background: #e8ece2; }
   .path-number { position: absolute; top: 1.875rem; right: 1.875rem; color: rgba(61, 96, 85, .22); font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(5.75rem, 7vw, 7rem); font-weight: 400; line-height: .8; letter-spacing: -.065em; pointer-events: none; }
   .card-label { color: #4f7167; }
-  .path-card h3 { max-width: 13ch; margin-top: 6.5rem; font-size: clamp(1.9rem, 2.5vw, 2.65rem); line-height: 1.03; letter-spacing: -.025em; }
+  .path-card-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .65rem; min-height: 5.5rem; }
+  .path-card h3 { max-width: 13ch; margin-top: 1.25rem; font-size: clamp(1.9rem, 2.5vw, 2.65rem); line-height: 1.03; letter-spacing: -.025em; }
   .path-card > p:not(.card-label) { max-width: 39ch; margin-top: 1rem; color: #3b3b38; font-size: .88rem; line-height: 1.7; }
   .path-card a,
   .tool-card a { align-self: flex-start; margin-top: auto; padding-top: 1.5rem; color: #3d6055; font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .1em; line-height: 1.5; text-transform: uppercase; text-decoration: none; }
@@ -765,9 +772,9 @@ const featuredArticles = homepageWriting;
   .learning-section a:focus-visible { outline: 2px solid #3d6055; outline-offset: 4px; }
   @media (min-width: 1280px) { .hero-visual { width: 100%; margin-block: 0; align-self: center; } }
   @media (max-width: 1020px) { .hero-copy h1 { max-width: 18ch; } .hero-visual { width: min(100%, 34rem); justify-self: center; } }
-  @media (max-width: 760px) { .example-grid, .learning-grid { grid-template-columns: minmax(0, 1fr); } .path-card .card-label { min-height: auto; } .path-card h3 { max-width: 21ch; margin-top: 6rem; } .path-card .path-deliverable { margin-bottom: 0; } .review-examples { padding-block: 3.5rem; } .hero-visual { width: min(100%, 30rem); } .hero-actions { gap: .8rem; } .hero-actions .button { flex: 1 1 auto; text-align: center; justify-content: center; } }
+  @media (max-width: 760px) { .example-grid, .learning-grid { grid-template-columns: minmax(0, 1fr); } .path-card-header { gap: .5rem; } .path-card .card-label { min-height: auto; font-size: 1.25rem; } .path-card h3 { max-width: 21ch; } .path-card .path-deliverable { margin-bottom: 0; } .review-examples { padding-block: 3.5rem; } .hero-visual { width: min(100%, 30rem); } .hero-actions { gap: .8rem; } .hero-actions .button { flex: 1 1 auto; text-align: center; justify-content: center; } }
   @media (prefers-reduced-motion: reduce) { .example-card { transition: none; } }
-  @media (max-width: 1020px) {
+  @media (max-width: 1200px) {
     .paths .path-grid { grid-template-columns: minmax(0, 1fr); }
     .paths .path-card { min-height: auto; margin-inline: 0; padding: 2rem; border: 1px solid var(--path-rule); }
     .paths .path-card h3 { max-width: 24ch; }

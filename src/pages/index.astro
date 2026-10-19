@@ -45,32 +45,32 @@ const featuredArticles = homepageWriting;
     <section class="paths" id="services" aria-labelledby="paths-title">
       <div class="shell">
         <div class="section-heading paths-heading" data-reveal>
-          <div><p class="eyebrow">Three ways to work together</p><h2 id="paths-title">What needs a closer look?</h2></div>
+          <div><p class="eyebrow">Three ways to work together</p><h2 id="paths-title">What can I help you with?</h2></div>
           <p>Start with the spending, the work, or a project you already have in mind.</p>
         </div>
         <div class="path-grid">
-          <a class="path-card" href="/services" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_business">
+          <a class="path-card" href="/services#technology-cost-review" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_business">
             <ServiceWatermark kind="cost" />
             <p class="card-label">Technology Cost Review</p>
             <h3 class="cost-question"><span>“Why does the</span> <span>bill keep growing?”</span></h3>
-            <p>For teams with meaningful cloud, AI, or software costs. Understand what’s driving the bill and what deserves attention.</p>
-            <p class="path-deliverable"><strong>You leave with</strong> a cost baseline, an explanation of the changes, and prioritized next steps.</p>
+            <p>For growing tech teams with cloud, AI, or software bills that are getting harder to explain. We’ll find out what’s driving the costs.</p>
+            <p class="path-deliverable"><strong>You leave with</strong> a clear spending breakdown, an explanation of what changed, and prioritized next steps.</p>
             <span class="path-action"><span>Explore the cost review</span><span class="link-arrow" aria-hidden="true">→</span></span>
           </a>
           <a class="path-card path-card-tint" href="/services#workflow-review" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_workflow">
             <ServiceWatermark kind="workflow" />
             <p class="card-label">AI &amp; Workflow Review</p>
             <h3>“Why does this take so long?”</h3>
-            <p>For service businesses moving the same information between emails, documents, and spreadsheets. Review one recurring task.</p>
-            <p class="path-deliverable"><strong>You leave with</strong> a map of the work and a plan for improving it, including whether AI belongs in it.</p>
+            <p>For businesses spending too much time moving information between emails, documents, and spreadsheets. We’ll look at one recurring task.</p>
+            <p class="path-deliverable"><strong>You leave with</strong> a map of the task and a plan for making it easier, including whether AI would help.</p>
             <span class="path-action"><span>Explore the workflow review</span><span class="link-arrow" aria-hidden="true">→</span></span>
           </a>
           <a class="path-card" href="/services#practical-setup" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_setup">
             <ServiceWatermark kind="setup" />
             <p class="card-label">Tool &amp; Automation Setup</p>
             <h3>“Can you help me build it?”</h3>
-            <p>For a defined project: a reporting template, connected tools, or a small automation. Start here when you know what you need.</p>
-            <p class="path-deliverable"><strong>You leave with</strong> the agreed setup, checks, and instructions for using it.</p>
+            <p>For a project you already have in mind: a reporting template, connected tools, or a small automation. I’ll build and test the agreed setup.</p>
+            <p class="path-deliverable"><strong>You leave with</strong> your setup, tested and ready to use, with instructions.</p>
             <span class="path-action"><span>Explore setup</span><span class="link-arrow" aria-hidden="true">→</span></span>
           </a>
         </div>
@@ -311,11 +311,11 @@ const featuredArticles = homepageWriting;
   .section-heading h2 { max-width: 18ch; margin-top: .9rem; font-size: clamp(2.65rem, 4vw, 4.2rem); line-height: .99; letter-spacing: -.035em; }
   .section-heading > p { max-width: 39ch; padding-left: 1.4rem; border-left: 2px solid rgba(107, 142, 127, .4); color: #4a4a4a; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.08rem, 1.55vw, 1.35rem); line-height: 1.52; text-wrap: balance; }
   .path-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.15rem; margin-top: 2.25rem; }
-  .path-card { position: relative; min-width: 0; min-height: 20.5rem; padding: 2rem; display: flex; flex-direction: column; border: 1px solid var(--path-rule); border-radius: 12px; box-shadow: 0 8px 22px rgba(41, 49, 39, .055); }
+  .path-card { position: relative; min-width: 0; min-height: 20.5rem; padding: 2rem; display: flex; flex-direction: column; border: 1px solid var(--path-rule); border-radius: 12px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 12px 24px -16px rgba(41, 49, 39, .24); }
   .path-card-tint { background: #e8ece2; }
   .path-number { position: absolute; top: 1.875rem; right: 1.875rem; color: rgba(61, 96, 85, .22); font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(5.75rem, 7vw, 7rem); font-weight: 400; line-height: .8; letter-spacing: -.065em; pointer-events: none; }
   .card-label { color: #4f7167; }
-  .path-card h3 { max-width: 13ch; margin-top: 1.2rem; font-size: clamp(1.9rem, 2.5vw, 2.65rem); line-height: 1.03; letter-spacing: -.025em; }
+  .path-card h3 { max-width: 13ch; margin-top: 4.25rem; font-size: clamp(1.9rem, 2.5vw, 2.65rem); line-height: 1.03; letter-spacing: -.025em; }
   .path-card > p:not(.card-label) { max-width: 39ch; margin-top: 1rem; color: #3b3b38; font-size: .88rem; line-height: 1.7; }
   .path-card a,
   .tool-card a { align-self: flex-start; margin-top: auto; padding-top: 1.5rem; color: #3d6055; font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .1em; line-height: 1.5; text-transform: uppercase; text-decoration: none; }
@@ -463,19 +463,19 @@ const featuredArticles = homepageWriting;
     --dark-rose: #82585b;
     --pale-rose: #f4ecea;
   }
-  .path-card { --path-accent: #3e5946; --path-rule: #cbd6c5; --path-hover: #e0e7d9; --path-rule-hover: #9aaf93; transition: background-color 200ms ease, border-color 200ms ease; }
+  .path-card { --path-accent: #3e5946; --path-rule: #cbd6c5; --path-hover: #e0e7d9; --path-rule-hover: #9aaf93; transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease; }
   .path-card:first-child { --path-accent: #785752; --path-rule: #dfc7c0; background: #f6e7e2; --path-hover: #f0ded8; --path-rule-hover: #b48c82; }
   .path-card:last-child { --path-accent: #5c594b; --path-rule: #ded3c4; background: #f5efe5; --path-hover: #efe6d8; --path-rule-hover: #b9a68c; }
   .path-card .card-label, .path-card a { color: var(--path-accent); }
   .path-card .path-number { color: var(--path-rule); opacity: .14; }
   @media (max-width: 767px) { .path-card .path-number { font-size: 4.5rem; } }
   .path-card a:focus-visible { outline-color: var(--path-accent); }
-  :global(.reveal-ready) .path-card[data-reveal] { transition: opacity .7s ease, transform .7s ease, background-color 200ms ease, border-top-color 200ms ease; }
+  :global(.reveal-ready) .path-card[data-reveal] { transition: opacity .7s ease, transform .7s ease, background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease; }
   .path-card a span { display: inline-block; transition: transform 200ms ease; }
-  .path-card:focus-within { background: var(--path-hover); border-color: var(--path-rule-hover); }
+  .path-card:focus-within { background: var(--path-hover); border-color: var(--path-rule-hover); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 16px 30px -18px rgba(41, 49, 39, .28); }
   .path-card:focus-within a span { transform: translateX(4px); }
   @media (hover: hover) {
-    .path-card:hover { background: var(--path-hover); border-color: var(--path-rule-hover); }
+    .path-card:hover { background: var(--path-hover); border-color: var(--path-rule-hover); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 16px 30px -18px rgba(41, 49, 39, .28); }
     .path-card:hover a span { transform: translateX(4px); }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -740,11 +740,11 @@ const featuredArticles = homepageWriting;
   .hero-context { max-width: 58ch; margin-top: 1rem; color: #4a4a4a; font-size: .95rem; line-height: 1.75; }
   .hero-byline { font-size: .68rem; }
   .hero-visual { align-self: center; }
-  .path-card .card-label { max-width: none; min-height: 0; position: relative; z-index: 1; text-wrap: wrap; }
+  .path-card .card-label { max-width: none; min-height: 0; position: relative; z-index: 1; letter-spacing: .08em; text-wrap: wrap; }
   .path-card h3 { max-width: 17ch; font-size: clamp(1.9rem, 2.4vw, 2.6rem); }
   .path-card .cost-question { max-width: none; }
   .cost-question > span { display: block; }
-  .path-card .path-deliverable { margin-bottom: 1.6rem; font-size: .85rem; }
+  .path-card .path-deliverable { margin-bottom: 1.6rem; padding-top: 1rem; border-top: 1px solid var(--path-rule); font-size: .85rem; }
   .path-deliverable strong { font-weight: 500; }
   .path-number { opacity: .65; }
   .path-action { font-size: .75rem; letter-spacing: .015em; }

@@ -89,7 +89,7 @@ test('tool wiring covers lifecycle events and reset is session-gated and clears 
 test('homepage path destinations describe their actual links', async () => {
   const homepage = await source('src/pages/index.astro');
   for (const [pathSource, destination, href] of [
-    ['homepage_path_business', 'services', '/services'],
+    ['homepage_path_business', 'services', '/services#technology-cost-review'],
     ['homepage_path_workflow', 'services', '/services#workflow-review'],
     ['homepage_path_setup', 'services', '/services#practical-setup'],
   ]) {

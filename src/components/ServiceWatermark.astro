@@ -1,30 +1,39 @@
 ---
 interface Props { kind: 'cost' | 'workflow' | 'setup'; }
 const { kind } = Astro.props;
+const surfaceId = `service-${kind}-surface`;
 ---
-<svg class="service-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+<svg class="service-watermark" data-kind={kind} viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id={surfaceId} x1="15" y1="10" x2="80" y2="90" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity=".85" />
+      <stop offset="1" stop-color="currentColor" stop-opacity=".14" />
+    </linearGradient>
+  </defs>
   {kind === 'cost' && <>
-    <path d="M30 12h28l18 18v52a6 6 0 0 1-6 6H30a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6Z" fill="currentColor" fill-opacity=".12" />
+    <path d="M30 12h28l18 18v52a6 6 0 0 1-6 6H30a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6Z" fill={`url(#${surfaceId})`} />
     <path d="M58 12v18h18M36 43h28M36 55h18M36 69h28M55 77h9" />
   </>}
   {kind === 'workflow' && <>
-    <circle cx="50" cy="50" r="36" fill="currentColor" fill-opacity=".12" />
+    <circle cx="50" cy="50" r="36" fill={`url(#${surfaceId})`} />
     <path d="M50 21v5m29 24h-5M50 79v-5M21 50h5M50 33v17l17 10" />
     <circle cx="50" cy="50" r="2" fill="currentColor" stroke="none" />
   </>}
   {kind === 'setup' && <>
     <g transform="translate(10 7) scale(.8)" stroke-width="3">
-    <path d="m50 8 23 13v26L50 60 27 47V21Z" fill="currentColor" fill-opacity=".12" />
+    <path d="m50 8 23 13v26L50 60 27 47V21Z" fill={`url(#${surfaceId})`} />
     <path d="m27 21 23 13 23-13M50 34v26" />
-    <path d="m27 47 23 13v26L27 99 4 86V60Z" fill="currentColor" fill-opacity=".12" />
+    <path d="m27 47 23 13v26L27 99 4 86V60Z" fill={`url(#${surfaceId})`} />
     <path d="m4 60 23 13 23-13M27 73v26" />
-    <path d="m73 47 23 13v26L73 99 50 86V60Z" fill="currentColor" fill-opacity=".12" />
+    <path d="m73 47 23 13v26L73 99 50 86V60Z" fill={`url(#${surfaceId})`} />
     <path d="m50 60 23 13 23-13M73 73v26" />
     </g>
   </>}
 </svg>
 
 <style>
-  .service-watermark { position: absolute; top: 1.7rem; right: 1.65rem; width: 4.5rem; height: 4.5rem; color: var(--path-accent, #3d6055); opacity: .14; pointer-events: none; }
-  @media (max-width: 760px) { .service-watermark { top: 1.5rem; right: 1.25rem; width: 4rem; height: 4rem; } }
+  .service-watermark { position: absolute; top: 1.25rem; right: 1.4rem; width: 6.25rem; height: 6.25rem; color: var(--path-accent, #3d6055); opacity: .42; transform: rotate(-4deg); filter: drop-shadow(0 2px 2px rgba(43, 38, 32, .08)); pointer-events: none; }
+  .service-watermark[data-kind="workflow"] { transform: rotate(5deg); }
+  .service-watermark[data-kind="setup"] { transform: rotate(-3deg); }
+  @media (max-width: 760px) { .service-watermark { right: 1.25rem; width: 5.75rem; height: 5.75rem; } }
 </style>

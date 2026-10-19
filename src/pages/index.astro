@@ -56,7 +56,7 @@ const featuredArticles = homepageWriting;
             <h3 class="cost-question"><span>“Why does the</span> <span>bill keep growing?”</span></h3>
             <p>For teams with meaningful cloud, AI, or software costs. Understand what’s driving the bill and what deserves attention.</p>
             <p class="path-deliverable"><strong>You leave with</strong> a cost baseline, an explanation of the changes, and prioritized next steps.</p>
-            <span class="path-action"><span>Explore the cost review</span><span aria-hidden="true">→</span></span>
+            <span class="path-action"><span>Explore the cost review</span><span class="link-arrow" aria-hidden="true">→</span></span>
           </a>
           <a class="path-card path-card-tint" href="/services#workflow-review" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_workflow">
             <ServiceWatermark kind="workflow" />
@@ -64,7 +64,7 @@ const featuredArticles = homepageWriting;
             <h3>“Why does this take so long?”</h3>
             <p>For service businesses moving the same information between emails, documents, and spreadsheets. Review one recurring task.</p>
             <p class="path-deliverable"><strong>You leave with</strong> a map of the work and a plan for improving it, including whether AI belongs in it.</p>
-            <span class="path-action"><span>Explore the workflow review</span><span aria-hidden="true">→</span></span>
+            <span class="path-action"><span>Explore the workflow review</span><span class="link-arrow" aria-hidden="true">→</span></span>
           </a>
           <a class="path-card" href="/services#practical-setup" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_setup">
             <ServiceWatermark kind="setup" />
@@ -72,7 +72,7 @@ const featuredArticles = homepageWriting;
             <h3>“Can you help me build it?”</h3>
             <p>For a defined project: a reporting template, connected tools, or a small automation. Start here when you know what you need.</p>
             <p class="path-deliverable"><strong>You leave with</strong> the agreed setup, checks, and instructions for using it.</p>
-            <span class="path-action"><span>Explore setup</span><span aria-hidden="true">→</span></span>
+            <span class="path-action"><span>Explore setup</span><span class="link-arrow" aria-hidden="true">→</span></span>
           </a>
         </div>
         <p class="service-scope-note">A clear scope, fixed quote, and timeline before work begins. Start with an email.</p>
@@ -83,19 +83,17 @@ const featuredArticles = homepageWriting;
       <div class="shell">
         <div class="section-heading" data-reveal>
           <div><p class="eyebrow">See the approach</p><h2 id="examples-title">What would a review actually tell you?</h2></div>
-          <p>These fictional examples show the questions I’d ask, the numbers I’d check, and what comes next.</p>
         </div>
-        <p class="example-disclosure">Illustrative work · Invented businesses and records, not client results.</p>
         <div class="example-grid">
           <a href="/services/examples#cost" class="example-card" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_examples">
             <p class="card-label">Technology costs</p><h3>A growing product.<br />An even faster-growing bill.</h3>
             <p>Follow three months of spending and investigate why the AI cost per accepted result rose.</p>
-            <span class="example-action">See the cost review <span aria-hidden="true">→</span></span>
+            <span class="example-action"><span>See the cost review</span><span class="link-arrow" aria-hidden="true">→</span></span>
           </a>
           <a href="/services/examples#workflow" class="example-card" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_examples">
             <p class="card-label">Recurring work</p><h3>The same numbers.<br />Copied into every report.</h3>
             <p>See why a controlled reporting template could be a better first step than adding AI.</p>
-            <span class="example-action">See the workflow review <span aria-hidden="true">→</span></span>
+            <span class="example-action"><span>See the workflow review</span><span class="link-arrow" aria-hidden="true">→</span></span>
           </a>
         </div>
       </div>
@@ -108,7 +106,7 @@ const featuredArticles = homepageWriting;
             <p class="eyebrow eyebrow-light">Tools</p>
             <h2 id="tools-title">Tools for real questions.</h2>
           </div>
-          <p>Everything here is free to use. Open a tool, see the method, or look through the code.<br /><a href="/tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_featured_tools">Browse all free tools →</a></p>
+          <p>Everything here is free to use. Open a tool, see the method, or look through the code.<br /><a class="browse-tools-link" href="/tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_featured_tools"><span>Browse all free tools</span><span class="link-arrow" aria-hidden="true">→</span></a></p>
         </div>
 
         {aiCostLens && (
@@ -119,7 +117,7 @@ const featuredArticles = homepageWriting;
               <p class="tool-question">What did one usable result really cost?</p>
               <p>Estimate a route from published prices. With matched cost, usage, and checked outcomes, see whether a cheaper option still holds up after quality and rework.</p>
               <div class="tool-actions">
-                <a class="tool-launch" href={aiCostLens.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="homepage_featured_tools">Open AI Cost Lens <span aria-hidden="true">→</span></a>
+                <a class="tool-launch" href={aiCostLens.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="homepage_featured_tools">Open AI Cost Lens <span class="link-arrow" aria-hidden="true">→</span></a>
                 <a class="tool-source" href={aiCostLens.sourceHref} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens_github" data-analytics-source="homepage_featured_tools"><span class="tool-source-label">View the source</span><span class="tool-source-arrow" aria-hidden="true">→</span></a>
               </div>
             </div>
@@ -148,7 +146,7 @@ const featuredArticles = homepageWriting;
               <h3>Cloud Cost Guard</h3>
               <p class="tool-question">Why did the bill move?</p>
               <p>Trace cost drivers, review anomalies, and understand the records behind the bill.</p>
-              <span class="tool-card-action"><span>Open Cloud Cost Guard</span><span aria-hidden="true">→</span></span>
+              <span class="tool-card-action"><span>Open Cloud Cost Guard</span><span class="link-arrow" aria-hidden="true">→</span></span>
             </a>
           )}
 
@@ -157,7 +155,7 @@ const featuredArticles = homepageWriting;
             <p class="card-label">Free worksheet</p><h3>Software Renewal Checklist</h3>
             <p class="tool-question">Is this subscription worth keeping?</p>
             <p>Eight questions about the bill, how the tool is used, and what changing it would involve.</p>
-            <span class="tool-card-action"><span>Get the checklist</span><span aria-hidden="true">→</span></span>
+            <span class="tool-card-action"><span>Get the checklist</span><span class="link-arrow" aria-hidden="true">→</span></span>
           </a>
         </div>
 
@@ -169,18 +167,18 @@ const featuredArticles = homepageWriting;
             <a class="small-tool" href={signalAudit.href} data-analytics-event="cta_click" data-analytics-destination="signal_audit" data-analytics-source="homepage_featured_tools">
               <span>Signal Audit</span>
               <p>Find where technology cost accountability is breaking down.</p>
-              <strong aria-hidden="true">→</strong>
+              <strong class="link-arrow" aria-hidden="true">→</strong>
             </a>
           )}
           {interactiveLab && (
             <a class="small-tool" href={interactiveLab.href} data-analytics-event="cta_click" data-analytics-destination="interactive_lab" data-analytics-source="homepage_featured_tools">
               <span>Interactive Lab</span>
               <p>Organize the evidence around a real technology spend decision.</p>
-              <strong aria-hidden="true">→</strong>
+              <strong class="link-arrow" aria-hidden="true">→</strong>
             </a>
           )}
         </div>
-        <div class="tool-review-invitation" data-reveal><p>Want help making sense of your own technology spending?</p><a class="text-action" href="/services#technology-cost-review" data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_featured_tools"><span>Explore a Technology Cost Review</span><span aria-hidden="true">→</span></a></div>
+        <div class="tool-review-invitation" data-reveal><p>Want help making sense of your own technology spending?</p><a class="text-action" href="/services#technology-cost-review" data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_featured_tools"><span>Explore a Technology Cost Review</span><span class="link-arrow" aria-hidden="true">→</span></a></div>
       </div>
     </section>
 
@@ -204,7 +202,7 @@ const featuredArticles = homepageWriting;
               ))}
               <div class="credential-row credential-contribution">
                 <dt>CONTRIBUTION</dt>
-                <dd><a class="contribution-link" href={about.recognitionUrl} target="_blank" rel="noopener noreferrer"><span>{about.recognition}</span><span aria-hidden="true">→</span></a></dd>
+                <dd><a class="contribution-link" href={about.recognitionUrl} target="_blank" rel="noopener noreferrer"><span>{about.recognition}</span><span class="link-arrow" aria-hidden="true">→</span></a></dd>
               </div>
             </dl>
           </div>
@@ -230,7 +228,7 @@ const featuredArticles = homepageWriting;
                 <p class="card-label">{article.topic.replace(' · Issue No. 1', '').replace(' · Issue no. 1', '')} · {article.date}</p>
                 <h3>{article.title}</h3>
                 <p>{article.description}</p>
-                <span><span>Read</span><span aria-hidden="true">→</span></span>
+                <span class="article-action"><span>Read</span><span class="link-arrow" aria-hidden="true">→</span></span>
               </div>
               {index === 0 && (
                 <div class="decision-artwork" role="img" aria-label="What gets built, what gets locked in, and what becomes the default.">
@@ -260,8 +258,8 @@ const featuredArticles = homepageWriting;
     <section class="learning-section" aria-labelledby="learning-title">
       <div class="shell learning-grid">
         <div data-reveal><p class="eyebrow">Investing &amp; trading</p><h2 id="learning-title">Here for your own money questions?</h2></div>
-        <div data-reveal><p>Learn investing and trading concepts through one-to-one lessons, worked examples, and guided practice. Bring the questions you’ve been wanting to ask.</p><a class="text-action" href="/learn" data-analytics-event="cta_click" data-analytics-destination="learn" data-analytics-source="homepage_path_personal"><span>Explore investing &amp; trading lessons</span><span aria-hidden="true">→</span></a>
-          {marketTape && <a class="learning-market-link" href={marketTape.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="market_tape" data-analytics-source="homepage_writing">Explore market context in Market Tape <span aria-hidden="true">↗</span></a>}
+        <div data-reveal><p>Learn investing and trading concepts through one-to-one lessons, worked examples, and guided practice. Bring the questions you’ve been wanting to ask.</p><a class="text-action" href="/learn" data-analytics-event="cta_click" data-analytics-destination="learn" data-analytics-source="homepage_path_personal"><span>Explore investing &amp; trading lessons</span><span class="link-arrow" aria-hidden="true">→</span></a>
+          {marketTape && <a class="learning-market-link" href={marketTape.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="market_tape" data-analytics-source="homepage_writing"><span>Explore market context in Market Tape</span><span class="link-arrow" aria-hidden="true">→</span></a>}
           <p class="education-note">Education and research only. Cloud &amp; Capital does not provide personal investment advice.</p>
         </div>
       </div>
@@ -852,7 +850,6 @@ const featuredArticles = homepageWriting;
   .path-action { font-size: .75rem; letter-spacing: .015em; }
   .service-scope-note { margin-top: 1.3rem; color: #595b52; font-size: .85rem; line-height: 1.6; }
   .review-examples { padding: 4.5rem 0; background: #e9eee6; }
-  .example-disclosure { margin-top: 1.6rem; color: #526152; font-size: .8rem; line-height: 1.6; }
   .example-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1.6rem; }
   .example-card { display: flex; flex-direction: column; padding: clamp(1.75rem, 3vw, 2.8rem); border: 1px solid #c2cdbf; color: #24211e; text-decoration: none; background: #f8f8f1; transition: background-color .2s; }
   .example-card:last-child { background: #f4ebe5; border-color: #d6c7bd; }
@@ -885,5 +882,46 @@ const featuredArticles = homepageWriting;
     .paths .path-card { min-height: auto; margin-inline: 0; padding: 2rem; border: 1px solid var(--path-rule); }
     .paths .path-card h3 { max-width: 24ch; }
     .paths .path-action { margin-top: 1.5rem; }
+  }
+
+  /* Shared text-action treatment, matching the approved service-card links. */
+  .home :is(.path-action, .example-action, .tool-card-action, .article-action, .text-action, .tool-source, .learning-market-link, .browse-tools-link, .contribution-link):is(a, span) {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: 50px;
+    font: 500 .75rem/1.4 'DM Mono', monospace;
+    letter-spacing: .015em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .home :is(.path-action, .example-action, .tool-card-action, .article-action):is(a, span) {
+    width: 100%;
+    justify-content: space-between;
+    padding-top: .35rem;
+  }
+  .home :is(.path-action, .example-action, .tool-card-action, .article-action, .text-action, .tool-source, .learning-market-link, .browse-tools-link, .contribution-link):is(a, span) > span:first-child {
+    font-size: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: .28rem;
+  }
+  .home .tool-actions a.tool-source .tool-source-label { border-bottom: 0; text-decoration: underline; }
+  .home .text-action > span:first-child::after { content: none; }
+  .home .link-arrow {
+    display: inline-block;
+    flex: 0 0 1.25rem;
+    width: 1.25rem;
+    margin-left: 0;
+    font: 500 1.25rem/1 'DM Mono', monospace;
+    letter-spacing: 0;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 200ms ease;
+  }
+  .home a:is(:hover, :focus-visible) .link-arrow { transform: translateX(4px); }
+  @media (prefers-reduced-motion: reduce) {
+    .home .link-arrow { transition: none; }
+    .home a:is(:hover, :focus-visible) .link-arrow { transform: none; }
   }
 </style>

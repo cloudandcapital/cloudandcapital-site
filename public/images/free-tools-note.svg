@@ -14,5 +14,5 @@
     <path d="M117 23C127 22 126 15 121 17C114 20 115 31 125 26"/>
     <path d="M132 8L129 23M128 28L127.9 28.4"/>
   </g>
-  <path d="M139 39C161 53 144 78 83 76C52 75 25 70 8 63M18 59L8 63L16 72" stroke="#191714" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M128 40C148 48 140 68 123 65C105 62 111 44 123 49C139 56 112 78 80 76C51 75 28 70 8 63M17 58Q12 60 8 63Q11 67 15 70" stroke="#191714" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

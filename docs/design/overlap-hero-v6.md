@@ -1,5 +1,7 @@
 # Overlapping hero composition and upper-right tools note
 
+Status: this composition was tried and set aside at Diana's request. The homepage uses `cloud-capital-hero-diamond-v5.webp` again. The approved handwriting remains, lifted slightly higher with a more pronounced curved arrow toward the tools button.
+
 Asset: `public/images/cloud-capital-hero-overlap-v6.webp` (1402 × 1122, transparent WebP).
 
 Created with the built-in image-generation tool. The output was packaged as WebP with transparency preserved. The magnifier keeps its smaller scale and fully diamond-covered handle, moving lower and left to overlap the cloud and dollar-sign composition. The handle extends diagonally through the lower foreground.

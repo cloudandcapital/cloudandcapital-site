@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164 62" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164 82" fill="none">
   <title>they’re free!</title>
   <g transform="translate(27 3) rotate(-6 61 22)" stroke="#191714" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
     <path d="M3 7Q2 15 2 25Q2 29 6 27M0 15L9 14"/>
@@ -14,5 +14,5 @@
     <path d="M117 23C127 22 126 15 121 17C114 20 115 31 125 26"/>
     <path d="M132 8L129 23M128 28L127.9 28.4"/>
   </g>
-  <path d="M137 43C114 56 68 45 8 51M18 44L8 51L19 55" stroke="#191714" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M139 39C161 53 144 78 83 76C52 75 25 70 8 63M18 59L8 63L16 72" stroke="#191714" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

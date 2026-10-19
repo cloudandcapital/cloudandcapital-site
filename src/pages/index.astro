@@ -849,12 +849,15 @@ const featuredArticles = homepageWriting;
   .path-number { opacity: .65; }
   .path-action { font-size: .75rem; letter-spacing: .015em; }
   .service-scope-note { margin-top: 1.3rem; color: #595b52; font-size: .85rem; line-height: 1.6; }
-  .review-examples { padding: 4.5rem 0; background: #e9eee6; }
+  .review-examples { --example-clay: #89534f; padding: 4.5rem 0; background: #e9eee6; }
+  .review-examples .eyebrow { color: var(--example-clay); }
+  .review-examples .eyebrow::after { opacity: .7; }
   .review-examples .section-heading { display: block; }
   .review-examples .section-heading h2 { max-width: none; font-size: clamp(2.2rem, 4vw, 4.2rem); line-height: 1.06; }
   .example-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1.6rem; }
   .example-card { display: flex; flex-direction: column; min-width: 0; padding: clamp(1.75rem, 3vw, 2.8rem); border: 1px solid #c2cdbf; border-radius: 12px; box-shadow: 0 8px 22px rgba(41,49,39,.055); color: #24211e; text-decoration: none; background: #f8f8f1; transition: background-color .2s; }
-  .example-card:last-child { background: #f4ebe5; border-color: #d6c7bd; }
+  .example-card:last-child { background: #f3e2dc; border-color: #d5b4aa; box-shadow: inset 0 3px 0 #b47d76, 0 8px 22px rgba(41,49,39,.055); }
+  .example-card:last-child .card-label, .example-card:last-child .example-action { color: var(--example-clay); }
   .example-card h3 { margin: 1.3rem 0 1rem; font-size: clamp(1.8rem, 2.7vw, 2.5rem); line-height: 1.12; letter-spacing: -.025em; }
   .example-card h3 > span { display: block; }
   .example-card > p:not(.card-label) { margin-bottom: 1.6rem; }
@@ -864,7 +867,8 @@ const featuredArticles = homepageWriting;
   .example-card > p:not(.card-label) { max-width: 46ch; font-size: .95rem; line-height: 1.7; }
   .example-action { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 44px; margin-top: auto; padding-top: 2rem; color: #3d6055; font: 500 .8rem/1.5 'DM Mono', monospace; }
   .example-card:hover { background: #f0f3e9; }
-  .example-card:last-child:hover { background: #eee0d9; }
+  .example-card:last-child:hover { background: #ecd6cf; }
+  .example-card:last-child:focus-visible { outline-color: var(--example-clay); }
   .example-card:focus-visible { outline: 3px solid #3d6055; outline-offset: 4px; }
   .tools-section .renewal-art { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 1.5rem; min-height: 195px; margin-bottom: 2rem; background: #f4e8df; color: #805751; border-radius: 14px; }
   .renewal-art > span { max-width: 8ch; font: italic 2.7rem/1 'Cormorant Garamond', Georgia, serif; }

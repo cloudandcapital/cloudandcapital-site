@@ -55,7 +55,7 @@ const featuredArticles = homepageWriting;
               <p class="card-label">Technology Cost Review</p>
               <ServiceWatermark kind="cost" />
             </div>
-            <h3><span>“Why does the bill</span> <span>keep growing?”</span></h3>
+            <h3><span>“Why does the bill</span> <span><span class="question-emphasis">keep growing?</span>”</span></h3>
             <p>For growing tech teams with cloud, AI, or software bills that are getting harder to explain. We’ll find out what’s driving the costs.</p>
             <p class="path-deliverable"><strong>You leave with</strong> a clear spending breakdown, an explanation of what changed, and prioritized next steps.</p>
             <span class="path-action"><span>Explore the cost review</span><span class="link-arrow" aria-hidden="true">→</span></span>
@@ -65,7 +65,7 @@ const featuredArticles = homepageWriting;
               <p class="card-label">AI &amp; Workflow Review</p>
               <ServiceWatermark kind="workflow" />
             </div>
-            <h3><span>“Why does this take</span> <span>so long?”</span></h3>
+            <h3><span>“Why does this take</span> <span><span class="question-emphasis">so long?</span>”</span></h3>
             <p>For businesses spending too much time moving information between emails, documents, and spreadsheets. We’ll look at one recurring task.</p>
             <p class="path-deliverable"><strong>You leave with</strong> a map of the task and a plan for making it easier, including whether AI would help.</p>
             <span class="path-action"><span>Explore the workflow review</span><span class="link-arrow" aria-hidden="true">→</span></span>
@@ -75,7 +75,7 @@ const featuredArticles = homepageWriting;
               <p class="card-label">Tool &amp; Automation Setup</p>
               <ServiceWatermark kind="setup" />
             </div>
-            <h3><span>“Can you help me</span> <span>build it?”</span></h3>
+            <h3><span>“Can you help me</span> <span><span class="question-emphasis">build it?</span>”</span></h3>
             <p>For a project you already have in mind: a reporting template, connected tools, or a small automation. I’ll build and test the agreed setup.</p>
             <p class="path-deliverable"><strong>You leave with</strong> your setup, tested and ready to use, with instructions.</p>
             <span class="path-action"><span>Explore setup</span><span class="link-arrow" aria-hidden="true">→</span></span>
@@ -751,6 +751,15 @@ const featuredArticles = homepageWriting;
   .path-card .card-label { max-width: none; min-height: 0; position: relative; z-index: 1; color: color-mix(in srgb, var(--path-accent) 85%, #191714); font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.3rem, 1.65vw, 1.5rem); font-style: italic; font-weight: 600; line-height: 1.15; letter-spacing: -.015em; text-transform: none; text-wrap: wrap; }
   .path-card h3 { font-size: clamp(1.9rem, 2.4vw, 2.6rem); }
   .path-card h3 > span { display: block; }
+  .path-card .question-emphasis { position: relative; display: inline-block; max-width: 100%; }
+  .path-card .question-emphasis::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -.11em;
+    height: .19em;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 12' preserveAspectRatio='none'%3E%3Cpath d='M3 7C58 3 156 3 237 6' fill='none' stroke='%23b78384' stroke-width='1.75' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+    pointer-events: none;
+  }
   .path-card .path-deliverable { margin-bottom: 1.6rem; padding-top: 1rem; border-top: 1px solid var(--path-rule); font-size: .85rem; }
   .path-deliverable strong { font-weight: 500; }
   .path-number { opacity: .65; }

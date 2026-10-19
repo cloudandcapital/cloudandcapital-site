@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import BusinessArtwork from '../components/BusinessArtwork.astro';
 import ServiceWatermark from '../components/ServiceWatermark.astro';
 import HomepageTools from '../components/HomepageTools.astro';
 import InstagramSection from '../components/InstagramSection.astro';
@@ -34,7 +33,15 @@ const featuredArticles = homepageWriting;
         </div>
 
         <div class="hero-visual">
-          <BusinessArtwork />
+          <img
+            class="hero-brand-mark"
+            src="/images/cloud-capital-handmade-icon.png"
+            alt="Cloud & Capital, with an outlined cloud and dollar sign"
+            width="500"
+            height="500"
+            fetchpriority="high"
+            decoding="async"
+          />
         </div>
       </div>
     </section>
@@ -281,10 +288,8 @@ const featuredArticles = homepageWriting;
   .hero-actions,
   .writing-actions,
   .contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.4rem; margin-top: 1.8rem; }
-  .hero-visual { min-width: 0; padding: .75rem .5rem 1.25rem; }
-  @media (min-width: 1280px) {
-    .hero-visual { width: min(calc(100% + 75px), 660px); justify-self: end; align-self: end; margin-block: -24px -20px; position: relative; top: 0; }
-  }
+  .hero-visual { display: flex; align-items: center; justify-content: center; min-width: 0; }
+  .hero-brand-mark { display: block; width: 100%; max-width: 31.25rem; height: auto; }
   .hero-actions .button, .writing-actions .button { min-height: 48px; border-radius: 8px; padding: .9rem 1.25rem; color: #f5eee9; }
   .hero-actions .button:focus-visible, .writing-actions .button:focus-visible { outline-color: #3d6055; }
   .hero-actions .hero-secondary:focus-visible { outline-color: #8f6265; }
@@ -750,7 +755,6 @@ const featuredArticles = homepageWriting;
   .learning-market-link { display: block; width: fit-content; padding: .75rem 0; margin-top: .4rem; color: #594b44; font-size: .9rem; line-height: 1.6; text-underline-offset: .25rem; }
   .learning-section .education-note { font-size: .8rem; color: #655851; }
   .learning-section a:focus-visible { outline: 2px solid #3d6055; outline-offset: 4px; }
-  @media (min-width: 1280px) { .hero-visual { width: 100%; margin-block: 0; align-self: center; } }
   @media (max-width: 1020px) { .hero-copy h1 { max-width: 18ch; } .hero-visual { width: min(100%, 34rem); justify-self: center; } }
   @media (max-width: 760px) { .example-grid, .learning-grid { grid-template-columns: minmax(0, 1fr); } .path-card .card-label { min-height: auto; } .path-card h3 { max-width: 21ch; } .path-card .path-deliverable { margin-bottom: 0; } .review-examples { padding-block: 3.5rem; } .hero-visual { width: min(100%, 30rem); } .hero-actions { gap: .8rem; } .hero-actions .button { flex: 1 1 auto; text-align: center; justify-content: center; } }
   @media (prefers-reduced-motion: reduce) { .example-card { transition: none; } }

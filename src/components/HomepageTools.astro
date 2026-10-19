@@ -34,8 +34,13 @@ const choices = [
       ))}
     </div>
     <div class="tools-more" data-reveal>
-      <p>Looking for market research, worksheets, or more ways to explore?</p>
-      <img class="tools-folder" src="/images/tools-folder-3d.webp" alt="" aria-hidden="true" width="512" height="512" loading="lazy" decoding="async" />
+      <span class="tools-folder" aria-hidden="true">
+        <img class="tools-folder-static" src="/images/tools-folder-3d.webp" alt="" width="512" height="512" loading="lazy" decoding="async" />
+        <span class="tools-folder-layer folder-card folder-card-sage"></span>
+        <span class="tools-folder-layer folder-card folder-card-ivory"></span>
+        <span class="tools-folder-layer folder-card folder-card-rose"></span>
+        <span class="tools-folder-layer folder-body"></span>
+      </span>
       <a href="/tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_featured_tools"><ActionLabel label="Browse all free tools" /></a>
     </div>
   </div>
@@ -77,8 +82,22 @@ const choices = [
   .tool-choice:last-child:hover { background-color: #fdf7f4; border-color: #b48c82; }
   .tool-choice:focus-visible, .tools-more a:focus-visible { outline: 3px solid #89534f; outline-offset: 4px; }
   .tools-more { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid #3d605526; text-align: center; }
-  .tools-more p { max-width: 58ch; color: #51564e; font-size: .95rem; line-height: 1.65; }
-  .tools-folder { display: block; flex: none; width: clamp(7.5rem, 11vw, 9rem); height: auto; margin-top: -.35rem; margin-bottom: -.6rem; pointer-events: none; user-select: none; }
+  .tools-folder { position: relative; display: block; isolation: isolate; flex: none; width: clamp(7.5rem, 11vw, 9rem); aspect-ratio: 1; margin-top: -.35rem; margin-bottom: -.6rem; pointer-events: none; user-select: none; }
+  .tools-folder-static { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+  .tools-folder-layer { display: none; position: absolute; background-image: url('/images/tools-folder-layers.webp'); background-size: 200% 200%; background-repeat: no-repeat; }
+  .folder-body { z-index: 4; left: 5%; top: 17%; width: 90%; height: 90%; background-position: 0 0; }
+  .folder-card { transform-origin: 50% 85%; }
+  .folder-card-sage { --card-lift: -.4rem; --card-roll: -1deg; z-index: 1; left: 0; top: 0; width: 75%; height: 75%; background-position: 100% 0; clip-path: inset(0 0 0 7%); animation-delay: .15s; }
+  .folder-card-ivory { --card-lift: -.55rem; --card-roll: .8deg; z-index: 2; left: 12%; top: 5%; width: 80%; height: 80%; background-position: 0 100%; animation-delay: .8s; }
+  .folder-card-rose { --card-lift: -.4rem; --card-roll: 1deg; z-index: 3; left: 30%; top: 15%; width: 74%; height: 74%; background-position: 100% 100%; animation-delay: 1.45s; }
+  @keyframes tools-card-shuffle { 0%, 12%, 80%, 100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(var(--card-lift)) rotate(var(--card-roll)); } 58% { transform: translateY(.06rem) rotate(0); } }
+  @keyframes tools-card-replay { 0%, 12%, 80%, 100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(var(--card-lift)) rotate(var(--card-roll)); } 58% { transform: translateY(.06rem) rotate(0); } }
+  @media (prefers-reduced-motion: no-preference) {
+    .tools-folder-static { visibility: hidden; }
+    .tools-folder-layer { display: block; }
+    .tools-more.is-visible .folder-card { animation-name: tools-card-shuffle; animation-duration: 3.2s; animation-timing-function: ease-in-out; animation-iteration-count: 1; }
+    .tools-more:has(a:hover) .folder-card, .tools-more:has(a:focus-visible) .folder-card { animation-name: tools-card-replay; animation-duration: 3.2s; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+  }
   .tools-more a { display: inline-flex; align-items: center; justify-content: center; width: min(100%, 22rem); min-height: 56px; padding: .35rem 1.65rem; border: 1px solid #9b6d6e; border-radius: 8px; background: var(--rose); color: var(--brand-ink); text-decoration: none; box-shadow: 0 8px 16px -10px #78575255; transition: background-color 200ms ease, box-shadow 200ms ease; }
   .tools-more a:hover { background: var(--rose-hover); box-shadow: 0 10px 18px -10px #78575266; }
   .tools-more a :global(.action-label) { min-height: 44px; font-size: .78rem; letter-spacing: .065em; }

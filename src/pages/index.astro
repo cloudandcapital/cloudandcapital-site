@@ -29,7 +29,10 @@ const featuredArticles = homepageWriting;
           <p class="hero-byline">Diana Molski · Finance analyst and tool builder</p>
           <div class="hero-actions">
             <a class="button button-primary" href="/services" data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_hero">Explore business services</a>
-            <a class="button hero-secondary" href="#tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_hero">Try the free tools</a>
+            <div class="hero-tools-cta">
+              <img class="hero-free-note" src="/images/free-tools-note.svg" alt="They’re free!" width="170" height="74" decoding="async" />
+              <a class="button hero-secondary" href="#tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_hero">Try the tools</a>
+            </div>
           </div>
         </div>
 
@@ -286,10 +289,15 @@ const featuredArticles = homepageWriting;
     .hero-visual { width: min(calc(100% + 75px), 660px); justify-self: end; align-self: end; margin-block: -24px -20px; position: relative; top: 0; }
   }
   .hero-actions .button, .writing-actions .button { min-height: 48px; border-radius: 8px; padding: .9rem 1.25rem; color: #f5eee9; }
-  .hero-actions .button { background: #fffaf6; color: #332826; border-color: #b78384; }
-  .hero-actions .button:hover { background: #f3e2dc; border-color: #9b696a; }
-  .hero-actions .button:focus-visible { outline: 2px solid #8f6265; outline-offset: .3rem; }
-  .writing-actions .button:focus-visible { outline-color: #3d6055; }
+  .hero-actions { align-items: flex-end; }
+  .hero-actions .button:focus-visible, .writing-actions .button:focus-visible { outline-color: #3d6055; }
+  .hero-actions .hero-secondary:focus-visible { outline-color: #8f6265; }
+  .hero-actions .hero-secondary { background: var(--rose); color: #24211e; border-color: transparent; }
+  .hero-actions .hero-secondary:hover { background: var(--rose-hover); }
+  .hero-tools-cta { display: flex; flex-direction: column; align-items: center; flex: 0 0 auto; gap: .15rem; min-width: 0; }
+  .hero-tools-cta .button { width: 100%; }
+  .hero-free-note { display: block; width: 9.2rem; height: auto; pointer-events: none; }
+  @media (max-width: 760px) { .hero-tools-cta { width: 100%; } }
 
   .paths { padding: clamp(4.5rem, 7vw, 6.25rem) 0; background: #fbfaf7; }
   .section-heading { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(20rem, .9fr); gap: clamp(2.5rem, 7vw, 6.5rem); align-items: end; }

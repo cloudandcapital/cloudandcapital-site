@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { JSDOM } from 'jsdom';
-import entry from '../dist/server/entry.mjs';
+import entry from '../.vercel/output/functions/_render.func/dist/server/entry.mjs';
 import { directoryTools, toolTopics, upcomingTools } from '../src/data/toolDirectory.ts';
 
 const response = await entry.fetch(new Request('https://cloudandcapital.com/tools'));

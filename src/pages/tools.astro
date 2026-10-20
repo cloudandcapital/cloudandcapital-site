@@ -93,9 +93,16 @@ const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
   .folder-back, .folder-body { left: 5%; top: 17%; width: 90%; height: 90%; background-position: 0 0; }
   .folder-back { z-index: 0; }
   .folder-body { z-index: 4; clip-path: polygon(0% 0%, 14% 0%, 14% 28%, 16% 31%, 18% 35%, 20% 39%, 21% 44%, 22% 46.5%, 24% 44%, 27% 42.5%, 31% 41%, 42% 40.5%, 46% 40.5%, 49% 41.5%, 52% 44.5%, 55% 49%, 58% 53%, 60% 54.7%, 63% 55%, 69% 54.2%, 76% 53%, 79% 52.5%, 82% 51.3%, 84% 49%, 86% 46%, 88% 44%, 91% 43%, 96% 42%, 100% 42%, 100% 100%, 0% 100%); }
-  .folder-card-sage { z-index: 1; left: 10%; top: 6%; width: 70%; height: 70%; background-position: 100% 0; clip-path: inset(0 0 0 7%); }
-  .folder-card-ivory { z-index: 2; left: 12%; top: 5%; width: 80%; height: 80%; background-position: 0 100%; }
-  .folder-card-rose { z-index: 3; left: 30%; top: 15%; width: 74%; height: 74%; background-position: 100% 100%; }
+  .folder-card { transform-origin: 50% 85%; }
+  .folder-card-sage { --card-lift: -.4rem; --card-roll: -1deg; --card-delay: .15s; z-index: 1; left: 10%; top: 6%; width: 70%; height: 70%; background-position: 100% 0; clip-path: inset(0 0 0 7%); }
+  .folder-card-ivory { --card-lift: -.55rem; --card-roll: .8deg; --card-delay: .8s; z-index: 2; left: 12%; top: 5%; width: 80%; height: 80%; background-position: 0 100%; }
+  .folder-card-rose { --card-lift: -.4rem; --card-roll: 1deg; --card-delay: 1.45s; z-index: 3; left: 30%; top: 15%; width: 74%; height: 74%; background-position: 100% 100%; }
+  @keyframes directory-file-shuffle { 0%, 12%, 80%, 100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(var(--card-lift)) rotate(var(--card-roll)); } 58% { transform: translateY(.06rem) rotate(0); } }
+  @keyframes directory-file-replay { 0%, 12%, 80%, 100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(var(--card-lift)) rotate(var(--card-roll)); } 58% { transform: translateY(.06rem) rotate(0); } }
+  @media (prefers-reduced-motion: no-preference) {
+    .folder-card { animation: directory-file-shuffle 3.2s ease-in-out 1; animation-delay: var(--card-delay); }
+    .library-folder:hover .folder-card { animation-name: directory-file-replay; }
+  }
   .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .tool-library { padding-bottom: clamp(3rem, 5vw, 4.5rem); }
   .tool-topics { display: flex; justify-content: center; flex-wrap: wrap; gap: .7rem; padding: 1.5rem 0; border-top: 1px solid #3d605529; }

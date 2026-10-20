@@ -7,7 +7,6 @@ import HomepageTools from '../components/HomepageTools.astro';
 import HomepageAbout from '../components/HomepageAbout.astro';
 import HomepageWriting from '../components/HomepageWriting.astro';
 import InstagramSection from '../components/InstagramSection.astro';
-import FlowText from '../components/FlowText.astro';
 import {
   contactLink,
 } from '../data/siteContent';
@@ -23,9 +22,9 @@ import {
         <div class="hero-copy">
           <p class="eyebrow">Finance · Technology · Free tools</p>
           <h1 id="home-title">Better decisions <span class="hero-heading-phrase">about your tools,</span> <span class="hero-heading-phrase">your costs,</span> <em>and your time.</em></h1>
-          <p class="hero-lede"><FlowText text="I’m Diana, a finance analyst and tool builder. I help small businesses and growing tech teams understand their software, cloud and AI costs, and find simpler ways to get work done." /></p>
+          <p class="hero-lede">I’m Diana, a <span class="hero-copy-phrase">finance analyst</span> and <span class="hero-copy-phrase">tool builder.</span> I help small businesses and <span class="hero-copy-phrase">growing tech teams</span> understand their software, cloud and AI costs, and find simpler ways to <span class="hero-copy-phrase">get work done.</span></p>
           <p class="hero-context">Cloud &amp; Capital is also where I share free tools and what&nbsp;I’m&nbsp;learning about money, markets and technology. Try&nbsp;a&nbsp;tool, read something, or bring me a&nbsp;business&nbsp;question.</p>
-          <p class="hero-byline">Diana Molski · Founder, Cloud &amp; Capital</p>
+          <p class="hero-byline">Diana Molski · Founder</p>
           <div class="hero-actions">
             <a class="button button-primary" href="/services" data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_hero">Explore business services</a>
             <div class="hero-tools-cta">
@@ -627,4 +626,8 @@ import {
     text-decoration: none;
   }
   .home .small-tool-label > span:first-child { text-decoration: underline; text-underline-offset: .28rem; }
+  .hero-copy-phrase { display: inline-block; max-width: 100%; }
+  @media (min-width: 1201px) {
+    .paths .path-card { display: grid; grid-template-rows: subgrid; grid-row: span 5; row-gap: 0; }
+  }
 </style>

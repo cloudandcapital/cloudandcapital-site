@@ -239,7 +239,7 @@ export const about = {
   heading: 'Hi, I’m Diana.',
   biography: [
     'I’m a mom, a lifelong internet nerd, and almost always in the middle of building something. I love a good rabbit hole, especially one that ends with something I can share.',
-    'I started out in beauty and pet salons before earning a finance degree and working in wealth management at Morgan Stanley. These days, my curiosity takes me into finance, AI, and what technology actually costs.',
+    'I started out in beauty and pet salons before earning a finance degree and working in wealth management at Morgan Stanley. These days, I look at technology through a finance lens: what it costs, what you get, and whether it’s worth it.',
     'Through Cloud & Capital, I help small businesses and growing tech teams understand their technology spending, simplify repetitive work, and build tools that fit how they work.',
     'I also share free tools and write Markets & Mimosas, my newsletter about money, markets, and technology. There’s room here for what I’ve learned and the questions I’m still working through.',
     'I’m the daughter of Polish immigrants, born and raised in LA’s South Bay, where I still live with my teenage son and our dog, Myszka.',

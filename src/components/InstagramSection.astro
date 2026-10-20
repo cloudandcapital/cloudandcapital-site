@@ -107,6 +107,13 @@ import { instagramPosts, instagramProfile } from '../data/instagram';
     .instagram-intro { display: block; }
     .instagram-intro > p { margin-top: 1.2rem; max-width: 40ch; }
     .instagram-strip { --post-gap: .7rem; margin-top: 2rem; }
+    .instagram-footer { flex-wrap: wrap; }
+    .instagram-follow { flex: none; }
+    .instagram-follow :global(.action-label) { white-space: nowrap; }
+    .instagram-toggle { margin-left: auto; }
+  }
+  @media (max-width: 360px) {
+    .instagram-follow :global(.action-label) { font-size: .75rem; }
   }
   @media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
     .instagram-strip[data-motion-ready] .instagram-viewport { overflow-x: auto; }

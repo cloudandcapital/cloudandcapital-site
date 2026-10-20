@@ -57,7 +57,7 @@ const subscribeHref = `${newsletter.subscribeHref.replace(/\/$/, '')}/subscribe`
         data-analytics-destination="substack"
         data-analytics-source="homepage_writing"
       >
-        <img src="https://substack.com/img/substack.png" alt="" width="24" height="24" loading="lazy" decoding="async" />
+        <img src="https://substack.com/img/substack.png" alt="" width="28" height="28" loading="lazy" decoding="async" />
         <ActionLabel label="Subscribe on Substack" />
       </a>
     </div>
@@ -182,13 +182,17 @@ const subscribeHref = `${newsletter.subscribeHref.replace(/\/$/, '')}/subscribe`
 
   .writing-subscribe { display: flex; justify-content: center; margin-top: 1.25rem; }
   .writing-subscribe a { display: inline-flex; align-items: center; gap: .8rem; color: #3d6055; text-decoration: none; }
-  .writing-subscribe img { flex: none; width: 24px; height: 24px; object-fit: contain; }
+  .writing-subscribe img { flex: none; width: 28px; height: 28px; object-fit: contain; }
+  .writing-subscribe :global(.action-label) { font-size: .875rem; }
   .essay-card :global(.action-arrow), .writing-subscribe :global(.action-arrow) { transition: transform 200ms ease; }
   .essay-card:is(:hover, :focus-visible) :global(.action-arrow),
   .writing-subscribe a:is(:hover, :focus-visible) :global(.action-arrow) { transform: translateX(4px); }
   :global(.reveal-ready) [data-reveal] { opacity: 0; transform: translateY(1.1rem); transition: opacity .7s ease, transform .7s ease; }
   :global(.reveal-ready) [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
 
+  @media (min-width: 1021px) {
+    .decision-artwork { transform: translateX(-2.5rem); }
+  }
   @media (max-width: 1020px) and (min-width: 761px) {
     .essay-featured { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); }
     .decision-artwork { padding-inline: 1.25rem; }

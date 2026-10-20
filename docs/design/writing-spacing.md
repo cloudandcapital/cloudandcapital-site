@@ -7,9 +7,10 @@ The approved heading, three article titles, descriptions, dates, destinations, c
 - The Decision Layer is a full-width landscape feature with copy on the left and typographic artwork on the right. It occupies its own grid row rather than spanning the combined height of two other articles.
 - The two Markets & Mimosas articles sit in equal columns below, divided by a fine newspaper rule. Rows use their natural content height; no fixed card height or automatic bottom alignment separates a description from its Read link.
 - The featured text has more horizontal space. Artwork terms use normal grid flow with small staggered indents, giving the illustration its own intrinsic height rather than positioning it inside a stretched empty canvas.
+- On desktop above 1020px, the entire artwork shifts 2.5rem left for optical balance, keeping its words and linework together. Tablet and mobile alignment stay centered in their available column.
 - On screens at or below 760px, articles stack in reading order. The featured artwork follows its copy, with responsive type sizes and no fixed-height wrapper.
 - Every Read link uses the existing ActionLabel component, preserving the shared type, underline, 50px touch target, close arrow, and 1.25rem arrow size.
-- The two bottom buttons are replaced by one centered Subscribe on Substack link. It leads to the publication's /subscribe route and includes a small, unaltered logo loaded from the download URL on Substack's official brand page: https://substack.com/brand (asset: https://substack.com/img/substack.png). There is no added form, tracking script, or embed.
+- The two bottom buttons are replaced by one centered Subscribe on Substack link. The label is 14px with a 28px logo for slightly more presence; the shared underline, 50px touch target, and 1.25rem arrow remain. It leads to the publication's /subscribe route and includes an unaltered logo loaded from the download URL on Substack's official brand page: https://substack.com/brand (asset: https://substack.com/img/substack.png). There is no added form, tracking script, or embed.
 
 ## Implementation and scope
 

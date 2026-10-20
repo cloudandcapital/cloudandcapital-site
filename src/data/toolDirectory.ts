@@ -18,6 +18,7 @@ export type DirectoryTool = {
   imageAlt: string;
   imageWidth: number;
   imageHeight: number;
+  companion?: { label: string; href: string };
 };
 
 export type ToolTopic = 'tech-spending' | 'money-investing' | 'ai-automation';
@@ -67,6 +68,7 @@ export const directoryTools: DirectoryTool[] = [
     image: '/images/software-renewal-project-desk.jpg',
     imageAlt: 'Software Renewal Tracker showing the Project desk subscription, charge and renewal date',
     imageWidth: 1168, imageHeight: 455,
+    companion: { label: 'Get the renewal worksheet', href: '/resources/software-renewal' },
   },
   {
     slug: 'market-tape', topics: ['money-investing'], name: 'Market Tape', kind: 'Market dashboard',
@@ -78,17 +80,6 @@ export const directoryTools: DirectoryTool[] = [
     image: '/images/market-tape-internals-momentum.jpg',
     imageAlt: 'Market Tape dashboard showing market internals and momentum',
     imageWidth: 1104, imageHeight: 430,
-  },
-  {
-    slug: 'software-renewal-checklist', topics: ['tech-spending'], name: 'Software Renewal Checklist', kind: 'Worksheet & PDF',
-    description: 'Decide whether a subscription is earning its place.',
-    bring: 'One subscription and a recent example of how it is used.',
-    result: 'Eight questions and a PDF with space for your answers.',
-    action: 'Get the renewal worksheet', href: '/resources/software-renewal', external: false,
-    destination: 'work', source: 'work_decision_tools', tone: 'sand',
-    image: '/images/software-renewal-worksheet-preview.jpg',
-    imageAlt: 'Four questions from the renewal worksheet about cost, purpose, dependencies and remaining work',
-    imageWidth: 1152, imageHeight: 395,
   },
   {
     slug: 'signal-audit', topics: ['tech-spending'], name: 'Signal Audit', kind: '12 question diagnostic',
@@ -114,11 +105,40 @@ export const directoryTools: DirectoryTool[] = [
   },
 ];
 
-export const upcomingTools: { slug: string; name: string; topics: ToolTopic[]; description: string }[] = [
+export const upcomingTools: {
+  slug: string;
+  name: string;
+  topics: ToolTopic[];
+  description: string;
+  preview: [string, string];
+  tone: 'sage' | 'rose' | 'sand';
+}[] = [
+  {
+    slug: 'monthly-money-planner',
+    name: 'Monthly Money Planner',
+    topics: ['money-investing'],
+    description: 'A place to plan your monthly budget, spending, and saving.',
+    preview: ['Make room.', 'Make a plan.'], tone: 'sage',
+  },
+  {
+    slug: 'business-cash-flow-planner',
+    name: 'Business Cash Flow Planner',
+    topics: ['money-investing'],
+    description: 'Map money coming in and going out, and plan your business cash buffer.',
+    preview: ['Cash in.', 'Cash out.'], tone: 'sand',
+  },
+  {
+    slug: 'worth-it-calculator',
+    name: 'Worth It Calculator',
+    topics: ['money-investing', 'tech-spending'],
+    description: 'Compare what something costs with the time it could save you.',
+    preview: ['Time saved.', 'Money spent.'], tone: 'rose',
+  },
   {
     slug: 'personal-ai-helper',
     name: 'Your own AI helper',
     topics: ['ai-automation'],
     description: 'An animal-inspired AI assistant, with a walkthrough to help you set it up.',
+    preview: ['Less admin.', 'More you.'], tone: 'rose',
   },
 ];

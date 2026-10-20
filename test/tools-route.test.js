@@ -31,7 +31,7 @@ test('Tools is canonical while Work remains a permanent compatibility redirect',
 test('directory opens released tools, preserves source links and has real screenshot assets', async () => {
   const page = await source('src/pages/tools.astro');
   const entries = directoryTools;
-  assert.equal(entries.length, 7);
+  assert.equal(entries.length, 6);
   assert.equal(new Set(entries.map(tool => tool.href)).size, entries.length);
   for (const tool of entries) {
     const registeredSlug = tool.slug === 'cloud-cost-guard' ? 'cloud-cost-guard-lumen' : tool.slug;
@@ -42,6 +42,10 @@ test('directory opens released tools, preserves source links and has real screen
     assert.ok(validateAnalyticsEvent('cta_click', { destination: tool.destination, source: tool.source }));
     assert.ok((await readFile(new URL(`public${tool.image}`, root))).length > 0);
   }
+  const renewal = entries.filter(tool => tool.slug.includes('renewal'));
+  assert.equal(renewal.length, 1, 'renewal is one card with a companion worksheet');
+  assert.equal(renewal[0].companion.href, '/resources/software-renewal');
+  assert.deepEqual(upcomingTools.map(tool => tool.slug), ['monthly-money-planner', 'business-cash-flow-planner', 'worth-it-calculator', 'personal-ai-helper']);
   assert.match(page, /href="https:\/\/github\.com\/cloudandcapital"/);
   assert.doesNotMatch(page, /openSourceTools\.map/);
   assert.ok(openSourceTools.some(project => project.title === 'AI Cost Lens' && project.href === tools.find(tool => tool.slug === 'ai-cost-lens').sourceHref));
@@ -79,7 +83,7 @@ test('topic filters show each tool once, include upcoming work and restore View 
   assert.deepEqual(shown(), ['ai-cost-lens', 'interactive-lab', 'personal-ai-helper']);
   assert.equal(status.textContent, 'AI & automation: 2 tools to try · 1 coming soon');
   root.querySelector('[data-tool-filter="all"]').click();
-  assert.equal(status.textContent, '7 tools to try · 1 coming soon');
+  assert.equal(status.textContent, '6 tools to try · 4 coming soon');
   assert.equal(shown().length, entries.length);
   assert.equal(root.querySelectorAll('[data-tool-item]').length, entries.length);
   dom.window.close();

@@ -20,6 +20,16 @@ The portrait, Myszka photo, beach photo, and flyer are real photographs/artwork.
 - `public/images/event-poster-vol01.png`: the event flyer is a static, non-clickable image, straight and aligned with the text. Its width remains 9.9rem maximum (158.4px at the default font size). There is no enlargement action or textual flyer link. Event: April 9, 2026, Hawthorne. Copy credits FinOps Weekly, SmartClouds, and speakers from Ulta Beauty and Wiv.ai. Source: https://luma.com/2w1hyz2q.
 - Photo labels use `@fontsource/caveat` 5.3.0, Latin weight 400, bundled locally.
 
+## Myszka’s natural fur color
+
+The room retains the approved .58 sepia treatment. An additional decorative rendering of the same original `myszka-about.webp` restores 78% of the natural photograph over her head and body. Two soft radial masks follow those regions in the square crop; both image layers share the same object-fit and 50% / 42% object-position, so their pixels align at every frame size. The natural-color layer sits above the warm multiply layer, with no filter of its own. Its blank alt text and aria-hidden flag prevent a duplicate image announcement. South Bay, the portrait, the photo framing, and all other styling are unchanged.
+
+A built-in image generation background-extraction study was inspected, using `public/images/myszka-about.webp` as the edit reference and a transparent background. The resulting source `generated_images/exec-dc3036bf-4bc5-4432-9a81-2a7e6909f504.png` was not adopted: it did not preserve registration precisely enough. The website displays only the original photograph. The final native CSS mask is in `/workspace/scratch/80688df69d25/cloudandcapital-site/src/components/HomepageAbout.astro`.
+
+Study prompt:
+
+Use case: background-extraction. Input image: the real photograph of Myszka, a small tan curly-haired dog sitting on a bed. Create a precise transparent-background cutout of ONLY the dog, including her entire visible ears, wispy head fur, muzzle, chest, body, paws, and tail. CRITICAL: preserve the exact original FULL PORTRAIT CANVAS and original placement, scale, proportions, pose, face, eyes, nose, fur, and outline. Keep the same 901:1600 canvas aspect ratio, with the dog occupying exactly the same location as in the input; retain transparent space above and below where the room and bed were. Do not center, enlarge, move, crop-to-subject, or recompose the dog. Remove the room, window, plant, wall and bedding to genuine transparency. Keep delicate wispy fur edges with soft realistic alpha coverage. No added elements, no cast shadows, no outline, no frame. This will be used ONLY as a registered alpha mask over the unchanged original photograph, so exact pixel alignment and full-canvas layout matter more than any beautification. No color or lighting changes to the dog.
+
 ## Generated magnets
 
 Mode for all three: built-in image generation, new transparent assets, no image references. Originals are retained. Project copies are trimmed to alpha bounds as needed, resized, and WebP encoded with alpha preserved.

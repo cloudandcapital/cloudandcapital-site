@@ -4,9 +4,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import BusinessArtwork from '../components/BusinessArtwork.astro';
 import ServiceWatermark from '../components/ServiceWatermark.astro';
 import HomepageTools from '../components/HomepageTools.astro';
+import HomepageAbout from '../components/HomepageAbout.astro';
 import InstagramSection from '../components/InstagramSection.astro';
 import {
-  about,
   contactLink,
   newsletter,
   homepageWriting,
@@ -86,33 +86,7 @@ const featuredArticles = homepageWriting;
 
     <HomepageTools />
 
-    <section class="about-section" id="about" aria-labelledby="about-title">
-      <div class="site-shell">
-        <div class="about-grid">
-          <div class="about-identity" data-reveal>
-            <p class="eyebrow eyebrow-light">About Diana</p>
-            <img class="about-portrait" src="/images/diana-molski-portrait.png" alt="Diana Molski" width="820" height="806" loading="lazy" />
-            <p class="about-location">Founder, Cloud &amp; Capital · Los Angeles</p>
-            <h2 id="about-title">{about.heading}</h2>
-          </div>
-
-          <div class="about-copy" data-reveal>
-            {about.biography.map((paragraph) => <p class="about-body">{paragraph}</p>)}
-
-            <p class="about-credentials-label">Credentials</p>
-            <dl class="credentials" aria-label="Professional credentials">
-              {about.credentials.map((credential) => (
-                <div class="credential-row"><dt>{credential.category}</dt><dd>{credential.detail}</dd></div>
-              ))}
-              <div class="credential-row credential-contribution">
-                <dt>CONTRIBUTION</dt>
-                <dd><a class="contribution-link" href={about.recognitionUrl} target="_blank" rel="noopener noreferrer"><span>{about.recognition}</span><span class="link-arrow" aria-hidden="true">→</span></a></dd>
-              </div>
-            </dl>
-          </div>
-        </div>
-      </div>
-    </section>
+    <HomepageAbout />
 
     <section class="writing-section" id="writing" aria-labelledby="writing-title">
       <div class="shell">
@@ -339,29 +313,6 @@ const featuredArticles = homepageWriting;
   .article-copy > span { display: inline-block; margin-top: auto; padding-top: 1.2rem; color: #3d6055; font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; }
   .article-card:hover .article-copy > span { text-decoration: underline; text-underline-offset: .3rem; }
 
-  .about-section { padding: clamp(4.25rem, 6vw, 5.6rem) 0; background: #3d6055; color: #f5eee9; }
-  .about-grid { display: grid; grid-template-columns: minmax(0, .38fr) minmax(0, .62fr); gap: clamp(3.5rem, 6vw, 5.5rem); align-items: start; }
-  .about-identity { min-width: 0; }
-  .about-portrait { display: block; width: 240px; height: 240px; margin-top: 1.5rem; border: 1px solid rgba(245, 238, 233, .68); border-radius: 50%; object-fit: cover; object-position: center; }
-  .about-location { margin-top: .85rem; color: rgba(245, 238, 233, .8); font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .045em; line-height: 1.5; }
-  .about-identity h2 { max-width: 15ch; margin-top: 2.25rem; font-size: clamp(2.55rem, 3.3vw, 3.25rem); line-height: 1.04; letter-spacing: -.035em; text-wrap: balance; }
-  .about-copy { min-width: 0; padding-top: 3rem; }
-  .about-copy .about-body { max-width: 62ch; margin-top: 1.1rem; color: rgba(245, 238, 233, .92); font-size: .95rem; line-height: 1.7; }
-  .about-copy .about-body:first-child { margin-top: 0; }
-  .about-section .eyebrow-light { color: #c7d8cf; }
-  .about-credentials-label { margin-top: 1.7rem; color: rgba(245, 238, 233, .8); font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
-  .credentials { margin: .65rem 0 0; }
-  .credential-row { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 1rem; align-items: baseline; padding: .7rem 0; border-bottom: 1px solid rgba(245, 238, 233, .17); }
-  .credential-row dt { color: rgba(245, 238, 233, .8); font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .07em; }
-  .credential-row dd { margin: 0; color: rgba(245, 238, 233, .86); font-size: .85rem; line-height: 1.5; }
-  .credential-contribution dt { color: rgba(245, 238, 233, .79); }
-  .contribution-link { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; color: rgba(245, 238, 233, .82); font-size: .875rem; line-height: 1.4; text-decoration: none; }
-  .contribution-link:hover, .contribution-link:focus-visible { color: #f5eee9; text-decoration: none; }
-  .contribution-link:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
-  .contribution-link span:first-child { text-decoration: underline; text-underline-offset: .25rem; text-decoration-color: rgba(245, 238, 233, .48); }
-  .contribution-link span:last-child { display: inline-block; flex: none; font-size: 1.25rem; line-height: 1; text-decoration: none; transition: transform 200ms ease; }
-  .contribution-link:hover span:last-child, .contribution-link:focus-visible span:last-child { transform: translateX(4px); }
-
   .contact-section { padding: 3.5rem 0 2rem; background: var(--clay); color: #2f2927; }
   .contact-inner { text-align: center; }
   .contact-section .eyebrow { justify-content: center; gap: .8rem; color: #2f2927; }
@@ -395,13 +346,10 @@ const featuredArticles = homepageWriting;
     .hero-copy { max-width: 48rem; }
     .hero-copy h1 { max-width: 18ch; }
     .hero-visual { width: min(100%, 39rem); }
-    .section-heading,
-    .about-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+    .section-heading { grid-template-columns: 1fr; gap: 1.8rem; }
     .section-heading > p { max-width: 58ch; }
 
     .tools-heading h2 { white-space: normal; }
-    .about-grid { gap: 2.6rem; }
-    .about-copy { padding-top: 0; }
   }
 
   @media (max-width: 760px) {
@@ -430,7 +378,6 @@ const featuredArticles = homepageWriting;
     .article-grid { gap: 1.25rem; background: transparent; border: 0; }
     .article-card { border-top: 1px solid rgba(25, 23, 20, .14); border-bottom: 1px solid rgba(25, 23, 20, .14); }
     .article-copy { min-height: 14rem; padding-inline: 0; }
-    .about-portrait { width: 240px; height: 240px; }
   }
 
   @media (max-width: 480px) {
@@ -442,8 +389,6 @@ const featuredArticles = homepageWriting;
     .contact-email-address { font-size: 1.0625rem; }
 
     .section-heading h2 { font-size: clamp(2.5rem, 12vw, 3.45rem); }
-    .about-identity h2 { font-size: clamp(2.55rem, 11vw, 3.1rem); }
-    .credential-row { grid-template-columns: 1fr; gap: .3rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -728,7 +673,6 @@ const featuredArticles = homepageWriting;
   }
   .tools-section .tool-actions a.tool-source .tool-source-arrow::before,
   .tools-section .tool-actions a.tool-source .tool-source-arrow::after { content: none; }
-  @media(max-width:650px){.about-portrait{width:180px;height:180px;}}
   /* Give every article action the same inset and space above it. */
   .writing-section .article-card:not(:first-child) { display: flex; flex-direction: column; }
   .writing-section .article-copy { flex: 1; padding-bottom: 2rem; }

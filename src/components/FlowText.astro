@@ -1,0 +1,11 @@
+---
+interface Props { text: string; }
+const { text } = Astro.props;
+const words = text.trim().split(/\s+/);
+const lead = words.slice(0, -4).join(' ');
+const ending = words.slice(-4).join(' ');
+---
+{lead}{lead && ' '}<span class="text-ending">{ending}</span>
+<style>
+  .text-ending { display: inline-block; max-width: 100%; }
+</style>

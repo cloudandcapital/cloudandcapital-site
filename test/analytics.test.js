@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { runInNewContext } from 'node:vm';
 
 import { ANALYTICS_SCHEMA, createAnalyticsTracker, validateAnalyticsEvent } from '../src/lib/analytics.js';
+import { directoryGroups } from '../src/data/toolDirectory.ts';
 
 const root = new URL('../', import.meta.url);
 const source = (path) => readFile(new URL(path, root), 'utf8');
@@ -45,7 +46,7 @@ test('the shared loader disables advertising signals and layouts contain no dupl
 });
 
 test('all static CTA metadata is complete and accepted by the allowlist', async () => {
-  const files = ['src/pages/index.astro', 'src/pages/tools.astro', 'src/pages/writing.astro', 'src/components/SignalAuditResults.astro', 'src/components/HomepageTools.astro', 'src/components/InstagramSection.astro'];
+  const files = ['src/pages/index.astro', 'src/pages/tools.astro', 'src/pages/writing.astro', 'src/components/SignalAuditResults.astro', 'src/components/HomepageTools.astro', 'src/components/InstagramSection.astro', 'src/components/DirectoryToolCard.astro'];
   let count = 0;
   for (const file of files) {
     const text = await source(file);
@@ -53,6 +54,15 @@ test('all static CTA metadata is complete and accepted by the allowlist', async 
       count += 1;
       const destination = tag[0].match(/data-analytics-destination="([^"]+)"/)?.[1];
       const sourceValue = tag[0].match(/data-analytics-source="([^"]+)"/)?.[1];
+      if (tag[0].includes('data-analytics-destination={tool.destination}')) {
+        assert.ok(tag[0].includes('data-analytics-source={tool.source}'));
+        const entries = directoryGroups.flatMap(group => group.tools);
+        count += entries.length - 1;
+        for (const tool of entries) {
+          assert.ok(validateAnalyticsEvent('cta_click', { destination: tool.destination, source: tool.source }), `${file}: ${tool.slug}`);
+        }
+        continue;
+      }
       if (tag[0].includes('data-analytics-destination={choice.destination}')) {
         for (const rowDestination of ['ai_cost_lens', 'cloud_cost_guard', 'software_renewal_tracker']) {
           assert.ok(validateAnalyticsEvent('cta_click', { destination: rowDestination, source: sourceValue }), `${file}: ${rowDestination}`);

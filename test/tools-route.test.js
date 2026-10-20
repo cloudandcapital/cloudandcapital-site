@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { directoryGroups } from '../src/data/toolDirectory.ts';
+import { tools, openSourceTools } from '../src/data/siteContent.ts';
+import { validateAnalyticsEvent } from '../src/lib/analytics.js';
 
 const root = new URL('../', import.meta.url);
 const source = (path) => readFile(new URL(path, root), 'utf8');
@@ -20,17 +23,24 @@ test('Tools is canonical while Work remains a permanent compatibility redirect',
   assert.match(data, /label: 'Tools', href: '\/tools'/);
   assert.match(home, /<HomepageTools\s*\/>/);
   assert.match(homepageTools, /href="\/tools"/);
-  assert.match(page, /title="Free AI & Cloud Cost Tools \| Cloud & Capital"/);
-  assert.match(page, /<h1 id="tools-title"><span>Start with the question\.<\/span><span>Follow the number\.<\/span><\/h1>/);
+  assert.match(page, /<DirectoryToolCard tool=\{tool\}/);
 });
 
-test('Tools keeps distinct lens destinations and semantic portfolio links', async () => {
+test('directory opens released tools, preserves source links and has real screenshot assets', async () => {
   const page = await source('src/pages/tools.astro');
-  assert.match(page, /class="lens-open" href=\{lens\.href\}/);
-  assert.match(page, /class="lens-source" href=\{lens\.sourceHref\}/);
-  assert.match(page, /class="product-feature guard-feature" href=\{guard\.href\}/);
-  assert.match(page, /class="product-feature tape-feature" href=\{tape\.href\}/);
-  assert.match(page, /class="supporting-tool" href=\{item\.tool\.href\}/);
-  assert.match(page, /class="open-row" href=\{project\.href\}/);
-  assert.match(page, /openSourceTools\.filter\(\(project\) => project\.title !== 'AI Cost Lens'\)/);
+  const entries = directoryGroups.flatMap(group => group.tools);
+  assert.equal(entries.length, 7);
+  assert.equal(new Set(entries.map(tool => tool.href)).size, entries.length);
+  for (const tool of entries) {
+    const registeredSlug = tool.slug === 'cloud-cost-guard' ? 'cloud-cost-guard-lumen' : tool.slug;
+    const registered = tools.find(item => item.slug === registeredSlug);
+    if (registered) assert.equal(tool.href, registered.href);
+    if (tool.external) assert.match(tool.href, /^https:\/\//);
+    else assert.match(tool.href, /^\/(?!\/)/);
+    assert.ok(validateAnalyticsEvent('cta_click', { destination: tool.destination, source: tool.source }));
+    assert.ok((await readFile(new URL(`public${tool.image}`, root))).length > 0);
+  }
+  assert.match(page, /openSourceTools\.map/);
+  assert.match(page, /href=\{project\.href\}/);
+  assert.ok(openSourceTools.some(project => project.title === 'AI Cost Lens' && project.href === tools.find(tool => tool.slug === 'ai-cost-lens').sourceHref));
 });

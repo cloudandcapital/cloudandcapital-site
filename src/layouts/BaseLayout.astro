@@ -235,6 +235,13 @@ const {
         .site-footer-links { gap: 0 1.25rem; }
         .site-footer-bottom { flex-wrap: wrap; gap: .4rem 1rem; }
       }
+      @media (max-width: 760px) {
+        .site-footer { text-align: center; }
+        .site-footer-top { justify-items: center; gap: .5rem; }
+        .site-footer-links { justify-content: center; }
+        .site-footer-social { justify-self: center; }
+        .site-footer-bottom { flex-direction: column; align-items: center; gap: .4rem; }
+      }
     </style>
     <nav class="site-nav">
       <a class="site-nav-logo" href="/"><span class="site-nav-logo-main">Cloud &amp; Capital</span><span class="site-nav-logo-sub">Turning numbers into strategy.</span></a>

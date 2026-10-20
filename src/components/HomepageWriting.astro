@@ -57,7 +57,7 @@ const subscribeHref = `${newsletter.subscribeHref.replace(/\/$/, '')}/subscribe`
         data-analytics-destination="substack"
         data-analytics-source="homepage_writing"
       >
-        <img src="https://substack.com/img/substack.png" alt="" width="28" height="28" loading="lazy" decoding="async" />
+        <span class="writing-substack-icon" aria-hidden="true"><img src="/images/substack-logo.svg" alt="" width="18" height="18" loading="lazy" decoding="async" /></span>
         <ActionLabel label="Subscribe on Substack" />
       </a>
     </div>
@@ -182,7 +182,8 @@ const subscribeHref = `${newsletter.subscribeHref.replace(/\/$/, '')}/subscribe`
 
   .writing-subscribe { display: flex; justify-content: flex-start; margin-top: 1.25rem; }
   .writing-subscribe a { display: inline-flex; align-items: center; gap: .8rem; color: #3d6055; text-decoration: none; }
-  .writing-subscribe img { flex: none; width: 28px; height: 28px; object-fit: contain; }
+  .writing-substack-icon { display: grid; place-items: center; flex: none; width: 28px; height: 28px; }
+  .writing-subscribe img { width: 18px; height: 18px; object-fit: contain; }
   .writing-subscribe :global(.action-label) { font-size: .875rem; }
   .essay-card :global(.action-arrow), .writing-subscribe :global(.action-arrow) { transition: transform 200ms ease; }
   .essay-card:is(:hover, :focus-visible) :global(.action-arrow),

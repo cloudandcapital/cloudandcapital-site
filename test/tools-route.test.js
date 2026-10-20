@@ -1,9 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { directoryGroups } from '../src/data/toolDirectory.ts';
+import { directoryTools, toolTopics, upcomingTools } from '../src/data/toolDirectory.ts';
 import { tools, openSourceTools } from '../src/data/siteContent.ts';
 import { validateAnalyticsEvent } from '../src/lib/analytics.js';
+import { JSDOM } from 'jsdom';
+import { initToolDirectory } from '../src/lib/tool-directory.js';
 
 const root = new URL('../', import.meta.url);
 const source = (path) => readFile(new URL(path, root), 'utf8');
@@ -28,7 +30,7 @@ test('Tools is canonical while Work remains a permanent compatibility redirect',
 
 test('directory opens released tools, preserves source links and has real screenshot assets', async () => {
   const page = await source('src/pages/tools.astro');
-  const entries = directoryGroups.flatMap(group => group.tools);
+  const entries = directoryTools;
   assert.equal(entries.length, 7);
   assert.equal(new Set(entries.map(tool => tool.href)).size, entries.length);
   for (const tool of entries) {
@@ -40,7 +42,45 @@ test('directory opens released tools, preserves source links and has real screen
     assert.ok(validateAnalyticsEvent('cta_click', { destination: tool.destination, source: tool.source }));
     assert.ok((await readFile(new URL(`public${tool.image}`, root))).length > 0);
   }
-  assert.match(page, /openSourceTools\.map/);
-  assert.match(page, /href=\{project\.href\}/);
+  assert.match(page, /href="https:\/\/github\.com\/cloudandcapital"/);
+  assert.doesNotMatch(page, /openSourceTools\.map/);
   assert.ok(openSourceTools.some(project => project.title === 'AI Cost Lens' && project.href === tools.find(tool => tool.slug === 'ai-cost-lens').sourceHref));
+});
+
+test('topic filters show each tool once, include upcoming work and restore View all', () => {
+  const entries = [...directoryTools, ...upcomingTools];
+  const filters = [{ id: 'all', label: 'View all' }, ...toolTopics];
+  const dom = new JSDOM(`<section data-tool-directory>
+    <div data-tool-filters hidden>${filters.map(topic => `<button type="button" data-tool-filter="${topic.id}"><span>${topic.label}</span></button>`).join('')}</div>
+    <p data-tool-status role="status"></p>
+    <ul>${entries.map(tool => `<li data-tool-item data-tool-id="${tool.slug}" data-tool-topics="${tool.topics.join(' ')}" ${upcomingTools.includes(tool) ? 'data-tool-upcoming' : ''}>${tool.name}</li>`).join('')}</ul>
+  </section>`);
+  const root = dom.window.document.querySelector('section');
+  const cards = [...root.querySelectorAll('[data-tool-item]')];
+  const shown = () => cards.filter(card => !card.hidden).map(card => card.dataset.toolId);
+  const status = root.querySelector('[data-tool-status]');
+  assert.ok(cards.every(card => !card.hidden), 'all entries remain available without JavaScript');
+  assert.equal(new Set(entries.map(tool => tool.slug)).size, entries.length);
+  initToolDirectory(root);
+  initToolDirectory(root); // Reinitialization must not duplicate cards or listeners.
+  assert.equal(root.querySelector('[data-tool-filters]').hidden, false);
+  assert.equal(shown().length, entries.length);
+  assert.equal(root.querySelector('[aria-pressed="true"]').dataset.toolFilter, 'all');
+  for (const topic of toolTopics) {
+    const button = root.querySelector(`[data-tool-filter="${topic.id}"]`);
+    button.focus();
+    button.click();
+    assert.strictEqual(dom.window.document.activeElement, button, 'filtering keeps focus on the selected control');
+    assert.deepEqual(shown(), entries.filter(tool => tool.topics.includes(topic.id)).map(tool => tool.slug));
+    assert.equal(root.querySelectorAll('[aria-pressed="true"]').length, 1);
+    assert.equal(button.getAttribute('aria-pressed'), 'true');
+    assert.ok(status.textContent.startsWith(`${topic.label}: `));
+  }
+  assert.deepEqual(shown(), ['ai-cost-lens', 'interactive-lab', 'personal-ai-helper']);
+  assert.equal(status.textContent, 'AI & automation: 2 tools to try · 1 coming soon');
+  root.querySelector('[data-tool-filter="all"]').click();
+  assert.equal(status.textContent, '7 tools to try · 1 coming soon');
+  assert.equal(shown().length, entries.length);
+  assert.equal(root.querySelectorAll('[data-tool-item]').length, entries.length);
+  dom.window.close();
 });

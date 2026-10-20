@@ -2,8 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ActionLabel from '../components/ActionLabel.astro';
 import DirectoryToolCard from '../components/DirectoryToolCard.astro';
-import { directoryGroups } from '../data/toolDirectory';
-import { openSourceTools } from '../data/siteContent';
+import { directoryTools, toolTopics, upcomingTools } from '../data/toolDirectory';
+
+const allEntries = [...directoryTools, ...upcomingTools];
+const filters = [{ id: 'all', label: 'View all' }, ...toolTopics];
 ---
 <BaseLayout title="Free Finance & Technology Tools | Cloud & Capital" description="Free tools for AI costs, cloud bills, software renewals, market context, and business decisions. See what each tool does, what to bring, and what you get.">
   <main id="main-content" class="tools-page">
@@ -23,38 +25,42 @@ import { openSourceTools } from '../data/siteContent';
               <span class="folder-layer folder-card folder-card-rose"></span>
               <span class="folder-layer folder-body"></span>
             </span>
-            <span class="folder-note">help yourself!</span>
           </div>
         </div>
-        <nav class="tool-topics" aria-label="Browse tools by task">
-          {directoryGroups.map(group => <a href={`#${group.id}`}><span>{group.label}</span><span class="topic-count" aria-label={`${group.tools.length} ${group.tools.length === 1 ? 'tool' : 'tools'}`}>{group.tools.length}</span></a>)}
-        </nav>
       </div>
     </section>
 
-    <div class="library-sections site-shell">
-      {directoryGroups.map(group => (
-        <section class:list={['tool-group', { 'market-group': group.id === 'money-markets' }]} id={group.id} aria-labelledby={`${group.id}-title`}>
-          <div class="group-heading"><p class="eyebrow">{group.label}</p><h2 id={`${group.id}-title`}>{group.heading}</h2></div>
-          <div class="directory-grid">{group.tools.map(tool => <DirectoryToolCard tool={tool} wide={group.id === 'money-markets'} />)}</div>
-        </section>
-      ))}
-
-      <section class="source-section" aria-labelledby="source-title">
-        <details class="source-drawer">
-          <summary><span><span class="eyebrow">Built in the open</span><span id="source-title" class="source-heading">For the curious. And the builders.</span></span><span class="source-plus" aria-hidden="true">+</span></summary>
-          <div class="source-content">
-            <p>These projects are shared as code. Open them on GitHub to explore how they work.</p>
-            <div class="source-grid">
-              {openSourceTools.map(project => (
-                <a class="source-project" href={project.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="github_pipeline" data-analytics-source="work_pipeline"><ActionLabel label={project.title} /><span class="source-description">{project.description}</span></a>
-              ))}
-            </div>
-            <a class="source-all" href="https://github.com/cloudandcapital" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="github_pipeline" data-analytics-source="work_pipeline"><ActionLabel label="Explore on GitHub" /></a>
-          </div>
-        </details>
-      </section>
-    </div>
+    <section class="tool-library site-shell" data-tool-directory aria-labelledby="library-title">
+      <h2 id="library-title" class="visually-hidden">Browse the tools</h2>
+      <div class="tool-topics" data-tool-filters role="group" aria-label="Choose a tool topic" hidden>
+        {filters.map(filter => (
+          <button type="button" data-tool-filter={filter.id} aria-pressed={filter.id === 'all' ? 'true' : 'false'} aria-controls="tool-gallery">
+            <span>{filter.label}</span>
+            <span class="topic-count" aria-hidden="true">{allEntries.filter(tool => filter.id === 'all' || tool.topics.some(topic => topic === filter.id)).length}</span>
+          </button>
+        ))}
+      </div>
+      <p class="library-status" data-tool-status role="status" aria-live="polite" aria-atomic="true">{directoryTools.length} tools to try · {upcomingTools.length} coming soon</p>
+      <ul class="directory-grid" id="tool-gallery">
+        {directoryTools.map(tool => (
+          <li class="directory-item" data-tool-item data-tool-id={tool.slug} data-tool-topics={tool.topics.join(' ')}>
+            <DirectoryToolCard tool={tool} />
+          </li>
+        ))}
+        {upcomingTools.map(tool => (
+          <li class="directory-item" data-tool-item data-tool-id={tool.slug} data-tool-topics={tool.topics.join(' ')} data-tool-upcoming>
+            <article class="upcoming-card" aria-labelledby={`${tool.slug}-title`}>
+              <div class="upcoming-preview" aria-hidden="true"><p>A little<br /><em>extra help.</em></p><span class="upcoming-sparkle">✳</span></div>
+              <div class="upcoming-copy"><p class="upcoming-label">Coming soon</p><h3 id={`${tool.slug}-title`}>{tool.name}</h3><p>{tool.description}</p></div>
+            </article>
+          </li>
+        ))}
+      </ul>
+      <div class="source-section">
+        <p>Curious how they’re built?</p>
+        <a href="https://github.com/cloudandcapital" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="github_pipeline" data-analytics-source="work_pipeline"><ActionLabel label="Explore on GitHub" /></a>
+      </div>
+    </section>
 
     <section class="tools-contact" aria-labelledby="tools-contact-title">
       <div class="site-shell contact-layout">
@@ -64,19 +70,25 @@ import { openSourceTools } from '../data/siteContent';
     </section>
   </main>
 </BaseLayout>
+<script>
+  import { initToolDirectory } from '../lib/tool-directory.js';
+  const setup = () => initToolDirectory(document.querySelector('[data-tool-directory]'));
+  setup();
+  document.addEventListener('astro:page-load', setup);
+</script>
 <style>
   .tools-page { color: var(--brand-ink); font-family: 'Jost', system-ui, sans-serif; }
   .tools-page :is(h1,h2,p) { margin: 0; }
   .eyebrow { display: flex; align-items: center; gap: .75rem; color: #4f7165; font: 400 .65rem/1.5 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
   .eyebrow::after { content: ''; width: 2.7rem; height: 1px; background: currentColor; opacity: .45; }
-  .tools-hero { padding: clamp(6.5rem, 9vw, 8.5rem) 0 0; background: var(--cream); }
-  .hero-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: center; gap: clamp(2rem, 5vw, 5rem); }
+  .tools-hero { padding: clamp(6.5rem, 9vw, 8.5rem) 0 1.5rem; background: var(--cream); }
+  .hero-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: center; gap: clamp(2rem, 5vw, 5rem); }
   .hero-copy h1 { margin-top: 1.2rem; font: 400 clamp(3.5rem, 6.5vw, 5.7rem)/.98 'Cormorant Garamond', Georgia, serif; letter-spacing: -.035em; }
   .hero-copy h1 > span, .hero-copy h1 > em { display: block; max-width: 100%; }
   .hero-copy h1 em { color: var(--brand-green); font-weight: 400; }
   .hero-copy > p:last-child { max-width: 49ch; margin-top: 1.4rem; color: #4b4c45; font-size: 1.0625rem; line-height: 1.75; text-wrap: pretty; }
-  .hero-art { position: relative; display: flex; justify-content: center; min-width: 0; padding-bottom: 1.5rem; }
-  .library-folder { position: relative; display: block; isolation: isolate; width: clamp(11rem, 21vw, 17rem); aspect-ratio: 1; }
+  .hero-art { position: relative; display: flex; justify-content: center; min-width: 0; padding: 0 1.25rem 1.75rem 0; }
+  .library-folder { position: relative; display: block; isolation: isolate; width: clamp(17rem, 28vw, 24rem); aspect-ratio: 1; }
   .folder-layer { position: absolute; background-image: url('/images/tools-folder-layers.webp'); background-size: 200% 200%; background-repeat: no-repeat; }
   .folder-back, .folder-body { left: 5%; top: 17%; width: 90%; height: 90%; background-position: 0 0; }
   .folder-back { z-index: 0; }
@@ -84,33 +96,33 @@ import { openSourceTools } from '../data/siteContent';
   .folder-card-sage { z-index: 1; left: 10%; top: 6%; width: 70%; height: 70%; background-position: 100% 0; clip-path: inset(0 0 0 7%); }
   .folder-card-ivory { z-index: 2; left: 12%; top: 5%; width: 80%; height: 80%; background-position: 0 100%; }
   .folder-card-rose { z-index: 3; left: 30%; top: 15%; width: 74%; height: 74%; background-position: 100% 100%; }
-  .folder-note { position: absolute; right: 8%; bottom: -1rem; color: #302b27; font: 400 2.1rem/1 'Caveat', cursive; transform: rotate(-6deg); }
-  .tool-topics { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 2.5rem; padding: 1.5rem 0 2rem; border-bottom: 1px solid #3d605529; }
-  .tool-topics a { display: inline-flex; align-items: center; gap: .85rem; min-height: 44px; padding: .6rem .9rem; border: 1px solid #cbd6c5; border-radius: 8px; background: #e4e9df; color: #3d6055; font: 400 .75rem/1.4 'DM Mono', monospace; text-decoration: none; }
-  .tool-topics a:nth-child(2) { border-color: #d6b8b2; background: #eddbd6; color: #71504b; }
-  .tool-topics a:nth-child(3) { border-color: #d3c6b1; background: #eadfce; color: #675844; }
-  .topic-count { display: grid; place-items: center; width: 1.3rem; height: 1.3rem; border-radius: 50%; background: #ffffff7a; font-size: .66rem; }
-  .tool-topics a:hover { border-color: currentColor; }
-  .library-sections { padding-bottom: 4rem; }
-  .tool-group { padding-top: clamp(3rem, 5vw, 4.5rem); scroll-margin-top: 6.5rem; }
-  .group-heading { margin-bottom: 1.65rem; }
-  .group-heading h2 { max-width: 24ch; margin-top: .65rem; font: 400 clamp(2.25rem, 3.6vw, 3.4rem)/1.08 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; text-wrap: balance; }
-  .directory-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
-  .market-group .directory-grid { grid-template-columns: 1fr; }
-  .source-section { margin-top: clamp(3rem, 5vw, 4.5rem); }
-  .source-drawer { border-top: 1px solid #3d605536; border-bottom: 1px solid #3d605536; }
-  summary { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; min-height: 100px; padding: 1.5rem 0; list-style: none; cursor: pointer; }
-  summary::-webkit-details-marker { display: none; }
-  .source-heading { display: block; margin-top: .4rem; font: 400 clamp(1.75rem, 2.6vw, 2.5rem)/1.15 'Cormorant Garamond', Georgia, serif; text-wrap: balance; }
-  .source-plus { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border: 1px solid #3d60554d; border-radius: 50%; color: #3d6055; font-size: 1.4rem; }
-  details[open] .source-plus { transform: rotate(45deg); }
-  .source-content { padding: .25rem 0 1.25rem; }
-  .source-content > p { max-width: 58ch; color: #5b5c52; font-size: .9375rem; line-height: 1.7; }
-  .source-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2.5rem; margin-top: 1rem; }
-  .source-project { display: block; padding: .6rem 0 1rem; border-bottom: 1px solid #3d605521; color: #3d6055; text-decoration: none; }
-  .source-project :global(.action-label) { min-height: 44px; }
-  .source-description { display: block; max-width: 55ch; color: #5b5c52; font-size: .875rem; line-height: 1.65; }
-  .source-all { display: inline-flex; margin-top: 1rem; color: #3d6055; text-decoration: none; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .tool-library { padding-bottom: clamp(3rem, 5vw, 4.5rem); }
+  .tool-topics { display: flex; flex-wrap: wrap; gap: .7rem; padding: 1.5rem 0; border-top: 1px solid #3d605529; }
+  .tool-topics[hidden], .directory-item[hidden] { display: none; }
+  .tool-topics button { --topic-surface: #e4e9df; --topic-border: #c2cdbb; display: inline-flex; align-items: center; justify-content: center; gap: 1rem; min-height: 58px; padding: .75rem 1.35rem; border: 1px solid var(--topic-border); border-radius: 14px; background: var(--topic-surface); color: #343d35; font: 500 1rem/1.4 'Jost', system-ui, sans-serif; cursor: pointer; box-shadow: 0 3px 0 -1px var(--topic-border); transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease; }
+  .tool-topics button[data-tool-filter="all"] { --topic-surface: #fcfbf8; --topic-border: #ccc5bb; }
+  .tool-topics button[data-tool-filter="money-investing"] { --topic-surface: #eadfce; --topic-border: #cfc0aa; }
+  .tool-topics button[data-tool-filter="ai-automation"] { --topic-surface: #e8d0cc; --topic-border: #c5a09b; }
+  .tool-topics button[aria-pressed="true"] { border-color: var(--brand-green); background: var(--brand-green); color: #fff; box-shadow: 0 3px 0 -1px #29453c, 0 8px 18px -12px #29453c80; }
+  .tool-topics button:hover { border-color: #3d6055; box-shadow: 0 3px 0 -1px #3d6055; }
+  .topic-count { display: grid; place-items: center; flex: none; min-width: 1.55rem; height: 1.55rem; border-radius: 50%; background: #ffffff8a; color: #42473e; font: 400 .72rem/1 'DM Mono', monospace; }
+  .tool-topics button[aria-pressed="true"] .topic-count { background: #ffffff24; color: #fff; }
+  .library-status { padding: .6rem 0 1.4rem; color: #585a51; font-size: .875rem; }
+  .directory-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; padding: 0; list-style: none; }
+  .directory-item { display: flex; min-width: 0; }
+  .directory-item > :global(*) { width: 100%; }
+  .upcoming-card { display: flex; flex-direction: column; width: 100%; min-width: 0; overflow: hidden; border: 1px solid #d6bcb5; border-radius: 16px; background: #fcfbf8; }
+  .upcoming-preview { position: relative; display: flex; flex-direction: column; justify-content: center; aspect-ratio: 1.85; padding: 1.5rem; overflow: hidden; background: #e8d0cc; }
+  .upcoming-preview > p { color: #5d453e; font: 400 clamp(2.25rem, 3.5vw, 3.25rem)/.95 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; }
+  .upcoming-sparkle { position: absolute; right: 1.5rem; bottom: 1.25rem; color: #927168; font-size: 3.25rem; line-height: 1; }
+  .upcoming-copy { padding: 1.5rem; }
+  .upcoming-label { color: #785752; font: 500 .61rem/1.5 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+  .upcoming-copy h3 { margin: .65rem 0 .9rem; font: italic 400 clamp(2.15rem, 2.7vw, 2.75rem)/1.05 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; text-wrap: balance; }
+  .upcoming-copy > p:last-child { color: #4a4a42; font-size: .9375rem; line-height: 1.7; text-wrap: pretty; }
+  .source-section { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .3rem 1rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #3d605529; }
+  .source-section p { color: #585a51; font-size: .875rem; }
+  .source-section a { display: inline-flex; color: #3d6055; text-decoration: none; }
   .tools-contact { padding: clamp(2.5rem, 5vw, 4rem) 0; background: var(--dusty-rose); }
   .contact-layout { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
   .tools-contact .eyebrow { color: #60433e; }
@@ -119,12 +131,11 @@ import { openSourceTools } from '../data/siteContent';
   .tools-contact a { display: inline-flex; justify-content: center; flex: none; min-height: 52px; padding: .2rem 1.3rem; border: 1px solid #b38d89; border-radius: 8px; background: var(--cream); color: var(--brand-ink); text-decoration: none; }
   .tools-contact a :global(.action-label > span:first-child) { text-decoration: none; }
   .tools-contact a:hover { background: #fcfbf8; }
-  .tools-page :is(a,summary):focus-visible { outline: 3px solid #89534f; outline-offset: 4px; }
+  .tools-page :is(a,button):focus-visible { outline: 3px solid #89534f; outline-offset: 4px; }
   @media (max-width: 1020px) {
     .hero-layout { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1rem; }
     .hero-copy h1 { font-size: clamp(3.1rem, 7vw, 4.5rem); }
     .directory-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .directory-grid > :last-child:nth-child(odd) { grid-column: 1 / -1; }
     .contact-layout { align-items: start; }
     .tools-contact a { flex-shrink: 1; }
   }
@@ -133,16 +144,21 @@ import { openSourceTools } from '../data/siteContent';
     .hero-layout { grid-template-columns: 1fr; gap: 1.25rem; }
     .hero-copy h1 { font-size: clamp(2.65rem, 11.5vw, 3.5rem); }
     .hero-copy > p:last-child { font-size: 1rem; }
-    .hero-art { justify-content: flex-end; margin-top: -.5rem; padding: 0 1rem .75rem 0; }
-    .library-folder { width: 8rem; }
-    .folder-note { right: 8.2rem; bottom: 1.5rem; font-size: 1.8rem; }
-    .tool-topics { gap: .6rem; margin-top: 1rem; padding-top: 1rem; }
-    .tool-topics a { gap: .55rem; padding: .6rem .75rem; font-size: .7rem; }
+    .hero-art { justify-content: center; padding: 0 1.5rem 1.25rem 0; }
+    .library-folder { width: clamp(10.5rem, 47vw, 14rem); }
+    .tool-topics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; padding: 1.25rem 0; }
+    .tool-topics button { gap: .55rem; min-height: 58px; padding: .7rem .6rem; font-size: .875rem; }
+    .topic-count { min-width: 1.4rem; height: 1.4rem; font-size: .68rem; }
     .directory-grid { grid-template-columns: 1fr; }
-    .group-heading h2 { font-size: clamp(2rem, 8.7vw, 2.65rem); }
-    .source-grid { grid-template-columns: 1fr; }
-    .library-sections { padding-bottom: 3rem; }
+    .upcoming-preview > p { font-size: clamp(2.5rem, 12vw, 3.5rem); }
     .contact-layout { display: block; }
     .tools-contact a { margin-top: 1.25rem; }
+  }
+  @media (max-width: 360px) {
+    .tool-topics button { gap: .4rem; padding-inline: .45rem; font-size: .8rem; }
+    .topic-count { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tool-topics button { transition: none; }
   }
 </style>

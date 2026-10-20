@@ -2,10 +2,10 @@
 import ActionLabel from './ActionLabel.astro';
 import FlowText from './FlowText.astro';
 import type { DirectoryTool } from '../data/toolDirectory';
-interface Props { tool: DirectoryTool; wide?: boolean; }
-const { tool, wide = false } = Astro.props;
+interface Props { tool: DirectoryTool; }
+const { tool } = Astro.props;
 ---
-<a class:list={['directory-card', { 'directory-card-wide': wide }]} data-tone={tool.tone} href={tool.href} target={tool.external ? '_blank' : undefined} rel={tool.external ? 'noopener noreferrer' : undefined} data-analytics-event="cta_click" data-analytics-destination={tool.destination} data-analytics-source={tool.source}>
+<a class="directory-card" data-tone={tool.tone} href={tool.href} target={tool.external ? '_blank' : undefined} rel={tool.external ? 'noopener noreferrer' : undefined} data-analytics-event="cta_click" data-analytics-destination={tool.destination} data-analytics-source={tool.source}>
   <div class="card-preview">
     <div class="preview-window">
       <div class="preview-bar" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -46,23 +46,13 @@ const { tool, wide = false } = Astro.props;
   .directory-card:hover .preview-window { transform: translateY(-3px); box-shadow: 0 21px 25px -13px #26372d66; }
   .directory-card:is(:hover, :focus-visible) :global(.action-arrow) { transform: translateX(3px); }
   .directory-card:focus-visible { outline: 3px solid #89534f; outline-offset: 4px; }
-  .directory-card-wide { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
-  .directory-card-wide .card-preview { aspect-ratio: auto; padding: clamp(1.5rem, 3vw, 3rem); }
-  .directory-card-wide .preview-window img { max-height: none; }
-  .directory-card-wide .card-copy { padding: clamp(1.5rem, 3vw, 2.5rem); }
-  .directory-card-wide h3 { font-size: clamp(2.65rem, 4vw, 3.6rem); }
-  .directory-card-wide dl { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
   @media (max-width: 1020px) {
     .card-copy { padding: 1.25rem; }
     .card-preview { padding: 1rem; }
     h3 { font-size: clamp(2rem, 3.7vw, 2.6rem); }
-    .directory-card-wide dl { grid-template-columns: 1fr; gap: .9rem; }
   }
   @media (max-width: 760px) {
-    .directory-card-wide { display: flex; }
-    .directory-card-wide .card-preview { aspect-ratio: 1.85; padding: 1.25rem; }
-    .directory-card-wide .card-copy, .card-copy { padding: 1.5rem; }
-    h3, .directory-card-wide h3 { font-size: clamp(2rem, 9vw, 2.6rem); }
+    h3 { font-size: clamp(2rem, 9vw, 2.6rem); }
   }
   @media (prefers-reduced-motion: reduce) {
     .directory-card, .preview-window, .card-action :global(.action-arrow) { transition: none; }

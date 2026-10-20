@@ -1,22 +1,39 @@
 # 3D service illustrations
 
+## Service card colour edits
+
+Created with the built-in image-generation tool using each original service illustration as its edit reference. The original pink clock and blocks remain available in the repository. `ServiceWatermark.astro` uses the new descriptive filenames to avoid stale image caches. Display sizes, placement, transparency and decorative image semantics are preserved.
+
+### Sage clock
+
+```text
+Use case: precise-object-edit, colour change only. Edit this exact existing 3D clock illustration for the sage-green service card on Cloud & Capital's website. Change ONLY the shiny pink/rose bezel to a glossy muted sage-green bezel, around #789382 with pale sage glass highlights. Preserve its luminous polished, slightly translucent glass-like depth and bright studio reflections; it must still look shiny and sculptural, not flat or matte. Keep the exact same white clock body, white face, charcoal hands, sage tick marks, angle, proportions, perspective, object position, scale, soft shadow and square transparent margins. No new details, no numerals, no text, no backdrop. Remove the pink tint from bezel reflections. Actual transparent RGBA background.
+```
+
+### Warm beige blocks
+
+```text
+Use case: precise-object-edit, colour change only. Edit this exact existing group of three rounded 3D building blocks for the warm beige service card on Cloud & Capital's website. Change ONLY the upper pink glass block to shiny warm beige/taupe glass, around #B9A58D with luminous ivory and pale beige highlights. It should read as a neutral warm beige, like polished champagne-coloured glass, without a metallic gold, yellow, orange or pink cast. Keep the same glossy translucent material depth and soft bright studio reflections. Preserve the two lower pearly-white blocks, their sizes, shapes, positions, viewing angle, composition, soft shadow, square canvas and transparent margins. Only adjust nearby pink reflections to reflect the new beige accent. Exactly three blocks; no added symbols, letters, objects, plinth or backdrop. Actual transparent RGBA background.
+```
+
+
 Created October 19, 2026 using the built-in image-generation tool with the approved hero as a style reference. These replace the service-card line drawings with a coordinated bill, clock, and three building blocks. The hero image and approved copy are unchanged.
 
 ## Project assets
 
-All files are 512 × 512 RGBA WebP images, derived from the transparent 1254 × 1254 generated PNGs by proportional downscaling and format conversion. Original generated files are retained.
+Current assets are 512 × 512 RGBA WebP images, proportionally downscaled and converted from the transparent generated PNGs. Original generated files are retained.
 
 - `public/images/service-bill-3d.webp` — 26,832 bytes
-- `public/images/service-clock-3d.webp` — 40,344 bytes
-- `public/images/service-blocks-3d.webp` — 27,800 bytes
+- `public/images/service-clock-sage-3d.webp` — 36,132 bytes; glossy sage accent
+- `public/images/service-blocks-beige-3d.webp` — 26,076 bytes; glossy warm beige accent
 
 Source style reference: `public/images/cloud-capital-hero-diamond-v5.webp`.
 
 ## Integration
 
-The three illustrations share pearly white surfaces, rose glass or clay-pink details, restrained sage accents, dark details where needed, and soft studio light. Display at full opacity with the generated transparency; no CSS tint, extra rotation, or artificial shadow is applied. The bill is slightly smaller to balance its taller silhouette. All three remain decorative with empty alt text, explicit dimensions, lazy loading, and async decoding. Desktop and mobile headline spacing leaves a clear illustration area above the questions.
+The three illustrations share pearly white surfaces, glossy accents matched to their service cards, dark details where needed, and soft studio light. The bill keeps its clay-pink accent; the clock has sage-green glass; the blocks have warm beige glass. Display at full opacity with the generated transparency; no CSS tint, extra rotation, or artificial shadow is applied. The bill is slightly smaller to balance its taller silhouette. All three remain decorative with empty alt text, explicit dimensions, lazy loading, and async decoding. Desktop and mobile headline spacing leaves a clear illustration area above the questions.
 
-## Final prompts
+## Original generation prompts
 
 ### bill
 

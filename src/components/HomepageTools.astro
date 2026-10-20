@@ -4,9 +4,9 @@ import { tools } from '../data/siteContent';
 const lens = tools.find(tool => tool.slug === 'ai-cost-lens');
 const guard = tools.find(tool => tool.slug === 'cloud-cost-guard-lumen');
 const choices = [
-  lens && { goal: 'Understand my AI costs.', name: 'AI Cost Lens', category: 'AI spending', description: 'Estimate an AI task, review a bill, or compare options using the numbers you have.', result: 'A clear cost breakdown, including review and rework time when you add it.', href: lens.href, action: 'Open AI Cost Lens', destination: 'ai_cost_lens', external: true, image: '/images/ai-cost-lens-anatomy-preview.jpg', imageAlt: 'AI Cost Lens example comparing model, infrastructure, and human review costs for two AI routes', imageWidth: 1315, imageHeight: 492 },
-  guard && { goal: 'Find out why the bill grew.', name: 'Cloud Cost Guard', category: 'Technology spending · Demo', description: 'Explore a sample cloud, AI, and software bill, with the records behind each total.', result: 'See what drove the costs and which questions deserve a closer look.', href: guard.href, action: 'Explore the demo', destination: 'cloud_cost_guard', external: true, image: '/images/cloud-cost-guard-summary-preview.jpg', imageAlt: 'Cloud Cost Guard screen showing reconciled cloud, AI, and software spending', imageWidth: 1216, imageHeight: 474 },
-  { goal: 'Keep track of renewals.', name: 'Software Renewal Tracker', category: 'Software subscriptions', description: 'Add your software charges, renewal dates, and cancellation deadlines.', result: 'See what is due each month and when to decide whether to keep a subscription.', href: '/tools/software-renewal-tracker', action: 'Open the renewal tracker', destination: 'software_renewal_tracker', external: false, image: '/images/software-renewal-project-desk.jpg', imageAlt: 'Software Renewal Tracker showing the Project desk subscription, charge, renewal date, and decision owner', imageWidth: 1168, imageHeight: 455 },
+  lens && { name: 'AI Cost Lens', category: 'AI spending', description: 'Estimate an AI task, review a bill, or compare options using the numbers you have.', result: 'A clear cost breakdown, including review and rework time when you add it.', href: lens.href, action: 'Open AI Cost Lens', destination: 'ai_cost_lens', external: true, image: '/images/ai-cost-lens-anatomy-preview.jpg', imageAlt: 'AI Cost Lens example comparing model, infrastructure, and human review costs for two AI routes', imageWidth: 1315, imageHeight: 492 },
+  guard && { name: 'Cloud Cost Guard', category: 'Technology spending · Demo', description: 'Explore a sample cloud, AI, and software bill, with the records behind each total.', result: 'See what drove the costs and which questions deserve a closer look.', href: guard.href, action: 'Explore the demo', destination: 'cloud_cost_guard', external: true, image: '/images/cloud-cost-guard-summary-preview.jpg', imageAlt: 'Cloud Cost Guard screen showing reconciled cloud, AI, and software spending', imageWidth: 1216, imageHeight: 474 },
+  { name: 'Software Renewal Tracker', category: 'Software subscriptions', description: 'Add your software charges, renewal dates, and cancellation deadlines.', result: 'See what is due each month and when to decide whether to keep a subscription.', href: '/tools/software-renewal-tracker', action: 'Open the renewal tracker', destination: 'software_renewal_tracker', external: false, image: '/images/software-renewal-project-desk.jpg', imageAlt: 'Software Renewal Tracker showing the Project desk subscription, charge, renewal date, and decision owner', imageWidth: 1168, imageHeight: 455 },
 ].filter(Boolean);
 ---
 <section class="free-tools" id="tools" aria-labelledby="tools-title">
@@ -21,7 +21,6 @@ const choices = [
           <div class="tool-copy">
             <p class="tool-category">{choice.category}</p>
             <h3>{choice.name}</h3>
-            <p class="tool-question">{choice.goal}</p>
             <p class="tool-description">{choice.description}</p>
             <p class="tool-result"><span>What you get</span>{choice.result}</p>
             <span class="tool-action"><ActionLabel label={choice.action} /></span>
@@ -59,9 +58,8 @@ const choices = [
   .tool-choice:last-child { --tool-accent: #785752; border-color: #dfc7c0; }
   .tool-copy { display: flex; flex-direction: column; flex: 1; min-width: 0; }
   .tool-category { color: var(--tool-accent); }
-  .tool-choice h3 { margin-top: .8rem; font: 400 clamp(2.3rem, 3.2vw, 3.2rem)/1.02 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; }
+  .tool-choice h3 { margin-top: .8rem; font: italic 400 clamp(2.3rem, 3.2vw, 3.2rem)/1.06 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; }
   .tool-choice:first-child h3 { font-size: clamp(3rem, 4.1vw, 4.3rem); }
-  .tool-question { margin-top: 1rem; font: italic 400 1.55rem/1.2 'Cormorant Garamond', Georgia, serif; }
   .tool-description { margin: .9rem 0; color: #44483f; font-size: .9rem; line-height: 1.75; }
   .tool-result { margin: 0 0 1.5rem; padding-top: .9rem; border-top: 1px solid #3d605526; font-size: .9rem; line-height: 1.65; }
   .tool-result > span { display: block; margin-bottom: .35rem; font: 500 .61rem/1.5 'DM Mono', monospace; letter-spacing: .07em; text-transform: uppercase; color: var(--tool-accent); }

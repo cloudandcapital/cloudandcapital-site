@@ -100,19 +100,20 @@ import ActionLabel from './ActionLabel.astro';
   .diana-star { top: -7%; left: 45%; width: 23%; transform: rotate(12deg); }
   .diana-round { top: -6%; left: 36%; width: 19%; }
   .diana-story { grid-area: story; min-width: 0; }
-  .diana-biography p { max-width: 64ch; margin: 1.05rem 0 0; color: #f3f0e9; font-size: .95rem; line-height: 1.75; }
+  .diana-biography p { max-width: 64ch; margin: 1.05rem 0 0; color: #f3f0e9; font-size: .95rem; line-height: 1.75; text-wrap: pretty; }
+  .diana-biography p:last-child { text-wrap: balance; }
   .diana-biography p:first-child { margin-top: 0; }
   .diana-community { display: grid; grid-template-columns: clamp(8.1rem, 11.7vw, 9.9rem) minmax(0, 1fr); align-items: start; gap: 1.2rem; margin-top: 1.8rem; padding-top: 1.6rem; border-top: 1px solid #f5eee92e; }
   .diana-event-image { display: block; border: 1px solid #f5eee966; border-radius: 6px; overflow: hidden; box-shadow: 0 8px 16px -8px #162e27b3; }
   .diana-event-image img { display: block; width: 100%; height: auto; }
   .diana-event-date { margin: 0; color: #d1dfd6; font: 400 .55rem/1.6 'DM Mono', monospace; letter-spacing: .035em; }
-  .diana-event-copy h3 { margin: .4rem 0; color: #faf6ef; font: italic 400 1.75rem/1.1 'Cormorant Garamond', Georgia, serif; }
-  .diana-event-copy > p:last-of-type { margin: .6rem 0 .35rem; color: #e8eee7; font-size: .82rem; line-height: 1.65; }
+  .diana-event-copy h3 { margin: .4rem 0; color: #faf6ef; font: italic 400 clamp(1.6rem, 2.75vw, 1.75rem)/1.1 'Cormorant Garamond', Georgia, serif; text-wrap: balance; }
+  .diana-event-copy > p:last-of-type { margin: .6rem 0 .35rem; color: #e8eee7; font-size: .82rem; line-height: 1.65; text-wrap: pretty; }
   .diana-credentials { margin-top: clamp(2.75rem, 5vw, 4rem); padding-top: 1.6rem; border-top: 1px solid #f5eee947; }
   .diana-credentials dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; margin: .8rem 0 0; }
   .diana-credential { display: grid; grid-template-columns: 7.7rem minmax(0, 1fr); align-items: baseline; gap: .75rem; padding: .8rem 0; border-bottom: 1px solid #f5eee926; }
   .diana-credential dt { color: #cbdad0; font: 400 .58rem/1.6 'DM Mono', monospace; letter-spacing: .05em; }
-  .diana-credential dd { margin: 0; color: #edf1ea; font-size: .79rem; line-height: 1.6; }
+  .diana-credential dd { margin: 0; color: #edf1ea; font-size: .79rem; line-height: 1.6; text-wrap: balance; }
   .diana-contribution { display: inline-flex; max-width: 100%; min-height: 32px; align-items: center; color: #edf1ea; text-decoration: none; }
   .diana-about a:focus-visible { outline: 2px solid #f2c8c9; outline-offset: 5px; }
   @media (max-width: 1020px) and (min-width: 761px) {

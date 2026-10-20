@@ -1,5 +1,6 @@
 ---
 import ActionLabel from './ActionLabel.astro';
+import FlowText from './FlowText.astro';
 import { homepageWriting, newsletter } from '../data/siteContent';
 
 const subscribeHref = `${newsletter.subscribeHref.replace(/\/$/, '')}/subscribe`;
@@ -28,7 +29,7 @@ const subscribeHref = `${newsletter.subscribeHref.replace(/\/$/, '')}/subscribe`
             <p class="essay-kicker">{index === 0 ? 'Featured essay' : index === 1 ? 'Latest' : 'Previously'}</p>
             <p class="essay-meta">{article.topic.replace(' · Issue No. 1', '').replace(' · Issue no. 1', '')} · {article.date}</p>
             <h3>{article.title.split(/(?<=[.!?])\s+/).map((sentence, sentenceIndex) => <Fragment>{sentenceIndex > 0 && ' '}<span class="writing-heading-phrase">{sentence}</span></Fragment>)}</h3>
-            <p class="essay-description">{article.description}</p>
+            <p class="essay-description"><FlowText text={article.description} /></p>
             <div class="essay-read"><ActionLabel label="Read" /></div>
           </div>
           {index === 0 && (

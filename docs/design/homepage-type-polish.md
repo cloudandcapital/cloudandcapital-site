@@ -5,6 +5,7 @@ October 20, 2026. The approved palette, artwork, copy, buttons, links, and mobil
 ## Findings and changes
 
 - Keep “about your tools” and “your costs” together in the hero. Phrase spans can still wrap within their available width; there are no fixed-height text boxes or forced desktop line breaks.
+- The shared `FlowText` component keeps four closing words together in the hero introduction, biography, event description, and writing summaries. Its inline ending has a maximum width so it can still wrap when necessary. This prevents short “they work” and “paid for” endings at intermediate phone widths without forcing fixed lines.
 - Give phone service cards 24px padding instead of 32px. Keep the service-name endings together and gently scale the decorative icons below 380px. This gives the narrowest questions enough room for their approved two-line phrasing.
 - Balance the short service and tool descriptions. Increase the service text measure from 39ch to 46ch, capped by the card width, so stacked cards have a more comfortable reading width.
 - Keep “for the task” together in the Tools heading and “Renewal Tracker” together in its tool name. Slightly scale the smaller tool headings on the narrowest phones.

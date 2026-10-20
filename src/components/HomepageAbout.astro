@@ -2,11 +2,7 @@
 import '@fontsource/caveat/latin-400.css';
 import { about } from '../data/siteContent';
 import ActionLabel from './ActionLabel.astro';
-// Keep a few closing words together without imposing fixed paragraph line breaks.
-const biographyParagraphs = about.biography.map(paragraph => {
-  const words = paragraph.split(/\s+/);
-  return { lead: words.slice(0, -4).join(' '), tail: words.slice(-4).join(' ') };
-});
+import FlowText from './FlowText.astro';
 ---
 <section class="diana-about" id="about" aria-labelledby="about-title">
   <div class="diana-shell">
@@ -44,7 +40,7 @@ const biographyParagraphs = about.biography.map(paragraph => {
 
       <div class="diana-story" data-reveal>
         <div class="diana-biography">
-          {biographyParagraphs.map(paragraph => <p>{paragraph.lead}{paragraph.lead && ' '}<span class="diana-text-tail">{paragraph.tail}</span></p>)}
+          {about.biography.map(paragraph => <p><FlowText text={paragraph} /></p>)}
         </div>
         <aside class="diana-community" aria-labelledby="diana-community-title">
           <div class="diana-event-image">
@@ -53,7 +49,7 @@ const biographyParagraphs = about.biography.map(paragraph => {
           <div class="diana-event-copy">
             <p class="diana-event-date">April 9, 2026 · Hawthorne</p>
             <h3 id="diana-community-title">Hosting FinOps Weekly LA</h3>
-            <p>I organized and hosted LA’s first FinOps Weekly meetup with SmartClouds, featuring speakers from <span class="diana-text-tail">Ulta Beauty and Wiv.ai.</span></p>
+            <p><FlowText text="I organized and hosted LA’s first FinOps Weekly meetup with SmartClouds, featuring speakers from Ulta Beauty and Wiv.ai." /></p>
           </div>
         </aside>
       </div>
@@ -107,7 +103,6 @@ const biographyParagraphs = about.biography.map(paragraph => {
   .diana-story { grid-area: story; min-width: 0; }
   .diana-biography p { max-width: 64ch; margin: 1.05rem 0 0; color: #f3f0e9; font-size: .95rem; line-height: 1.75; text-wrap: pretty; }
   .diana-biography p:last-child { text-wrap: balance; }
-  .diana-text-tail { display: inline-block; max-width: 100%; }
   .diana-biography p:first-child { margin-top: 0; }
   .diana-community { display: grid; grid-template-columns: clamp(8.1rem, 11.7vw, 9.9rem) minmax(0, 1fr); align-items: start; gap: 1.2rem; margin-top: 1.8rem; padding-top: 1.6rem; border-top: 1px solid #f5eee92e; }
   .diana-event-image { display: block; border: 1px solid #f5eee966; border-radius: 6px; overflow: hidden; box-shadow: 0 8px 16px -8px #162e27b3; }

@@ -1,6 +1,6 @@
 # Homepage contact finish
 
-The closing contact section uses a slightly rosier clay `#c8a5a5`, scoped locally so the rest of the site's clay palette remains unchanged. Dark text is `#2f2927`; the charcoal footer remains intact.
+The closing contact section uses a slightly rosier clay `#c8a5a5` through `--dusty-rose`. The homepage's Try the tools and Browse all free tools buttons share this token, with `#bf9797` on hover and dark text. Existing clay and rose tokens elsewhere remain unchanged. Contact text is `#2f2927`; the charcoal footer remains intact.
 
 The headline reads “Have a bill, a task, or an idea / you want to make sense of?” with the existing desktop two-line structure and natural mobile wrapping. The supporting copy, including “A few lines are enough,” is unchanged.
 

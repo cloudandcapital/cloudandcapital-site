@@ -5,14 +5,11 @@ import BusinessArtwork from '../components/BusinessArtwork.astro';
 import ServiceWatermark from '../components/ServiceWatermark.astro';
 import HomepageTools from '../components/HomepageTools.astro';
 import HomepageAbout from '../components/HomepageAbout.astro';
+import HomepageWriting from '../components/HomepageWriting.astro';
 import InstagramSection from '../components/InstagramSection.astro';
 import {
   contactLink,
-  newsletter,
-  homepageWriting,
 } from '../data/siteContent';
-
-const featuredArticles = homepageWriting;
 ---
 
 <BaseLayout
@@ -88,50 +85,7 @@ const featuredArticles = homepageWriting;
 
     <HomepageAbout />
 
-    <section class="writing-section" id="writing" aria-labelledby="writing-title">
-      <div class="shell">
-        <div class="section-heading" data-reveal>
-          <div>
-            <p class="eyebrow">Writing</p>
-            <h2 id="writing-title">Markets, money, and what I’m learning as I build.</h2>
-          </div>
-        </div>
-
-
-        <div class="article-grid">
-          {featuredArticles.map((article, index) => (
-            <a class="article-card" href={article.href} target="_blank" rel="noopener noreferrer" data-reveal data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">
-              <div class="article-copy">
-                <p class="article-latest">{index === 0 ? 'Featured essay' : index === 1 ? 'Latest' : 'Previously'}</p>
-                <p class="card-label">{article.topic.replace(' · Issue No. 1', '').replace(' · Issue no. 1', '')} · {article.date}</p>
-                <h3>{article.title}</h3>
-                <p>{article.description}</p>
-                <span class="article-action"><span>Read</span><span class="link-arrow" aria-hidden="true">→</span></span>
-              </div>
-              {index === 0 && (
-                <div class="decision-artwork" role="img" aria-label="What gets built, what gets locked in, and what becomes the default.">
-                  <svg class="decision-linework" viewBox="0 0 500 500" preserveAspectRatio="none" aria-hidden="true">
-                    <path d="M 72 -15 V 194 M 72 270 V 440 M 350 18 V 178 M 350 236 V 515 M 18 108 H 306 M 116 174 H 510" />
-                    <path d="M -20 360 H 286 M 212 426 H 505" />
-                  </svg>
-                  <div class="decision-terms" aria-hidden="true">
-                    <div class="decision-term decision-built"><span>What gets</span><strong>Built</strong></div>
-                    <div class="decision-term decision-locked"><span>What gets</span><strong>Locked in</strong></div>
-                    <div class="decision-term decision-default"><span>What becomes the</span><strong>Default</strong></div>
-                  </div>
-                </div>
-              )}
-
-            </a>
-          ))}
-        </div>
-
-        <div class="writing-actions">
-          <a class="button button-primary" href="/insights">Explore business insights</a>
-          <a class="button button-secondary" href={newsletter.subscribeHref} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">Read Markets &amp; Mimosas</a>
-        </div>
-      </div>
-    </section>
+    <HomepageWriting />
 
     <InstagramSection />
 
@@ -214,8 +168,7 @@ const featuredArticles = homepageWriting;
   .text-action:focus-visible,
   .path-card a:focus-visible,
   .tool-card a:focus-visible,
-  .small-tool:focus-visible,
-  .article-card:focus-visible { outline: 2px solid currentColor; outline-offset: .3rem; }
+  .small-tool:focus-visible { outline: 2px solid currentColor; outline-offset: .3rem; }
   .button-primary { background: #4f7167; color: #f5eee9; }
   .button-primary:hover { background: #45675e; }
   .button-white { background: #f5eee9; color: #2b2622; }
@@ -262,15 +215,14 @@ const featuredArticles = homepageWriting;
   .hero-lede { max-width: 58ch; margin-top: 1.6rem; color: #4a4a4a; font-size: 1rem; line-height: 1.78; }
   .hero-byline { margin-top: 1.15rem; color: #6c665f; font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .11em; line-height: 1.5; text-transform: uppercase; }
   .hero-actions,
-  .writing-actions,
   .contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.4rem; margin-top: 1.8rem; }
   .hero-visual { min-width: 0; padding: .75rem .5rem 1.25rem; }
   @media (min-width: 1280px) {
     .hero-visual { width: min(calc(100% + 75px), 660px); justify-self: end; align-self: end; margin-block: -24px -20px; position: relative; top: 0; }
   }
-  .hero-actions .button, .writing-actions .button { min-height: 48px; border-radius: 8px; padding: .9rem 1.25rem; color: #f5eee9; }
+  .hero-actions .button { min-height: 48px; border-radius: 8px; padding: .9rem 1.25rem; color: #f5eee9; }
   .hero-actions { align-items: flex-end; }
-  .hero-actions .button:focus-visible, .writing-actions .button:focus-visible { outline-color: #3d6055; }
+  .hero-actions .button:focus-visible { outline-color: #3d6055; }
   .hero-actions .hero-secondary:focus-visible { outline-color: #8f6265; }
   .hero-actions .hero-secondary { background: var(--rose); color: #24211e; border-color: transparent; }
   .hero-actions .hero-secondary:hover { background: var(--rose-hover); }
@@ -303,15 +255,6 @@ const featuredArticles = homepageWriting;
   .path-card a:hover,
   .tool-card a:hover { text-decoration: underline; text-underline-offset: .32rem; }
   .education-note { margin-top: 1rem; color: #79726b; font-size: .7rem; line-height: 1.55; }
-
-  .writing-section { padding: clamp(4.25rem, 6vw, 5.6rem) 0; background: var(--sand); }
-  .article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 2rem; background: rgba(25, 23, 20, .14); border-top: 1px solid rgba(25, 23, 20, .14); border-bottom: 1px solid rgba(25, 23, 20, .14); }
-  .article-card { min-width: 0; background: #f5eee9; color: inherit; text-decoration: none; }
-  .article-copy { min-height: 16rem; padding: 1.55rem; display: flex; flex-direction: column; }
-  .article-copy h3 { margin-top: .7rem; font-size: clamp(1.6rem, 2.2vw, 2.05rem); line-height: 1.02; }
-  .article-copy > p:not(.card-label) { margin-top: .85rem; color: #4a4a4a; font-size: .82rem; line-height: 1.65; }
-  .article-copy > span { display: inline-block; margin-top: auto; padding-top: 1.2rem; color: #3d6055; font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; }
-  .article-card:hover .article-copy > span { text-decoration: underline; text-underline-offset: .3rem; }
 
   .contact-section { padding: 3.5rem 0 2rem; background: var(--clay); color: #2f2927; }
   .contact-inner { text-align: center; }
@@ -361,9 +304,8 @@ const featuredArticles = homepageWriting;
     .scribbled-word { white-space: normal; }
 
     .path-grid,
-    .tool-grid,
-    .smaller-tools,
-    .article-grid { grid-template-columns: 1fr; }
+  .tool-grid,
+  .smaller-tools { grid-template-columns: 1fr; }
     .path-card { min-height: auto; padding: 2rem 0; border-right: 0; border-bottom: 1px solid rgba(25, 23, 20, .13); }
     .path-card { margin-inline: -1.25rem; padding-inline: 1.25rem; }
     .path-card a { margin-top: 1.5rem; }
@@ -375,14 +317,10 @@ const featuredArticles = homepageWriting;
     .smaller-tools-intro { padding: 1.6rem 0; }
     .small-tool { min-height: auto; padding: 1.55rem 0; border-top: 1px solid rgba(245, 238, 233, .13); border-left: 0; }
     .small-tool strong { top: 1.55rem; right: 0; }
-    .article-grid { gap: 1.25rem; background: transparent; border: 0; }
-    .article-card { border-top: 1px solid rgba(25, 23, 20, .14); border-bottom: 1px solid rgba(25, 23, 20, .14); }
-    .article-copy { min-height: 14rem; padding-inline: 0; }
   }
 
   @media (max-width: 480px) {
     .hero-actions { display: grid; grid-template-columns: 1fr; }
-    .writing-actions,
     .contact-actions { flex-direction: column; align-items: flex-start; }
     .button { width: 100%; text-align: center; }
     .contact-email-card { padding: 1rem 1.25rem; }
@@ -508,38 +446,6 @@ const featuredArticles = homepageWriting;
   .tools-section { padding-bottom: 2.25rem; }
   @media (max-width: 760px) { .tools-section .small-tool + .small-tool { border-top: 0; } }
 
-  .writing-section { background: #fbfaf7; border-top: 1px solid rgba(36,35,31,.1); }
-  .writing-section .section-heading { display: block; }
-  .writing-section .section-heading h2 { max-width: none; font-size: clamp(2.65rem,4.3vw,4.3rem); line-height: 1.02; }
-  .writing-section .section-heading h2 span { display: block; }
-  .writing-section .article-grid { margin-top: clamp(3rem, 4vw, 4rem); gap: 0; background: transparent; border-bottom: 0; }
-  .writing-section .article-card { display: flex; flex-direction: column; background: transparent; border-right: 1px solid rgba(25, 23, 20, .14); }
-  .writing-section .article-card:last-child { border-right: 0; }
-  .writing-section .article-copy { flex: 1; min-height: 0; padding: 1.75rem 1.55rem; }
-  .writing-section .article-copy h3 { text-wrap: balance; line-height: 1.1; }
-  .writing-section .article-copy > span { text-transform: uppercase; }
-  .writing-section .article-copy > span span { display: inline-block; transition: transform 220ms ease; }
-  .writing-section .article-card:focus-visible { outline: 2px solid #3d6055; outline-offset: 5px; }
-  .writing-section .writing-actions { margin-top: 2rem; }
-  .writing-section .writing-actions .button { min-height: 48px; border-radius: 8px; padding: .9rem 1.25rem; gap: .65rem; }
-  .writing-section .writing-secondary { background: var(--rose); color: #2f2927; }
-  .writing-section .writing-secondary:hover { background: var(--rose-hover); }
-  .writing-section .writing-actions a:focus-visible { outline-color: #3d6055; }
-  @media (max-width: 760px) { .writing-section .section-heading h2 span { display: inline; } .writing-section .article-copy { min-height: auto; padding-block: 1.5rem; } .writing-section .article-copy > span { padding-top: 1.5rem; } }
-  @media (prefers-reduced-motion: reduce) { .writing-section .article-copy > span span { transition: none; transform: none !important; } }
-
-  @media (max-width: 760px) {
-    .writing-section .article-grid { border-top: 1px solid rgba(25, 23, 20, .14); }
-    .writing-section .article-card { border: 0; border-bottom: 1px solid rgba(25, 23, 20, .14); }
-    .writing-section .article-copy { padding: 1.75rem 0; }
-  }
-
-  .writing-section .section-heading h2 { text-wrap: balance; }
-  .writing-section .article-copy > span { margin-top: auto; }
-  .writing-section .writing-actions { margin-top: 1.5rem; }
-  .writing-section .writing-actions .button-secondary { color:#3d6055; border-color:#3d6055; background:transparent; }
-  @media (max-width: 760px) { .writing-section .article-copy > span { margin-top: 0; } }
-
   .tools-section .tool-card > p:not(.card-label):not(.tool-question) { max-width: none; text-wrap: balance; }
   .tools-section .small-tool { display: grid; grid-template-columns: minmax(0,1fr) auto; column-gap: 1rem; padding: 1.35rem 0; }
   .tools-section .small-tool > span, .tools-section .small-tool p { grid-column: 1; }
@@ -553,52 +459,6 @@ const featuredArticles = homepageWriting;
 
   .tools-section .tool-card:last-child > .card-label,
   .tools-section .tool-card:last-child > a { color: #805751; }
-  .writing-section .article-grid { grid-template-columns: minmax(0, 1.72fr) minmax(0, 1fr); grid-template-rows: repeat(2, 1fr); border-top: 1px solid rgba(49,62,54,.25); }
-  .writing-section .article-card { border: 0; }
-  .writing-section .article-card:first-child { grid-row: 1 / 3; display: grid; grid-template-columns: minmax(0, 42fr) minmax(0, 58fr); background: #f2eee6; border-right: 1px solid rgba(49,62,54,.2); }
-  .writing-section .article-card:last-child { border-top: 1px solid rgba(49,62,54,.2); }
-  .writing-section .article-copy { padding: 1.75rem 2rem; }
-  .writing-section .article-card:first-child .article-copy { display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: 2.5rem 0 2.5rem 2.5rem; }
-  .writing-section .article-copy .article-latest { margin: 0 0 1.25rem; color: #3d6055; font: .62rem/1.4 'DM Mono', monospace; letter-spacing: .14em; text-transform: uppercase; }
-  .writing-section .article-card:first-child h3 { margin-top: 1rem; font-size: clamp(2.6rem, 3.65vw, 3.5rem); line-height: .97; }
-  .writing-section .article-card:first-child .article-copy > p:not(.card-label):not(.article-latest) { font-size: .95rem; line-height: 1.7; margin-top: 1.2rem; }
-  .writing-section .article-card:not(:first-child) h3 { font-size: clamp(1.7rem, 2.2vw, 2rem); }
-  .writing-section .article-copy > span { padding-top: 1.65rem; }
-  .writing-section .article-card:first-child .article-copy > span { margin-top: auto; padding-top: 2rem; }
-  .decision-artwork { position: relative; min-width: 0; min-height: 440px; overflow: hidden; margin: 1.15rem 0; }
-  .decision-linework { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: #536659; stroke-width: .65; opacity: .23; pointer-events: none; }
-  .decision-linework path:nth-child(2) { stroke: #4b4942; opacity: .5; stroke-width: .5; }
-  .decision-terms { position: absolute; inset: 0; }
-  .decision-term { position: absolute; display: flex; flex-direction: column; width: max-content; max-width: 100%; text-transform: uppercase; }
-  .decision-term span { margin-bottom: .18rem; font: 400 clamp(.55rem, .7vw, .68rem)/1.3 'DM Mono', monospace; letter-spacing: .18em; }
-  .decision-term strong { font: 500 clamp(4rem, 5.7vw, 6.7rem)/.78 'Cormorant Garamond', Georgia, serif; letter-spacing: -.055em; white-space: nowrap; }
-  .decision-built { top: 14%; left: 7%; color: #3d6055; }
-  .decision-locked { top: 39%; left: 15%; color: #805751; }
-  .decision-locked strong { font-size: clamp(3.1rem, 4.05vw, 4.8rem); }
-  .decision-default { top: 65.5%; left: 12%; color: #4b4942; }
-  .decision-default strong { font-size: clamp(3.6rem, 5.15vw, 6rem); }
-  @media (max-width: 1024px) {
-    .writing-section .article-grid { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; }
-    .writing-section .article-card:first-child { grid-row: auto; grid-template-columns: minmax(0, 42fr) minmax(0, 58fr); border-right: 0; }
-    .writing-section .article-card + .article-card { border-top: 1px solid rgba(49,62,54,.2); }
-    .writing-section .article-copy { padding: 1.75rem; }
-    .writing-section .article-card:first-child .article-copy { padding: 2rem 0 2rem 2rem; }
-    .writing-section .article-copy > span { margin-top: 0; }
-    .decision-artwork { min-height: 380px; }
-  }
-  @media (max-width: 600px) {
-    .writing-section .article-card:first-child { grid-template-columns: minmax(0, 1fr); }
-    .writing-section .article-card:first-child .article-copy { padding: 1.8rem 1.8rem 1.25rem; }
-    .writing-section .article-card:first-child .article-copy > span { margin-top: 0; }
-    .decision-artwork { grid-row: 1; min-height: 325px; margin: .5rem 1.15rem 0; }
-    .decision-term span { font-size: .58rem; }
-    .decision-term strong { font-size: clamp(3.9rem, 19vw, 5rem); }
-    .decision-locked strong { font-size: clamp(2.8rem, 12vw, 3.7rem); }
-    .decision-built { top: 12%; left: 5%; }
-    .decision-locked { top: 36%; left: 18%; }
-    .decision-default { top: 64%; left: 9%; }
-    .decision-default strong { font-size: clamp(3.5rem, 17.1vw, 4.5rem); }
-  }
 
   /* Actions are readable and distinct from the intentionally small editorial metadata. */
   .button { min-height: 48px; font-size: .78rem; font-weight: 500; letter-spacing: .065em; }
@@ -626,30 +486,11 @@ const featuredArticles = homepageWriting;
   .tools-section .tool-card:hover .tool-card-action span:last-child, .tools-section .tool-card:focus-visible .tool-card-action span:last-child { transform: translateX(4px); }
   .tools-section .small-tool > span { text-decoration: underline; text-decoration-color: rgba(36,33,30,.4); text-underline-offset: .2rem; }
   .tools-section .small-tool strong { line-height: 1; }
-
-  .writing-section .article-copy > span { display: inline-flex; align-items: center; gap: .55rem; align-self: flex-start; min-height: 44px; padding-top: 0; color: #3d6055; font: 500 .8125rem/1.4 'DM Mono', monospace; letter-spacing: .045em; }
-  .writing-section .article-card:first-child .article-copy > span { min-height: 44px; }
-  .writing-section .article-copy > span span:first-child { font-size: inherit; text-decoration: underline; text-underline-offset: .3rem; }
-  .writing-section .article-copy > span span:last-child { line-height: 1; }
   .path-action span:last-child,
   .tools-section .tool-actions a > span:last-child,
   .tools-section .tool-card-action span:last-child,
   .tools-section .small-tool strong,
-  .writing-section .article-copy > span span:last-child,
   .text-action > span:last-child { font-size: 1.25rem; }
-  .writing-section .article-card:hover .article-copy > span, .writing-section .article-card:focus-visible .article-copy > span { color: #2e4e44; text-decoration: none; }
-  .writing-section .article-card:hover .article-copy > span span:last-child, .writing-section .article-card:focus-visible .article-copy > span span:last-child { transform: translateX(4px); }
-  .writing-section .article-card:hover { background-color: #f8f5ef; }
-  .writing-section .article-card:first-child:hover { background-color: #eee9df; }
-  .writing-section .article-card:focus-visible { outline-width: 3px; }
-
-  .decision-term span { margin-bottom: .3rem; font-size: clamp(.7rem, .9vw, .86rem); font-weight: 500; letter-spacing: .12em; }
-  .decision-built span { color: color-mix(in srgb, var(--decision-built-mix-base, #2e4e44) 88%, #f2eee6); }
-  .decision-locked span { color: color-mix(in srgb, var(--decision-locked-mix-base, #493029) 88%, #f2eee6); }
-  .decision-default span { color: color-mix(in srgb, var(--decision-default-mix-base, #4b4942) 88%, #f2eee6); }
-  .decision-built strong, .decision-locked strong { opacity: .42; }
-  .decision-default strong { opacity: .36; }
-  @media (max-width: 600px) { .decision-term span { font-size: .73rem; } }
   @media (prefers-reduced-motion: reduce) { .path-action span, .contribution-link span, .tools-section .tool-card-action span { transition: none; transform: none !important; } }
 
   .tools-section .tool-actions a.tool-source:link,
@@ -673,26 +514,6 @@ const featuredArticles = homepageWriting;
   }
   .tools-section .tool-actions a.tool-source .tool-source-arrow::before,
   .tools-section .tool-actions a.tool-source .tool-source-arrow::after { content: none; }
-  /* Keep each editorial description and Read action together. */
-  .writing-section .article-card:not(:first-child) { display: flex; flex-direction: column; }
-  .writing-section .article-copy { flex: 1; justify-content: flex-start; padding-bottom: 1.5rem; }
-  .writing-section .article-card:first-child .article-copy { justify-content: flex-start; padding-bottom: 2rem; }
-  .writing-section .article-card:not(:first-child) .article-copy { padding: 1.5rem 2rem; }
-  .writing-section .article-copy .article-latest { margin-bottom: 1rem; }
-  .writing-section .article-copy > p:not(.card-label):not(.article-latest) { margin-bottom: 0; }
-  .writing-section .article-copy > .article-action,
-  .writing-section .article-card:first-child .article-copy > .article-action { margin-top: .5rem; padding-top: 0; }
-  /* The shared 50px link target supplies the rest of the visual breathing room. */
-  .decision-artwork { min-height: 0; height: 23.5rem; align-self: center; margin-block: 1rem; }
-  .decision-linework, .decision-terms { transform: scale(.85); transform-origin: 50% 50%; }
-  @media (max-width: 1024px) {
-    .writing-section .article-card:not(:first-child) .article-copy { padding: 1.5rem 1.75rem; }
-    .decision-artwork { height: 20.25rem; }
-  }
-  @media (max-width: 600px) {
-    .writing-section .article-card:first-child .article-copy { padding: 1.5rem 1.8rem 1.8rem; }
-    .decision-artwork { height: 17.25rem; margin: .5rem 1.15rem 0; }
-  }
   /* Business-first homepage: keep the established palette and readable type. */
   .hero-copy > .eyebrow { margin-bottom: 1.5rem; font-size: .67rem; }
   .hero-copy h1 em { color: #3d6055; font-weight: 400; }
@@ -747,7 +568,7 @@ const featuredArticles = homepageWriting;
   }
 
   /* Shared text-action treatment, matching the approved service-card links. */
-  .home :is(.path-action, .example-action, .tool-card-action, .article-action, .text-action, .tool-source, .learning-market-link, .browse-tools-link, .contribution-link):is(a, span) {
+  .home :is(.path-action, .example-action, .tool-card-action, .text-action, .tool-source, .learning-market-link, .browse-tools-link, .contribution-link):is(a, span) {
     display: inline-flex;
     align-items: center;
     gap: .45rem;
@@ -757,12 +578,12 @@ const featuredArticles = homepageWriting;
     text-transform: uppercase;
     text-decoration: none;
   }
-  .home :is(.path-action, .example-action, .tool-card-action, .article-action):is(a, span) {
+  .home :is(.path-action, .example-action, .tool-card-action):is(a, span) {
     width: fit-content;
     justify-content: flex-start;
     padding-top: .35rem;
   }
-  .home :is(.path-action, .example-action, .tool-card-action, .article-action, .text-action, .tool-source, .learning-market-link, .browse-tools-link, .contribution-link):is(a, span) > span:first-child {
+  .home :is(.path-action, .example-action, .tool-card-action, .text-action, .tool-source, .learning-market-link, .browse-tools-link, .contribution-link):is(a, span) > span:first-child {
     font-size: inherit;
     text-decoration: underline;
     text-decoration-thickness: 1px;

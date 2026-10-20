@@ -1,15 +1,20 @@
-# Homepage writing: editorial spacing pass
+# Homepage writing: compact editorial layout
 
-The approved title, article text, article destinations, cream and sage palette, featured essay layout, staggered Built / Locked in / Default typography, fine linework, and two bottom buttons are retained.
+The approved heading, three article titles, descriptions, dates, destinations, cream and sage palette, staggered Built / Locked in / Default typography, and fine linework remain.
 
-## Changes
+## Layout
 
-- Each Read action follows its description instead of using an automatic top margin to sit at the bottom of a stretched card. Description bottom margins are removed to avoid double spacing. The action gets an 8px top margin; its shared 50px touch target provides approximately another 16px above the visible label. The existing link typography, underline, close arrow, and arrow size remain shared with the rest of the homepage.
-- The featured copy starts at the top and its headline, description, and Read action stay together.
-- Secondary article padding is 24px vertically. The Featured essay / Latest / Previously labels have a 16px bottom margin, reduced from 20px.
-- The linework and typographic composition scale together to 85%, preserving their relationship. The illustration has a bounded height of 23.5rem on desktop, 20.25rem on tablets, and 17.25rem on narrow screens rather than stretching through the full feature height. It remains vertically centered beside the featured copy and appears above it on narrow screens.
-- All changes are native CSS. No new image assets or generated artwork are used.
+- The Decision Layer is a full-width landscape feature with copy on the left and typographic artwork on the right. It occupies its own grid row rather than spanning the combined height of two other articles.
+- The two Markets & Mimosas articles sit in equal columns below, divided by a fine newspaper rule. Rows use their natural content height; no fixed card height or automatic bottom alignment separates a description from its Read link.
+- The featured text has more horizontal space. Artwork terms use normal grid flow with small staggered indents, giving the illustration its own intrinsic height rather than positioning it inside a stretched empty canvas.
+- On screens at or below 760px, articles stack in reading order. The featured artwork follows its copy, with responsive type sizes and no fixed-height wrapper.
+- Every Read link uses the existing ActionLabel component, preserving the shared type, underline, 50px touch target, close arrow, and 1.25rem arrow size.
+- The two bottom buttons are replaced by one centered Subscribe on Substack link. It leads to the publication's /subscribe route and includes a small, unaltered logo loaded from the download URL on Substack's official brand page: https://substack.com/brand (asset: https://substack.com/img/substack.png). There is no added form, tracking script, or embed.
 
-## Scope and verification
+## Implementation and scope
 
-Only writing-section styles in `src/pages/index.astro` change. Hero, services, tools, About, Instagram, contact, article content, analytics attributes, and destinations are preserved. Validation uses the Astro production build, whitespace checks, and the server-rendered page / bundled stylesheet. Browser visual review of the protected preview remains with the user; the local Browser connection is unavailable in this chat.
+Writing markup and styles live in `src/components/HomepageWriting.astro`. The homepage imports this component; obsolete writing styles are removed from `src/pages/index.astro` to prevent conflicting layout overrides. Other sections, shared ActionLabel styles, article data, and existing analytics attributes are preserved.
+
+## Verification
+
+Validation uses the Astro production build, whitespace checks, server-rendered content and links, and compiled responsive CSS. The protected Vercel preview remains available for visual review. Browser visual QA is unavailable in this chat because the connected browser lacks its originating context; do not treat source or server-rendered checks as a browser review.

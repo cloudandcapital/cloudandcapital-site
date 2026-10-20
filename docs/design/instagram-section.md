@@ -13,7 +13,7 @@ The approved clay background, editorial headline, description, six selected post
 
 ## Social links
 
-Instagram and Substack use the same 14px ActionLabel text, 28px icon, .8rem icon gap, shared 50px target, underline, close arrow, and 1.25rem arrow size. Both links align to the shared 78rem site shell's left edge. The Instagram logo reuses the Simple Icons path already used by the site's footer; no new image asset or external Instagram embed is added.
+Instagram and Substack use the same 14px ActionLabel text, 28px icon slot, .8rem icon gap, shared 50px target, underline, close arrow, and 1.25rem arrow size. Both links align to the shared 78rem site shell's left edge. The Instagram glyph is 16px centered in its 28px slot, matching the visible Substack mark inside its padded PNG without shifting the link labels. The Instagram logo reuses the Simple Icons path already used by the site's footer; no new image asset or external Instagram embed is added.
 
 ## Verification
 

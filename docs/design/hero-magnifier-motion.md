@@ -11,7 +11,7 @@ The generated layers retain the reference canvas. The foreground image is scaled
 
 ## Motion and layout
 
-Only the magnifier moves. The cloud and dollar remain fixed. CSS follows a small, closed, smooth 18-second path with at most 4.5% horizontal displacement, 1.25% vertical displacement, and 1.25 degrees of rotation. The existing hero artwork size, desktop scale, mobile layout, copy, buttons, and handwritten note remain unchanged.
+Only the magnifier moves. The cloud and dollar remain fixed. CSS follows a small, closed, smooth 20-second path with at most 8% horizontal displacement, 1.75% vertical displacement, and 1.75 degrees of rotation. The existing hero artwork size, desktop scale, mobile layout, copy, buttons, and handwritten note remain unchanged.
 
 An IntersectionObserver and page visibility check pause motion when the hero is off screen or the page is hidden. A labelled keyboard-accessible 32px pause/play control sits in the artwork's lower-right margin. It is outside the aria-hidden decorative illustration. Reduced-motion visitors see the approved complete original image and no motion control. Without JavaScript the layers stay still and the control remains hidden.
 

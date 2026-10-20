@@ -44,3 +44,5 @@ Each isolated card should extend behind where the cream foreground folder lip wi
 ## Folder depth and button spacing
 
 The folder sprite now renders twice: a complete rear layer below the three moving cards, and a foreground copy masked along the curved front lip and left rim. This places the cards inside the opening rather than behind the folder's rear wall. Both stationary copies use the same atlas cell and exact position, so their lighting and edges align. The art has an 8px bottom margin plus the CTA's 16px flex gap, leaving about 20px of visual clearance above the button after the folder's slight visual overhang.
+
+The sage card is inset 10% from the left and 6% from the top at 70% of the illustration canvas size. This keeps its lower-left corner within the pocket opening and its lower edge behind the front lip throughout its lift. The other two card positions and the button clearance stay the same.

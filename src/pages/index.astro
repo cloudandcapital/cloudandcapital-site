@@ -92,11 +92,12 @@ import {
     <section class="contact-section" id="contact" aria-labelledby="contact-title">
       <div class="site-shell contact-inner" data-reveal>
         <p class="eyebrow eyebrow-gold">Get in touch</p>
-        <h2 id="contact-title"><span>Have a number, bill, or idea</span> <span>you want to make sense of?</span></h2>
+        <h2 id="contact-title"><span>Have a bill, a task, or an idea</span> <span>you want to make sense of?</span></h2>
         <div class="contact-copy">
           <p>Tell me what’s getting stuck, which tools you use, and what you’d like to change. A few lines are enough.</p>
           <a class="contact-email-card" href={contactLink.href} data-analytics-event="cta_click" data-analytics-destination="contact" data-analytics-source="homepage_contact">
-            <span class="contact-email-label">Email Diana <svg class="contact-email-heart" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8.1 13.6C5.5 11.9 2.1 9.5 1.9 6.3c-.1-1.6.8-2.8 2.2-2.9 1.5-.2 2.8.9 3.7 2.1 1-1.6 2.4-2.5 3.7-2.3 1.7.2 2.5 1.5 2.3 3-.3 2.8-3.1 5.1-5.7 7.4Z" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+            <img class="contact-email-crystal" src="/images/pink-rhinestone-heart.webp" alt="" aria-hidden="true" width="512" height="468" loading="lazy" decoding="async" />
+            <span class="contact-email-label">Email Diana</span>
             <span class="contact-email-address">diana@cloudandcapital.com</span>
             <span class="contact-email-circle" aria-hidden="true"><span class="contact-email-arrow">→</span></span>
           </a>
@@ -256,7 +257,7 @@ import {
   .tool-card a:hover { text-decoration: underline; text-underline-offset: .32rem; }
   .education-note { margin-top: 1rem; color: #79726b; font-size: .7rem; line-height: 1.55; }
 
-  .contact-section { padding: 3.5rem 0 2rem; background: var(--clay); color: #2f2927; }
+  .contact-section { padding: 3.5rem 0 2rem; background: #c8a5a5; color: #2f2927; }
   .contact-inner { text-align: center; }
   .contact-section .eyebrow { justify-content: center; gap: .8rem; color: #2f2927; }
   .contact-section .eyebrow::before, .contact-section .eyebrow::after { content: ''; width: 2.4rem; height: 1px; background: currentColor; opacity: .3; }
@@ -264,11 +265,11 @@ import {
   .contact-section h2 span { display: block; }
   .contact-copy { margin-top: 1.0625rem; }
   .contact-copy > p { color: rgba(47, 41, 39, .95); font-size: .98rem; line-height: 1.8; }
-  .contact-email-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .35rem 1rem; width: min(100%, 39.5rem); min-height: 5.625rem; margin: 1.375rem auto 0; padding: .875rem 1.5rem; background: #f5eee9; color: #2f2927; text-align: left; text-decoration: none; transition: background-color .2s ease; }
+  .contact-email-card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .35rem 1rem; width: min(100%, 39.5rem); min-height: 5.625rem; margin: 1.375rem auto 0; padding: .875rem 1.5rem; border-radius: 12px; background: #f5eee9; color: #2f2927; text-align: left; text-decoration: none; transition: background-color .2s ease; }
   .contact-email-card:hover { background: #f1e9e2; }
   .contact-email-card:focus-visible { outline: 2px solid #2f2927; outline-offset: 3px; }
   .contact-email-label { display: inline-flex; align-items: center; gap: .35rem; grid-column: 1; font: 500 .68rem/1.5 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; }
-  .contact-email-heart { width: 13px; height: 13px; flex: none; color: #8f665f; }
+  .contact-email-crystal { position: absolute; top: -1.5rem; right: -.45rem; width: 3rem; height: auto; transform: rotate(14deg); filter: drop-shadow(0 3px 3px rgba(78, 40, 47, .2)); pointer-events: none; }
   .contact-email-address { grid-column: 1; min-width: 0; overflow-wrap: anywhere; font-size: 1.125rem; line-height: 1.4; }
   .contact-email-circle { grid-column: 2; grid-row: 1 / span 2; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #2f2927; color: #f5eee9; }
   .contact-email-arrow { font-size: 1.25rem; line-height: 1; transition: transform .2s ease; }

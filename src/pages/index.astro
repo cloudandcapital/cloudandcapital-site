@@ -673,16 +673,25 @@ const featuredArticles = homepageWriting;
   }
   .tools-section .tool-actions a.tool-source .tool-source-arrow::before,
   .tools-section .tool-actions a.tool-source .tool-source-arrow::after { content: none; }
-  /* Give every article action the same inset and space above it. */
+  /* Keep each editorial description and Read action together. */
   .writing-section .article-card:not(:first-child) { display: flex; flex-direction: column; }
-  .writing-section .article-copy { flex: 1; padding-bottom: 2rem; }
-  .writing-section .article-card:first-child .article-copy { padding-bottom: 2rem; }
-  .writing-section .article-copy > p:not(.card-label):not(.article-latest) { margin-bottom: 1.5rem; }
-  .writing-section .article-copy > span,
-  .writing-section .article-card:first-child .article-copy > span { margin-top: auto; padding-top: 0; }
+  .writing-section .article-copy { flex: 1; justify-content: flex-start; padding-bottom: 1.5rem; }
+  .writing-section .article-card:first-child .article-copy { justify-content: flex-start; padding-bottom: 2rem; }
+  .writing-section .article-card:not(:first-child) .article-copy { padding: 1.5rem 2rem; }
+  .writing-section .article-copy .article-latest { margin-bottom: 1rem; }
+  .writing-section .article-copy > p:not(.card-label):not(.article-latest) { margin-bottom: 0; }
+  .writing-section .article-copy > .article-action,
+  .writing-section .article-card:first-child .article-copy > .article-action { margin-top: .5rem; padding-top: 0; }
+  /* The shared 50px link target supplies the rest of the visual breathing room. */
+  .decision-artwork { min-height: 0; height: 23.5rem; align-self: center; margin-block: 1rem; }
+  .decision-linework, .decision-terms { transform: scale(.85); transform-origin: 50% 50%; }
+  @media (max-width: 1024px) {
+    .writing-section .article-card:not(:first-child) .article-copy { padding: 1.5rem 1.75rem; }
+    .decision-artwork { height: 20.25rem; }
+  }
   @media (max-width: 600px) {
-    .writing-section .article-copy,
-    .writing-section .article-card:first-child .article-copy { padding-bottom: 1.8rem; }
+    .writing-section .article-card:first-child .article-copy { padding: 1.5rem 1.8rem 1.8rem; }
+    .decision-artwork { height: 17.25rem; margin: .5rem 1.15rem 0; }
   }
   /* Business-first homepage: keep the established palette and readable type. */
   .hero-copy > .eyebrow { margin-bottom: 1.5rem; font-size: .67rem; }

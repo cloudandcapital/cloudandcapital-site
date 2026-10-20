@@ -42,9 +42,9 @@ export const tools = [
   {
     slug: 'cloud-cost-guard-lumen',
     title: 'Cloud Cost Guard + Lumen',
-    label: 'Dashboard · AI Analyst · Live',
+    label: 'Billing CSV · Local analysis · Live',
     description:
-      'Investigate cloud, AI, and SaaS spend in one place. Review cost drivers, anomalies, and the next question to ask.',
+      'Upload a supported cloud billing CSV to see spending and cost drivers. Add an earlier bill to compare periods. Your records are processed in your browser.',
     href: 'https://guard.cloudandcapital.com',
     external: true,
   },

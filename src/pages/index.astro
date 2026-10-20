@@ -230,13 +230,14 @@ import {
   .hero-tools-cta { position: relative; display: inline-flex; align-items: center; flex: 0 0 auto; min-width: 0; }
   .hero-free-note { position: absolute; left: calc(100% - .6rem); top: -2.3rem; display: block; width: 8.25rem; height: auto; pointer-events: none; }
   @media (max-width: 760px) {
-    .hero-tools-cta { width: 100%; padding-right: 9rem; box-sizing: border-box; }
-    .hero-tools-cta .button { width: 100%; }
-    .hero-tools-cta .hero-free-note { left: auto; right: 0; top: -.9rem; }
+    .hero-copy .hero-actions { row-gap: 1.25rem; }
+    .hero-tools-cta { width: 100%; padding-right: 10rem; box-sizing: border-box; }
+    .hero-tools-cta .button { width: 100%; padding-inline: .75rem; }
+    .hero-tools-cta .hero-free-note { left: auto; right: 1rem; top: .25rem; }
   }
   @media (max-width: 360px) {
-    .hero-tools-cta { padding-right: 7.75rem; }
-    .hero-tools-cta .hero-free-note { width: 7rem; }
+    .hero-tools-cta { padding-right: 8.25rem; }
+    .hero-tools-cta .hero-free-note { width: 7rem; right: .5rem; }
   }
 
   .paths { padding: clamp(4.5rem, 7vw, 6.25rem) 0; background: #fbfaf7; }

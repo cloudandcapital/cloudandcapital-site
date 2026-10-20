@@ -78,21 +78,22 @@ import ActionLabel from './ActionLabel.astro';
   .diana-intro .diana-eyebrow::after { content: ''; flex: none; width: 2.7rem; height: 1px; background: currentColor; opacity: .42; }
   .diana-intro h2 { margin: .85rem 0 0; color: #faf6ef; font: 400 clamp(3.3rem, 5vw, 4.5rem)/1 'Cormorant Garamond', Georgia, serif; letter-spacing: -.035em; }
   .diana-visual { grid-area: photos; align-self: center; min-width: 0; }
-  .diana-photo-cluster { position: relative; isolation: isolate; width: min(100%, 27rem); aspect-ratio: .54; margin-inline: auto; }
+  .diana-photo-cluster { position: relative; isolation: isolate; width: min(100%, 27rem); aspect-ratio: .59; margin-inline: auto; }
   .diana-portrait { position: absolute; z-index: 1; top: 1.5%; left: 17%; width: 72%; }
   .diana-portrait-window { overflow: hidden; aspect-ratio: 1; border-radius: 50%; box-shadow: 0 1px 2px #152d2759, 3px 9px 18px -7px #152d2773; }
   .diana-portrait-window img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.012); }
-  .diana-polaroid { --photo-tilt: -8deg; position: absolute; z-index: 2; box-sizing: border-box; width: 52%; margin: 0; padding: clamp(.5rem, 1vw, .7rem); border: 1px solid #fffefa; border-radius: 2px; background: #faf6ef; color: #2f2927; box-shadow: 1px 2px 0 #d9d1c4, 0 5px 8px -4px #142d2773, 3px 12px 20px -10px #122a258c; transform: rotate(var(--photo-tilt)); }
-  .diana-myszka { top: 44%; left: -1%; }
-  .diana-beach { --photo-tilt: 6deg; z-index: 3; top: 61%; right: -1%; }
-  .diana-photo-window { overflow: hidden; aspect-ratio: 1; background: #e7e4db; }
+  .diana-polaroid { --photo-tilt: -8deg; position: absolute; z-index: 2; box-sizing: border-box; width: 42%; margin: 0; padding: clamp(.5rem, 1vw, .7rem); border: 1px solid #fffefa; border-radius: 2px; background: #faf6ef; color: #2f2927; box-shadow: 1px 2px 0 #d9d1c4, 0 5px 8px -4px #142d2773, 3px 12px 20px -10px #122a258c; transform: rotate(var(--photo-tilt)); }
+  .diana-myszka { top: 47%; left: 3%; }
+  .diana-beach { --photo-tilt: 6deg; z-index: 3; top: 65%; right: 4%; }
+  .diana-photo-window { position: relative; overflow: hidden; aspect-ratio: 1; background: #e7e4db; }
+  .diana-photo-window::after { content: ''; position: absolute; inset: 0; background: rgb(223 205 177 / .12); pointer-events: none; }
   .diana-photo-window img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .diana-myszka .diana-photo-window img { object-position: 50% 42%; }
-  .diana-myszka .diana-photo-window img, .diana-beach .diana-photo-window img { filter: sepia(.12) saturate(.9) contrast(.98) brightness(1.02); }
+  .diana-myszka .diana-photo-window img, .diana-beach .diana-photo-window img { filter: sepia(.3) saturate(.65) contrast(.95) brightness(1.03); }
   .diana-beach .diana-photo-window img { object-position: 50% 35%; }
   .diana-polaroid figcaption { padding: .55rem .1rem .2rem; font: 400 clamp(1.4rem, 2.5vw, 1.85rem)/1.05 'Caveat', 'Segoe Print', 'Bradley Hand', cursive; font-synthesis: none; text-align: center; }
   .diana-magnet { position: absolute; z-index: 2; display: block; height: auto; filter: drop-shadow(1px 2px 1px #1b292559) drop-shadow(0 4px 3px #1b292533); pointer-events: none; user-select: none; }
-  .diana-heart { top: -3%; left: 6%; width: 24%; transform: rotate(14deg); }
+  .diana-heart { top: -3%; left: 3%; width: 29%; transform: rotate(-18deg); }
   .diana-star { top: -7%; left: 45%; width: 23%; transform: rotate(12deg); }
   .diana-round { top: -6%; left: 36%; width: 19%; }
   .diana-story { grid-area: story; min-width: 0; }
@@ -114,9 +115,9 @@ import ActionLabel from './ActionLabel.astro';
   @media (max-width: 1020px) and (min-width: 761px) {
     .diana-grid { grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); column-gap: 2.5rem; }
     .diana-visual { align-self: start; margin-top: 2rem; }
-    .diana-myszka { left: -3%; }
-    .diana-beach { right: -3%; }
-    .diana-photo-cluster { aspect-ratio: .52; }
+    .diana-myszka { left: 1%; }
+    .diana-beach { right: 1%; }
+    .diana-photo-cluster { aspect-ratio: .56; }
     .diana-credential { grid-template-columns: 1fr; gap: .3rem; }
   }
   @media (max-width: 760px) {
@@ -137,7 +138,7 @@ import ActionLabel from './ActionLabel.astro';
     .diana-event-image { width: 9.9rem; }
   }
   @media (max-width: 380px) {
-    .diana-photo-cluster { aspect-ratio: .5; }
+    .diana-photo-cluster { aspect-ratio: .55; }
     .diana-credential { grid-template-columns: 1fr; gap: .3rem; }
   }
 </style>

@@ -110,7 +110,7 @@ const subscribeHref = `${newsletter.subscribeHref.replace(/\/$/, '')}/subscribe`
   .essay-featured {
     display: grid;
     grid-column: 1 / -1;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: center;
     border-bottom: 1px solid rgba(49, 62, 54, .2);
     background: #f2eee6;
@@ -190,11 +190,11 @@ const subscribeHref = `${newsletter.subscribeHref.replace(/\/$/, '')}/subscribe`
   :global(.reveal-ready) [data-reveal] { opacity: 0; transform: translateY(1.1rem); transition: opacity .7s ease, transform .7s ease; }
   :global(.reveal-ready) [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
 
-  @media (min-width: 1021px) {
-    .decision-artwork { transform: translateX(-2.5rem); }
+  @media (min-width: 761px) {
+    /* The SVG's left rule is at x=58 of 500: move it onto the shared column boundary. */
+    .decision-artwork { transform: translateX(-11.6%); }
   }
   @media (max-width: 1020px) and (min-width: 761px) {
-    .essay-featured { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); }
     .decision-artwork { padding-inline: 1.25rem; }
     .decision-term strong { font-size: 6.4vw; }
     .decision-locked { margin-left: 1rem; }

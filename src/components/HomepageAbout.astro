@@ -74,6 +74,8 @@ import ActionLabel from './ActionLabel.astro';
   .diana-grid { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); grid-template-areas: 'photos intro' 'photos story'; grid-template-rows: auto 1fr; column-gap: clamp(3rem, 6vw, 5.5rem); align-items: start; }
   .diana-intro { grid-area: intro; margin-bottom: 1.5rem; }
   .diana-eyebrow { margin: 0; color: #d1dfd6; font: 400 .61rem/1.5 'DM Mono', monospace; letter-spacing: .14em; text-transform: uppercase; }
+  .diana-intro .diana-eyebrow { display: flex; align-items: center; gap: .75rem; }
+  .diana-intro .diana-eyebrow::after { content: ''; flex: none; width: 2.7rem; height: 1px; background: currentColor; opacity: .42; }
   .diana-intro h2 { margin: .85rem 0 0; color: #faf6ef; font: 400 clamp(3.3rem, 5vw, 4.5rem)/1 'Cormorant Garamond', Georgia, serif; letter-spacing: -.035em; }
   .diana-visual { grid-area: photos; align-self: center; min-width: 0; }
   .diana-photo-cluster { position: relative; isolation: isolate; width: min(100%, 27rem); aspect-ratio: .54; margin-inline: auto; }
@@ -90,14 +92,14 @@ import ActionLabel from './ActionLabel.astro';
   .diana-beach .diana-photo-window img { object-position: 50% 35%; }
   .diana-polaroid figcaption { padding: .55rem .1rem .2rem; font: 400 clamp(1.4rem, 2.5vw, 1.85rem)/1.05 'Caveat', 'Segoe Print', 'Bradley Hand', cursive; font-synthesis: none; text-align: center; }
   .diana-magnet { position: absolute; z-index: 2; display: block; height: auto; filter: drop-shadow(1px 2px 1px #1b292559) drop-shadow(0 4px 3px #1b292533); pointer-events: none; user-select: none; }
-  .diana-heart { top: -3%; right: 6%; width: 24%; transform: rotate(14deg); }
-  .diana-star { top: -7%; left: 35%; width: 23%; transform: rotate(12deg); }
-  .diana-round { top: -6%; right: 19%; width: 19%; }
+  .diana-heart { top: -3%; left: 6%; width: 24%; transform: rotate(14deg); }
+  .diana-star { top: -7%; left: 45%; width: 23%; transform: rotate(12deg); }
+  .diana-round { top: -6%; left: 36%; width: 19%; }
   .diana-story { grid-area: story; min-width: 0; }
   .diana-biography p { max-width: 64ch; margin: 1.05rem 0 0; color: #f3f0e9; font-size: .95rem; line-height: 1.75; }
   .diana-biography p:first-child { margin-top: 0; }
-  .diana-community { display: grid; grid-template-columns: clamp(9rem, 13vw, 11rem) minmax(0, 1fr); align-items: start; gap: 1.2rem; margin-top: 1.8rem; padding-top: 1.6rem; border-top: 1px solid #f5eee92e; }
-  .diana-event-image { display: block; border: 1px solid #f5eee966; border-radius: 6px; overflow: hidden; box-shadow: 0 8px 16px -8px #162e27b3; transform: rotate(-3deg); }
+  .diana-community { display: grid; grid-template-columns: clamp(8.1rem, 11.7vw, 9.9rem) minmax(0, 1fr); align-items: start; gap: 1.2rem; margin-top: 1.8rem; padding-top: 1.6rem; border-top: 1px solid #f5eee92e; }
+  .diana-event-image { display: block; border: 1px solid #f5eee966; border-radius: 6px; overflow: hidden; box-shadow: 0 8px 16px -8px #162e27b3; }
   .diana-event-image img { display: block; width: 100%; height: auto; }
   .diana-event-date { margin: 0; color: #d1dfd6; font: 400 .55rem/1.6 'DM Mono', monospace; letter-spacing: .035em; }
   .diana-event-copy h3 { margin: .4rem 0; color: #faf6ef; font: italic 400 1.75rem/1.1 'Cormorant Garamond', Georgia, serif; }
@@ -132,7 +134,7 @@ import ActionLabel from './ActionLabel.astro';
   }
   @media (max-width: 560px) {
     .diana-community { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
-    .diana-event-image { width: 11rem; }
+    .diana-event-image { width: 9.9rem; }
   }
   @media (max-width: 380px) {
     .diana-photo-cluster { aspect-ratio: .5; }

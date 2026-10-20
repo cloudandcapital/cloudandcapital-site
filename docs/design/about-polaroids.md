@@ -2,9 +2,9 @@
 
 ## Current design
 
-The deep sage About section holds Diana’s circular portrait above two staggered cream Polaroids. Myszka sits midway down the left side; South Bay sits lower on the right. Three small pink pavé magnets overlap their upper edges: the existing heart on the portrait, a star on Myszka, and a round button on South Bay. Short contact shadows and slight photo tilts suggest pictures held against a wall. The gallery is static.
+The deep sage About section holds Diana’s circular portrait above two staggered cream Polaroids. Myszka sits midway down the left side; South Bay sits lower on the right. Three small pink pavé magnets overlap their upper edges: the existing heart at the portrait’s upper left, a star slightly right of center on Myszka, and a round button slightly left of center on South Bay. Short contact shadows and slight photo tilts suggest pictures held against a wall. The gallery is static.
 
-The only handwritten photo captions are “Myszka” and “South Bay”, set in locally bundled Caveat 400 with font synthesis disabled. There are no caption subtitles or location line. The section eyebrow is “About”, followed by “Hi, I’m Diana.” The personal paragraph retains Diana’s Polish immigrant family roots, South Bay, teenage son, and dog; the ocean sentence is removed.
+The only handwritten photo captions are “Myszka” and “South Bay”, set in locally bundled Caveat 400 with font synthesis disabled. There are no caption subtitles or location line. The section eyebrow is “About”, with the same 2.7rem line, .75rem gap, and .42 line opacity as the other section labels, followed by “Hi, I’m Diana.” The personal paragraph retains Diana’s Polish immigrant family roots, South Bay, teenage son, and dog; the ocean sentence is removed.
 
 The existing credentials and PointFive contribution remain. The AI row reads “AI — Claude Code, OpenAI Codex”. There is no separate tools line.
 
@@ -17,7 +17,7 @@ The portrait, Myszka photo, beach photo, and flyer are real photographs/artwork.
 - `public/images/south-bay-about.webp`: Diana’s `20260812_125908.jpg`, looking along the South Bay coast toward the Palos Verdes headland. CSS crop: `object-position: 50% 35%`.
 - The other five uploaded photographs were reviewed alongside these. Frames at 0.5, 2.5, and 5.5 seconds from `20260519_185508.mp4`, at 1, 4.5, and 9 seconds from `20260519_183827.mp4`, and at 1, 4, and 8 seconds from `20260519_184407.mp4` were compared. The original Esplanade photograph was selected for its clarity and recognizable coastal setting.
 - A light browser-only tone treatment on Myszka and South Bay uses sepia(.12), saturate(.9), contrast(.98), and brightness(1.02), leaving the source files unchanged.
-- `public/images/event-poster-vol01.png`: the full-resolution 1200px event flyer is displayed at up to 176px and links to the original. There is no extra textual flyer link. Event: April 9, 2026, Hawthorne. Copy credits FinOps Weekly, SmartClouds, and speakers from Ulta Beauty and Wiv.ai. Source: https://luma.com/2w1hyz2q.
+- `public/images/event-poster-vol01.png`: the full-resolution 1200px event flyer is straight and aligned with the text. Its width is reduced by 10% to a maximum of 9.9rem (158.4px at the default font size), and it links to the original. There is no extra textual flyer link. Event: April 9, 2026, Hawthorne. Copy credits FinOps Weekly, SmartClouds, and speakers from Ulta Beauty and Wiv.ai. Source: https://luma.com/2w1hyz2q.
 - Photo labels use `@fontsource/caveat` 5.3.0, Latin weight 400, bundled locally.
 
 ## Generated magnets

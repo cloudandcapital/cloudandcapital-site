@@ -18,7 +18,6 @@ import FlowText from './FlowText.astro';
             <div class="diana-portrait-window">
               <img src="/images/diana-molski-portrait.png" alt="Diana Molski" width="820" height="806" loading="lazy" decoding="async" />
             </div>
-            <img class="diana-magnet diana-heart" src="/images/pink-rhinestone-heart.webp" alt="" aria-hidden="true" width="512" height="468" loading="lazy" decoding="async" />
           </div>
           <figure class="diana-polaroid diana-myszka">
             <div class="diana-photo-window">
@@ -26,14 +25,12 @@ import FlowText from './FlowText.astro';
               <img class="diana-natural-fur" src="/images/myszka-about.webp" alt="" aria-hidden="true" width="901" height="1600" loading="lazy" decoding="async" />
             </div>
             <figcaption>Myszka</figcaption>
-            <img class="diana-magnet diana-star" src="/images/pink-rhinestone-star-magnet.webp" alt="" aria-hidden="true" width="311" height="320" loading="lazy" decoding="async" />
           </figure>
           <figure class="diana-polaroid diana-beach">
             <div class="diana-photo-window">
               <img src="/images/south-bay-about.webp" alt="Diana’s photo of the South Bay coastline, with sand, blue ocean, and the Palos Verdes headland" width="901" height="1600" loading="lazy" decoding="async" />
             </div>
             <figcaption>South Bay</figcaption>
-            <img class="diana-magnet diana-round" src="/images/pink-rhinestone-round-magnet.webp" alt="" aria-hidden="true" width="320" height="320" loading="lazy" decoding="async" />
           </figure>
         </div>
       </div>
@@ -96,10 +93,6 @@ import FlowText from './FlowText.astro';
   .diana-myszka .diana-photo-window .diana-natural-fur { position: absolute; inset: 0; z-index: 1; filter: none; opacity: 1; mask-image: radial-gradient(ellipse 36% 27% at 45% 34%, #000 80%, transparent 100%), radial-gradient(ellipse 40% 31% at 41% 69%, #000 80%, transparent 100%); pointer-events: none; }
   .diana-beach .diana-photo-window img { object-position: 50% 35%; }
   .diana-polaroid figcaption { padding: .55rem .1rem .2rem; font: 400 clamp(1.4rem, 2.5vw, 1.85rem)/1.05 'Caveat', 'Segoe Print', 'Bradley Hand', cursive; font-synthesis: none; text-align: center; }
-  .diana-magnet { position: absolute; z-index: 2; display: block; height: auto; filter: drop-shadow(1px 2px 1px #1b292559) drop-shadow(0 4px 3px #1b292533); pointer-events: none; user-select: none; }
-  .diana-heart { top: -3%; left: 3%; width: 29%; transform: rotate(-18deg); }
-  .diana-star { top: -7%; left: 45%; width: 23%; transform: rotate(12deg); }
-  .diana-round { top: -6%; left: 36%; width: 19%; }
   .diana-story { grid-area: story; min-width: 0; }
   .diana-biography p { max-width: 64ch; margin: 1.05rem 0 0; color: #f3f0e9; font-size: .95rem; line-height: 1.75; text-wrap: pretty; }
   .diana-biography p:last-child { text-wrap: balance; }
@@ -147,4 +140,3 @@ import FlowText from './FlowText.astro';
     .diana-credential { grid-template-columns: 1fr; gap: .3rem; }
   }
 </style>
-

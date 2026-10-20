@@ -34,6 +34,19 @@ Following Diana's screenshot review, PR #35 (`def69b9161819a5f2c01461f87bef4b4c6
 
 The separate dependency repair is still draft PR #31, not a production patch. Its preview deployment reports success; preview acceptance and release remain separate follow-ups. Hosting controls, browser headers and API spend/abuse protection retain their existing security-work owner and acceptance steps.
 
+### Visitor feedback refinement — October 20
+
+Diana approved a restrained decorative edit and clearer explanation of the work after Zack’s first-visitor feedback. This updates the earlier crystal placement decisions:
+
+- PR #37 (`27f6a2e6e6eee6fa33b18341a7e2e6e2a916e971`) makes the finance analyst/tool builder role explicit in the introduction, names software/cloud/AI costs, and tightens the three service descriptions around recognizable tasks and deliverables.
+- About is now 169 words. It names Cal State Dominguez Hills and Morgan Stanley, explains the finance perspective and present work, and retains the mom/internet-nerd/rabbit-hole details, beauty/animals background, Polish family, Myszka, South Bay, newsletter and welcoming close. The event and credentials remain.
+- Remove the three crystal magnets from the About photos and the email-card heart. Keep the photo treatment, handwriting, clay pink/sage palette and crystal magnifying glass. The email card no longer reserves extra space for a heart.
+- PR #38 (`124751d3ec0c7839c46e1a57f015a7d1a1017ce7`) aligns desktop service-card rows with CSS subgrid and keeps short hero phrases together. The byline is shorter at narrow widths.
+
+Validation: the copy/decorative pass built and all 77 existing tests passed. The final layout pass built and passed whitespace checks. Both production deployments reported success. Live desktop and 320/375/390/414/768/1024px checks found no checked text overflow, horizontal escapes or missing loaded images. The three desktop service dividers and action rows align, and the checked hero role/audience phrases stay together. These are responsive Chrome checks, not physical-device or Safari certification.
+
+The Tools directory stays draft PR #34 and has been synchronized with this homepage and the current Technology Cost Review service changes. Its desktop/mobile visual acceptance is still pending the Vercel team grant. The plugin is installed/enabled, but scoped reads return 403 and the connection lists no teams. The supported CLI fallback has no signed-in credentials in this environment; no sign-in was completed and no protection settings were changed.
+
 ### Next page: Tools
 
 The live Tools page currently leads with “Start with the question. Follow the number.” and a decorative cost/signal/evidence/decision index, followed by a large AI Cost Lens feature. That is more abstract and more AI-led than the simple library visitors are expecting from the homepage.

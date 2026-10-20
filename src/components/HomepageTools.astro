@@ -1,0 +1,111 @@
+---
+import ActionLabel from './ActionLabel.astro';
+import { tools } from '../data/siteContent';
+const lens = tools.find(tool => tool.slug === 'ai-cost-lens');
+const guard = tools.find(tool => tool.slug === 'cloud-cost-guard-lumen');
+const choices = [
+  lens && { name: 'AI Cost Lens', category: 'AI spending', description: 'Estimate an AI task, review a bill, or compare options using the numbers you have.', result: 'A clear cost breakdown, including review and rework time when you add it.', href: lens.href, action: 'Open AI Cost Lens', destination: 'ai_cost_lens', external: true, image: '/images/ai-cost-lens-anatomy-preview.jpg', imageAlt: 'AI Cost Lens example comparing model, infrastructure, and human review costs for two AI routes', imageWidth: 1315, imageHeight: 492 },
+  guard && { name: 'Cloud Cost Guard', category: 'Cloud spending', description: 'Upload a supported cloud billing CSV to see where your money went. Add an earlier bill to see what changed.', result: 'A spending breakdown, the biggest cost drivers, and questions worth investigating.', href: guard.href, action: 'Review my cloud bill', destination: 'cloud_cost_guard', external: true, image: '/images/cloud-cost-guard-summary-preview.jpg', imageAlt: 'Illustrative Cloud Cost Guard dashboard with sample cloud, direct AI, and software costs', imageWidth: 1216, imageHeight: 474 },
+  { name: 'Software Renewal Tracker', category: 'Software subscriptions', description: 'Add your software charges, renewal dates, and cancellation deadlines.', result: 'See what is due each month and when to decide whether to keep a subscription.', href: '/tools/software-renewal-tracker', action: 'Open the renewal tracker', destination: 'software_renewal_tracker', external: false, image: '/images/software-renewal-project-desk.jpg', imageAlt: 'Software Renewal Tracker showing the Project desk subscription, charge, renewal date, and decision owner', imageWidth: 1168, imageHeight: 455 },
+].filter(Boolean);
+---
+<section class="free-tools" id="tools" aria-labelledby="tools-title">
+  <div class="tools-shell">
+    <div class="tools-intro" data-reveal>
+      <p class="tools-eyebrow">Free tools</p>
+      <h2 id="tools-title">Find a tool for the task.</h2>
+    </div>
+    <div class="tool-choices">
+      {choices.map(choice => choice && (
+        <a class="tool-choice" href={choice.href} target={choice.external ? '_blank' : undefined} rel={choice.external ? 'noopener noreferrer' : undefined} data-reveal data-analytics-event="cta_click" data-analytics-destination={choice.destination} data-analytics-source="homepage_featured_tools">
+          <div class="tool-copy">
+            <p class="tool-category">{choice.category}</p>
+            <h3>{choice.name}</h3>
+            <p class="tool-description">{choice.description}</p>
+            <p class="tool-result"><span>What you get</span>{choice.result}</p>
+            <span class="tool-action"><ActionLabel label={choice.action} /></span>
+          </div>
+          <div class="tool-window">
+            <div class="window-heading" aria-hidden="true"><span class="window-dots"><i></i><i></i><i></i></span><span>{choice.name}</span></div>
+            <div class="window-canvas"><img src={choice.image} alt={choice.imageAlt} width={choice.imageWidth} height={choice.imageHeight} loading="lazy" decoding="async" /></div>
+          </div>
+        </a>
+      ))}
+    </div>
+    <div class="tools-more" data-reveal>
+      <span class="tools-folder" aria-hidden="true">
+        <img class="tools-folder-static" src="/images/tools-folder-3d.webp" alt="" width="512" height="512" loading="lazy" decoding="async" />
+        <span class="tools-folder-layer folder-back"></span>
+        <span class="tools-folder-layer folder-card folder-card-sage"></span>
+        <span class="tools-folder-layer folder-card folder-card-ivory"></span>
+        <span class="tools-folder-layer folder-card folder-card-rose"></span>
+        <span class="tools-folder-layer folder-body"></span>
+      </span>
+      <a href="/tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_featured_tools"><ActionLabel label="Browse all free tools" /></a>
+    </div>
+  </div>
+</section>
+<style>
+  .free-tools { padding: clamp(4.5rem, 7vw, 6.25rem) 0; background: var(--cream); color: var(--brand-ink); }
+  .tools-shell { width: min(calc(100% - 4rem), 78rem); margin-inline: auto; }
+  .tools-eyebrow, .tool-category { font: 500 .65rem/1.5 'DM Mono', monospace; letter-spacing: .09em; text-transform: uppercase; }
+  .tools-eyebrow { display: flex; align-items: center; gap: .75rem; color: #4f7567; font-size: .61rem; font-weight: 400; letter-spacing: .16em; }
+  .tools-eyebrow::after { content: ''; width: 2.7rem; height: 1px; background: currentColor; opacity: .42; }
+  .tools-intro h2 { margin-top: .9rem; font: 400 clamp(2.65rem, 4vw, 4.2rem)/.99 'Cormorant Garamond', Georgia, serif; letter-spacing: -.035em; }
+  .tool-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+  .tool-choice { --tool-accent: #3e5946; display: flex; flex-direction: column; gap: 1.8rem; min-width: 0; padding: clamp(1.75rem, 3vw, 2.6rem); border: 1px solid #cbd6c5; border-radius: 12px; background: #fcfbf8; color: inherit; text-decoration: none; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 12px 24px -16px rgba(41, 49, 39, .24); transition: background-color 200ms ease, border-color 200ms ease; }
+  .tool-choice:first-child { --tool-accent: #faf6ef; --feature-padding: clamp(2rem, 3.5vw, 3.3rem); --feature-overhang: clamp(1rem, calc(50vw - 40rem), 3rem); display: grid; grid-column: 1 / -1; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); align-items: center; gap: clamp(1.8rem, 3vw, 3rem); padding: var(--feature-padding); background-color: #4f7167; background-image: radial-gradient(ellipse at 80% 40%, #edf4df1f, transparent 58%); border-color: #4f7167; color: #faf6ef; }
+  .tool-choice:last-child { --tool-accent: #785752; border-color: #dfc7c0; }
+  .tool-copy { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+  .tool-category { color: var(--tool-accent); }
+  .tool-choice h3 { margin-top: .8rem; font: italic 400 clamp(2.3rem, 3.2vw, 3.2rem)/1.06 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; }
+  .tool-choice:first-child h3 { font-size: clamp(3rem, 4.1vw, 4.3rem); }
+  .tool-description { margin: .9rem 0; color: #44483f; font-size: .9rem; line-height: 1.75; }
+  .tool-result { margin: 0 0 1.5rem; padding-top: .9rem; border-top: 1px solid #3d605526; font-size: .9rem; line-height: 1.65; }
+  .tool-result > span { display: block; margin-bottom: .35rem; font: 500 .61rem/1.5 'DM Mono', monospace; letter-spacing: .07em; text-transform: uppercase; color: var(--tool-accent); }
+  .tool-choice:first-child .tool-result { border-color: #faf6ef40; }
+  .tool-choice:last-child .tool-result { border-color: #89534f30; }
+  .tool-action { margin-top: auto; color: var(--tool-accent); }
+  .tool-choice:first-child .tool-description { color: #faf6ef; }
+  .tool-window { position: relative; isolation: isolate; min-width: 0; margin: 0 0 .5rem; border: 1px solid #e8e3dc; border-radius: 12px; background: #fff; color: #625d55; box-shadow: 0 18px 28px -18px #18282066, 0 2px 6px #1828200d; }
+  /* Scale the overhang with the page gutters so the preview stays in the viewport. */
+  .tool-choice:first-child .tool-window { width: calc(100% + var(--feature-padding) + var(--feature-overhang)); margin: 0; border-color: #ffffffb3; box-shadow: 0 32px 56px -12px #14271d75, 0 12px 24px -8px #0d221e5c, 0 2px 4px #12282026; transform: translateY(-.75rem); transition: transform 240ms ease, box-shadow 240ms ease; }
+  .tool-choice:not(:first-child) .tool-window { order: -1; }
+  .window-heading { position: relative; display: flex; align-items: center; justify-content: center; min-height: 2rem; padding: .6rem 2.7rem; border-radius: 12px 12px 0 0; border-bottom: 1px solid #24211e1a; background: #fff; font: 400 .55rem/1.4 'DM Mono', monospace; }
+  .window-dots { position: absolute; left: .85rem; display: flex; gap: .3rem; }
+  .window-dots i { width: 5px; height: 5px; border-radius: 50%; background: #bbb4a8; }
+  .window-canvas { display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 0 0 12px 12px; background: #fff; }
+  .window-canvas img { display: block; width: 100%; height: auto; }
+  .tool-choice:hover { background-color: #f8faf5; border-color: #9aaf93; }
+  .tool-choice:first-child:hover { background-color: #45675e; border-color: #45675e; }
+  .tool-choice:last-child:hover { background-color: #fdf7f4; border-color: #b48c82; }
+  .tool-choice:focus-visible, .tools-more a:focus-visible { outline: 3px solid #89534f; outline-offset: 4px; }
+  .tools-more { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid #3d605526; text-align: center; }
+  .tools-folder { position: relative; display: block; isolation: isolate; flex: none; width: clamp(7.5rem, 11vw, 9rem); aspect-ratio: 1; margin-top: -.35rem; margin-bottom: .5rem; pointer-events: none; user-select: none; }
+  .tools-folder-static { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+  .tools-folder-layer { display: none; position: absolute; background-image: url('/images/tools-folder-layers.webp'); background-size: 200% 200%; background-repeat: no-repeat; }
+  .folder-back, .folder-body { left: 5%; top: 17%; width: 90%; height: 90%; background-position: 0 0; }
+  .folder-back { z-index: 0; }
+  /* Keep the rear wall behind the cards and only the curved front lip above them. */
+  .folder-body { z-index: 4; clip-path: polygon(0% 0%, 14% 0%, 14% 28%, 16% 31%, 18% 35%, 20% 39%, 21% 44%, 22% 46.5%, 24% 44%, 27% 42.5%, 31% 41%, 42% 40.5%, 46% 40.5%, 49% 41.5%, 52% 44.5%, 55% 49%, 58% 53%, 60% 54.7%, 63% 55%, 69% 54.2%, 76% 53%, 79% 52.5%, 82% 51.3%, 84% 49%, 86% 46%, 88% 44%, 91% 43%, 96% 42%, 100% 42%, 100% 100%, 0% 100%); }
+  .folder-card { transform-origin: 50% 85%; }
+  .folder-card-sage { --card-lift: -.4rem; --card-roll: -1deg; z-index: 1; left: 10%; top: 6%; width: 70%; height: 70%; background-position: 100% 0; clip-path: inset(0 0 0 7%); animation-delay: .15s; }
+  .folder-card-ivory { --card-lift: -.55rem; --card-roll: .8deg; z-index: 2; left: 12%; top: 5%; width: 80%; height: 80%; background-position: 0 100%; animation-delay: .8s; }
+  .folder-card-rose { --card-lift: -.4rem; --card-roll: 1deg; z-index: 3; left: 30%; top: 15%; width: 74%; height: 74%; background-position: 100% 100%; animation-delay: 1.45s; }
+  @keyframes tools-card-shuffle { 0%, 12%, 80%, 100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(var(--card-lift)) rotate(var(--card-roll)); } 58% { transform: translateY(.06rem) rotate(0); } }
+  @keyframes tools-card-replay { 0%, 12%, 80%, 100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(var(--card-lift)) rotate(var(--card-roll)); } 58% { transform: translateY(.06rem) rotate(0); } }
+  @media (prefers-reduced-motion: no-preference) {
+    .tools-folder-static { visibility: hidden; }
+    .tools-folder-layer { display: block; }
+    .tools-more.is-visible .folder-card { animation-name: tools-card-shuffle; animation-duration: 3.2s; animation-timing-function: ease-in-out; animation-iteration-count: 1; }
+    .tools-more:has(a:hover) .folder-card, .tools-more:has(a:focus-visible) .folder-card { animation-name: tools-card-replay; animation-duration: 3.2s; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+  }
+  .tools-more a { display: inline-flex; align-items: center; justify-content: center; width: min(100%, 22rem); min-height: 56px; padding: .35rem 1.65rem; border: 1px solid #b58b8c; border-radius: 8px; background: var(--dusty-rose); color: var(--brand-ink); text-decoration: none; box-shadow: 0 8px 16px -10px #78575255; transition: background-color 200ms ease, box-shadow 200ms ease; }
+  .tools-more a:hover { background: var(--dusty-rose-hover); box-shadow: 0 10px 18px -10px #78575266; }
+  .tools-more a :global(.action-label) { min-height: 44px; font-size: .78rem; letter-spacing: .065em; }
+  .tools-more a :global(.action-label > span:first-child) { text-decoration: none; }
+  @media (min-width: 1021px) and (prefers-reduced-motion: no-preference) { .tool-choice:first-child:hover .tool-window, .tool-choice:first-child:focus-visible .tool-window { transform: translateY(-1rem); box-shadow: 0 38px 62px -12px #14271d80, 0 14px 26px -8px #0d221e5c, 0 2px 4px #12282026; } }
+  @media (max-width: 1020px) { .tools-shell { width: min(calc(100% - 3rem), 78rem); } .tool-choice:first-child { grid-template-columns: minmax(0, 1fr); } .tool-choice:first-child .tool-window { width: 100%; max-width: 100%; transform: none; box-shadow: 0 20px 30px -16px #172a1e80, 0 6px 12px -6px #172a1e66; } }
+  @media (max-width: 760px) { .tools-shell { width: calc(100% - 2.5rem); } .tool-choices { grid-template-columns: minmax(0, 1fr); } .tool-choice { padding: 1.75rem; } .tool-choice:first-child { padding: 1.75rem; } }
+  @media (prefers-reduced-motion: reduce) { .tool-choice, .tool-window, .tools-more a { transition: none; } }
+</style>

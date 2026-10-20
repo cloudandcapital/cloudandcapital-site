@@ -1,20 +1,15 @@
 ---
+import '@fontsource/cormorant-garamond/latin-600-italic.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HeroDataArtwork from '../components/HeroDataArtwork.astro';
+import BusinessArtwork from '../components/BusinessArtwork.astro';
+import ServiceWatermark from '../components/ServiceWatermark.astro';
+import HomepageTools from '../components/HomepageTools.astro';
+import HomepageAbout from '../components/HomepageAbout.astro';
+import HomepageWriting from '../components/HomepageWriting.astro';
+import InstagramSection from '../components/InstagramSection.astro';
 import {
-  about,
   contactLink,
-  newsletter,
-  tools,
-  homepageWriting,
 } from '../data/siteContent';
-
-const aiCostLens = tools.find((tool) => tool.slug === 'ai-cost-lens');
-const cloudCostGuard = tools.find((tool) => tool.slug === 'cloud-cost-guard-lumen');
-const marketTape = tools.find((tool) => tool.slug === 'market-tape');
-const signalAudit = tools.find((tool) => tool.slug === 'signal-audit');
-const interactiveLab = tools.find((tool) => tool.slug === 'interactive-lab');
-const featuredArticles = homepageWriting;
 ---
 
 <BaseLayout
@@ -25,234 +20,84 @@ const featuredArticles = homepageWriting;
     <section class="hero" aria-labelledby="home-title">
       <div class="shell hero-grid">
         <div class="hero-copy">
-          <h1 id="home-title">
-            Before you invest it, spend it, or build with it,
-            <span class="scribbled-word">understand it.<svg viewBox="0 0 250 26" preserveAspectRatio="none" aria-hidden="true"><path d="M4 18 C55 6 111 27 246 10" /><path d="M18 22 C91 13 161 23 226 15" /></svg></span>
-          </h1>
-          <p class="hero-lede">I’m Diana. I help growing tech teams understand cloud, AI, and software costs, and service businesses improve recurring work. I also build tools, teach investing concepts, and write about markets and money. If the story and the numbers disagree, I want to know why.</p>
+          <p class="eyebrow">Business services · Finance &amp; technology</p>
+          <h1 id="home-title">Better decisions about your tools, your costs, <em>and your time.</em></h1>
+          <p class="hero-lede">I’m Diana. I help small businesses and growing tech teams understand their tech spending, simplify repetitive tasks, and build tools that fit how they work.</p>
+          <p class="hero-context">Cloud &amp; Capital is also where I share free tools and what I’m learning about money, AI, and technology. Try a tool, read something, or bring me a business question.</p>
           <p class="hero-byline">Diana Molski · Finance analyst and tool builder</p>
           <div class="hero-actions">
             <a class="button button-primary" href="/services" data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_hero">Explore business services</a>
-            <a class="button hero-secondary" href="#tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_hero">Explore the tools</a>
+            <div class="hero-tools-cta">
+              <a class="button hero-secondary" href="/tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_hero">Try the tools</a>
+              <img class="hero-free-note" src="/images/free-tools-note.svg" alt="They’re free!" width="164" height="82" decoding="async" />
+            </div>
           </div>
         </div>
 
         <div class="hero-visual">
-          <HeroDataArtwork />
+          <BusinessArtwork />
         </div>
       </div>
     </section>
 
-    <section class="paths" aria-labelledby="paths-title">
+    <section class="paths" id="services" aria-labelledby="paths-title">
       <div class="shell">
         <div class="section-heading paths-heading" data-reveal>
-          <div>
-            <p class="eyebrow">Start with your question</p>
-            <h2 id="paths-title">What are you here to figure out?</h2>
-          </div>
+          <div><p class="eyebrow">3 ways to work together</p><h2 id="paths-title">What can I help you with?</h2></div>
         </div>
-
         <div class="path-grid">
-          <a class="path-card" href="/learn" data-reveal data-analytics-event="cta_click" data-analytics-destination="learn" data-analytics-source="homepage_path_personal">
-            <div class="path-number">01</div>
-            <p class="card-label">Your money</p>
-            <h3>Understand investing and trading.</h3>
-            <p>Tailored investing and trading lessons, worked examples, and guided practice.</p>
-            <span class="path-action"><span>Explore learning</span><span aria-hidden="true">→</span></span>
-          </a>
-
-          <a class="path-card path-card-tint" href="/services" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_business">
-            <div class="path-number">02</div>
-            <p class="card-label">Your business</p>
-            <h3>Know where the money and time are going.</h3>
-            <p>Cloud, AI, and software cost analysis for growing teams. Reporting tools and automation for service businesses.</p>
-            <span class="path-action"><span>Explore business services</span><span aria-hidden="true">→</span></span>
-          </a>
-
-          <a class="path-card" href="/tools" data-reveal data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="homepage_path_team">
-            <div class="path-number">03</div>
-            <p class="card-label">Your technology spend</p>
-            <h3>See what cloud and AI are actually costing.</h3>
-            <p>Explore cloud and AI cost analysis, decision tools, and open-source finance projects.</p>
-            <span class="path-action"><span>Explore the technical work</span><span aria-hidden="true">→</span></span>
-          </a>
-        </div>
-        <p class="education-note">Education and research only. Cloud &amp; Capital does not provide personal investment advice.</p>
-      </div>
-    </section>
-
-    <section class="tools-section" id="tools" aria-labelledby="tools-title">
-      <div class="shell">
-        <div class="section-heading tools-heading" data-reveal>
-          <div>
-            <p class="eyebrow eyebrow-light">Tools</p>
-            <h2 id="tools-title">Tools for real questions.</h2>
-          </div>
-          <p>Everything here is free to use. Open a tool, see the method, or look through the code.</p>
-        </div>
-
-        {aiCostLens && (
-          <article class="flagship-tool" data-reveal>
-            <div class="flagship-copy">
-              <p class="card-label card-label-gold">Featured tool · AI economics</p>
-              <h3>{aiCostLens.title}</h3>
-              <p class="tool-question">What did one usable result really cost?</p>
-              <p>Estimate a route from published prices. With matched cost, usage, and checked outcomes, see whether a cheaper option still holds up after quality and rework.</p>
-              <div class="tool-actions">
-                <a class="tool-launch" href={aiCostLens.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="homepage_featured_tools">Open AI Cost Lens <span aria-hidden="true">→</span></a>
-                <a class="tool-source" href={aiCostLens.sourceHref} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens_github" data-analytics-source="homepage_featured_tools"><span class="tool-source-label">View the source</span><span class="tool-source-arrow" aria-hidden="true">→</span></a>
-              </div>
+          <a class="path-card" href="/services#technology-cost-review" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_business">
+            <div class="path-card-header">
+              <p class="card-label">Technology Cost Review</p>
+              <ServiceWatermark kind="cost" />
             </div>
-            <a class="flagship-window" href={aiCostLens.href} target="_blank" rel="noopener noreferrer" aria-label="Open AI Cost Lens" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="homepage_featured_tools">
-              <span class="window-bar" aria-hidden="true">
-                <span class="window-dots"><i></i><i></i><i></i></span>
-                <span>lens.cloudandcapital.com · illustrative example</span>
-              </span>
-              <span class="window-canvas">
-                <img src="/images/ai-cost-lens-cost-anatomy-wide.png" alt="AI Cost Lens illustrative example comparing the full cost of two AI routes" width="2190" height="964" loading="lazy" />
-              </span>
-            </a>
-          </article>
-        )}
-
-        <div class="tool-grid">
-          {cloudCostGuard && (
-            <a class="tool-card" href={cloudCostGuard.href} target="_blank" rel="noopener noreferrer" data-reveal data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="homepage_featured_tools">
-              <div class="tool-preview">
-                <div class="preview-surface">
-                  <div class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>guard.cloudandcapital.com</span></div>
-                  <img src="/images/cloud-cost-guard-spend-reconciliation.jpg" alt="Illustrative Cloud Cost Guard dashboard with sample cloud, direct AI, and software costs" width="1216" height="474" loading="lazy" />
-                </div>
-              </div>
-              <p class="card-label">Cloud spending</p>
-              <h3>Cloud Cost Guard</h3>
-              <p class="tool-question">Why did the bill move?</p>
-              <p>Upload a supported cloud billing CSV to see where your money went. Add an earlier bill to see what changed.</p>
-              <span class="tool-card-action"><span>Review my cloud bill</span><span aria-hidden="true">→</span></span>
-            </a>
-          )}
-
-          {marketTape && (
-            <a class="tool-card" href={marketTape.href} target="_blank" rel="noopener noreferrer" data-reveal data-analytics-event="cta_click" data-analytics-destination="market_tape" data-analytics-source="homepage_featured_tools">
-              <div class="tool-preview">
-                <div class="preview-surface market-preview">
-                  <div class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>market-tape.cloudandcapital.com</span></div>
-                  <div class="market-crop"><img src="/images/market-tape-internals-momentum.jpg" alt="Market internals and momentum leaders and laggards with sparklines" width="1104" height="430" loading="lazy" /></div>
-                </div>
-              </div>
-              <p class="card-label">Markets</p>
-              <h3>{marketTape.title}</h3>
-              <p class="tool-question">What is moving across the market?</p>
-              <p>Explore rates, sectors, commodities, and market context in a research dashboard.</p>
-              <span class="tool-card-action"><span>Open Market Tape</span><span aria-hidden="true">→</span></span>
-            </a>
-          )}
+            <h3><span>“Why does the bill</span> <span><span class="question-emphasis">keep growing?</span>”</span></h3>
+            <p>For growing tech teams with cloud, AI, or software bills that are getting harder to explain. We’ll find out what’s driving the costs.</p>
+            <p class="path-deliverable"><strong>You leave with</strong> a clear spending breakdown, an explanation of what changed, and prioritized next steps.</p>
+            <span class="path-action"><span>Explore the cost review</span><span class="link-arrow" aria-hidden="true">→</span></span>
+          </a>
+          <a class="path-card path-card-tint" href="/services#workflow-review" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_workflow">
+            <div class="path-card-header">
+              <p class="card-label">AI &amp; Workflow Review</p>
+              <ServiceWatermark kind="workflow" />
+            </div>
+            <h3><span>“Why does this take</span> <span><span class="question-emphasis">so long?</span>”</span></h3>
+            <p>For businesses spending too much time moving information between emails, documents, and spreadsheets. We’ll look at one recurring task.</p>
+            <p class="path-deliverable"><strong>You leave with</strong> a map of the task and a plan for making it easier, including whether AI would help.</p>
+            <span class="path-action"><span>Explore the workflow review</span><span class="link-arrow" aria-hidden="true">→</span></span>
+          </a>
+          <a class="path-card" href="/services#practical-setup" data-reveal data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="homepage_path_setup">
+            <div class="path-card-header">
+              <p class="card-label">Tool &amp; Automation Setup</p>
+              <ServiceWatermark kind="setup" />
+            </div>
+            <h3><span>“Can you help me</span> <span><span class="question-emphasis">build it?</span>”</span></h3>
+            <p>For a project you already have in mind: a reporting template, connected tools, or a small automation. I’ll build and test the agreed setup.</p>
+            <p class="path-deliverable"><strong>You leave with</strong> your setup, tested and ready to use, with instructions.</p>
+            <span class="path-action"><span>Explore setup</span><span class="link-arrow" aria-hidden="true">→</span></span>
+          </a>
         </div>
-
-        <div class="smaller-tools" data-reveal>
-          <div class="smaller-tools-intro">
-            <h3 class="card-label">More tools</h3>
-          </div>
-          {signalAudit && (
-            <a class="small-tool" href={signalAudit.href} data-analytics-event="cta_click" data-analytics-destination="signal_audit" data-analytics-source="homepage_featured_tools">
-              <span>Signal Audit</span>
-              <p>Find where technology cost accountability is breaking down.</p>
-              <strong aria-hidden="true">→</strong>
-            </a>
-          )}
-          {interactiveLab && (
-            <a class="small-tool" href={interactiveLab.href} data-analytics-event="cta_click" data-analytics-destination="interactive_lab" data-analytics-source="homepage_featured_tools">
-              <span>Interactive Lab</span>
-              <p>Organize the evidence around a real technology spend decision.</p>
-              <strong aria-hidden="true">→</strong>
-            </a>
-          )}
-        </div>
-
+        <p class="service-scope-note">A clear scope, fixed quote, and timeline before work begins. Start with an email.</p>
       </div>
     </section>
 
-    <section class="writing-section" id="writing" aria-labelledby="writing-title">
-      <div class="shell">
-        <div class="section-heading" data-reveal>
-          <div>
-            <p class="eyebrow">Writing</p>
-            <h2 id="writing-title">Markets, money, and what I’m learning as I build.</h2>
-          </div>
-        </div>
+    <HomepageTools />
 
+    <HomepageAbout />
 
-        <div class="article-grid">
-          {featuredArticles.map((article, index) => (
-            <a class="article-card" href={article.href} target="_blank" rel="noopener noreferrer" data-reveal data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">
-              <div class="article-copy">
-                <p class="article-latest">{index === 0 ? 'Featured essay' : index === 1 ? 'Latest' : 'Previously'}</p>
-                <p class="card-label">{article.topic.replace(' · Issue No. 1', '').replace(' · Issue no. 1', '')} · {article.date}</p>
-                <h3>{article.title}</h3>
-                <p>{article.description}</p>
-                <span><span>Read</span><span aria-hidden="true">→</span></span>
-              </div>
-              {index === 0 && (
-                <div class="decision-artwork" role="img" aria-label="What gets built, what gets locked in, and what becomes the default.">
-                  <svg class="decision-linework" viewBox="0 0 500 500" preserveAspectRatio="none" aria-hidden="true">
-                    <path d="M 72 -15 V 194 M 72 270 V 440 M 350 18 V 178 M 350 236 V 515 M 18 108 H 306 M 116 174 H 510" />
-                    <path d="M -20 360 H 286 M 212 426 H 505" />
-                  </svg>
-                  <div class="decision-terms" aria-hidden="true">
-                    <div class="decision-term decision-built"><span>What gets</span><strong>Built</strong></div>
-                    <div class="decision-term decision-locked"><span>What gets</span><strong>Locked in</strong></div>
-                    <div class="decision-term decision-default"><span>What becomes the</span><strong>Default</strong></div>
-                  </div>
-                </div>
-              )}
+    <HomepageWriting />
 
-            </a>
-          ))}
-        </div>
-
-        <div class="writing-actions">
-          <a class="button button-primary" href="/insights">Explore business insights</a>
-          <a class="button button-secondary" href={newsletter.subscribeHref} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="substack" data-analytics-source="homepage_writing">Read Markets &amp; Mimosas</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="about-section" id="about" aria-labelledby="about-title">
-      <div class="site-shell">
-        <div class="about-grid">
-          <div class="about-identity" data-reveal>
-            <p class="eyebrow eyebrow-light">About Diana</p>
-            <img class="about-portrait" src="/images/diana-molski-portrait.png" alt="Diana Molski" width="820" height="806" loading="lazy" />
-            <p class="about-location">Founder, Cloud &amp; Capital · Los Angeles</p>
-            <h2 id="about-title"><span>{about.headingLead}</span> <span>{about.headingMiddle}</span> <em>{about.headingItalic}</em></h2>
-          </div>
-
-          <div class="about-copy" data-reveal>
-            {about.biography.map((paragraph) => <p class="about-body">{paragraph}</p>)}
-
-            <p class="about-credentials-label">Credentials</p>
-            <dl class="credentials" aria-label="Professional credentials">
-              {about.credentials.map((credential) => (
-                <div class="credential-row"><dt>{credential.category}</dt><dd>{credential.detail}</dd></div>
-              ))}
-              <div class="credential-row credential-contribution">
-                <dt>CONTRIBUTION</dt>
-                <dd><a class="contribution-link" href={about.recognitionUrl} target="_blank" rel="noopener noreferrer"><span>{about.recognition}</span><span aria-hidden="true">→</span></a></dd>
-              </div>
-            </dl>
-          </div>
-        </div>
-      </div>
-    </section>
+    <InstagramSection />
 
     <section class="contact-section" id="contact" aria-labelledby="contact-title">
       <div class="site-shell contact-inner" data-reveal>
         <p class="eyebrow eyebrow-gold">Get in touch</p>
-        <h2 id="contact-title"><span>Have a number, bill, or idea</span> <span>you want to make sense of?</span></h2>
+        <h2 id="contact-title"><span>Have a bill, a task, or an idea</span> <span>you want to make sense of?</span></h2>
         <div class="contact-copy">
-          <p>Tell me what you’re working on, what isn’t adding up, or what you want another set of eyes on.</p>
+          <p>Tell me what’s getting stuck, which tools you use, and what you’d like to change. A few lines are enough.</p>
           <a class="contact-email-card" href={contactLink.href} data-analytics-event="cta_click" data-analytics-destination="contact" data-analytics-source="homepage_contact">
-            <span class="contact-email-label">Email Diana <svg class="contact-email-heart" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8.1 13.6C5.5 11.9 2.1 9.5 1.9 6.3c-.1-1.6.8-2.8 2.2-2.9 1.5-.2 2.8.9 3.7 2.1 1-1.6 2.4-2.5 3.7-2.3 1.7.2 2.5 1.5 2.3 3-.3 2.8-3.1 5.1-5.7 7.4Z" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+            <img class="contact-email-crystal" src="/images/pink-rhinestone-heart.webp" alt="" aria-hidden="true" width="512" height="468" loading="lazy" decoding="async" />
+            <span class="contact-email-label">Email Diana</span>
             <span class="contact-email-address">diana@cloudandcapital.com</span>
             <span class="contact-email-circle" aria-hidden="true"><span class="contact-email-arrow">→</span></span>
           </a>
@@ -324,8 +169,7 @@ const featuredArticles = homepageWriting;
   .text-action:focus-visible,
   .path-card a:focus-visible,
   .tool-card a:focus-visible,
-  .small-tool:focus-visible,
-  .article-card:focus-visible { outline: 2px solid currentColor; outline-offset: .3rem; }
+  .small-tool:focus-visible { outline: 2px solid currentColor; outline-offset: .3rem; }
   .button-primary { background: #4f7167; color: #f5eee9; }
   .button-primary:hover { background: #45675e; }
   .button-white { background: #f5eee9; color: #2b2622; }
@@ -364,7 +208,7 @@ const featuredArticles = homepageWriting;
 
   .hero { padding: clamp(7.6rem, 10vw, 9rem) 0 clamp(4.25rem, 7vw, 6rem); background: #f5eee9; }
   .hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(3rem, 7vw, 6.5rem); align-items: center; }
-  .hero-copy h1 { max-width: 13ch; margin-top: 0; font-size: clamp(3.7rem, 5.55vw, 5.75rem); line-height: .93; letter-spacing: -.042em; }
+  .hero-copy h1 { max-width: 15ch; margin-top: 0; font-size: clamp(3.7rem, 5.55vw, 5.75rem); line-height: .93; letter-spacing: -.042em; }
   .scribbled-word { position: relative; display: inline-block; font-style: italic; color: #3d6055; white-space: nowrap; }
   .scribbled-word svg { position: absolute; left: -.08em; right: -.08em; bottom: -.16em; width: calc(100% + .16em); height: .28em; overflow: visible; }
   .scribbled-word path { fill: none; stroke: #c29260; stroke-width: 2.2; stroke-linecap: round; opacity: .75; stroke-dasharray: 260; stroke-dashoffset: 260; animation: scribble-in 1.1s ease forwards 1s; }
@@ -372,29 +216,40 @@ const featuredArticles = homepageWriting;
   .hero-lede { max-width: 58ch; margin-top: 1.6rem; color: #4a4a4a; font-size: 1rem; line-height: 1.78; }
   .hero-byline { margin-top: 1.15rem; color: #6c665f; font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .11em; line-height: 1.5; text-transform: uppercase; }
   .hero-actions,
-  .writing-actions,
   .contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.4rem; margin-top: 1.8rem; }
   .hero-visual { min-width: 0; padding: .75rem .5rem 1.25rem; }
   @media (min-width: 1280px) {
     .hero-visual { width: min(calc(100% + 75px), 660px); justify-self: end; align-self: end; margin-block: -24px -20px; position: relative; top: 0; }
   }
-  .hero-actions .button, .writing-actions .button { min-height: 48px; border-radius: 8px; padding: .9rem 1.25rem; color: #f5eee9; }
-  .hero-actions .button:focus-visible, .writing-actions .button:focus-visible { outline-color: #3d6055; }
+  .hero-actions .button { min-height: 48px; border-radius: 8px; padding: .9rem 1.25rem; color: #f5eee9; }
+  .hero-actions { align-items: flex-end; }
+  .hero-actions .button:focus-visible { outline-color: #3d6055; }
   .hero-actions .hero-secondary:focus-visible { outline-color: #8f6265; }
-  .hero-actions .hero-secondary { background: var(--rose); color: #24211e; border-color: transparent; }
-  .hero-actions .hero-secondary:hover { background: var(--rose-hover); }
+  .hero-actions .hero-secondary { background: var(--dusty-rose); color: #24211e; border-color: transparent; }
+  .hero-actions .hero-secondary:hover { background: var(--dusty-rose-hover); }
+  .hero-tools-cta { position: relative; display: inline-flex; align-items: center; flex: 0 0 auto; min-width: 0; }
+  .hero-free-note { position: absolute; left: calc(100% - .6rem); top: -2.3rem; display: block; width: 8.25rem; height: auto; pointer-events: none; }
+  @media (max-width: 760px) {
+    .hero-tools-cta { width: 100%; padding-right: 9rem; box-sizing: border-box; }
+    .hero-tools-cta .button { width: 100%; }
+    .hero-tools-cta .hero-free-note { left: auto; right: 0; top: -.9rem; }
+  }
+  @media (max-width: 360px) {
+    .hero-tools-cta { padding-right: 7.75rem; }
+    .hero-tools-cta .hero-free-note { width: 7rem; }
+  }
 
   .paths { padding: clamp(4.5rem, 7vw, 6.25rem) 0; background: #fbfaf7; }
   .section-heading { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(20rem, .9fr); gap: clamp(2.5rem, 7vw, 6.5rem); align-items: end; }
   .section-heading h2 { max-width: 18ch; margin-top: .9rem; font-size: clamp(2.65rem, 4vw, 4.2rem); line-height: .99; letter-spacing: -.035em; }
   .section-heading > p { max-width: 39ch; padding-left: 1.4rem; border-left: 2px solid rgba(107, 142, 127, .4); color: #4a4a4a; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.08rem, 1.55vw, 1.35rem); line-height: 1.52; text-wrap: balance; }
-  .path-grid { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 2.25rem; border-top: 0; border-bottom: 1px solid rgba(25, 23, 20, .14); }
-  .path-card { position: relative; min-height: 20.5rem; padding: 2.2rem; display: flex; flex-direction: column; border-right: 1px solid rgba(25, 23, 20, .12); }
-  .path-card:last-child { border-right: 0; }
-  .path-card-tint { background: var(--sage-strong); }
+  .path-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.15rem; margin-top: 2.25rem; }
+  .path-card { position: relative; min-width: 0; min-height: 20.5rem; padding: 2rem; display: flex; flex-direction: column; border: 1px solid var(--path-rule); border-radius: 12px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 12px 24px -16px rgba(41, 49, 39, .24); }
+  .path-card-tint { background: #e8ece2; }
   .path-number { position: absolute; top: 1.875rem; right: 1.875rem; color: rgba(61, 96, 85, .22); font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(5.75rem, 7vw, 7rem); font-weight: 400; line-height: .8; letter-spacing: -.065em; pointer-events: none; }
   .card-label { color: #4f7167; }
-  .path-card h3 { max-width: 13ch; margin-top: 1.2rem; font-size: clamp(1.9rem, 2.5vw, 2.65rem); line-height: 1.03; letter-spacing: -.025em; }
+  .path-card-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .65rem; min-height: 5.5rem; }
+  .path-card h3 { max-width: none; margin-top: 1.25rem; font-size: clamp(1.9rem, 2.5vw, 2.65rem); line-height: 1.03; letter-spacing: -.025em; text-wrap: wrap; }
   .path-card > p:not(.card-label) { max-width: 39ch; margin-top: 1rem; color: #3b3b38; font-size: .88rem; line-height: 1.7; }
   .path-card a,
   .tool-card a { align-self: flex-start; margin-top: auto; padding-top: 1.5rem; color: #3d6055; font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .1em; line-height: 1.5; text-transform: uppercase; text-decoration: none; }
@@ -402,41 +257,7 @@ const featuredArticles = homepageWriting;
   .tool-card a:hover { text-decoration: underline; text-underline-offset: .32rem; }
   .education-note { margin-top: 1rem; color: #79726b; font-size: .7rem; line-height: 1.55; }
 
-  .writing-section { padding: clamp(4.25rem, 6vw, 5.6rem) 0; background: var(--sand); }
-  .article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 2rem; background: rgba(25, 23, 20, .14); border-top: 1px solid rgba(25, 23, 20, .14); border-bottom: 1px solid rgba(25, 23, 20, .14); }
-  .article-card { min-width: 0; background: #f5eee9; color: inherit; text-decoration: none; }
-  .article-copy { min-height: 16rem; padding: 1.55rem; display: flex; flex-direction: column; }
-  .article-copy h3 { margin-top: .7rem; font-size: clamp(1.6rem, 2.2vw, 2.05rem); line-height: 1.02; }
-  .article-copy > p:not(.card-label) { margin-top: .85rem; color: #4a4a4a; font-size: .82rem; line-height: 1.65; }
-  .article-copy > span { display: inline-block; margin-top: auto; padding-top: 1.2rem; color: #3d6055; font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; }
-  .article-card:hover .article-copy > span { text-decoration: underline; text-underline-offset: .3rem; }
-
-  .about-section { padding: clamp(4.25rem, 6vw, 5.6rem) 0; background: #3d6055; color: #f5eee9; }
-  .about-grid { display: grid; grid-template-columns: minmax(0, .38fr) minmax(0, .62fr); gap: clamp(3.5rem, 6vw, 5.5rem); align-items: start; }
-  .about-identity { min-width: 0; }
-  .about-portrait { display: block; width: 240px; height: 240px; margin-top: 1.5rem; border: 1px solid rgba(245, 238, 233, .68); border-radius: 50%; object-fit: cover; object-position: center; }
-  .about-location { margin-top: .85rem; color: rgba(245, 238, 233, .8); font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .045em; line-height: 1.5; }
-  .about-identity h2 { max-width: 15ch; margin-top: 2.25rem; font-size: clamp(2.55rem, 3.3vw, 3.25rem); line-height: 1.04; letter-spacing: -.035em; text-wrap: balance; }
-  .about-identity h2 > span, .about-identity h2 em { display: block; }
-  .about-identity h2 em { font-style: italic; font-weight: 400; }
-  .about-copy { min-width: 0; padding-top: 3rem; }
-  .about-copy .about-body { max-width: 62ch; margin-top: 1.1rem; color: rgba(245, 238, 233, .92); font-size: .95rem; line-height: 1.7; }
-  .about-copy .about-body:first-child { margin-top: 0; }
-  .about-section .eyebrow-light { color: #c7d8cf; }
-  .about-credentials-label { margin-top: 1.7rem; color: rgba(245, 238, 233, .8); font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
-  .credentials { margin: .65rem 0 0; }
-  .credential-row { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 1rem; align-items: baseline; padding: .7rem 0; border-bottom: 1px solid rgba(245, 238, 233, .17); }
-  .credential-row dt { color: rgba(245, 238, 233, .8); font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .07em; }
-  .credential-row dd { margin: 0; color: rgba(245, 238, 233, .86); font-size: .85rem; line-height: 1.5; }
-  .credential-contribution dt { color: rgba(245, 238, 233, .79); }
-  .contribution-link { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; color: rgba(245, 238, 233, .82); font-size: .875rem; line-height: 1.4; text-decoration: none; }
-  .contribution-link:hover, .contribution-link:focus-visible { color: #f5eee9; text-decoration: none; }
-  .contribution-link:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
-  .contribution-link span:first-child { text-decoration: underline; text-underline-offset: .25rem; text-decoration-color: rgba(245, 238, 233, .48); }
-  .contribution-link span:last-child { display: inline-block; flex: none; font-size: 1.25rem; line-height: 1; text-decoration: none; transition: transform 200ms ease; }
-  .contribution-link:hover span:last-child, .contribution-link:focus-visible span:last-child { transform: translateX(4px); }
-
-  .contact-section { padding: 3.5rem 0 2rem; background: var(--clay); color: #2f2927; }
+  .contact-section { padding: 3.5rem 0 2rem; background: var(--dusty-rose); color: #2f2927; }
   .contact-inner { text-align: center; }
   .contact-section .eyebrow { justify-content: center; gap: .8rem; color: #2f2927; }
   .contact-section .eyebrow::before, .contact-section .eyebrow::after { content: ''; width: 2.4rem; height: 1px; background: currentColor; opacity: .3; }
@@ -444,18 +265,18 @@ const featuredArticles = homepageWriting;
   .contact-section h2 span { display: block; }
   .contact-copy { margin-top: 1.0625rem; }
   .contact-copy > p { color: rgba(47, 41, 39, .95); font-size: .98rem; line-height: 1.8; }
-  .contact-email-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .35rem 1rem; width: min(100%, 39.5rem); min-height: 5.625rem; margin: 1.375rem auto 0; padding: .875rem 1.5rem; background: #f5eee9; color: #2f2927; text-align: left; text-decoration: none; transition: background-color .2s ease; }
+  .contact-email-card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .35rem 1rem; width: min(100%, 39.5rem); min-height: 5.625rem; margin: 1.375rem auto 0; padding: .875rem 1.5rem; border-radius: 12px; background: #f5eee9; color: #2f2927; text-align: left; text-decoration: none; transition: background-color .2s ease; }
   .contact-email-card:hover { background: #f1e9e2; }
   .contact-email-card:focus-visible { outline: 2px solid #2f2927; outline-offset: 3px; }
   .contact-email-label { display: inline-flex; align-items: center; gap: .35rem; grid-column: 1; font: 500 .68rem/1.5 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; }
-  .contact-email-heart { width: 13px; height: 13px; flex: none; color: #8f665f; }
+  .contact-email-crystal { position: absolute; top: -1.5rem; right: -.45rem; width: 3rem; height: auto; transform: rotate(14deg); filter: drop-shadow(0 3px 3px rgba(78, 40, 47, .2)); pointer-events: none; }
   .contact-email-address { grid-column: 1; min-width: 0; overflow-wrap: anywhere; font-size: 1.125rem; line-height: 1.4; }
   .contact-email-circle { grid-column: 2; grid-row: 1 / span 2; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #2f2927; color: #f5eee9; }
   .contact-email-arrow { font-size: 1.25rem; line-height: 1; transition: transform .2s ease; }
   .contact-email-card:hover .contact-email-arrow, .contact-email-card:focus-visible .contact-email-arrow { transform: translateX(3px); }
   .contact-section .contact-email-card, .contact-section .contact-email-card:hover, .contact-section .contact-email-card:focus-visible,
   .contact-section .contact-email-card span, .contact-section .contact-email-card:hover span, .contact-section .contact-email-card:focus-visible span { text-decoration: none; border-bottom: 0; }
-  @media (min-width: 1200px) { .contact-copy > p { white-space: nowrap; } }
+  .contact-copy > p { max-width: 65ch; margin-inline: auto; }
 
   @keyframes scribble-in { to { stroke-dashoffset: 0; } }
   @keyframes signal-ping { 0% { box-shadow: 0 0 0 0 rgba(201, 143, 127, .5); } 70%, 100% { box-shadow: 0 0 0 .55rem rgba(201, 143, 127, 0); } }
@@ -467,15 +288,12 @@ const featuredArticles = homepageWriting;
     .shell { width: min(calc(100% - 3rem), 78rem); }
     .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
     .hero-copy { max-width: 48rem; }
-    .hero-copy h1 { max-width: 14ch; }
+    .hero-copy h1 { max-width: 18ch; }
     .hero-visual { width: min(100%, 39rem); }
-    .section-heading,
-    .about-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+    .section-heading { grid-template-columns: 1fr; gap: 1.8rem; }
     .section-heading > p { max-width: 58ch; }
 
     .tools-heading h2 { white-space: normal; }
-    .about-grid { gap: 2.6rem; }
-    .about-copy { padding-top: 0; }
   }
 
   @media (max-width: 760px) {
@@ -483,13 +301,12 @@ const featuredArticles = homepageWriting;
     .contact-section h2 span { display: inline; }
     .shell { width: min(calc(100% - 2.5rem), 78rem); }
     .hero { padding-top: 7rem; }
-    .hero-copy h1 { max-width: 11ch; font-size: clamp(3rem, 14vw, 4.45rem); }
+    .hero-copy h1 { max-width: 15ch; font-size: clamp(2.8rem, 11vw, 4.45rem); }
     .scribbled-word { white-space: normal; }
 
     .path-grid,
-    .tool-grid,
-    .smaller-tools,
-    .article-grid { grid-template-columns: 1fr; }
+  .tool-grid,
+  .smaller-tools { grid-template-columns: 1fr; }
     .path-card { min-height: auto; padding: 2rem 0; border-right: 0; border-bottom: 1px solid rgba(25, 23, 20, .13); }
     .path-card { margin-inline: -1.25rem; padding-inline: 1.25rem; }
     .path-card a { margin-top: 1.5rem; }
@@ -501,23 +318,16 @@ const featuredArticles = homepageWriting;
     .smaller-tools-intro { padding: 1.6rem 0; }
     .small-tool { min-height: auto; padding: 1.55rem 0; border-top: 1px solid rgba(245, 238, 233, .13); border-left: 0; }
     .small-tool strong { top: 1.55rem; right: 0; }
-    .article-grid { gap: 1.25rem; background: transparent; border: 0; }
-    .article-card { border-top: 1px solid rgba(25, 23, 20, .14); border-bottom: 1px solid rgba(25, 23, 20, .14); }
-    .article-copy { min-height: 14rem; padding-inline: 0; }
-    .about-portrait { width: 240px; height: 240px; }
   }
 
   @media (max-width: 480px) {
     .hero-actions { display: grid; grid-template-columns: 1fr; }
-    .writing-actions,
     .contact-actions { flex-direction: column; align-items: flex-start; }
     .button { width: 100%; text-align: center; }
     .contact-email-card { padding: 1rem 1.25rem; }
     .contact-email-address { font-size: 1.0625rem; }
 
     .section-heading h2 { font-size: clamp(2.5rem, 12vw, 3.45rem); }
-    .about-identity h2 { font-size: clamp(2.55rem, 11vw, 3.1rem); }
-    .credential-row { grid-template-columns: 1fr; gap: .3rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -543,19 +353,19 @@ const featuredArticles = homepageWriting;
     --dark-rose: #82585b;
     --pale-rose: #f4ecea;
   }
-  .path-card { --path-accent: #2b4236; --path-rule: #5e776b; --path-hover: #a7b0a0; --path-rule-hover: #50675c; border-top: 2px solid var(--path-rule); transition: background-color 200ms ease, border-top-color 200ms ease; }
-  .path-card:first-child { --path-accent: #493029; --path-rule: #8f665f; background: var(--clay); --path-hover: #baa197; --path-rule-hover: #7e5750; }
-  .path-card:last-child { --path-accent: #34463b; --path-rule: #53675e; background: #bdb7ac; --path-hover: #b4aea2; --path-rule-hover: #45594e; }
+  .path-card { --path-accent: #3e5946; --path-rule: #cbd6c5; --path-underline: #789382; --path-hover: #e0e7d9; --path-rule-hover: #9aaf93; transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease; }
+  .path-card:first-child { --path-accent: #785752; --path-rule: #dfc7c0; --path-underline: #b78384; background: #f6e7e2; --path-hover: #f0ded8; --path-rule-hover: #b48c82; }
+  .path-card:last-child { --path-accent: #5c594b; --path-rule: #ded3c4; --path-underline: #a18b70; background: #f5efe5; --path-hover: #efe6d8; --path-rule-hover: #b9a68c; }
   .path-card .card-label, .path-card a { color: var(--path-accent); }
   .path-card .path-number { color: var(--path-rule); opacity: .14; }
   @media (max-width: 767px) { .path-card .path-number { font-size: 4.5rem; } }
   .path-card a:focus-visible { outline-color: var(--path-accent); }
-  :global(.reveal-ready) .path-card[data-reveal] { transition: opacity .7s ease, transform .7s ease, background-color 200ms ease, border-top-color 200ms ease; }
+  :global(.reveal-ready) .path-card[data-reveal] { transition: opacity .7s ease, transform .7s ease, background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease; }
   .path-card a span { display: inline-block; transition: transform 200ms ease; }
-  .path-card:focus-within { background: var(--path-hover); border-top-color: var(--path-rule-hover); }
+  .path-card:focus-within { background: var(--path-hover); border-color: var(--path-rule-hover); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 16px 30px -18px rgba(41, 49, 39, .28); }
   .path-card:focus-within a span { transform: translateX(4px); }
   @media (hover: hover) {
-    .path-card:hover { background: var(--path-hover); border-top-color: var(--path-rule-hover); }
+    .path-card:hover { background: var(--path-hover); border-color: var(--path-rule-hover); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 16px 30px -18px rgba(41, 49, 39, .28); }
     .path-card:hover a span { transform: translateX(4px); }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -637,38 +447,6 @@ const featuredArticles = homepageWriting;
   .tools-section { padding-bottom: 2.25rem; }
   @media (max-width: 760px) { .tools-section .small-tool + .small-tool { border-top: 0; } }
 
-  .writing-section { background: #fbfaf7; border-top: 1px solid rgba(36,35,31,.1); }
-  .writing-section .section-heading { display: block; }
-  .writing-section .section-heading h2 { max-width: none; font-size: clamp(2.65rem,4.3vw,4.3rem); line-height: 1.02; }
-  .writing-section .section-heading h2 span { display: block; }
-  .writing-section .article-grid { margin-top: clamp(3rem, 4vw, 4rem); gap: 0; background: transparent; border-bottom: 0; }
-  .writing-section .article-card { display: flex; flex-direction: column; background: transparent; border-right: 1px solid rgba(25, 23, 20, .14); }
-  .writing-section .article-card:last-child { border-right: 0; }
-  .writing-section .article-copy { flex: 1; min-height: 0; padding: 1.75rem 1.55rem; }
-  .writing-section .article-copy h3 { text-wrap: balance; line-height: 1.1; }
-  .writing-section .article-copy > span { text-transform: uppercase; }
-  .writing-section .article-copy > span span { display: inline-block; transition: transform 220ms ease; }
-  .writing-section .article-card:focus-visible { outline: 2px solid #3d6055; outline-offset: 5px; }
-  .writing-section .writing-actions { margin-top: 2rem; }
-  .writing-section .writing-actions .button { min-height: 48px; border-radius: 8px; padding: .9rem 1.25rem; gap: .65rem; }
-  .writing-section .writing-secondary { background: var(--rose); color: #2f2927; }
-  .writing-section .writing-secondary:hover { background: var(--rose-hover); }
-  .writing-section .writing-actions a:focus-visible { outline-color: #3d6055; }
-  @media (max-width: 760px) { .writing-section .section-heading h2 span { display: inline; } .writing-section .article-copy { min-height: auto; padding-block: 1.5rem; } .writing-section .article-copy > span { padding-top: 1.5rem; } }
-  @media (prefers-reduced-motion: reduce) { .writing-section .article-copy > span span { transition: none; transform: none !important; } }
-
-  @media (max-width: 760px) {
-    .writing-section .article-grid { border-top: 1px solid rgba(25, 23, 20, .14); }
-    .writing-section .article-card { border: 0; border-bottom: 1px solid rgba(25, 23, 20, .14); }
-    .writing-section .article-copy { padding: 1.75rem 0; }
-  }
-
-  .writing-section .section-heading h2 { text-wrap: balance; }
-  .writing-section .article-copy > span { margin-top: auto; }
-  .writing-section .writing-actions { margin-top: 1.5rem; }
-  .writing-section .writing-actions .button-secondary { color:#3d6055; border-color:#3d6055; background:transparent; }
-  @media (max-width: 760px) { .writing-section .article-copy > span { margin-top: 0; } }
-
   .tools-section .tool-card > p:not(.card-label):not(.tool-question) { max-width: none; text-wrap: balance; }
   .tools-section .small-tool { display: grid; grid-template-columns: minmax(0,1fr) auto; column-gap: 1rem; padding: 1.35rem 0; }
   .tools-section .small-tool > span, .tools-section .small-tool p { grid-column: 1; }
@@ -682,52 +460,6 @@ const featuredArticles = homepageWriting;
 
   .tools-section .tool-card:last-child > .card-label,
   .tools-section .tool-card:last-child > a { color: #805751; }
-  .writing-section .article-grid { grid-template-columns: minmax(0, 1.72fr) minmax(0, 1fr); grid-template-rows: repeat(2, 1fr); border-top: 1px solid rgba(49,62,54,.25); }
-  .writing-section .article-card { border: 0; }
-  .writing-section .article-card:first-child { grid-row: 1 / 3; display: grid; grid-template-columns: minmax(0, 42fr) minmax(0, 58fr); background: #f2eee6; border-right: 1px solid rgba(49,62,54,.2); }
-  .writing-section .article-card:last-child { border-top: 1px solid rgba(49,62,54,.2); }
-  .writing-section .article-copy { padding: 1.75rem 2rem; }
-  .writing-section .article-card:first-child .article-copy { display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: 2.5rem 0 2.5rem 2.5rem; }
-  .writing-section .article-copy .article-latest { margin: 0 0 1.25rem; color: #3d6055; font: .62rem/1.4 'DM Mono', monospace; letter-spacing: .14em; text-transform: uppercase; }
-  .writing-section .article-card:first-child h3 { margin-top: 1rem; font-size: clamp(2.6rem, 3.65vw, 3.5rem); line-height: .97; }
-  .writing-section .article-card:first-child .article-copy > p:not(.card-label):not(.article-latest) { font-size: .95rem; line-height: 1.7; margin-top: 1.2rem; }
-  .writing-section .article-card:not(:first-child) h3 { font-size: clamp(1.7rem, 2.2vw, 2rem); }
-  .writing-section .article-copy > span { padding-top: 1.65rem; }
-  .writing-section .article-card:first-child .article-copy > span { margin-top: auto; padding-top: 2rem; }
-  .decision-artwork { position: relative; min-width: 0; min-height: 440px; overflow: hidden; margin: 1.15rem 0; }
-  .decision-linework { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: #536659; stroke-width: .65; opacity: .23; pointer-events: none; }
-  .decision-linework path:nth-child(2) { stroke: #4b4942; opacity: .5; stroke-width: .5; }
-  .decision-terms { position: absolute; inset: 0; }
-  .decision-term { position: absolute; display: flex; flex-direction: column; width: max-content; max-width: 100%; text-transform: uppercase; }
-  .decision-term span { margin-bottom: .18rem; font: 400 clamp(.55rem, .7vw, .68rem)/1.3 'DM Mono', monospace; letter-spacing: .18em; }
-  .decision-term strong { font: 500 clamp(4rem, 5.7vw, 6.7rem)/.78 'Cormorant Garamond', Georgia, serif; letter-spacing: -.055em; white-space: nowrap; }
-  .decision-built { top: 14%; left: 7%; color: #3d6055; }
-  .decision-locked { top: 39%; left: 15%; color: #805751; }
-  .decision-locked strong { font-size: clamp(3.1rem, 4.05vw, 4.8rem); }
-  .decision-default { top: 65.5%; left: 12%; color: #4b4942; }
-  .decision-default strong { font-size: clamp(3.6rem, 5.15vw, 6rem); }
-  @media (max-width: 1024px) {
-    .writing-section .article-grid { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; }
-    .writing-section .article-card:first-child { grid-row: auto; grid-template-columns: minmax(0, 42fr) minmax(0, 58fr); border-right: 0; }
-    .writing-section .article-card + .article-card { border-top: 1px solid rgba(49,62,54,.2); }
-    .writing-section .article-copy { padding: 1.75rem; }
-    .writing-section .article-card:first-child .article-copy { padding: 2rem 0 2rem 2rem; }
-    .writing-section .article-copy > span { margin-top: 0; }
-    .decision-artwork { min-height: 380px; }
-  }
-  @media (max-width: 600px) {
-    .writing-section .article-card:first-child { grid-template-columns: minmax(0, 1fr); }
-    .writing-section .article-card:first-child .article-copy { padding: 1.8rem 1.8rem 1.25rem; }
-    .writing-section .article-card:first-child .article-copy > span { margin-top: 0; }
-    .decision-artwork { grid-row: 1; min-height: 325px; margin: .5rem 1.15rem 0; }
-    .decision-term span { font-size: .58rem; }
-    .decision-term strong { font-size: clamp(3.9rem, 19vw, 5rem); }
-    .decision-locked strong { font-size: clamp(2.8rem, 12vw, 3.7rem); }
-    .decision-built { top: 12%; left: 5%; }
-    .decision-locked { top: 36%; left: 18%; }
-    .decision-default { top: 64%; left: 9%; }
-    .decision-default strong { font-size: clamp(3.5rem, 17.1vw, 4.5rem); }
-  }
 
   /* Actions are readable and distinct from the intentionally small editorial metadata. */
   .button { min-height: 48px; font-size: .78rem; font-weight: 500; letter-spacing: .065em; }
@@ -755,30 +487,11 @@ const featuredArticles = homepageWriting;
   .tools-section .tool-card:hover .tool-card-action span:last-child, .tools-section .tool-card:focus-visible .tool-card-action span:last-child { transform: translateX(4px); }
   .tools-section .small-tool > span { text-decoration: underline; text-decoration-color: rgba(36,33,30,.4); text-underline-offset: .2rem; }
   .tools-section .small-tool strong { line-height: 1; }
-
-  .writing-section .article-copy > span { display: inline-flex; align-items: center; gap: .55rem; align-self: flex-start; min-height: 44px; padding-top: 0; color: #3d6055; font: 500 .8125rem/1.4 'DM Mono', monospace; letter-spacing: .045em; }
-  .writing-section .article-card:first-child .article-copy > span { min-height: 44px; }
-  .writing-section .article-copy > span span:first-child { font-size: inherit; text-decoration: underline; text-underline-offset: .3rem; }
-  .writing-section .article-copy > span span:last-child { line-height: 1; }
   .path-action span:last-child,
   .tools-section .tool-actions a > span:last-child,
   .tools-section .tool-card-action span:last-child,
   .tools-section .small-tool strong,
-  .writing-section .article-copy > span span:last-child,
   .text-action > span:last-child { font-size: 1.25rem; }
-  .writing-section .article-card:hover .article-copy > span, .writing-section .article-card:focus-visible .article-copy > span { color: #2e4e44; text-decoration: none; }
-  .writing-section .article-card:hover .article-copy > span span:last-child, .writing-section .article-card:focus-visible .article-copy > span span:last-child { transform: translateX(4px); }
-  .writing-section .article-card:hover { background-color: #f8f5ef; }
-  .writing-section .article-card:first-child:hover { background-color: #eee9df; }
-  .writing-section .article-card:focus-visible { outline-width: 3px; }
-
-  .decision-term span { margin-bottom: .3rem; font-size: clamp(.7rem, .9vw, .86rem); font-weight: 500; letter-spacing: .12em; }
-  .decision-built span { color: color-mix(in srgb, var(--decision-built-mix-base, #2e4e44) 88%, #f2eee6); }
-  .decision-locked span { color: color-mix(in srgb, var(--decision-locked-mix-base, #493029) 88%, #f2eee6); }
-  .decision-default span { color: color-mix(in srgb, var(--decision-default-mix-base, #4b4942) 88%, #f2eee6); }
-  .decision-built strong, .decision-locked strong { opacity: .42; }
-  .decision-default strong { opacity: .36; }
-  @media (max-width: 600px) { .decision-term span { font-size: .73rem; } }
   @media (prefers-reduced-motion: reduce) { .path-action span, .contribution-link span, .tools-section .tool-card-action span { transition: none; transform: none !important; } }
 
   .tools-section .tool-actions a.tool-source:link,
@@ -802,16 +515,110 @@ const featuredArticles = homepageWriting;
   }
   .tools-section .tool-actions a.tool-source .tool-source-arrow::before,
   .tools-section .tool-actions a.tool-source .tool-source-arrow::after { content: none; }
-  @media(max-width:650px){.about-portrait{width:180px;height:180px;}}
-  /* Give every article action the same inset and space above it. */
-  .writing-section .article-card:not(:first-child) { display: flex; flex-direction: column; }
-  .writing-section .article-copy { flex: 1; padding-bottom: 2rem; }
-  .writing-section .article-card:first-child .article-copy { padding-bottom: 2rem; }
-  .writing-section .article-copy > p:not(.card-label):not(.article-latest) { margin-bottom: 1.5rem; }
-  .writing-section .article-copy > span,
-  .writing-section .article-card:first-child .article-copy > span { margin-top: auto; padding-top: 0; }
-  @media (max-width: 600px) {
-    .writing-section .article-copy,
-    .writing-section .article-card:first-child .article-copy { padding-bottom: 1.8rem; }
+  /* Business-first homepage: keep the established palette and readable type. */
+  .hero-copy > .eyebrow { margin-bottom: 1.5rem; font-size: .67rem; }
+  .hero-copy h1 em { color: #3d6055; font-weight: 400; }
+  .hero-context { max-width: 58ch; margin-top: 1rem; color: #4a4a4a; font-size: .95rem; line-height: 1.75; }
+  .hero-byline { font-size: .68rem; }
+  .hero-visual { align-self: center; }
+  .path-card .card-label { max-width: none; min-height: 0; position: relative; z-index: 1; color: color-mix(in srgb, var(--path-accent) 85%, #191714); font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.3rem, 1.65vw, 1.5rem); font-style: italic; font-weight: 600; line-height: 1.15; letter-spacing: -.015em; text-transform: none; text-wrap: wrap; }
+  .path-card h3 { font-size: clamp(1.9rem, 2.4vw, 2.6rem); }
+  .path-card h3 > span { display: block; }
+  .path-card .question-emphasis { position: relative; display: inline-block; max-width: 100%; }
+  .path-card .question-emphasis::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 calc(-.11em - 3px);
+    height: .19em;
+    --question-curve: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 12' preserveAspectRatio='none'%3E%3Cpath d='M3 7C58 3 156 3 237 6' fill='none' stroke='%23000' stroke-width='1.75' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+    background-color: var(--path-underline);
+    -webkit-mask: var(--question-curve) center / 100% 100% no-repeat;
+    mask: var(--question-curve) center / 100% 100% no-repeat;
+    pointer-events: none;
   }
+  .path-card .path-deliverable { margin-bottom: 1.6rem; padding-top: 1rem; border-top: 1px solid var(--path-rule); font-size: .85rem; }
+  .path-deliverable strong { font-weight: 500; }
+  .path-number { opacity: .65; }
+  .path-action { font-size: .75rem; letter-spacing: .015em; }
+  .service-scope-note { margin-top: 1.3rem; color: #595b52; font-size: .85rem; line-height: 1.6; }
+  .tools-section .renewal-art { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 1.5rem; min-height: 195px; margin-bottom: 2rem; background: #f4e8df; color: #805751; border-radius: 14px; }
+  .renewal-art > span { max-width: 8ch; font: italic 2.7rem/1 'Cormorant Garamond', Georgia, serif; }
+  .renewal-art svg { width: 45%; max-width: 210px; }
+  .tool-review-invitation { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .8rem 2rem; padding: 2rem 0 .5rem; }
+  .tool-review-invitation p { font-size: 1rem; line-height: 1.6; }
+  .tools-heading > p a { display: inline-flex; align-items: center; min-height: 44px; margin-top: .6rem; color: inherit; font: 500 .8rem/1.5 'DM Mono', monospace; text-underline-offset: .25rem; }
+  .learning-section { padding: 4rem 0; background: #f2e5df; }
+  .learning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 6rem); }
+  .learning-section h2 { max-width: 18ch; margin-top: 1rem; font-size: clamp(2.5rem, 4vw, 3.7rem); line-height: 1.05; }
+  .learning-grid > div > p:not(.eyebrow):not(.education-note) { font-size: 1rem; line-height: 1.75; }
+  .learning-section .text-action { margin-top: 1rem; color: #3d6055; }
+  .learning-market-link { display: block; width: fit-content; padding: .75rem 0; margin-top: .4rem; color: #594b44; font-size: .9rem; line-height: 1.6; text-underline-offset: .25rem; }
+  .learning-section .education-note { font-size: .8rem; color: #655851; }
+  .learning-section a:focus-visible { outline: 2px solid #3d6055; outline-offset: 4px; }
+  @media (min-width: 1280px) { .hero-visual { width: 100%; margin-block: 0; align-self: center; } }
+  @media (max-width: 1020px) { .hero-copy h1 { max-width: 18ch; } .hero-visual { width: min(100%, 34rem); justify-self: center; } }
+  @media (max-width: 760px) { .example-grid, .learning-grid { grid-template-columns: minmax(0, 1fr); } .path-card-header { gap: .5rem; } .path-card .card-label { min-height: auto; font-size: 1.25rem; } .path-card .path-deliverable { margin-bottom: 0; } .review-examples { padding-block: 3.5rem; } .hero-visual { width: min(100%, 30rem); } .hero-actions { gap: .8rem; } .hero-actions .button { flex: 1 1 auto; text-align: center; justify-content: center; } }
+  @media (prefers-reduced-motion: reduce) { .example-card { transition: none; } }
+  @media (max-width: 1200px) {
+    .paths .path-grid { grid-template-columns: minmax(0, 1fr); }
+    .paths .path-card { min-height: auto; margin-inline: 0; padding: 2rem; border: 1px solid var(--path-rule); }
+    .paths .path-action { margin-top: 1.5rem; }
+  }
+  @media (max-width: 360px) {
+    .paths .path-card h3 { font-size: 1.8rem; }
+  }
+
+  /* Shared text-action treatment, matching the approved service-card links. */
+  .home :is(.path-action, .example-action, .tool-card-action, .text-action, .tool-source, .learning-market-link, .browse-tools-link, .contribution-link):is(a, span) {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    min-height: 50px;
+    font: 500 .75rem/1.4 'DM Mono', monospace;
+    letter-spacing: .015em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .home :is(.path-action, .example-action, .tool-card-action):is(a, span) {
+    width: fit-content;
+    justify-content: flex-start;
+    padding-top: .35rem;
+  }
+  .home :is(.path-action, .example-action, .tool-card-action, .text-action, .tool-source, .learning-market-link, .browse-tools-link, .contribution-link):is(a, span) > span:first-child {
+    font-size: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: .28rem;
+  }
+  .home .tool-actions a.tool-source .tool-source-label { border-bottom: 0; text-decoration: underline; }
+  .home .text-action > span:first-child::after { content: none; }
+  .home .link-arrow {
+    display: inline-block;
+    flex: 0 0 1.25rem;
+    width: 1.25rem;
+    margin-left: 0;
+    font: 500 1.25rem/1 'DM Mono', monospace;
+    letter-spacing: 0;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 200ms ease;
+  }
+  .home a:is(:hover, :focus-visible) .link-arrow { transform: translateX(4px); }
+  @media (prefers-reduced-motion: reduce) {
+    .home .link-arrow { transition: none; }
+    .home a:is(:hover, :focus-visible) .link-arrow { transform: none; }
+  }
+
+  .home .tools-section .small-tool { grid-template-columns: minmax(0, 1fr); }
+  .home .tools-section .small-tool > .small-tool-label {
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+    gap: .45rem;
+    font: 500 .75rem/1.4 'DM Mono', monospace;
+    letter-spacing: .015em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .home .small-tool-label > span:first-child { text-decoration: underline; text-underline-offset: .28rem; }
 </style>

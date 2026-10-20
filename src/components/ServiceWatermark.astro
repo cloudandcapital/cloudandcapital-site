@@ -1,0 +1,30 @@
+---
+interface Props { kind: 'cost' | 'workflow' | 'setup'; }
+const { kind } = Astro.props;
+const artwork = {
+  cost: '/images/service-bill-3d.webp',
+  workflow: '/images/service-clock-sage-3d.webp',
+  setup: '/images/service-blocks-beige-3d.webp',
+};
+---
+<img
+  class="service-watermark"
+  data-kind={kind}
+  src={artwork[kind]}
+  alt=""
+  aria-hidden="true"
+  width="512"
+  height="512"
+  loading="lazy"
+  decoding="async"
+/>
+
+<style>
+  /* Account for transparent canvas margins so the visible objects align with the names. */
+  .service-watermark { display: block; width: 7.5rem; height: 7.5rem; margin-block: -1rem; margin-inline: -.5rem -.75rem; object-fit: contain; pointer-events: none; }
+  .service-watermark[data-kind="cost"] { width: 7rem; height: 7rem; margin-block: -.75rem; }
+  @media (max-width: 760px) {
+    .service-watermark { width: 6.75rem; height: 6.75rem; margin-block: -.625rem; margin-inline: -.625rem -.875rem; }
+    .service-watermark[data-kind="cost"] { width: 6.25rem; height: 6.25rem; margin-block: -.375rem; }
+  }
+</style>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164 82" fill="none">
+  <title>they’re free!</title>
+  <g transform="translate(27 3) rotate(-6 61 22)" stroke="#191714" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 7Q2 15 2 25Q2 29 6 27M0 15L9 14"/>
+    <path d="M12 4Q10 15 10 27C11 19 16 15 18 18C20 21 15 28 19 27"/>
+    <path d="M22 23C33 22 31 14 25 17C18 22 22 32 31 26"/>
+    <path d="M35 17Q33 26 37 26Q41 25 43 17M43 17C42 27 39 37 34 37Q31 36 34 32"/>
+    <path d="M49 11Q50 14 47 17"/>
+    <path d="M53 27L55 18M55 21Q60 14 63 19"/>
+    <path d="M65 23C75 22 74 15 69 17C62 20 63 31 73 26"/>
+    <path d="M82 35C83 22 84 3 91 7Q94 10 89 14M79 21L92 20"/>
+    <path d="M94 27L96 18M96 21Q102 14 105 19"/>
+    <path d="M106 23C116 22 115 15 110 17C103 20 104 31 114 26"/>
+    <path d="M117 23C127 22 126 15 121 17C114 20 115 31 125 26"/>
+    <path d="M132 8L129 23M128 28L127.9 28.4"/>
+  </g>
+  <path d="M120 43C115 57 78 63 28 63M36 58L28 63L36 68" stroke="#191714" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

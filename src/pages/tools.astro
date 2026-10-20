@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { contactLink, openSourceTools, tools } from '../data/siteContent';
+import { openSourceTools, tools } from '../data/siteContent';
 
 const lens = tools.find((tool) => tool.slug === 'ai-cost-lens');
 const guard = tools.find((tool) => tool.slug === 'cloud-cost-guard-lumen');
@@ -56,13 +56,13 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
             </div>
             <a class="flagship-window" href={lens.href} target="_blank" rel="noopener noreferrer" aria-label="Open AI Cost Lens" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="work_flagship">
               <span class="window-bar" aria-hidden="true"><span class="window-dots"><i></i><i></i><i></i></span><span>lens.cloudandcapital.com · illustrative example</span></span>
-              <span class="window-canvas"><img src="/images/ai-cost-lens-cost-anatomy-wide.png" alt="AI Cost Lens illustrative example comparing the full cost of two AI routes" width="2190" height="964" loading="lazy" /></span>
+              <span class="window-canvas"><img src="/images/ai-cost-lens-anatomy-preview.jpg" alt="AI Cost Lens illustrative example comparing the full cost of two AI routes" width="1315" height="492" loading="lazy" /></span>
             </a>
           </div>
           <dl class="lens-notes">
             <div><dt>The question</dt><dd>What did one usable AI result cost?</dd></div>
-            <div><dt>You bring</dt><dd>A prompt or the bill, usage, and outcome records you have.</dd></div>
-            <div><dt>You leave with</dt><dd>A price scenario, cost baseline, or evidence-gated route comparison.</dd></div>
+            <div><dt>You bring</dt><dd>Start with an example, a prompt, or the bill and usage records you have.</dd></div>
+            <div><dt>You leave with</dt><dd>A price estimate or cost breakdown, with the assumptions and missing information made clear.</dd></div>
           </dl>
         </div>
       </section>
@@ -73,10 +73,14 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
         <p class="eyebrow">Choose a starting point</p>
         <h2 id="starting-title">Choose where to begin.</h2>
         <div class="product-features">
+          <a class="product-feature renewal-feature" href="/tools/software-renewal-tracker" data-analytics-event="cta_click" data-analytics-destination="software_renewal_tracker" data-analytics-source="work_decision_tools">
+            <div class="product-copy"><span class="product-status">Free tracker</span><h3>Software Renewal Tracker</h3><p class="product-question">What renews next, and when do I need to decide?</p><p>Add your software charges, renewal dates, and cancellation deadlines. See upcoming charges and monthly equivalent costs in one place.</p><span class="product-action"><span>Open the renewal tracker</span><span aria-hidden="true">→</span></span></div>
+            <div class="product-media"><img src="/images/software-renewal-project-desk.jpg" alt="Software Renewal Tracker showing the Project desk subscription, renewal date, and notice deadline" width="1168" height="455" loading="lazy" /></div>
+          </a>
           {guard && (
             <a class="product-feature guard-feature" href={guard.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="work_decision_tools">
               <div class="product-copy"><span class="product-status">Free tool · CSV upload</span><h3>Cloud Cost Guard</h3><p class="product-question">What moved the bill?</p><p>Upload a supported cloud billing CSV to see spending and cost drivers. Add an earlier bill to compare periods. Your records are processed in your browser, and an example is available to explore.</p><span class="product-action"><span>Review my cloud bill</span><span aria-hidden="true">→</span></span></div>
-              <div class="product-media" aria-hidden="true"><img src="/images/cloud-cost-guard-spend-reconciliation.jpg" alt="" width="1216" height="474" loading="lazy" /></div>
+              <div class="product-media" aria-hidden="true"><img src="/images/cloud-cost-guard-summary-preview.jpg" alt="" width="1216" height="474" loading="lazy" /></div>
             </a>
           )}
           {tape && (
@@ -115,7 +119,7 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
     </section>
 
     <section class="contact-strip" aria-labelledby="contact-strip-title">
-      <div class="site-shell contact-layout"><p class="eyebrow">Start a conversation</p><h2 id="contact-strip-title">Have a number you want to make sense of?</h2><a href={contactLink.href} data-analytics-event="cta_click" data-analytics-destination="contact" data-analytics-source="work_contact"><span>Email Diana</span><svg class="contact-heart" aria-hidden="true" viewBox="0 0 16 16" fill="none"><path d="M8 13.5C5.9 11.7 2.1 8.7 2.2 5.7c.1-1.7 2.2-2.7 3.7-1.7.8.5 1.3 1.1 2.1 1.8.7-1 1.5-1.9 2.6-2 2.2-.2 3.7 1.7 3.1 3.7-.7 2.3-3.5 4.7-5.7 6Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" /></svg><span aria-hidden="true">→</span></a></div>
+      <div class="site-shell contact-layout"><p class="eyebrow">Work with Diana</p><h2 id="contact-strip-title">Want help reviewing your technology costs?</h2><a href="/services#technology-cost-review" data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="work_contact"><span>Explore the cost review</span><svg class="contact-heart" aria-hidden="true" viewBox="0 0 16 16" fill="none"><path d="M8 13.5C5.9 11.7 2.1 8.7 2.2 5.7c.1-1.7 2.2-2.7 3.7-1.7.8.5 1.3 1.1 2.1 1.8.7-1 1.5-1.9 2.6-2 2.2-.2 3.7 1.7 3.1 3.7-.7 2.3-3.5 4.7-5.7 6Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" /></svg><span aria-hidden="true">→</span></a></div>
     </section>
   </main>
 </BaseLayout>
@@ -175,6 +179,9 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
   .product-feature { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2rem, 4vw, 4rem); align-items: center; min-width: 0; padding: clamp(2rem, 4vw, 3.5rem); transition: background-color .2s ease; }
   .guard-feature { background: var(--sage-surface); }
   .guard-feature:hover, .guard-feature:focus-visible { background: var(--sage-surface-hover); }
+  .renewal-feature { border: 1px solid #d5b4aa; border-radius: 16px; background: #f3e2dc; }
+  .renewal-feature:hover, .renewal-feature:focus-visible { background: #ecd6cf; }
+  .renewal-feature .product-status { color: #89534f; }
   .tape-feature { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); background: var(--cream); border-top: 1px solid rgba(128,87,81,.48); }
   .tape-feature:hover, .tape-feature:focus-visible { background: var(--cream-dark); }
   .product-status { color: #3d6055; }
@@ -184,10 +191,13 @@ const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost 
   .product-copy > p:not(.product-question), .supporting-tool > p:not(.product-question) { max-width: 54ch; margin-top: 1rem; color: #4b4942; font-size: .96rem; line-height: 1.72; }
   .product-action { display: inline-flex; align-items: center; gap: .7rem; min-height: 44px; margin-top: 1.5rem; color: #3d6055; font: 500 .72rem/1.4 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
   .product-feature .product-action { padding: .85rem 1.2rem; background: var(--brand-green); color: #f5eee9; border-radius: 8px; }
+  .renewal-feature .product-action { background: #89534f; }
   .tape-feature .product-action { background: var(--rose); color: var(--brand-ink); }
   .tape-feature:hover .product-action { background: var(--rose-hover); }
   .product-media { display: flex; align-items: center; min-width: 0; height: clamp(13rem, 17vw, 16rem); }
   .product-media img { display: block; width: 100%; height: 100%; object-fit: contain; border: 1px solid rgba(36,35,31,.12); border-radius: 8px; }
+  .renewal-feature .product-media, .guard-feature .product-media { height: auto; }
+  .renewal-feature .product-media img, .guard-feature .product-media img { height: auto; }
   .supporting-tools { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
   .supporting-tool { display: flex; flex-direction: column; min-width: 0; padding: 2rem 2.2rem; border-top: 1px solid rgba(36,35,31,.22); background: var(--cream); transition: background-color .2s ease; }
   .supporting-tool:hover, .supporting-tool:focus-visible { background: var(--sage-surface-hover); }

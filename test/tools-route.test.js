@@ -6,18 +6,20 @@ const root = new URL('../', import.meta.url);
 const source = (path) => readFile(new URL(path, root), 'utf8');
 
 test('Tools is canonical while Work remains a permanent compatibility redirect', async () => {
-  const [page, redirect, sitemap, data, home] = await Promise.all([
+  const [page, redirect, sitemap, data, home, homepageTools] = await Promise.all([
     source('src/pages/tools.astro'),
     source('src/pages/work.astro'),
     source('src/pages/sitemap.xml.ts'),
     source('src/data/siteContent.ts'),
     source('src/pages/index.astro'),
+    source('src/components/HomepageTools.astro'),
   ]);
   assert.match(redirect, /Astro\.redirect\('\/tools', 308\)/);
   assert.match(sitemap, /'\/tools'/);
   assert.doesNotMatch(sitemap, /'\/work'/);
   assert.match(data, /label: 'Tools', href: '\/tools'/);
-  assert.match(home, /class="path-card" href="\/tools"/);
+  assert.match(home, /<HomepageTools\s*\/>/);
+  assert.match(homepageTools, /href="\/tools"/);
   assert.match(page, /title="Free AI & Cloud Cost Tools \| Cloud & Capital"/);
   assert.match(page, /<h1 id="tools-title"><span>Start with the question\.<\/span><span>Follow the number\.<\/span><\/h1>/);
 });

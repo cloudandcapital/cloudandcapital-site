@@ -6,18 +6,18 @@ export type SiteLink = {
 
 export const navigation: SiteLink[] = [
   { label: 'Services', href: '/services' },
-  { label: 'Investing & Trading', href: '/learn' },
   { label: 'Tools', href: '/tools' },
   { label: 'Insights', href: '/insights' },
+  { label: 'Investing & Trading', href: '/learn' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
 ];
 
 export const footerLinks: SiteLink[] = [
   { label: 'Services', href: '/services' },
-  { label: 'Investing & Trading', href: '/learn' },
   { label: 'Tools', href: '/tools' },
   { label: 'Insights', href: '/insights' },
+  { label: 'Investing & Trading', href: '/learn' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
   { label: 'Substack', href: 'https://cloudandcapital.substack.com', external: true },
@@ -236,19 +236,21 @@ export const events = [
 export const about = {
   name: 'Diana Molski',
   founderLabel: 'Founder, Cloud & Capital',
-  headingLead: 'Hi, I’m Diana.',
-  headingMiddle: 'I like a good',
-  headingItalic: 'money question.',
+  heading: 'Hi, I’m Diana.',
   biography: [
-    'I started out as a beauty advisor, then worked in pet salons. I began following the markets in 2020, earned a finance degree, and later worked in wealth management at Morgan Stanley.',
-    'Today I help growing tech teams understand cloud, AI, and software costs, and service businesses improve recurring reporting and put useful tools to work. I also build free tools, write Markets & Mimosas, and teach investing and trading concepts through worked examples.',
+    'I’m a mom, a lifelong internet nerd, and almost always in the middle of building something. I love a good rabbit hole, especially one that ends with something I can share.',
+    'I started out in beauty and pet salons before earning a finance degree and working in wealth management at Morgan Stanley. These days, my curiosity takes me into finance, AI, and what technology actually costs.',
+    'Through Cloud & Capital, I help small businesses and growing tech teams understand their technology spending, simplify repetitive work, and build tools that fit how they work.',
+    'I also share free tools and write Markets & Mimosas, my newsletter about money, markets, and technology. There’s room here for what I’ve learned and the questions I’m still working through.',
+    'I’m the daughter of Polish immigrants, born and raised in LA’s South Bay, where I still live with my teenage son and our dog, Myszka.',
+    'Have a look around. Try a tool, read something, or say hello.',
   ],
   credentials: [
     { category: 'BOOKKEEPING', detail: 'Intuit Certified Bookkeeping Professional' },
     { category: 'FINOPS', detail: 'FinOps Certified Practitioner · FinOps Certified FOCUS Analyst' },
     { category: 'CLOUD + AI', detail: 'AWS Certified Cloud Practitioner · Microsoft Azure AI Fundamentals' },
     { category: 'GOVERNANCE', detail: 'Stacklet FinOps Governance for Cloud & AI' },
-    { category: 'AI BUILDING', detail: 'Claude Partner Badge · Claude Code' },
+    { category: 'AI', detail: 'Claude Code, OpenAI Codex' },
   ],
   recognition: 'PointFive Cloud Efficiency Hub',
   recognitionUrl:

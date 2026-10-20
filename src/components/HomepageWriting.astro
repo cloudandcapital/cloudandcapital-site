@@ -1,0 +1,221 @@
+---
+import ActionLabel from './ActionLabel.astro';
+import { homepageWriting, newsletter } from '../data/siteContent';
+
+const subscribeHref = `${newsletter.subscribeHref.replace(/\/$/, '')}/subscribe`;
+---
+
+<section class="writing-section" id="writing" aria-labelledby="writing-title">
+  <div class="site-shell">
+    <header class="writing-heading" data-reveal>
+      <p class="writing-eyebrow">Writing</p>
+      <h2 id="writing-title">Markets, money, and what I’m learning as I build.</h2>
+    </header>
+
+    <div class="writing-grid">
+      {homepageWriting.map((article, index) => (
+        <a
+          class:list={['essay-card', { 'essay-featured': index === 0 }]}
+          href={article.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-reveal
+          data-analytics-event="cta_click"
+          data-analytics-destination="substack"
+          data-analytics-source="homepage_writing"
+        >
+          <div class="essay-copy">
+            <p class="essay-kicker">{index === 0 ? 'Featured essay' : index === 1 ? 'Latest' : 'Previously'}</p>
+            <p class="essay-meta">{article.topic.replace(' · Issue No. 1', '').replace(' · Issue no. 1', '')} · {article.date}</p>
+            <h3>{article.title}</h3>
+            <p class="essay-description">{article.description}</p>
+            <div class="essay-read"><ActionLabel label="Read" /></div>
+          </div>
+          {index === 0 && (
+            <div class="decision-artwork" role="img" aria-label="What gets built, what gets locked in, and what becomes the default.">
+              <svg class="decision-linework" viewBox="0 0 500 360" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M 58 12 V 148 M 58 208 V 348 M 390 0 V 125 M 390 185 V 360 M 0 98 H 315 M 125 168 H 500" />
+                <path d="M 0 280 H 306 M 245 334 H 500" />
+              </svg>
+              <div class="decision-terms" aria-hidden="true">
+                <div class="decision-term decision-built"><span>What gets</span><strong>Built</strong></div>
+                <div class="decision-term decision-locked"><span>What gets</span><strong>Locked in</strong></div>
+                <div class="decision-term decision-default"><span>What becomes the</span><strong>Default</strong></div>
+              </div>
+            </div>
+          )}
+        </a>
+      ))}
+    </div>
+
+    <div class="writing-subscribe">
+      <a
+        href={subscribeHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-analytics-event="cta_click"
+        data-analytics-destination="substack"
+        data-analytics-source="homepage_writing"
+      >
+        <img src="https://substack.com/img/substack.png" alt="" width="28" height="28" loading="lazy" decoding="async" />
+        <ActionLabel label="Subscribe on Substack" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .writing-section {
+    padding-block: clamp(4.25rem, 6vw, 5.6rem);
+    border-top: 1px solid rgba(36, 35, 31, .1);
+    background: #fbfaf7;
+    scroll-margin-top: 5rem;
+  }
+  .writing-heading h2 {
+    margin-top: .9rem;
+    font: 400 clamp(2.65rem, 4.3vw, 4.3rem)/1.02 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: -.035em;
+    text-wrap: balance;
+  }
+  .writing-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    color: #4f7567;
+    font: 400 .61rem/1.5 'DM Mono', monospace;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .writing-eyebrow::after {
+    content: '';
+    width: 2.7rem;
+    height: 1px;
+    background: currentColor;
+    opacity: .42;
+  }
+  .writing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: clamp(2.5rem, 4vw, 3.5rem);
+    border-block: 1px solid rgba(49, 62, 54, .25);
+  }
+  .essay-card {
+    display: block;
+    min-width: 0;
+    color: inherit;
+    text-decoration: none;
+    transition: background-color 200ms ease;
+  }
+  .essay-card:nth-child(2) { border-right: 1px solid rgba(49, 62, 54, .2); }
+  .essay-featured {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    border-bottom: 1px solid rgba(49, 62, 54, .2);
+    background: #f2eee6;
+  }
+  .essay-copy { min-width: 0; padding: clamp(1.5rem, 3vw, 2.5rem); }
+  .essay-kicker {
+    margin-bottom: .8rem;
+    color: #3d6055;
+    font: 400 .62rem/1.4 'DM Mono', monospace;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  .essay-meta {
+    color: #4f7167;
+    font: 400 .61rem/1.5 'DM Mono', monospace;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    text-wrap: pretty;
+  }
+  .essay-copy h3 {
+    margin-top: .85rem;
+    font: 400 clamp(1.85rem, 2.35vw, 2.25rem)/1.1 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: -.015em;
+    text-wrap: balance;
+  }
+  .essay-featured h3 { font-size: clamp(2.65rem, 4vw, 3.75rem); line-height: 1.02; }
+  .essay-description {
+    margin-top: 1rem;
+    color: #4a4a4a;
+    font-size: .9rem;
+    line-height: 1.7;
+    text-wrap: pretty;
+  }
+  .essay-featured .essay-description { max-width: 46ch; font-size: .95rem; }
+  .essay-read { width: fit-content; margin-top: .45rem; color: #3d6055; }
+  .essay-card:hover { background: #f8f5ef; }
+  .essay-featured:hover { background: #eee9df; }
+  .essay-card:focus-visible, .writing-subscribe a:focus-visible {
+    position: relative;
+    outline: 2px solid #3d6055;
+    outline-offset: 4px;
+  }
+
+  /* Flowing type gives the artwork its own height, independent of the other essays. */
+  .decision-artwork { position: relative; min-width: 0; padding: 1.75rem 2rem; }
+  .decision-linework {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: #536659;
+    stroke-width: .65;
+    opacity: .23;
+    pointer-events: none;
+  }
+  .decision-linework path:nth-child(2) { stroke: #4b4942; opacity: .5; stroke-width: .5; }
+  .decision-terms { position: relative; display: grid; gap: .85rem; width: fit-content; max-width: 100%; margin-inline: auto; }
+  .decision-term { display: flex; flex-direction: column; width: fit-content; text-transform: uppercase; }
+  .decision-term span { margin-bottom: .35rem; font: 500 clamp(.65rem, .8vw, .8rem)/1.3 'DM Mono', monospace; letter-spacing: .12em; }
+  .decision-term strong { font: 500 clamp(3.7rem, 5.7vw, 5.9rem)/.8 'Cormorant Garamond', Georgia, serif; letter-spacing: -.055em; white-space: nowrap; }
+  .decision-built { color: #3d6055; }
+  .decision-locked { margin-left: 2rem; color: #805751; }
+  .decision-locked strong { font-size: clamp(3.1rem, 4.8vw, 5rem); }
+  .decision-default { margin-left: 1rem; color: #4b4942; }
+  .decision-default strong { font-size: clamp(3.5rem, 5.3vw, 5.5rem); }
+  .decision-built strong, .decision-locked strong { opacity: .42; }
+  .decision-default strong { opacity: .36; }
+
+  .writing-subscribe { display: flex; justify-content: flex-start; margin-top: 1.25rem; }
+  .writing-subscribe a { display: inline-flex; align-items: center; gap: .8rem; color: #3d6055; text-decoration: none; }
+  .writing-subscribe img { flex: none; width: 28px; height: 28px; object-fit: contain; }
+  .writing-subscribe :global(.action-label) { font-size: .875rem; }
+  .essay-card :global(.action-arrow), .writing-subscribe :global(.action-arrow) { transition: transform 200ms ease; }
+  .essay-card:is(:hover, :focus-visible) :global(.action-arrow),
+  .writing-subscribe a:is(:hover, :focus-visible) :global(.action-arrow) { transform: translateX(4px); }
+  :global(.reveal-ready) [data-reveal] { opacity: 0; transform: translateY(1.1rem); transition: opacity .7s ease, transform .7s ease; }
+  :global(.reveal-ready) [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+
+  @media (min-width: 761px) {
+    /* The SVG's left rule is at x=58 of 500: move it onto the shared column boundary. */
+    .decision-artwork { transform: translateX(-11.6%); }
+  }
+  @media (max-width: 1020px) and (min-width: 761px) {
+    .decision-artwork { padding-inline: 1.25rem; }
+    .decision-term strong { font-size: 6.4vw; }
+    .decision-locked { margin-left: 1rem; }
+    .decision-locked strong { font-size: 5.25vw; }
+    .decision-default strong { font-size: 6vw; }
+  }
+  @media (max-width: 760px) {
+    .writing-grid, .essay-featured { grid-template-columns: minmax(0, 1fr); }
+    .essay-card:nth-child(2) { border-right: 0; border-bottom: 1px solid rgba(49, 62, 54, .2); }
+    .essay-copy { padding: 1.75rem 1.5rem; }
+    .essay-featured h3 { font-size: clamp(2.65rem, 7.5vw, 3.75rem); }
+    .decision-artwork { padding: 0 1.5rem 1.75rem; }
+    .decision-terms { gap: .75rem; }
+    .decision-term strong { font-size: clamp(3.7rem, 13vw, 5.3rem); }
+    .decision-locked { margin-left: 1.25rem; }
+    .decision-locked strong { font-size: clamp(3rem, 11vw, 4.5rem); }
+    .decision-default strong { font-size: clamp(3.5rem, 12.5vw, 5rem); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .essay-card { transition: none; }
+    .essay-card :global(.action-arrow), .writing-subscribe :global(.action-arrow) { transition: none; transform: none; }
+    :global(.reveal-ready) [data-reveal] { opacity: 1; transform: none; transition: none; }
+  }
+</style>

@@ -1,5 +1,5 @@
 ---
-import '@fontsource/caveat/latin-500.css';
+import '@fontsource/caveat/latin-400.css';
 import { about } from '../data/siteContent';
 import ActionLabel from './ActionLabel.astro';
 ---
@@ -13,12 +13,17 @@ import ActionLabel from './ActionLabel.astro';
 
       <div class="diana-visual" data-reveal>
         <div class="diana-photo-cluster">
-          <img class="diana-portrait" src="/images/diana-molski-portrait.png" alt="Diana Molski" width="820" height="806" loading="lazy" decoding="async" />
+          <figure class="diana-polaroid diana-me">
+            <div class="diana-photo-window">
+              <img src="/images/diana-molski-portrait.png" alt="Diana Molski" width="820" height="806" loading="lazy" decoding="async" />
+            </div>
+            <figcaption>Diana</figcaption>
+          </figure>
           <figure class="diana-polaroid diana-myszka">
             <div class="diana-photo-window">
               <img src="/images/myszka-about.webp" alt="Myszka looking over her shoulder while curled up on a bed" width="901" height="1600" loading="lazy" decoding="async" />
             </div>
-            <figcaption><span class="diana-caption-name">Myszka <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20S3 14 3 8.5C3 3.8 9 2.7 12 7c3-4.3 9-3.2 9 1.5C21 14 12 20 12 20Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></span><small>my little mouse</small></figcaption>
+            <figcaption><span class="diana-caption-name">Myszka <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20S3 14 3 8.5C3 3.8 9 2.7 12 7c3-4.3 9-3.2 9 1.5C21 14 12 20 12 20Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></span><small>Polish for “little mouse”</small></figcaption>
           </figure>
           <figure class="diana-polaroid diana-beach">
             <div class="diana-photo-window">
@@ -37,13 +42,12 @@ import ActionLabel from './ActionLabel.astro';
         </div>
         <aside class="diana-community" aria-labelledby="diana-community-title">
           <a class="diana-event-image" href="/images/event-poster-vol01.png" target="_blank" rel="noopener noreferrer" aria-label="View the flyer for Diana’s April 2026 FinOps Weekly Los Angeles meetup">
-            <img src="/images/finops-weekly-la-flyer.webp" alt="" width="320" height="320" loading="lazy" decoding="async" />
+            <img src="/images/event-poster-vol01.png" alt="Using AI to Put the Ops in FinOps, hosted by Diana Molski" width="1200" height="1200" loading="lazy" decoding="async" />
           </a>
           <div class="diana-event-copy">
             <p class="diana-event-date">April 9, 2026 · Hawthorne</p>
             <h3 id="diana-community-title">A little community, too.</h3>
-            <p>I organized and hosted the first FinOps Weekly Los Angeles meetup, bringing together people working in finance, cloud, and AI.</p>
-            <a class="diana-event-link" href="/images/event-poster-vol01.png" target="_blank" rel="noopener noreferrer"><ActionLabel label="See the event flyer" /></a>
+            <p>I organized and hosted LA’s first FinOps Weekly meetup with SmartClouds, featuring speakers from Ulta Beauty and Wiv.ai.</p>
           </div>
         </aside>
       </div>
@@ -60,6 +64,7 @@ import ActionLabel from './ActionLabel.astro';
           <dd><a class="diana-contribution" href={about.recognitionUrl} target="_blank" rel="noopener noreferrer"><ActionLabel label={about.recognition} /></a></dd>
         </div>
       </dl>
+      <p class="diana-build-tools"><span>Tools I build with</span>Claude Code · OpenAI Codex</p>
     </div>
   </div>
 </section>
@@ -67,42 +72,45 @@ import ActionLabel from './ActionLabel.astro';
 <style>
   .diana-about { padding: clamp(4.5rem, 7vw, 6.25rem) 0; background: #3d6055; color: #faf6ef; scroll-margin-top: 5rem; }
   .diana-shell { width: min(calc(100% - 4rem), 78rem); margin-inline: auto; }
-  .diana-grid { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); grid-template-areas: 'photos intro' 'photos story'; column-gap: clamp(3rem, 6vw, 5.5rem); align-items: start; }
+  .diana-grid { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); grid-template-areas: 'photos intro' 'photos story'; grid-template-rows: auto 1fr; column-gap: clamp(3rem, 6vw, 5.5rem); align-items: start; }
   .diana-intro { grid-area: intro; margin-bottom: 1.5rem; }
   .diana-eyebrow { margin: 0; color: #d1dfd6; font: 400 .61rem/1.5 'DM Mono', monospace; letter-spacing: .14em; text-transform: uppercase; }
   .diana-intro h2 { margin: .85rem 0 0; color: #faf6ef; font: 400 clamp(3.3rem, 5vw, 4.5rem)/1 'Cormorant Garamond', Georgia, serif; letter-spacing: -.035em; }
   .diana-visual { grid-area: photos; align-self: center; min-width: 0; }
-  .diana-photo-cluster { position: relative; isolation: isolate; width: min(100%, 27rem); aspect-ratio: .72; margin-inline: auto; }
-  .diana-portrait { position: absolute; z-index: 1; top: 1%; left: 18%; display: block; width: 64%; height: auto; aspect-ratio: 1; object-fit: cover; border: 2px solid #f5eee9cc; border-radius: 50%; box-shadow: 0 18px 32px -14px #142f2780; }
-  .diana-polaroid { --photo-tilt: -7deg; position: absolute; z-index: 2; box-sizing: border-box; width: 55%; margin: 0; padding: clamp(.5rem, 1vw, .7rem); border: 1px solid #fffefa; border-radius: 2px; background: #faf6ef; color: #2f2927; box-shadow: 1px 2px 0 #d9d1c4, 3px 4px 0 #e6dfd3, 0 18px 28px -9px #122a25a6; transform: rotate(var(--photo-tilt)); }
-  .diana-myszka { top: 39%; left: -1%; }
-  .diana-beach { --photo-tilt: 7deg; z-index: 3; top: 43%; right: -1%; }
+  .diana-photo-cluster { position: relative; isolation: isolate; width: min(100%, 27rem); aspect-ratio: .58; margin-inline: auto; }
+  .diana-polaroid { --photo-tilt: -7deg; position: absolute; z-index: 2; box-sizing: border-box; width: 52%; margin: 0; padding: clamp(.5rem, 1vw, .7rem); border: 1px solid #fffefa; border-radius: 2px; background: #faf6ef; color: #2f2927; box-shadow: 1px 2px 0 #d9d1c4, 3px 4px 0 #e6dfd3, 0 18px 28px -9px #122a25a6; transform: rotate(var(--photo-tilt)); }
+  .diana-me { --photo-tilt: -3deg; z-index: 1; top: 1%; left: 15%; width: 70%; }
+  .diana-me .diana-photo-window img { object-position: 50% 46%; }
+  .diana-myszka { top: 54%; left: -1%; }
+  .diana-beach { --photo-tilt: 7deg; z-index: 3; top: 57%; right: -1%; }
   .diana-photo-window { overflow: hidden; aspect-ratio: 1; background: #e7e4db; }
   .diana-photo-window img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .diana-myszka .diana-photo-window img { object-position: 50% 42%; }
+  .diana-myszka .diana-photo-window img, .diana-beach .diana-photo-window img { filter: sepia(.12) saturate(.9) contrast(.98) brightness(1.02); }
   .diana-beach .diana-photo-window img { object-position: 50% 35%; }
-  .diana-polaroid figcaption { min-height: 2.7rem; padding: .65rem .1rem .2rem; font: 500 clamp(1.4rem, 2.5vw, 1.85rem)/1 'Caveat', 'Segoe Print', 'Bradley Hand', cursive; text-align: center; }
+  .diana-polaroid figcaption { min-height: 2.7rem; padding: .65rem .1rem .2rem; font: 400 clamp(1.4rem, 2.5vw, 1.85rem)/1 'Caveat', 'Segoe Print', 'Bradley Hand', cursive; font-synthesis: none; text-align: center; }
   .diana-caption-name { display: inline-flex; align-items: center; gap: .35rem; }
   .diana-caption-name svg { flex: none; width: .65em; height: .65em; color: #9b5d62; transform: rotate(-8deg); }
-  .diana-polaroid small { display: block; margin-top: .35rem; color: #625b54; font: 400 .55rem/1.4 'DM Mono', monospace; letter-spacing: .015em; }
-  .diana-heart { position: absolute; z-index: 4; top: 41%; right: -4%; display: block; width: 24%; height: auto; transform: rotate(14deg); filter: drop-shadow(0 7px 7px #17291e66); pointer-events: none; user-select: none; }
+  .diana-polaroid small { display: block; margin-top: .35rem; color: #625b54; font: 400 .55rem/1.4 'DM Mono', monospace; letter-spacing: .015em; text-wrap: balance; }
+  .diana-heart { position: absolute; z-index: 4; top: 55%; right: -4%; display: block; width: 24%; height: auto; transform: rotate(14deg); filter: drop-shadow(0 7px 7px #17291e66); pointer-events: none; user-select: none; }
   .diana-location { margin: .55rem 0 0; color: #e0e8e2; font: 400 .58rem/1.6 'DM Mono', monospace; letter-spacing: .035em; text-align: center; }
   .diana-story { grid-area: story; min-width: 0; }
   .diana-biography p { max-width: 64ch; margin: 1.05rem 0 0; color: #f3f0e9; font-size: .95rem; line-height: 1.75; }
   .diana-biography p:first-child { margin-top: 0; }
-  .diana-community { display: grid; grid-template-columns: 5.25rem minmax(0, 1fr); align-items: start; gap: 1.2rem; margin-top: 1.8rem; padding-top: 1.6rem; border-top: 1px solid #f5eee92e; }
+  .diana-community { display: grid; grid-template-columns: clamp(9rem, 13vw, 11rem) minmax(0, 1fr); align-items: start; gap: 1.2rem; margin-top: 1.8rem; padding-top: 1.6rem; border-top: 1px solid #f5eee92e; }
   .diana-event-image { display: block; border: 1px solid #f5eee966; border-radius: 6px; overflow: hidden; box-shadow: 0 8px 16px -8px #162e27b3; transform: rotate(-3deg); }
   .diana-event-image img { display: block; width: 100%; height: auto; }
   .diana-event-date { margin: 0; color: #d1dfd6; font: 400 .55rem/1.6 'DM Mono', monospace; letter-spacing: .035em; }
   .diana-event-copy h3 { margin: .4rem 0; color: #faf6ef; font: italic 400 1.75rem/1.1 'Cormorant Garamond', Georgia, serif; }
   .diana-event-copy > p:last-of-type { margin: .6rem 0 .35rem; color: #e8eee7; font-size: .82rem; line-height: 1.65; }
-  .diana-event-link { display: inline-flex; align-items: center; min-height: 44px; color: #faf6ef; text-decoration: none; }
   .diana-credentials { margin-top: clamp(2.75rem, 5vw, 4rem); padding-top: 1.6rem; border-top: 1px solid #f5eee947; }
   .diana-credentials dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; margin: .8rem 0 0; }
   .diana-credential { display: grid; grid-template-columns: 7.7rem minmax(0, 1fr); align-items: baseline; gap: .75rem; padding: .8rem 0; border-bottom: 1px solid #f5eee926; }
   .diana-credential dt { color: #cbdad0; font: 400 .58rem/1.6 'DM Mono', monospace; letter-spacing: .05em; }
   .diana-credential dd { margin: 0; color: #edf1ea; font-size: .79rem; line-height: 1.6; }
   .diana-contribution { display: inline-flex; max-width: 100%; min-height: 32px; align-items: center; color: #edf1ea; text-decoration: none; }
+  .diana-build-tools { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1.2rem; margin: 1.3rem 0 0; color: #edf1ea; font-size: .79rem; line-height: 1.6; }
+  .diana-build-tools > span { color: #cbdad0; font: 400 .58rem/1.6 'DM Mono', monospace; letter-spacing: .05em; text-transform: uppercase; }
   .diana-about a:focus-visible { outline: 2px solid #f2c8c9; outline-offset: 5px; }
   @media (hover: hover) and (prefers-reduced-motion: no-preference) {
     .diana-polaroid { transition: transform 240ms ease, box-shadow 240ms ease; }
@@ -111,16 +119,15 @@ import ActionLabel from './ActionLabel.astro';
   @media (max-width: 1020px) and (min-width: 761px) {
     .diana-grid { grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); column-gap: 2.5rem; }
     .diana-visual { align-self: start; margin-top: 2rem; }
-    .diana-polaroid { width: 59%; }
     .diana-myszka { left: -3%; }
-    .diana-beach { right: -3%; top: 46%; }
-    .diana-photo-cluster { aspect-ratio: .65; }
+    .diana-beach { right: -3%; }
+    .diana-photo-cluster { aspect-ratio: .55; }
     .diana-location { font-size: .52rem; }
     .diana-credential { grid-template-columns: 1fr; gap: .3rem; }
   }
   @media (max-width: 760px) {
     .diana-shell { width: min(calc(100% - 2.5rem), 40rem); }
-    .diana-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'intro' 'photos' 'story'; gap: 0; }
+    .diana-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'intro' 'photos' 'story'; grid-template-rows: auto auto auto; gap: 0; }
     .diana-intro { margin-bottom: 1.75rem; }
     .diana-intro h2 { font-size: clamp(3.15rem, 12vw, 4.25rem); }
     .diana-visual { width: min(100%, 25rem); margin-inline: auto; }
@@ -132,8 +139,12 @@ import ActionLabel from './ActionLabel.astro';
     .diana-credentials dl { grid-template-columns: minmax(0, 1fr); }
     .diana-credential { grid-template-columns: 7.7rem minmax(0, 1fr); }
   }
+  @media (max-width: 560px) {
+    .diana-community { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
+    .diana-event-image { width: 11rem; }
+  }
   @media (max-width: 380px) {
-    .diana-community { grid-template-columns: 4.25rem minmax(0, 1fr); gap: 1rem; }
+    .diana-photo-cluster { aspect-ratio: .55; }
     .diana-credential { grid-template-columns: 1fr; gap: .3rem; }
     .diana-polaroid small { font-size: .49rem; }
   }

@@ -73,6 +73,16 @@ Diana identified software renewal as duplicated and reminded us that the pipelin
 
 The Coming soon copy is a concise proposal for the page, not a locked feature specification. Existing Market Tape research/upgrades stay with their owner and do not become a duplicate tool. No new application, financial calculation, login, bank connection or agent integration was built in this website pass.
 
+### Topic palettes, centered actions and full tool audit
+
+Diana’s next screenshot review approved the direction but identified the Interactive Lab thumbnail frame and asked for selected topics to show only their matching tools in a consistent color. The subsequent request centers the tool buttons. A check of the previous actual built HTML/script/CSS confirmed correct membership; category colors were missing because they were fixed to each individual card.
+
+This repair gives each topic a palette: Tech spending uses sage, Money & investing uses sand/beige, and AI & automation uses clay pink. The selected palette applies to both released and Coming soon cards, including their preview, light body tint, border and accents. View all restores each card’s original tone. Topic controls and tool action/companion links are centered. Ready-tool screenshot frames share an aspect ratio and contain the full image; the taller Lab capture no longer defines a deeper preview region. Replacing the actual screenshots remains part of the app audit after each UI is accepted.
+
+All 78 tests and the production build passed. A new standalone built-page integration check tests the rendered HTML, actual filtering script and CSS, matching membership/palettes, focus, View all restoration, hidden cards, centered actions and shared preview rules. It does not certify visual desktop/mobile/Safari layouts. Run it after the build with `node scripts/verify-tools-directory.mjs`.
+
+Diana also requested a thorough audit with Codex and Claude of every tool/resource for usefulness, working inputs/results, calculations, recovery, accessibility/mobile and better real screenshots. The inventory, responsibilities, evidence and acceptance steps are in `docs/design/tool-audit-plan.md`. The first tool is Interactive Lab. The connected Claude review currently rejects supported requests with INVALID_ARGUMENT; no critique was returned, so Claude’s review and the full app audits remain pending. Do not confuse the completed directory checks with app acceptance.
+
 ## Remaining-page order
 
 | Order | Page | Main work | Ready when |

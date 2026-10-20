@@ -23,10 +23,10 @@ export type DirectoryTool = {
 
 export type ToolTopic = 'tech-spending' | 'money-investing' | 'ai-automation';
 
-export const toolTopics: { id: ToolTopic; label: string }[] = [
-  { id: 'tech-spending', label: 'Tech spending' },
-  { id: 'money-investing', label: 'Money & investing' },
-  { id: 'ai-automation', label: 'AI & automation' },
+export const toolTopics: { id: ToolTopic; label: string; tone: DirectoryTool['tone'] }[] = [
+  { id: 'tech-spending', label: 'Tech spending', tone: 'sage' },
+  { id: 'money-investing', label: 'Money & investing', tone: 'sand' },
+  { id: 'ai-automation', label: 'AI & automation', tone: 'rose' },
 ];
 
 function releasedTool(slug: string) {

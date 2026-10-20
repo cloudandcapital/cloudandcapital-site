@@ -7,12 +7,18 @@ export function initToolDirectory(root) {
   const cards = [...root.querySelectorAll('[data-tool-item]')];
   if (!controls || !status || !buttons.length) return;
 
-  function selectTopic(topic, label) {
+  function selectTopic(topic, label, tone) {
+    root.dataset.activeTopic = topic;
     let ready = 0;
     let upcoming = 0;
     for (const card of cards) {
       const matches = topic === 'all' || card.dataset.toolTopics.split(' ').includes(topic);
       card.hidden = !matches;
+      const visual = card.querySelector('[data-tone]');
+      if (visual) {
+        if (tone === 'sage' || tone === 'sand' || tone === 'rose') visual.dataset.filterTone = tone;
+        else delete visual.dataset.filterTone;
+      }
       if (matches) {
         if (card.hasAttribute('data-tool-upcoming')) upcoming += 1;
         else ready += 1;
@@ -27,10 +33,10 @@ export function initToolDirectory(root) {
 
   for (const button of buttons) {
     button.addEventListener('click', () => {
-      selectTopic(button.dataset.toolFilter, button.querySelector('span').textContent);
+      selectTopic(button.dataset.toolFilter, button.querySelector('span').textContent, button.dataset.toolTone);
     });
   }
   root.dataset.directoryReady = 'true';
   controls.hidden = false;
-  selectTopic('all', 'View all');
+  selectTopic('all', 'View all', 'all');
 }

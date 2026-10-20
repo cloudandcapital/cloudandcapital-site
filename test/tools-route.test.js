@@ -53,11 +53,11 @@ test('directory opens released tools, preserves source links and has real screen
 
 test('topic filters show each tool once, include upcoming work and restore View all', () => {
   const entries = [...directoryTools, ...upcomingTools];
-  const filters = [{ id: 'all', label: 'View all' }, ...toolTopics];
+  const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
   const dom = new JSDOM(`<section data-tool-directory>
-    <div data-tool-filters hidden>${filters.map(topic => `<button type="button" data-tool-filter="${topic.id}"><span>${topic.label}</span></button>`).join('')}</div>
+    <div data-tool-filters hidden>${filters.map(topic => `<button type="button" data-tool-filter="${topic.id}" data-tool-tone="${topic.tone}"><span>${topic.label}</span></button>`).join('')}</div>
     <p data-tool-status role="status"></p>
-    <ul>${entries.map(tool => `<li data-tool-item data-tool-id="${tool.slug}" data-tool-topics="${tool.topics.join(' ')}" ${upcomingTools.includes(tool) ? 'data-tool-upcoming' : ''}>${tool.name}</li>`).join('')}</ul>
+    <ul>${entries.map(tool => `<li data-tool-item data-tool-id="${tool.slug}" data-tool-topics="${tool.topics.join(' ')}" ${upcomingTools.includes(tool) ? 'data-tool-upcoming' : ''}><article data-tone="${tool.tone}">${tool.name}</article></li>`).join('')}</ul>
   </section>`);
   const root = dom.window.document.querySelector('section');
   const cards = [...root.querySelectorAll('[data-tool-item]')];
@@ -79,11 +79,17 @@ test('topic filters show each tool once, include upcoming work and restore View 
     assert.equal(root.querySelectorAll('[aria-pressed="true"]').length, 1);
     assert.equal(button.getAttribute('aria-pressed'), 'true');
     assert.ok(status.textContent.startsWith(`${topic.label}: `));
+    assert.equal(root.dataset.activeTopic, topic.id);
+    for (const card of cards.filter(card => !card.hidden)) {
+      assert.equal(card.querySelector('article').dataset.filterTone, topic.tone);
+    }
   }
   assert.deepEqual(shown(), ['ai-cost-lens', 'interactive-lab', 'personal-ai-helper']);
   assert.equal(status.textContent, 'AI & automation: 2 tools to try · 1 coming soon');
   root.querySelector('[data-tool-filter="all"]').click();
   assert.equal(status.textContent, '6 tools to try · 4 coming soon');
+  assert.equal(root.dataset.activeTopic, 'all');
+  for (const card of cards) assert.equal(card.querySelector('article').dataset.filterTone, undefined);
   assert.equal(shown().length, entries.length);
   assert.equal(root.querySelectorAll('[data-tool-item]').length, entries.length);
   dom.window.close();

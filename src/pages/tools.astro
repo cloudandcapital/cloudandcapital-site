@@ -5,7 +5,7 @@ import DirectoryToolCard from '../components/DirectoryToolCard.astro';
 import { directoryTools, toolTopics, upcomingTools } from '../data/toolDirectory';
 
 const allEntries = [...directoryTools, ...upcomingTools];
-const filters = [{ id: 'all', label: 'View all' }, ...toolTopics];
+const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
 ---
 <BaseLayout title="Free Finance & Technology Tools | Cloud & Capital" description="Free tools for AI costs, cloud bills, software renewals, market context, and business decisions. See what each tool does, what to bring, and what you get.">
   <main id="main-content" class="tools-page">
@@ -34,7 +34,7 @@ const filters = [{ id: 'all', label: 'View all' }, ...toolTopics];
       <h2 id="library-title" class="visually-hidden">Browse the tools</h2>
       <div class="tool-topics" data-tool-filters role="group" aria-label="Choose a tool topic" hidden>
         {filters.map(filter => (
-          <button type="button" data-tool-filter={filter.id} aria-pressed={filter.id === 'all' ? 'true' : 'false'} aria-controls="tool-gallery">
+          <button type="button" data-tool-filter={filter.id} data-tool-tone={filter.tone} aria-pressed={filter.id === 'all' ? 'true' : 'false'} aria-controls="tool-gallery">
             <span>{filter.label}</span>
             <span class="topic-count" aria-hidden="true">{allEntries.filter(tool => filter.id === 'all' || tool.topics.some(topic => topic === filter.id)).length}</span>
           </button>
@@ -98,23 +98,28 @@ const filters = [{ id: 'all', label: 'View all' }, ...toolTopics];
   .folder-card-rose { z-index: 3; left: 30%; top: 15%; width: 74%; height: 74%; background-position: 100% 100%; }
   .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .tool-library { padding-bottom: clamp(3rem, 5vw, 4.5rem); }
-  .tool-topics { display: flex; flex-wrap: wrap; gap: .7rem; padding: 1.5rem 0; border-top: 1px solid #3d605529; }
+  .tool-topics { display: flex; justify-content: center; flex-wrap: wrap; gap: .7rem; padding: 1.5rem 0; border-top: 1px solid #3d605529; }
   .tool-topics[hidden], .directory-item[hidden] { display: none; }
-  .tool-topics button { --topic-surface: #e4e9df; --topic-border: #c2cdbb; display: inline-flex; align-items: center; justify-content: center; gap: 1rem; min-height: 58px; padding: .75rem 1.35rem; border: 1px solid var(--topic-border); border-radius: 14px; background: var(--topic-surface); color: #343d35; font: 500 1rem/1.4 'Jost', system-ui, sans-serif; cursor: pointer; box-shadow: 0 3px 0 -1px var(--topic-border); transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease; }
-  .tool-topics button[data-tool-filter="all"] { --topic-surface: #fcfbf8; --topic-border: #ccc5bb; }
-  .tool-topics button[data-tool-filter="money-investing"] { --topic-surface: #eadfce; --topic-border: #cfc0aa; }
-  .tool-topics button[data-tool-filter="ai-automation"] { --topic-surface: #e8d0cc; --topic-border: #c5a09b; }
-  .tool-topics button[aria-pressed="true"] { border-color: var(--brand-green); background: var(--brand-green); color: #fff; box-shadow: 0 3px 0 -1px #29453c, 0 8px 18px -12px #29453c80; }
-  .tool-topics button:hover { border-color: #3d6055; box-shadow: 0 3px 0 -1px #3d6055; }
+  .tool-topics button { --topic-surface: #e4e9df; --topic-border: #c2cdbb; --topic-ink: #3d6055; display: inline-flex; align-items: center; justify-content: center; gap: 1rem; min-height: 58px; padding: .75rem 1.35rem; border: 1px solid var(--topic-border); border-radius: 14px; background: var(--topic-surface); color: var(--topic-ink); font: 500 1rem/1.4 'Jost', system-ui, sans-serif; cursor: pointer; box-shadow: 0 3px 0 -1px var(--topic-border); transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease; }
+  .tool-topics button[data-tool-filter="all"] { --topic-surface: #fcfbf8; --topic-border: #ccc5bb; --topic-ink: #24211e; }
+  .tool-topics button[data-tool-filter="money-investing"] { --topic-surface: #eadfce; --topic-border: #cfc0aa; --topic-ink: #675844; }
+  .tool-topics button[data-tool-filter="ai-automation"] { --topic-surface: #e8d0cc; --topic-border: #c5a09b; --topic-ink: #785752; }
+  .tool-topics button[aria-pressed="true"] { border-color: var(--topic-ink); box-shadow: 0 0 0 1px var(--topic-ink), 0 3px 0 -1px var(--topic-ink); }
+  .tool-topics button[data-tool-filter="all"][aria-pressed="true"] { background: var(--brand-ink); color: #fff; }
+  .tool-topics button:hover { border-color: var(--topic-ink); box-shadow: 0 3px 0 -1px var(--topic-ink); }
   .topic-count { display: grid; place-items: center; flex: none; min-width: 1.55rem; height: 1.55rem; border-radius: 50%; background: #ffffff8a; color: #42473e; font: 400 .72rem/1 'DM Mono', monospace; }
-  .tool-topics button[aria-pressed="true"] .topic-count { background: #ffffff24; color: #fff; }
-  .library-status { padding: .6rem 0 1.4rem; color: #585a51; font-size: .875rem; }
+  .tool-topics button[aria-pressed="true"] .topic-count { background: var(--topic-ink); color: #fff; }
+  .tool-topics button[data-tool-filter="all"][aria-pressed="true"] .topic-count { background: #ffffff24; }
+  .library-status { text-align: center; padding: .6rem 0 1.4rem; color: #585a51; font-size: .875rem; }
   .directory-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; padding: 0; list-style: none; }
   .directory-item { display: flex; min-width: 0; }
   .directory-item > :global(*) { width: 100%; }
-  .upcoming-card { --upcoming-surface: #e8d0cc; --upcoming-ink: #5d453e; display: flex; flex-direction: column; width: 100%; min-width: 0; overflow: hidden; border: 1px solid #d6bcb5; border-radius: 16px; background: #fcfbf8; }
+  .upcoming-card { --upcoming-surface: #e8d0cc; --upcoming-ink: #5d453e; --upcoming-body: #fcfbf8; display: flex; flex-direction: column; width: 100%; min-width: 0; overflow: hidden; border: 1px solid #d6bcb5; border-radius: 16px; background: var(--upcoming-body); }
   .upcoming-card[data-tone="sage"] { --upcoming-surface: #e4e9df; --upcoming-ink: #3d6055; border-color: #c2cdbb; }
   .upcoming-card[data-tone="sand"] { --upcoming-surface: #eadfce; --upcoming-ink: #675844; border-color: #d3c6b1; }
+  .upcoming-card[data-filter-tone="sage"] { --upcoming-surface: #e4e9df; --upcoming-ink: #3d6055; --upcoming-body: #f0f3ec; border-color: #c2cdbb; }
+  .upcoming-card[data-filter-tone="sand"] { --upcoming-surface: #eadfce; --upcoming-ink: #675844; --upcoming-body: #f6f0e6; border-color: #d3c6b1; }
+  .upcoming-card[data-filter-tone="rose"] { --upcoming-surface: #eddbd6; --upcoming-ink: #785752; --upcoming-body: #f6eae7; border-color: #d6b8b2; }
   .upcoming-preview { position: relative; display: flex; flex-direction: column; justify-content: center; aspect-ratio: 1.85; padding: 1.5rem; overflow: hidden; background: var(--upcoming-surface); }
   .upcoming-preview > p { color: var(--upcoming-ink); font: 400 clamp(2.25rem, 3.5vw, 3.25rem)/.95 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; }
   .upcoming-sparkle { position: absolute; right: 1.5rem; bottom: 1.25rem; color: var(--upcoming-ink); opacity: .6; font-size: 3.25rem; line-height: 1; }

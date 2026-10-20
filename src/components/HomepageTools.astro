@@ -36,6 +36,7 @@ const choices = [
     <div class="tools-more" data-reveal>
       <span class="tools-folder" aria-hidden="true">
         <img class="tools-folder-static" src="/images/tools-folder-3d.webp" alt="" width="512" height="512" loading="lazy" decoding="async" />
+        <span class="tools-folder-layer folder-back"></span>
         <span class="tools-folder-layer folder-card folder-card-sage"></span>
         <span class="tools-folder-layer folder-card folder-card-ivory"></span>
         <span class="tools-folder-layer folder-card folder-card-rose"></span>
@@ -82,10 +83,13 @@ const choices = [
   .tool-choice:last-child:hover { background-color: #fdf7f4; border-color: #b48c82; }
   .tool-choice:focus-visible, .tools-more a:focus-visible { outline: 3px solid #89534f; outline-offset: 4px; }
   .tools-more { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid #3d605526; text-align: center; }
-  .tools-folder { position: relative; display: block; isolation: isolate; flex: none; width: clamp(7.5rem, 11vw, 9rem); aspect-ratio: 1; margin-top: -.35rem; margin-bottom: -.6rem; pointer-events: none; user-select: none; }
+  .tools-folder { position: relative; display: block; isolation: isolate; flex: none; width: clamp(7.5rem, 11vw, 9rem); aspect-ratio: 1; margin-top: -.35rem; margin-bottom: .5rem; pointer-events: none; user-select: none; }
   .tools-folder-static { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
   .tools-folder-layer { display: none; position: absolute; background-image: url('/images/tools-folder-layers.webp'); background-size: 200% 200%; background-repeat: no-repeat; }
-  .folder-body { z-index: 4; left: 5%; top: 17%; width: 90%; height: 90%; background-position: 0 0; }
+  .folder-back, .folder-body { left: 5%; top: 17%; width: 90%; height: 90%; background-position: 0 0; }
+  .folder-back { z-index: 0; }
+  /* Keep the rear wall behind the cards and only the curved front lip above them. */
+  .folder-body { z-index: 4; clip-path: polygon(0% 0%, 14% 0%, 14% 28%, 16% 31%, 18% 35%, 20% 39%, 21% 44%, 22% 46.5%, 24% 44%, 27% 42.5%, 31% 41%, 42% 40.5%, 46% 40.5%, 49% 41.5%, 52% 44.5%, 55% 49%, 58% 53%, 60% 54.7%, 63% 55%, 69% 54.2%, 76% 53%, 79% 52.5%, 82% 51.3%, 84% 49%, 86% 46%, 88% 44%, 91% 43%, 96% 42%, 100% 42%, 100% 100%, 0% 100%); }
   .folder-card { transform-origin: 50% 85%; }
   .folder-card-sage { --card-lift: -.4rem; --card-roll: -1deg; z-index: 1; left: 0; top: 0; width: 75%; height: 75%; background-position: 100% 0; clip-path: inset(0 0 0 7%); animation-delay: .15s; }
   .folder-card-ivory { --card-lift: -.55rem; --card-roll: .8deg; z-index: 2; left: 12%; top: 5%; width: 80%; height: 80%; background-position: 0 100%; animation-delay: .8s; }

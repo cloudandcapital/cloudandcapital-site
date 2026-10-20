@@ -40,3 +40,7 @@ BOTTOM RIGHT CELL: the rose-glass clay pink card ONLY in its original right/fron
 Each isolated card should extend behind where the cream foreground folder lip will be when the cells are stacked; do not crop cards off at the lip. Keep ALL four objects entirely within their own cells with transparent edge margins. Use genuine RGBA transparency across all empty regions. No backdrop, shadow rectangle, labels, grid, button, or website mockup. No repeated assembled folder in any cell. This is four separate pieces of ONE existing illustration for independent vertical card movement.
 ```
 
+
+## Folder depth and button spacing
+
+The folder sprite now renders twice: a complete rear layer below the three moving cards, and a foreground copy masked along the curved front lip and left rim. This places the cards inside the opening rather than behind the folder's rear wall. Both stationary copies use the same atlas cell and exact position, so their lighting and edges align. The art has an 8px bottom margin plus the CTA's 16px flex gap, leaving about 20px of visual clearance above the button after the folder's slight visual overhang.

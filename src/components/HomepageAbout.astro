@@ -3,7 +3,7 @@ import '@fontsource/caveat/latin-400.css';
 import { about } from '../data/siteContent';
 import ActionLabel from './ActionLabel.astro';
 import FlowText from './FlowText.astro';
-import ClaudePartnerBadge from './ClaudePartnerBadge.astro';
+import FeaturedCredentials from './FeaturedCredentials.astro';
 ---
 <section class="diana-about" id="about" aria-labelledby="about-title">
   <div class="diana-shell">
@@ -55,7 +55,7 @@ import ClaudePartnerBadge from './ClaudePartnerBadge.astro';
 
     <div class="diana-credentials" data-reveal>
       <p class="diana-eyebrow">Credentials &amp; contributions</p>
-      <ClaudePartnerBadge dark centered />
+      <FeaturedCredentials />
       <dl aria-label="Professional credentials">
         {about.credentials.map(credential => (
           <div class="diana-credential"><dt>{credential.category}</dt><dd>{credential.detail}</dd></div>

@@ -3,7 +3,6 @@ import '@fontsource/cormorant-garamond/latin-600.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import ServiceWatermark from '../components/ServiceWatermark.astro';
-import ServicesDeskArtwork from '../components/ServicesDeskArtwork.astro';
 import ActionLabel from '../components/ActionLabel.astro';
 import FlowText from '../components/FlowText.astro';
 import '../styles/services-page.css';
@@ -13,8 +12,8 @@ const offers = [
     id: 'technology-cost-review', kind: 'cost', number: '01',
     name: 'Technology Cost Review', nameLead: 'Technology', nameEnd: 'Cost Review',
     serviceType: 'Cloud, AI and software cost analysis',
-    question: ['Why does the bill', 'keep growing?'],
-    description: 'For cloud, AI, or software bills that are hard to explain. I’ll review what you’re paying for, what changed, and what deserves a closer look.',
+    description: 'Understand what you’re paying for across cloud, AI, and software, and why the bill changed.',
+    takeaway: 'A spending breakdown, the main cost drivers, and a prioritized list of next steps.',
     inputs: 'Recent bills or exports, plus the question you need answered.',
     deliverables: [
       'A spending breakdown that ties back to your records',
@@ -32,8 +31,8 @@ const offers = [
     id: 'workflow-review', kind: 'workflow', number: '02',
     name: 'AI & Workflow Review', nameLead: 'AI &', nameEnd: 'Workflow Review',
     serviceType: 'AI and workflow review',
-    question: ['Why does this take', 'so long?'],
-    description: 'For a task that keeps eating up your week: copying data, chasing updates, or rebuilding the same report. I’ll work through the process with you.',
+    description: 'Find a simpler way to handle a recurring task, from copying data to rebuilding the same report.',
+    takeaway: 'A map of the process and a plan for improving it, including whether AI or automation would help.',
     inputs: 'One recurring task, the tools involved, and a few redacted examples.',
     deliverables: [
       'A map of the process and where work gets stuck',
@@ -50,8 +49,8 @@ const offers = [
     id: 'practical-setup', kind: 'setup', number: '03',
     name: 'Tool & Automation Setup', nameLead: 'Tool &', nameEnd: 'Automation Setup',
     serviceType: 'Tool and automation setup',
-    question: ['Can you help me', 'build it?'],
-    description: 'For a reporting template, a small tool, or an automation that connects the apps you use. I’ll build and test the setup we agree on.',
+    description: 'Get a reporting template, small tool, or automation built around the way your business works.',
+    takeaway: 'A tested setup, instructions, and a handoff so you know how to use and maintain it.',
     inputs: 'The result you have in mind, your current tools, and example inputs.',
     deliverables: [
       'The agreed setup, tested and ready to use',
@@ -79,101 +78,51 @@ const serviceCatalog = {
     },
   })),
 };
-const steps = [
-  { number: '01', title: 'Tell me what’s stuck.', text: 'The question, the tools, and what you’d like to change. A few lines are enough.' },
-  { number: '02', title: 'Agree on the plan.', text: 'You’ll know the deliverable, fixed quote, and timeline before we begin.' },
-  { number: '03', title: 'Put it to use.', text: 'Recommendations you can act on, or a working setup with a handoff and clear next steps.' },
-];
 const questions = [
   { question: 'What will it cost?', answer: 'You receive a defined scope and fixed quote before work begins. The quote depends on the question, deliverable, and systems involved.' },
   { question: 'Do I have to buy new software?', answer: 'We look at existing tools and simpler processes first. Any proposed software or usage cost is made clear before you decide.' },
   { question: 'Do I need a review before booking setup?', answer: 'No. You can start with setup when the result and scope are clear. A review helps when you need to decide what to change, and its recommendations are yours to use independently.' },
-  { question: 'Is a paid cost review right for my business?', answer: 'It fits when technology spending, growth, or complexity makes the decision worth investigating. If you only need to check a few inexpensive subscriptions, try AI Cost Lens or the free renewal worksheet first.' },
-  { question: 'Are savings guaranteed?', answer: 'No. Findings explain the evidence and assumptions, and time freed up is kept separate from cash savings. Sometimes the right recommendation is to keep what you already have.' },
 ];
 ---
 <BaseLayout title="AI & Cloud Cost Reviews, Workflow Consulting | Cloud & Capital" description="Review AI, cloud, and software spending, simplify one recurring workflow, or build a defined tool or automation with Diana Molski. A clear scope and fixed quote before work begins." structuredData={[serviceCatalog]}>
   <main id="main-content" class="business-services">
     <section class="services-shell services-hero" aria-labelledby="services-title">
-      <div class="services-hero-copy">
-        <p class="service-kicker">Business services</p>
-        <h1 id="services-title"><span>Your tools should</span> <em>earn their keep.</em></h1>
-        <p class="services-lede">I help small businesses and growing tech teams understand their technology costs, simplify repetitive work, and <span>build the setup they need.</span></p>
-        <div class="services-actions">
-          <a class="service-button" href="#inquiry"><ActionLabel label="Tell me what’s stuck" /></a>
-          <a class="service-text-link" href="#offers"><ActionLabel label="Explore the services" /></a>
-        </div>
-        <p class="services-hero-note">A clear scope, fixed quote, and timeline <span>before work begins.</span></p>
-      </div>
-      <ServicesDeskArtwork />
+      <p class="service-kicker">Business services</p>
+      <h1 id="services-title"><span>Your tools should</span> <em>earn their keep.</em></h1>
+      <p class="services-lede">I review technology costs, simplify repetitive tasks, and build tools and automations for small businesses and <span>growing tech teams.</span></p>
+      <a class="service-text-link" href="#inquiry"><ActionLabel label="Email Diana" /></a>
     </section>
 
     <section id="offers" class="services-shell offers-section" aria-labelledby="offers-title">
-      <div class="services-section-heading">
-        <div><p class="service-kicker">3 ways to work together</p><h2 id="offers-title">Start with <em>what’s stuck.</em></h2></div>
-        <p>You don’t need to know which service fits.<br class="desktop-break" /> We can work that out from your question.</p>
-      </div>
-      <nav class="service-menu" aria-label="Jump to a service">
-        {offers.map(offer => <a href={`#${offer.id}`}><span class="menu-number" aria-hidden="true">{offer.number}</span><span>{offer.name}</span><span class="menu-arrow" aria-hidden="true">↓</span></a>)}
-      </nav>
-      <div class="service-panels">
+      <h2 class="service-kicker" id="offers-title">3 ways to work together</h2>
+      <div class="service-cards">
         {offers.map(offer => (
-          <article id={offer.id} class:list={['service-panel', `${offer.kind}-panel`]} aria-labelledby={`${offer.id}-title`}>
-            <div class="service-overview">
-              <div class="service-panel-heading"><h3 id={`${offer.id}-title`}>{offer.nameLead} <span>{offer.nameEnd}</span></h3><ServiceWatermark kind={offer.kind} /></div>
-              <p class="service-question"><span>“{offer.question[0]}</span> <em>{offer.question[1]}”</em></p>
-              <p class="service-description"><FlowText text={offer.description} /></p>
-              <p class="service-inputs"><span>Start with</span><FlowText text={offer.inputs} /></p>
-            </div>
-            <div class="service-details">
-              <h4>What you leave with</h4>
-              <ul class="service-deliverables">{offer.deliverables.map(item => <li><FlowText text={item} /></li>)}</ul>
-              <details class="service-scope">
-                <summary>What’s included</summary>
-                <div class="scope-copy">
-                  {offer.scope.map(paragraph => <p>{paragraph}</p>)}
-                  {offer.kind === 'cost' && <p>For a few low-cost subscriptions, try <a href="https://lens.cloudandcapital.com" target="_blank" rel="noopener noreferrer">AI Cost Lens</a> or the <a href="/resources/software-renewal">free renewal worksheet</a> first.</p>}
-                </div>
-              </details>
-              <div class="service-panel-actions">
-                <a class="service-button service-button-light" href="#inquiry"><ActionLabel label={offer.action} /></a>
-                {offer.example && <a class="service-text-link service-example-link" href={offer.example}><ActionLabel label="See a worked example" /></a>}
+          <article id={offer.id} class:list={['service-card', `${offer.kind}-card`]} aria-labelledby={`${offer.id}-title`}>
+            <div class="service-card-heading"><h3 id={`${offer.id}-title`}>{offer.nameLead} <span>{offer.nameEnd}</span></h3><ServiceWatermark kind={offer.kind} /></div>
+            <p class="service-description">{offer.description}</p>
+            <p class="service-takeaway"><span>You get</span>{offer.takeaway}</p>
+            <details class="service-scope">
+              <summary>Scope &amp; details</summary>
+              <div class="scope-copy">
+                <p><strong>Start with:</strong> {offer.inputs}</p>
+                <ul>{offer.deliverables.map(item => <li>{item}</li>)}</ul>
+                {offer.scope.map(paragraph => <p>{paragraph}</p>)}
+                {offer.kind === 'cost' && <p>For a few low-cost subscriptions, try <a href="https://lens.cloudandcapital.com" target="_blank" rel="noopener noreferrer">AI Cost Lens</a> or the <a href="/resources/software-renewal">free renewal worksheet</a> first.</p>}
+                {offer.example && <a class="service-text-link" href={offer.example}><ActionLabel label="See a worked example" /></a>}
               </div>
-            </div>
+            </details>
+            <a class="service-text-link service-card-action" href="#inquiry"><ActionLabel label={offer.action} /></a>
           </article>
         ))}
       </div>
     </section>
 
-    <section class="services-method" aria-labelledby="process-title">
-      <div class="services-shell">
-        <div class="services-section-heading"><div><p class="service-kicker">From question to next step</p><h2 id="process-title">Here’s how <em>we work.</em></h2></div><p>Start with an email.<br /> We’ll take it from there.</p></div>
-        <ol class="method-steps">{steps.map(step => <li><span class="method-number" aria-hidden="true">{step.number}</span><h3>{step.title}</h3><p><FlowText text={step.text} /></p></li>)}</ol>
-      </div>
-    </section>
-
-    <section class="services-about" aria-labelledby="reviewer-title">
-      <div class="services-shell services-about-grid">
-        <div class="services-portrait"><img src="/images/diana-molski-portrait.png" alt="Diana Molski, founder of Cloud & Capital" width="820" height="806" loading="lazy" decoding="async" /><p>Diana Molski · Founder</p></div>
-        <div class="services-about-copy">
-          <p class="service-kicker">Your reviewer &amp; builder</p>
-          <h2 id="reviewer-title">A finance lens.<br /><em>A builder’s curiosity.</em></h2>
-          <p><FlowText text="I earned my finance degree at Cal State Dominguez Hills and worked in wealth management at Morgan Stanley. These days, I look at technology through a finance lens: what it costs, what you get, and whether it’s worth it." /></p>
-          <p><FlowText text="I also build tools and work through the details behind a process. I like the slightly annoying questions: Who uses this? What changed? And why are we doing it this way?" /></p>
-          <ul class="services-credentials" aria-label="Professional credentials"><li>FinOps Practitioner &amp; FOCUS Analyst</li><li>AWS Cloud Practitioner</li><li>Azure AI Fundamentals</li></ul>
-          <a class="service-text-link" href="/#about"><ActionLabel label="More about me" /></a>
-        </div>
-      </div>
-    </section>
-
-    <section class="services-shell services-proof" aria-labelledby="proof-title">
-      <div class="proof-grid">
-        <div class="proof-copy"><p class="service-kicker">Made by Cloud &amp; Capital</p><h2 id="proof-title">Try something<br /><em>I’ve built.</em></h2><p><FlowText text="AI Cost Lens helps you estimate an AI task, review a bill, or compare the cost of a usable result. It’s one of the free tools I share here." /></p><a class="service-text-link" href="/tools"><ActionLabel label="Browse all free tools" /></a></div>
-        <figure class="proof-preview"><a href="https://lens.cloudandcapital.com" target="_blank" rel="noopener noreferrer" aria-label="Open AI Cost Lens"><div class="proof-window"><div class="proof-window-bar" aria-hidden="true"><span><i></i><i></i><i></i></span>AI Cost Lens</div><img src="/images/ai-cost-lens-anatomy-preview.jpg" alt="AI Cost Lens example comparing model, infrastructure, and human review costs for two AI routes" width="1315" height="492" loading="lazy" decoding="async" /></div></a><figcaption>AI Cost Lens · Example cost comparison</figcaption></figure>
-      </div>
-      <div class="services-extras" aria-label="More ways to explore">
-        <a href="/resources/software-renewal"><p class="service-kicker">Free resource</p><h3>Before you renew <em>that software.</em></h3><p>Eight questions to help you decide whether it’s worth keeping.</p><ActionLabel label="Get the renewal worksheet" /></a>
-        <a href="/learn"><p class="service-kicker">One-to-one lessons</p><h3>Investing &amp; trading, <em>explained.</em></h3><p>Start with your questions, from investing basics to reading a chart.</p><ActionLabel label="Explore the lessons" /></a>
+    <section class="services-shell services-about" aria-labelledby="reviewer-title">
+      <img src="/images/diana-molski-portrait.png" alt="Diana Molski, founder of Cloud & Capital" width="820" height="806" loading="lazy" decoding="async" />
+      <div>
+        <h2 id="reviewer-title">You’ll work directly with me.</h2>
+        <p>I’m Diana, a finance analyst and tool builder. My background includes a finance degree from Cal State Dominguez Hills, wealth management at Morgan Stanley, and FinOps certification.</p>
+        <a class="service-text-link" href="/#about"><ActionLabel label="More about me" /></a>
       </div>
     </section>
 
@@ -183,9 +132,16 @@ const questions = [
     </section>
 
     <section id="inquiry" class="services-contact" aria-labelledby="inquiry-title">
-      <div class="services-shell services-contact-grid">
-        <div class="services-contact-copy"><p class="service-kicker">Let’s start with your question</p><h2 id="inquiry-title">What’s getting<br /><em>stuck?</em></h2><p><FlowText text="Tell me what’s happening, which tools you use, and what you’d like to change. A few lines are enough. You don’t need to choose a service first." /></p><p><FlowText text="I’ll reply with any questions, then a scope and quote if there’s a project I can help with." /></p><a class="service-text-link contact-direct" href="mailto:diana@cloudandcapital.com?subject=Business%20inquiry"><ActionLabel label="Email Diana directly" /></a></div>
-        <div class="inquiry-box"><p class="inquiry-heading">A little about your project</p><p class="contact-privacy">Leave out financial records, passwords, and sensitive client information.</p><InquiryForm kind="business" appearance="services" /></div>
+      <div class="services-shell contact-inner">
+        <p class="service-kicker">Get in touch</p>
+        <h2 id="inquiry-title">Tell me <em>what you need.</em></h2>
+        <p class="contact-intro"><FlowText text="Email me a few lines about your business, the tools you use, and what you’d like to change." /></p>
+        <p class="contact-quote"><FlowText text="We’ll agree on the scope, fixed quote, and timeline before work begins." /></p>
+        <a class="service-button contact-email" href="mailto:diana@cloudandcapital.com?subject=Business%20inquiry"><ActionLabel label="Email Diana" /></a>
+        <details class="inquiry-draft">
+          <summary>Help me draft the email</summary>
+          <div class="inquiry-box"><p class="contact-privacy">Leave out financial records, passwords, and sensitive client information.</p><InquiryForm kind="business" appearance="services" /></div>
+        </details>
       </div>
     </section>
   </main>

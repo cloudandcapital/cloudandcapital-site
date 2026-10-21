@@ -39,7 +39,7 @@
 .guide-article h1 { max-width:17ch; }
 .guide-back { display:inline-flex; align-items:center; min-height:44px; margin-bottom:1.75rem; font-size:.9rem; color:#3d6055; }
 .guide-button { display:inline-flex; justify-content:center; align-items:center; min-height:54px; margin-block:1rem; padding:.35rem 1.3rem; border:1px solid #b48e88; border-radius:8px; background:var(--dusty-rose); text-decoration:none; }
-a.guide-button .action-label > span:first-child { text-decoration:none; border-bottom:0; }
+.guides-page a.guide-button .action-label > span:first-child { text-decoration:none; border-bottom:0; }
 .guide-screenshot { margin:1.5rem 0 2.5rem; }
 .guide-screenshot img { display:block; width:100%; height:auto; padding:1.4rem; border-radius:14px; background:#e4e9df; box-shadow:0 14px 30px -25px #243b2f66; }
 .guide-screenshot figcaption { margin-top:.7rem; color:#62645b; font-size:.85rem; }

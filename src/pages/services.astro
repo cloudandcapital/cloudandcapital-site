@@ -1,84 +1,192 @@
 ---
+import '@fontsource/cormorant-garamond/latin-600.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import InquiryForm from '../components/InquiryForm.astro';
-import ServiceArtwork from '../components/ServiceArtwork.astro';
-import ProcessArtwork from '../components/ProcessArtwork.astro';
-import ExtrasArtwork from '../components/ExtrasArtwork.astro';
-import '../styles/services.css';
+import ServiceWatermark from '../components/ServiceWatermark.astro';
+import ServicesDeskArtwork from '../components/ServicesDeskArtwork.astro';
+import ActionLabel from '../components/ActionLabel.astro';
+import FlowText from '../components/FlowText.astro';
 import '../styles/services-page.css';
+
+const offers = [
+  {
+    id: 'technology-cost-review', kind: 'cost', number: '01',
+    name: 'Technology Cost Review', nameLead: 'Technology', nameEnd: 'Cost Review',
+    serviceType: 'Cloud, AI and software cost analysis',
+    question: ['Why does the bill', 'keep growing?'],
+    description: 'For cloud, AI, or software bills that are hard to explain. I’ll review what you’re paying for, what changed, and what deserves a closer look.',
+    inputs: 'Recent bills or exports, plus the question you need answered.',
+    deliverables: [
+      'A spending breakdown that ties back to your records',
+      'The main cost drivers, with cost per workload or result where the records support it',
+      'Prioritized recommendations and the next checks to make',
+    ],
+    scope: [
+      'A defined set of cloud accounts, AI workloads, or software vendors, usually covering three recent billing months. We agree the systems, records, and question before quoting.',
+      'I review cost drivers, ownership, usage, commitments, and growth scenarios where the evidence supports them. For AI tools, I separate subscriptions from extra usage, check overlapping plans, and agree how a proposed change will be tested.',
+      'Architecture changes, migrations, and account changes are separate. Complex allocation or commitment analysis needs its own agreed scope.',
+    ],
+    action: 'Ask about a cost review', example: '/services/examples#cost',
+  },
+  {
+    id: 'workflow-review', kind: 'workflow', number: '02',
+    name: 'AI & Workflow Review', nameLead: 'AI &', nameEnd: 'Workflow Review',
+    serviceType: 'AI and workflow review',
+    question: ['Why does this take', 'so long?'],
+    description: 'For a task that keeps eating up your week: copying data, chasing updates, or rebuilding the same report. I’ll work through the process with you.',
+    inputs: 'One recurring task, the tools involved, and a few redacted examples.',
+    deliverables: [
+      'A map of the process and where work gets stuck',
+      'A recommended change, including costs and tradeoffs',
+      'An implementation plan with a way to check whether it helps',
+    ],
+    scope: [
+      'One workflow across up to three tools, using two or three redacted examples. We compare simpler processes, existing features, automation, and AI, including costs, checking, and maintenance.',
+      'The plan includes a success measure and an owner. You can use the recommendations independently. Building the change is scoped separately.',
+    ],
+    action: 'Ask about a workflow review', example: '/services/examples#workflow',
+  },
+  {
+    id: 'practical-setup', kind: 'setup', number: '03',
+    name: 'Tool & Automation Setup', nameLead: 'Tool &', nameEnd: 'Automation Setup',
+    serviceType: 'Tool and automation setup',
+    question: ['Can you help me', 'build it?'],
+    description: 'For a reporting template, a small tool, or an automation that connects the apps you use. I’ll build and test the setup we agree on.',
+    inputs: 'The result you have in mind, your current tools, and example inputs.',
+    deliverables: [
+      'The agreed setup, tested and ready to use',
+      'Checks for everyday use and exceptions',
+      'Instructions, a handoff, and an agreed maintenance owner',
+    ],
+    scope: [
+      'One agreed result across up to three compatible tools, individually quoted. We agree the inputs, deliverable, tests, and maintenance owner before work starts.',
+      'You can start here when the project is clear. A paid review isn’t required. New features and ongoing support are agreed separately.',
+    ],
+    action: 'Ask about a setup', example: null,
+  },
+] as const;
 const serviceCatalog = {
   '@type': 'OfferCatalog',
   '@id': 'https://cloudandcapital.com/services#catalog',
   name: 'Cloud & Capital business services',
-  itemListElement: [
-    { name: 'Technology Cost Review', serviceType: 'Cloud, AI and software cost analysis', anchor: 'technology-cost-review', description: 'A reconciled cost baseline, growth drivers, and a prioritized action plan for startups and growing tech teams with meaningful technology spend.' },
-    { name: 'AI & Workflow Review', serviceType: 'AI and workflow review', anchor: 'workflow-review', description: 'A review of one recurring task for a service business, with a workflow map, recommended change, and scoped implementation plan.' },
-    { name: 'Tool & Automation Setup', serviceType: 'Tool and automation setup', anchor: 'practical-setup', description: 'One agreed setup across compatible tools, with checks, instructions, and a handoff.' },
-  ].map(({ name, serviceType, anchor, description }) => ({
+  itemListElement: offers.map(({ name, serviceType, id, description }) => ({
     '@type': 'Offer',
     itemOffered: {
       '@type': 'Service', name, serviceType, description,
-      '@id': `https://cloudandcapital.com/services#${anchor}`,
-      url: `https://cloudandcapital.com/services#${anchor}`,
+      '@id': `https://cloudandcapital.com/services#${id}`,
+      url: `https://cloudandcapital.com/services#${id}`,
       provider: { '@id': 'https://cloudandcapital.com/#organization' },
     },
   })),
 };
+const steps = [
+  { number: '01', title: 'Tell me what’s stuck.', text: 'The question, the tools, and what you’d like to change. A few lines are enough.' },
+  { number: '02', title: 'Agree on the plan.', text: 'You’ll know the deliverable, fixed quote, and timeline before we begin.' },
+  { number: '03', title: 'Put it to use.', text: 'Recommendations you can act on, or a working setup with a handoff and clear next steps.' },
+];
+const questions = [
+  { question: 'What will it cost?', answer: 'You receive a defined scope and fixed quote before work begins. The quote depends on the question, deliverable, and systems involved.' },
+  { question: 'Do I have to buy new software?', answer: 'We look at existing tools and simpler processes first. Any proposed software or usage cost is made clear before you decide.' },
+  { question: 'Do I need a review before booking setup?', answer: 'No. You can start with setup when the result and scope are clear. A review helps when you need to decide what to change, and its recommendations are yours to use independently.' },
+  { question: 'Is a paid cost review right for my business?', answer: 'It fits when technology spending, growth, or complexity makes the decision worth investigating. If you only need to check a few inexpensive subscriptions, try AI Cost Lens or the free renewal worksheet first.' },
+  { question: 'Are savings guaranteed?', answer: 'No. Findings explain the evidence and assumptions, and time freed up is kept separate from cash savings. Sometimes the right recommendation is to keep what you already have.' },
+];
 ---
-<BaseLayout title="AI & Cloud Cost Reviews, Workflow Consulting | Cloud & Capital" description="Review AI, cloud, and SaaS spending, assess one recurring workflow, or set up a defined automation. For startups and service businesses, with an agreed scope and quote." structuredData={[serviceCatalog]}>
-  <main id="main-content" class="offer-page business-services">
+<BaseLayout title="AI & Cloud Cost Reviews, Workflow Consulting | Cloud & Capital" description="Review AI, cloud, and software spending, simplify one recurring workflow, or build a defined tool or automation with Diana Molski. A clear scope and fixed quote before work begins." structuredData={[serviceCatalog]}>
+  <main id="main-content" class="business-services">
     <section class="services-shell services-hero" aria-labelledby="services-title">
       <div class="services-hero-copy">
-        <p class="service-kicker">Business services · Cloud &amp; Capital</p>
-        <h1 id="services-title">Your tools should<br /><em>earn their keep.</em></h1>
-        <p class="services-lede">Understand growing technology costs. Improve recurring work. Build the tool you need.</p>
-        <p class="services-aside">Because another subscription isn’t always the answer.</p>
-        <div class="services-actions"><a class="offer-button" href="#offers">Explore the services <span aria-hidden="true">↓</span></a><a class="service-text-link" href="#inquiry">Ask me about your business →</a></div>
+        <p class="service-kicker">Business services</p>
+        <h1 id="services-title"><span>Your tools should</span> <em>earn their keep.</em></h1>
+        <p class="services-lede"><FlowText text="I help small businesses and growing tech teams understand their technology costs, simplify repetitive work, and build the setup they need." /></p>
+        <div class="services-actions">
+          <a class="service-button" href="#inquiry"><ActionLabel label="Tell me what’s stuck" /></a>
+          <a class="service-text-link" href="#offers"><ActionLabel label="Explore the services" /></a>
+        </div>
+        <p class="services-hero-note">A clear scope, fixed quote, and timeline before work begins.</p>
       </div>
-      <div class="services-hero-art"><ServiceArtwork kind="hero" /></div>
+      <ServicesDeskArtwork />
     </section>
+
     <section id="offers" class="services-shell offers-section" aria-labelledby="offers-title">
-      <div class="services-section-heading"><div><p class="service-kicker">Three ways to work together</p><h2 id="offers-title">A useful place to start.</h2></div><p>For growing tech teams managing rising costs, and service businesses improving how work gets done.</p></div>
-      <div class="service-cards">
-        <article id="technology-cost-review" class="service-card cost-card">
-          <div class="service-card-art"><ServiceArtwork kind="cost" /></div>
-          <div class="service-card-content"><p class="service-kicker">01 · Understand the spending</p><h3><span>Technology</span> Cost Review</h3><p class="service-question">“Why are our technology costs growing?”</p><p>For startups and growing tech teams with meaningful cloud, AI, and software spend. Understand what is driving costs and what deserves attention before you scale.</p><div class="service-deliverables"><h4>You’ll leave with</h4><ul><li>A reconciled cost baseline and growth drivers</li><li>Cost per workload or result where records support it</li><li>A prioritized action plan and next checks</li></ul></div><a class="service-example-link" href="/services/examples#cost"><span>See an example of a Technology Cost Review</span><span aria-hidden="true">→</span></a><details class="service-scope"><summary>Scope &amp; example</summary><p>A defined set of cloud accounts, AI workloads, or software vendors, usually covering three recent billing months. We agree the systems, records, and question before quoting. Review cost drivers, ownership, usage, commitments, and growth scenarios where the evidence supports them. For AI tools, separate subscriptions from extra usage, check overlapping plans, and agree how a proposed change will be tested.</p><p>Architecture changes, migrations, and account changes are separate. Complex allocation or commitment analysis needs its own agreed scope. If a few low-cost subscriptions are the whole question, start with <a href="https://lens.cloudandcapital.com" target="_blank" rel="noopener noreferrer">AI Cost Lens</a> or the <a href="/resources/software-renewal">free renewal worksheet</a>.</p></details><a class="service-card-cta" href="#inquiry">Ask about a cost review <span aria-hidden="true">↗</span></a></div>
-        </article>
-        <article id="workflow-review" class="service-card workflow-card">
-          <div class="service-card-art"><ServiceArtwork kind="workflow" /></div>
-          <div class="service-card-content"><p class="service-kicker">02 · Understand the work</p><h3><span>AI &amp; Workflow</span> Review</h3><p class="service-question">“Why does this take so long?”</p><p>For service businesses repeatedly moving information between emails, documents, and spreadsheets. Get a plan for one recurring task, including whether AI or automation belongs in it.</p><div class="service-deliverables"><h4>You’ll leave with</h4><ul><li>A map of where work gets stuck</li><li>A recommended change, with costs and tradeoffs</li><li>A scoped implementation plan with success checks</li></ul></div><a class="service-example-link" href="/services/examples#workflow"><span>See an example of a Workflow Review</span><span aria-hidden="true">→</span></a><details class="service-scope"><summary>Scope &amp; example</summary><p>One workflow across up to three tools, using two or three redacted examples. We compare simpler processes, existing features, automation, and AI—including costs, checking, and maintenance.</p><p>Your pilot plan includes a success measure and an owner. You can use it independently; building it is separately scoped.</p></details><a class="service-card-cta" href="#inquiry">Ask about a workflow review <span aria-hidden="true">↗</span></a></div>
-        </article>
-        <article id="practical-setup" class="service-card setup-card">
-          <div class="service-card-art"><ServiceArtwork kind="setup" /></div>
-          <div class="service-card-content"><p class="service-kicker">03 · Put the change to work</p><h3><span>Tool &amp;</span> Automation Setup</h3><p class="service-question">“Can you help me build it?”</p><p>For a business with a clear project: a reporting template, connected tools, or a small automation built and checked. Book directly when you know what you need.</p><div class="service-deliverables"><h4>You’ll leave with</h4><ul><li>The agreed setup, ready to use</li><li>Checks for normal use and exceptions</li><li>Instructions and a proper handoff</li></ul></div><details class="service-scope"><summary>Scope &amp; approach</summary><p>One agreed result across up to three compatible tools, individually quoted. We agree the inputs, deliverable, tests, and maintenance owner before work starts.</p><p>A paid review isn’t required when the project is clear. New features and ongoing support are agreed separately.</p></details><a class="service-card-cta" href="#inquiry">Ask about a setup <span aria-hidden="true">↗</span></a></div>
-        </article>
+      <div class="services-section-heading">
+        <div><p class="service-kicker">3 ways to work together</p><h2 id="offers-title">Start with <em>what’s stuck.</em></h2></div>
+        <p>You don’t need to know which service fits.<br class="desktop-break" /> We can work that out from your question.</p>
       </div>
-      <p class="service-choice-note">Growing costs <em>and</em> recurring work? Or not sure where to start? <a href="#inquiry">Tell me what’s happening.</a> We’ll find the right starting point before paid work.</p>
+      <nav class="service-menu" aria-label="Jump to a service">
+        {offers.map(offer => <a href={`#${offer.id}`}><span class="menu-number" aria-hidden="true">{offer.number}</span><span>{offer.name}</span><span class="menu-arrow" aria-hidden="true">↓</span></a>)}
+      </nav>
+      <div class="service-panels">
+        {offers.map(offer => (
+          <article id={offer.id} class:list={['service-panel', `${offer.kind}-panel`]} aria-labelledby={`${offer.id}-title`}>
+            <div class="service-overview">
+              <div class="service-panel-heading"><h3 id={`${offer.id}-title`}>{offer.nameLead} <span>{offer.nameEnd}</span></h3><ServiceWatermark kind={offer.kind} /></div>
+              <p class="service-question"><span>“{offer.question[0]}</span> <em>{offer.question[1]}”</em></p>
+              <p class="service-description"><FlowText text={offer.description} /></p>
+              <p class="service-inputs"><span>Start with</span><FlowText text={offer.inputs} /></p>
+            </div>
+            <div class="service-details">
+              <h4>What you leave with</h4>
+              <ul class="service-deliverables">{offer.deliverables.map(item => <li><FlowText text={item} /></li>)}</ul>
+              <details class="service-scope">
+                <summary>What’s included</summary>
+                <div class="scope-copy">
+                  {offer.scope.map(paragraph => <p>{paragraph}</p>)}
+                  {offer.kind === 'cost' && <p>For a few low-cost subscriptions, try <a href="https://lens.cloudandcapital.com" target="_blank" rel="noopener noreferrer">AI Cost Lens</a> or the <a href="/resources/software-renewal">free renewal worksheet</a> first.</p>}
+                </div>
+              </details>
+              <div class="service-panel-actions">
+                <a class="service-button service-button-light" href="#inquiry"><ActionLabel label={offer.action} /></a>
+                {offer.example && <a class="service-text-link service-example-link" href={offer.example}><ActionLabel label="See a worked example" /></a>}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
     </section>
+
     <section class="services-method" aria-labelledby="process-title">
       <div class="services-shell">
-        <div class="method-heading"><p class="service-kicker">A clear scope, from the start</p><h2 id="process-title">Here’s how we work.</h2><p>Start with an email. We’ll take it from there.</p></div>
-        <ol class="method-steps">
-          <li><div class="method-visual"><ProcessArtwork kind="email" /><span class="method-number" aria-hidden="true">01</span></div><h3>Tell me what’s stuck.</h3><p>The question, the tools, and what you’d like to change. A few lines are enough.</p></li>
-          <li><div class="method-visual"><ProcessArtwork kind="scope" /><span class="method-number" aria-hidden="true">02</span></div><h3>Agree on the plan.</h3><p>You’ll know the deliverable, fixed quote, and timeline before we begin.</p></li>
-          <li><div class="method-visual"><ProcessArtwork kind="handoff" /><span class="method-number" aria-hidden="true">03</span></div><h3>Put it to use.</h3><p>Actionable recommendations or a working setup—with a handoff so you know what comes next.</p></li>
-        </ol>
+        <div class="services-section-heading"><div><p class="service-kicker">From question to next step</p><h2 id="process-title">Here’s how <em>we work.</em></h2></div><p>Start with an email.<br /> We’ll take it from there.</p></div>
+        <ol class="method-steps">{steps.map(step => <li><span class="method-number" aria-hidden="true">{step.number}</span><h3>{step.title}</h3><p><FlowText text={step.text} /></p></li>)}</ol>
       </div>
     </section>
-    <section class="services-shell services-about" aria-labelledby="reviewer-title"><div class="services-portrait"><img src="/images/diana-molski-portrait.png" alt="Diana Molski, founder of Cloud & Capital" width="820" height="806" loading="lazy" /><p>Diana Molski · Los Angeles</p></div><div><p class="service-kicker">Your reviewer &amp; builder</p><h2 id="reviewer-title">Hi, I’m Diana.<br /><em>I like a good money question.</em></h2><p>I studied finance and worked in wealth management at Morgan Stanley. Today I combine finance and FinOps analysis with tools that help teams understand technology costs and improve the work behind their reports.</p><p>I like asking the slightly annoying questions: What is this costing? Who uses it? And why are we doing it this way?</p><ul class="services-credentials" aria-label="Professional credentials"><li>FinOps Practitioner &amp; FOCUS Analyst</li><li>AWS Cloud Practitioner</li><li>Azure AI Fundamentals</li></ul><a class="service-text-link" href="/#about">More about my background →</a></div></section>
-    <section class="services-proof" aria-labelledby="proof-title"><div class="services-shell proof-grid"><div><p class="service-kicker">Built by Cloud &amp; Capital</p><h2 id="proof-title">Tools that make<br /><em>numbers easier to use.</em></h2><p>AI Cost Lens reviews AI bills, subscriptions, and extra usage, then helps you compare the cost behind a usable result. Cloud Cost Guard brings cloud, AI, and software spending into view.</p><a class="service-text-link" href="/tools">Explore the tools →</a></div><figure><a href="https://lens.cloudandcapital.com" target="_blank" rel="noopener noreferrer" aria-label="Explore AI Cost Lens"><img src="/images/ai-cost-lens-cost-anatomy-wide.png" alt="AI Cost Lens screen comparing model, infrastructure, and human review costs" width="2048" height="901" loading="lazy" /></a><figcaption>AI Cost Lens · Illustrative tool example, not a client result.</figcaption></figure></div></section>
-    <section class="services-shell services-extras" aria-label="Resources and education">
-      <a class="extra-panel checklist-panel" href="/resources/software-renewal"><div class="extra-copy"><p class="service-kicker">Free checklist</p><h3>Before you renew<br /><em>that software.</em></h3><p>Eight questions to help you decide whether it’s worth keeping.</p><span class="service-text-link">Get the checklist →</span></div><ExtrasArtwork kind="renewal" /></a>
-      <a class="extra-panel lessons-panel" href="/learn"><div class="extra-copy"><p class="service-kicker">One-to-one lessons</p><h3>Investing &amp; trading,<br /><em>explained.</em></h3><p>From investing basics to understanding a trading setup. Start with your questions.</p><span class="service-text-link">Explore the lessons →</span></div><ExtrasArtwork kind="markets" /></a>
+
+    <section class="services-about" aria-labelledby="reviewer-title">
+      <div class="services-shell services-about-grid">
+        <div class="services-portrait"><img src="/images/diana-molski-portrait.png" alt="Diana Molski, founder of Cloud & Capital" width="820" height="806" loading="lazy" decoding="async" /><p>Diana Molski · Founder</p></div>
+        <div class="services-about-copy">
+          <p class="service-kicker">Your reviewer &amp; builder</p>
+          <h2 id="reviewer-title">A finance lens.<br /><em>A builder’s curiosity.</em></h2>
+          <p><FlowText text="I earned my finance degree at Cal State Dominguez Hills and worked in wealth management at Morgan Stanley. These days, I look at technology through a finance lens: what it costs, what you get, and whether it’s worth it." /></p>
+          <p><FlowText text="I also build tools and work through the details behind a process. I like the slightly annoying questions: Who uses this? What changed? And why are we doing it this way?" /></p>
+          <ul class="services-credentials" aria-label="Professional credentials"><li>FinOps Practitioner &amp; FOCUS Analyst</li><li>AWS Cloud Practitioner</li><li>Azure AI Fundamentals</li></ul>
+          <a class="service-text-link" href="/#about"><ActionLabel label="More about me" /></a>
+        </div>
+      </div>
     </section>
-    <section class="services-shell services-faq" aria-labelledby="faq-title"><div><p class="service-kicker">FAQs</p><h2 id="faq-title">Before<br /><em>you book.</em></h2></div><div><details><summary>What will it cost?</summary><p>You receive a defined scope and fixed quote before work begins. Setup fees depend on the result and systems involved.</p></details><details><summary>Do I have to buy new software?</summary><p>Existing tools and simpler processes are considered first. Any proposed external cost is made explicit.</p></details><details><summary>Do I need a review before booking setup?</summary><p>No. You can book setup directly when the result and scope are clear. A review helps when you need to decide what to change, and its recommendations are yours to use independently.</p></details><details><summary>Is a paid cost review right for my business?</summary><p>It fits when technology spending, growth, or complexity makes the decision worth investigating. A few inexpensive subscriptions usually don’t justify a paid cost review. Start with the free worksheet; reporting or manual-work problems may fit a different service.</p></details><details><summary>Are savings guaranteed?</summary><p>Findings explain evidence and assumptions. Time freed up is kept separate from cash savings; the recommendation may be to keep your existing system.</p></details></div></section>
-    <section id="inquiry" class="services-contact" aria-labelledby="inquiry-title"><div class="services-shell services-contact-grid"><div><p class="service-kicker">Let’s start with your question</p><h2 id="inquiry-title">What’s getting<br /><em>stuck?</em></h2><p>A few lines are enough. You don’t need to choose a service first.</p><p>I’ll reply with any questions, then a scope and quote if there’s a useful project.</p><p class="contact-privacy">Leave out financial records, passwords, and sensitive client information.</p></div><InquiryForm kind="business" /></div></section>
+
+    <section class="services-shell services-proof" aria-labelledby="proof-title">
+      <div class="proof-grid">
+        <div class="proof-copy"><p class="service-kicker">Made by Cloud &amp; Capital</p><h2 id="proof-title">Try something<br /><em>I’ve built.</em></h2><p><FlowText text="AI Cost Lens helps you estimate an AI task, review a bill, or compare the cost of a usable result. It’s one of the free tools I share here." /></p><a class="service-text-link" href="/tools"><ActionLabel label="Browse all free tools" /></a></div>
+        <figure class="proof-preview"><a href="https://lens.cloudandcapital.com" target="_blank" rel="noopener noreferrer" aria-label="Open AI Cost Lens"><div class="proof-window"><div class="proof-window-bar" aria-hidden="true"><span><i></i><i></i><i></i></span>AI Cost Lens</div><img src="/images/ai-cost-lens-anatomy-preview.jpg" alt="AI Cost Lens example comparing model, infrastructure, and human review costs for two AI routes" width="1315" height="492" loading="lazy" decoding="async" /></div></a><figcaption>AI Cost Lens · Example cost comparison</figcaption></figure>
+      </div>
+      <div class="services-extras" aria-label="More ways to explore">
+        <a href="/resources/software-renewal"><p class="service-kicker">Free resource</p><h3>Before you renew <em>that software.</em></h3><p>Eight questions to help you decide whether it’s worth keeping.</p><ActionLabel label="Get the renewal worksheet" /></a>
+        <a href="/learn"><p class="service-kicker">One-to-one lessons</p><h3>Investing &amp; trading, <em>explained.</em></h3><p>Start with your questions, from investing basics to reading a chart.</p><ActionLabel label="Explore the lessons" /></a>
+      </div>
+    </section>
+
+    <section class="services-shell services-faq" aria-labelledby="faq-title">
+      <div><p class="service-kicker">A few good questions</p><h2 id="faq-title">Before <em>we begin.</em></h2></div>
+      <div class="faq-list">{questions.map(item => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
+    </section>
+
+    <section id="inquiry" class="services-contact" aria-labelledby="inquiry-title">
+      <div class="services-shell services-contact-grid">
+        <div class="services-contact-copy"><p class="service-kicker">Let’s start with your question</p><h2 id="inquiry-title">What’s getting<br /><em>stuck?</em></h2><p><FlowText text="Tell me what’s happening, which tools you use, and what you’d like to change. A few lines are enough. You don’t need to choose a service first." /></p><p><FlowText text="I’ll reply with any questions, then a scope and quote if there’s a project I can help with." /></p><a class="service-text-link contact-direct" href="mailto:diana@cloudandcapital.com?subject=Business%20inquiry"><ActionLabel label="Email Diana directly" /></a></div>
+        <div class="inquiry-box"><p class="inquiry-heading">A little about your project</p><p class="contact-privacy">Leave out financial records, passwords, and sensitive client information.</p><InquiryForm kind="business" appearance="services" /></div>
+      </div>
+    </section>
   </main>
 </BaseLayout>
-
-<style>
-  .service-example-link { display: inline-flex; align-items: center; gap: .45rem; margin: .5rem 0 1rem; min-height: 44px; color: #3d6055; font: 500 .75rem/1.5 'DM Mono', monospace; text-decoration: none; }
-  .service-example-link > span:first-child { text-decoration: underline; text-underline-offset: .28rem; }
-  .service-example-link > span:last-child { flex: 0 0 1.25rem; width: 1.25rem; font-size: 1.25rem; line-height: 1; text-align: center; }
-  .service-example-link:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
-</style>

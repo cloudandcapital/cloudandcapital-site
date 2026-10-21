@@ -7,6 +7,7 @@ const pages = [
   '/learn',
   '/resources/software-renewal',
   '/insights',
+  '/insights/using-the-renewal-tracker',
   '/insights/is-this-software-worth-it',
   '/tools',
   '/tools/software-renewal-tracker',

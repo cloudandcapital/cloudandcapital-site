@@ -5,18 +5,17 @@ export type SiteLink = {
 };
 
 export const navigation: SiteLink[] = [
-  { label: 'Services', href: '/services' },
   { label: 'Tools', href: '/tools' },
-  { label: 'Insights', href: '/insights' },
-  { label: 'Investing & Trading', href: '/learn' },
+  { label: 'Services', href: '/services' },
+  { label: 'Guides & writing', href: '/insights' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
 ];
 
 export const footerLinks: SiteLink[] = [
-  { label: 'Services', href: '/services' },
   { label: 'Tools', href: '/tools' },
-  { label: 'Insights', href: '/insights' },
+  { label: 'Services', href: '/services' },
+  { label: 'Guides & writing', href: '/insights' },
   { label: 'Investing & Trading', href: '/learn' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
@@ -240,7 +239,7 @@ export const about = {
   biography: [
     "I’m a mom, a lifelong internet nerd, and almost always in the middle of building something. I love a good rabbit hole, especially one that ends with something I can share.",
     "I earned my finance degree at Cal State Dominguez Hills and worked in wealth management at Morgan Stanley. These days, I look at technology through a finance lens: what it costs, what you get, and whether it’s worth it.",
-    "I like turning a tangled task into something someone can actually use. Cloud & Capital brings that together with free tools and Markets & Mimosas, my newsletter about money, markets and technology.",
+    "At Cloud & Capital, I analyse cloud, AI and software costs and build tools and automations for business owners and teams. I share free tools, explain how they work, and write Markets & Mimosas, my newsletter about money, markets and technology.",
     "Before finance, I worked in beauty and with animals. I’m the daughter of Polish immigrants, born and raised in LA’s South Bay, where I still live with my teenage son and our dog, Myszka.",
     "There’s room here for what I’ve learned and the questions I’m still working through. Have a look around. Try a tool, read something, or say hello.",
   ],
@@ -249,7 +248,7 @@ export const about = {
     { category: 'FINOPS', detail: 'FinOps Certified Practitioner · FinOps Certified FOCUS Analyst' },
     { category: 'CLOUD + AI', detail: 'AWS Certified Cloud Practitioner · Microsoft Azure AI Fundamentals' },
     { category: 'GOVERNANCE', detail: 'Stacklet FinOps Governance for Cloud & AI' },
-    { category: 'AI', detail: 'Claude Code, OpenAI Codex' },
+    { category: 'BUILDING WITH AI', detail: 'Claude Code · OpenAI Codex' },
   ],
   recognition: 'PointFive Cloud Efficiency Hub',
   recognitionUrl:

@@ -89,11 +89,14 @@
 .business-services .services-inquiry .copy-button { min-height: 44px; padding: .6rem .7rem; margin-left: .5rem; border-color: #3d60554d; border-radius: 6px; color: #3d6055; font: 400 .75rem/1.4 'DM Mono', monospace; }
 .business-services .inquiry-box .email-fallback { margin-top: 1rem; overflow-wrap: anywhere; }
 @media (min-width: 1101px) {
-  .business-services .service-cards { grid-template-rows: repeat(4, auto); }
-  .business-services .service-card { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; }
+  .business-services .service-cards { grid-template-rows: repeat(5, auto); }
+  .business-services .service-card { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; }
 }
 @media (max-width: 1100px) { .business-services .service-cards { grid-template-columns: minmax(0, 1fr); gap: 1rem; } .business-services .service-card { padding: 1.7rem; } .business-services .service-card-heading { min-height: 0; } .business-services .service-card h3 { font-size: 2.1rem; } .business-services .service-description, .business-services .service-takeaway { max-width: 65ch; } .business-services .service-card-heading img.service-watermark { width: 5.5rem; height: 5.5rem; } }
 @media (max-width: 1020px) { .business-services .services-shell { width: min(calc(100% - 3rem), 78rem); } }
 @media (max-width: 760px) { .business-services .services-shell { width: calc(100% - 2.5rem); } .business-services .services-hero { padding-block: 8rem 1.5rem; } .business-services h1 { font-size: clamp(2.9rem, 8vw, 4.6rem); } .business-services .services-lede { font-size: 1.05rem; } .business-services .offers-section { padding-block: 1.5rem 2rem; } .business-services .service-card h3 { font-size: clamp(1.6rem, 7vw, 2rem); } .business-services .services-about { gap: 1.25rem; grid-template-columns: 5rem minmax(0, 1fr); } .business-services .services-about > img { width: 5rem; height: 5rem; } .business-services .services-about h2 { font-size: 1.9rem; } .business-services .services-faq { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; padding-block: 2rem; } .business-services .services-faq h2 { font-size: 2.5rem; } .business-services .services-contact { padding-block: 2.5rem; } }
 @media (max-width: 540px) { .business-services .service-card { padding: 1.4rem; } .business-services .service-card-heading img.service-watermark { width: 4.5rem; height: 4.5rem; } .business-services .services-about { grid-template-columns: minmax(0, 1fr); gap: 1rem; } .business-services .services-about h2 { font-size: 2rem; } .business-services .inquiry-box { padding: 1.25rem; } .business-services .services-inquiry .fields { gap: 0; } .business-services .services-inquiry .copy-button { display: block; margin: .75rem 0 0; } }
 @media (max-width: 380px) { .business-services h1 { font-size: clamp(2.4rem, 11.9vw, 2.8rem); } .business-services .service-card h3 { font-size: 1.5rem; } .business-services .service-card-heading img.service-watermark { width: 3.75rem; height: 3.75rem; } .business-services .service-card-action .action-label { font-size: .61rem; } }
+
+/* Legacy hash targets stay available without adding a grid row. */
+.business-services .service-card > span[id] { position: absolute; }

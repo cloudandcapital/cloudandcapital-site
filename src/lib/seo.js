@@ -6,7 +6,8 @@ const routeNames = {
   '/tools': 'Free tools',
   '/tools/software-renewal-tracker': 'Software Renewal Tracker',
   '/resources/software-renewal': 'Software renewal checklist',
-  '/insights': 'Insights',
+  '/insights': 'Guides & writing',
+  '/insights/using-the-renewal-tracker': 'How to use the Software Renewal Tracker',
   '/insights/is-this-software-worth-it': 'Is this software worth what we are paying?',
   '/signal-audit': 'Technology Cost Signal Audit',
   '/interactive-lab': 'Interactive Lab',
@@ -26,7 +27,7 @@ export function createSiteGraph({ siteUrl, pathname, title, description, entitie
     {
       '@type': 'Organization', ...organization,
       name: 'Cloud & Capital', url: home,
-      description: 'Custom tools and automations for solo business owners, with free tools and writing about money, markets, and technology. Specialist technology cost and workflow reviews are available.',
+      description: 'Cloud, AI and software cost analysis, workflow reviews, and custom tools and automations for business owners and teams. Free tools and writing about money, markets, and technology.',
       founder: person, email: 'diana@cloudandcapital.com',
       sameAs: ['https://github.com/cloudandcapital', 'https://cloudandcapital.substack.com', 'https://www.instagram.com/cloud.and.capital/'],
     },

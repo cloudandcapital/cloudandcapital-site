@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { runInNewContext } from 'node:vm';
+import { directoryTools } from '../src/data/toolDirectory.ts';
 
 import { ANALYTICS_SCHEMA, createAnalyticsTracker, validateAnalyticsEvent } from '../src/lib/analytics.js';
 
@@ -45,7 +46,7 @@ test('the shared loader disables advertising signals and layouts contain no dupl
 });
 
 test('all static CTA metadata is complete and accepted by the allowlist', async () => {
-  const files = ['src/pages/index.astro', 'src/pages/tools.astro', 'src/pages/writing.astro', 'src/components/SignalAuditResults.astro', 'src/components/HomepageTools.astro', 'src/components/InstagramSection.astro'];
+  const files = ['src/pages/index.astro', 'src/pages/tools.astro', 'src/pages/writing.astro', 'src/components/SignalAuditResults.astro', 'src/components/HomepageTools.astro', 'src/components/InstagramSection.astro', 'src/components/HomepageWriting.astro', 'src/components/DirectoryToolCard.astro', 'src/pages/insights/index.astro', 'src/pages/insights/using-the-renewal-tracker.astro'];
   let count = 0;
   for (const file of files) {
     const text = await source(file);
@@ -63,6 +64,10 @@ test('all static CTA metadata is complete and accepted by the allowlist', async 
         for (const rowDestination of ['cloud_cost_guard', 'market_tape', 'signal_audit', 'interactive_lab']) {
           assert.ok(validateAnalyticsEvent('cta_click', { destination: rowDestination, source: sourceValue }), `${file}: ${rowDestination}`);
         }
+        continue;
+      }
+      if (tag[0].includes('data-analytics-destination={tool.destination}')) {
+        for (const tool of directoryTools) assert.ok(validateAnalyticsEvent('cta_click', { destination: tool.destination, source: tool.source }));
         continue;
       }
       assert.ok(validateAnalyticsEvent('cta_click', { destination, source: sourceValue }), `${file}: ${tag[0]}`);
@@ -89,8 +94,8 @@ test('tool wiring covers lifecycle events and reset is session-gated and clears 
 test('homepage path destinations describe their actual links', async () => {
   const homepage = await source('src/pages/index.astro');
   for (const [pathSource, destination, href] of [
-    ['homepage_path_business', 'services', '/services#money-tools'],
-    ['homepage_path_workflow', 'services', '/services#workflow-projects'],
+    ['homepage_path_business', 'services', '/services#technology-cost-review'],
+    ['homepage_path_workflow', 'services', '/services#workflow-review'],
     ['homepage_path_setup', 'services', '/services#custom-tools'],
   ]) {
     const tag = [...homepage.matchAll(/<a\b[^>]*>/g)]
@@ -126,3 +131,4 @@ test('the actual Google wrapper queues Arguments objects and preserves every com
     commands[index].forEach((value, argumentIndex) => assert.strictEqual(queued[argumentIndex], value));
   });
 });
+

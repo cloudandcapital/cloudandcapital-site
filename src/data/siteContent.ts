@@ -240,7 +240,7 @@ export const about = {
   biography: [
     "I’m a mom, a lifelong internet nerd, and almost always in the middle of building something. I love a good rabbit hole, especially one that ends with something I can share.",
     "I earned my finance degree at Cal State Dominguez Hills and worked in wealth management at Morgan Stanley. These days, I look at technology through a finance lens: what it costs, what you get, and whether it’s worth it.",
-    "That’s the work I offer through Cloud & Capital: reviewing technology bills, untangling repetitive work, and building tools for a specific need. I also share free tools and write Markets & Mimosas, my newsletter about money, markets and technology.",
+    "I like turning a tangled task into something someone can actually use. Cloud & Capital brings that together with free tools and Markets & Mimosas, my newsletter about money, markets and technology.",
     "Before finance, I worked in beauty and with animals. I’m the daughter of Polish immigrants, born and raised in LA’s South Bay, where I still live with my teenage son and our dog, Myszka.",
     "There’s room here for what I’ve learned and the questions I’m still working through. Have a look around. Try a tool, read something, or say hello.",
   ],

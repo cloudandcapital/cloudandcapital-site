@@ -26,7 +26,7 @@ export function createSiteGraph({ siteUrl, pathname, title, description, entitie
     {
       '@type': 'Organization', ...organization,
       name: 'Cloud & Capital', url: home,
-      description: 'Technology cost reviews, AI and workflow reviews, and tool and automation setup for growing tech teams and service businesses.',
+      description: 'Custom tools and automations for solo business owners, with free tools and writing about money, markets, and technology. Specialist technology cost and workflow reviews are available.',
       founder: person, email: 'diana@cloudandcapital.com',
       sameAs: ['https://github.com/cloudandcapital', 'https://cloudandcapital.substack.com', 'https://www.instagram.com/cloud.and.capital/'],
     },

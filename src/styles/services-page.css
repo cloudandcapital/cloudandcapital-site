@@ -22,6 +22,8 @@
 .business-services .services-lede { max-width: 57ch; margin-block: 1.5rem .5rem; color: #45483f; font-size: 1.1rem; }
 .business-services .services-lede > span { display: inline-block; }
 .business-services .offers-section { padding-block: 1.8rem 3rem; }
+.business-services .project-intro { max-width: 76ch; margin-bottom: 1.75rem; color: #45483f; }
+.business-services .project-delivery { max-width: 80ch; margin-top: 1.4rem; color: #56584f; font-size: .9rem; }
 .business-services .service-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; align-items: start; }
 .business-services .service-card { --card-accent: #785752; --card-rule: #a7766f40; min-width: 0; padding: 1.7rem; border: 1px solid #c8a9a266; border-radius: 12px; background: #eee0db; }
 .business-services .workflow-card { --card-accent: #3d6055; --card-rule: #597b5b40; background: #e4e9df; border-color: #a6b79d66; }
@@ -51,6 +53,14 @@
 .business-services .services-about h2 { margin-bottom: .6rem; font-size: 2.2rem; }
 .business-services .services-about p { max-width: 78ch; color: #56584f; font-size: .95rem; }
 .business-services .services-about .action-label { font-size: .65rem; }
+.business-services .specialist-section { padding-top: 2rem; }
+.business-services .specialist-list { max-width: 58rem; }
+.business-services .specialist-review { border-bottom: 1px solid #3d60552b; }
+.business-services .specialist-review:first-child { border-top: 1px solid #3d60552b; }
+.business-services .specialist-review > summary { padding-block: .5rem; }
+.business-services .specialist-review .scope-copy { max-width: 78ch; padding-right: .5rem; }
+.business-services .specialist-review .scope-copy a { color: var(--service-green); }
+.business-services .specialist-review .scope-copy .service-text-link { width: fit-content; min-height: 44px; }
 .business-services .services-faq { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); gap: 3rem; padding-block: 3rem; }
 .business-services .faq-list details { border-bottom: 1px solid #3d60552b; }
 .business-services .faq-list details:first-child { border-top: 1px solid #3d60552b; }
@@ -79,11 +89,8 @@
 .business-services .services-inquiry .copy-button { min-height: 44px; padding: .6rem .7rem; margin-left: .5rem; border-color: #3d60554d; border-radius: 6px; color: #3d6055; font: 400 .75rem/1.4 'DM Mono', monospace; }
 .business-services .inquiry-box .email-fallback { margin-top: 1rem; overflow-wrap: anywhere; }
 @media (min-width: 1101px) {
-  .business-services .service-cards { grid-template-rows: repeat(5, auto); }
-  .business-services .service-card { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; }
-  /* An expanded scope stays with its own card without growing the other two. */
-  .business-services .service-cards:has(.service-scope[open]) { grid-template-rows: none; }
-  .business-services .service-cards:has(.service-scope[open]) .service-card { display: block; grid-row: auto; }
+  .business-services .service-cards { grid-template-rows: repeat(4, auto); }
+  .business-services .service-card { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; }
 }
 @media (max-width: 1100px) { .business-services .service-cards { grid-template-columns: minmax(0, 1fr); gap: 1rem; } .business-services .service-card { padding: 1.7rem; } .business-services .service-card-heading { min-height: 0; } .business-services .service-card h3 { font-size: 2.1rem; } .business-services .service-description, .business-services .service-takeaway { max-width: 65ch; } .business-services .service-card-heading img.service-watermark { width: 5.5rem; height: 5.5rem; } }
 @media (max-width: 1020px) { .business-services .services-shell { width: min(calc(100% - 3rem), 78rem); } }

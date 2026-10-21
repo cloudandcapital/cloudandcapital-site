@@ -7,68 +7,58 @@ import ActionLabel from '../components/ActionLabel.astro';
 import FlowText from '../components/FlowText.astro';
 import '../styles/services-page.css';
 
-const offers = [
+const projects = [
   {
-    id: 'technology-cost-review', kind: 'cost', number: '01',
-    name: 'Technology Cost Review', nameLead: 'Technology', nameEnd: 'Cost Review',
-    serviceType: 'Cloud, AI and software cost analysis',
-    description: 'Understand what you’re paying for across cloud, AI, and software, and why the bill changed.',
-    takeaway: 'A spending breakdown, the main cost drivers, and a prioritized list of next steps.',
-    inputs: 'Recent bills or exports, plus the question you need answered.',
-    deliverables: [
-      'A spending breakdown that ties back to your records',
-      'The main cost drivers, with cost per workload or result where the records support it',
-      'Prioritized recommendations and the next checks to make',
+    id: 'money-tools', kind: 'cost', nameLead: 'Money &', nameEnd: 'records',
+    description: 'Keep the dates and figures you need in one place.',
+    examples: 'A renewal diary, an invoice status tracker, or a recurring report from your records.',
+    href: '/tools/software-renewal-tracker', action: 'Try the renewal tracker', external: false,
+  },
+  {
+    id: 'workflow-projects', kind: 'workflow', nameLead: 'Everyday', nameEnd: 'admin',
+    description: 'Reduce copying, chasing, and rewriting in your regular admin.',
+    examples: 'Reply drafts you approve, follow-up reminders, or information passed between compatible apps.',
+    href: '/services/examples#workflow', action: 'See a worked example', external: false,
+  },
+  {
+    id: 'custom-tools', kind: 'setup', nameLead: 'Custom', nameEnd: 'tools',
+    description: 'Build a small tool for a task your existing apps don’t handle well.',
+    examples: 'A calculator, an intake form, or a dashboard built around the inputs and result you need.',
+    href: 'https://lens.cloudandcapital.com', action: 'See a tool I’ve built', external: true,
+  },
+] as const;
+const reviews = [
+  {
+    id: 'workflow-review', name: 'AI & Workflow Review', serviceType: 'AI and workflow review',
+    description: 'For a recurring process that needs a closer look before you decide what to change.',
+    takeaway: 'A process map, recommended changes, and a way to check whether they help. You can use the plan independently or ask me to quote the build.',
+    scope: [
+      'One workflow across up to three tools, using two or three redacted examples. We compare simpler processes, existing features, automation, and AI, including costs, checking, and maintenance.',
+      'The plan includes a success measure and an owner. Building the change is scoped separately.',
     ],
+    example: '/services/examples#workflow',
+  },
+  {
+    id: 'technology-cost-review', name: 'Technology Cost Review', serviceType: 'Cloud, AI and software cost analysis',
+    description: 'For a business with meaningful cloud, AI, or software spending and a bill that needs explaining.',
+    takeaway: 'A spending breakdown that ties back to your records, the main cost drivers, and prioritized next steps.',
     scope: [
       'A defined set of cloud accounts, AI workloads, or software vendors, usually covering three recent billing months. We agree the systems, records, and question before quoting.',
       'I review cost drivers, ownership, usage, commitments, and growth scenarios where the evidence supports them. For AI tools, I separate subscriptions from extra usage, check overlapping plans, and agree how a proposed change will be tested.',
       'Architecture changes, migrations, and account changes are separate. Complex allocation or commitment analysis needs its own agreed scope.',
     ],
-    action: 'Ask about a cost review', example: '/services/examples#cost',
-  },
-  {
-    id: 'workflow-review', kind: 'workflow', number: '02',
-    name: 'AI & Workflow Review', nameLead: 'AI &', nameEnd: 'Workflow Review',
-    serviceType: 'AI and workflow review',
-    description: 'Find a simpler way to handle a recurring task, from copying data to rebuilding the same report.',
-    takeaway: 'A map of the process and a plan for improving it, including whether AI or automation would help.',
-    inputs: 'One recurring task, the tools involved, and a few redacted examples.',
-    deliverables: [
-      'A map of the process and where work gets stuck',
-      'A recommended change, including costs and tradeoffs',
-      'An implementation plan with a way to check whether it helps',
-    ],
-    scope: [
-      'One workflow across up to three tools, using two or three redacted examples. We compare simpler processes, existing features, automation, and AI, including costs, checking, and maintenance.',
-      'The plan includes a success measure and an owner. You can use the recommendations independently. Building the change is scoped separately.',
-    ],
-    action: 'Ask about a workflow review', example: '/services/examples#workflow',
-  },
-  {
-    id: 'practical-setup', kind: 'setup', number: '03',
-    name: 'Tool & Automation Setup', nameLead: 'Tool &', nameEnd: 'Automation Setup',
-    serviceType: 'Tool and automation setup',
-    description: 'Get a reporting template, small tool, or automation built around the way your business works.',
-    takeaway: 'A tested setup, instructions, and a handoff so you know how to use and maintain it.',
-    inputs: 'The result you have in mind, your current tools, and example inputs.',
-    deliverables: [
-      'The agreed setup, tested and ready to use',
-      'Checks for everyday use and exceptions',
-      'Instructions, a handoff, and an agreed maintenance owner',
-    ],
-    scope: [
-      'One agreed result across up to three compatible tools, individually quoted. We agree the inputs, deliverable, tests, and maintenance owner before work starts.',
-      'You can start here when the project is clear. A paid review isn’t required. New features and ongoing support are agreed separately.',
-    ],
-    action: 'Ask about a setup', example: null,
+    example: '/services/examples#cost',
   },
 ] as const;
+const catalogServices = [
+  { id: 'practical-setup', name: 'Tool & Automation Setup', serviceType: 'Custom tools and automation setup', description: 'A defined tool or automation project for a solo business owner, including testing, instructions, and an agreed handoff.' },
+  ...reviews,
+];
 const serviceCatalog = {
   '@type': 'OfferCatalog',
   '@id': 'https://cloudandcapital.com/services#catalog',
   name: 'Cloud & Capital business services',
-  itemListElement: offers.map(({ name, serviceType, id, description }) => ({
+  itemListElement: catalogServices.map(({ name, serviceType, id, description }) => ({
     '@type': 'Offer',
     itemOffered: {
       '@type': 'Service', name, serviceType, description,
@@ -79,42 +69,34 @@ const serviceCatalog = {
   })),
 };
 const questions = [
-  { question: 'What will it cost?', answer: 'You receive a defined scope and fixed quote before work begins. The quote depends on the question, deliverable, and systems involved.' },
-  { question: 'Do I have to buy new software?', answer: 'We look at existing tools and simpler processes first. Any proposed software or usage cost is made clear before you decide.' },
-  { question: 'Do I need a review before booking setup?', answer: 'No. You can start with setup when the result and scope are clear. A review helps when you need to decide what to change, and its recommendations are yours to use independently.' },
+  { question: 'What will it cost?', answer: 'You receive a defined scope, fixed quote, and timeline before work begins. Any software, hosting, or AI usage costs are included in that discussion.' },
+  { question: 'Do I have to buy new software?', answer: 'We look at your existing tools and simpler processes first. A custom build or AI feature needs to earn its place in the solution.' },
+  { question: 'What happens after the handoff?', answer: 'Your setup comes with instructions and a walkthrough. We agree who will maintain it and what support is included. Future changes and ongoing support are quoted separately.' },
 ];
 ---
-<BaseLayout title="AI & Cloud Cost Reviews, Workflow Consulting | Cloud & Capital" description="Review AI, cloud, and software spending, simplify one recurring workflow, or build a defined tool or automation with Diana Molski. A clear scope and fixed quote before work begins." structuredData={[serviceCatalog]}>
+<BaseLayout title="Custom Tools & Automation Setup | Cloud & Capital" description="Custom tools and automations for solo business owners. Start with one recurring task; get a defined project, fixed quote, tested setup, and clear instructions." structuredData={[serviceCatalog]}>
   <main id="main-content" class="business-services">
     <section class="services-shell services-hero" aria-labelledby="services-title">
-      <p class="service-kicker">Business services</p>
+      <p class="service-kicker">Tools &amp; automation setup</p>
       <h1 id="services-title"><span>Your tools should</span> <em>earn their keep.</em></h1>
-      <p class="services-lede">I review technology costs, simplify repetitive tasks, and build tools and automations for small businesses and <span>growing tech teams.</span></p>
-      <a class="service-text-link" href="#inquiry"><ActionLabel label="Email Diana" /></a>
+      <p class="services-lede">I build tools and automations for solo business owners who want less repetitive admin. Bring me one task and the tools you already use.</p>
+      <a class="service-text-link" href="#inquiry"><ActionLabel label="Tell me about the task" /></a>
     </section>
 
-    <section id="offers" class="services-shell offers-section" aria-labelledby="offers-title">
-      <h2 class="service-kicker" id="offers-title">3 ways to work together</h2>
-      <div class="service-cards">
-        {offers.map(offer => (
-          <article id={offer.id} class:list={['service-card', `${offer.kind}-card`]} aria-labelledby={`${offer.id}-title`}>
-            <div class="service-card-heading"><h3 id={`${offer.id}-title`}>{offer.nameLead} <span>{offer.nameEnd}</span></h3><ServiceWatermark kind={offer.kind} /></div>
-            <p class="service-description">{offer.description}</p>
-            <p class="service-takeaway"><span>You get</span>{offer.takeaway}</p>
-            <details class="service-scope">
-              <summary>Scope &amp; details</summary>
-              <div class="scope-copy">
-                <p><strong>Start with:</strong> {offer.inputs}</p>
-                <ul>{offer.deliverables.map(item => <li>{item}</li>)}</ul>
-                {offer.scope.map(paragraph => <p>{paragraph}</p>)}
-                {offer.kind === 'cost' && <p>For a few low-cost subscriptions, try <a href="https://lens.cloudandcapital.com" target="_blank" rel="noopener noreferrer">AI Cost Lens</a> or the <a href="/resources/software-renewal">free renewal worksheet</a> first.</p>}
-                {offer.example && <a class="service-text-link" href={offer.example}><ActionLabel label="See a worked example" /></a>}
-              </div>
-            </details>
-            <a class="service-text-link service-card-action" href="#inquiry"><ActionLabel label={offer.action} /></a>
+    <section id="practical-setup" class="services-shell offers-section" aria-labelledby="offers-title">
+      <h2 class="service-kicker" id="offers-title">Start with one thing</h2>
+      <p class="project-intro">I’ll work through the task with you, recommend a suitable approach, and quote a defined project. That could mean setting up a feature you already have, connecting apps, or building a small tool.</p>
+      <div id="offers" class="service-cards">
+        {projects.map(project => (
+          <article id={project.id} class:list={['service-card', `${project.kind}-card`]} aria-labelledby={`${project.id}-title`}>
+            <div class="service-card-heading"><h3 id={`${project.id}-title`}>{project.nameLead} <span>{project.nameEnd}</span></h3><ServiceWatermark kind={project.kind} /></div>
+            <p class="service-description">{project.description}</p>
+            <p class="service-takeaway"><span>For example</span>{project.examples}</p>
+            <a class="service-text-link service-card-action" href={project.href} target={project.external ? '_blank' : undefined} rel={project.external ? 'noopener noreferrer' : undefined}><ActionLabel label={project.action} /></a>
           </article>
         ))}
       </div>
+      <p class="project-delivery">Every setup includes testing, instructions, and an agreed handoff. Software costs and any ongoing support are agreed before building.</p>
     </section>
 
     <section class="services-shell services-about" aria-labelledby="reviewer-title">
@@ -126,6 +108,25 @@ const questions = [
       </div>
     </section>
 
+    <section class="services-shell specialist-section" aria-labelledby="specialist-title">
+      <h2 class="service-kicker" id="specialist-title">Specialist reviews</h2>
+      <div class="specialist-list">
+        {reviews.map(review => (
+          <details id={review.id} class="specialist-review">
+            <summary>{review.name}</summary>
+            <div class="scope-copy">
+              <p>{review.description}</p>
+              <p><strong>You get:</strong> {review.takeaway}</p>
+              {review.scope.map(paragraph => <p>{paragraph}</p>)}
+              {review.id === 'technology-cost-review' && <p>For a few low-cost subscriptions, start with the <a href="/tools/software-renewal-tracker">free renewal tracker</a>.</p>}
+              <a class="service-text-link" href={review.example}><ActionLabel label="See a worked example" /></a>
+              <a class="service-text-link" href="#inquiry"><ActionLabel label="Ask about a review" /></a>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
     <section class="services-shell services-faq" aria-labelledby="faq-title">
       <div><p class="service-kicker">A few good questions</p><h2 id="faq-title">Before <em>we begin.</em></h2></div>
       <div class="faq-list">{questions.map(item => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
@@ -134,8 +135,8 @@ const questions = [
     <section id="inquiry" class="services-contact" aria-labelledby="inquiry-title">
       <div class="services-shell contact-inner">
         <p class="service-kicker">Get in touch</p>
-        <h2 id="inquiry-title">Tell me <em>what you need.</em></h2>
-        <p class="contact-intro"><FlowText text="Email me a few lines about your business, the tools you use, and what you’d like to change." /></p>
+        <h2 id="inquiry-title">What keeps <em>taking up your time?</em></h2>
+        <p class="contact-intro"><FlowText text="Email me a few lines about the task, the tools you use, and where you get stuck." /></p>
         <p class="contact-quote"><FlowText text="We’ll agree on the scope, fixed quote, and timeline before work begins." /></p>
         <a class="service-button contact-email" href="mailto:diana@cloudandcapital.com?subject=Business%20inquiry"><ActionLabel label="Email Diana" /></a>
         <details class="inquiry-draft">
@@ -146,3 +147,12 @@ const questions = [
     </section>
   </main>
 </BaseLayout>
+
+<script>
+  function revealLinkedReview() {
+    const target = document.getElementById(window.location.hash.slice(1));
+    if (target instanceof HTMLDetailsElement && target.classList.contains('specialist-review')) target.open = true;
+  }
+  revealLinkedReview();
+  window.addEventListener('hashchange', revealLinkedReview);
+</script>

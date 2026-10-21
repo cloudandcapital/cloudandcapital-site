@@ -1,262 +1,180 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { openSourceTools, tools } from '../data/siteContent';
+import ActionLabel from '../components/ActionLabel.astro';
+import DirectoryToolCard from '../components/DirectoryToolCard.astro';
+import { directoryTools, toolTopics, upcomingTools } from '../data/toolDirectory';
 
-const lens = tools.find((tool) => tool.slug === 'ai-cost-lens');
-const guard = tools.find((tool) => tool.slug === 'cloud-cost-guard-lumen');
-const tape = tools.find((tool) => tool.slug === 'market-tape');
-const audit = tools.find((tool) => tool.slug === 'signal-audit');
-const lab = tools.find((tool) => tool.slug === 'interactive-lab');
-
-const supportingTools = [
-  { tool: { title: 'Software Renewal Checklist', href: '/resources/software-renewal' }, status: 'Free worksheet', question: 'Is this subscription worth keeping?', description: 'Eight questions about the bill, how it is used, and what changing tools would involve. Download a two-page PDF with space for your answers.', action: 'Get the renewal worksheet', destination: 'work' },
-  audit && { tool: audit, status: 'Diagnostic', question: 'Where does the decision chain break?', description: 'A five-minute diagnostic showing where cost enters the decision chain before it reaches the invoice, with a weakest-link assessment and priority move.', action: 'Start Signal Audit', destination: 'signal_audit' },
-  lab && { tool: lab, status: 'Guided lab', question: 'What changes when the assumptions change?', description: 'Turn one real question about cloud, AI, SaaS, or technology spend into a structured decision brief grounded in the context you provide.', action: 'Open Interactive Lab', destination: 'interactive_lab' },
-].filter((item) => item !== undefined);
-
-// AI Cost Lens is featured above; these five repository destinations were checked separately.
-const moreCode = openSourceTools.filter((project) => project.title !== 'AI Cost Lens');
+const availableCount = directoryTools.filter(tool => tool.availability !== 'review').length;
+const reviewCount = directoryTools.length - availableCount;
+const allEntries = [...directoryTools, ...upcomingTools];
+const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
 ---
-
-<BaseLayout title="Free AI & Cloud Cost Tools | Cloud & Capital" description="Explore AI Cost Lens, Cloud Cost Guard, Market Tape, and a software renewal tracker. Free tools for AI costs, technology spend, and market research.">
+<BaseLayout title="Free Finance & Technology Tools | Cloud & Capital" description="Free tools for AI costs, cloud bills, software renewals, market context, and business decisions. See what each tool does, what to bring, and what you get.">
   <main id="main-content" class="tools-page">
     <section class="tools-hero" aria-labelledby="tools-title">
-      <div class="site-shell hero-layout">
-        <div class="hero-copy">
-          <p class="eyebrow">Tools</p>
-          <h1 id="tools-title"><span>Start with the question.</span><span>Follow the number.</span></h1>
-          <p>Free tools for understanding markets, business decisions, cloud spend, and AI costs.</p>
-        </div>
-        <div class="tool-index" role="img" aria-label="Research index: cost, signal, evidence, decision.">
-          <div class="index-heading" aria-hidden="true"><span>Cloud &amp; Capital</span><span>Working index</span></div>
-          <div class="index-entries" aria-hidden="true">
-            <div><span>Cost</span><small>What was spent</small></div>
-            <div><span>Signal</span><small>What moved</small></div>
-            <div><span>Evidence</span><small>What holds up</small></div>
-            <div><span>Decision</span><small>What comes next</small></div>
-          </div>
-          <div class="index-footer" aria-hidden="true">Follow the number to the question beneath it.</div>
-        </div>
-      </div>
-    </section>
-
-    {lens && (
-      <section class="lens-section" aria-labelledby="lens-title">
-        <div class="site-shell">
-          <p class="eyebrow eyebrow-light">Featured tool · AI economics</p>
-          <div class="lens-layout">
-            <div class="lens-copy">
-              <h2 id="lens-title">AI Cost Lens</h2>
-              <p class="lens-question">What did one usable result really cost?</p>
-              <p class="lens-description">{lens.description}</p>
-              <div class="lens-actions">
-                <a class="lens-open" href={lens.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="work_flagship"><span>Open AI Cost Lens</span><span aria-hidden="true">→</span></a>
-                <a class="lens-source" href={lens.sourceHref} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens_github" data-analytics-source="work_flagship"><span>View the source</span><span aria-hidden="true">→</span></a>
-              </div>
-            </div>
-            <a class="flagship-window" href={lens.href} target="_blank" rel="noopener noreferrer" aria-label="Open AI Cost Lens" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="work_flagship">
-              <span class="window-bar" aria-hidden="true"><span class="window-dots"><i></i><i></i><i></i></span><span>lens.cloudandcapital.com · illustrative example</span></span>
-              <span class="window-canvas"><img src="/images/ai-cost-lens-anatomy-preview.jpg" alt="AI Cost Lens illustrative example comparing the full cost of two AI routes" width="1315" height="492" loading="lazy" /></span>
-            </a>
-          </div>
-          <dl class="lens-notes">
-            <div><dt>The question</dt><dd>What did one usable AI result cost?</dd></div>
-            <div><dt>You bring</dt><dd>Start with an example, a prompt, or the bill and usage records you have.</dd></div>
-            <div><dt>You leave with</dt><dd>A price estimate or cost breakdown, with the assumptions and missing information made clear.</dd></div>
-          </dl>
-        </div>
-      </section>
-    )}
-
-    <section class="starting-section" aria-labelledby="starting-title">
       <div class="site-shell">
-        <p class="eyebrow">Choose a starting point</p>
-        <h2 id="starting-title">Choose where to begin.</h2>
-        <div class="product-features">
-          <a class="product-feature renewal-feature" href="/tools/software-renewal-tracker" data-analytics-event="cta_click" data-analytics-destination="software_renewal_tracker" data-analytics-source="work_decision_tools">
-            <div class="product-copy"><span class="product-status">Free tracker</span><h3>Software Renewal Tracker</h3><p class="product-question">What renews next, and when do I need to decide?</p><p>Add your software charges, renewal dates, and cancellation deadlines. See upcoming charges and monthly equivalent costs in one place.</p><span class="product-action"><span>Open the renewal tracker</span><span aria-hidden="true">→</span></span></div>
-            <div class="product-media"><img src="/images/software-renewal-project-desk.jpg" alt="Software Renewal Tracker showing the Project desk subscription, renewal date, and notice deadline" width="1168" height="455" loading="lazy" /></div>
-          </a>
-          {guard && (
-            <a class="product-feature guard-feature" href={guard.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="work_decision_tools">
-              <div class="product-copy"><span class="product-status">Free tool · CSV upload</span><h3>Cloud Cost Guard</h3><p class="product-question">What moved the bill?</p><p>Upload a supported cloud billing CSV to see spending and cost drivers. Add an earlier bill to compare periods. Your records are processed in your browser, and an example is available to explore.</p><span class="product-action"><span>Review my cloud bill</span><span aria-hidden="true">→</span></span></div>
-              <div class="product-media" aria-hidden="true"><img src="/images/cloud-cost-guard-summary-preview.jpg" alt="" width="1216" height="474" loading="lazy" /></div>
-            </a>
-          )}
-          {tape && (
-            <a class="product-feature tape-feature" href={tape.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="market_tape" data-analytics-source="work_decision_tools">
-              <div class="product-media" aria-hidden="true"><img src="/images/market-tape-internals-momentum.jpg" alt="" width="1104" height="430" loading="lazy" /></div>
-              <div class="product-copy"><span class="product-status">Market view</span><h3>Market Tape</h3><p class="product-question">What is moving across the market?</p><p>Explore rates, sectors, commodities, and market context in a research dashboard.</p><span class="product-action"><span>Open Market Tape</span><span aria-hidden="true">→</span></span></div>
-            </a>
-          )}
-        </div>
-        <div class="supporting-tools">
-          {supportingTools.map((item) => (
-            <a class="supporting-tool" href={item.tool.href} data-analytics-event="cta_click" data-analytics-destination={item.destination} data-analytics-source="work_decision_tools">
-              <span class="product-status">{item.status}</span><h3>{item.tool.title}</h3><p class="product-question">{item.question}</p><p>{item.description}</p><span class="product-action"><span>{item.action}</span><span aria-hidden="true">→</span></span>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="open-section" aria-labelledby="open-title">
-      <div class="site-shell">
-        <div class="open-layout">
-          <div class="open-heading"><p class="eyebrow">Built in the open</p><h2 id="open-title"><span>More experiments</span><span>and source code.</span></h2></div>
-          <div class="open-panel">
-            <div class="open-list">
-              {moreCode.map((project) => (
-                <a class="open-row" href={project.href} target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="github_pipeline" data-analytics-source="work_pipeline">
-                  <span class="open-name">{project.title}</span><span class="open-description">{project.description}</span><span class="open-arrow" aria-hidden="true">→</span>
-                </a>
-              ))}
-            </div>
-            <a class="open-all" href="https://github.com/cloudandcapital" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="github_pipeline" data-analytics-source="work_pipeline"><span>View all on GitHub</span><span aria-hidden="true">→</span></a>
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <p class="eyebrow">Free tools</p>
+            <h1 id="tools-title"><span>Find something</span><em>that helps.</em></h1>
+            <p>Understand a bill, keep track of renewals, explore the market, or work through a decision. Start with what you need.</p>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <span class="library-folder">
+              <span class="folder-layer folder-back"></span>
+              <span class="folder-layer folder-card folder-card-sage"></span>
+              <span class="folder-layer folder-card folder-card-ivory"></span>
+              <span class="folder-layer folder-card folder-card-rose"></span>
+              <span class="folder-layer folder-body"></span>
+            </span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="contact-strip" aria-labelledby="contact-strip-title">
-      <div class="site-shell contact-layout"><p class="eyebrow">Work with Diana</p><h2 id="contact-strip-title">Want help reviewing your technology costs?</h2><a href="/services#technology-cost-review" data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="work_contact"><span>Explore the cost review</span><svg class="contact-heart" aria-hidden="true" viewBox="0 0 16 16" fill="none"><path d="M8 13.5C5.9 11.7 2.1 8.7 2.2 5.7c.1-1.7 2.2-2.7 3.7-1.7.8.5 1.3 1.1 2.1 1.8.7-1 1.5-1.9 2.6-2 2.2-.2 3.7 1.7 3.1 3.7-.7 2.3-3.5 4.7-5.7 6Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" /></svg><span aria-hidden="true">→</span></a></div>
+    <section class="tool-library site-shell" data-tool-directory aria-labelledby="library-title">
+      <h2 id="library-title" class="visually-hidden">Browse the tools</h2>
+      <div class="tool-topics" data-tool-filters role="group" aria-label="Choose a tool topic" hidden>
+        {filters.map(filter => (
+          <button type="button" data-tool-filter={filter.id} data-tool-tone={filter.tone} aria-pressed={filter.id === 'all' ? 'true' : 'false'} aria-controls="tool-gallery">
+            <span>{filter.label}</span>
+            <span class="topic-count" aria-hidden="true">{allEntries.filter(tool => filter.id === 'all' || tool.topics.some(topic => topic === filter.id)).length}</span>
+          </button>
+        ))}
+      </div>
+      <p class="library-status" data-tool-status role="status" aria-live="polite" aria-atomic="true">{availableCount} tools to explore · {reviewCount} under review · {upcomingTools.length} coming soon</p>
+      <ul class="directory-grid" id="tool-gallery">
+        {directoryTools.map(tool => (
+          <li class="directory-item" data-tool-item data-tool-id={tool.slug} data-tool-topics={tool.topics.join(' ')} data-tool-review={tool.availability === 'review' || undefined}>
+            <DirectoryToolCard tool={tool} />
+          </li>
+        ))}
+        {upcomingTools.map(tool => (
+          <li class="directory-item" data-tool-item data-tool-id={tool.slug} data-tool-topics={tool.topics.join(' ')} data-tool-upcoming>
+            <article class="upcoming-card" data-tone={tool.tone} aria-labelledby={`${tool.slug}-title`}>
+              <div class="upcoming-preview" aria-hidden="true"><p>{tool.preview[0]}<br /><em>{tool.preview[1]}</em></p><span class="upcoming-sparkle">✳</span></div>
+              <div class="upcoming-copy"><p class="upcoming-label">{tool.next ? 'Coming next' : 'Coming soon'}</p><h3 id={`${tool.slug}-title`}>{tool.name}</h3><p>{tool.description}</p></div>
+            </article>
+          </li>
+        ))}
+      </ul>
+      <div class="source-section">
+        <p>Curious how they’re built?</p>
+        <a href="https://github.com/cloudandcapital" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="github_pipeline" data-analytics-source="work_pipeline"><ActionLabel label="Explore on GitHub" /></a>
+      </div>
+    </section>
+
+    <section class="tools-contact" aria-labelledby="tools-contact-title">
+      <div class="site-shell contact-layout">
+        <div><p class="eyebrow">Work with Diana</p><h2 id="tools-contact-title">Need a tool that fits your work?</h2><p>Bring me the task, the inputs you have, and the result you need. We’ll work out a defined project.</p></div>
+        <a href="/services" data-analytics-event="cta_click" data-analytics-destination="services" data-analytics-source="work_contact"><ActionLabel label="Ways to work together" /></a>
+      </div>
     </section>
   </main>
 </BaseLayout>
-
+<script>
+  import { initToolDirectory } from '../lib/tool-directory.js';
+  const setup = () => initToolDirectory(document.querySelector('[data-tool-directory]'));
+  setup();
+  document.addEventListener('astro:page-load', setup);
+</script>
 <style>
-  .tools-page { color: #24211e; font-family: 'Jost', system-ui, sans-serif; }
-  .tools-page :is(h1,h2,h3,p) { margin: 0; }
-  .tools-page :is(h1,h2,h3) { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; }
-  .tools-page a { color: inherit; text-decoration: none; }
-  .tools-page a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
-  .eyebrow, .product-status { font: 500 .68rem/1.5 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
-  .eyebrow { color: #3d6055; }
-  .eyebrow-light { color: #d4e0d6; }
-  .tools-hero { padding: clamp(6.05rem, 8.1vw, 7.4rem) 0 clamp(2.95rem, 4.5vw, 3.95rem); background: var(--cream); }
-  .hero-layout { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: clamp(2rem, 4vw, 4rem); align-items: center; }
-  .hero-copy h1 { margin-top: 1.4rem; font-size: clamp(3.4rem, 4.2vw, 4.5rem); line-height: .96; letter-spacing: -.035em; }
-  .hero-copy h1 span { display: block; }
-  .hero-copy > p:last-child { max-width: 42ch; margin-top: 1.6rem; color: #4a4a4a; font-size: 1rem; line-height: 1.75; }
-  .tool-index { min-width: 0; padding: 1.8rem 2.1rem 1.5rem; border: 1px solid rgba(36,35,31,.2); background: #f9f5ee; }
-  .index-heading, .index-footer { display: flex; justify-content: space-between; gap: 1rem; color: #4b4942; font: 500 .6rem/1.5 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
-  .index-heading { padding-bottom: 1rem; border-bottom: 1px solid rgba(36,35,31,.23); }
-  .index-entries { padding: 1rem 0; }
-  .index-entries > div { display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; min-height: 3.7rem; padding: .45rem 0; border-bottom: 1px solid rgba(36,35,31,.18); }
-  .index-entries span { font: 400 clamp(2rem, 3vw, 2.75rem)/1 'Cormorant Garamond', Georgia, serif; text-transform: uppercase; color: #3d6055; }
-  .index-entries > div:nth-child(2) span { color: #805751; }
-  .index-entries > div:nth-child(4) span { color: #2f2927; }
-  .index-entries small { color: #6c665f; font: .6rem/1.5 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; }
-  .index-footer { justify-content: flex-end; padding-top: .75rem; }
-  .lens-section { padding: clamp(3.6rem, 5vw, 4.8rem) 0; background: var(--brand-green); color: #f5eee9; }
-  .lens-layout { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(2rem, 4vw, 4rem); align-items: center; margin-top: 1.25rem; }
-  .lens-copy h2 { font-size: clamp(3.5rem, 5vw, 5rem); line-height: .96; }
-  .lens-question { margin-top: 1rem !important; font: italic 400 clamp(1.55rem, 2.2vw, 2rem)/1.2 'Cormorant Garamond', Georgia, serif; }
-  .lens-description { max-width: 46ch; margin-top: 1.3rem !important; color: #e4eee6; font-size: .97rem; line-height: 1.75; }
-  .lens-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1rem; margin-top: 1.8rem; }
-  .lens-actions a, .open-all, .contact-layout a { display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; font: 500 .72rem/1.4 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
-  .lens-open { padding: .85rem 1.25rem; background: var(--cream); color: #2f2927 !important; border-radius: 8px; }
-  .lens-open:hover { background: var(--cream-dark); }
-  .lens-source { padding: .85rem 1.25rem; border: 1px solid rgba(245,238,233,.58); border-radius: 8px; }
-  .lens-source:hover { background: rgba(245,238,233,.1); }
-  .open-all > span:first-child { border-bottom: 1px solid currentColor; }
-  .lens-actions a > span:last-child, .open-all > span:last-child, .contact-layout a > span:last-child, .product-action > span:last-child, .open-arrow { display: inline-block; font-size: 1.25rem; line-height: 1; transition: transform .2s ease; }
-  .lens-actions a:hover > span:last-child, .lens-actions a:focus-visible > span:last-child, .open-all:hover > span:last-child, .open-all:focus-visible > span:last-child, .contact-layout a:hover > span:last-child, .contact-layout a:focus-visible > span:last-child, .tools-page a:hover .product-action > span:last-child, .tools-page a:focus-visible .product-action > span:last-child, .tools-page a:hover .open-arrow, .tools-page a:focus-visible .open-arrow { transform: translateX(3px); }
-  .flagship-window { position: relative; isolation: isolate; display: block; min-width: 0; margin: 0 14px 14px 0; border: 0; border-radius: 16px; background: #faf6ef; color: #625d55; text-decoration: none; box-shadow: 0 15px 30px -16px rgba(24,40,32,.45); transition: transform 220ms ease, box-shadow 220ms ease; }
-  .flagship-window::before { content: ''; position: absolute; inset: 16px -16px -16px 16px; z-index: -1; background: #dfe3d7; border-radius: 16px; }
-  .window-bar { position: relative; display: flex; justify-content: center; align-items: center; min-height: 2rem; padding: .6rem 2.7rem; border-radius: 16px 16px 0 0; background: #faf6ef; border-bottom: 1px solid rgba(36,33,30,.1); font: .48rem 'DM Mono',monospace; color: #68635b; }
-  .window-dots { position: absolute; left: .85rem; display: flex; gap: .3rem; }
-  .window-dots i { width: 5px; height: 5px; border-radius: 50%; background: #bbb4a8; }
-  .window-canvas { display: block; border-radius: 0 0 16px 16px; overflow: hidden; }
-  .flagship-window img { display: block; width: 100%; height: auto; border-radius: 0 0 16px 16px; transform: none; }
-  .flagship-window:hover, .flagship-window:focus-visible { transform: translateY(-5px); box-shadow: 0 20px 34px -16px rgba(24,40,32,.5); }
-  .lens-notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin: 1.8rem 0 0; padding-top: 1.25rem; border-top: 1px solid rgba(245,238,233,.3); }
-  .lens-notes dt { color: #d4e0d6; font: 500 .62rem/1.5 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
-  .lens-notes dd { max-width: 28ch; margin: .5rem 0 0; color: #faf6ef; font-size: 1.0625rem; line-height: 1.6; }
-  .starting-section { padding: clamp(4.5rem, 7vw, 6.5rem) 0 clamp(2rem, 3vw, 3rem); background: var(--cream); }
-  .starting-section h2 { margin-top: .9rem; font-size: clamp(2.75rem, 4vw, 4rem); line-height: 1.04; }
-  .product-features { display: grid; gap: 1.5rem; margin-top: 2.5rem; }
-  .product-feature { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2rem, 4vw, 4rem); align-items: center; min-width: 0; padding: clamp(2rem, 4vw, 3.5rem); transition: background-color .2s ease; }
-  .guard-feature { background: var(--sage-surface); }
-  .guard-feature:hover, .guard-feature:focus-visible { background: var(--sage-surface-hover); }
-  .renewal-feature { border: 1px solid #d5b4aa; border-radius: 16px; background: #f3e2dc; }
-  .renewal-feature:hover, .renewal-feature:focus-visible { background: #ecd6cf; }
-  .renewal-feature .product-status { color: #89534f; }
-  .tape-feature { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); background: var(--cream); border-top: 1px solid rgba(128,87,81,.48); }
-  .tape-feature:hover, .tape-feature:focus-visible { background: var(--cream-dark); }
-  .product-status { color: #3d6055; }
-  .tape-feature .product-status { color: #805751; }
-  .product-copy h3, .supporting-tool h3 { margin-top: .75rem; font-size: clamp(2.7rem, 3.5vw, 3.7rem); line-height: 1; }
-  .product-question { margin-top: 1rem !important; font: italic 400 clamp(1.5rem, 2vw, 1.9rem)/1.2 'Cormorant Garamond', Georgia, serif; }
-  .product-copy > p:not(.product-question), .supporting-tool > p:not(.product-question) { max-width: 54ch; margin-top: 1rem; color: #4b4942; font-size: .96rem; line-height: 1.72; }
-  .product-action { display: inline-flex; align-items: center; gap: .7rem; min-height: 44px; margin-top: 1.5rem; color: #3d6055; font: 500 .72rem/1.4 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
-  .product-feature .product-action { padding: .85rem 1.2rem; background: var(--brand-green); color: #f5eee9; border-radius: 8px; }
-  .renewal-feature .product-action { background: #89534f; }
-  .tape-feature .product-action { background: var(--rose); color: var(--brand-ink); }
-  .tape-feature:hover .product-action { background: var(--rose-hover); }
-  .product-media { display: flex; align-items: center; min-width: 0; height: clamp(13rem, 17vw, 16rem); }
-  .product-media img { display: block; width: 100%; height: 100%; object-fit: contain; border: 1px solid rgba(36,35,31,.12); border-radius: 8px; }
-  .renewal-feature .product-media, .guard-feature .product-media { height: auto; }
-  .renewal-feature .product-media img, .guard-feature .product-media img { height: auto; }
-  .supporting-tools { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-  .supporting-tool { display: flex; flex-direction: column; min-width: 0; padding: 2rem 2.2rem; border-top: 1px solid rgba(36,35,31,.22); background: var(--cream); transition: background-color .2s ease; }
-  .supporting-tool:hover, .supporting-tool:focus-visible { background: var(--sage-surface-hover); }
-  .supporting-tool h3 { font-size: clamp(2.2rem, 2.7vw, 2.8rem); }
-  .supporting-tool .product-question { font-size: 1.55rem; }
-  .supporting-tool > p:not(.product-question) { font-size: .9rem; margin-bottom: 1.5rem; }
-  .supporting-tool .product-action { align-self: flex-start; margin-top: auto; padding: .7rem .9rem; border: 1px solid #3d6055; font-size: .78rem; border-radius: 8px; }
-  .open-section { padding: clamp(2.8rem, 4vw, 3.6rem) 0; background: var(--cream); }
-  .open-layout { display: grid; grid-template-columns: minmax(0, .43fr) minmax(0, .57fr); gap: clamp(2rem, 4vw, 4rem); align-items: start; }
-  .open-heading h2 { margin-top: .8rem; font-size: clamp(2.15rem, 2.75vw, 2.8rem); line-height: 1.04; }
-  .open-heading h2 span { display: block; }
-  .open-panel { min-width: 0; padding: .5rem 1.75rem .75rem; background: var(--brand-green); color: #f5eee9; }
-  .open-row { display: grid; grid-template-columns: minmax(10rem, .65fr) minmax(0, 1.35fr) auto; gap: 1rem; align-items: center; min-height: 4.3rem; padding: .65rem 0; border-bottom: 1px solid rgba(245,238,233,.22); transition: background-color .2s ease; }
-  .open-row:hover, .open-row:focus-visible { background: rgba(245,238,233,.06); }
-  .open-name { font: 400 1.35rem/1.1 'Cormorant Garamond', Georgia, serif; }
-  .open-description { color: #e5eee6; font-size: .83rem; line-height: 1.5; }
-  .open-arrow { color: #f5eee9; }
-  .open-all { margin-top: .8rem; color: #e5eee6 !important; }
-  .contact-strip { padding: 2rem 0; background: var(--clay); }
-  .contact-layout { display: grid; grid-template-columns: minmax(10rem, .25fr) minmax(0, .5fr) minmax(10rem, .25fr); align-items: center; gap: 1.5rem; }
-  .contact-layout .eyebrow { color: #2f2927; }
-  .contact-layout h2 { max-width: 22ch; font-size: clamp(2rem, 2.65vw, 2.7rem); line-height: 1.05; }
-  .contact-layout a { justify-self: end; justify-content: center; min-height: 56px; padding: .9rem 1.7rem; background: var(--cream); color: #2f2927; white-space: nowrap; }
-  .contact-layout a:hover { background: var(--cream-dark); }
-  .contact-heart { width: 13px; height: 13px; color: #805751; }
-  @media (max-width: 1024px) {
-    .hero-layout, .lens-layout { grid-template-columns: 1fr; }
-    .tool-index { max-width: 44rem; }
-    .flagship-window { max-width: 48rem; }
-    .product-feature, .tape-feature { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 2rem; }
-    .tape-feature { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); }
-    .open-layout { grid-template-columns: 1fr; gap: 1.8rem; }
-    .contact-layout { grid-template-columns: minmax(0, .35fr) minmax(0, .65fr); }
-    .contact-layout a { grid-column: 2; justify-self: start; }
+  .tools-page { color: var(--brand-ink); font-family: 'Jost', system-ui, sans-serif; }
+  .tools-page :is(h1,h2,p) { margin: 0; }
+  .eyebrow { display: flex; align-items: center; gap: .75rem; color: #4f7165; font: 400 .65rem/1.5 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
+  .eyebrow::after { content: ''; width: 2.7rem; height: 1px; background: currentColor; opacity: .45; }
+  .tools-hero { padding: clamp(6.5rem, 9vw, 8.5rem) 0 1.5rem; background: var(--cream); }
+  .hero-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: center; gap: clamp(2rem, 5vw, 5rem); }
+  .hero-copy h1 { margin-top: 1.2rem; font: 400 clamp(3.5rem, 6.5vw, 5.7rem)/.98 'Cormorant Garamond', Georgia, serif; letter-spacing: -.035em; }
+  .hero-copy h1 > span, .hero-copy h1 > em { display: block; max-width: 100%; }
+  .hero-copy h1 em { color: var(--brand-green); font-weight: 400; }
+  .hero-copy > p:last-child { max-width: 49ch; margin-top: 1.4rem; color: #4b4c45; font-size: 1.0625rem; line-height: 1.75; text-wrap: pretty; }
+  .hero-art { position: relative; display: flex; justify-content: center; min-width: 0; padding: 0 1.25rem 1.75rem 0; }
+  .library-folder { position: relative; display: block; isolation: isolate; width: clamp(17rem, 28vw, 24rem); aspect-ratio: 1; }
+  .folder-layer { position: absolute; background-image: url('/images/tools-folder-layers.webp'); background-size: 200% 200%; background-repeat: no-repeat; }
+  .folder-back, .folder-body { left: 5%; top: 17%; width: 90%; height: 90%; background-position: 0 0; }
+  .folder-back { z-index: 0; }
+  .folder-body { z-index: 4; clip-path: polygon(0% 0%, 14% 0%, 14% 28%, 16% 31%, 18% 35%, 20% 39%, 21% 44%, 22% 46.5%, 24% 44%, 27% 42.5%, 31% 41%, 42% 40.5%, 46% 40.5%, 49% 41.5%, 52% 44.5%, 55% 49%, 58% 53%, 60% 54.7%, 63% 55%, 69% 54.2%, 76% 53%, 79% 52.5%, 82% 51.3%, 84% 49%, 86% 46%, 88% 44%, 91% 43%, 96% 42%, 100% 42%, 100% 100%, 0% 100%); }
+  .folder-card { transform-origin: 50% 85%; }
+  .folder-card-sage { --card-lift: -.4rem; --card-roll: -1deg; --card-delay: .15s; z-index: 1; left: 10%; top: 6%; width: 70%; height: 70%; background-position: 100% 0; clip-path: inset(0 0 0 7%); }
+  .folder-card-ivory { --card-lift: -.55rem; --card-roll: .8deg; --card-delay: .8s; z-index: 2; left: 12%; top: 5%; width: 80%; height: 80%; background-position: 0 100%; }
+  .folder-card-rose { --card-lift: -.4rem; --card-roll: 1deg; --card-delay: 1.45s; z-index: 3; left: 30%; top: 15%; width: 74%; height: 74%; background-position: 100% 100%; }
+  @keyframes directory-file-shuffle { 0%, 12%, 80%, 100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(var(--card-lift)) rotate(var(--card-roll)); } 58% { transform: translateY(.06rem) rotate(0); } }
+  @keyframes directory-file-replay { 0%, 12%, 80%, 100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(var(--card-lift)) rotate(var(--card-roll)); } 58% { transform: translateY(.06rem) rotate(0); } }
+  @media (prefers-reduced-motion: no-preference) {
+    .folder-card { animation: directory-file-shuffle 3.2s ease-in-out 1; animation-delay: var(--card-delay); }
+    .library-folder:hover .folder-card { animation-name: directory-file-replay; }
   }
-  @media (max-width: 800px) {
-    .product-feature, .tape-feature { grid-template-columns: 1fr; }
-    .tape-feature .product-media { grid-row: 2; }
-    .product-media { height: auto; }
-    .product-media img { height: auto; }
-    .supporting-tools { grid-template-columns: 1fr; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .tool-library { padding-bottom: clamp(3rem, 5vw, 4.5rem); }
+  .tool-topics { display: flex; justify-content: center; flex-wrap: wrap; gap: .7rem; padding: 1.5rem 0; border-top: 1px solid #3d605529; }
+  .tool-topics[hidden], .directory-item[hidden] { display: none; }
+  .tool-topics button { --topic-surface: #e4e9df; --topic-border: #c2cdbb; --topic-ink: #3d6055; display: inline-flex; align-items: center; justify-content: center; gap: 1rem; min-height: 58px; padding: .75rem 1.35rem; border: 1px solid var(--topic-border); border-radius: 14px; background: var(--topic-surface); color: var(--topic-ink); font: 500 1rem/1.4 'Jost', system-ui, sans-serif; cursor: pointer; box-shadow: 0 3px 0 -1px var(--topic-border); transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease; }
+  .tool-topics button[data-tool-filter="all"] { --topic-surface: #fcfbf8; --topic-border: #ccc5bb; --topic-ink: #24211e; }
+  .tool-topics button[data-tool-filter="money-investing"] { --topic-surface: #eadfce; --topic-border: #cfc0aa; --topic-ink: #675844; }
+  .tool-topics button[data-tool-filter="ai-automation"] { --topic-surface: #e8d0cc; --topic-border: #c5a09b; --topic-ink: #785752; }
+  .tool-topics button[aria-pressed="true"] { border-color: var(--topic-ink); box-shadow: 0 0 0 1px var(--topic-ink), 0 3px 0 -1px var(--topic-ink); }
+  .tool-topics button[data-tool-filter="all"][aria-pressed="true"] { background: var(--brand-ink); color: #fff; }
+  .tool-topics button:hover { border-color: var(--topic-ink); box-shadow: 0 3px 0 -1px var(--topic-ink); }
+  .topic-count { display: grid; place-items: center; flex: none; min-width: 1.55rem; height: 1.55rem; border-radius: 50%; background: #ffffff8a; color: #42473e; font: 400 .72rem/1 'DM Mono', monospace; }
+  .tool-topics button[aria-pressed="true"] .topic-count { background: var(--topic-ink); color: #fff; }
+  .tool-topics button[data-tool-filter="all"][aria-pressed="true"] .topic-count { background: #ffffff24; }
+  .library-status { text-align: center; padding: .6rem 0 1.4rem; color: #585a51; font-size: .875rem; }
+  .directory-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; padding: 0; list-style: none; }
+  .directory-item { display: flex; min-width: 0; }
+  .directory-item > :global(*) { width: 100%; }
+  .upcoming-card { --upcoming-surface: #e8d0cc; --upcoming-ink: #5d453e; --upcoming-body: #fcfbf8; display: flex; flex-direction: column; width: 100%; min-width: 0; overflow: hidden; border: 1px solid #d6bcb5; border-radius: 16px; background: var(--upcoming-body); }
+  .upcoming-card[data-tone="sage"] { --upcoming-surface: #e4e9df; --upcoming-ink: #3d6055; border-color: #c2cdbb; }
+  .upcoming-card[data-tone="sand"] { --upcoming-surface: #eadfce; --upcoming-ink: #675844; border-color: #d3c6b1; }
+  .upcoming-card[data-filter-tone="sage"] { --upcoming-surface: #e4e9df; --upcoming-ink: #3d6055; --upcoming-body: #f0f3ec; border-color: #c2cdbb; }
+  .upcoming-card[data-filter-tone="sand"] { --upcoming-surface: #eadfce; --upcoming-ink: #675844; --upcoming-body: #f6f0e6; border-color: #d3c6b1; }
+  .upcoming-card[data-filter-tone="rose"] { --upcoming-surface: #eddbd6; --upcoming-ink: #785752; --upcoming-body: #f6eae7; border-color: #d6b8b2; }
+  .upcoming-preview { position: relative; display: flex; flex-direction: column; justify-content: center; aspect-ratio: 1.85; padding: 1.5rem; overflow: hidden; background: var(--upcoming-surface); }
+  .upcoming-preview > p { color: var(--upcoming-ink); font: 400 clamp(2.25rem, 3.5vw, 3.25rem)/.95 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; }
+  .upcoming-sparkle { position: absolute; right: 1.5rem; bottom: 1.25rem; color: var(--upcoming-ink); opacity: .6; font-size: 3.25rem; line-height: 1; }
+  .upcoming-copy { padding: 1.5rem; }
+  .upcoming-label { color: var(--upcoming-ink); font: 500 .61rem/1.5 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+  .upcoming-copy h3 { margin: .65rem 0 .9rem; font: italic 400 clamp(2.15rem, 2.7vw, 2.75rem)/1.05 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; text-wrap: balance; }
+  .upcoming-copy > p:last-child { color: #4a4a42; font-size: .9375rem; line-height: 1.7; text-wrap: pretty; }
+  .source-section { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .3rem 1rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #3d605529; }
+  .source-section p { color: #585a51; font-size: .875rem; }
+  .source-section a { display: inline-flex; color: #3d6055; text-decoration: none; }
+  .tools-contact { padding: clamp(2.5rem, 5vw, 4rem) 0; background: var(--dusty-rose); }
+  .contact-layout { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+  .tools-contact .eyebrow { color: #60433e; }
+  .tools-contact h2 { max-width: 24ch; margin-top: .75rem; font: 400 clamp(2.1rem, 3.3vw, 3rem)/1.1 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; text-wrap: balance; }
+  .tools-contact p:last-child { max-width: 52ch; margin-top: .8rem; color: #493f3b; font-size: .9375rem; line-height: 1.7; }
+  .tools-contact a { display: inline-flex; justify-content: center; flex: none; min-height: 52px; padding: .2rem 1.3rem; border: 1px solid #b38d89; border-radius: 8px; background: var(--cream); color: var(--brand-ink); text-decoration: none; }
+  .tools-contact a :global(.action-label > span:first-child) { text-decoration: none; }
+  .tools-contact a:hover { background: #fcfbf8; }
+  .tools-page :is(a,button):focus-visible { outline: 3px solid #89534f; outline-offset: 4px; }
+  @media (max-width: 1020px) {
+    .hero-layout { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1rem; }
+    .hero-copy h1 { font-size: clamp(3.1rem, 7vw, 4.5rem); }
+    .directory-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .contact-layout { align-items: start; }
+    .tools-contact a { flex-shrink: 1; }
   }
-  @media (max-width: 700px) {
-    .tools-hero { padding: 6.5rem 0 3.3rem; }
-    .hero-copy h1 { font-size: clamp(3.1rem, 11vw, 4.4rem); }
-    .tool-index { padding-inline: 1.25rem; }
-    .index-entries small { display: none; }
-    .lens-notes { grid-template-columns: 1fr; gap: .9rem; }
-    .lens-notes div { border-bottom: 1px solid rgba(245,238,233,.2); padding-bottom: .8rem; }
-    .product-feature { padding: 1.75rem; }
-    .supporting-tool { padding: 1.75rem; }
-    .open-panel { padding-inline: 1.25rem; }
-    .open-row { grid-template-columns: 1fr auto; gap: .3rem 1rem; }
-    .open-description { grid-column: 1; }
-    .open-arrow { grid-column: 2; grid-row: 1 / 3; align-self: center; }
-    .contact-layout { grid-template-columns: 1fr; gap: 1rem; }
-    .contact-layout a { grid-column: 1; justify-self: stretch; justify-content: center; }
+  @media (max-width: 760px) {
+    .tools-hero { padding-top: 6.75rem; }
+    .hero-layout { grid-template-columns: 1fr; gap: 1.25rem; }
+    .hero-copy h1 { font-size: clamp(2.65rem, 11.5vw, 3.5rem); }
+    .hero-copy > p:last-child { font-size: 1rem; }
+    .hero-art { justify-content: center; padding: 0 1.5rem 1.25rem 0; }
+    .library-folder { width: clamp(10.5rem, 47vw, 14rem); }
+    .tool-topics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; padding: 1.25rem 0; }
+    .tool-topics button { gap: .55rem; min-height: 58px; padding: .7rem .6rem; font-size: .875rem; }
+    .topic-count { min-width: 1.4rem; height: 1.4rem; font-size: .68rem; }
+    .directory-grid { grid-template-columns: 1fr; }
+    .upcoming-preview > p { font-size: clamp(2.5rem, 12vw, 3.5rem); }
+    .contact-layout { display: block; }
+    .tools-contact a { margin-top: 1.25rem; }
+  }
+  @media (max-width: 360px) {
+    .tool-topics button { gap: .4rem; padding-inline: .45rem; font-size: .8rem; }
+    .topic-count { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .tools-page a, .tools-page a > span:last-child, .tools-page a .product-action > span:last-child, .tools-page a .open-arrow { transition: none; }
+    .tool-topics button { transition: none; }
   }
 </style>

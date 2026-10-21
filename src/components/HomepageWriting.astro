@@ -50,6 +50,7 @@ const subscribeHref = `${newsletter.subscribeHref.replace(/\/$/, '')}/subscribe`
     </div>
 
     <div class="writing-subscribe">
+      <a href="/insights" data-analytics-event="cta_click" data-analytics-destination="writing" data-analytics-source="homepage_writing"><ActionLabel label="Browse guides & writing" /></a>
       <a
         href={subscribeHref}
         target="_blank"
@@ -182,7 +183,7 @@ const subscribeHref = `${newsletter.subscribeHref.replace(/\/$/, '')}/subscribe`
   .decision-built strong, .decision-locked strong { opacity: .42; }
   .decision-default strong { opacity: .36; }
 
-  .writing-subscribe { display: flex; justify-content: flex-start; margin-top: 1.25rem; }
+  .writing-subscribe { flex-wrap: wrap; column-gap: 2rem; row-gap: .5rem; display: flex; justify-content: flex-start; margin-top: 1.25rem; }
   .writing-subscribe a { display: inline-flex; align-items: center; gap: .8rem; color: #3d6055; text-decoration: none; }
   .writing-substack-icon { display: grid; place-items: center; flex: none; width: 28px; height: 28px; }
   .writing-subscribe img { width: 18px; height: 18px; object-fit: contain; }

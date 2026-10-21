@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ActionLabel from '../../components/ActionLabel.astro';
+import '../../styles/guides-page.css';
+---
+<BaseLayout title="How to Use the Software Renewal Tracker | Cloud & Capital" description="Add your subscriptions, separate monthly cost from payment dates, record cancellation deadlines, and export a backup. A guide to the free Software Renewal Tracker." type="article">
+  <main id="main-content" class="guides-page tracker-guide">
+    <article class="guide-shell guide-article">
+      <header>
+        <a class="guide-back" href="/insights">← Guides &amp; writing</a>
+        <p class="guide-eyebrow">Tool walkthrough · Diana Molski</p>
+        <h1>Give every renewal <em>a place to land.</em></h1>
+        <p class="guide-lede">A subscription can look affordable each month and still bring a surprisingly large payment. The free Software Renewal Tracker keeps the amounts, dates and next decisions together.</p>
+        <a class="guide-button" href="/tools/software-renewal-tracker" data-analytics-event="cta_click" data-analytics-destination="software_renewal_tracker" data-analytics-source="software_renewal_resource"><ActionLabel label="Open the free tracker" /></a>
+      </header>
+      <figure class="guide-screenshot"><img src="/images/software-renewal-project-desk.jpg" alt="The tracker’s Project desk example with a subscription charge and renewal information" width="1168" height="455" /><figcaption>Illustrative subscription data. Add your own records in the tracker.</figcaption></figure>
+      <section><h2>Start with the actual payment.</h2><p>Choose <strong>Add a subscription</strong>. Enter the vendor, full charge in USD, and billing frequency. For a $240 annual plan, enter <strong>240</strong> and choose <strong>Annually</strong>.</p><p>That works out to $20 a month for comparison. The payment is still $240 when it falls due. The tracker shows a monthly equivalent alongside the charges expected in the month you select.</p></section>
+      <aside class="guide-example"><p class="guide-eyebrow">A checked example</p><p><strong>$19 monthly + $240 annually + $600 annually = $89 monthly equivalent.</strong></p><p>If both annual payments fall in the same month as one $19 charge, that month needs $859. Across a full year, both views total $1,068, assuming unchanged prices and no additional tax or fees.</p></aside>
+      <section><h2>Record three dates separately.</h2><ul><li><strong>Billing date:</strong> a recent or next expected charge. This anchors the projected payment schedule.</li><li><strong>Renewal date:</strong> when the agreement renews.</li><li><strong>Cancellation or notice deadline:</strong> when you must act to prevent renewal.</li></ul><p>Check the vendor’s terms. A cancellation deadline can fall before the payment date. Renewal and notice dates are not inferred or repeated automatically. Put a deadline’s exact time and time zone in the notes.</p></section>
+      <section><h2>Give the decision an owner.</h2><p>Add who will review the subscription and choose a status, such as Keep, Adjust plan or Compare alternatives. Use the notes for dependencies, missing information and the next action.</p><p>Choosing <strong>Cancel</strong> records your decision. It does not cancel the vendor’s service or remove projected charges. After confirming that billing has ended, update <strong>Billing state</strong> to <strong>Billing ended (confirmed)</strong>.</p></section>
+      <section><h2>Save a copy outside the browser.</h2><p>Saving a subscription stores the diary in this browser on this device. Subscription records are not sent to Cloud &amp; Capital. The diary does not sync across devices, and clearing browser data can remove it.</p><p>Use <strong>Export CSV</strong> for a backup you can import later. Calendar export creates dated, all-day events for the next 12 months from your selected month. It does not add automatic reminders; your calendar app controls alerts.</p></section>
+      <footer class="guide-next"><h2>Dates organized. Decision next.</h2><p>The tracker keeps the records together. The companion worksheet helps you consider usage, alternatives and what would happen if you changed or cancelled a plan.</p><div class="guide-actions"><a class="guide-button" href="/tools/software-renewal-tracker" data-analytics-event="cta_click" data-analytics-destination="software_renewal_tracker" data-analytics-source="software_renewal_resource"><ActionLabel label="Use the tracker" /></a><a href="/resources/software-renewal"><ActionLabel label="Get the renewal worksheet" /></a></div></footer>
+    </article>
+  </main>
+</BaseLayout>

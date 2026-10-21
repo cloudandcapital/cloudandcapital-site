@@ -38,7 +38,7 @@ import ClaudePartnerBadge from './ClaudePartnerBadge.astro';
 
       <div class="diana-story" data-reveal>
         <div class="diana-biography">
-          {about.biography.map((paragraph, index) => <p>{index === about.biography.length - 1 ? paragraph.replace('I’m still working through.', 'I’m\u00a0still\u00a0working\u00a0through.') : <FlowText text={paragraph} />}</p>)}
+          {about.biography.map(paragraph => <p><FlowText text={paragraph} /></p>)}
         </div>
         <aside class="diana-community" aria-labelledby="diana-community-title">
           <div class="diana-event-image">
@@ -55,7 +55,7 @@ import ClaudePartnerBadge from './ClaudePartnerBadge.astro';
 
     <div class="diana-credentials" data-reveal>
       <p class="diana-eyebrow">Credentials &amp; contributions</p>
-      <ClaudePartnerBadge dark />
+      <ClaudePartnerBadge dark centered />
       <dl aria-label="Professional credentials">
         {about.credentials.map(credential => (
           <div class="diana-credential"><dt>{credential.category}</dt><dd>{credential.detail}</dd></div>

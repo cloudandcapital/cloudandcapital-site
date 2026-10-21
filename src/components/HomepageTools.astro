@@ -4,9 +4,9 @@ import { tools } from '../data/siteContent';
 const lens = tools.find(tool => tool.slug === 'ai-cost-lens');
 const guard = tools.find(tool => tool.slug === 'cloud-cost-guard-lumen');
 const choices = [
-  lens && { name: 'AI Cost Lens', category: 'AI spending', description: 'Estimate an AI task, review a bill, or compare options using the numbers you have.', result: 'A clear cost breakdown, including review and rework time when you add it.', href: lens.href, action: 'Open AI Cost Lens', destination: 'ai_cost_lens', external: true, image: '/images/ai-cost-lens-result-preview.jpg', imageAlt: 'Example AI Cost Lens comparison showing recurring cost per ready result, retries, and one time change costs', imageWidth: 1197, imageHeight: 504 },
-  guard && { name: 'Cloud Cost Guard', category: 'Cloud spending', description: 'Upload a supported cloud billing CSV to see where your money went. Add an earlier bill to see what changed.', result: 'A spending breakdown, the biggest cost drivers, and questions worth investigating.', href: guard.href, action: 'Review my cloud bill', destination: 'cloud_cost_guard', external: true, image: '/images/cloud-cost-guard-billing-preview.jpg', imageAlt: 'Example Cloud Cost Guard result showing net cloud cost, credits, and charges by service', imageWidth: 1232, imageHeight: 541 },
-  { name: 'Software Renewal Tracker', category: 'Software subscriptions', description: 'Add your software charges, renewal dates, and cancellation deadlines.', result: 'See what is due each month and when to decide whether to keep a subscription.', href: '/tools/software-renewal-tracker', action: 'Open the renewal tracker', destination: 'software_renewal_tracker', external: false, image: '/images/software-renewal-budget-preview.jpg', imageAlt: 'Example renewal tracker comparing an 89 dollar monthly budget equivalent with 859 dollars in charges due in November', imageWidth: 714, imageHeight: 298 },
+  lens && { name: 'AI Cost Lens', category: 'AI spending', description: ['Estimate an AI task, review a bill, or compare options using the numbers you have.'], result: 'A clear cost breakdown, including review and rework time when you add it.', href: lens.href, action: 'Open AI Cost Lens', destination: 'ai_cost_lens', external: true, image: '/images/ai-cost-lens-result-preview.jpg', imageAlt: 'Example AI Cost Lens comparison showing recurring cost per ready result, retries, and one time change costs', imageWidth: 1197, imageHeight: 504 },
+  guard && { name: 'Cloud Cost Guard', category: 'Cloud spending', description: ['Upload a supported cloud billing CSV.', 'Add an earlier bill to compare costs.'], result: 'A spending breakdown, the biggest cost drivers, and questions worth investigating.', href: guard.href, action: 'Review my cloud bill', destination: 'cloud_cost_guard', external: true, image: '/images/cloud-cost-guard-billing-preview.jpg', imageAlt: 'Example Cloud Cost Guard result showing net cloud cost, credits, and charges by service', imageWidth: 1232, imageHeight: 541 },
+  { name: 'Software Renewal Tracker', category: 'Software subscriptions', description: ['Add software charges and renewal dates.', 'Keep cancellation deadlines in view.'], result: 'See what is due each month and when to decide whether to keep a subscription.', href: '/tools/software-renewal-tracker', action: 'Open the renewal tracker', destination: 'software_renewal_tracker', external: false, image: '/images/software-renewal-budget-preview.jpg', imageAlt: 'Example renewal tracker comparing an 89 dollar monthly budget equivalent with 859 dollars in charges due in November', imageWidth: 714, imageHeight: 298 },
 ].filter(Boolean);
 ---
 <section class="free-tools" id="tools" aria-labelledby="tools-title">
@@ -22,7 +22,7 @@ const choices = [
           <div class="tool-copy">
             <p class="tool-category">{choice.category}</p>
             <h3>{choice.name === 'Software Renewal Tracker' ? <Fragment>Software <span class="tool-heading-phrase">Renewal Tracker</span></Fragment> : choice.name}</h3>
-            <p class="tool-description">{choice.description}</p>
+            <p class="tool-description">{choice.description.map(line => <span>{line}</span>)}</p>
             <p class="tool-result"><span>What you get</span>{choice.result}</p>
             <span class="tool-action"><ActionLabel label={choice.action} /></span>
           </div>
@@ -64,6 +64,7 @@ const choices = [
   .tool-choice h3 { margin-top: .8rem; font: italic 400 clamp(2.3rem, 3.2vw, 3.2rem)/1.06 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; }
   .tool-choice:first-child h3 { font-size: clamp(3rem, 4.1vw, 4.3rem); }
   .tool-description { margin: .9rem 0; color: #44483f; font-size: .9rem; line-height: 1.75; text-wrap: balance; }
+  .tool-choice:not(:first-child) .tool-description > span { display: block; }
   .tool-result { margin: 0 0 1.5rem; padding-top: .9rem; border-top: 1px solid #3d605526; font-size: .9rem; line-height: 1.65; text-wrap: balance; }
   .tool-result > span { display: block; margin-bottom: .35rem; font: 500 .61rem/1.5 'DM Mono', monospace; letter-spacing: .07em; text-transform: uppercase; color: var(--tool-accent); }
   .tool-choice:first-child .tool-result { border-color: #faf6ef40; }

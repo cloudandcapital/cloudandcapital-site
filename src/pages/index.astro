@@ -70,7 +70,7 @@ import {
               <ServiceWatermark kind="setup" />
             </div>
             <h3><span>“Can you help me</span> <span><span class="question-emphasis">build it?</span>”</span></h3>
-            <p>Turn one clear idea into a calculator, form, or small dashboard, with instructions for using it.</p>
+            <p>From calculators and indicators to AI agents and dashboards, I build around what you need the tool to do.</p>
             <span class="path-action"><span>Explore custom builds</span><span class="link-arrow" aria-hidden="true">→</span></span>
           </a>
         </div>
@@ -627,4 +627,8 @@ import {
   @media (min-width: 1201px) {
     .paths .path-card { display: grid; grid-template-rows: subgrid; grid-row: span 4; row-gap: 0; }
   }
+  /* Size both headline lines to their actual column, including wide desktops. */
+  .hero-copy { container-type: inline-size; }
+  .hero-copy h1 { max-width: none; font-size: clamp(2rem, 12.6cqi, 5.75rem); }
+  .hero-copy h1 > span, .hero-copy h1 > em { display: block; width: fit-content; max-width: 100%; white-space: nowrap; }
 </style>

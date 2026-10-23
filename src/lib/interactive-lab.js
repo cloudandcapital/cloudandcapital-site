@@ -7,18 +7,18 @@ export const DECISION_TYPES = {
     eyebrow: 'Commitment economics',
     questions: [
       { id: 'alternatives', label: 'What are the real options?', prompt: 'Name the options being considered, including the option to wait or stage the commitment.' },
-      { id: 'exposure', label: 'What is the financial exposure?', prompt: 'Include the amount, term, pricing structure, and any deadline you know.' },
+      { id: 'exposure', label: 'What money and time are at stake?', prompt: 'Include the amount, contract length, pricing structure, and any deadline you know.' },
       { id: 'demand', label: 'What demand is already proven?', prompt: 'Describe the stable baseline, utilization evidence, and what remains uncertain.' },
       { id: 'constraint', label: 'What cannot be compromised?', prompt: 'Note the reliability, capacity, performance, delivery, or cash constraint that matters most.' },
     ],
   },
   renewal: {
-    label: 'SaaS renewal or rationalization',
-    eyebrow: 'Vendor economics',
+    label: 'Software renewal',
+    eyebrow: 'Before you renew',
     questions: [
       { id: 'alternatives', label: 'What are the real options?', prompt: 'Renew, renegotiate, reduce scope, switch, build, or wait—name what is genuinely available.' },
-      { id: 'exposure', label: 'What is the financial exposure?', prompt: 'Include current spend, proposed term, renewal deadline, and recent growth.' },
-      { id: 'demand', label: 'What usage and ownership evidence exists?', prompt: 'Describe adoption, utilization, business owners, and any unallocated or shared usage.' },
+      { id: 'exposure', label: 'What does it cost, and when is it due?', prompt: 'Include the current bill, new quote, contract length, and renewal deadline. Say which details are still unknown.' },
+      { id: 'demand', label: 'Who uses it, and who looks after it?', prompt: 'Share what is actually used, what sits unused, and who owns the subscription.' },
       { id: 'constraint', label: 'What makes change difficult?', prompt: 'Include switching cost, implementation effort, operational dependency, or contractual limits.' },
     ],
   },
@@ -153,9 +153,9 @@ const NUMBER_WORD_VALUES = new Map([
 
 const NUMBER_WORD_ATOM = '(?:zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|thirty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|forty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|fifty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|sixty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|seventy(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|eighty(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|ninety(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?)\\b';
 const NUMBER_ATOM = `(?:\\d[\\d,]*(?:\\.\\d+)?|${NUMBER_WORD_ATOM})`;
-const COUNT_UNIT = 'anomal(?:y|ies)|services?|teams?|accounts?|requests?|workloads?|incidents?|outages?|resources?|models?|environments?';
-const STANDARD_UNIT = '%|percent(?:age)?|years?|months?|weeks?|days?|hours?|engineers?|users?|seats?|licenses?|licences?|quarters?|x|times?';
-const NUMBER_CLAIM_PATTERN = new RegExp(`([$€£])?\\s*(${NUMBER_ATOM})(?:\\s*(?:-|–|—|to)\\s*(${NUMBER_ATOM}))?([kKmM])?(?:\\s*-\\s*)?(?:(?:\\s+recent)?\\s+(${COUNT_UNIT})|\\s*(${STANDARD_UNIT}))?`, 'gi');
+const COUNT_UNIT = 'anomal(?:y|ies)|services?|teams?|accounts?|requests?|workloads?|incidents?|outages?|resources?|models?|environments?|users?|seats?|licenses?|licences?';
+const STANDARD_UNIT = '%|percent(?:age)?|years?|months?|weeks?|days?|hours?|minutes?|seconds?|engineers?|quarters?|x|times?';
+const NUMBER_CLAIM_PATTERN = new RegExp(`(?<![\\w])([$€£])?\\s*(${NUMBER_ATOM})(?:\\s*(?:-|–|—|to)\\s*(${NUMBER_ATOM}))?([kKmM])?(?:\\s*-\\s*)?(?:(?:\\s+(?:recent|active|unused|licensed|named|stable|production|reserved))?\\s+(${COUNT_UNIT})|\\s*(${STANDARD_UNIT}))?`, 'gi');
 
 function parseNumberAtom(atom) {
   if (/^\d/.test(atom)) return Number(atom.replace(/,/g, ''));
@@ -172,7 +172,10 @@ function normalizeUnit(unit = '') {
 
 function extractNumericClaims(text) {
   const claims = [];
-  for (const match of String(text).matchAll(NUMBER_CLAIM_PATTERN)) {
+  // These describe recurrence, not a quantity. Preserve offsets for the
+  // deliberately narrow, server-calculated comparisons below.
+  const readable = String(text).replace(/\bone[-\u2010-\u2014 ](?:time|off)\b/gi, (match) => ' '.repeat(match.length));
+  for (const match of readable.matchAll(NUMBER_CLAIM_PATTERN)) {
     const [raw, currency, firstAtom, secondAtom, magnitude, countUnit, standardUnit] = match;
     const rawUnit = countUnit || standardUnit;
     if (!currency && !magnitude && !rawUnit && !/^\d/.test(firstAtom)) continue;
@@ -181,17 +184,93 @@ function extractNumericClaims(text) {
     const second = secondAtom ? parseNumberAtom(secondAtom) * scale : null;
     const unit = currency ? `currency:${currency}` : normalizeUnit(rawUnit);
     const value = second === null ? String(first) : `${first}..${second}`;
-    claims.push({ raw: raw.trim(), signature: `${value}|${unit}` });
+    claims.push({ raw: raw.trim(), signature: `${value}|${unit}`, value: first, unit, currency, range: second !== null, index: match.index + raw.indexOf(raw.trim()) });
   }
   return claims;
 }
 
-export function findUnsupportedNumbers(value, sourceText) {
+function addEquivalentUnits(allowed, value, unit) {
+  const conversions = {
+    year: [['month', 12], ['quarter', 4]], quarter: [['month', 3]],
+    week: [['day', 7]], day: [['hour', 24]], hour: [['minute', 60]], minute: [['second', 60]],
+  };
+  for (const [other, scale] of conversions[unit] || []) allowed.add(`${Number(value) * scale}|${other}`);
+  for (const [other, entries] of Object.entries(conversions)) {
+    for (const [target, scale] of entries) if (target === unit && Number(value) % scale === 0) allowed.add(`${Number(value) / scale}|${other}`);
+  }
+}
+
+const MONEY_CODES = { '$': 'USD', '€': 'EUR', '£': 'GBP' };
+function moneyText(amount, symbol) {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: MONEY_CODES[symbol], maximumFractionDigits: 2 }).format(amount);
+}
+
+export function getCheckedCalculations(sourceText) {
+  const source = String(sourceText);
+  const claims = extractNumericClaims(source);
+  const amounts = claims.filter((claim) => claim.currency && !claim.range);
+  // Do not choose a base among different quotes, credits, currencies or rates.
+  if (!amounts.length || claims.some((claim) => claim.currency && claim.range) || /[-−]\s*[$€£]|\b(?:credit|refund|negative)\b/i.test(source)) return [];
+  if (new Set(amounts.map((claim) => claim.signature)).size !== 1) return [];
+  const { value: amount, currency: symbol } = amounts[0];
+  if (!(amount > 0 && amount <= 1e9) || Math.abs(amount * 100 - Math.round(amount * 100)) > 1e-5) return [];
+  const result = [];
+  const percentages = claims.filter((claim) => claim.unit === 'percent' && !claim.range);
+  const rates = [...new Set(percentages.map((claim) => claim.value))];
+  if (rates.length === 1 && rates[0] > 0 && rates[0] <= 100 && Math.abs(rates[0] * 100 - Math.round(rates[0] * 100)) < 1e-8) {
+    const rate = rates[0];
+    const explicitIncrease = percentages.some((claim) => {
+      const surrounding = source.slice(Math.max(0, claim.index - 48), claim.index + claim.raw.length + 48);
+      const before = source.slice(Math.max(0, claim.index - 70), claim.index);
+      const subjects = [...before.matchAll(/\b(price|quote|cost|bill|rate|fee|charge|renewal|demand|usage|traffic|revenue|margin|headcount|requests|utilization)\b/gi)];
+      const lastSubject = subjects.at(-1)?.[1];
+      const priceSubject = /^(?:price|quote|cost|bill|rate|fee|charge|renewal)$/i.test(lastSubject || '')
+        || /^\s*(?:price|cost|fee|rate)\s+increase\b/i.test(source.slice(claim.index + claim.raw.length));
+      return /\bincreas(?:e|es|ed|ing)\b|\bhigher\b/i.test(surrounding)
+        && priceSubject
+        && !/\b(?:discount|decrease|reduction|lower)\b/i.test(surrounding);
+    });
+    if (explicitIncrease) {
+      const cents = BigInt(Math.round(amount * 100));
+      const increaseCents = (cents * BigInt(Math.round(rate * 100)) + 5000n) / 10000n;
+      const increase = Number(increaseCents) / 100;
+      const total = Number(cents + increaseCents) / 100;
+      result.push({
+        label: 'Applying the price increase',
+        explanation: `Calculated: applying a ${rate}% increase to ${moneyText(amount, symbol)} gives ${moneyText(total, symbol)}. The increase is ${moneyText(increase, symbol)}. This assumes the increase applies to that entire charge.`,
+        amounts: [{ value: total, currency: symbol }, { value: increase, currency: symbol }],
+      });
+    }
+  }
+  const monthly = amounts.every((claim) => {
+    const after = source.slice(claim.index + claim.raw.length, claim.index + claim.raw.length + 30);
+    const before = source.slice(Math.max(0, claim.index - 35), claim.index);
+    return /^\s*(?:\/\s*|per\s+|a\s+|each\s+)?month(?:ly|s)?\b/i.test(after)
+      || /\bmonthly(?:\s+(?:spend|cost|price|fee|bill|baseline))?\s*(?:is|of|:)?\s*$/i.test(before);
+  });
+  const yearlyHorizon = claims.some((claim) => !claim.range && ((claim.unit === 'year' && claim.value === 1) || (claim.unit === 'month' && claim.value === 12)));
+  if (monthly && yearlyHorizon) {
+    const total = Number(BigInt(Math.round(amount * 100)) * 12n) / 100;
+    result.push({ label: 'At the current monthly rate', explanation: `Calculated: ${moneyText(amount, symbol)} per month over 12 months is ${moneyText(total, symbol)}, assuming the rate and usage stay the same. This is not a commitment quote.`, amounts: [{ value: total, currency: symbol }] });
+  }
+  return result;
+}
+
+export function findUnsupportedNumbers(value, sourceText, { includeCalculations = false } = {}) {
   const allowed = new Set();
   for (const { signature } of extractNumericClaims(sourceText)) {
     allowed.add(signature);
     const [value, unit] = signature.split('|');
-    if (value.includes('..')) value.split('..').forEach((endpoint) => allowed.add(`${endpoint}|${unit}`));
+    const endpoints = value.includes('..') ? value.split('..') : [value];
+    for (const endpoint of endpoints) {
+      allowed.add(`${endpoint}|${unit}`);
+      addEquivalentUnits(allowed, endpoint, unit);
+    }
+  }
+  if (includeCalculations) {
+    for (const calculation of getCheckedCalculations(sourceText)) {
+      for (const amount of calculation.amounts) allowed.add(`${amount.value}|currency:${amount.currency}`);
+    }
   }
   return [...new Set(extractNumericClaims(JSON.stringify(value)).filter(({ signature }) => !allowed.has(signature)).map(({ raw }) => raw))];
 }

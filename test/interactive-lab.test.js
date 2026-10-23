@@ -5,10 +5,12 @@ import {
   assessReadiness,
   classifyDecision,
   findUnsupportedNumbers,
+  getCheckedCalculations,
   getQuestions,
   validateBrief,
 } from '../src/lib/interactive-lab.js';
 import { GET, POST } from '../src/pages/api/interactive-lab.js';
+import { validBrief } from '../test-support/interactive-lab-fixture.js';
 
 test('classifies the five supported decision families and preserves an explicit type', () => {
   assert.equal(classifyDecision('Should we reserve GPU capacity for a year?'), 'commitment');
@@ -48,30 +50,7 @@ test('a decision becomes ready only when all targeted evidence is supplied', () 
   assert.deepEqual(result.missing, []);
 });
 
-const validBrief = {
-  decision_summary: 'Choose how much capacity to commit before demand is proven.',
-  posture: { label: 'Stage', rationale: 'The baseline is known but growth remains uncertain.' },
-  known_facts: ['A commitment is being considered.', 'Demand is uncertain.', 'Finance wants flexibility.'],
-  working_assumptions: [{ assumption: 'Some baseline demand will persist.', why_it_matters: 'It determines the defensible commitment floor.' }],
-  options: [
-    { name: 'Wait', economics: 'Pay for flexibility.', operational_effect: 'No change.', reversibility: 'High.', risk: 'Higher near-term rate.', evidence_needed: 'Usage history.' },
-    { name: 'Stage', economics: 'Commit only the baseline.', operational_effect: 'Mixed purchasing model.', reversibility: 'Medium.', risk: 'Some exposure remains.', evidence_needed: 'Baseline utilization.' },
-  ],
-  lenses: {
-    finops: { view: 'Size commitment to proven usage.', need: 'Coverage and utilization.' },
-    finance: { view: 'Protect downside.', need: 'Term and cash exposure.' },
-    engineering: { view: 'Protect capacity.', need: 'Queue and workload evidence.' },
-  },
-  common_ground: 'All three lenses need a stable baseline.',
-  unresolved_tension: 'The price of flexibility remains uncertain.',
-  economics: { available: false, analysis: 'The rate comparison is missing.', thresholds: [] },
-  recommendation: { move: 'Stage the commitment.', confidence: 'Medium', rationale: 'Demand evidence is incomplete.' },
-  change_the_answer: ['A stable workload floor.', 'A materially different rate.'],
-  next_actions: [
-    { action: 'Measure baseline.', owner: 'FinOps', evidence: 'Usage export.', timing: 'Before approval.' },
-    { action: 'Confirm roadmap.', owner: 'Engineering', evidence: 'Workload plan.', timing: 'This week.' },
-  ],
-};
+
 
 test('validates the complete decision brief contract', () => {
   assert.equal(validateBrief(validBrief), true);
@@ -114,7 +93,7 @@ test('continues rejecting unsupported numbers, arithmetic, changed units, and ma
   assert.deepEqual(findUnsupportedNumbers({ move: 'The annual total is $720K.' }, 'Spend is $360K for two years.'), ['$720K']);
 });
 
-test('three failed regeneration attempts return a clean 502 without a corrupted brief', async () => {
+test('two failed regeneration attempts return a clean 502 without a corrupted brief', async () => {
   const originalFetch = globalThis.fetch;
   const drafts = [
     { ...validBrief, recommendation: { ...validBrief.recommendation, move: 'Commit $720K.' } },
@@ -146,7 +125,7 @@ test('three failed regeneration attempts return a clean 502 without a corrupted 
     const response = await POST({ request });
     const body = await response.json();
     assert.equal(response.status, 502);
-    assert.equal(calls, 3);
+    assert.equal(calls, 2);
     assert.equal(body.brief, undefined);
     assert.match(body.error, /inputs are still here/i);
     assert.doesNotMatch(JSON.stringify(body), /unspecified figure/i);
@@ -207,4 +186,113 @@ test('invalid JSON fails closed and GET exposes only public contract metadata', 
   const metadata = await (await GET()).json();
   assert.equal(metadata.version, 2);
   assert.equal(metadata.decisionTypes.commitment, 'Capacity or commitment');
+});
+
+test('recurrence words are not quantities, while real seat counts stay checked', () => {
+  assert.deepEqual(findUnsupportedNumbers('A one-time migration or a one-off payment.', 'Migration is possible.'), []);
+  assert.deepEqual(findUnsupportedNumbers('Remove two unused seats.', 'There are 12 seats.'), ['two unused seats']);
+  assert.deepEqual(findUnsupportedNumbers('Two unused seats.', '2 seats are unused.'), []);
+});
+
+test('accepts exact calendar equivalences without turning durations into staffing', () => {
+  assert.deepEqual(findUnsupportedNumbers('A 12-month term or four quarters.', 'A one-year term.'), []);
+  assert.deepEqual(findUnsupportedNumbers('One year.', '12 months.'), []);
+  assert.deepEqual(findUnsupportedNumbers('Three months.', 'One quarter.'), []);
+  assert.deepEqual(findUnsupportedNumbers('12 engineers.', 'One year.'), ['12 engineers']);
+});
+
+test('checks a price increase in cents and allows only those computed amounts', () => {
+  const source = 'The annual price is $2,880 and the renewal quote is 20% higher.';
+  const calculations = getCheckedCalculations(source);
+  assert.equal(calculations.length, 1);
+  assert.deepEqual(calculations[0].amounts, [{ value: 3456, currency: '$' }, { value: 576, currency: '$' }]);
+  assert.deepEqual(findUnsupportedNumbers('Calculated: $3,456, an increase of $576.', source, { includeCalculations: true }), []);
+  assert.deepEqual(findUnsupportedNumbers('$3,456.', source), ['$3,456']);
+  assert.deepEqual(findUnsupportedNumbers('Savings of $480.', source, { includeCalculations: true }), ['$480']);
+  assert.equal(getCheckedCalculations('The price is $0.05 and the new quote is 10% higher.')[0].amounts[1].value, 0.01);
+});
+
+test('annualization needs an explicit monthly rate and yearly horizon', () => {
+  assert.deepEqual(getCheckedCalculations('Spend is $40K/month. Compare options over one year.')[0].amounts, [{ value: 480000, currency: '$' }]);
+  assert.equal(getCheckedCalculations('Monthly spend is $40K. Compare options over 12 months.').length, 1);
+  assert.deepEqual(getCheckedCalculations('We spend $40K per month. The future term is unknown.'), []);
+  assert.deepEqual(getCheckedCalculations('The project costs $40K. Review over one year.'), []);
+});
+
+test('does not choose among ambiguous bases, currencies, ranges, credits, or unrelated growth', () => {
+  for (const source of [
+    'Price is $2,880 or $3,000 and the quote is 20% higher.',
+    'Price is $2,880 or €2,880 and the quote is 20% higher.',
+    'Price is $2,000–3,000 and the quote is 20% higher.',
+    'Price is $2,880 with a credit. The quote is 20% higher.',
+    'Price is $2,880 and demand is 20% higher.',
+    'Price is $2,880 and the quote is 20% lower.',
+    'The price is $2,880.005 and the quote is 20% higher.',
+    'Price is $2,880 and the quote is 20.123% higher.',
+  ]) assert.deepEqual(getCheckedCalculations(source), [], source);
+});
+
+const renewalPayload = {
+  stage: 'brief', decision: 'Should we renew the design software?', decisionType: 'renewal',
+  answers: { alternatives: 'Renew or negotiate the quote.', exposure: 'The annual price is $2,880 and the renewal quote is 20% higher.', demand: 'The design team uses the product regularly.', constraint: 'Replacement cost and contract terms are unknown.' },
+};
+function labRequest(payload = renewalPayload) {
+  return new Request('https://cloudandcapital.com/api/interactive-lab', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+}
+function modelResponse(brief) {
+  return new Response(JSON.stringify({ stop_reason: 'end_turn', content: [{ type: 'text', text: JSON.stringify(brief) }] }), { status: 200 });
+}
+
+test('API returns its own checked calculations and ignores caller-supplied calculations', async () => {
+  const original = globalThis.fetch;
+  globalThis.fetch = async () => modelResponse({ ...validBrief, economics: { available: false, analysis: 'Calculated: the new price would be $3,456 if the increase applies to the entire bill.', thresholds: [] } });
+  try {
+    const response = await POST({ request: labRequest({ ...renewalPayload, calculations: [{ amounts: [{ value: 9999, currency: '$' }] }] }) });
+    const result = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(result.calculations[0].amounts[0].value, 3456);
+    assert.doesNotMatch(JSON.stringify(result), /9999/);
+  } finally { globalThis.fetch = original; }
+});
+
+test('a derived amount cannot be presented as a reported fact', async () => {
+  const original = globalThis.fetch;
+  globalThis.fetch = async () => modelResponse({ ...validBrief, known_facts: ['The quoted price is $3,456.', 'The team uses the tool.', 'Terms are unknown.'] });
+  try {
+    const response = await POST({ request: labRequest() });
+    assert.equal(response.status, 502);
+  } finally { globalThis.fetch = original; }
+});
+
+test('the total generation budget prevents a further retry', async () => {
+  const originalFetch = globalThis.fetch;
+  const originalNow = Date.now;
+  let clock = 100000;
+  let calls = 0;
+  Date.now = () => clock;
+  globalThis.fetch = async (_url, options) => {
+    calls += 1;
+    assert.equal(options.signal instanceof AbortSignal, true);
+    clock += 56000;
+    return modelResponse({ ...validBrief, recommendation: { ...validBrief.recommendation, move: 'Spend $9999.' } });
+  };
+  try {
+    const response = await POST({ request: labRequest() });
+    assert.equal(response.status, 504);
+    assert.equal(calls, 1);
+  } finally { globalThis.fetch = originalFetch; Date.now = originalNow; }
+});
+
+test('provider failures and timeouts have useful errors without a fake brief', async () => {
+  const original = globalThis.fetch;
+  try {
+    globalThis.fetch = async () => new Response('provider detail', { status: 503 });
+    let response = await POST({ request: labRequest() });
+    assert.equal(response.status, 503);
+    assert.match((await response.json()).error, /inputs are still here/);
+    globalThis.fetch = async () => { throw new DOMException('Timed out', 'TimeoutError'); };
+    response = await POST({ request: labRequest() });
+    assert.equal(response.status, 504);
+    assert.match((await response.json()).error, /too long/);
+  } finally { globalThis.fetch = original; }
 });

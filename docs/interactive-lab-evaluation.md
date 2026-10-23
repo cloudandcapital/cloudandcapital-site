@@ -23,3 +23,25 @@ VERCEL_DEPLOYMENT=https://your-preview.vercel.app npm run evaluate:interactive-l
 ```
 
 Use a local environment or protected preview, not the production endpoint. The seven scenarios cover SaaS renewal, GPU commitment, AI build-or-buy, cloud cost review, multi-cloud, a high-evidence Commit control, and an underdetermined Explore control. The runner checks schema validity, expected posture, supplied evidence, scenario specificity, terminology leakage, numeric grounding, malformed fallback text, and distinct recommendations.
+
+## Repair checks, October 23, 2026
+
+The Lab preserves answers when returning to the same decision family. Changing
+families clears incompatible answers. All five starters include complete,
+explicitly illustrative evidence; that label remains after partial edits.
+
+Generation is limited to two attempts within a 55-second server budget, with a
+60-second browser cutoff and cancellation. Errors keep the visitor's inputs.
+Numeric validation accepts equivalent time units and ordinary recurrence wording
+such as “one-time.” It still rejects invented counts, prices, and savings.
+
+The server can independently check a narrowly defined price increase, or a
+monthly run rate over an explicitly supplied yearly horizon. These appear in a
+separate calculation section with conditions. Ambiguous bases, credits, multiple
+currencies, and unsupported arithmetic are excluded. Checked amounts cannot be
+listed as user-reported facts. This numeric check does not verify contracts or
+prove that a cheaper seat count is available.
+
+Regression checks: `npm test`. Re-test a renewal, AI build/buy, and an under-specified
+case through the deployed UI, including Back, cancellation, Copy, and mobile
+layout. Keep the directory entry under review until real generation succeeds.

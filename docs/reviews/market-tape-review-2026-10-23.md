@@ -60,10 +60,21 @@ App PR #23, merged as 7e2ae376e749e1d7914114927f823673b0d07eee, deployed success
 - App tests: 18 regression tests, benchmark checks, TypeScript and build passed. Site tests: 109 passed before the environment interruption. Companion copy/reflow is compiled by the Vercel preview/production build.
 - Browser verified live desktop metrics, 48 unique table rows, seven menu entries (directory plus six tools), cache feedback, and 375px phone layout without horizontal overflow.
 
-### Capture interruption and next work
+### Captures completed after reconnecting
 
-The execution environment and browser disconnected during new screenshot capture. Fresh 2x screenshot assets were not completed or published. The guide removes the outdated market capture rather than present obsolete breadth figures; on phones, cloud-review questions use readable native text rather than a tiny wide screenshot. The tools-directory capture remains the previous dated layout until a fresh capture can be made.
+The workspace and browser reconnected. Fresh, actual-interface captures now replace the previous layouts:
 
-Resume with real screenshots from the current deployment: desktop market internals/momentum for the directory, equity status for the guide, and a 2x phone capture. Do not use mockups as screenshots. The approved homepage remains untouched.
+| Asset | Dimensions | Purpose |
+| --- | --- | --- |
+| market-tape-snapshot-review.jpg | 1104 × 551 | Tool-directory internals, corrected macro comparisons and momentum |
+| market-tape-equity-review.jpg | 1104 × 648 | Desktop guide: equity summaries and technology context |
+| market-tape-snapshot-mobile.jpg | 720 × 440 | Double-resolution phone crop of equity breadth, capped in display width |
+| market-tape-cloud-review.jpg | 1104 × 255 | Desktop fixed review questions |
+
+No mockups or invented values. The phone guide retains native text for cloud questions rather than shrinking the wide image. Alt text describes the actual breadth crop. The original October 22 source date stays explicit.
+
+Screenshot review exposed a crowded macro row. App PR #24, production main 0f4d07fc2fce55d4664f8806b3565a59e828aaaf, puts the value and score on separate lines with a consistent label gap. Its 18 regression tests and build pass. The final capture uses this deployed layout.
+
+The companion site passes 109 tests and its production build. Browser checks confirm the phone guide selects the 720px image at a 320px display width, with no horizontal overflow, and uses readable native cloud questions. These are viewport checks, not physical-device tests.
 
 History is the next useful product upgrade: store dated snapshots and offer a 5–20-session change view. A commitment-payment calculator and reliable current valuation source are separate improvements.

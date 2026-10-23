@@ -11,7 +11,7 @@ const articleData = {
   author: { '@id': 'https://cloudandcapital.com/#diana' },
   publisher: { '@id': 'https://cloudandcapital.com/#organization' },
   mainEntityOfPage: articleUrl, datePublished: '2026-10-23', dateModified: '2026-10-23',
-  image: 'https://cloudandcapital.com/images/market-tape-cloud-review.jpg',
+  image: 'https://cloudandcapital.com/images/market-tape-equity-review.jpg',
 };
 ---
 <BaseLayout title={`${title} | Cloud & Capital`} description={description} type="article" structuredData={[articleData]}>
@@ -40,6 +40,14 @@ const articleData = {
       </section>
 
 
+
+      <figure class="guide-screenshot">
+        <picture>
+          <source media="(max-width: 760px)" srcset="/images/market-tape-snapshot-mobile.jpg" width="720" height="440" />
+          <img src="/images/market-tape-equity-review.jpg" alt="Actual Market Tape equity ETF breadth: 16 of 34 positive scores, a reading of 47 out of 100 in the Middle band" width="1104" height="648" loading="lazy" decoding="async" />
+        </picture>
+        <figcaption>A real dashboard capture from October 23, 2026, using the October 22 snapshot. Your visit may show different values.</figcaption>
+      </figure>
 
       <section aria-labelledby="scores-title">
         <h2 id="scores-title">A score and a return are different things.</h2>
@@ -72,7 +80,7 @@ const articleData = {
           <div><h3>3-year commitment</h3><p>Will the workload still look like this in three years? Check migration plans, flexibility, and the cost of unused capacity.</p></div>
           <div><h3>Spot or on-demand</h3><p>Can the job stop and restart? Check interruption handling and fallback capacity. On-demand avoids a term commitment; it does not guarantee capacity.</p></div>
         </div>
-        <img class="desktop-review-capture" src="/images/market-tape-cloud-review.jpg" alt="Market Tape’s fixed review questions for one-year commitments, three-year commitments, and Spot or on-demand capacity" width="1104" height="252" loading="lazy" decoding="async" />
+        <img class="desktop-review-capture" src="/images/market-tape-cloud-review.jpg" alt="Market Tape’s fixed review questions for one-year commitments, three-year commitments, and Spot or on-demand capacity" width="1104" height="255" loading="lazy" decoding="async" />
         <figcaption>Questions you can take into a cost review. These stay available when AI analysis is unavailable.</figcaption>
       </figure>
 
@@ -105,5 +113,6 @@ const articleData = {
     .phone-review-notes h3 { margin: 0 0 .5rem; font-size: 1.2rem; }
     .phone-review-notes p { margin: 0; font-size: .95rem; }
   }
+  @media (max-width: 760px) { .tape-guide .guide-screenshot picture { display: block; max-width: 23rem; margin-inline: auto; } .tape-guide .guide-screenshot picture img { width: 100%; height: auto; padding: .5rem; } }
   .tape-guide .guide-example { background:var(--cream); }
 </style>

@@ -48,3 +48,13 @@ Preview proof: `cloud-cost-guard-guide-review-2026-10-23.jpg`. Manual independen
 ## Still open
 
 Independent Claude review; actual printed/PDF pagination; physical-device testing; and the Guard owner's wider format, malformed input, duplicate, limit, browser compatibility and privacy regressions. Do not reopen or overwrite app-owner work based only on older project notes. Existing specialist audit and Morning Scan schedules remain unchanged.
+
+## Own-spending follow-up
+
+Diana clarified that reviewing a visitor's own AWS, Azure or Google Cloud spending is the priority. Updated the guide to lead with provider-specific export requirements and the actual upload controls. Removed the separate two-file example tutorial and its download buttons from the visitor page. The stable CSVs remain available as QA fixtures for independent arithmetic checks. The only suggested preview is the tool's existing optional Try an example mode.
+
+The catalog companion is now How to review your own bill, and the writing archive describes the own-bill flow. The public screenshot stays clearly marked as invented records. File details are behind an accessible disclosure. AWS/Azure FOCUS and Google conversion limits are stated explicitly; this website change does not add native provider parsers, archive support, Google import, or invoice-PDF ingestion.
+
+Rechecked the unchanged app main SHA and official AWS Data Exports, Azure export and Google Cloud billing export documentation on October 23. Provider export availability does not establish that Guard accepts every delivered schema or format. The existing quality plan and manual Claude brief now prioritize that gap.
+
+The own-bill revision passes the existing 138 tests. Browser review covers desktop and 375px/320px frames, with no horizontal overflow at inner widths 360px/305px. The file-requirements disclosure opens by pointer and closes with Space, with the expanded long field names contained at 320px. Actual preview capture: `cloud-cost-guard-own-bill-2026-10-23.jpg`. No app code or approved homepage change.

@@ -4,7 +4,7 @@ import ActionLabel from '../../components/ActionLabel.astro';
 import '../../styles/guides-page.css';
 
 const title = 'Your cloud bill grew. What changed?';
-const description = 'Use Cloud Cost Guard to review a billing CSV, compare two periods, and choose what to check next. A walkthrough with two downloadable example bills.';
+const description = 'Review your own cloud billing export with Cloud Cost Guard. Check supported AWS, Azure, and Google Cloud formats, understand the result, and choose what to investigate next.';
 const articleUrl = 'https://cloudandcapital.com/insights/using-cloud-cost-guard';
 const articleData = {
   '@type': 'Article',
@@ -28,64 +28,70 @@ const articleData = {
         <h1><span>Your cloud bill grew.</span> <em>What changed?</em></h1>
         <p class="guide-byline">By Diana Molski · <time datetime="2026-10-23">October 23, 2026</time></p>
         <p class="guide-lede">A bigger bill tells you something changed. It doesn’t tell you where to start. Cloud Cost Guard breaks down your billing records and compares periods, so you can see which services deserve a closer look.</p>
-        <p>Bring one supported billing CSV for a spending breakdown. Add an earlier bill to see what moved. Let’s try it with two small, made-up bills first.</p>
+        <p>Start with your own billing export. Upload one period for a spending breakdown, or add an earlier period to see what changed.</p>
         <a class="guide-button" href="https://guard.cloudandcapital.com/" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="writing_archive"><ActionLabel label="Open Cloud Cost Guard" /></a>
       </header>
 
-      <section aria-labelledby="example-title">
-        <h2 id="example-title">Compare two bills with me.</h2>
-        <p>These files contain invented AWS charges for August and September 2026. They’re here so you can follow along before using your own records.</p>
-        <div class="guard-example-files">
-          <p class="guide-eyebrow">The two example bills</p>
-          <a href="/examples/cloud-cost-guard/current-example.csv" download="cloud-cost-guard-september-example.csv">Download September CSV <span aria-hidden="true">→</span></a>
-          <a href="/examples/cloud-cost-guard/previous-example.csv" download="cloud-cost-guard-august-example.csv">Download August CSV <span aria-hidden="true">→</span></a>
-        </div>
+      <section aria-labelledby="upload-title">
+        <h2 id="upload-title">Start with your own bill.</h2>
+        <p>Use a billing CSV for the period you want to review. Guard currently reads supported FOCUS exports or its simple template. FOCUS is a shared format for billing records. Here’s the route for each provider.</p>
+        <dl class="guard-providers">
+          <div>
+            <dt>AWS</dt>
+            <dd>Create a <strong>FOCUS</strong> export in Billing and Cost Management → Data Exports. Download its CSV files from S3 and extract them if compressed. <a href="https://docs.aws.amazon.com/cur/latest/userguide/dataexports-create-standard.html" target="_blank" rel="noopener noreferrer">AWS export instructions</a>.</dd>
+          </div>
+          <div>
+            <dt>Azure</dt>
+            <dd>In Cost Management → Exports, choose <strong>Cost and usage details (FOCUS)</strong>, where available for your billing account. Download the CSV files from Azure storage and extract them if compressed. <a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports" target="_blank" rel="noopener noreferrer">Azure export instructions</a>.</dd>
+          </div>
+          <div>
+            <dt>Google Cloud</dt>
+            <dd><strong>Needs preparation in the current version.</strong> Map your billed-cost records to Guard’s simple template. Its reader doesn’t automatically convert the usual Google Cloud billing CSV layout. <a href="https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery" target="_blank" rel="noopener noreferrer">Google’s billing export options</a>.</dd>
+          </div>
+        </dl>
+        <p>Open <strong>What can I upload?</strong> on Guard’s start screen for the template and format details. PDF invoices, screenshots, Excel files, archives, and Parquet files aren’t read directly.</p>
         <ol class="guard-steps">
-          <li>Open the tool. Under <strong>Your current bill</strong>, choose the September file.</li>
-          <li>Under <strong>An earlier bill</strong>, choose the August file.</li>
+          <li>Under <strong>Your current bill</strong>, select all CSV parts from one export run.</li>
+          <li>To compare, add a separate earlier period under <strong>An earlier bill</strong>. This is optional.</li>
           <li>Choose <strong>Review my bill</strong>. The first review prepares the analysis tools on your device, so give it a moment.</li>
         </ol>
-        <p>For this walkthrough, use the files above. The tool’s separate <strong>Try an example</strong> button opens a different sample dashboard.</p>
-        <table class="guard-example-table">
-          <caption>What the uploaded example shows</caption>
-          <thead><tr><th scope="col">Period</th><th scope="col">Days</th><th scope="col">Net cost</th></tr></thead>
-          <tbody>
-            <tr><th scope="row">August</th><td>31</td><td>$996.60</td></tr>
-            <tr><th scope="row">September</th><td>30</td><td>$1,310.13</td></tr>
-          </tbody>
-        </table>
-        <p>The increase is <strong>$313.53, or 31.5%</strong>. Those are changes in the supplied period totals, rounded for display. August and September have different numbers of days, so this isn’t a comparison of daily spending rates.</p>
+        <details class="guard-file-help">
+          <summary>File requirements and limits</summary>
+          <ul>
+            <li>Each period allows up to <strong>20 CSV files, 10 MB combined, and 50,000 rows</strong>.</li>
+            <li>The simple template needs <strong>Date, Service, Cost, and Currency</strong>. Preserve credits as negative amounts, and keep taxes and other charges you want included.</li>
+            <li>FOCUS files need <strong>ChargePeriodStart, ChargePeriodEnd, ServiceName, BilledCost, and BillingCurrency</strong>. This is support for those columns, not validation of the full FOCUS specification. Empty service labels need to be filled in before upload.</li>
+            <li>Use one currency and consistent account coverage and cost basis. The comparison must be earlier and must not overlap the current period.</li>
+            <li>If identical rows are flagged, check whether they’re repeated exports or separate charges before choosing how to count them. Don’t combine repeated month-to-date snapshots.</li>
+          </ul>
+        </details>
+      </section>
+
+      <section aria-labelledby="result-title">
+        <h2 id="result-title">What does the result tell you?</h2>
+        <p><strong>Net cloud cost</strong> shows the total from your supplied records, including signed credits. <strong>Services</strong> breaks it down by service. If you added an earlier period, <strong>Findings</strong> shows the biggest movements between the two uploads.</p>
+        <p>Check the dates, currency, and included accounts before using the result. Different-length periods compare total spending, not daily spending rates. A partial export gives you a partial picture.</p>
+        <aside class="guide-example"><p><strong>“Service totals add up” checks the calculation.</strong> It doesn’t prove every account or charge was included. Compare the upload’s coverage and total with your provider bill.</p></aside>
+        <p>The report covers the cloud records you supply. Separate software invoices, direct AI bills, or Kubernetes utilization need additional data; those sections explain what’s missing.</p>
       </section>
 
       <figure class="guide-screenshot guard-wide-screenshot">
-        <img src="/images/cloud-cost-guard-billing-preview.jpg" width="1232" height="541" alt="The actual uploaded example: $1,310.13 net cloud cost, $1,362.38 in positive charges, minus $52.25 in credits, with charges grouped by service" loading="lazy" decoding="async" />
-        <figcaption>September’s made-up bill in the live tool. Credits reduce the total; the chart shows positive charges by service.</figcaption>
+        <img src="/images/cloud-cost-guard-billing-preview.jpg" width="1232" height="541" alt="An example of the uploaded-bill report, showing net cloud cost, positive charges, credits, and a breakdown by service" loading="lazy" decoding="async" />
+        <figcaption>A preview of the report using invented records. Your upload supplies your own figures.</figcaption>
       </figure>
 
       <section aria-labelledby="next-title">
         <h2 id="next-title">Start with the biggest change.</h2>
-        <p>Open <strong>Findings</strong> and look at <strong>Biggest movement</strong> and <strong>Largest changes</strong>. In our example, API compute increased by <strong>$240.03</strong>. That’s where I’d start looking.</p>
+        <p>With a comparison, open <strong>Findings</strong> and look at <strong>Biggest movement</strong> and <strong>Largest changes</strong>. Start with the service behind the largest increase. With one period, use <strong>Services</strong> to see which charges deserve a closer look.</p>
         <p>I’d ask the service owner what changed between the periods, then check usage, rates, and the underlying charges. Was there more demand? A different configuration? A price change? The service total gives us a place to investigate. It doesn’t answer those questions on its own.</p>
         <p>Keep the next step small: one service, someone who can explain it, and the records needed to check the explanation. A higher bill might make sense for the work being done.</p>
-        <aside class="guide-example"><p><strong>“Service totals add up” checks the calculation.</strong> It doesn’t prove every account or charge was included. Compare the upload’s coverage and total with your provider bill before treating it as the full picture.</p></aside>
-      </section>
-
-      <section aria-labelledby="own-bill-title">
-        <h2 id="own-bill-title">Now try your own bill.</h2>
-        <p>Choose <strong>Upload another bill</strong>. The tool accepts supported FOCUS billing CSVs or its simple template. Open <strong>What can I upload?</strong> on the start screen for the format and AWS/Azure export instructions.</p>
-        <ul>
-          <li><strong>Use one complete export run per period.</strong> Select all its CSV parts together. Keep the accounts, currency, and cost basis consistent for a comparison, and use a separate earlier period.</li>
-          <li><strong>Keep credits and taxes in the records.</strong> In the simple template, the required columns are Date, Service, Cost, and Currency. Credits use negative amounts.</li>
-          <li><strong>Check the file type.</strong> PDFs, Excel files, compressed archives, and other providers’ CSV layouts need conversion first. Each period allows up to 10 MB and 50,000 rows.</li>
-        </ul>
-        <p>If the tool asks about identical rows, check whether they’re repeated exports or separate charges before choosing how to count them. A partial export will give you a partial total.</p>
-        <p>The uploaded report covers the cloud billing records you supply. Separate software invoices, direct AI bills, or Kubernetes utilization need additional data; those sections explain what’s missing.</p>
       </section>
 
       <section aria-labelledby="keep-title">
         <h2 id="keep-title">Ask a question. Keep the review.</h2>
         <p>Open <strong>Lumen</strong> and choose <strong>What changed?</strong> for a plain-language explanation. For uploaded bills, Lumen uses prepared answers from your report on your device, covering totals, services, credits, dates, and findings.</p>
         <p>Choose <strong>Printable report</strong> to download an HTML copy you can open in your browser. The CSV exports keep the normalized records, and <strong>Evidence JSON</strong> keeps the fuller report data. Save what you need before leaving.</p>
+        <p>Want a quick preview before finding your export? The optional <strong>Try an example</strong> button on the start screen opens a sample dashboard.</p>
         <p>Your uploaded records, results, and Lumen questions stay in this tab’s memory. Reloading, closing the tab, or clearing the data removes them. The separate sample dashboard’s AI chat has its own disclosure about sending messages to an AI service.</p>
       </section>
 
@@ -109,15 +115,14 @@ const articleData = {
   .guard-guide .guide-button { color:white; background:var(--brand-green); border-color:var(--brand-green); }
   .guard-guide .guide-button :global(.action-label) { color:inherit; }
   .guard-guide .guide-screenshot img { padding:0; border:1px solid #d3c9c0; border-radius:12px; background:var(--cream); }
-  .guard-example-files { margin:1.5rem 0; padding:1.2rem 1.4rem; border-block:1px solid #c8d1c0; background:var(--sage-surface); }
-  .guard-example-files a { display:flex; align-items:center; gap:.5rem; min-height:44px; width:fit-content; max-width:100%; color:var(--brand-green); }
-  .guard-example-files a > span { flex:none; }
+  .guard-providers { margin-block:1.5rem; border-top:1px solid #c8d1c0; }
+  .guard-providers > div { display:grid; grid-template-columns:8rem minmax(0,1fr); gap:1.25rem; padding:1.25rem 0; border-bottom:1px solid #c8d1c0; }
+  .guard-providers dt { color:var(--brand-green); font-size:1.2rem; font-weight:500; }
+  .guard-providers dd { margin:0; line-height:1.75; text-wrap:pretty; }
   .guard-steps { padding-left:1.4rem; }
-  .guard-example-table { width:100%; margin:1.75rem 0 1rem; border-collapse:collapse; font-variant-numeric:lining-nums tabular-nums; }
-  .guard-example-table caption { padding-bottom:.8rem; text-align:left; font-weight:500; }
-  .guard-example-table th,.guard-example-table td { padding:.9rem .7rem; border-bottom:1px solid #d3c9c0; text-align:left; }
-  .guard-example-table thead th { color:var(--brand-green); border-top:1px solid #d3c9c0; font-weight:500; }
-  .guard-example-table tbody th { font-weight:400; }
-  .guard-example-table :is(th,td):last-child { text-align:right; white-space:nowrap; }
-  @media(max-width:760px) { .guard-wide-screenshot { display:none; } .guard-example-files { padding:1rem; } .guard-example-table th,.guard-example-table td { padding:.8rem .4rem; font-size:.94rem; } }
+  .guard-file-help { margin-top:1.5rem; padding:1rem 1.3rem; border:1px solid #c8d1c0; border-radius:12px; }
+  .guard-file-help summary { min-height:44px; padding-block:.5rem; cursor:pointer; font-weight:500; }
+  .guard-file-help summary:focus-visible { outline:2px solid var(--clay-ink); outline-offset:4px; }
+  .guard-file-help li { overflow-wrap:anywhere; }
+  @media(max-width:760px) { .guard-wide-screenshot { display:none; } .guard-providers > div { grid-template-columns:1fr; gap:.35rem; } .guard-file-help { padding:.8rem 1rem; } }
 </style>

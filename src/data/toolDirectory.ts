@@ -53,14 +53,14 @@ export const directoryTools: DirectoryTool[] = [
   {
     slug: 'cloud-cost-guard', topics: ['tech-spending'], name: 'Cloud Cost Guard', kind: 'Cloud bills',
     description: 'See where your cloud spending went and what changed between bills.',
-    bring: 'A supported billing CSV. Add an earlier bill to compare.',
+    bring: 'A supported FOCUS CSV or the simple billing template. Add an earlier period to compare.',
     result: 'Cost drivers, a spending breakdown, and questions to investigate.',
     action: 'Review my cloud bill', href: releasedTool('cloud-cost-guard-lumen').href, external: true,
     destination: 'cloud_cost_guard', source: 'work_decision_tools', tone: 'rose',
     image: '/images/cloud-cost-guard-billing-preview.jpg',
     imageAlt: 'Cloud Cost Guard reviewing an example uploaded bill: $1,310.13 net cost, signed credits, and charges grouped by service',
     imageWidth: 1232, imageHeight: 541, imageLabel: 'Example billing records',
-    companion: { label: 'Read a changing bill with me', href: '/insights/using-cloud-cost-guard' },
+    companion: { label: 'How to review your own bill', href: '/insights/using-cloud-cost-guard' },
   },
   {
     slug: 'software-renewal-tracker', topics: ['tech-spending'], name: 'Software Renewal Tracker', kind: 'Software subscriptions',

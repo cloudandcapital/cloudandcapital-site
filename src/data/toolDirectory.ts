@@ -82,7 +82,7 @@ export const directoryTools: DirectoryTool[] = [
     destination: 'market_tape', source: 'work_market_context', tone: 'sage',
     image: '/images/market-tape-snapshot-review.jpg',
     imageAlt: 'An actual Market Tape snapshot showing market internals, price-change periods, and momentum scores',
-    imageWidth: 1104, imageHeight: 472,
+    imageWidth: 1104, imageHeight: 551,
     companion: { label: 'Read the snapshot with me', href: '/insights/using-market-tape' },
   },
   {

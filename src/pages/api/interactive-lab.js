@@ -3,6 +3,7 @@ import {
   MAX_DECISION_CHARS,
   assessReadiness,
   findUnsupportedNumbers,
+  getCheckedCalculations,
   validateBrief,
 } from '../../lib/interactive-lab.js';
 
@@ -20,9 +21,9 @@ function buildSourceText(readiness) {
 }
 
 function buildSystemPrompt(readiness) {
-  return `You are the analytical engine for the Cloud & Capital Interactive Lab, a finance-native decision-framing instrument for technology spend.
+  return `You help visitors to the Cloud & Capital Interactive Lab think through technology spending decisions.
 
-The user has already supplied a decision and answered a set of evidence questions. Create a concise, meeting-ready decision brief. The brief must help Finance, FinOps, and Engineering discuss the same decision from shared facts.
+The user has supplied a decision and answered questions. Write a short, useful brief in plain English, like a thoughtful colleague. Explain what to do next and why, without corporate jargon. Differentiate reported facts, assumptions, and checked calculations.
 
 Decision family: ${readiness.typeLabel}
 
@@ -60,7 +61,7 @@ Return only valid JSON matching this exact structure:
 Rules:
 - Treat every supplied statement as user-provided context, not independently verified truth.
 - Never invent prices, percentages, utilization levels, time periods, savings, ROI, or break-even points.
-- Do not introduce any numeric value that does not appear in the user's supplied text. Use qualitative language when figures are absent.
+- Use only supplied numbers, equivalent time units, or the checked calculations provided below. Never calculate other figures yourself. Keep calculated figures out of known_facts and label them Calculated wherever used.
 - Set economics.available to true only when the supplied facts support a defensible comparison. Explain missing inputs when false.
 - Preserve every materially distinct option supplied by the user, including partial renewal, unless it is a duplicate or genuinely infeasible. Include two to four genuinely different options.
 - The three lenses must be substantively different, not paraphrases.
@@ -69,13 +70,15 @@ Rules:
 - Do not claim that stakeholders agree unless the supplied context reports agreement. Frame common_ground as a supported shared constraint or likely alignment instead.
 - Do not describe an extension as having no commercial commitment unless its price and terms are supplied.
 - Do not introduce punitive governance actions, access restrictions, contractual claims, or absolute conclusions unsupported by the supplied evidence.
+- Unused seats do not prove avoidable cost: pricing may have minimums, bundles, or other terms. Only say reducing seats saves money if the user supplied those terms; otherwise make that conditional on the vendor confirming a lower price. Do not invent utilization policies or assume an existing annual bill proves the next contract's term.
+- Unknown replacement costs or migration effort mean switching has not been evaluated, not that it is impossible. Gather that evidence before the supplied deadline when feasible; do not automatically postpone it until the next renewal.
 - Do not call a target unreachable merely because one lever disappears when other levers have not been examined.
 - No HTML, markdown, tables, bullets, citations, or disclaimers inside fields.
 - No generic FinOps slogans, false precision, or authoritative claims about a vendor's commercial terms.
 - Return between two and four options so every materially distinct supplied option is represented, and return exactly three next actions.
 - Include no more than three working assumptions and three thresholds.
 - Keep every prose field to one sentence and no more than 35 words.
-- Keep the complete response under 1,400 words so the JSON is never truncated.`;
+- Keep the complete response under 800 words. Prefer short, direct sentences. Do not repeat the same point in every section.`;
 }
 
 function buildUserPrompt(readiness) {
@@ -83,17 +86,23 @@ function buildUserPrompt(readiness) {
     .map((question) => `${question.label}:\n${readiness.answers[question.id]}`)
     .join('\n\n');
 
-  return `Decision:\n${readiness.decision}\n\nUser-supplied evidence:\n${evidence}`;
+  const calculations = getCheckedCalculations(buildSourceText(readiness));
+  return `Decision:\n${readiness.decision}\n\nUser-supplied evidence:\n${evidence}\n\nChecked arithmetic (calculated, not reported facts; conditions still apply):\n${calculations.map((item) => item.explanation).join('\n') || 'None. Use qualitative comparisons.'}`;
 }
 
-async function callModel(readiness) {
+async function callModel(readiness, requestSignal) {
   let correction = '';
-  for (let attempt = 0; attempt < 3; attempt += 1) {
+  const deadline = Date.now() + 55000;
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    const remaining = deadline - Date.now();
+    if (remaining <= 0) throw new Error('MODEL_TIMEOUT');
+    const timeout = AbortSignal.timeout(Math.min(48000, remaining));
+    const signal = requestSignal ? AbortSignal.any([requestSignal, timeout]) : timeout;
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': import.meta.env?.ANTHROPIC_API_KEY,
+        'x-api-key': import.meta.env?.ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY,
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
@@ -103,16 +112,16 @@ async function callModel(readiness) {
         system: [{ type: 'text', text: buildSystemPrompt(readiness), cache_control: { type: 'ephemeral' } }],
         messages: [{ role: 'user', content: `${buildUserPrompt(readiness)}${correction}` }],
       }),
-      signal: AbortSignal.timeout(90000),
+      signal,
     });
 
     if (!response.ok) {
-      const detail = await response.text();
-      console.error('Interactive Lab model error:', response.status, detail.slice(0, 500));
-      throw new Error('MODEL_REQUEST_FAILED');
+      console.error('Interactive Lab model request failed', { status: response.status, attempt: attempt + 1 });
+      throw new Error('MODEL_UNAVAILABLE');
     }
 
     const data = await response.json();
+    if (Date.now() >= deadline) throw new Error('MODEL_TIMEOUT');
     const raw = data.content?.find((part) => part.type === 'text')?.text || '';
     if (data.stop_reason === 'max_tokens') {
       console.error('Interactive Lab model output truncated at max_tokens');
@@ -123,8 +132,7 @@ async function callModel(readiness) {
 
     try {
       brief = JSON.parse(cleaned);
-    } catch (error) {
-      console.error('Interactive Lab JSON parse error:', error, raw.slice(0, 500));
+    } catch {
       throw new Error('INVALID_MODEL_JSON');
     }
 
@@ -133,14 +141,18 @@ async function callModel(readiness) {
       throw new Error('INVALID_MODEL_SCHEMA');
     }
 
-    const unsupportedNumbers = findUnsupportedNumbers(brief, buildSourceText(readiness));
+    const sourceText = buildSourceText(readiness);
+    const unsupportedNumbers = [...new Set([
+      ...findUnsupportedNumbers(brief, sourceText, { includeCalculations: true }),
+      ...findUnsupportedNumbers(brief.known_facts, sourceText),
+    ])];
     if (!unsupportedNumbers.length) return brief;
 
-    console.error('Interactive Lab unsupported numeric claims:', unsupportedNumbers);
-    if (attempt === 2) {
+    console.error('Interactive Lab numeric validation failed', { count: unsupportedNumbers.length, attempt: attempt + 1 });
+    if (attempt === 1) {
       throw new Error('UNSUPPORTED_NUMERIC_CLAIM');
     }
-    correction = `\n\nYour previous draft was rejected because it introduced these unsupported numeric claims: ${unsupportedNumbers.join(', ')}. Regenerate the complete JSON from scratch. Do not use those claims, calculate derived figures, or replace them with new numbers. Use qualitative language to describe comparisons whose figures were not explicitly supplied.`;
+    correction = `\n\nThe draft used unsupported numbers, or placed calculated figures in known_facts: ${unsupportedNumbers.join(', ')}. Regenerate the complete JSON. Keep known_facts to supplied facts. Elsewhere use only supplied values and the exact checked calculations above, labelled Calculated. Use qualitative wording for all other comparisons.`;
   }
   throw new Error('UNSUPPORTED_NUMERIC_CLAIM');
 }
@@ -189,11 +201,17 @@ export async function POST({ request }) {
   }
 
   try {
-    const brief = await callModel(readiness);
-    return json({ status: 'ready', ...context, brief });
+    const brief = await callModel(readiness, request.signal);
+    const calculations = getCheckedCalculations(buildSourceText(readiness));
+    return json({ status: 'ready', ...context, brief, calculations });
   } catch (error) {
-    console.error('Interactive Lab handler error:', error);
-    return json({ error: 'The Lab could not produce a validated brief. Your inputs are still here—please try again.' }, 502);
+    const timedOut = ['TimeoutError', 'AbortError'].includes(error.name) || error.message === 'MODEL_TIMEOUT';
+    const unavailable = error.message === 'MODEL_UNAVAILABLE';
+    console.error('Interactive Lab request failed', { code: timedOut ? 'MODEL_TIMEOUT' : error.message });
+    const message = timedOut ? 'That took too long. Your inputs are still here. Try again in a moment.'
+      : unavailable ? 'The AI service is unavailable right now. Your inputs are still here. Please try again later.'
+        : 'The Lab could not produce a checked brief. Your inputs are still here. Please try again.';
+    return json({ error: message }, timedOut ? 504 : unavailable ? 503 : 502);
   }
 }
 

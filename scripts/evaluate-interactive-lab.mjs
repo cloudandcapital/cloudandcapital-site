@@ -93,7 +93,9 @@ for (const scenario of scenarios) {
 
     const serialized = JSON.stringify(payload.brief);
     assert.doesNotMatch(serialized, /unspecified figure/i);
-    assert.deepEqual(findUnsupportedNumbers(payload.brief, [scenario.decision, ...Object.values(scenario.answers)].join('\n')), []);
+    const source = [scenario.decision, ...Object.values(scenario.answers)].join('\n');
+    assert.deepEqual(findUnsupportedNumbers(payload.brief, source, { includeCalculations: true }), []);
+    assert.deepEqual(findUnsupportedNumbers(payload.brief.known_facts, source), []);
     for (const term of scenario.required) assert.match(serialized, new RegExp(term, 'i'), `missing supplied evidence: ${term}`);
     for (const term of scenario.forbidden) assert.doesNotMatch(serialized, new RegExp(term, 'i'), `cross-scenario leakage: ${term}`);
     assert.ok(payload.brief.options.every((option) => option.name && option.risk && option.evidence_needed));

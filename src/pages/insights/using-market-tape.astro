@@ -11,7 +11,7 @@ const articleData = {
   author: { '@id': 'https://cloudandcapital.com/#diana' },
   publisher: { '@id': 'https://cloudandcapital.com/#organization' },
   mainEntityOfPage: articleUrl, datePublished: '2026-10-23', dateModified: '2026-10-23',
-  image: 'https://cloudandcapital.com/images/market-tape-snapshot-review.jpg',
+  image: 'https://cloudandcapital.com/images/market-tape-cloud-review.jpg',
 };
 ---
 <BaseLayout title={`${title} | Cloud & Capital`} description={description} type="article" structuredData={[articleData]}>
@@ -35,23 +35,23 @@ const articleData = {
 
       <section aria-labelledby="status-title">
         <h2 id="status-title">Get a feel for the snapshot.</h2>
-        <p>Under <strong>Market Status</strong>, look at <strong>Relative-strength breadth</strong> and the share above the 20- and 50-session moving averages. They help you see how much of this tracked basket is participating.</p>
-        <p>That basket mixes ETFs and indices. A reading of 52/100 means about 52% of the unique tracked instruments have a positive relative-strength score. It doesn’t mean you should invest 52% of your money, or that 52% of all US stocks are doing well.</p>
+        <p>Under <strong>Market Status</strong>, look at <strong>Equity ETF breadth</strong> and the share above the 20- and 50-session moving averages. They help you see how much of this tracked basket is participating.</p>
+        <p>That reading uses 34 equity ETFs, counted once, and excludes SPY, bonds, commodities, yields, and volatility indices. On the October 22 snapshot, 16 of 34 had positive scores: 47/100, in the Middle band. Below 40 is the Lower band; 70 or above is the Upper band. These describe this sample, not how much money to invest.</p>
       </section>
 
-      <figure class="guide-screenshot">
-        <picture>
-          <source media="(max-width: 760px)" srcset="/images/market-tape-snapshot-mobile.jpg" width="360" height="670" />
-          <img src="/images/market-tape-snapshot-review.jpg" alt="An actual Market Tape snapshot with labeled market data and relative-strength scores" width="1104" height="472" loading="lazy" decoding="async" />
-        </picture>
-        <figcaption>A real dashboard capture from October 23, 2026. The values on your visit may be different.</figcaption>
-      </figure>
+
 
       <section aria-labelledby="scores-title">
         <h2 id="scores-title">A score and a return are different things.</h2>
         <p><strong>RS1M</strong> compares an instrument’s price performance with SPY, an ETF that tracks the S&P 500, over 20 trading sessions, then adjusts for the instrument’s volatility. Positive means it outperformed SPY; negative means it underperformed. The size of the number is a score, not a percentage return.</p>
-        <p>A +1.2 score doesn’t mean a 1.2% gain. An instrument can fall in price and still have a positive score if SPY fell more. <strong>Macro Context</strong> keeps the actual 20-session percentage price change beside the score so you can tell them apart.</p>
+        <p>An instrument can fall in price and still have a positive score if SPY fell more. <strong>Macro Context</strong> keeps the actual 20-session percentage price change beside the score so you can tell them apart.</p>
         <p>The <strong>Sectors</strong>, <strong>Global ETF leaders</strong>, and <strong>Momentum</strong> lists rank these scores. An A, B, or C describes the price trend; it isn’t a business-quality grade or a buy/sell rating. The <a href="https://market-tape.cloudandcapital.com/sources" target="_blank" rel="noopener noreferrer">methodology page</a> explains the rules.</p>
+      </section>
+
+      <section aria-labelledby="example-title">
+        <h2 id="example-title">Here’s a real example.</h2>
+        <p>On the October 22, 2026 snapshot, consumer staples (XLP) led the sector score ranking. Meanwhile, the semiconductor ETFs SMH and SOXX had one-session price changes of about −6.0% and −6.8%. Those are daily price moves, separate from their 20-session relative-strength scores.</p>
+        <p>I’d open <strong>All 48 tracked instruments</strong>, compare the 1D, 5D, and 20D columns, then check the funds’ holdings and recent news. Are the same companies driving both funds? Is the weakness limited to that day? The table helps me narrow the question; a single snapshot can’t establish a lasting rotation.</p>
       </section>
 
       <aside class="guide-example" aria-label="A next step for market research">
@@ -67,15 +67,20 @@ const articleData = {
       </section>
 
       <figure class="guide-screenshot">
-        <img src="/images/market-tape-cloud-review.jpg" alt="Market Tape’s fixed review questions for one-year commitments, three-year commitments, and Spot or on-demand capacity" width="1104" height="252" loading="lazy" decoding="async" />
+        <div class="phone-review-notes" aria-label="Questions from Before a cloud commitment">
+          <div><h3>1-year commitment</h3><p>How much usage stays steady? Compare that baseline with the commitment, payment terms, and break-even point.</p></div>
+          <div><h3>3-year commitment</h3><p>Will the workload still look like this in three years? Check migration plans, flexibility, and the cost of unused capacity.</p></div>
+          <div><h3>Spot or on-demand</h3><p>Can the job stop and restart? Check interruption handling and fallback capacity. On-demand avoids a term commitment; it does not guarantee capacity.</p></div>
+        </div>
+        <img class="desktop-review-capture" src="/images/market-tape-cloud-review.jpg" alt="Market Tape’s fixed review questions for one-year commitments, three-year commitments, and Spot or on-demand capacity" width="1104" height="252" loading="lazy" decoding="async" />
         <figcaption>Questions you can take into a cost review. These stay available when AI analysis is unavailable.</figcaption>
       </figure>
 
       <section aria-labelledby="lumen-title">
         <h2 id="lumen-title">Read Lumen with the numbers beside it.</h2>
         <p>Lumen adds an AI-written explanation of the snapshot. Check its numbers, units, dates, and conclusions against the dashboard and linked sources. It can still get things wrong.</p>
-        <p><strong>Refresh analysis</strong> asks for analysis of the displayed snapshot; it doesn’t fetch a new live market quote. If the underlying snapshot has changed, reload the page. If analysis is unavailable, you can still use the dated data and fixed review questions.</p>
-        <p>An unavailable valuation stays <strong>Unavailable</strong>. An older figure labeled Archived is historical context. New analysis pauses when a snapshot is more than four days old; that backstop doesn’t replace checking the dates yourself.</p>
+        <p><strong>Refresh analysis</strong> checks the analysis of the displayed snapshot. A message tells you if the same cached reading is still current; it doesn’t fetch a live market quote. If the underlying snapshot has changed, reload the page. If analysis is unavailable, you can still use the dated data and fixed review questions.</p>
+        <p>If every current valuation is unavailable, that section stays hidden. Any older figure labeled Archived is historical context. New analysis pauses when a snapshot is more than four days old; that backstop doesn’t replace checking the dates yourself.</p>
       </section>
 
       <footer class="guide-next">
@@ -93,5 +98,12 @@ const articleData = {
 <style>
   .tape-guide .guide-button { background:#dce4d9; border-color:#a8b8a5; }
   .tape-guide .guide-screenshot img { background:var(--cream); border:1px solid #c9c2b7; padding:1rem; }
+  .phone-review-notes { display: none; }
+  @media (max-width: 760px) {
+    .desktop-review-capture { display: none; }
+    .phone-review-notes { display: grid; gap: 1.25rem; padding: 1.25rem; background: var(--cream); border: 1px solid #c9c2b7; }
+    .phone-review-notes h3 { margin: 0 0 .5rem; font-size: 1.2rem; }
+    .phone-review-notes p { margin: 0; font-size: .95rem; }
+  }
   .tape-guide .guide-example { background:var(--cream); }
 </style>

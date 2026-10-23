@@ -44,3 +44,26 @@ Verify the RS1M formula and units against `cloudandcapital/market-tape/scripts/b
 Review unavailable/stale behavior, valuation-source labeling, ticker/source links, desktop and phone usability, and whether the real screenshots match the tool. The manually maintained infrastructure/deal section has separate dates and is not an exhaustive real-time tracker. Evaluate whether the guide explains both the value and limits without burying the reader in jargon or caveats.
 
 Return findings by severity with the exact page/section, reproduction steps, expected versus actual behavior, and the smallest useful fix. Separate verified bugs from suggestions and from anything you could not test. Give an honest readiness verdict. Don’t publish, sign up, use paid services, request credentials, or run load tests.
+
+
+## Independent Claude review follow-up
+
+App PR #23, merged as 7e2ae376e749e1d7914114927f823673b0d07eee, deployed successfully to production. Full resolution ledger is in the app repo at audits/claude-review-resolution-2026-10-23.md.
+
+- Equity summaries now use 34 classified equity ETFs, excluding SPY and macro instruments. The pinned October 22 snapshot gives 16/34 positive, 47/100; 53% above the 20-session average and 41% above the 50-session average.
+- Corrected IWM-vs-SPY and XLK trend/relative-score labels; neutral rounded zero; all 48 unique instruments inspectable in a table.
+- Fixed, identical compute summary at every width; source-built alerts and separate fixed business questions; no generated six-month budget implication.
+- GPU scope corrected to one vendor’s selected rental list rates, including reservation-only/on-demand-equivalent endpoints. CBRE vacancy described as unchanged.
+- SpaceX SEC S-1 checked directly without identifying request data: monthly arrangement through May 2029, bilateral 90-day termination; no inferred aggregate amount added to $265B+ headline.
+- All-unavailable valuation section hidden, missing navigation links added, Market Tape in both relevant catalog topics.
+- Refresh analysis tested publicly: status explicitly reports the same cached analysis after checking.
+- App tests: 18 regression tests, benchmark checks, TypeScript and build passed. Site tests: 109 passed before the environment interruption. Companion copy/reflow is compiled by the Vercel preview/production build.
+- Browser verified live desktop metrics, 48 unique table rows, seven menu entries (directory plus six tools), cache feedback, and 375px phone layout without horizontal overflow.
+
+### Capture interruption and next work
+
+The execution environment and browser disconnected during new screenshot capture. Fresh 2x screenshot assets were not completed or published. The guide removes the outdated market capture rather than present obsolete breadth figures; on phones, cloud-review questions use readable native text rather than a tiny wide screenshot. The tools-directory capture remains the previous dated layout until a fresh capture can be made.
+
+Resume with real screenshots from the current deployment: desktop market internals/momentum for the directory, equity status for the guide, and a 2x phone capture. Do not use mockups as screenshots. The approved homepage remains untouched.
+
+History is the next useful product upgrade: store dated snapshots and offer a 5–20-session change view. A commitment-payment calculator and reliable current valuation source are separate improvements.

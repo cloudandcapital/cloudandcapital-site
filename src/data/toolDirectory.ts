@@ -74,7 +74,7 @@ export const directoryTools: DirectoryTool[] = [
     companion: { label: 'How to use this tracker', href: '/insights/using-the-renewal-tracker' },
   },
   {
-    slug: 'market-tape', topics: ['money-investing'], name: 'Market Tape', kind: 'Market dashboard',
+    slug: 'market-tape', topics: ['money-investing', 'tech-spending'], name: 'Market Tape', kind: 'Market dashboard',
     description: 'Explore market trends alongside cloud and AI spending context.',
     bring: 'No upload needed. Check the snapshot date.',
     result: 'Dated market signals, sector scores, and source-linked infrastructure context.',

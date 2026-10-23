@@ -8,6 +8,8 @@ const pages = [
   '/resources/software-renewal',
   '/insights',
   '/insights/using-ai-cost-lens',
+  '/insights/using-interactive-lab',
+  '/insights/using-market-tape',
   '/insights/using-the-renewal-tracker',
   '/insights/is-this-software-worth-it',
   '/tools',

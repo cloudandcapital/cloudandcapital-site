@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ActionLabel from '../../components/ActionLabel.astro';
+import '../../styles/guides-page.css';
+
+const title = 'What’s moving in the market?';
+const description = 'Read Market Tape with me. Check the dates, understand the scores, and find a useful next question for your market research or technology cost review.';
+const articleUrl = 'https://cloudandcapital.com/insights/using-market-tape';
+const articleData = {
+  '@type': 'Article', '@id': `${articleUrl}#article`, headline: title, description,
+  author: { '@id': 'https://cloudandcapital.com/#diana' },
+  publisher: { '@id': 'https://cloudandcapital.com/#organization' },
+  mainEntityOfPage: articleUrl, datePublished: '2026-10-23', dateModified: '2026-10-23',
+  image: 'https://cloudandcapital.com/images/market-tape-snapshot-review.jpg',
+};
+---
+<BaseLayout title={`${title} | Cloud & Capital`} description={description} type="article" structuredData={[articleData]}>
+  <main id="main-content" class="guides-page tape-guide">
+    <article class="guide-shell guide-article">
+      <header>
+        <a class="guide-back" href="/insights">← Guides &amp; writing</a>
+        <p class="guide-eyebrow">Markets &amp; technology finance · A tool walkthrough</p>
+        <h1>What’s moving <em>in the market?</em></h1>
+        <p class="guide-byline">By Diana Molski · <time datetime="2026-10-23">October 23, 2026</time></p>
+        <p class="guide-lede">I built Market Tape to bring market moves and technology finance context into one place. Here’s how I’d use it to find something worth a closer look.</p>
+        <p>It’s for people following the markets and people working on technology budgets. You don’t need to upload anything. Open the dashboard, check the dates, and choose the part that matters to you.</p>
+        <a class="guide-button" href="https://market-tape.cloudandcapital.com/" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="market_tape" data-analytics-source="market_tape_guide"><ActionLabel label="Open Market Tape" /></a>
+      </header>
+
+      <section aria-labelledby="dates-title">
+        <h2 id="dates-title">Start with the date.</h2>
+        <p><strong>Prices dated</strong> tells you which trading date the daily price records belong to. <strong>Snapshot published</strong> tells you when the pipeline produced the file. Publishing a file later doesn’t make its prices newer.</p>
+        <p>The pipeline is scheduled to check every 30 minutes during its weekday window. That’s a schedule, not a guarantee or a live quote feed. Daily prices can still change while the market is open. The infrastructure benchmarks and deal tracker have their own source dates.</p>
+      </section>
+
+      <section aria-labelledby="status-title">
+        <h2 id="status-title">Get a feel for the snapshot.</h2>
+        <p>Under <strong>Market Status</strong>, look at <strong>Relative-strength breadth</strong> and the share above the 20- and 50-session moving averages. They help you see how much of this tracked basket is participating.</p>
+        <p>That basket mixes ETFs and indices. A reading of 52/100 means about 52% of the unique tracked instruments have a positive relative-strength score. It doesn’t mean you should invest 52% of your money, or that 52% of all US stocks are doing well.</p>
+      </section>
+
+      <figure class="guide-screenshot">
+        <picture>
+          <source media="(max-width: 760px)" srcset="/images/market-tape-snapshot-mobile.jpg" width="360" height="670" />
+          <img src="/images/market-tape-snapshot-review.jpg" alt="An actual Market Tape snapshot with labeled market data and relative-strength scores" width="1104" height="472" loading="lazy" decoding="async" />
+        </picture>
+        <figcaption>A real dashboard capture from October 23, 2026. The values on your visit may be different.</figcaption>
+      </figure>
+
+      <section aria-labelledby="scores-title">
+        <h2 id="scores-title">A score and a return are different things.</h2>
+        <p><strong>RS1M</strong> compares an instrument’s price performance with SPY, an ETF that tracks the S&P 500, over 20 trading sessions, then adjusts for the instrument’s volatility. Positive means it outperformed SPY; negative means it underperformed. The size of the number is a score, not a percentage return.</p>
+        <p>A +1.2 score doesn’t mean a 1.2% gain. An instrument can fall in price and still have a positive score if SPY fell more. <strong>Macro Context</strong> keeps the actual 20-session percentage price change beside the score so you can tell them apart.</p>
+        <p>The <strong>Sectors</strong>, <strong>Global ETF leaders</strong>, and <strong>Momentum</strong> lists rank these scores. An A, B, or C describes the price trend; it isn’t a business-quality grade or a buy/sell rating. The <a href="https://market-tape.cloudandcapital.com/sources" target="_blank" rel="noopener noreferrer">methodology page</a> explains the rules.</p>
+      </section>
+
+      <aside class="guide-example" aria-label="A next step for market research">
+        <p class="guide-eyebrow">What would I do next?</p>
+        <p>If defensive sectors rank above technology, I’d write down a question: <strong>Is this a broad shift, or are a few names driving it?</strong> Then I’d check the funds’ holdings and the underlying news. In the Momentum list, each ticker opens a Yahoo Finance research page. The ranking helps me choose what to research. It doesn’t answer the question by itself.</p>
+      </aside>
+
+      <section aria-labelledby="costs-title">
+        <h2 id="costs-title">Working on a technology budget?</h2>
+        <p>Look at the source-linked infrastructure benchmarks and AI compute tracker for wider context. Read the dates and the status of each announcement. Signed, announced, targeted, and reported deals are different things; the tracker is a selected, manually maintained list.</p>
+        <p>Then use <strong>Before a cloud commitment</strong> to bring the discussion back to your own business. How much usage stays steady? What might change over three years? Can a job stop and restart? Those answers, along with the actual prices and contract terms, help you evaluate a commitment.</p>
+        <p>Stock-market volatility can’t establish whether Spot capacity is safe for your workload. A software company’s valuation doesn’t tell you what discount its sales team will offer. Market context gives you questions to investigate alongside your own evidence.</p>
+      </section>
+
+      <figure class="guide-screenshot">
+        <img src="/images/market-tape-cloud-review.jpg" alt="Market Tape’s fixed review questions for one-year commitments, three-year commitments, and Spot or on-demand capacity" width="1104" height="252" loading="lazy" decoding="async" />
+        <figcaption>Questions you can take into a cost review. These stay available when AI analysis is unavailable.</figcaption>
+      </figure>
+
+      <section aria-labelledby="lumen-title">
+        <h2 id="lumen-title">Read Lumen with the numbers beside it.</h2>
+        <p>Lumen adds an AI-written explanation of the snapshot. Check its numbers, units, dates, and conclusions against the dashboard and linked sources. It can still get things wrong.</p>
+        <p><strong>Refresh analysis</strong> asks for analysis of the displayed snapshot; it doesn’t fetch a new live market quote. If the underlying snapshot has changed, reload the page. If analysis is unavailable, you can still use the dated data and fixed review questions.</p>
+        <p>An unavailable valuation stays <strong>Unavailable</strong>. An older figure labeled Archived is historical context. New analysis pauses when a snapshot is more than four days old; that backstop doesn’t replace checking the dates yourself.</p>
+      </section>
+
+      <footer class="guide-next">
+        <p class="guide-eyebrow">Find your next question</p>
+        <h2>Take a look, then follow the source.</h2>
+        <p>Try a market question in Market Tape. If you’re reviewing a real technology bill or commitment, I can help you work through the costs, usage, and terms.</p>
+        <div class="guide-actions">
+          <a class="guide-button" href="https://market-tape.cloudandcapital.com/" target="_blank" rel="noopener noreferrer"><ActionLabel label="Explore the snapshot" /></a>
+          <a href="/services#technology-cost-review"><ActionLabel label="Explore a cost review" /></a>
+        </div>
+      </footer>
+    </article>
+  </main>
+</BaseLayout>
+<style>
+  .tape-guide .guide-button { background:#dce4d9; border-color:#a8b8a5; }
+  .tape-guide .guide-screenshot img { background:var(--cream); border:1px solid #c9c2b7; padding:1rem; }
+  .tape-guide .guide-example { background:var(--cream); }
+</style>

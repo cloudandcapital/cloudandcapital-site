@@ -146,7 +146,7 @@ const briefObject = (properties) => ({ type: 'object', properties, required: Obj
 const briefList = (items, description) => ({ type: 'array', items, description });
 const briefChoice = (...values) => ({ type: 'string', enum: values });
 export const BRIEF_OUTPUT_SCHEMA = briefObject({
-  decision_summary: briefString,
+  decision_summary: { type: 'string', description: 'Short decision title under twelve words; no figures or fact recap.' },
   posture: briefObject({ label: briefChoice('Explore', 'Stage', 'Commit'), rationale: briefString }),
   recommendation: briefObject({ move: briefString, confidence: briefChoice('Low', 'Medium', 'High'), rationale: briefString }),
   options: briefList(briefObject({ name: briefString, cost_effect: briefString, practical_effect: briefString, check: briefString }), 'Two to four distinct options.'),

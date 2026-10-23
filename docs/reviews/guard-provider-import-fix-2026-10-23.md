@@ -91,9 +91,27 @@ instructions, 18-place cost disclosure and explicit UTC confirmation guidance.
 The public `/billing-pipeline/provenance.json` matches the merged FinOps Lite
 and Watchdog revisions and billing module hashes above.
 
-A fresh post-release interactive upload is still open: the local execution and
-browser workspace disconnected before that check. The complete upload/report/
-export interaction passed in CI, but the public page/provenance read is delivery
-evidence, not a claimed live file-upload pass. Physical print and device checks
-also remain separate. No private bill was used.
+## Post-release live upload follow-up
+
+After the testing workspace reconnected on October 23, the public HTTPS app
+passed the previously open interactive check. Its actual file chooser accepted
+the unchanged 1,000-row Gzip fixture. Review stayed disabled until explicit UTC
+confirmation, then showed 1,000 counted records and exact net USD
+`20.52022672899`. Downloaded Evidence JSON retained AWS `18.0066386184`,
+Microsoft `1.97651418586` and Oracle `0.53707392473`; these add to the exact net.
+The UTC confirmation warning and original expanded CSV digest
+`e91e5ac7edf01ed2c9d926f37ef7dc1ae2aae97956fea8da6c9ee488b1c2839e`
+are present in the downloaded evidence. Printable HTML retains the exact total
+and UTC warning. **Clear my data** returned to empty selectors and disabled Review.
+
+| Live artifact | Bytes | SHA-256 |
+| --- | ---: | --- |
+| Evidence JSON | 2,011,042 | `7601a70e19c62ff98aaebbe865538b12c5cac9cc38537d3ae4481a7ae28777d9` |
+| Printable HTML | 6,499 | `24e48632dafdc27b8a13821e97fc8dfd6218ab62f8c0966afe139fb2267331e5` |
+| Report viewport screenshot | 90,678 | `2a0a34b05192562638403495cae786fd3bbe38b803f293a359b1f0d8bbd56522` |
+
+This closes the fresh production upload/download/clear-data check for that
+public fixture. Physical print, real-device coverage, independent network
+capture and broader current-provider acceptance remain separate. No private
+bill was used.
 

@@ -16,7 +16,7 @@ const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
         <div class="hero-layout">
           <div class="hero-copy">
             <p class="eyebrow">Free tools</p>
-            <h1 id="tools-title"><span>Find something</span><em>that helps.</em></h1>
+            <h1 id="tools-title"><span>Find something</span> <em>that helps.</em></h1>
             <p>Understand a bill, keep track of renewals, explore the market, or work through a decision. Start with what you need.</p>
           </div>
           <div class="hero-art" aria-hidden="true">
@@ -87,7 +87,7 @@ const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
   .hero-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: center; gap: clamp(2rem, 5vw, 5rem); }
   .hero-copy h1 { margin-top: 1.2rem; font: 400 clamp(3.5rem, 6.5vw, 5.7rem)/.98 'Cormorant Garamond', Georgia, serif; letter-spacing: -.035em; }
   .hero-copy h1 > span, .hero-copy h1 > em { display: block; max-width: 100%; }
-  .hero-copy h1 em { color: var(--brand-green); font-weight: 400; }
+  .hero-copy h1 em { color: var(--clay-ink); font-style: normal; font-weight: 500; }
   .hero-copy > p:last-child { max-width: 49ch; margin-top: 1.4rem; color: #4b4c45; font-size: 1.0625rem; line-height: 1.75; text-wrap: pretty; }
   .hero-art { position: relative; display: flex; justify-content: center; min-width: 0; padding: 0 1.25rem 1.75rem 0; }
   .library-folder { position: relative; display: block; isolation: isolate; width: clamp(17rem, 28vw, 24rem); aspect-ratio: 1; }
@@ -110,8 +110,8 @@ const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
   .tool-topics { display: flex; justify-content: center; flex-wrap: wrap; gap: .7rem; padding: 1.5rem 0; border-top: 1px solid #3d605529; }
   .tool-topics[hidden], .directory-item[hidden] { display: none; }
   .tool-topics button { --topic-surface: #e4e9df; --topic-border: #c2cdbb; --topic-ink: #3d6055; display: inline-flex; align-items: center; justify-content: center; gap: 1rem; min-height: 58px; padding: .75rem 1.35rem; border: 1px solid var(--topic-border); border-radius: 14px; background: var(--topic-surface); color: var(--topic-ink); font: 500 1rem/1.4 'Jost', system-ui, sans-serif; cursor: pointer; box-shadow: 0 3px 0 -1px var(--topic-border); transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease; }
-  .tool-topics button[data-tool-filter="all"] { --topic-surface: #fcfbf8; --topic-border: #ccc5bb; --topic-ink: #24211e; }
-  .tool-topics button[data-tool-filter="money-investing"] { --topic-surface: #eadfce; --topic-border: #cfc0aa; --topic-ink: #675844; }
+  .tool-topics button[data-tool-filter="all"] { --topic-surface: var(--cream); --topic-border: #ccc5bb; --topic-ink: #24211e; }
+  .tool-topics button[data-tool-filter="money-investing"] { --topic-surface: var(--cream); --topic-border: #cfc0aa; --topic-ink: #675844; }
   .tool-topics button[data-tool-filter="ai-automation"] { --topic-surface: #e8d0cc; --topic-border: #c5a09b; --topic-ink: #785752; }
   .tool-topics button[aria-pressed="true"] { border-color: var(--topic-ink); box-shadow: 0 0 0 1px var(--topic-ink), 0 3px 0 -1px var(--topic-ink); }
   .tool-topics button[data-tool-filter="all"][aria-pressed="true"] { background: var(--brand-ink); color: #fff; }
@@ -123,11 +123,11 @@ const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
   .directory-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; padding: 0; list-style: none; }
   .directory-item { display: flex; min-width: 0; }
   .directory-item > :global(*) { width: 100%; }
-  .upcoming-card { --upcoming-surface: #e8d0cc; --upcoming-ink: #5d453e; --upcoming-body: #fcfbf8; display: flex; flex-direction: column; width: 100%; min-width: 0; overflow: hidden; border: 1px solid #d6bcb5; border-radius: 16px; background: var(--upcoming-body); }
+  .upcoming-card { --upcoming-surface: #e8d0cc; --upcoming-ink: #5d453e; --upcoming-body: var(--cream); display: flex; flex-direction: column; width: 100%; min-width: 0; overflow: hidden; border: 1px solid #d6bcb5; border-radius: 16px; background: var(--upcoming-body); }
   .upcoming-card[data-tone="sage"] { --upcoming-surface: #e4e9df; --upcoming-ink: #3d6055; border-color: #c2cdbb; }
-  .upcoming-card[data-tone="sand"] { --upcoming-surface: #eadfce; --upcoming-ink: #675844; border-color: #d3c6b1; }
+  .upcoming-card[data-tone="sand"] { --upcoming-surface: var(--cream); --upcoming-ink: #675844; border-color: #d3c6b1; }
   .upcoming-card[data-filter-tone="sage"] { --upcoming-surface: #e4e9df; --upcoming-ink: #3d6055; --upcoming-body: #f0f3ec; border-color: #c2cdbb; }
-  .upcoming-card[data-filter-tone="sand"] { --upcoming-surface: #eadfce; --upcoming-ink: #675844; --upcoming-body: #f6f0e6; border-color: #d3c6b1; }
+  .upcoming-card[data-filter-tone="sand"] { --upcoming-surface: var(--cream); --upcoming-ink: #675844; --upcoming-body: var(--cream); border-color: #d3c6b1; }
   .upcoming-card[data-filter-tone="rose"] { --upcoming-surface: #eddbd6; --upcoming-ink: #785752; --upcoming-body: #f6eae7; border-color: #d6b8b2; }
   .upcoming-preview { position: relative; display: flex; flex-direction: column; justify-content: center; aspect-ratio: 1.85; padding: 1.5rem; overflow: hidden; background: var(--upcoming-surface); }
   .upcoming-preview > p { color: var(--upcoming-ink); font: 400 clamp(2.25rem, 3.5vw, 3.25rem)/.95 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; }
@@ -146,7 +146,7 @@ const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
   .tools-contact p:last-child { max-width: 52ch; margin-top: .8rem; color: #493f3b; font-size: .9375rem; line-height: 1.7; }
   .tools-contact a { display: inline-flex; justify-content: center; flex: none; min-height: 52px; padding: .2rem 1.3rem; border: 1px solid #b38d89; border-radius: 8px; background: var(--cream); color: var(--brand-ink); text-decoration: none; }
   .tools-contact a :global(.action-label > span:first-child) { text-decoration: none; }
-  .tools-contact a:hover { background: #fcfbf8; }
+  .tools-contact a:hover { background: var(--cream); }
   .tools-page :is(a,button):focus-visible { outline: 3px solid #89534f; outline-offset: 4px; }
   @media (max-width: 1020px) {
     .hero-layout { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1rem; }

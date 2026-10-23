@@ -77,7 +77,7 @@ test('all static CTA metadata is complete and accepted by the allowlist', async 
 });
 
 test('tool wiring covers lifecycle events and reset is session-gated and clears state', async () => {
-  const [audit, lab] = await Promise.all([source('src/pages/signal-audit.astro'), source('src/pages/interactive-lab.astro')]);
+  const [audit, lab] = await Promise.all([source('src/lib/signal-audit-ui.js'), source('src/pages/interactive-lab.astro')]);
   for (const action of ['copy', 'print', 'retake']) assert.match(audit, new RegExp(`action: ["']${action}["']`));
   assert.match(audit, /tool_start/);
   assert.match(audit, /tool_complete/);

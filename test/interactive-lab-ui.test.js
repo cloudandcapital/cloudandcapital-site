@@ -208,6 +208,22 @@ test('starter selection and context disclosure expose their current state', asyn
   } finally { ui.dom.window.close(); }
 });
 
+test('withheld option effects are visibly labeled in the comparison and Copy', async () => {
+  const brief = { ...validBrief, options: [{ ...validBrief.options[0], practical_effect: 'The effect is not established here. Confirm access before choosing.' }, validBrief.options[1]] };
+  const ui = setup(async () => ({ ok: true, json: async () => ({ status: 'ready', brief, optionChecks: [{ optionIndex: 0, field: 'practical_effect' }] }) }));
+  let copied = '';
+  Object.defineProperty(ui.window.navigator, 'clipboard', { value: { writeText: async text => { copied = text; } } });
+  try {
+    await chooseExample(ui);
+    ui.$('briefBtn').click();
+    await tick();
+    assert.equal(ui.$('optionMatrix').querySelectorAll('.needs-checking').length, 2);
+    ui.$('copyBtn').click();
+    await tick();
+    assert.match(copied, /What changes: Needs checking: The effect is not established/);
+  } finally { ui.dom.window.close(); }
+});
+
 test('browser cutoff aborts generation, keeps answers, and unlocks the form', async () => {
   let expire;
   const ui = setup(async (_body, options) => new Promise((_resolve, reject) => {

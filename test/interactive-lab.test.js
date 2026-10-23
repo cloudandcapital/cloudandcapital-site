@@ -185,7 +185,7 @@ test('invalid JSON fails closed and GET exposes only public contract metadata', 
   const invalid = await POST({ request: new Request('https://cloudandcapital.com/api/interactive-lab', { method: 'POST', body: '{' }) });
   assert.equal(invalid.status, 400);
   const metadata = await (await GET()).json();
-  assert.equal(metadata.version, 4);
+  assert.equal(metadata.version, 5);
   assert.equal(metadata.decisionTypes.commitment, 'Cloud capacity');
 });
 
@@ -387,7 +387,7 @@ test('observed promises need conditional language or a check', () => {
   assert.deepEqual(findUnqualifiedPromises('Continued access is subject to vendor confirmation.'), []);
 });
 
-test('a rejected promise is regenerated rather than displayed as a checked brief', async () => {
+test('an unverified option effect is withheld and replaced by a labeled confirmation check', async () => {
   const original = globalThis.fetch;
   let calls = 0;
   globalThis.fetch = async () => modelResponse(++calls === 1 ? { ...validBrief, options: [{ ...validBrief.options[0], practical_effect: 'No disruption.' }, validBrief.options[1]] } : validBrief);
@@ -395,8 +395,11 @@ test('a rejected promise is regenerated rather than displayed as a checked brief
     const response = await POST({ request: labRequest() });
     const result = await response.json();
     assert.equal(response.status, 200);
-    assert.equal(calls, 2);
+    assert.equal(calls, 1);
     assert.doesNotMatch(JSON.stringify(result.brief), /No disruption/);
+    assert.deepEqual(result.optionChecks, [{ optionIndex: 0, field: 'practical_effect' }]);
+    assert.match(result.brief.options[0].practical_effect, /not established here/);
+    assert.equal(result.calculations[0].amounts[0].value, 3456);
   } finally { globalThis.fetch = original; }
 });
 
@@ -411,5 +414,17 @@ test('a repeated unsupported promise fails without returning the rejected brief'
     assert.equal(result.code, 'UNQUALIFIED_PROMISE');
     assert.equal(result.brief, undefined);
     assert.equal(calls, 2);
+  } finally { globalThis.fetch = original; }
+});
+
+test('deferring an option effect cannot hide an unsupported figure in that field', async () => {
+  const original = globalThis.fetch;
+  globalThis.fetch = async () => modelResponse({ ...validBrief, options: [{ ...validBrief.options[0], practical_effect: 'No disruption and savings of $9999.' }, validBrief.options[1]] });
+  try {
+    const response = await POST({ request: labRequest() });
+    const result = await response.json();
+    assert.equal(response.status, 502);
+    assert.equal(result.code, 'UNSUPPORTED_NUMERIC_CLAIM');
+    assert.equal(result.brief, undefined);
   } finally { globalThis.fetch = original; }
 });

@@ -2,7 +2,8 @@
 
 The Lab turns a technology spending question into a short decision brief:
 a suggested next move, an option comparison, missing information, and practical
-actions. Version 4 labels whether each option was supplied or suggested. It keeps
+actions. Version 5 labels whether each option was supplied or suggested and marks
+withheld option effects as Needs checking. It keeps
 the short report introduced in version 3, without repeated facts, functional
 lenses, or speculative thresholds.
 
@@ -32,11 +33,15 @@ schema and a 1,800 output-token ceiling. It allows at most two attempts within
 Timing labels are constrained to Now, Before the deadline, or Before choosing.
 Only capitalization of recognized enum values is normalized.
 
-The same two-attempt budget also rejects a narrow set of unqualified promises
-observed in live review, including no disruption, preserved quality, and captured
-savings. Conditional effects and checks are allowed. This is a targeted guard,
-not proof that every remaining statement is grounded or that all unsupported
-claims can be detected automatically.
+All original numeric claims are checked before any text is withheld. For a narrow
+set of unqualified promises observed in live review, a suspect option cost/effect
+cell is excluded and replaced by an explicitly labeled, server-authored
+confirmation check. This supplies no new price, term, or factual effect. The
+response identifies the affected cells in optionChecks. Unsupported figures are
+never removed to make an invalid draft pass. Promises elsewhere in the brief still
+trigger retry/failure within the same budget. Conditional effects and requirements
+are allowed. These targeted checks do not prove every remaining statement is
+grounded or detect every unsupported claim.
 
 The prompt asks for qualitative reasoning rather than numeric restatement.
 A separate numeric check still rejects invented figures, units, and durations.

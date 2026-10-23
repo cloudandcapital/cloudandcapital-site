@@ -12,6 +12,8 @@ Start cold as someone who wants to review THEIR OWN AWS, Azure or Google Cloud s
 
 This is the priority readiness question: current code reads supported FOCUS columns or the simple template. AWS/Azure have documented FOCUS CSV instructions; generic Google Cloud exports need preparation. Don't infer full provider compatibility from a simple invented fixture. Compare the parser against representative official export layouts, versions, timestamp formats, credits/taxes, blank account-level service names, multipart deliveries and compression. Where you cannot test an actual delivered format, mark it unverified. Is the upload experience easy enough, and are unsupported files explained without fabricating results?
 
+Diana's broader release requirement is coverage of the major providers' real downloads with minimal setup. Use the provider-input-coverage-2026-10-23.md brief alongside this audit. Start with AWS, Azure and Google Cloud, and distinguish native tested imports, files needing mapping, manual entry and unsupported/unverified formats. This is an audit of the own-bill product, not just the sample arithmetic.
+
 Use these public, fictional CSVs for a repeatable arithmetic check after evaluating the own-bill flow. They remain QA fixtures, not a required visitor workflow. Do not upload private information:
 
 - Current (September): https://cloudandcapital.com/examples/cloud-cost-guard/current-example.csv

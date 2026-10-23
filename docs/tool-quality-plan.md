@@ -14,6 +14,16 @@ Ship a casual, readable guide with a checked example and a concrete answer to â€
 
 Diana uses her own Claude app for independent review. Prepare a reproducible handoff covering live tool, guide, sources, arithmetic, usefulness, limitations, design, and exports. Work through material findings and retest changed behavior before marking that review complete. Do not call the connected editorial plugin on her behalf.
 
+## Real-world input coverage
+
+Diana's requirement applies across the library: accommodate the major providers and common files that the intended visitor actually has, with minimal preparation. A tool must not earn a ready verdict just because our invented example or custom template works. Examples are optional; reviewing the visitor's own information is the primary path.
+
+AI Cost Lens's baseline is OpenAI/ChatGPT, Anthropic/Claude and xAI/Grok, followed by Google/Gemini and other widely used providers identified through research and actual use. Subscription invoices and API cost/usage exports are separate inputs. Cloud Cost Guard's baseline is AWS, Azure and Google Cloud. These are coverage targets, not claims that every provider/file format is already supported or that a measured majority of users is covered.
+
+Track native and tested, mapped with confirmation, and unsupported formats separately. Verify the provider's actual download layout, credits, taxes, period, currency and totals. A price catalog entry, an OpenAI-compatible request format or generic mapper does not establish native bill-import support. A bill alone may establish spending without establishing requests, tokens, business outcomes or cost per usable result.
+
+Owner acceptance brief: [Provider input coverage](reviews/provider-input-coverage-2026-10-23.md). Apply it to existing tools before adding new ones. Keep active app ownership boundaries; this website task does not make concurrent Lens or Guard app changes.
+
 ## Current ownership and review state
 
 | Tool | Current evidence | Remaining owner work |

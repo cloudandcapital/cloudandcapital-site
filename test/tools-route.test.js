@@ -29,7 +29,7 @@ test('Tools is canonical while Work remains a permanent compatibility redirect',
 });
 
 test('directory opens released tools, preserves source links and has real screenshot assets', async () => {
-  const page = await source('src/pages/tools.astro');
+  const [page, sitemap] = await Promise.all([source('src/pages/tools.astro'), source('src/pages/sitemap.xml.ts')]);
   const entries = directoryTools;
   assert.equal(entries.length, 6);
   assert.equal(new Set(entries.map(tool => tool.href)).size, entries.length);
@@ -41,6 +41,9 @@ test('directory opens released tools, preserves source links and has real screen
     else assert.match(tool.href, /^\/(?!\/)/);
     assert.ok(validateAnalyticsEvent('cta_click', { destination: tool.destination, source: tool.source }));
     assert.ok((await readFile(new URL(`public${tool.image}`, root))).length > 0);
+    assert.match(tool.companion.href, /^\/insights\/[a-z-]+$/);
+    assert.ok((await source(`src/pages${tool.companion.href}.astro`)).length > 0, `${tool.name} has a companion guide`);
+    assert.ok(sitemap.includes(`'${tool.companion.href}'`), `${tool.name}'s guide is discoverable in the sitemap`);
   }
   const renewal = entries.filter(tool => tool.slug.includes('renewal'));
   assert.equal(renewal.length, 1, 'renewal is one card with a companion worksheet');

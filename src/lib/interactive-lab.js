@@ -155,7 +155,7 @@ const NUMBER_WORD_ATOM = '(?:zero|one|two|three|four|five|six|seven|eight|nine|t
 const NUMBER_ATOM = `(?:\\d[\\d,]*(?:\\.\\d+)?|${NUMBER_WORD_ATOM})`;
 const COUNT_UNIT = 'anomal(?:y|ies)|services?|teams?|accounts?|requests?|workloads?|incidents?|outages?|resources?|models?|environments?|users?|seats?|licenses?|licences?';
 const STANDARD_UNIT = '%|percent(?:age)?|years?|months?|weeks?|days?|hours?|minutes?|seconds?|engineers?|quarters?|x|times?';
-const NUMBER_CLAIM_PATTERN = new RegExp(`(?<![\\w])([$€£])?\\s*(${NUMBER_ATOM})(?:\\s*(?:-|–|—|to)\\s*(${NUMBER_ATOM}))?([kKmM])?(?:\\s*-\\s*)?(?:(?:\\s+(?:recent|active|unused|licensed|named|stable|production|reserved))?\\s+(${COUNT_UNIT})|\\s*(${STANDARD_UNIT}))?`, 'gi');
+const NUMBER_CLAIM_PATTERN = new RegExp(`(?<![\\w])([$€£])?\\s*(${NUMBER_ATOM})(?:\\s*(?:-|–|—|to)\\s*(${NUMBER_ATOM}))?([kKmM])?(?:(?:\\s*[-‐‑–—]\\s*|\\s+)(?:(?:recent|active|unused|licensed|named|stable|production|reserved)(?:\\s*[-‐‑–—]\\s*|\\s+))?(${COUNT_UNIT})\\b|(?:\\s*[-‐‑–—]\\s*)?\\s*(${STANDARD_UNIT})(?![A-Za-z]))?`, 'gi');
 
 function parseNumberAtom(atom) {
   if (/^\d/.test(atom)) return Number(atom.replace(/,/g, ''));

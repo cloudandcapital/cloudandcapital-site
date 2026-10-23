@@ -58,3 +58,10 @@ validation, and deadline. The numeric rules do not rely on model arithmetic.
 Provider reference: https://platform.claude.com/docs/en/models/haiku-4-5/overview.
 The noindex responsive-review helper now accepts `page=lab` as an allowlisted
 local route so actual generation can be checked at phone widths.
+
+The first Haiku check returned within the deadline but failed validation.
+A deterministic regression reproduced rejection of “12-seat” versus “12 seats”;
+count-unit parsing now preserves hyphenated count modifiers. Error responses
+carry a bounded failure code and rejected numeric claims back to the requesting
+visitor, never to logs, so live validation can be diagnosed without exposing a
+rejected draft as a usable brief.

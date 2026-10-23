@@ -1,4 +1,4 @@
-import { DIMENSIONS, QUESTIONS, TARGET_SCOPES, TECHNOLOGY_SCOPES, EXAMPLE, HIGH_BOUNDARY, RUBRIC_VERSION, scoreAudit, scopeGuidance, discussionQuestions, buildAuditSummary, assessmentDate, exampleLabel } from './signal-audit.js';
+import { DIMENSIONS, QUESTIONS, TARGET_SCOPES, TECHNOLOGY_SCOPES, EXAMPLE, HIGH_BOUNDARY, RUBRIC_VERSION, scoreAudit, scopeGuidance, discussionQuestions, buildAuditSummary, assessmentDate, exampleLabel, mapCoverageMessage } from './signal-audit.js';
 
 export function mountSignalAudit(document) {
   const window = document.defaultView;
@@ -109,6 +109,7 @@ export function mountSignalAudit(document) {
     $('exampleLabel').textContent = state.isExample ? exampleLabel(state.answers) : '';
     $('exampleDescription').hidden = editedExample || !state.isExample;
     $('exampleDescription').textContent = state.isExample && !editedExample ? EXAMPLE.description : '';
+    $('exampleContext').textContent = editedExample ? 'These answers started from the made-up example.' : 'These are illustrative answers.';
     $('resultEyebrow').textContent = state.isExample ? 'Example result' : 'Your self-assessment';
     $('assessmentDate').dateTime = state.takenAt;
     $('assessmentDate').textContent = assessmentDate(state.takenAt);
@@ -127,7 +128,7 @@ export function mountSignalAudit(document) {
       $('mapPoint').style.bottom = `${result.axes.decisionIntegration}%`;
       $('mapPoint').classList.toggle('edge-right', result.axes.signalReadiness > 84);
     }
-    $('mapDescription').textContent = result.valid ? `Understand the spending: ${result.axes.signalReadiness}/100 points. Use it in decisions: ${result.axes.decisionIntegration}/100 points. The dividing lines use our 67 point cutoff.` : 'No overall position: each area needs at least two scored answers. Missing information is kept separate from a low score.';
+    $('mapDescription').textContent = result.valid ? `Understand the spending: ${result.axes.signalReadiness}/100 points. Use it in decisions: ${result.axes.decisionIntegration}/100 points. The dividing lines use our 67 point cutoff.` : 'No overall position: each area needs at least two scored answers. Unknown and not applicable answers are kept separate from a low score.';
     $('dimensionCards').replaceChildren(...DIMENSIONS.map((dimension) => {
       const item = result.dimensions[dimension.id];
       const article = document.createElement('article'); article.className = 'profile-row';
@@ -145,6 +146,7 @@ export function mountSignalAudit(document) {
     $('moveText').textContent = result.priority.move;
     $('priorityReason').textContent = result.priority.reason;
     $('mapCoverageNotice').hidden = result.valid;
+    $('mapCoverageNotice').textContent = mapCoverageMessage(result);
     $('renewalTrackerLink').hidden = result.priority.questionId !== 'commitments-contracts';
     $('ownerText').textContent = result.priority.owners;
     $('measureText').textContent = result.priority.measures.join(' · ');

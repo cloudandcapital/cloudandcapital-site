@@ -86,6 +86,7 @@ test('edited examples keep their provenance without a false original scenario de
     ui.$('editAnswersButton').click(); ui.answerAll('score-3');
     assert.equal(ui.$('exampleLabel').textContent, 'Started from the made-up example, then edited');
     assert.equal(ui.$('exampleDescription').hidden, true); assert.equal(ui.$('exampleDescription').textContent, '');
+    assert.equal(ui.$('exampleContext').textContent, 'These answers started from the made-up example.');
     ui.$('copyButton').click(); await new Promise((r) => setImmediate(r));
     assert.match(copied, /Started from the made-up example, then edited/); assert.doesNotMatch(copied, /Made-up example: a team’s software renewals/);
     assert.match(copied, /Taken: /); assert.equal(ui.$('assessmentDate').dateTime, ui.state.takenAt); assert.match(ui.$('rubricVersion').textContent, /-r2/);
@@ -98,9 +99,32 @@ test('known renewal gap still renders when exclusions hide the map and links to 
     ui.begin(); for (const answer of values) { ui.choose('answer', answer); ui.$('nextButton').click(); }
     assert.equal(ui.$('mapPoint').hidden, true); assert.equal(ui.$('mapCoverageNotice').hidden, false);
     assert.match(ui.$('moveTitle').textContent, /renewal/); assert.match(ui.$('priorityReason').textContent, /renew automatically/);
+    assert.match(ui.$('mapCoverageNotice').textContent, /scored answer you provided/);
     assert.equal(ui.$('renewalTrackerLink').hidden, false); assert.equal(ui.$('renewalTrackerLink').getAttribute('href'), '/tools/software-renewal-tracker');
   } finally { ui.dom.window.close(); }
 });
+
+for (const scenario of ['all not applicable', 'all unknown', 'strong answers with two exclusions']) {
+  test(`${scenario}: the rendered explanation and copied notice use the correct cause`, async () => {
+    const ui = setup(); let copied = '';
+    Object.defineProperty(ui.window.navigator, 'clipboard', { value: { writeText: async (text) => { copied = text; } } });
+    try {
+      ui.begin();
+      for (const question of QUESTIONS) {
+        const answer = scenario === 'all not applicable' ? 'not-applicable' : scenario === 'all unknown' ? 'outside-visibility' : ['unit-economics-value', 'consumption-demand'].includes(question.id) ? 'not-applicable' : 'score-3';
+        ui.choose('answer', answer); ui.$('nextButton').click();
+      }
+      const notice = ui.$('mapCoverageNotice').textContent;
+      assert.equal(ui.$('mapCoverageNotice').hidden, false); assert.doesNotMatch(notice, /answer you provided/);
+      assert.doesNotMatch(ui.$('resultMeaning').textContent, /missing information/);
+      assert.doesNotMatch(ui.$('mapDescription').textContent, /Missing information/);
+      if (scenario === 'all unknown') assert.match(notice, /unknown or left unanswered/);
+      else { assert.match(notice, /not applicable/); assert.doesNotMatch(notice, /missing|unknown/); }
+      ui.$('copyButton').click(); await new Promise((r) => setImmediate(r));
+      assert.ok(copied.includes(notice));
+    } finally { ui.dom.window.close(); }
+  });
+}
 
 test('print lifecycle opens all answers and method, then restores the on-screen disclosures', () => {
   const ui = setup(); try {

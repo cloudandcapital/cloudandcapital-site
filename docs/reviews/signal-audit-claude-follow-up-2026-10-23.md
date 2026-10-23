@@ -14,7 +14,7 @@ The normalization, exclusion denominator, rounded axis arithmetic, 67 boundary a
 
 ## Smaller findings addressed
 
-- DM Sans lining, tabular numerals replace old-style serif figures in score tiles and area scores. Both 100/100 values fit at 320px.
+- Lining, tabular sans-serif numerals replace old-style serif figures in score tiles and area scores. Both 100/100 values fit at 320px. The declared DM Sans currently falls back to the platform sans-serif; font loading remains a nonblocking visual refinement noted in the independent recheck.
 - An edited example keeps an explicit edited-example label and loses the original scenario description. Copy preserves this provenance. Example results say “Example result.”
 - Begin and Next stay keyboard reachable and show the existing friendly errors when a selection is missing.
 - Changing scope or categories shows the answer count that will be cleared before Begin. Unchanged selections keep the answers.
@@ -38,4 +38,18 @@ Small optional improvements included: renewal results link to the existing Renew
 
 Native Chrome/Safari PDF pagination is still unverified. The cloud browser can invoke Print but does not expose a usable native print-preview/export interface. Print invocation and disclosure restoration are tested; that is not proof of final page breaks. No physical phone, Safari/Firefox or real screen-reader testing is claimed.
 
-Deferred product choices: per-area “good enough” targets, changing the all-lowest tie order, and reversing the answer display order. They need a separate product decision, not a feature added solely because an alternative assessment has it. A focused independent recheck of r2 is welcome; the original Claude review is complete, not a review of these later fixes.
+Deferred product choices: per-area “good enough” targets, changing the all-lowest tie order, and reversing the answer display order. They need a separate product decision, not a feature added solely because an alternative assessment has it. The focused independent r2 recheck is recorded below.
+
+## Focused independent recheck received
+
+Diana supplied Claude's recheck of the deployed `2026-10-23-r2` rubric. All seven targeted items pass: the original blockers, known answers in incomplete areas, the hidden renewal zero, maintenance/scope fit, edited-example provenance and the UI fixes. Claude also reconciled the worked example again and reported that no answers, scores or scope values reached analytics. This supersedes the earlier pending recheck status; it is distinct from our own tests.
+
+One wording defect remained around withheld maps. Scope-fit results still called exclusions “missing information,” and a generic notice claimed that an information/scope check came from a scored answer. The copy-only follow-up fixes the pattern meaning and map description, and shares a cause-specific notice between the screen and copied summary. It distinguishes a known scored answer, genuine not-applicable exclusions, and unknown/unanswered information. No scoring, priority, coverage or cutoff rule changes; the rubric version remains r2.
+
+The edited-example note now says its answers started from the made-up example. The guide caption names `2026-10-23-r2` exactly. The approved example screenshots still match: their captured header/renewal content is unchanged.
+
+138 website tests pass, including 38 Signal Audit tests. Added regression cases cover all N/A, all unknown, strong answers with two N/A exclusions, and a known gap in an incomplete area. They check the pattern wording, map text and exact agreement between the on-screen notice and Copy. Browser and production verification are recorded in the release checkpoint.
+
+Still open: real Chrome/Safari PDF pagination. No simulated page count or identical cross-browser pagination is claimed. Further tied-gap summaries, reminders about residual unknowns, and font-loading refinement are nonblocking product/design ideas rather than reopened scoring defects.
+
+Visual regression evidence: [all-not-applicable wording](signal-audit-exclusions-wording-2026-10-23.jpg), captured from the working tool without changing its answers or result.

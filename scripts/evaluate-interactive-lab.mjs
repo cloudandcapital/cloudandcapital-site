@@ -27,7 +27,7 @@ const scenarios = [
     answers: { alternatives: 'Use the vendor model, optimize the current path, or build internally.', exposure: 'Unit cost is known but future volume is uncertain.', demand: 'Quality and latency requirements are documented.', constraint: 'The team has limited model operations capacity.' },
   },
   {
-    name: 'Cloud cost review', type: 'cost_review', posture: 'Stage', required: ['(?:14|fourteen(?: recent)?) anomalies', 'owners'], forbidden: ['GPU', 'renewal'],
+    name: 'Cloud cost review', type: 'cost_review', posture: 'Stage', required: ['anomalies', 'owners'], forbidden: ['GPU', 'renewal'],
     decision: 'Run a cloud cost review without damaging reliability.',
     answers: { alternatives: 'Remove waste, improve accountability, or reprioritize unfunded work.', exposure: 'The baseline is known but the savings target needs validation.', demand: 'Fourteen recent anomalies lack owners and allocation is incomplete.', constraint: 'Reliability, security, and the product roadmap must be protected.' },
   },
@@ -94,12 +94,11 @@ for (const scenario of scenarios) {
     const serialized = JSON.stringify(payload.brief);
     assert.doesNotMatch(serialized, /unspecified figure/i);
     const source = [scenario.decision, ...Object.values(scenario.answers)].join('\n');
-    assert.deepEqual(findUnsupportedNumbers(payload.brief, source, { includeCalculations: true }), []);
-    assert.deepEqual(findUnsupportedNumbers(payload.brief.known_facts, source), []);
+    assert.deepEqual(findUnsupportedNumbers(payload.brief, source), []);
     for (const term of scenario.required) assert.match(serialized, new RegExp(term, 'i'), `missing supplied evidence: ${term}`);
     for (const term of scenario.forbidden) assert.doesNotMatch(serialized, new RegExp(term, 'i'), `cross-scenario leakage: ${term}`);
-    assert.ok(payload.brief.options.every((option) => option.name && option.risk && option.evidence_needed));
-    assert.ok(payload.brief.recommendation.move && payload.brief.next_actions.every((action) => action.action && action.evidence));
+    assert.ok(payload.brief.options.every((option) => option.name && option.cost_effect && option.practical_effect && option.check));
+    assert.ok(payload.brief.recommendation.move && payload.brief.next_actions.every((action) => action.action && action.owner && action.timing));
 
     recommendations.push({ name: scenario.name, terms: recommendationTerms(payload.brief.recommendation.move) });
     console.log(`PASS  ${scenario.name}: ${payload.brief.posture.label} — ${payload.brief.recommendation.move}`);

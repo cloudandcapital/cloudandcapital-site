@@ -128,11 +128,11 @@ test('successful output and Copy preserve the checked arithmetic and example lab
     assert.equal(ui.$('briefExampleNotice').hidden, false);
     assert.equal(ui.$('calculationsSection').hidden, false);
     assert.equal(ui.$('checkedCalculations').textContent, explanation);
-    assert.match(ui.$('recommendationMove').textContent, /Stage/);
+    assert.match(ui.$('recommendationMove').textContent, /Measure/);
     ui.$('copyBtn').click();
     await tick();
     assert.match(copied, /ILLUSTRATIVE EXAMPLE/);
-    assert.ok(copied.indexOf('RECOMMENDATION') < copied.indexOf('KNOWN FACTS'));
+    assert.ok(copied.indexOf('RECOMMENDATION') < copied.indexOf('COMPARE YOUR OPTIONS'));
     assert.equal(copied.split(explanation).length - 1, 1);
     assert.equal(copied.split('NEXT ACTIONS').length - 1, 1);
     assert.equal(ui.$('copyState').textContent, 'Decision brief copied.');

@@ -184,7 +184,7 @@ test('invalid JSON fails closed and GET exposes only public contract metadata', 
   const invalid = await POST({ request: new Request('https://cloudandcapital.com/api/interactive-lab', { method: 'POST', body: '{' }) });
   assert.equal(invalid.status, 400);
   const metadata = await (await GET()).json();
-  assert.equal(metadata.version, 2);
+  assert.equal(metadata.version, 3);
   assert.equal(metadata.decisionTypes.commitment, 'Capacity or commitment');
 });
 
@@ -245,7 +245,7 @@ function modelResponse(brief) {
 
 test('API returns its own checked calculations and ignores caller-supplied calculations', async () => {
   const original = globalThis.fetch;
-  globalThis.fetch = async () => modelResponse({ ...validBrief, economics: { available: false, analysis: 'Calculated: the new price would be $3,456 if the increase applies to the entire bill.', thresholds: [] } });
+  globalThis.fetch = async () => modelResponse(validBrief);
   try {
     const response = await POST({ request: labRequest({ ...renewalPayload, calculations: [{ amounts: [{ value: 9999, currency: '$' }] }] }) });
     const result = await response.json();
@@ -255,9 +255,9 @@ test('API returns its own checked calculations and ignores caller-supplied calcu
   } finally { globalThis.fetch = original; }
 });
 
-test('a derived amount cannot be presented as a reported fact', async () => {
+test('derived amounts stay in the independent calculation section', async () => {
   const original = globalThis.fetch;
-  globalThis.fetch = async () => modelResponse({ ...validBrief, known_facts: ['The quoted price is $3,456.', 'The team uses the tool.', 'Terms are unknown.'] });
+  globalThis.fetch = async () => modelResponse({ ...validBrief, recommendation: { ...validBrief.recommendation, move: 'The quoted price is $3,456.' } });
   try {
     const response = await POST({ request: labRequest() });
     assert.equal(response.status, 502);
@@ -328,14 +328,30 @@ test('truncated model output fails closed with a distinct recovery code', async 
   } finally { globalThis.fetch = original; }
 });
 
-test('seven concise facts do not reject an otherwise valid brief', () => {
-  const brief = { ...validBrief, known_facts: [
-    'The current subscription is used.', 'Some seats are unused.', 'The design lead owns it.',
-    'A renewal quote has arrived.', 'The next contract term is unknown.',
-    'Replacement pricing is unknown.', 'Existing files must remain accessible.',
-  ] };
-  assert.equal(validateBrief(brief), true);
-  assert.equal(validateBrief({ ...brief, known_facts: [] }), false);
-  assert.equal(validateBrief({ ...brief, known_facts: Array(13).fill('A fact.') }), false);
-  assert.deepEqual(findUnsupportedNumbers('A price of $9999.', 'The bill is $2880.'), ['$9999']);
+test('a useful list of checks is bounded without requiring invented facts', () => {
+  assert.equal(validateBrief({ ...validBrief, missing_information: Array(7).fill('Confirm the commercial terms.') }), true);
+  assert.equal(validateBrief({ ...validBrief, missing_information: [] }), false);
+  assert.equal(validateBrief({ ...validBrief, missing_information: Array(9).fill('Confirm the commercial terms.') }), false);
+});
+
+test('the compact brief rejects invented action schedules and missing option checks', () => {
+  assert.equal(validateBrief({ ...validBrief, next_actions: [{ ...validBrief.next_actions[0], timing: 'Within one week' }, validBrief.next_actions[1]] }), false);
+  assert.equal(validateBrief({ ...validBrief, options: [{ ...validBrief.options[0], check: '' }, validBrief.options[1]] }), false);
+});
+
+test('provider enum capitalization is normalized without accepting unknown labels', async () => {
+  const original = globalThis.fetch;
+  globalThis.fetch = async () => modelResponse({ ...validBrief,
+    posture: { ...validBrief.posture, label: 'stage' },
+    recommendation: { ...validBrief.recommendation, confidence: 'medium' },
+    next_actions: validBrief.next_actions.map((action) => ({ ...action, timing: action.timing.toLowerCase() })),
+  });
+  try {
+    const response = await POST({ request: labRequest() });
+    const body = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(body.brief.posture.label, 'Stage');
+    assert.equal(body.brief.recommendation.confidence, 'Medium');
+    assert.equal(body.brief.next_actions[0].timing, 'Now');
+  } finally { globalThis.fetch = original; }
 });

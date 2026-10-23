@@ -92,6 +92,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .thinking-state h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 400; }
     .thinking-state p { min-height: 1.5rem; margin-top: .6rem; font-family: var(--font-body); font-size: 1.05rem; color: var(--text-muted); }
 
+    .decision-brief, .thinking-state { scroll-margin-top: 110px; }
     .decision-brief { animation: briefIn .35s ease; }
     @keyframes briefIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     .context-summary { margin-bottom: 1.8rem; border: 1px solid var(--border); background: #fff; }
@@ -569,6 +570,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       requestVersion += 1;
       activeController?.abort();
       activeController = null;
+      briefBtn.textContent = 'Generate the brief →';
       stopThinking();
       showContextStage();
       setBusy(false);
@@ -603,6 +605,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       $('exampleNotice').hidden = true;
       $('copyState').textContent = '';
       contextBtn.textContent = 'Build the context →';
+      briefBtn.textContent = 'Generate the brief →';
       updateDecisionCount();
       setBusy(false);
       document.querySelectorAll('.scenario-button').forEach((item) => item.classList.remove('is-selected'));
@@ -637,6 +640,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       setError();
       setStep(2);
       startThinking();
+      briefBtn.textContent = 'Building your brief…';
+      $('thinkingState').scrollIntoView({ behavior: 'smooth', block: 'center' });
       try {
         const data = await callLab({ stage: 'brief', decision: decisionInput.value.trim(), decisionType: state.decisionType, answers: state.answers });
         if (operation !== requestVersion) return;
@@ -650,7 +655,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         $('labWorkspace').classList.add('is-results');
         $('briefState').hidden = false;
         $('briefState').focus({ preventScroll: true });
-        if (window.innerWidth < 980) $('briefState').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        $('briefState').scrollIntoView({ behavior: 'smooth', block: 'start' });
         window.ccTrack?.('lab_stage_result', { stage: 'brief', result: 'success' });
         if (!toolCompletionTracked) {
           window.ccTrack?.('tool_complete', { tool: 'interactive_lab', result: 'completed' });
@@ -664,7 +669,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         showPlaceholder('context');
         setError(error.message);
       } finally {
-        if (operation === requestVersion) setBusy(false);
+        if (operation === requestVersion) {
+          briefBtn.textContent = 'Generate the brief →';
+          setBusy(false);
+        }
       }
     });
 

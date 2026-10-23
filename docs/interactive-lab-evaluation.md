@@ -45,3 +45,9 @@ prove that a cheaper seat count is available.
 Regression checks: `npm test`. Re-test a renewal, AI build/buy, and an under-specified
 case through the deployed UI, including Back, cancellation, Copy, and mobile
 layout. Keep the directory entry under review until real generation succeeds.
+
+The first bounded production renewal check timed out with its inputs intact.
+The follow-up keeps Sonnet 4.6, explicitly sets low effort, and requests a much
+shorter brief (420 prose words; 2,600 output-token cap). This follows the
+provider's effort guidance: https://platform.claude.com/docs/en/build-with-claude/effort.
+Loading and results scroll into view so the status and next move are visible.

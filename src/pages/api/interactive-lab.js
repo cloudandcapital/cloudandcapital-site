@@ -76,9 +76,9 @@ Rules:
 - No HTML, markdown, tables, bullets, citations, or disclaimers inside fields.
 - No generic FinOps slogans, false precision, or authoritative claims about a vendor's commercial terms.
 - Return between two and four options so every materially distinct supplied option is represented, and return exactly three next actions.
-- Include no more than three working assumptions and three thresholds.
-- Keep every prose field to one sentence and no more than 35 words.
-- Keep the complete response under 800 words. Prefer short, direct sentences. Do not repeat the same point in every section.`;
+- Include no more than two working assumptions and two thresholds; use empty arrays when they add nothing.
+- Keep most fields under 12 words; recommendation.move and economics.analysis may use up to 30 words. Use concise fragments in option cells and action fields.
+- Keep all prose under 420 words in total. Do not repeat the same point in every section. Prefer specific missing evidence over extra explanation.`;
 }
 
 function buildUserPrompt(readiness) {
@@ -107,7 +107,8 @@ async function callModel(readiness, requestSignal) {
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 3200,
+        max_tokens: 2600,
+        output_config: { effort: 'low' },
         temperature: 0.2,
         system: [{ type: 'text', text: buildSystemPrompt(readiness), cache_control: { type: 'ephemeral' } }],
         messages: [{ role: 'user', content: `${buildUserPrompt(readiness)}${correction}` }],

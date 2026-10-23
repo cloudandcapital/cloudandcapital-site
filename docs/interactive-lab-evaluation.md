@@ -71,3 +71,10 @@ The provider request now uses its native JSON schema format for required keys,
 field types, and enums; the server still checks lengths, counts, and numbers.
 Schema failures identify the failing field without returning draft content.
 Provider reference: https://platform.claude.com/docs/en/build-with-claude/structured-outputs.
+
+The strict-schema response exposed the specific failure: known_facts contained
+seven entries, exceeding the old six-entry cap. The validator now accepts one
+to twelve short facts while the prompt requests up to eight. Empty facts and
+oversized lists still fail; numeric grounding remains strict. The model no
+longer receives computed amounts in its prompt: checked arithmetic is shown
+separately by the app so it is not confused with reported evidence.

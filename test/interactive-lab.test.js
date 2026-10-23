@@ -327,3 +327,15 @@ test('truncated model output fails closed with a distinct recovery code', async 
     assert.equal(body.brief, undefined);
   } finally { globalThis.fetch = original; }
 });
+
+test('seven concise facts do not reject an otherwise valid brief', () => {
+  const brief = { ...validBrief, known_facts: [
+    'The current subscription is used.', 'Some seats are unused.', 'The design lead owns it.',
+    'A renewal quote has arrived.', 'The next contract term is unknown.',
+    'Replacement pricing is unknown.', 'Existing files must remain accessible.',
+  ] };
+  assert.equal(validateBrief(brief), true);
+  assert.equal(validateBrief({ ...brief, known_facts: [] }), false);
+  assert.equal(validateBrief({ ...brief, known_facts: Array(13).fill('A fact.') }), false);
+  assert.deepEqual(findUnsupportedNumbers('A price of $9999.', 'The bill is $2880.'), ['$9999']);
+});

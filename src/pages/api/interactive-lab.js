@@ -5,6 +5,7 @@ import {
   MAX_DECISION_CHARS,
   assessReadiness,
   findUnsupportedNumbers,
+  findUnqualifiedPromises,
   getCheckedCalculations,
   validateBrief,
 } from '../../lib/interactive-lab.js';
@@ -121,15 +122,16 @@ async function callModel(readiness, requestSignal) {
 
     const sourceText = buildSourceText(readiness);
     const unsupportedNumbers = findUnsupportedNumbers(brief, sourceText);
-    if (!unsupportedNumbers.length) return brief;
+    const unqualifiedPromises = findUnqualifiedPromises(brief);
+    if (!unsupportedNumbers.length && !unqualifiedPromises.length) return brief;
 
-    console.error('Interactive Lab numeric validation failed', { count: unsupportedNumbers.length, attempt: attempt + 1 });
+    console.error('Interactive Lab claim validation failed', { numericCount: unsupportedNumbers.length, promiseCount: unqualifiedPromises.length, attempt: attempt + 1 });
     if (attempt === 1) {
-      const error = new Error('UNSUPPORTED_NUMERIC_CLAIM');
-      error.rejectedClaims = unsupportedNumbers;
+      const error = new Error(unsupportedNumbers.length ? 'UNSUPPORTED_NUMERIC_CLAIM' : 'UNQUALIFIED_PROMISE');
+      error.rejectedClaims = [...unsupportedNumbers, ...unqualifiedPromises];
       throw error;
     }
-    correction = `\n\nThe draft introduced unsupported numeric claims: ${unsupportedNumbers.join(', ')}. Regenerate the complete brief without any quantities or durations. Refer to the quote, unused seats, current bill, and deadline qualitatively. Use only the allowed timing labels.`;
+    correction = `\n\nThe draft introduced claims that cannot be shown: ${[...unsupportedNumbers, ...unqualifiedPromises].join(', ')}. Regenerate the complete brief without any quantities or durations. Replace promises about disruption, preserved quality, or savings with conditional effects and the checks needed to establish them. Do not call any action the only safe choice. Refer to the quote, unused seats, current bill, and deadline qualitatively. Use only the allowed timing labels.`;
   }
   throw new Error('UNSUPPORTED_NUMERIC_CLAIM');
 }
@@ -188,7 +190,7 @@ export async function POST({ request }) {
     const message = timedOut ? 'That took too long. Your inputs are still here. Try again in a moment.'
       : unavailable ? 'The AI service is unavailable right now. Your inputs are still here. Please try again later.'
         : 'The Lab could not produce a checked brief. Your inputs are still here. Please try again.';
-    const knownCodes = ['INVALID_MODEL_JSON', 'INVALID_MODEL_SCHEMA', 'MODEL_OUTPUT_TRUNCATED', 'UNSUPPORTED_NUMERIC_CLAIM'];
+    const knownCodes = ['INVALID_MODEL_JSON', 'INVALID_MODEL_SCHEMA', 'MODEL_OUTPUT_TRUNCATED', 'UNSUPPORTED_NUMERIC_CLAIM', 'UNQUALIFIED_PROMISE'];
     const code = timedOut ? 'MODEL_TIMEOUT' : unavailable ? 'MODEL_UNAVAILABLE' : knownCodes.includes(error.message) ? error.message : 'MODEL_REQUEST_FAILED';
     // Return validation details only to the requesting visitor, never to logs.
     // This is an error response, not a usable or partially repaired brief.

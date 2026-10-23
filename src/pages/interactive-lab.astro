@@ -224,7 +224,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       .lab-shell { max-width: none; padding: 0; }
       .lab-frame { border: 0; box-shadow: none; }
       .lab-workspace { display: block; }
-      .lab-output-pane { padding: 0; background: #fff; }
+      .lab-output-pane, .lab-workspace.is-results .lab-output-pane { padding: 0; background: #fff; }
+      .recommendation { color: #000; background: #fff; border: 1px solid #aaa; }
+      .recommendation-top, .recommendation-rationale { color: #333; border-color: #aaa; }
       .brief-section { break-inside: avoid; }
       .print-context { display: block; padding-block: 1.25rem; border-bottom: 1px solid #aaa; }
       .print-context h2 { font: 600 1rem var(--font-body); }
@@ -250,7 +252,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <p class="lab-status" id="labStatus" role="status" aria-live="polite" aria-atomic="true"></p>
     <section class="lab-frame" aria-label="Interactive decision lab">
       <div class="lab-rail" aria-label="Progress">
-        <div class="lab-step is-active" id="stepDecision"><span class="lab-step-number">01</span> Decision</div>
+        <div class="lab-step is-active" id="stepDecision" aria-current="step"><span class="lab-step-number">01</span> Decision</div>
         <div class="lab-step" id="stepEvidence"><span class="lab-step-number">02</span> Details</div>
         <div class="lab-step" id="stepBrief"><span class="lab-step-number">03</span> Brief</div>
       </div>

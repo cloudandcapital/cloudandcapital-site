@@ -32,6 +32,12 @@ schema and a 1,800 output-token ceiling. It allows at most two attempts within
 Timing labels are constrained to Now, Before the deadline, or Before choosing.
 Only capitalization of recognized enum values is normalized.
 
+The same two-attempt budget also rejects a narrow set of unqualified promises
+observed in live review, including no disruption, preserved quality, and captured
+savings. Conditional effects and checks are allowed. This is a targeted guard,
+not proof that every remaining statement is grounded or that all unsupported
+claims can be detected automatically.
+
 The prompt asks for qualitative reasoning rather than numeric restatement.
 A separate numeric check still rejects invented figures, units, and durations.
 Only the server calculates a narrowly defined price increase, or a monthly run

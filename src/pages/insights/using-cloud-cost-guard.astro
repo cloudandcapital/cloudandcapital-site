@@ -38,18 +38,18 @@ const articleData = {
         <dl class="guard-providers">
           <div>
             <dt>AWS</dt>
-            <dd>Create a <strong>FOCUS</strong> export in Billing and Cost Management → Data Exports. Download its CSV files from S3 and extract them if compressed. <a href="https://docs.aws.amazon.com/cur/latest/userguide/dataexports-create-standard.html" target="_blank" rel="noopener noreferrer">AWS export instructions</a>.</dd>
+            <dd>Create a <strong>FOCUS</strong> export in Billing and Cost Management → Data Exports. Download its CSV or <strong>.csv.gz</strong> files from S3 and select the parts together. Guard opens Gzip CSV files for you. <a href="https://docs.aws.amazon.com/cur/latest/userguide/dataexports-create-standard.html" target="_blank" rel="noopener noreferrer">AWS export instructions</a>.</dd>
           </div>
           <div>
             <dt>Azure</dt>
-            <dd>In Cost Management → Exports, choose <strong>Cost and usage details (FOCUS)</strong>, where available for your billing account. Download the CSV files from Azure storage and extract them if compressed. <a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports" target="_blank" rel="noopener noreferrer">Azure export instructions</a>.</dd>
+            <dd>In Cost Management → Exports, choose <strong>Cost and usage details (FOCUS)</strong>, where available for your billing account. Download the CSV or <strong>.csv.gz</strong> files from Azure storage. <a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports" target="_blank" rel="noopener noreferrer">Azure export instructions</a>.</dd>
           </div>
           <div>
             <dt>Google Cloud</dt>
             <dd><strong>Needs preparation in the current version.</strong> Map your billed-cost records to Guard’s simple template. Its reader doesn’t automatically convert the usual Google Cloud billing CSV layout. <a href="https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery" target="_blank" rel="noopener noreferrer">Google’s billing export options</a>.</dd>
           </div>
         </dl>
-        <p>Open <strong>What can I upload?</strong> on Guard’s start screen for the template and format details. PDF invoices, screenshots, Excel files, archives, and Parquet files aren’t read directly.</p>
+        <p>Open <strong>What can I upload?</strong> on Guard’s start screen for the template and format details. PDF invoices, screenshots, Excel files, ZIP archives, and Parquet files aren’t read directly.</p>
         <ol class="guard-steps">
           <li>Under <strong>Your current bill</strong>, select all CSV parts from one export run.</li>
           <li>To compare, add a separate earlier period under <strong>An earlier bill</strong>. This is optional.</li>
@@ -58,9 +58,10 @@ const articleData = {
         <details class="guard-file-help">
           <summary>File requirements and limits</summary>
           <ul>
-            <li>Each period allows up to <strong>20 CSV files, 10 MB combined, and 50,000 rows</strong>.</li>
+            <li>Each period allows up to <strong>20 CSV or Gzip CSV files, 10 MB combined before and after decompression, and 50,000 rows</strong>.</li>
             <li>The simple template needs <strong>Date, Service, Cost, and Currency</strong>. Preserve credits as negative amounts, and keep taxes and other charges you want included.</li>
-            <li>The current reader accepts cost values with up to eight decimal places. Some exports use more precision and will be rejected. Keep the original amounts; don’t round records just to force an upload.</li>
+            <li>Cost values keep up to <strong>18 decimal places</strong> through the analysis and downloads. Keep your original amounts; don’t round records just to force an upload.</li>
+            <li>If timestamps leave out the timezone, Guard asks you to confirm UTC. Confirm only if your export uses UTC; otherwise export explicit UTC timestamps. The report records your choice.</li>
             <li>FOCUS files need <strong>ChargePeriodStart, ChargePeriodEnd, ServiceName, BilledCost, and BillingCurrency</strong>. This is support for those columns, not validation of the full FOCUS specification. Empty service labels need to be filled in before upload.</li>
             <li>Use one currency and consistent account coverage and cost basis. The comparison must be earlier and must not overlap the current period.</li>
             <li>If identical rows are flagged, check whether they’re repeated exports or separate charges before choosing how to count them. Don’t combine repeated month-to-date snapshots.</li>

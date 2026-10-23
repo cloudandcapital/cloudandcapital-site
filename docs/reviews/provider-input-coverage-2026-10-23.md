@@ -6,7 +6,7 @@ Every tool should accommodate the common inputs of its intended users. For spend
 
 The first experience is: choose the provider, select the file they downloaded, confirm what was read, and get an understandable result with a next action. Make optional examples secondary. Avoid asking visitors to understand a schema or build their own integration before seeing value.
 
-This is an acceptance standard and owner work brief. It is not a claim that all these inputs are currently supported, and it does not authorize concurrent changes in separately owned app repos.
+This is an acceptance standard, not a claim that every input is supported. Diana explicitly authorized Guard fixes in this website conversation on October23. Coordinate from fresh source and preserve the existing analytical pipeline; an owning-chat note is not an access barrier. Lens remains a separate active app project.
 
 ## Initial coverage targets
 
@@ -19,7 +19,7 @@ This is an acceptance standard and owner work brief. It is not a claim that all 
 
 The provider list is a starting coverage baseline, not a market-share measurement or an exhaustive promise. Maintain a visible per-format support matrix as the owners test and release adapters.
 
-## Current source-reported position
+## Initial source-reported position (before the import fixes)
 
 - **Lens**, main `7f2bb1770d930cf8013af646ef30bc5b3c2ecfda`: README describes local OpenAI dashboard CSVs, Claude Team/Enterprise spend CSV, saved Claude Admin API JSON pairs, and identifiable text-based OpenAI/Anthropic invoice PDFs. A user-confirmed flat CSV/JSON mapper and manual invoice path are available. The README explicitly keeps native current-customer OpenAI CSV compatibility unverified, and does not claim Anthropic Console CSV headers, arbitrary providers or scanned PDF/image support. No xAI/Grok-specific native bill importer is claimed there. These are source-documentation findings in this turn, not new live import passes.
 - **Guard**, main `4d35b115c8b5179158087cb285896f8791544cd1`: inspected upload documentation and earlier live walkthrough support selected FOCUS columns/simple CSV. AWS/Azure have documented FOCUS routes with extracted CSV files. Generic Google Cloud exports need preparation. Archives, invoice PDFs and arbitrary native cloud export layouts are not automatically read. The earlier two-file synthetic test established arithmetic, comparison and exports, not broad provider compatibility.
@@ -48,8 +48,12 @@ Do not treat a provider in the pricing catalog, an OpenAI-compatible API endpoin
 7. Confirm privacy, processing location and export/copy behavior through the real app. Do not silently send uploaded financial records to an external model, log them, or request/store cloud credentials to complete a local review.
 8. Make unsupported formats recoverable: say what the file appears to be, what is missing, and the easiest supported next step. A confusing mapping screen is a usability finding even if it is technically possible to finish.
 
-## Next work in the owning chats
+## Next provider checks
 
 Start with a provider/file coverage matrix that distinguishes documented, implemented and actually tested support. Prioritize the gaps that block an ordinary user's own bill, including xAI/Grok for Lens and a simpler Google Cloud path for Guard. Research the common export layouts before implementing adapters. Preserve existing deterministic accounting and local processing; test each new adapter end to end, then update its guide, directory description and screenshot together.
 
 The independent Claude audit should evaluate this flow cold, then check arithmetic with controlled fixtures. A passing example calculation is one part of acceptance, not the readiness verdict.
+
+## October23 Guard implementation follow-up
+
+Diana authorized the concrete import fixes here. Guard PR36 adds bounded local Gzip CSV opening, 18-place exact cost support and explicit UTC confirmation with source evidence. The unchanged historical public CSVs and Gzip wrapper now pass the actual reader and producer pipeline with exact reconciled totals; native and WebAssembly results agree. See [the implementation review](guard-provider-import-fix-2026-10-23.md) for release and browser evidence. This repairs those observed blockers, without certifying all current native layouts or Google Cloud.

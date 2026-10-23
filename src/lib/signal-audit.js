@@ -148,7 +148,7 @@ export function scoreAudit(answers = {}) {
   const notApplicable = QUESTIONS.filter((q) => answers[q.id] === 'not-applicable').map((q) => q.id);
   const unanswered = QUESTIONS.filter((q) => !optionFor(q, answers)).map((q) => q.id);
   const valid = axes.signalReadiness !== null && axes.decisionIntegration !== null && answeredCount >= 8;
-  const archetype = valid ? classifyArchetype(axes.signalReadiness, axes.decisionIntegration) : { name: 'More Information Needed', meaning: 'There aren’t enough scored answers across all four areas to place this scope on the map. Check the missing information and whether the questions fit your scope before drawing a conclusion.' };
+  const archetype = valid ? classifyArchetype(axes.signalReadiness, axes.decisionIntegration) : { name: 'More Information Needed', meaning: 'There aren’t enough scored answers across all four areas to place this scope on the map. Unknown and not applicable answers are excluded from scoring; they don’t establish a low score.' };
   const lowestAnswer = (id) => Math.min(...QUESTIONS.filter((q) => q.dimension === id).map((q) => optionFor(q, answers)?.score).filter((score) => typeof score === 'number'));
   const ranked = DIMENSIONS.filter((d) => dimensions[d.id].valid).sort((a, b) => dimensions[a.id].score - dimensions[b.id].score || lowestAnswer(a.id) - lowestAnswer(b.id) || tieOrder.indexOf(a.id) - tieOrder.indexOf(b.id));
   const weakest = ranked[0]?.id ?? null;
@@ -220,6 +220,13 @@ export function assessmentDate(takenAt) {
 export function exampleLabel(answers) {
   return QUESTIONS.some((q) => answers?.[q.id] !== EXAMPLE.answers[q.id]) ? 'Started from the made-up example, then edited' : EXAMPLE.label;
 }
+export function mapCoverageMessage(result) {
+  if (result.valid) return '';
+  const reason = 'Map not shown: at least one area has fewer than two scored answers.';
+  if (result.priority.questionId) return `${reason} The suggested step uses a scored answer you provided.`;
+  if (result.priority.evidenceType === 'scope-fit') return `${reason} Questions marked not applicable aren’t scored. Check whether this scope fits the questions.`;
+  return `${reason} Questions marked unknown or left unanswered aren’t scored. Check the information you couldn’t confirm.`;
+}
 export function buildAuditSummary(result, context = {}) {
   const scope = TARGET_SCOPES.find((x) => x.id === context.targetScope)?.label || 'Scope not selected';
   const technology = (context.technologyScopes || []).map((id) => TECHNOLOGY_SCOPES.find((x) => x.id === id)?.label).filter(Boolean).join(', ');
@@ -230,7 +237,7 @@ export function buildAuditSummary(result, context = {}) {
     `Understand the spending: ${score(result.axes.signalReadiness)}`, `Use it in decisions: ${score(result.axes.decisionIntegration)}`,
     `Answer coverage: ${result.answeredCount}/12 scored; ${result.coverage.unknown.length} unknown; ${result.coverage.notApplicable.length} not applicable; ${result.coverage.unanswered.length} unanswered. This is not verified evidence or a confidence estimate.`,
     '', 'FOUR AREAS', ...DIMENSIONS.map((d) => `${d.name}: ${score(result.dimensions[d.id].score)} (${result.dimensions[d.id].answered}/3 scored)`),
-    ...(!result.valid ? ['Map not shown: at least one area has fewer than two scored answers. Any first step below comes from an answer you did provide.'] : []),
+    ...(!result.valid ? [mapCoverageMessage(result)] : []),
     '', 'WHAT TO DO FIRST', result.priority.title, result.priority.move, `Why this first: ${result.priority.reason}`, `Suggested owner: ${result.priority.owners}`, `What to check: ${result.priority.measures.join('; ')}`,
     '', 'QUESTIONS TO DISCUSS', ...discussionQuestions(result).map((q, i) => `${i + 1}. ${q}`), '', 'FOR THIS TECHNOLOGY', scopeGuidance(context.technologyScopes),
     '', 'YOUR ANSWERS', ...QUESTIONS.map((q) => `${q.title}: ${optionFor(q, context.answers)?.label || 'Unanswered'}`),

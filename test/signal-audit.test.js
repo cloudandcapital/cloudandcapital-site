@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { DIMENSIONS, QUESTIONS, EXAMPLE, HIGH_BOUNDARY, buildAuditSummary, classifyArchetype, scoreAudit, validatePayload, discussionQuestions } from '../src/lib/signal-audit.js';
+import { DIMENSIONS, QUESTIONS, EXAMPLE, HIGH_BOUNDARY, buildAuditSummary, classifyArchetype, scoreAudit, validatePayload, discussionQuestions, mapCoverageMessage } from '../src/lib/signal-audit.js';
 import { POST } from '../src/pages/api/signal-audit.js';
 const answersAt = (score) => Object.fromEntries(QUESTIONS.map((q) => [q.id, typeof score === 'number' ? `score-${score}` : score]));
 const byArea = (scores) => Object.fromEntries(QUESTIONS.map((q) => [q.id, `score-${scores[q.dimension]}`]));
@@ -169,6 +169,24 @@ test('scope-fit results explain exclusions and ask about fit instead of treating
   assert.equal(r.priority.evidenceType, 'scope-fit'); assert.match(r.priority.reason, /not applicable/);
   assert.doesNotMatch(r.priority.reason, /missing answer/);
   assert.match(discussionQuestions(r).join(' '), /narrower scope/); assert.doesNotMatch(discussionQuestions(r).join(' '), /different person or a record/);
+});
+
+test('map notices and Copy distinguish excluded questions, unknown information, and a known scored gap', () => {
+  const mostlyStrong = answersAt(3);
+  mostlyStrong['unit-economics-value'] = 'not-applicable'; mostlyStrong['consumption-demand'] = 'not-applicable';
+  const knownGap = answersAt('outside-visibility'); knownGap['commitments-contracts'] = 'score-0';
+  for (const answers of [answersAt('not-applicable'), answersAt('outside-visibility'), mostlyStrong, knownGap]) {
+    const r = scoreAudit(answers); const message = mapCoverageMessage(r);
+    assert.equal(r.valid, false); assert.ok(buildAuditSummary(r, { answers }).includes(message));
+    assert.doesNotMatch(r.archetype.meaning, /missing information/);
+    if (r.priority.questionId) assert.match(message, /scored answer you provided/);
+    else {
+      assert.doesNotMatch(message, /answer you provided/);
+      if (r.priority.evidenceType === 'scope-fit') { assert.match(message, /not applicable/); assert.doesNotMatch(message, /missing|unknown/); }
+      else assert.match(message, /unknown or left unanswered/);
+    }
+  }
+  assert.equal(mapCoverageMessage(scoreAudit(answersAt(3))), '');
 });
 
 test('varied missing and excluded answers never suppress the lowest known scored answer', () => {

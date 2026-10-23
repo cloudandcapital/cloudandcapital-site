@@ -106,9 +106,8 @@ async function callModel(readiness, requestSignal) {
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
+        model: 'claude-haiku-4-5-20251001',
         max_tokens: 2600,
-        output_config: { effort: 'low' },
         temperature: 0.2,
         system: [{ type: 'text', text: buildSystemPrompt(readiness), cache_control: { type: 'ephemeral' } }],
         messages: [{ role: 'user', content: `${buildUserPrompt(readiness)}${correction}` }],

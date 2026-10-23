@@ -92,7 +92,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .thinking-state h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 400; }
     .thinking-state p { min-height: 1.5rem; margin-top: .6rem; font-family: var(--font-body); font-size: 1.05rem; color: var(--text-muted); }
 
-    .decision-brief, .thinking-state { scroll-margin-top: 110px; }
+    .decision-brief, .thinking-state, #contextStage, #errorMsg { scroll-margin-top: 110px; }
     .decision-brief { animation: briefIn .35s ease; }
     @keyframes briefIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     .context-summary { margin-bottom: 1.8rem; border: 1px solid var(--border); background: #fff; }
@@ -574,6 +574,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       stopThinking();
       showContextStage();
       setBusy(false);
+      $('contextStage').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     $('resetBtn').addEventListener('click', resetLab);
     $('anotherBtn').addEventListener('click', resetLab);
@@ -668,6 +669,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         setStep(1);
         showPlaceholder('context');
         setError(error.message);
+        errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } finally {
         if (operation === requestVersion) {
           briefBtn.textContent = 'Generate the brief →';

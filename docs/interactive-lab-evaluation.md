@@ -51,3 +51,10 @@ The follow-up keeps Sonnet 4.6, explicitly sets low effort, and requests a much
 shorter brief (420 prose words; 2,600 output-token cap). This follows the
 provider's effort guidance: https://platform.claude.com/docs/en/build-with-claude/effort.
 Loading and results scroll into view so the status and next move are visible.
+
+The shorter Sonnet request also timed out. The next repair uses the pinned
+Claude Haiku 4.5 snapshot (`claude-haiku-4-5-20251001`) with the same prompt,
+validation, and deadline. The numeric rules do not rely on model arithmetic.
+Provider reference: https://platform.claude.com/docs/en/models/haiku-4-5/overview.
+The noindex responsive-review helper now accepts `page=lab` as an allowlisted
+local route so actual generation can be checked at phone widths.

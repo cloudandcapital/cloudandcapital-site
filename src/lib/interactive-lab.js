@@ -312,3 +312,21 @@ export function findUnqualifiedPromises(value) {
   visit(value);
   return [...matches];
 }
+
+export function deferUnverifiedOptionEffects(brief) {
+  const optionChecks = [];
+  const questions = {
+    cost_effect: 'Savings are not established here. Confirm the total price and any conditions before choosing.',
+    practical_effect: 'The effect is not established here. Confirm changes to access, quality, and ongoing work before choosing.',
+  };
+  const options = brief.options.map((option, optionIndex) => {
+    const reviewed = { ...option };
+    for (const [field, question] of Object.entries(questions)) {
+      if (!findUnqualifiedPromises(option[field]).length) continue;
+      reviewed[field] = question;
+      optionChecks.push({ optionIndex, field });
+    }
+    return reviewed;
+  });
+  return { brief: { ...brief, options }, optionChecks };
+}

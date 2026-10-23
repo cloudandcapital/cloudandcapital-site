@@ -134,6 +134,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .decision-matrix tbody th { width: 15%; background: var(--cream); font-size: .6rem; letter-spacing: .09em; text-transform: uppercase; color: var(--forest-deep); font-weight: 500; }
     .decision-matrix td { font-family: var(--font-body); font-size: .92rem; line-height: 1.45; color: var(--text-muted); }
     .option-source { display: block; margin-top: .45rem; font-family: var(--font-ui); font-size: .6rem; line-height: 1.5; letter-spacing: .05em; text-transform: uppercase; color: var(--text-muted); }
+    .needs-checking { color: var(--clay-ink); }
     .option-note { margin-bottom: 1rem; font-family: var(--font-body); font-size: .94rem; line-height: 1.5; color: var(--text-muted); }
     .renewal-checklist { margin-top: 1.75rem; padding: 1.1rem 1.3rem; border-left: 3px solid var(--dusty-rose); background: #fff; }
     .renewal-checklist h3 { margin-bottom: .5rem; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--clay-ink); }
@@ -351,7 +352,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <section class="brief-section"><h3>Recommendation</h3><div class="recommendation"><div class="recommendation-top"><span>The next move</span><span id="confidenceLabel"></span></div><p class="recommendation-move" id="recommendationMove"></p><p class="recommendation-rationale" id="recommendationRationale"></p></div></section>
             <section class="brief-section"><h3>Next actions</h3><div class="options-wrap"><table class="actions-table"><thead><tr><th>Action</th><th>Suggested owner</th><th>Timing</th></tr></thead><tbody id="actionsBody"></tbody></table></div></section>
             <section class="brief-section" id="calculationsSection" hidden><h3>Calculated from your inputs</h3><ul class="brief-list" id="checkedCalculations"></ul></section>
-            <section class="brief-section"><h3>Options to compare</h3><p class="option-note">The AI organizes the options you named and labels ideas it adds as Suggested. Check that the choices are available to you. Owners are suggestions too.</p><div id="optionMatrix"></div></section>
+            <section class="brief-section"><h3>Options to compare</h3><p class="option-note">The AI organizes the options you named and labels ideas it adds as Suggested. Check that the choices are available to you. Owners are suggestions too. Needs checking means an effect or saving has not been established here.</p><div id="optionMatrix"></div></section>
             <section class="brief-section"><h3>What still needs checking</h3><ul class="brief-list" id="missingInformation"></ul></section>
             <p class="brief-disclosure">This is an AI-generated decision aid based only on the context supplied. Validate provider terms, calculations, and financially consequential decisions against primary data before acting.</p>
             <div class="brief-actions"><button type="button" class="lab-button lab-button-primary" id="copyBtn">Copy decision brief</button><button type="button" class="lab-button lab-button-quiet" id="printBtn">Print / Save PDF</button><button type="button" class="lab-button lab-button-quiet" id="editBtn">Edit context</button><button type="button" class="lab-button lab-button-quiet" id="anotherBtn">Try another</button></div>
@@ -363,7 +364,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </main>
 
   <script is:inline>
-    const state = { decisionType: '', questions: [], answers: {}, brief: null, briefContext: null, calculations: [], selectedScenario: null, example: false, contextDecision: '', decisionChanged: false };
+    const state = { decisionType: '', questions: [], answers: {}, brief: null, briefContext: null, calculations: [], optionChecks: [], selectedScenario: null, example: false, contextDecision: '', decisionChanged: false };
     const starterExamples = {
       commitment: {
         decision: 'Should we reserve GPU capacity for one year at $500K, or keep buying capacity as needed?',
@@ -656,6 +657,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       state.brief = null;
       state.briefContext = null;
       state.calculations = [];
+      state.optionChecks = [];
       state.example = false;
       state.selectedScenario = null;
       state.contextDecision = '';
@@ -713,6 +715,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         state.brief = data.brief;
         state.briefContext = suppliedContext;
         state.calculations = data.calculations || [];
+        state.optionChecks = data.optionChecks || [];
         $('copyState').textContent = '';
         renderBrief(data.brief);
         renderContextSummary();
@@ -799,6 +802,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       return option.source === 'supplied' ? 'From your context' : 'Suggested';
     }
 
+    function needsOptionCheck(index, field) {
+      return state.optionChecks.some((check) => check.optionIndex === index && check.field === field);
+    }
+
+    function optionValue(tag, option, field, index) {
+      const cell = makeElement(tag, '', option[field]);
+      if (needsOptionCheck(index, field)) cell.append(makeElement('span', 'option-source needs-checking', 'Needs checking'));
+      return cell;
+    }
+
     function renderOptionMatrix(options) {
       const criteria = [
         ['cost_effect', 'Cost'],
@@ -824,13 +837,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         const rowHeader = makeElement('th', '', label);
         rowHeader.scope = 'row';
         row.append(rowHeader);
-        options.forEach((option) => row.append(makeElement('td', '', option[key])));
+        options.forEach((option, index) => row.append(optionValue('td', option, key, index)));
         body.append(row);
       });
       table.append(head, body);
 
       const mobile = makeElement('div', 'matrix-mobile');
-      options.forEach((option) => {
+      options.forEach((option, index) => {
         const card = makeElement('section', 'matrix-option');
         const heading = makeElement('h4', '', option.name);
         heading.append(makeElement('span', 'option-source', optionSourceLabel(option)));
@@ -838,7 +851,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         const list = document.createElement('dl');
         criteria.forEach(([key, label]) => {
           const row = makeElement('div', 'matrix-option-row');
-          row.append(makeElement('dt', '', label), makeElement('dd', '', option[key]));
+          row.append(makeElement('dt', '', label), optionValue('dd', option, key, index));
           list.append(row);
         });
         card.append(list);
@@ -858,7 +871,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         ...(state.calculations.length ? ['CALCULATED FROM YOUR INPUTS', ...state.calculations.map((item) => item.explanation), ''] : []),
         'OPTIONS TO COMPARE',
       ];
-      brief.options.forEach((option) => lines.push(`${option.name} (${optionSourceLabel(option)})`, `Cost: ${option.cost_effect}`, `What changes: ${option.practical_effect}`, `Check before choosing: ${option.check}`, ''));
+      brief.options.forEach((option, index) => lines.push(`${option.name} (${optionSourceLabel(option)})`, `Cost: ${needsOptionCheck(index, 'cost_effect') ? 'Needs checking: ' : ''}${option.cost_effect}`, `What changes: ${needsOptionCheck(index, 'practical_effect') ? 'Needs checking: ' : ''}${option.practical_effect}`, `Check before choosing: ${option.check}`, ''));
       lines.push('WHAT STILL NEEDS CHECKING', ...brief.missing_information.map((item) => `- ${item}`), '', 'CONTEXT SUPPLIED', 'Your decision', context.decision, ...context.questions.flatMap((question) => [question.label, context.answers[question.id] || '', '']), 'AI-generated decision aid. Options and suggested owners need checking. Check terms and calculations against primary data before acting.');
       return lines.join('\n');
     }

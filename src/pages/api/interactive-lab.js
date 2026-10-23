@@ -6,6 +6,7 @@ import {
   assessReadiness,
   findUnsupportedNumbers,
   findUnqualifiedPromises,
+  deferUnverifiedOptionEffects,
   getCheckedCalculations,
   validateBrief,
 } from '../../lib/interactive-lab.js';
@@ -35,6 +36,7 @@ Rules:
 - Do not rank options as cheapest, highest spend, or best value when comparable prices are unknown. State which price or term is missing. Never promise zero disruption, unaffected users, or preserved access without evidence; say what needs checking.
 - Describe effects as possibilities unless supplied evidence confirms them. Optimization can affect quality and reliability: ask the visitor to test them, never say they are preserved while costs fall. A vendor conversation may not resolve the unknowns.
 - If the decision and answers conflict, flag the conflicting detail under missing_information and ask for confirmation before using it. Never silently choose a deadline or price.
+- A constraint is a required outcome, not proof of what an option will do. For renewing an existing plan, ask to confirm continued access under the proposed terms; never infer unchanged access or preserved files just because the vendor stays the same.
 - Removing seats only reduces cost if the vendor confirms the pricing terms. Unknown migration cost does not make switching impossible. Keep file access, reliability, and other supplied constraints explicit.
 - Preserve every materially different choice the user supplied. Compare two to four options. Do not merge reducing scope with renewing everything. Set source to supplied only for a choice the visitor named. Set source to suggested for any option you introduce. If choices are unknown, suggest possibilities without presenting them as available or approved.
 - For a software renewal, explicitly check auto-renewal and cancellation or seat-change notice deadlines. Do not treat the renewal date as the last date to act. If terms are unconfirmed, put this check first among the missing information or next actions.
@@ -122,8 +124,11 @@ async function callModel(readiness, requestSignal) {
 
     const sourceText = buildSourceText(readiness);
     const unsupportedNumbers = findUnsupportedNumbers(brief, sourceText);
-    const unqualifiedPromises = findUnqualifiedPromises(brief);
-    if (!unsupportedNumbers.length && !unqualifiedPromises.length) return brief;
+    // Check all original figures before withholding an unverified effect. Never
+    // hide a bad numeric claim by replacing its surrounding sentence.
+    const reviewed = unsupportedNumbers.length ? { brief, optionChecks: [] } : deferUnverifiedOptionEffects(brief);
+    const unqualifiedPromises = findUnqualifiedPromises(reviewed.brief);
+    if (!unsupportedNumbers.length && !unqualifiedPromises.length) return reviewed;
 
     console.error('Interactive Lab claim validation failed', { numericCount: unsupportedNumbers.length, promiseCount: unqualifiedPromises.length, attempt: attempt + 1 });
     if (attempt === 1) {
@@ -180,9 +185,9 @@ export async function POST({ request }) {
   }
 
   try {
-    const brief = await callModel(readiness, request.signal);
+    const { brief, optionChecks } = await callModel(readiness, request.signal);
     const calculations = getCheckedCalculations(buildSourceText(readiness));
-    return json({ status: 'ready', ...context, brief, calculations });
+    return json({ status: 'ready', ...context, brief, calculations, optionChecks });
   } catch (error) {
     const timedOut = ['TimeoutError', 'AbortError'].includes(error.name) || error.message === 'MODEL_TIMEOUT';
     const unavailable = error.message === 'MODEL_UNAVAILABLE';
@@ -201,7 +206,7 @@ export async function POST({ request }) {
 export async function GET() {
   return json({
     name: 'Cloud & Capital Interactive Lab',
-    version: 4,
+    version: 5,
     decisionTypes: Object.fromEntries(Object.entries(DECISION_TYPES).map(([key, value]) => [key, value.label])),
   });
 }

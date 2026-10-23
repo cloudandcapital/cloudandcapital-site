@@ -8,7 +8,7 @@ const { tool } = Astro.props;
 <article class="directory-card" data-tone={tool.tone} aria-labelledby={`${tool.slug}-name`}>
   <div class="card-preview">
     <div class="preview-window">
-      <div class="preview-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="preview-bar" aria-hidden="true"><i></i><i></i><i></i>{tool.imageLabel && <span>{tool.imageLabel}</span>}</div>
       <img src={tool.image} alt={tool.imageAlt} width={tool.imageWidth} height={tool.imageHeight} loading="lazy" decoding="async" />
     </div>
   </div>
@@ -35,6 +35,7 @@ const { tool } = Astro.props;
   .preview-window { display: grid; grid-template-rows: 19px minmax(0, 1fr); width: 100%; height: 100%; min-height: 0; overflow: hidden; border: 1px solid #e7e4df; border-radius: 8px; background: #fff; box-shadow: 0 17px 23px -12px #26372d59, 0 2px 5px #26372d0a; transition: transform 220ms ease, box-shadow 220ms ease; }
   .preview-bar { display: flex; align-items: center; gap: 4px; min-height: 19px; padding-inline: 8px; border-bottom: 1px solid #24211e12; background: #fff; }
   .preview-bar i { width: 4px; height: 4px; border-radius: 50%; background: #bbb4a8; }
+  .preview-bar span { margin-left: auto; color: #625d55; font: 400 .5rem/1.3 'DM Mono', monospace; }
   .preview-window img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: contain; background: #fff; }
   .card-copy { display: flex; flex-direction: column; flex: 1; min-width: 0; padding: 1.5rem; }
   .card-kind, dt { margin: 0; color: var(--card-accent); font: 500 .61rem/1.5 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }

@@ -8,6 +8,9 @@ export default defineConfig({
   site: 'https://cloudandcapital.com',
   // Preserve Astro 6 inline whitespace and the approved text wrapping.
   compressHTML: true,
+  vite: {
+    server: { allowedHosts: ['terminal.local'] },
+  },
   output: 'server',
   adapter: vercel({
     webAnalytics: { enabled: true },

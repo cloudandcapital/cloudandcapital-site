@@ -64,5 +64,20 @@
       "timezoneChoice": "UTC",
       "status": "partial"
     }
-  ]
+  ],
+  "release_revision": "bfc58e8e192be520f505021c82e70b961ba0fb8a",
+  "ci_revision": "0a66675371cc416e83a1128754d3bf1ba53168a3",
+  "ci_run": 40033533365,
+  "browser_contracts": {
+    "passed": 153,
+    "skipped": 14,
+    "failed": 0
+  },
+  "production_verification": {
+    "vercel_status": "success",
+    "public_url": "https://guard.cloudandcapital.com/",
+    "public_requirements": "Gzip, 18-place costs and explicit UTC disclosure confirmed",
+    "public_source_pins": "matched merged producer revisions and billing module hashes",
+    "post_release_interactive_upload": "pending: local execution and browser workspace unavailable"
+  }
 }

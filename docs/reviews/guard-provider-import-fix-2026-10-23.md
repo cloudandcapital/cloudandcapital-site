@@ -69,4 +69,31 @@ Local validation passed 180 frontend tests, 13 pipeline integration tests,
 5 native/WebAssembly parity tests, 4 CSV/Gzip transport tests, 46 API tests and
 the optimized production build. The guide passed 138 site tests and a production
 build; its updated requirements fit at 320px and 375px without horizontal overflow.
-Complete browser checks and the release record follow below once verified.
+Guard's complete CI passed at `0a66675371cc416e83a1128754d3bf1ba53168a3`:
+153 browser contract checks passed, with 14 existing skips. This includes the
+real file chooser, Gzip import, UTC confirmation, exact report values and
+downloaded evidence on desktop, tablet and mobile. All backend, dependency-audit
+and production-bundle checks passed. Eight reviewed screenshot references reflect
+only the precision disclosure changing from 8 to 18; screenshot assertions remain
+enabled.
+
+## Release
+
+Guard PR36 merged as `bfc58e8e192be520f505021c82e70b961ba0fb8a`.
+[CI run 40033533365](https://github.com/cloudandcapital/cloud-cost-guard/actions/runs/40033533365)
+records the successful checks. The machine-readable input runs identify the last
+functional source revision; subsequent branch commits only update visual test
+references and collection of failure evidence.
+
+Vercel's production status for the merge revision passed. A fresh, uncached
+read of [the public app](https://guard.cloudandcapital.com/) confirmed Gzip
+instructions, 18-place cost disclosure and explicit UTC confirmation guidance.
+The public `/billing-pipeline/provenance.json` matches the merged FinOps Lite
+and Watchdog revisions and billing module hashes above.
+
+A fresh post-release interactive upload is still open: the local execution and
+browser workspace disconnected before that check. The complete upload/report/
+export interaction passed in CI, but the public page/provenance read is delivery
+evidence, not a claimed live file-upload pass. Physical print and device checks
+also remain separate. No private bill was used.
+

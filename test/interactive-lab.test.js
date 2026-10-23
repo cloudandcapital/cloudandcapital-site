@@ -5,6 +5,7 @@ import {
   assessReadiness,
   classifyDecision,
   findUnsupportedNumbers,
+  findUnqualifiedPromises,
   getCheckedCalculations,
   getQuestions,
   validateBrief,
@@ -369,5 +370,42 @@ test('an option with a false verification label is rejected rather than shown as
     assert.equal(response.status, 502);
     assert.equal(result.code, 'INVALID_MODEL_SCHEMA');
     assert.equal(result.brief, undefined);
+  } finally { globalThis.fetch = original; }
+});
+
+test('observed promises need conditional language or a check', () => {
+  assert.deepEqual(findUnqualifiedPromises({ effect: 'No disruption; unused seats remain.' }), ['No disruption']);
+  assert.equal(findUnqualifiedPromises('Keeps existing quality and reliability while cutting calls.').length, 1);
+  assert.equal(findUnqualifiedPromises('Captures near-term savings from optimization.').length, 1);
+  assert.equal(findUnqualifiedPromises('This is the only safe first move.').length, 1);
+  assert.deepEqual(findUnqualifiedPromises('Could preserve quality, but test reliability before rollout.'), []);
+  assert.deepEqual(findUnqualifiedPromises('Check whether there will be no disruption.'), []);
+  assert.deepEqual(findUnqualifiedPromises('There is no guarantee of no disruption.'), []);
+});
+
+test('a rejected promise is regenerated rather than displayed as a checked brief', async () => {
+  const original = globalThis.fetch;
+  let calls = 0;
+  globalThis.fetch = async () => modelResponse(++calls === 1 ? { ...validBrief, options: [{ ...validBrief.options[0], practical_effect: 'No disruption.' }, validBrief.options[1]] } : validBrief);
+  try {
+    const response = await POST({ request: labRequest() });
+    const result = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(calls, 2);
+    assert.doesNotMatch(JSON.stringify(result.brief), /No disruption/);
+  } finally { globalThis.fetch = original; }
+});
+
+test('a repeated unsupported promise fails without returning the rejected brief', async () => {
+  const original = globalThis.fetch;
+  let calls = 0;
+  globalThis.fetch = async () => { calls += 1; return modelResponse({ ...validBrief, recommendation: { ...validBrief.recommendation, rationale: 'This delivers savings.' } }); };
+  try {
+    const response = await POST({ request: labRequest() });
+    const result = await response.json();
+    assert.equal(response.status, 502);
+    assert.equal(result.code, 'UNQUALIFIED_PROMISE');
+    assert.equal(result.brief, undefined);
+    assert.equal(calls, 2);
   } finally { globalThis.fetch = original; }
 });

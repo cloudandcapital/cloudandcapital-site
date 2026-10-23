@@ -284,3 +284,30 @@ export function findUnsupportedNumbers(value, sourceText, { includeCalculations 
   }
   return [...new Set(extractNumericClaims(JSON.stringify(value)).filter(({ signature }) => !allowed.has(signature)).map(({ raw }) => raw))];
 }
+
+// A narrow guard for promises observed in live review. This does not establish
+// that the remaining prose is true or that every unsupported claim is detected.
+export function findUnqualifiedPromises(value) {
+  const matches = new Set();
+  const qualifiers = /\b(?:may|might|could|if|unless|unknown|uncertain|unconfirmed|check|confirm|test|assess|verify|whether|depends?|potential(?:ly)?)\b|\bnot\s+(?:confirmed|guaranteed)\b|\bno\s+guarantee\b/i;
+  const promises = [
+    /\bno disruption\b/i,
+    /\b(?:keeps?|preserves?|maintains?)\b[^.!?;]{0,90}\b(?:quality|reliability|access)\b/i,
+    /\b(?:captures?|delivers?|guarantees?)\b[^.!?;]{0,60}\b(?:savings?|cost reduction)\b/i,
+    /\bonly safe\s+(?:first\s+)?(?:move|path|option|step)\b/i,
+  ];
+  function visit(item) {
+    if (typeof item === 'string') {
+      for (const clause of item.split(/[.!?;\n]/)) {
+        if (qualifiers.test(clause)) continue;
+        for (const pattern of promises) {
+          const match = clause.match(pattern);
+          if (match) matches.add(match[0]);
+        }
+      }
+    } else if (Array.isArray(item)) item.forEach(visit);
+    else if (item && typeof item === 'object') Object.values(item).forEach(visit);
+  }
+  visit(value);
+  return [...matches];
+}

@@ -32,7 +32,7 @@ Return only valid JSON matching this exact structure:
 {
   "decision_summary": "One neutral sentence describing the actual decision and central tension.",
   "posture": { "label": "Explore | Stage | Commit", "rationale": "Why this posture fits the supplied evidence." },
-  "known_facts": ["Three to six facts drawn only from the user's text."],
+  "known_facts": ["Up to eight short facts drawn only from the user's text."],
   "working_assumptions": [{ "assumption": "An inference needed to reason", "why_it_matters": "How it could change the decision" }],
   "options": [{
     "name": "A real option",
@@ -62,7 +62,7 @@ Return only valid JSON matching this exact structure:
 Rules:
 - Treat every supplied statement as user-provided context, not independently verified truth.
 - Never invent prices, percentages, utilization levels, time periods, savings, ROI, or break-even points.
-- Use only supplied numbers, equivalent time units, or the checked calculations provided below. Never calculate other figures yourself. Keep calculated figures out of known_facts and label them Calculated wherever used.
+- Use only supplied numbers or equivalent time units. The app displays checked arithmetic separately: do not calculate amounts or include derived figures in known_facts.
 - Set economics.available to true only when the supplied facts support a defensible comparison. Explain missing inputs when false.
 - Preserve every materially distinct option supplied by the user, including partial renewal, unless it is a duplicate or genuinely infeasible. Include two to four genuinely different options.
 - The three lenses must be substantively different, not paraphrases.
@@ -87,8 +87,7 @@ function buildUserPrompt(readiness) {
     .map((question) => `${question.label}:\n${readiness.answers[question.id]}`)
     .join('\n\n');
 
-  const calculations = getCheckedCalculations(buildSourceText(readiness));
-  return `Decision:\n${readiness.decision}\n\nUser-supplied evidence:\n${evidence}\n\nChecked arithmetic (calculated, not reported facts; conditions still apply):\n${calculations.map((item) => item.explanation).join('\n') || 'None. Use qualitative comparisons.'}`;
+  return `Decision:\n${readiness.decision}\n\nUser-supplied evidence:\n${evidence}\n\nThe app handles arithmetic separately. Use the supplied figures; do not calculate additional totals or savings.`;
 }
 
 async function callModel(readiness, requestSignal) {

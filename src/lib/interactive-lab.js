@@ -128,7 +128,7 @@ export function validateBrief(value, onInvalid = () => {}) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return invalid('brief');
   if (!isText(value.decision_summary, 300)) return invalid('decision_summary');
   if (!value.posture || !['Explore', 'Stage', 'Commit'].includes(value.posture.label) || !isText(value.posture.rationale, 600)) return invalid('posture');
-  if (!isTextArray(value.known_facts, 3, 6)) return invalid('known_facts');
+  if (!isTextArray(value.known_facts, 1, 12)) return invalid('known_facts');
   if (!Array.isArray(value.working_assumptions) || value.working_assumptions.length > 5) return invalid('working_assumptions.length');
   if (!value.working_assumptions.every((item) => isText(item?.assumption, 400) && isText(item?.why_it_matters, 500))) return invalid('working_assumptions.fields');
   if (!Array.isArray(value.options) || value.options.length < 2 || value.options.length > 4) return invalid('options.length');
@@ -155,7 +155,7 @@ const briefLens = briefObject({ view: briefString, need: briefString });
 export const BRIEF_OUTPUT_SCHEMA = briefObject({
   decision_summary: briefString,
   posture: briefObject({ label: briefChoice('Explore', 'Stage', 'Commit'), rationale: briefString }),
-  known_facts: briefList(briefString, 'Three to six facts reported by the user; no calculated amounts.'),
+  known_facts: briefList(briefString, 'Up to eight short facts reported by the user; no calculated amounts.'),
   working_assumptions: briefList(briefObject({ assumption: briefString, why_it_matters: briefString }), 'Zero to two assumptions.'),
   options: briefList(briefObject(Object.fromEntries(['name', 'economics', 'operational_effect', 'reversibility', 'risk', 'evidence_needed'].map((key) => [key, briefString]))), 'Two to four distinct options; preserve the user choices.'),
   lenses: briefObject({ finops: briefLens, finance: briefLens, engineering: briefLens }),

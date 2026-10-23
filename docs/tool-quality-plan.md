@@ -22,7 +22,7 @@ AI Cost Lens's baseline is OpenAI/ChatGPT, Anthropic/Claude and xAI/Grok, follow
 
 Track native and tested, mapped with confirmation, and unsupported formats separately. Verify the provider's actual download layout, credits, taxes, period, currency and totals. A price catalog entry, an OpenAI-compatible request format or generic mapper does not establish native bill-import support. A bill alone may establish spending without establishing requests, tokens, business outcomes or cost per usable result.
 
-Owner acceptance brief: [Provider input coverage](reviews/provider-input-coverage-2026-10-23.md). Apply it to existing tools before adding new ones. Keep active app ownership boundaries; this website task does not make concurrent Lens or Guard app changes.
+Acceptance brief: [Provider input coverage](reviews/provider-input-coverage-2026-10-23.md). Apply it to existing tools before adding new ones. Coordinate from fresh source to avoid concurrent edits. Guard implementation is authorized here; Lens remains a separate active app project.
 
 ## Current ownership and review state
 

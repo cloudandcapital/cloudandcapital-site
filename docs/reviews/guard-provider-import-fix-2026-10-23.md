@@ -1,8 +1,9 @@
 # Guard import compatibility fixes — October 23, 2026
 
-Diana explicitly authorized Guard implementation in this website conversation.
-The earlier separate-chat ownership note was coordination guidance, not an
-access barrier. Existing weekly audit scope and schedules are unchanged.
+Ordinary compressed CSV delivery, precise costs and timezone-less timestamps
+blocked the public FOCUS inputs before analysis. This change repairs those
+import failures through the existing analytical pipeline. Existing weekly audit
+scope and schedules are unchanged.
 
 ## Implementation
 

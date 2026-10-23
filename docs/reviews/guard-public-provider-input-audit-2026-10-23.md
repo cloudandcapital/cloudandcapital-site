@@ -1,6 +1,6 @@
 # Guard provider-input compatibility — October 23, 2026
 
-**Historical read-only finding: both unmodified public FOCUS CSVs failed before analysis at the pinned revision below.** The 1,000-record file also failed through the public upload control, with Review disabled. This is a read-only review under Diana's new major-provider input requirement. Guard app code was not changed; its separate working chat remains the owner.
+**Historical read-only finding: both unmodified public FOCUS CSVs failed before analysis at the pinned revision below.** The 1,000-record file also failed through the public upload control, with Review disabled. This initial review did not change Guard app code. The authorized implementation and subsequent release evidence are recorded in the follow-up below.
 
 ## Evidence and provenance
 

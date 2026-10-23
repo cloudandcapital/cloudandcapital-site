@@ -7,6 +7,7 @@ const pages = [
   '/learn',
   '/resources/software-renewal',
   '/insights',
+  '/insights/using-ai-cost-lens',
   '/insights/using-the-renewal-tracker',
   '/insights/is-this-software-worth-it',
   '/tools',

@@ -48,6 +48,7 @@ export const directoryTools: DirectoryTool[] = [
     image: '/images/ai-cost-lens-usable-result-preview.jpg',
     imageAlt: 'Example AI Cost Lens comparison showing tool charges, review time, and 2 dollars 56 cents versus 4 dollars 25 cents per usable result',
     imageWidth: 1193, imageHeight: 538, imageLabel: 'Example data',
+    companion: { label: 'Walk through an example', href: '/insights/using-ai-cost-lens' },
   },
   {
     slug: 'cloud-cost-guard', topics: ['tech-spending'], name: 'Cloud Cost Guard', kind: 'Cloud bills',

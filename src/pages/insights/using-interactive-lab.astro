@@ -7,12 +7,12 @@ import '../../styles/interactive-lab-guide.css';
 const title = 'A higher renewal quote. Now what?';
 const description = 'Work through a software renewal in Interactive Lab. Compare the choices, find the missing details, and leave with a next step you can use.';
 ---
-<BaseLayout title={`${title} | Cloud & Capital`} description={description} type="article" noindex={true}>
+<BaseLayout title={`${title} | Cloud & Capital`} description={description} type="article">
   <main id="main-content" class="guides-page lab-guide">
     <article class="guide-shell guide-article">
       <header>
         <a class="guide-back" href="/interactive-lab">← Interactive Lab</a>
-        <p class="guide-eyebrow">Technology decisions · A tool walkthrough · Review copy</p>
+        <p class="guide-eyebrow">Technology decisions · A tool walkthrough</p>
         <h1>A higher renewal quote. <em>Now what?</em></h1>
         <p class="guide-byline">By Diana Molski · <time datetime="2026-10-22">October 22, 2026</time></p>
         <p class="guide-lede">The software is getting more expensive. Some seats sit unused. Switching might help, but you haven’t checked what that would involve. Where do you start?</p>
@@ -32,7 +32,10 @@ const description = 'Work through a software renewal in Interactive Lab. Compare
       </section>
 
       <figure class="guide-screenshot">
-        <img src="/images/interactive-lab-renewal-brief.jpg" alt="An actual Interactive Lab renewal brief suggesting a vendor conversation to negotiate the higher quote and check whether removing unused seats would lower the price" width="1054" height="430" loading="lazy" decoding="async" />
+        <picture>
+          <source media="(max-width: 760px)" srcset="/images/interactive-lab-renewal-mobile.jpg" width="343" height="274" />
+          <img src="/images/interactive-lab-renewal-brief.jpg" alt="An actual Interactive Lab renewal brief recommending that the visitor confirm notice and seat-change terms before choosing" width="1054" height="597" loading="lazy" decoding="async" />
+        </picture>
         <figcaption>A brief generated from the made-up renewal example. It suggests what to check before choosing.</figcaption>
       </figure>
 
@@ -42,8 +45,14 @@ const description = 'Work through a software renewal in Interactive Lab. Compare
         <p>Read the <strong>Before you renew</strong> checklist first. Does the plan auto-renew? How much notice do you need to cancel or change seats? The date to act can be earlier than the renewal itself. Check those terms before assuming you still have the full 30 days.</p>
         <p>Then read <strong>Options to compare</strong>. Fewer seats might mean a lower bill, but only if the vendor’s pricing allows it. Switching is still worth checking; unknown migration effort doesn’t automatically rule it out.</p>
         <p>Ideas the AI adds are labeled <strong>Suggested</strong>. The other options are based on your context. Check that they reflect the choices you actually have. Action owners are suggestions too; a role in the brief doesn’t mean your team already has someone doing that job.</p>
+        <p><strong>Needs checking</strong> means an effect or saving hasn’t been established here. The Lab leaves that as something to confirm rather than promising a result.</p>
         <p>That gives you something to do: get the missing prices and terms, check the impact on the team, and come back to the decision with better information. The brief can help you prepare for that conversation.</p>
       </section>
+
+      <figure class="guide-screenshot">
+        <img src="/images/interactive-lab-renewal-options.jpg" alt="The renewal example comparing renew, reduce seats, negotiate, and switch, followed by the terms and migration details still needing checking" width="1054" height="813" loading="lazy" decoding="async" />
+        <figcaption>Compare the choices and the checks that would help you choose. <a href="/images/interactive-lab-renewal-options.jpg" target="_blank" rel="noopener noreferrer">Open the larger screenshot</a>.</figcaption>
+      </figure>
 
       <aside class="guide-example" aria-label="The renewal calculation">
         <p class="guide-eyebrow">The calculation, separately</p>

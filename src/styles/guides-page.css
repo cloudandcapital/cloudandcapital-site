@@ -17,7 +17,7 @@
 .guide-section-heading { display:flex; justify-content:space-between; align-items:end; gap:1.5rem; margin-bottom:1.5rem; }
 .guide-section-heading a,.guide-read,.guide-subscribe { display:inline-flex; align-items:center; min-height:44px; color:#3d6055; text-decoration:none; }
 .guide-section-heading a { flex:none; }
-.guide-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr)); gap:1.5rem; }
+.guide-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.5rem; }
 .guide-card { display:flex; flex-direction:column; min-width:0; overflow:hidden; border:1px solid #bcc8b8; border-radius:18px; background:#edf0e8; }
 .guide-card.sand { border-color:#d3c6b1; background:var(--cream); }
 .guide-card > img { display:block; width:100%; height:15rem; padding:1.6rem; object-fit:contain; background:#e0e6d9; }

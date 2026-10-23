@@ -296,3 +296,9 @@ test('provider failures and timeouts have useful errors without a fake brief', a
     assert.match((await response.json()).error, /too long/);
   } finally { globalThis.fetch = original; }
 });
+
+test('hyphenated seat and workload descriptions retain their count units', () => {
+  assert.deepEqual(findUnsupportedNumbers('Compare the 12-seat and 10-seat plans.', 'There are 12 seats and 10 active seats.'), []);
+  assert.deepEqual(findUnsupportedNumbers('A two-workload baseline.', 'Two workloads are stable.'), []);
+  assert.deepEqual(findUnsupportedNumbers('A 12-request plan.', 'There are 12 seats.'), ['12-request']);
+});

@@ -150,7 +150,9 @@ async function callModel(readiness, requestSignal) {
 
     console.error('Interactive Lab numeric validation failed', { count: unsupportedNumbers.length, attempt: attempt + 1 });
     if (attempt === 1) {
-      throw new Error('UNSUPPORTED_NUMERIC_CLAIM');
+      const error = new Error('UNSUPPORTED_NUMERIC_CLAIM');
+      error.rejectedClaims = unsupportedNumbers;
+      throw error;
     }
     correction = `\n\nThe draft used unsupported numbers, or placed calculated figures in known_facts: ${unsupportedNumbers.join(', ')}. Regenerate the complete JSON. Keep known_facts to supplied facts. Elsewhere use only supplied values and the exact checked calculations above, labelled Calculated. Use qualitative wording for all other comparisons.`;
   }
@@ -211,7 +213,11 @@ export async function POST({ request }) {
     const message = timedOut ? 'That took too long. Your inputs are still here. Try again in a moment.'
       : unavailable ? 'The AI service is unavailable right now. Your inputs are still here. Please try again later.'
         : 'The Lab could not produce a checked brief. Your inputs are still here. Please try again.';
-    return json({ error: message }, timedOut ? 504 : unavailable ? 503 : 502);
+    const knownCodes = ['INVALID_MODEL_JSON', 'INVALID_MODEL_SCHEMA', 'MODEL_OUTPUT_TRUNCATED', 'UNSUPPORTED_NUMERIC_CLAIM'];
+    const code = timedOut ? 'MODEL_TIMEOUT' : unavailable ? 'MODEL_UNAVAILABLE' : knownCodes.includes(error.message) ? error.message : 'MODEL_REQUEST_FAILED';
+    // Return validation details only to the requesting visitor, never to logs.
+    // This is an error response, not a usable or partially repaired brief.
+    return json({ error: message, code, rejectedClaims: error.rejectedClaims || [] }, timedOut ? 504 : unavailable ? 503 : 502);
   }
 }
 

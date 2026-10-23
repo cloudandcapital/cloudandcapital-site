@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { DIMENSIONS, QUESTIONS, EXAMPLE, HIGH_BOUNDARY, buildAuditSummary, classifyArchetype, scoreAudit, validatePayload } from '../src/lib/signal-audit.js';
+import { DIMENSIONS, QUESTIONS, EXAMPLE, HIGH_BOUNDARY, buildAuditSummary, classifyArchetype, scoreAudit, validatePayload, discussionQuestions } from '../src/lib/signal-audit.js';
 import { POST } from '../src/pages/api/signal-audit.js';
 const answersAt = (score) => Object.fromEntries(QUESTIONS.map((q) => [q.id, typeof score === 'number' ? `score-${score}` : score]));
 const byArea = (scores) => Object.fromEntries(QUESTIONS.map((q) => [q.id, `score-${scores[q.dimension]}`]));
@@ -22,7 +22,7 @@ test('minimum and maximum score endpoints, with maintenance rather than an inven
   assert.equal(minimum.archetype.name, 'Invoice Led'); assert.equal(minimum.priority.kind, 'improve');
   assert.deepEqual(maximum.axes, { signalReadiness: 100, decisionIntegration: 100 });
   assert.equal(maximum.archetype.name, 'Decision Embedded'); assert.equal(maximum.priority.kind, 'maintain');
-  assert.equal(scoreAudit(answersAt(2)).priority.kind, 'maintain');
+  assert.equal(scoreAudit(answersAt(2)).priority.kind, 'review');
 });
 test('the four patterns match their axis positions at the disclosed 67 point boundary', () => {
   assert.equal(HIGH_BOUNDARY, 67);
@@ -114,17 +114,73 @@ test('API rejects invalid JSON, media type, complete forged answers, and oversiz
   const bad = await POST({ request: request(validPayload({ ...answersAt(2), forecasting: 'score-99' })) }); assert.equal(bad.status, 400);
   const size = await POST({ request: request({ ...validPayload(), padding: 'é'.repeat(7000) }) }); assert.equal(size.status, 413);
 });
-test('copy output preserves scope, all answers, exclusions, first-step basis, and the illustrative label', () => {
-  const summary = buildAuditSummary(scoreAudit(EXAMPLE.answers), { ...EXAMPLE, isExample: true });
+test('copy output preserves date, scope, all answers, exclusions, first-step basis, and the illustrative label', () => {
+  const summary = buildAuditSummary(scoreAudit(EXAMPLE.answers), { ...EXAMPLE, isExample: true, takenAt: '2026-10-23T12:00:00Z' });
+  assert.match(summary, /Taken: Oct 23, 2026/); assert.match(summary, /Rubric version: 2026-10-23-r2/);
   assert.match(summary, /Made-up example/); assert.match(summary, /11\/12 scored; 0 unknown; 1 not applicable/);
   assert.match(summary, /78\/100 points/); assert.match(summary, /Why this first/);
   for (const q of QUESTIONS) assert.ok(summary.includes(q.options.find((o) => o.id === EXAMPLE.answers[q.id]).label));
   assert.match(summary, /Scope: One team or shared service/); assert.match(summary, /not a certification/);
 });
 
-test('a lower average made only of working answers does not invent a repair while a specific gap exists elsewhere', () => {
+test('a known low answer takes precedence over partial practices in lower average areas', () => {
   const answers = answersAt(2); answers['cost-driver-visibility'] = 'score-1'; answers.attribution = 'score-3'; answers.forecasting = 'score-3';
   const r = scoreAudit(answers);
   assert.equal(r.dimensions['signal-clarity'].score, 78);
   assert.equal(r.priority.questionId, 'cost-driver-visibility');
+});
+
+test('all-middle answers suggest a conditional check, not blanket maintenance or a mandatory upgrade', () => {
+  const r = scoreAudit(answersAt(2));
+  assert.deepEqual(r.axes, { signalReadiness: 67, decisionIntegration: 67 });
+  assert.equal(r.priority.kind, 'review'); assert.equal(r.priority.questionId, 'architecture-vendor');
+  assert.match(r.priority.reason, /after a preferred option/); assert.match(r.priority.reason, /keep it if it already meets your needs/);
+  assert.match(r.priority.move, /If this affects the decision/); assert.notEqual(r.priority.title, 'Keep what’s working');
+});
+
+test('a stronger area average cannot hide a zero on renewals', () => {
+  const answers = answersAt(2);
+  Object.assign(answers, { 'architecture-vendor': 'score-3', 'commitments-contracts': 'score-0', 'leadership-funding': 'score-3', 'ownership-follow-through': 'score-1', 'anomaly-response': 'score-1', 'cross-functional-cadence': 'score-1' });
+  const r = scoreAudit(answers);
+  assert.equal(r.dimensions['decision-timing'].score, 67); assert.equal(r.dimensions['operating-response'].score, 33);
+  assert.equal(r.priority.questionId, 'commitments-contracts');
+});
+
+test('a small SaaS team keeps its renewal first step when two exclusions withhold the map', () => {
+  const values = [2, 2, 1, 'not-applicable', 1, 'not-applicable', 1, 0, 1, 1, 1, 1];
+  const answers = Object.fromEntries(QUESTIONS.map((q, i) => [q.id, typeof values[i] === 'number' ? `score-${values[i]}` : values[i]]));
+  const r = scoreAudit(answers);
+  assert.equal(r.valid, false); assert.equal(r.answeredCount, 10); assert.equal(r.axes.signalReadiness, null);
+  assert.equal(r.priority.questionId, 'commitments-contracts'); assert.match(r.priority.reason, /renew automatically/);
+  assert.match(buildAuditSummary(r, { answers }), /Map not shown/);
+});
+
+test('known low answers remain useful even when their own area has too few answers to score', () => {
+  const answers = answersAt('outside-visibility'); answers['commitments-contracts'] = 'score-0';
+  const r = scoreAudit(answers);
+  assert.equal(r.valid, false); assert.equal(r.dimensions['decision-timing'].score, null);
+  assert.equal(r.priority.questionId, 'commitments-contracts'); assert.equal(r.priority.kind, 'improve');
+  Object.assign(answers, { 'cost-driver-visibility': 'score-1', attribution: 'score-0', 'architecture-vendor': 'score-0' });
+  assert.equal(scoreAudit(answers).priority.questionId, 'architecture-vendor');
+});
+
+test('scope-fit results explain exclusions and ask about fit instead of treating them as missing answers', () => {
+  const r = scoreAudit(answersAt('not-applicable'));
+  assert.equal(r.priority.evidenceType, 'scope-fit'); assert.match(r.priority.reason, /not applicable/);
+  assert.doesNotMatch(r.priority.reason, /missing answer/);
+  assert.match(discussionQuestions(r).join(' '), /narrower scope/); assert.doesNotMatch(discussionQuestions(r).join(' '), /different person or a record/);
+});
+
+test('varied missing and excluded answers never suppress the lowest known scored answer', () => {
+  const choices = ['score-0', 'score-1', 'score-2', 'score-3', 'outside-visibility', 'not-applicable'];
+  let seed = 23;
+  for (let run = 0; run < 1500; run++) {
+    const answers = Object.fromEntries(QUESTIONS.map((q) => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return [q.id, choices[(seed >>> 8) % choices.length]]; }));
+    const scored = Object.values(answers).filter((id) => id.startsWith('score-')).map((id) => Number(id.slice(-1)));
+    const lowest = Math.min(...scored); const r = scoreAudit(answers);
+    if (lowest < 3) {
+      assert.equal(answers[r.priority.questionId], `score-${lowest}`);
+      assert.equal(r.priority.kind, lowest === 2 ? 'review' : 'improve');
+    } else assert.equal(r.priority.questionId, null);
+  }
 });

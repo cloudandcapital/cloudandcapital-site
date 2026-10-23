@@ -5,7 +5,7 @@ const schema = Object.freeze({
   }),
   tool_start: Object.freeze({
     tool: Object.freeze(['signal_audit', 'interactive_lab']),
-    entry: Object.freeze(['audit_setup', 'decision_form', 'starter_scenario']),
+    entry: Object.freeze(['audit_setup', 'audit_example', 'decision_form', 'starter_scenario']),
   }),
   tool_complete: Object.freeze({
     tool: Object.freeze(['signal_audit', 'interactive_lab']),

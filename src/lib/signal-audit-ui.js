@@ -1,13 +1,13 @@
-import { DIMENSIONS, QUESTIONS, TARGET_SCOPES, TECHNOLOGY_SCOPES, EXAMPLE, HIGH_BOUNDARY, scoreAudit, scopeGuidance, discussionQuestions, buildAuditSummary } from './signal-audit.js';
+import { DIMENSIONS, QUESTIONS, TARGET_SCOPES, TECHNOLOGY_SCOPES, EXAMPLE, HIGH_BOUNDARY, RUBRIC_VERSION, scoreAudit, scopeGuidance, discussionQuestions, buildAuditSummary, assessmentDate, exampleLabel } from './signal-audit.js';
 
 export function mountSignalAudit(document) {
   const window = document.defaultView;
   const $ = (id) => document.getElementById(id);
-  const state = { targetScope: '', technologyScopes: [], answers: {}, index: 0, result: null, isExample: false, started: false, completed: false };
+  const state = { targetScope: '', technologyScopes: [], answers: {}, index: 0, result: null, isExample: false, takenAt: null, started: false, completed: false };
   const labelFor = (items, id) => items.find((item) => item.id === id)?.label || id;
   const announce = (text) => { $('liveStatus').textContent = text; };
   const track = (event, fields) => window.ccTrack?.(event, { tool: 'signal_audit', ...fields });
-  const startSession = () => { if (!state.started) track('tool_start', { entry: 'audit_setup' }); state.started = true; };
+  const startSession = () => { if (!state.started) track('tool_start', { entry: state.isExample ? 'audit_example' : 'audit_setup' }); state.started = true; };
   const scrollTo = (node) => node.scrollIntoView({ behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
   function makeChoice(item, type, name) {
     const label = document.createElement('label');
@@ -21,8 +21,19 @@ export function mountSignalAudit(document) {
   $('technologyScopes').replaceChildren(...TECHNOLOGY_SCOPES.map((item) => makeChoice(item, 'checkbox', 'technology-scope')));
   $('segments').replaceChildren(...DIMENSIONS.map(() => document.createElement('span')));
   $('mapPlot').style.setProperty('--high-boundary', `${HIGH_BOUNDARY}%`);
-  function updateSetupButton() {
-    $('beginButton').disabled = !document.querySelector('input[name="target-scope"]:checked') || !document.querySelector('input[name="technology-scope"]:checked');
+  function scopeSelection() {
+    return { targetScope: document.querySelector('input[name="target-scope"]:checked')?.value || '', technologyScopes: [...document.querySelectorAll('input[name="technology-scope"]:checked')].map((input) => input.value) };
+  }
+  function scopeHasChanged(selection) {
+    return Boolean(state.targetScope && (state.targetScope !== selection.targetScope || [...state.technologyScopes].sort().join() !== [...selection.technologyScopes].sort().join()));
+  }
+  function updateScopeWarning() {
+    const selection = scopeSelection();
+    const count = Object.keys(state.answers).length;
+    const willClear = count > 0 && scopeHasChanged(selection);
+    $('scopeResetWarning').hidden = !willClear;
+    $('scopeResetWarning').textContent = willClear ? `Changing the scope clears your ${count} ${count === 1 ? 'answer' : 'answers'} when you begin again.` : '';
+    if (selection.targetScope && selection.technologyScopes.length) $('setupError').textContent = '';
   }
   function renderQuestion() {
     const question = QUESTIONS[state.index];
@@ -44,7 +55,6 @@ export function mountSignalAudit(document) {
     [...$('segments').children].forEach((segment, index) => { segment.className = index < dimensionIndex ? 'done' : index === dimensionIndex ? 'active' : ''; });
     $('previousButton').textContent = state.index === 0 ? '← Back to scope' : '← Previous';
     $('nextButton').textContent = state.index === QUESTIONS.length - 1 ? 'See my result →' : 'Next →';
-    $('nextButton').disabled = !state.answers[question.id];
     $('answerError').textContent = '';
     $('questionPrompt').focus({ preventScroll: true });
     announce(`${DIMENSIONS[dimensionIndex].name}. Question ${state.index + 1} of 12.`);
@@ -54,17 +64,23 @@ export function mountSignalAudit(document) {
     const input = event.target;
     if (!(input instanceof window.HTMLInputElement)) return;
     if (input.name === 'technology-scope' && input.checked) {
-      if (input.value === 'mixed') document.querySelectorAll('input[name="technology-scope"]').forEach((item) => { if (item !== input) item.checked = false; });
-      else document.querySelector('input[name="technology-scope"][value="mixed"]').checked = false;
+      if (input.value === 'mixed') {
+        const replaced = [...document.querySelectorAll('input[name="technology-scope"]:checked')].some((item) => item !== input);
+        document.querySelectorAll('input[name="technology-scope"]').forEach((item) => { if (item !== input) item.checked = false; });
+        if (replaced) announce('Mixed technology portfolio selected. Individual categories cleared.');
+      } else {
+        const mixed = document.querySelector('input[name="technology-scope"][value="mixed"]');
+        if (mixed.checked) { mixed.checked = false; announce('Individual category selected. Mixed technology portfolio cleared.'); }
+      }
     }
-    if (input.name === 'target-scope' || input.name === 'technology-scope') updateSetupButton();
-    if (input.name === 'answer') { state.answers[QUESTIONS[state.index].id] = input.value; $('nextButton').disabled = false; }
+    if (input.name === 'target-scope' || input.name === 'technology-scope') updateScopeWarning();
+    if (input.name === 'answer') { state.answers[QUESTIONS[state.index].id] = input.value; $('answerError').textContent = ''; }
   });
   $('beginButton').addEventListener('click', () => {
     const target = document.querySelector('input[name="target-scope"]:checked');
     const technologyScopes = [...document.querySelectorAll('input[name="technology-scope"]:checked')].map((input) => input.value);
     if (!target || !technologyScopes.length) { $('setupError').textContent = 'Choose what to assess and at least one technology category.'; return; }
-    const changed = state.targetScope && (state.targetScope !== target.value || [...state.technologyScopes].sort().join() !== [...technologyScopes].sort().join());
+    const changed = scopeHasChanged({ targetScope: target.value, technologyScopes });
     if (changed) { state.answers = {}; state.index = 0; state.isExample = false; state.started = false; state.completed = false; }
     state.targetScope = target.value; state.technologyScopes = technologyScopes;
     $('setupError').textContent = '';
@@ -79,16 +95,24 @@ export function mountSignalAudit(document) {
     else showResults();
   });
   $('previousButton').addEventListener('click', () => {
-    if (state.index === 0) { $('questionPanel').hidden = true; $('setupPanel').hidden = false; $('stageTitle').focus({ preventScroll: true }); }
+    if (state.index === 0) { $('questionPanel').hidden = true; $('setupPanel').hidden = false; updateScopeWarning(); $('stageTitle').focus({ preventScroll: true }); }
     else { state.index--; renderQuestion(); }
     scrollTo($('auditStage'));
   });
   function showResults() {
     state.result = scoreAudit(state.answers);
+    state.takenAt = new Date().toISOString();
     const result = state.result;
     $('auditStage').hidden = true; $('results').hidden = false; $('exampleButton').hidden = true;
     $('exampleNotice').hidden = !state.isExample;
-    $('exampleDescription').textContent = state.isExample ? EXAMPLE.description : '';
+    const editedExample = state.isExample && exampleLabel(state.answers) !== EXAMPLE.label;
+    $('exampleLabel').textContent = state.isExample ? exampleLabel(state.answers) : '';
+    $('exampleDescription').hidden = editedExample || !state.isExample;
+    $('exampleDescription').textContent = state.isExample && !editedExample ? EXAMPLE.description : '';
+    $('resultEyebrow').textContent = state.isExample ? 'Example result' : 'Your self-assessment';
+    $('assessmentDate').dateTime = state.takenAt;
+    $('assessmentDate').textContent = assessmentDate(state.takenAt);
+    $('rubricVersion').textContent = RUBRIC_VERSION;
     $('resultTitle').textContent = result.archetype.name;
     $('resultMeaning').textContent = result.archetype.meaning;
     $('scopeLabel').textContent = labelFor(TARGET_SCOPES, state.targetScope);
@@ -120,6 +144,8 @@ export function mountSignalAudit(document) {
     $('moveTitle').textContent = result.priority.title;
     $('moveText').textContent = result.priority.move;
     $('priorityReason').textContent = result.priority.reason;
+    $('mapCoverageNotice').hidden = result.valid;
+    $('renewalTrackerLink').hidden = result.priority.questionId !== 'commitments-contracts';
     $('ownerText').textContent = result.priority.owners;
     $('measureText').textContent = result.priority.measures.join(' · ');
     $('discussionQuestions').replaceChildren(...discussionQuestions(result).map((text) => { const li = document.createElement('li'); li.textContent = text; return li; }));
@@ -139,17 +165,27 @@ export function mountSignalAudit(document) {
     state.targetScope = EXAMPLE.targetScope; state.technologyScopes = [...EXAMPLE.technologyScopes]; state.answers = { ...EXAMPLE.answers }; state.isExample = true; state.index = 0;
     document.querySelectorAll('input[name="target-scope"]').forEach((input) => { input.checked = input.value === state.targetScope; });
     document.querySelectorAll('input[name="technology-scope"]').forEach((input) => { input.checked = state.technologyScopes.includes(input.value); });
-    updateSetupButton(); startSession(); showResults();
+    updateScopeWarning(); startSession(); showResults();
   });
   $('editAnswersButton').addEventListener('click', () => {
     state.index = 0; $('results').hidden = true; $('auditStage').hidden = false; $('setupPanel').hidden = true; $('questionPanel').hidden = false; renderQuestion(); scrollTo($('auditStage'));
   });
   $('retakeButton').addEventListener('click', () => {
     track('tool_output_action', { action: 'retake' });
-    state.answers = {}; state.index = 0; state.result = null; state.isExample = false; state.targetScope = ''; state.technologyScopes = []; state.started = false; state.completed = false;
-    $('auditForm').reset(); updateSetupButton(); $('exampleButton').hidden = false;
+    state.answers = {}; state.index = 0; state.result = null; state.isExample = false; state.takenAt = null; state.targetScope = ''; state.technologyScopes = []; state.started = false; state.completed = false;
+    $('auditForm').reset(); updateScopeWarning(); $('setupError').textContent = ''; $('exampleButton').hidden = false;
     $('results').hidden = true; $('auditStage').hidden = false; $('setupPanel').hidden = false; $('questionPanel').hidden = true; $('scopeChangeNotice').hidden = true;
     $('stageTitle').focus({ preventScroll: true }); scrollTo($('auditStage'));
+  });
+  let detailsBeforePrint = [];
+  window.addEventListener('beforeprint', () => {
+    if ($('results').hidden || detailsBeforePrint.length) return;
+    detailsBeforePrint = [...$('results').querySelectorAll('details')].map((node) => [node, node.open]);
+    detailsBeforePrint.forEach(([node]) => { node.open = true; });
+  });
+  window.addEventListener('afterprint', () => {
+    detailsBeforePrint.forEach(([node, open]) => { node.open = open; });
+    detailsBeforePrint = [];
   });
   $('printButton').addEventListener('click', () => { track('tool_output_action', { action: 'print' }); window.print(); });
   $('copyButton').addEventListener('click', async () => {

@@ -123,48 +123,35 @@ function isTextArray(value, min, max) {
   return Array.isArray(value) && value.length >= min && value.length <= max && value.every((item) => isText(item, 500));
 }
 
+export const ACTION_TIMINGS = ['Now', 'Before the deadline', 'Before choosing'];
+
 export function validateBrief(value, onInvalid = () => {}) {
   const invalid = (field) => { onInvalid(field); return false; };
   if (!value || typeof value !== 'object' || Array.isArray(value)) return invalid('brief');
+  const fields = ['decision_summary', 'posture', 'recommendation', 'options', 'missing_information', 'next_actions'];
+  if (Object.keys(value).some((key) => !fields.includes(key))) return invalid('unexpected_fields');
   if (!isText(value.decision_summary, 300)) return invalid('decision_summary');
-  if (!value.posture || !['Explore', 'Stage', 'Commit'].includes(value.posture.label) || !isText(value.posture.rationale, 600)) return invalid('posture');
-  if (!isTextArray(value.known_facts, 1, 12)) return invalid('known_facts');
-  if (!Array.isArray(value.working_assumptions) || value.working_assumptions.length > 5) return invalid('working_assumptions.length');
-  if (!value.working_assumptions.every((item) => isText(item?.assumption, 400) && isText(item?.why_it_matters, 500))) return invalid('working_assumptions.fields');
+  if (!value.posture || !['Explore', 'Stage', 'Commit'].includes(value.posture.label) || !isText(value.posture.rationale, 500)) return invalid('posture');
+  if (!value.recommendation || !isText(value.recommendation.move, 700) || !['Low', 'Medium', 'High'].includes(value.recommendation.confidence) || !isText(value.recommendation.rationale, 500)) return invalid('recommendation');
   if (!Array.isArray(value.options) || value.options.length < 2 || value.options.length > 4) return invalid('options.length');
-  if (!value.options.every((item) => ['name', 'economics', 'operational_effect', 'reversibility', 'risk', 'evidence_needed'].every((key) => isText(item?.[key], 600)))) return invalid('options.fields');
-  if (!value.lenses || !['finops', 'finance', 'engineering'].every((lens) => isText(value.lenses?.[lens]?.view, 600) && isText(value.lenses?.[lens]?.need, 400))) return invalid('lenses');
-  if (!isText(value.common_ground, 700) || !isText(value.unresolved_tension, 700)) return invalid('common_ground_or_tension');
-  if (!value.economics || typeof value.economics.available !== 'boolean' || !isText(value.economics.analysis, 800)) return invalid('economics');
-  if (!Array.isArray(value.economics.thresholds) || value.economics.thresholds.length > 4) return invalid('economics.thresholds.length');
-  if (!value.economics.thresholds.every((item) => ['metric', 'trigger', 'meaning', 'basis'].every((key) => isText(item?.[key], 500)))) return invalid('economics.thresholds.fields');
-  if (!value.recommendation || !isText(value.recommendation.move, 900) || !['Low', 'Medium', 'High'].includes(value.recommendation.confidence) || !isText(value.recommendation.rationale, 700)) return invalid('recommendation');
-  if (!isTextArray(value.change_the_answer, 2, 4)) return invalid('change_the_answer');
+  if (!value.options.every((item) => ['name', 'cost_effect', 'practical_effect', 'check'].every((key) => isText(item?.[key], 500)))) return invalid('options.fields');
+  if (!isTextArray(value.missing_information, 1, 8)) return invalid('missing_information');
   if (!Array.isArray(value.next_actions) || value.next_actions.length < 2 || value.next_actions.length > 4) return invalid('next_actions.length');
-  if (!value.next_actions.every((item) => ['action', 'owner', 'evidence', 'timing'].every((key) => isText(item?.[key], 500)))) return invalid('next_actions.fields');
+  if (!value.next_actions.every((item) => isText(item?.action, 500) && isText(item?.owner, 200) && ACTION_TIMINGS.includes(item?.timing))) return invalid('next_actions.fields');
   return true;
 }
 
-
-// Provider-supported JSON Schema; length/count constraints stay in validateBrief.
 const briefString = { type: 'string' };
 const briefObject = (properties) => ({ type: 'object', properties, required: Object.keys(properties), additionalProperties: false });
 const briefList = (items, description) => ({ type: 'array', items, description });
 const briefChoice = (...values) => ({ type: 'string', enum: values });
-const briefLens = briefObject({ view: briefString, need: briefString });
 export const BRIEF_OUTPUT_SCHEMA = briefObject({
   decision_summary: briefString,
   posture: briefObject({ label: briefChoice('Explore', 'Stage', 'Commit'), rationale: briefString }),
-  known_facts: briefList(briefString, 'Up to eight short facts reported by the user; no calculated amounts.'),
-  working_assumptions: briefList(briefObject({ assumption: briefString, why_it_matters: briefString }), 'Zero to two assumptions.'),
-  options: briefList(briefObject(Object.fromEntries(['name', 'economics', 'operational_effect', 'reversibility', 'risk', 'evidence_needed'].map((key) => [key, briefString]))), 'Two to four distinct options; preserve the user choices.'),
-  lenses: briefObject({ finops: briefLens, finance: briefLens, engineering: briefLens }),
-  common_ground: briefString,
-  unresolved_tension: briefString,
-  economics: briefObject({ available: { type: 'boolean' }, analysis: briefString, thresholds: briefList(briefObject({ metric: briefString, trigger: briefString, meaning: briefString, basis: briefString }), 'Zero to two thresholds using supplied figures or qualitative conditions.') }),
   recommendation: briefObject({ move: briefString, confidence: briefChoice('Low', 'Medium', 'High'), rationale: briefString }),
-  change_the_answer: briefList(briefString, 'Two to four developments that could change the recommendation.'),
-  next_actions: briefList(briefObject({ action: briefString, owner: briefString, evidence: briefString, timing: briefString }), 'Exactly three practical next actions.'),
+  options: briefList(briefObject({ name: briefString, cost_effect: briefString, practical_effect: briefString, check: briefString }), 'Two to four distinct options.'),
+  missing_information: briefList(briefString, 'One to five specific things that are still unknown.'),
+  next_actions: briefList(briefObject({ action: briefString, owner: briefString, timing: briefChoice(...ACTION_TIMINGS) }), 'Two or three practical next actions.'),
 });
 
 const NUMBER_WORD_VALUES = new Map([

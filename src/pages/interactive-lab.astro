@@ -189,7 +189,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       .lab-workspace.is-results .lab-output-pane { padding: 1.6rem 1rem 2rem; }
       .scenario-button { padding: .78rem; }
       .form-actions { position: sticky; bottom: 0; z-index: 10; margin: 1.2rem -1rem -2rem; padding: .8rem 1rem calc(.8rem + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); border-top: 1px solid var(--border); }
-      .facts-grid, .lens-grid, .tension-grid { grid-template-columns: 1fr; }
+      .actions-table, .actions-table tbody, .actions-table tr { display: block; }
+      .actions-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+      .actions-table tr { padding: .8rem; margin-bottom: .8rem; border: 1px solid var(--border); }
+      .actions-table td { display: grid; grid-template-columns: 4rem minmax(0, 1fr); gap: .6rem; padding: .3rem 0; border: 0; }
+      .actions-table td::before { content: attr(data-label); font-family: var(--font-ui); font-size: .62rem; color: var(--text-light); text-transform: uppercase; letter-spacing: .06em; }
       .context-summary summary { align-items: flex-start; flex-wrap: wrap; }
       .context-summary-decision { order: 3; flex-basis: 100%; white-space: normal; }
       .context-summary-list { grid-template-columns: 1fr; }
@@ -304,13 +308,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <h2 id="placeholderHeading">Work through the choice.</h2>
               <p id="placeholderCopy">Get a suggested next move, a comparison of your options, and the missing information worth checking before you decide.</p>
             </div>
-            <div class="brief-outline" aria-label="Brief contents"><div class="outline-item">Facts &amp; assumptions</div><div class="outline-item">Options &amp; economics</div><div class="outline-item">Recommendation &amp; actions</div></div>
+            <div class="brief-outline" aria-label="Brief contents"><div class="outline-item">Suggested next move</div><div class="outline-item">Your options</div><div class="outline-item">What to check</div></div>
           </div>
 
           <div class="thinking-state" id="thinkingState" role="status" hidden>
             <div class="thinking-mark" aria-hidden="true"></div>
             <h2>Building the decision brief</h2>
-            <p id="thinkingText">Separating facts from assumptions</p>
+            <p id="thinkingText">Reading your context</p>
             <p>Usually takes less than a minute. Your answers stay here if it cannot finish.</p>
             <button type="button" class="lab-button lab-button-quiet" id="cancelBtn">Cancel</button>
           </div>
@@ -328,13 +332,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </header>
 
             <section class="brief-section"><h3>Recommendation</h3><div class="recommendation"><div class="recommendation-top"><span>The next move</span><span id="confidenceLabel"></span></div><p class="recommendation-move" id="recommendationMove"></p><p class="recommendation-rationale" id="recommendationRationale"></p></div></section>
-            <section class="brief-section"><h3>Next actions</h3><div class="options-wrap"><table class="actions-table"><thead><tr><th>Action</th><th>Owner</th><th>Evidence</th><th>Timing</th></tr></thead><tbody id="actionsBody"></tbody></table></div></section>
+            <section class="brief-section"><h3>Next actions</h3><div class="options-wrap"><table class="actions-table"><thead><tr><th>Action</th><th>Owner</th><th>Timing</th></tr></thead><tbody id="actionsBody"></tbody></table></div></section>
             <section class="brief-section" id="calculationsSection" hidden><h3>Calculated from your inputs</h3><ul class="brief-list" id="checkedCalculations"></ul></section>
-            <section class="brief-section"><h3>Facts and assumptions</h3><div class="facts-grid"><div class="fact-column"><h4>Known facts</h4><ul class="brief-list" id="knownFacts"></ul></div><div class="fact-column"><h4>Working assumptions</h4><ul class="brief-list" id="workingAssumptions"></ul></div></div></section>
-            <section class="brief-section"><h3>Option comparison</h3><div id="optionMatrix"></div></section>
-            <section class="brief-section"><h3>Cross-functional view</h3><div class="lens-grid" id="lensGrid"></div><div class="tension-grid"><div class="tension-card"><strong>Common ground</strong><p id="commonGround"></p></div><div class="tension-card"><strong>Unresolved tension</strong><p id="unresolvedTension"></p></div></div></section>
-            <section class="brief-section"><h3>Economics and thresholds</h3><div class="economics-callout"><p class="brief-section-copy" id="economicsAnalysis"></p></div><div class="threshold-list" id="thresholdList"></div></section>
-            <section class="brief-section"><h3>What would change the answer</h3><ul class="brief-list" id="changeAnswer"></ul></section>
+            <section class="brief-section"><h3>Compare your options</h3><div id="optionMatrix"></div></section>
+            <section class="brief-section"><h3>What still needs checking</h3><ul class="brief-list" id="missingInformation"></ul></section>
             <p class="brief-disclosure">This is an AI-generated decision aid based only on the context supplied. Validate provider terms, calculations, and financially consequential decisions against primary data before acting.</p>
             <div class="brief-actions"><button type="button" class="lab-button lab-button-primary" id="copyBtn">Copy decision brief</button><button type="button" class="lab-button lab-button-quiet" id="printBtn">Print / Save PDF</button><button type="button" class="lab-button lab-button-quiet" id="editBtn">Edit context</button><button type="button" class="lab-button lab-button-quiet" id="anotherBtn">Try another</button></div>
             <div class="copy-state" id="copyState" aria-live="polite"></div>
@@ -414,7 +415,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       $('briefState').hidden = true;
       if (mode === 'context') {
         $('placeholderStatus').textContent = 'Context in progress';
-        $('placeholderHeading').textContent = 'A stronger answer starts with better evidence.';
+        $('placeholderHeading').textContent = 'A useful next move starts with your context.';
         $('placeholderCopy').textContent = 'Answer the four questions, including anything you do not know yet. The brief will show the gaps and suggest what to check next.';
       } else {
         $('placeholderStatus').textContent = 'Waiting for context';
@@ -629,7 +630,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       $('briefState').hidden = true;
       $('thinkingState').hidden = false;
       outputPane.setAttribute('aria-busy', 'true');
-      const messages = ['Separating facts from assumptions', 'Comparing your options', 'Looking at cost, budget, and practical tradeoffs', 'Checking what could change the answer'];
+      const messages = ['Reading your context', 'Comparing your options', 'Looking at cost, budget, and practical tradeoffs', 'Checking what could change the answer'];
       let index = 0;
       $('thinkingText').textContent = messages[index];
       clearInterval(thinkingTimer);
@@ -697,58 +698,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       });
     }
 
-    function withSentencePunctuation(value) {
-      const text = value.trim();
-      return /[.!?]$/.test(text) ? text : `${text}.`;
-    }
 
     function renderBrief(brief) {
-      $('briefPosture').textContent = brief.posture.label;
+      const postureLabels = { Explore: 'Gather more information', Stage: 'Compare before committing', Commit: 'Ready to choose' };
+      $('briefPosture').textContent = postureLabels[brief.posture.label];
       $('briefTitle').textContent = brief.decision_summary;
       $('briefPostureReason').textContent = brief.posture.rationale;
       $('calculationsSection').hidden = !state.calculations.length;
       appendTextList($('checkedCalculations'), state.calculations.map((item) => item.explanation));
-      appendTextList($('knownFacts'), brief.known_facts);
-      appendTextList($('workingAssumptions'), brief.working_assumptions, (li, item) => {
-        li.className = 'assumption-item';
-        li.append(makeElement('strong', '', item.assumption), makeElement('span', '', item.why_it_matters));
-      });
-
-      renderOptionMatrix(brief.options);
-
-      $('lensGrid').replaceChildren();
-      [['finops', 'FinOps'], ['finance', 'Finance'], ['engineering', 'Engineering']].forEach(([key, label]) => {
-        const card = makeElement('div', 'lens-card');
-        card.append(makeElement('h4', '', label), makeElement('p', '', brief.lenses[key].view));
-        const need = makeElement('p', 'lens-need');
-        need.append(makeElement('strong', '', 'Needs to know'), document.createTextNode(brief.lenses[key].need));
-        card.append(need);
-        $('lensGrid').append(card);
-      });
-      $('commonGround').textContent = brief.common_ground;
-      $('unresolvedTension').textContent = brief.unresolved_tension;
-      $('economicsAnalysis').textContent = brief.economics.analysis;
-      $('thresholdList').replaceChildren();
-      if (!brief.economics.thresholds.length) {
-        $('thresholdList').append(makeElement('p', 'brief-section-copy', 'No defensible threshold can be set from the supplied evidence yet.'));
-      } else {
-        brief.economics.thresholds.forEach((threshold) => {
-          const item = makeElement('div', 'threshold-item');
-          item.append(
-            makeElement('strong', '', `${threshold.metric} · ${threshold.trigger}`),
-            makeElement('span', '', `${withSentencePunctuation(threshold.meaning)} Basis: ${withSentencePunctuation(threshold.basis)}`),
-          );
-          $('thresholdList').append(item);
-        });
-      }
       $('confidenceLabel').textContent = `${brief.recommendation.confidence} confidence`;
       $('recommendationMove').textContent = brief.recommendation.move;
       $('recommendationRationale').textContent = brief.recommendation.rationale;
-      appendTextList($('changeAnswer'), brief.change_the_answer);
+      renderOptionMatrix(brief.options);
+      appendTextList($('missingInformation'), brief.missing_information);
       $('actionsBody').replaceChildren();
       brief.next_actions.forEach((action) => {
         const row = document.createElement('tr');
-        ['action', 'owner', 'evidence', 'timing'].forEach((key) => row.append(makeElement('td', '', action[key])));
+        [['action', 'Action'], ['owner', 'Owner'], ['timing', 'Timing']].forEach(([key, label]) => {
+          const cell = makeElement('td', '', action[key]);
+          cell.dataset.label = label;
+          row.append(cell);
+        });
         $('actionsBody').append(row);
       });
     }
@@ -768,11 +738,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     function renderOptionMatrix(options) {
       const criteria = [
-        ['economics', 'Economics'],
-        ['operational_effect', 'Operating effect'],
-        ['reversibility', 'Reversibility'],
-        ['risk', 'Risk'],
-        ['evidence_needed', 'Evidence needed'],
+        ['cost_effect', 'Cost'],
+        ['practical_effect', 'What changes'],
+        ['check', 'Check before choosing'],
       ];
       const container = $('optionMatrix');
       container.replaceChildren();
@@ -812,19 +780,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     function briefToText(brief) {
       const lines = [
-        'CLOUD & CAPITAL · DECISION BRIEF', '', brief.decision_summary, `Posture: ${brief.posture.label}`, brief.posture.rationale, '',
+        'CLOUD & CAPITAL · DECISION BRIEF', '', brief.decision_summary, brief.posture.rationale, '',
         ...(state.example ? ['ILLUSTRATIVE EXAMPLE: Started with made-up details. Check or replace every detail before using it for a real decision.', ''] : []),
         'RECOMMENDATION', brief.recommendation.move, `${brief.recommendation.confidence} confidence: ${brief.recommendation.rationale}`, '',
-        'NEXT ACTIONS', ...brief.next_actions.map((action) => `- ${action.action} | Owner: ${action.owner} | Evidence: ${action.evidence} | Timing: ${action.timing}`), '',
+        'NEXT ACTIONS', ...brief.next_actions.map((action) => `- ${action.action} | Owner: ${action.owner} | Timing: ${action.timing}`), '',
         ...(state.calculations.length ? ['CALCULATED FROM YOUR INPUTS', ...state.calculations.map((item) => item.explanation), ''] : []),
-        'KNOWN FACTS', ...brief.known_facts.map((item) => `- ${item}`), '', 'WORKING ASSUMPTIONS',
-        ...brief.working_assumptions.map((item) => `- ${item.assumption} — ${item.why_it_matters}`), '', 'OPTIONS',
+        'COMPARE YOUR OPTIONS',
       ];
-      brief.options.forEach((option) => lines.push(`${option.name}\nEconomics: ${option.economics}\nOperating effect: ${option.operational_effect}\nReversibility: ${option.reversibility}\nRisk: ${option.risk}\nEvidence needed: ${option.evidence_needed}`, ''));
-      lines.push('CROSS-FUNCTIONAL VIEW', `FinOps: ${brief.lenses.finops.view} Needs: ${brief.lenses.finops.need}`, `Finance: ${brief.lenses.finance.view} Needs: ${brief.lenses.finance.need}`, `Engineering: ${brief.lenses.engineering.view} Needs: ${brief.lenses.engineering.need}`, '', `Common ground: ${brief.common_ground}`, `Unresolved tension: ${brief.unresolved_tension}`, '', 'ECONOMICS & THRESHOLDS', brief.economics.analysis);
-      brief.economics.thresholds.forEach((threshold) => lines.push('', `Metric: ${threshold.metric}`, `Trigger: ${threshold.trigger}`, `Meaning: ${withSentencePunctuation(threshold.meaning)} Basis: ${withSentencePunctuation(threshold.basis)}`));
-      lines.push('', 'WHAT WOULD CHANGE THE ANSWER', ...brief.change_the_answer.map((item) => `- ${item}`));
-      lines.push('', 'AI-generated decision aid. Validate provider terms, calculations, and financially consequential decisions against primary data before acting.');
+      brief.options.forEach((option) => lines.push(option.name, `Cost: ${option.cost_effect}`, `What changes: ${option.practical_effect}`, `Check before choosing: ${option.check}`, ''));
+      lines.push('WHAT STILL NEEDS CHECKING', ...brief.missing_information.map((item) => `- ${item}`), '', 'YOUR DECISION', decisionInput.value.trim(), '', 'AI-generated decision aid. Check terms and calculations against primary data before acting.');
       return lines.join('\n');
     }
 

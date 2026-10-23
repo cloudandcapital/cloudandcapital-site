@@ -1,6 +1,6 @@
 # Guard provider-input compatibility — October 23, 2026
 
-**Confirmed gap: both unmodified public FOCUS CSVs fail before analysis.** The 1,000-record file also failed through the public upload control, with Review disabled. This is a read-only review under Diana's new major-provider input requirement. Guard app code was not changed; its separate working chat remains the owner.
+**Historical read-only finding: both unmodified public FOCUS CSVs failed before analysis at the pinned revision below.** The 1,000-record file also failed through the public upload control, with Review disabled. This initial review did not change Guard app code. The authorized implementation and subsequent release evidence are recorded in the follow-up below.
 
 ## Evidence and provenance
 
@@ -47,3 +47,7 @@ It imports the real reader, calls `readBillingFiles` using File objects, and pro
 **For the Guard owner:** fix and verify exact monetary precision, explicitly grounded timestamps and ordinary compressed delivery while preserving the existing pipeline, negative credits, duplicate handling, comparison semantics and local privacy. Reconcile these sample totals after establishing the intended date interpretation. Check exports, local Lumen and phone upload. Then test representative current AWS/Azure downloads and a separately sourced Google Cloud layout. Google's [Cost table CSV](https://docs.cloud.google.com/billing/docs/how-to/cost-table) and [FOCUS BigQuery export](https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/focus-export) are distinct paths. Name and verify supported formats; a historical sample pass alone does not certify all current provider bills.
 
 Return the release revision, real UI checks, coverage matrix and remaining limits. Broader provider-input readiness stays open until that owning app work passes. Preserve the earlier scoped GREEN and closed seven-row example checks; this is a new product requirement and evidence set.
+
+## Subsequent implementation
+
+Diana then explicitly authorized Guard fixes in this conversation. The earlier separate-chat coordination note no longer limits this work. [The implementation review](guard-provider-import-fix-2026-10-23.md) records Guard PR36, merged producer changes, exact public-input passes, and the current release/browser evidence. Preserve this original failure record and source pins; it is not the current compatibility verdict. Broad current-provider acceptance remains open.

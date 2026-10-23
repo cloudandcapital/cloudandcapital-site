@@ -6,7 +6,9 @@ const lab = page === 'lab';
 const guide = page === 'lab-guide';
 const tape = page === 'market-tape';
 const tapeGuide = page === 'market-tape-guide';
-const path = lab ? '/interactive-lab' : guide ? '/insights/using-interactive-lab' : tape ? 'https://market-tape.cloudandcapital.com/' : tapeGuide ? '/insights/using-market-tape' : '/';
-const suffix = lab ? '&page=lab' : guide ? '&page=lab-guide' : tape ? '&page=market-tape' : tapeGuide ? '&page=market-tape-guide' : '';
+const audit = page === 'signal-audit';
+const auditGuide = page === 'signal-audit-guide';
+const path = audit ? '/signal-audit' : auditGuide ? '/insights/using-signal-audit' : lab ? '/interactive-lab' : guide ? '/insights/using-interactive-lab' : tape ? 'https://market-tape.cloudandcapital.com/' : tapeGuide ? '/insights/using-market-tape' : '/';
+const suffix = audit ? '&page=signal-audit' : auditGuide ? '&page=signal-audit-guide' : lab ? '&page=lab' : guide ? '&page=lab-guide' : tape ? '&page=market-tape' : tapeGuide ? '&page=market-tape-guide' : '';
 ---
-<html lang="en"><head><meta charset="utf-8" /><meta name="robots" content="noindex,nofollow" /><title>Responsive review</title></head><body style="margin:0;background:#e8e8e8;font-family:system-ui"><header style="padding:10px;text-align:center">{widths.map(size => <a href={`?width=${size}${suffix}`} style="margin-inline:8px">{size}px</a>)}</header><iframe src={path} title={lab ? 'Responsive Lab preview' : guide ? 'Responsive Lab guide preview' : tape ? 'Responsive Market Tape preview' : tapeGuide ? 'Responsive Market Tape guide preview' : 'Responsive homepage preview'} style={`display:block;border:0;width:${width}px;height:840px;margin:0 auto;background:white;`}></iframe></body></html>
+<html lang="en"><head><meta charset="utf-8" /><meta name="robots" content="noindex,nofollow" /><title>Responsive review</title></head><body style="margin:0;background:#e8e8e8;font-family:system-ui"><header style="padding:10px;text-align:center">{widths.map(size => <a href={`?width=${size}${suffix}`} style="margin-inline:8px">{size}px</a>)}</header><iframe src={path} title={audit ? 'Responsive Signal Audit preview' : auditGuide ? 'Responsive Signal Audit guide preview' : lab ? 'Responsive Lab preview' : guide ? 'Responsive Lab guide preview' : tape ? 'Responsive Market Tape preview' : tapeGuide ? 'Responsive Market Tape guide preview' : 'Responsive homepage preview'} style={`display:block;border:0;width:${width}px;height:840px;margin:0 auto;background:white;`}></iframe></body></html>

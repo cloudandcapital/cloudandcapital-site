@@ -16,6 +16,7 @@ export type DirectoryTool = {
   tone: 'sage' | 'rose' | 'sand';
   image: string;
   imageAlt: string;
+  imageLabel?: string;
   imageWidth: number;
   imageHeight: number;
   companion?: { label: string; href: string };
@@ -39,14 +40,14 @@ function releasedTool(slug: string) {
 export const directoryTools: DirectoryTool[] = [
   {
     slug: 'ai-cost-lens', topics: ['tech-spending', 'ai-automation'], name: 'AI Cost Lens', kind: 'AI costs',
-    description: 'Estimate an AI task, review a bill, or compare the cost of a usable result.',
-    bring: 'A prompt, a price estimate, or your bill and usage records.',
-    result: 'An estimate or cost breakdown, with the assumptions made clear.',
+    description: 'Compare AI tools or review the spending you can account for.',
+    bring: 'Monthly tool costs and a small sample of your work, or a bill and usage records.',
+    result: 'Cost per usable result or an AI spending breakdown, with assumptions made clear.',
     action: 'Open AI Cost Lens', href: releasedTool('ai-cost-lens').href, external: true,
     destination: 'ai_cost_lens', source: 'work_flagship', tone: 'sage',
-    image: '/images/ai-cost-lens-anatomy-preview.jpg',
-    imageAlt: 'AI Cost Lens comparing model, infrastructure and human review costs for two AI routes',
-    imageWidth: 1315, imageHeight: 492,
+    image: '/images/ai-cost-lens-usable-result-preview.jpg',
+    imageAlt: 'Example AI Cost Lens comparison showing tool charges, review time, and 2 dollars 56 cents versus 4 dollars 25 cents per usable result',
+    imageWidth: 1193, imageHeight: 538, imageLabel: 'Example data',
   },
   {
     slug: 'cloud-cost-guard', topics: ['tech-spending'], name: 'Cloud Cost Guard', kind: 'Cloud bills',

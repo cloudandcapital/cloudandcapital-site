@@ -1,0 +1,17 @@
+.lab-guide header > p:not(.guide-eyebrow):not(.guide-byline):not(.guide-lede) { margin-top:1rem; font-size:1.05rem; }
+.lab-guide .guide-byline { margin:0 0 1.5rem; color:#62645b; font-size:.9rem; }
+.lab-guide .guide-article h1 { max-width:18ch; }
+.lab-guide .guide-article h1 em { display:block; color:var(--clay-ink); font-style:italic; }
+.lab-guide .guide-button { background:var(--forest-deep); border-color:var(--forest-deep); color:#fff; }
+.lab-guide .guide-button:hover { background:var(--forest-deep); border-color:var(--forest-deep); }
+.lab-guide section p + p,.lab-guide .guide-example p + p { margin-top:1rem; }
+.lab-guide-case { margin-block:1.5rem; padding:1.5rem 1.75rem; border:1px solid var(--dusty-rose); border-radius:14px; background:var(--cream); }
+.lab-guide .lab-guide-case .guide-eyebrow,.lab-guide .guide-example .guide-eyebrow { font-size:.65rem; color:var(--clay-ink); }
+.lab-guide .guide-screenshot img { padding:1rem; background:var(--cream); border:1px solid var(--dusty-rose); }
+.lab-guide-steps { padding-left:1.4rem; }
+.lab-guide-steps li { padding-left:.2rem; }
+@media(max-width:760px) {
+  .lab-guide header > p:not(.guide-eyebrow):not(.guide-byline):not(.guide-lede) { font-size:1rem; }
+  .lab-guide-case { padding:1.25rem; }
+  .lab-guide .guide-screenshot img { padding:.35rem; }
+}

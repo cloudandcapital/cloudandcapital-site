@@ -1,5 +1,5 @@
 // Independent, directional rubric. The cutoffs are ours, not an external benchmark.
-export const RUBRIC_VERSION = '2026-10-23';
+export const RUBRIC_VERSION = '2026-10-23-r2';
 export const HIGH_BOUNDARY = 67;
 export const DIMENSIONS = [
   { id: 'signal-clarity', name: 'Understand the bill', description: 'Explain changes, connect spending to an owner, and keep a useful forecast.' },
@@ -28,7 +28,7 @@ export const QUESTIONS = [
   ]),
   q('forecasting', 'signal-clarity', 'Forecast the spending', 'How do you estimate what this part of the business will spend next?', [
     'We don’t make a recurring forecast.',
-    'We make an occasional estimate or an annual budget.',
+    'We make an estimate, but don’t check it against actual spending or update it when things change.',
     'We use recent spending, expected growth, and known contract changes.',
     'We record the main assumptions, compare the forecast with actual spending, and update it when demand changes.',
   ]),
@@ -76,7 +76,7 @@ export const QUESTIONS = [
   ]),
   q('anomaly-response', 'operating-response', 'Respond to unexpected changes', 'How do you catch and handle an unexpected cost change that matters?', [
     'We usually discover it at month end or through an unexpected bill.',
-    'We find changes through a regular manual review.',
+    'We find changes in a review, but usually too late to act.',
     'We have alerts, but they can be noisy, hard to explain, or sent to the wrong person.',
     'Our checks catch meaningful changes in time to act, reach the right owner, and track the response.',
   ], 'Checks can be manual or automated. The useful question is whether they work for the size and risk of this spending.'),
@@ -154,21 +154,26 @@ export function scoreAudit(answers = {}) {
   const weakest = ranked[0]?.id ?? null;
   const max = ranked.length ? Math.max(...ranked.map((d) => dimensions[d.id].score)) : null;
   const strongest = ranked.filter((d) => dimensions[d.id].score === max).map((d) => d.id);
-  const priorityArea = ranked.find((dimension) => QUESTIONS.some((q) => q.dimension === dimension.id && typeof optionFor(q, answers)?.score === 'number' && optionFor(q, answers).score < 2));
-  const weakestQuestions = QUESTIONS.filter((q) => q.dimension === priorityArea?.id && typeof optionFor(q, answers)?.score === 'number').sort((a, b) => optionFor(a, answers).score - optionFor(b, answers).score);
-  const priorityQuestion = weakestQuestions[0];
-  const hasKnownGap = QUESTIONS.some((q) => typeof optionFor(q, answers)?.score === 'number' && optionFor(q, answers).score < 2);
+  // A known answer can support a next step even when exclusions prevent a map.
+  // Individual severity comes first, so an area average cannot hide a zero.
+  const areaAverage = (id) => {
+    const scores = QUESTIONS.filter((q) => q.dimension === id).map((q) => optionFor(q, answers)?.score).filter((score) => typeof score === 'number');
+    return scores.reduce((sum, score) => sum + score, 0) / scores.length;
+  };
+  const priorityQuestion = QUESTIONS.filter((q) => typeof optionFor(q, answers)?.score === 'number' && optionFor(q, answers).score < 3).sort((a, b) =>
+    optionFor(a, answers).score - optionFor(b, answers).score || areaAverage(a.dimension) - areaAverage(b.dimension) || tieOrder.indexOf(a.dimension) - tieOrder.indexOf(b.dimension) || QUESTIONS.indexOf(a) - QUESTIONS.indexOf(b)
+  )[0];
   let priority;
-  if (!valid || (!hasKnownGap && (unknown.length || unanswered.length))) {
+  if (priorityQuestion) {
+    const selected = optionFor(priorityQuestion, answers);
+    const review = selected.score === 2;
+    priority = { ...ACTIONS[priorityQuestion.id], kind: review ? 'review' : 'improve', questionId: priorityQuestion.id, reason: `For “${priorityQuestion.title},” you chose: “${selected.label}” ${review ? 'No scored answer is at the lowest two levels. Check whether this partial practice gets in the way of the next decision; keep it if it already meets your needs.' : 'This is one of your lowest scored answers. Check it against the next decision and your records.'}` };
+    if (review) priority.move = `If this affects the decision you’re facing, here’s a check to try. ${priority.move}`;
+  } else if (!valid || unknown.length || unanswered.length) {
     const fitOnly = notApplicable.length > 0 && !unknown.length && !unanswered.length;
-    priority = { kind: 'evidence', questionId: null, title: fitOnly ? 'Check whether this scope fits' : 'Fill in the missing information first', move: fitOnly ? 'Review the questions marked not applicable. A narrower scope or a simpler spending review may fit better. Keep those exclusions visible rather than choosing an answer just to obtain a score.' : 'Choose one question you couldn’t answer and ask the person who owns that information. Check a recent bill, decision, or contract together, then revisit the same scope.', reason: 'A missing answer doesn’t establish that a business process is weak. It tells us what still needs checking.', measures: ['Missing answers checked with the appropriate records or owner'], owners: 'You and the person who can answer the missing question' };
-  } else if (!hasKnownGap) {
-    priority = { kind: 'maintain', questionId: null, title: 'Keep what’s working', move: 'Use a recent decision to check that the answers still hold. Keep the current process if it serves the business, and revisit this scope after a meaningful change in spending, ownership, or contracts.', reason: 'All scored answers describe a working or consistent practice. A higher score alone is not a reason to add more process.', measures: ['A recent decision supports the answers, with any exceptions recorded'], owners: 'The current spending and decision owners' };
+    priority = { kind: 'evidence', evidenceType: fitOnly ? 'scope-fit' : 'missing', questionId: null, title: fitOnly ? 'Check whether this scope fits' : 'Fill in the missing information first', move: fitOnly ? 'Review the questions marked not applicable. A narrower scope or a simpler spending review may fit better. Keep those exclusions visible rather than choosing an answer just to obtain a score.' : 'Choose one question you couldn’t answer and ask the person who owns that information. Check a recent bill, decision, or contract together, then revisit the same scope.', reason: fitOnly ? 'Questions marked not applicable aren’t scored. Several exclusions can leave too little information for this map, without showing a weak process.' : 'A missing answer doesn’t establish that a business process is weak. It tells us what still needs checking.', measures: [fitOnly ? 'A scope that fits the questions, with genuine exclusions kept visible' : 'Missing answers checked with the appropriate records or owner'], owners: fitOnly ? 'You and the person who knows the boundaries of this spending' : 'You and the person who can answer the missing question' };
   } else {
-    // Among areas with a known 0 or 1 answer, start with the lowest scoring area.
-    // Ties follow the disclosed area order and then questionnaire order.
-    const question = priorityQuestion;
-    priority = { ...ACTIONS[question.id], kind: 'improve', questionId: question.id, reason: `For “${question.title},” you chose: “${optionFor(question, answers).label}” This is the lowest scored answer in the first area we’d check.` };
+    priority = { kind: 'maintain', questionId: null, title: 'Keep what’s working', move: 'Use a recent decision to check that the answers still hold. Keep the current process if it serves the business, and revisit this scope after a meaningful change in spending, ownership, or contracts.', reason: 'Every scored answer is at the strongest level in this rubric, with no unknown answers left. That still needs checking against records; it is not a reason to add more process.', measures: ['A recent decision supports the answers, with any exceptions recorded'], owners: 'The current spending and decision owners' };
   }
   return { rubricVersion: RUBRIC_VERSION, dimensions, axes, answeredCount, coverage: { scored: answeredCount, total: QUESTIONS.length, unknown, notApplicable, unanswered }, valid, archetype, strongest, weakest, priority };
 }
@@ -203,20 +208,29 @@ export const EXAMPLE = {
   answers: Object.fromEntries(QUESTIONS.map((question) => [question.id, ({ 'cost-driver-visibility': 'score-3', attribution: 'score-3', forecasting: 'score-2', 'unit-economics-value': 'score-2', 'full-economic-view': 'score-2', 'consumption-demand': 'not-applicable', 'architecture-vendor': 'score-1', 'commitments-contracts': 'score-0', 'leadership-funding': 'score-1', 'ownership-follow-through': 'score-1', 'anomaly-response': 'score-1', 'cross-functional-cadence': 'score-1' })[question.id]])),
 };
 export function discussionQuestions(result) {
+  if (result.priority.evidenceType === 'scope-fit') return ['Which questions genuinely don’t apply to this spending?', 'Would a narrower scope or a simpler spending review fit better?', 'Which exclusions should stay visible if we repeat this assessment?'];
   if (result.priority.kind === 'evidence') return ['Which questions need a different person or a record to answer?', 'Which questions genuinely don’t apply to this scope?', 'What can we verify together before repeating this assessment?'];
   if (result.priority.kind === 'maintain') return ['Which recent decision supports these answers?', 'Has spending, ownership, or the contract changed since then?', 'What would tell us the current process needs an adjustment?'];
   return ['Which upcoming decision could this first step help?', 'Who will check the records and when will they respond?', 'What result would tell us to change something or keep it as it is?'];
+}
+export function assessmentDate(takenAt) {
+  const date = new Date(takenAt || NaN);
+  return Number.isNaN(date.valueOf()) ? 'Not recorded' : new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(date);
+}
+export function exampleLabel(answers) {
+  return QUESTIONS.some((q) => answers?.[q.id] !== EXAMPLE.answers[q.id]) ? 'Started from the made-up example, then edited' : EXAMPLE.label;
 }
 export function buildAuditSummary(result, context = {}) {
   const scope = TARGET_SCOPES.find((x) => x.id === context.targetScope)?.label || 'Scope not selected';
   const technology = (context.technologyScopes || []).map((id) => TECHNOLOGY_SCOPES.find((x) => x.id === id)?.label).filter(Boolean).join(', ');
   const score = (n) => n === null ? 'Not enough answers' : `${n}/100 points`;
   return [
-    'CLOUD & CAPITAL · SIGNAL AUDIT', `Rubric: ${RUBRIC_VERSION}`, context.isExample ? EXAMPLE.label : 'Your self-assessment', `Scope: ${scope}`, `Technology: ${technology}`,
+    'CLOUD & CAPITAL · SIGNAL AUDIT', `Taken: ${assessmentDate(context.takenAt)}`, `Rubric version: ${RUBRIC_VERSION}`, context.isExample ? exampleLabel(context.answers) : 'Your self-assessment', `Scope: ${scope}`, `Technology: ${technology}`,
     `Pattern: ${result.archetype.name}`, result.archetype.meaning,
     `Understand the spending: ${score(result.axes.signalReadiness)}`, `Use it in decisions: ${score(result.axes.decisionIntegration)}`,
     `Answer coverage: ${result.answeredCount}/12 scored; ${result.coverage.unknown.length} unknown; ${result.coverage.notApplicable.length} not applicable; ${result.coverage.unanswered.length} unanswered. This is not verified evidence or a confidence estimate.`,
     '', 'FOUR AREAS', ...DIMENSIONS.map((d) => `${d.name}: ${score(result.dimensions[d.id].score)} (${result.dimensions[d.id].answered}/3 scored)`),
+    ...(!result.valid ? ['Map not shown: at least one area has fewer than two scored answers. Any first step below comes from an answer you did provide.'] : []),
     '', 'WHAT TO DO FIRST', result.priority.title, result.priority.move, `Why this first: ${result.priority.reason}`, `Suggested owner: ${result.priority.owners}`, `What to check: ${result.priority.measures.join('; ')}`,
     '', 'QUESTIONS TO DISCUSS', ...discussionQuestions(result).map((q, i) => `${i + 1}. ${q}`), '', 'FOR THIS TECHNOLOGY', scopeGuidance(context.technologyScopes),
     '', 'YOUR ANSWERS', ...QUESTIONS.map((q) => `${q.title}: ${optionFor(q, context.answers)?.label || 'Unanswered'}`),

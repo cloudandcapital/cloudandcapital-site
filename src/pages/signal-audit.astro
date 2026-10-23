@@ -25,8 +25,9 @@ import '../styles/signal-audit.css';
           <fieldset><legend>Which part of the business?</legend><div id="targetScopes" class="audit-choices"></div></fieldset>
           <fieldset><legend>Which technology spending? <span>Choose one or more</span></legend><div id="technologyScopes" class="audit-choices"></div><p class="audit-field-help">Choose individual categories, or Mixed technology portfolio for the whole mix.</p></fieldset>
           <p class="audit-privacy">Your answers and result stay in this browser tab. Copy or print the result before leaving. Site analytics record tool activity, without your answers.</p>
+          <p id="scopeResetWarning" class="audit-notice" role="status" hidden></p>
           <p id="setupError" class="audit-error" role="alert"></p>
-          <div class="audit-controls audit-controls-end"><button class="audit-button primary" type="button" id="beginButton" disabled>Begin the audit →</button></div>
+          <div class="audit-controls audit-controls-end"><button class="audit-button primary" type="button" id="beginButton" aria-describedby="setupError scopeResetWarning">Begin the audit →</button></div>
         </div>
         <div id="questionPanel" class="audit-panel" hidden>
           <p id="scopeChangeNotice" class="audit-notice" hidden>You changed the scope, so the earlier answers have been cleared. Answer for this scope from the start.</p>
@@ -34,7 +35,7 @@ import '../styles/signal-audit.css';
           <div id="questionProgress" role="progressbar" aria-label="Question progress" aria-valuemin="1" aria-valuemax="12" aria-valuenow="1"><div id="segments" class="audit-segments" aria-hidden="true"></div></div>
           <fieldset aria-describedby="answerHelp questionExample"><legend id="questionPrompt" tabindex="-1"></legend><p id="questionExample" class="audit-field-help"></p><p id="answerHelp" class="audit-field-help">Choose the closest answer to what happens today.</p><div id="answerChoices" class="audit-choices audit-answers"></div></fieldset>
           <p id="answerError" class="audit-error" role="alert"></p>
-          <div class="audit-controls"><button class="audit-button secondary" type="button" id="previousButton">← Previous</button><button class="audit-button primary" type="button" id="nextButton" disabled>Next →</button></div>
+          <div class="audit-controls"><button class="audit-button secondary" type="button" id="previousButton">← Previous</button><button class="audit-button primary" type="button" id="nextButton" aria-describedby="answerError">Next →</button></div>
         </div>
       </form>
     </section>

@@ -1,22 +1,21 @@
-Please independently audit Cloud & Capital’s Signal Audit and its companion guide.
+Please do a focused recheck of Signal Audit after the fixes from your October 23 audit. No edits or publishing.
 
 Tool: https://cloudandcapital.com/signal-audit
 Guide: https://cloudandcapital.com/insights/using-signal-audit
-Directory: https://cloudandcapital.com/tools
+Rubric version shown on the result: 2026-10-23-r2
 
-This is a free, directional self-assessment for someone reviewing business cloud, AI, or software spending. The intended outcome is one useful next step, who to involve, and what to check. My voice is casual and clear. Keep the calm beige/sage design and existing positioning.
+Please use the real controls and distinguish hands-on checks from source-only findings.
 
-First try the tool as an unfamiliar visitor, before reading the guide. Can you quickly explain who it helps, what the answers mean, and what you can do afterward? Is the recommendation specific enough to be useful?
+1. All score-2 answers. The math should still be 67/67. The first step should now refer to an actual selected answer, be conditional on its relevance, and explicitly allow keeping a practice that already meets the business's needs. It should not say all practices are working or demand a higher score for its own sake.
+2. Your small SaaS case: 2,2,1,N/A,1,N/A,1,0,1,1,1,1. Does the tool withhold the map but keep the known renewal step, its actual answer, an owner, and a check? Is the coverage explanation accurate?
+3. Known answers in an incomplete area. Try only a 0 on renewals and unknown everywhere else. Then your case 1,0,unknown,unknown,unknown,unknown,0,0,unknown,unknown,unknown,unknown. A known low answer should not disappear.
+4. Your hidden-zero case: 2,2,2 / 2,2,2 / 3,0,3 / 1,1,1. The renewal zero should now take precedence over the area average. Check the revised published tie rules as well.
+5. Maintenance and fit. All 3s should maintain; all 3s plus one unknown should check information; all 3s plus one N/A should maintain if coverage is sufficient. All N/A should explain scope fit and genuine exclusions, without calling them missing answers.
+6. Try the made-up example, then edit every answer to 3. The label should say it was edited, the old scenario description should disappear, and Copy should retain that provenance. Results and Copy should show date taken and explicitly labeled rubric version.
+7. Check reachable Begin/Next error messages, scope-change warning before answers clear, legible score numerals at 320px, Mixed selection announcements, and the renewal link. Verify guide/screenshot accuracy.
 
-Then check the full experience:
-- Run the made-up software renewal example. Independently reconcile the displayed area scores and the 78/100, 28/100 axes, 11 scored answers, one inapplicable answer, and the renewal recommendation. Don’t assume these expected values are correct.
-- Start fresh and test all-unknown, all-inapplicable, lowest, strongest, and mixed answers. Missing information should not become a diagnosed business failure. Strong answers should not invent a problem to repair.
-- Check the treatment of exclusions, the two-scored-answers-per-area rule, points versus percentages, the map’s 67 point divisions, and the published priority/tie rules. Can a stronger average hide a serious individual gap? Could a normal small team be unfairly penalized?
-- Exercise Previous, Edit answers, changed scope, Mixed category selection, Start fresh, Copy summary, and Print / Save PDF. Check that copied/printed output keeps the context, exclusions, illustrative label and answers. Inspect actual PDF pagination if your tools allow it.
-- Inspect desktop, phone widths, keyboard/focus, labels, spacing, line breaks, score fit and failure feedback. Verify privacy claims against source/network behavior if available.
+The made-up example should still reconcile independently to 89/67/22/33 by area, 78/28 by axis, eleven scored answers and one N/A. Browser answers still calculate locally, without an AI provider request.
 
-Read the guide afterward. Does it accurately match the current tool, example, screenshots, output and limitations? Does it answer “so what do I do with this?” without overstating what a self-assessment proves?
+Print headings/disclosure expansion were improved, but no real Chrome/Safari PDF pagination check has been completed. If you can generate an actual PDF, inspect it; otherwise keep that limitation explicit rather than substituting a simulated pagination estimate.
 
-Check the current FinOps Foundation assessment/maturity guidance and one relevant assessment alternative using primary sources. Recommend only improvements with a clear visitor benefit; a competitor feature alone isn’t a reason to add it.
-
-Return blockers, worthwhile improvements, and optional future ideas separately. Include reproducible steps, evidence and the smallest useful fix. Distinguish hands-on tests from source-only review and anything you couldn’t verify. Don’t edit or publish anything.
+Please return any remaining blocker with a reproducible case. Keep optional product ideas separate from release defects.

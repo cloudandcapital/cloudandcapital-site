@@ -23,7 +23,7 @@ Diana uses her own Claude app for independent review. Prepare a reproducible han
 | Software Renewal Tracker | Existing reviewed entry, CSV and calendar paths; companion guide and PDF resources | Use the current tracker owner for later work. Reconcile any new release before replacing screenshots or repeating defects. |
 | AI Cost Lens | Separate active app owner and weekly audit | Do not modify that app from this website task. Read the latest closeout before calling it complete or reopening a finding. |
 | Cloud Cost Guard | Separate active app owner and weekly audit | Do not modify that app from this website task. Verify current upload promises and owner closeout. |
-| Signal Audit | Current pass: scoring, applicability, first-step logic, local privacy, export, wording, guide, actual screenshots and responsive checks | Independent Claude review pending. See docs/reviews/signal-audit-review-2026-10-23.md. |
+| Signal Audit | Current pass: scoring, applicability, first-step logic, local privacy, export, wording, guide, actual screenshots and responsive checks | Claude reviewed October 23. Both recommendation blockers fixed in r2; targeted regression and browser checks pass. Real Chrome/Safari PDF pagination still unverified. See docs/reviews/signal-audit-claude-follow-up-2026-10-23.md. |
 
 A row is not a claim that every tool is locked. Each final status needs its owning release evidence.
 

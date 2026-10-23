@@ -1,0 +1,68 @@
+[
+  {
+    "file": "focus_sample.csv",
+    "sha256": "e91e5ac7edf01ed2c9d926f37ef7dc1ae2aae97956fea8da6c9ee488b1c2839e",
+    "records": 1000,
+    "bytes": 755423,
+    "groups": [
+      {
+        "provider": "AWS",
+        "currency": "USD",
+        "records": 942,
+        "billedCost": "18.00663861840",
+        "overEightMeaningfulDecimals": 473,
+        "blankServiceNames": 0
+      },
+      {
+        "provider": "Oracle",
+        "currency": "USD",
+        "records": 7,
+        "billedCost": "0.53707392473",
+        "overEightMeaningfulDecimals": 1,
+        "blankServiceNames": 0
+      },
+      {
+        "provider": "Microsoft",
+        "currency": "USD",
+        "records": 51,
+        "billedCost": "1.97651418586",
+        "overEightMeaningfulDecimals": 19,
+        "blankServiceNames": 0
+      }
+    ],
+    "timezoneSuffixPresent": 0
+  },
+  {
+    "file": "focus_sample_10000.csv",
+    "sha256": "0bf58b73123294c4476b648e647cad842935036f67dc4e9a2cc4a6d7497cc2e3",
+    "records": 10000,
+    "bytes": 7529214,
+    "groups": [
+      {
+        "provider": "AWS",
+        "currency": "USD",
+        "records": 9441,
+        "billedCost": "112.16617543240",
+        "overEightMeaningfulDecimals": 4656,
+        "blankServiceNames": 0
+      },
+      {
+        "provider": "Oracle",
+        "currency": "USD",
+        "records": 68,
+        "billedCost": "5.18894273503",
+        "overEightMeaningfulDecimals": 16,
+        "blankServiceNames": 0
+      },
+      {
+        "provider": "Microsoft",
+        "currency": "USD",
+        "records": 491,
+        "billedCost": "34.07497307454",
+        "overEightMeaningfulDecimals": 144,
+        "blankServiceNames": 0
+      }
+    ],
+    "timezoneSuffixPresent": 0
+  }
+]

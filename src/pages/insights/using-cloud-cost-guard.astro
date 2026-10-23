@@ -60,6 +60,7 @@ const articleData = {
           <ul>
             <li>Each period allows up to <strong>20 CSV files, 10 MB combined, and 50,000 rows</strong>.</li>
             <li>The simple template needs <strong>Date, Service, Cost, and Currency</strong>. Preserve credits as negative amounts, and keep taxes and other charges you want included.</li>
+            <li>The current reader accepts cost values with up to eight decimal places. Some exports use more precision and will be rejected. Keep the original amounts; don’t round records just to force an upload.</li>
             <li>FOCUS files need <strong>ChargePeriodStart, ChargePeriodEnd, ServiceName, BilledCost, and BillingCurrency</strong>. This is support for those columns, not validation of the full FOCUS specification. Empty service labels need to be filled in before upload.</li>
             <li>Use one currency and consistent account coverage and cost basis. The comparison must be earlier and must not overlap the current period.</li>
             <li>If identical rows are flagged, check whether they’re repeated exports or separate charges before choosing how to count them. Don’t combine repeated month-to-date snapshots.</li>

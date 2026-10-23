@@ -14,6 +14,8 @@ This is the priority readiness question: current code reads supported FOCUS colu
 
 Diana's broader release requirement is coverage of the major providers' real downloads with minimal setup. Use the provider-input-coverage-2026-10-23.md brief alongside this audit. Start with AWS, Azure and Google Cloud, and distinguish native tested imports, files needing mapping, manual entry and unsupported/unverified formats. This is an audit of the own-bill product, not just the sample arithmetic.
 
+New concrete evidence is in guard-public-provider-input-audit-2026-10-23.md: both public FinOps Foundation FOCUS CSV extracts fail the exact reader at the eight-decimal-place limit; a lossless diagnostic exposes a UTC serialization boundary; a Gzip wrapper gets a misleading UTF-8 message. The smaller raw CSV and Gzip failure were reproduced through the public controls. These historical extracts contain AWS, Microsoft and Oracle, not GCP. Please use the pinned files/hashes and independent totals, preserve their provenance, and keep new native-import acceptance separate from the earlier passing seven-row example.
+
 Use these public, fictional CSVs for a repeatable arithmetic check after evaluating the own-bill flow. They remain QA fixtures, not a required visitor workflow. Do not upload private information:
 
 - Current (September): https://cloudandcapital.com/examples/cloud-cost-guard/current-example.csv

@@ -184,8 +184,8 @@ test('invalid JSON fails closed and GET exposes only public contract metadata', 
   const invalid = await POST({ request: new Request('https://cloudandcapital.com/api/interactive-lab', { method: 'POST', body: '{' }) });
   assert.equal(invalid.status, 400);
   const metadata = await (await GET()).json();
-  assert.equal(metadata.version, 3);
-  assert.equal(metadata.decisionTypes.commitment, 'Capacity or commitment');
+  assert.equal(metadata.version, 4);
+  assert.equal(metadata.decisionTypes.commitment, 'Cloud capacity');
 });
 
 test('recurrence words are not quantities, while real seat counts stay checked', () => {
@@ -337,6 +337,8 @@ test('a useful list of checks is bounded without requiring invented facts', () =
 test('the compact brief rejects invented action schedules and missing option checks', () => {
   assert.equal(validateBrief({ ...validBrief, next_actions: [{ ...validBrief.next_actions[0], timing: 'Within one week' }, validBrief.next_actions[1]] }), false);
   assert.equal(validateBrief({ ...validBrief, options: [{ ...validBrief.options[0], check: '' }, validBrief.options[1]] }), false);
+  assert.equal(validateBrief({ ...validBrief, options: [{ ...validBrief.options[0], source: 'verified' }, validBrief.options[1]] }), false);
+  assert.equal(validateBrief({ ...validBrief, options: [{ ...validBrief.options[0], source: undefined }, validBrief.options[1]] }), false);
 });
 
 test('provider enum capitalization is normalized without accepting unknown labels', async () => {
@@ -345,6 +347,7 @@ test('provider enum capitalization is normalized without accepting unknown label
     posture: { ...validBrief.posture, label: 'stage' },
     recommendation: { ...validBrief.recommendation, confidence: 'medium' },
     next_actions: validBrief.next_actions.map((action) => ({ ...action, timing: action.timing.toLowerCase() })),
+    options: validBrief.options.map((option) => ({ ...option, source: option.source.toUpperCase() })),
   });
   try {
     const response = await POST({ request: labRequest() });
@@ -353,5 +356,18 @@ test('provider enum capitalization is normalized without accepting unknown label
     assert.equal(body.brief.posture.label, 'Stage');
     assert.equal(body.brief.recommendation.confidence, 'Medium');
     assert.equal(body.brief.next_actions[0].timing, 'Now');
+    assert.equal(body.brief.options[1].source, 'suggested');
+  } finally { globalThis.fetch = original; }
+});
+
+test('an option with a false verification label is rejected rather than shown as evidence', async () => {
+  const original = globalThis.fetch;
+  globalThis.fetch = async () => modelResponse({ ...validBrief, options: validBrief.options.map(option => ({ ...option, source: 'verified' })) });
+  try {
+    const response = await POST({ request: labRequest() });
+    const result = await response.json();
+    assert.equal(response.status, 502);
+    assert.equal(result.code, 'INVALID_MODEL_SCHEMA');
+    assert.equal(result.brief, undefined);
   } finally { globalThis.fetch = original; }
 });

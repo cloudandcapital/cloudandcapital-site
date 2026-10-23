@@ -3,8 +3,8 @@ export const MAX_ANSWER_CHARS = 1200;
 
 export const DECISION_TYPES = {
   commitment: {
-    label: 'Capacity or commitment',
-    eyebrow: 'Commitment economics',
+    label: 'Cloud capacity',
+    eyebrow: 'Before reserving capacity',
     questions: [
       { id: 'alternatives', label: 'What are the real options?', prompt: 'Name the options being considered, including the option to wait or stage the commitment.' },
       { id: 'exposure', label: 'What money and time are at stake?', prompt: 'Include the amount, contract length, pricing structure, and any deadline you know.' },
@@ -17,14 +17,14 @@ export const DECISION_TYPES = {
     eyebrow: 'Before you renew',
     questions: [
       { id: 'alternatives', label: 'What are the real options?', prompt: 'Renew, renegotiate, reduce scope, switch, build, or wait—name what is genuinely available.' },
-      { id: 'exposure', label: 'What does it cost, and when is it due?', prompt: 'Include the current bill, new quote, contract length, and renewal deadline. Say which details are still unknown.' },
+      { id: 'exposure', label: 'What does it cost, and when is it due?', prompt: 'Include the current bill, new quote, contract length, renewal date, and any deadline to cancel or change seats. Does it auto-renew? Say what you do not know yet.' },
       { id: 'demand', label: 'Who uses it, and who looks after it?', prompt: 'Share what is actually used, what sits unused, and who owns the subscription.' },
       { id: 'constraint', label: 'What makes change difficult?', prompt: 'Include switching cost, implementation effort, operational dependency, or contractual limits.' },
     ],
   },
   build_buy: {
-    label: 'AI build, buy, or optimize',
-    eyebrow: 'Build-versus-buy economics',
+    label: 'AI build or buy',
+    eyebrow: 'Choosing an AI setup',
     questions: [
       { id: 'alternatives', label: 'What are the real options?', prompt: 'Name the vendor, model, optimization, or internal-build paths actually being considered.' },
       { id: 'exposure', label: 'What does the current path cost?', prompt: 'Include spend, volume, growth, unit cost, and any margin pressure you can measure.' },
@@ -43,8 +43,8 @@ export const DECISION_TYPES = {
     ],
   },
   architecture: {
-    label: 'Architecture or workload placement',
-    eyebrow: 'Architecture economics',
+    label: 'Cloud setup',
+    eyebrow: 'Choosing a cloud setup',
     questions: [
       { id: 'alternatives', label: 'What are the real options?', prompt: 'Name the architecture, provider, placement, or migration choices being evaluated.' },
       { id: 'exposure', label: 'What is the cost and time horizon?', prompt: 'Include expected run cost, migration or build cost, and how long the decision must hold.' },
@@ -134,7 +134,7 @@ export function validateBrief(value, onInvalid = () => {}) {
   if (!value.posture || !['Explore', 'Stage', 'Commit'].includes(value.posture.label) || !isText(value.posture.rationale, 500)) return invalid('posture');
   if (!value.recommendation || !isText(value.recommendation.move, 700) || !['Low', 'Medium', 'High'].includes(value.recommendation.confidence) || !isText(value.recommendation.rationale, 500)) return invalid('recommendation');
   if (!Array.isArray(value.options) || value.options.length < 2 || value.options.length > 4) return invalid('options.length');
-  if (!value.options.every((item) => ['name', 'cost_effect', 'practical_effect', 'check'].every((key) => isText(item?.[key], 500)))) return invalid('options.fields');
+  if (!value.options.every((item) => ['name', 'cost_effect', 'practical_effect', 'check'].every((key) => isText(item?.[key], 500)) && ['supplied', 'suggested'].includes(item.source))) return invalid('options.fields');
   if (!isTextArray(value.missing_information, 1, 8)) return invalid('missing_information');
   if (!Array.isArray(value.next_actions) || value.next_actions.length < 2 || value.next_actions.length > 4) return invalid('next_actions.length');
   if (!value.next_actions.every((item) => isText(item?.action, 500) && isText(item?.owner, 200) && ACTION_TIMINGS.includes(item?.timing))) return invalid('next_actions.fields');
@@ -149,7 +149,7 @@ export const BRIEF_OUTPUT_SCHEMA = briefObject({
   decision_summary: { type: 'string', description: 'Short decision title under twelve words; no figures or fact recap.' },
   posture: briefObject({ label: briefChoice('Explore', 'Stage', 'Commit'), rationale: briefString }),
   recommendation: briefObject({ move: briefString, confidence: briefChoice('Low', 'Medium', 'High'), rationale: briefString }),
-  options: briefList(briefObject({ name: briefString, cost_effect: briefString, practical_effect: briefString, check: briefString }), 'Two to four distinct options.'),
+  options: briefList(briefObject({ name: briefString, source: briefChoice('supplied', 'suggested'), cost_effect: briefString, practical_effect: briefString, check: briefString }), 'Two to four distinct options. Mark an option supplied only if the visitor named that choice; any new possibility is suggested.'),
   missing_information: briefList(briefString, 'One to five specific things that are still unknown.'),
   next_actions: briefList(briefObject({ action: briefString, owner: briefString, timing: briefChoice(...ACTION_TIMINGS) }), 'Two or three practical next actions.'),
 });
@@ -261,7 +261,7 @@ export function getCheckedCalculations(sourceText) {
   const yearlyHorizon = claims.some((claim) => !claim.range && ((claim.unit === 'year' && claim.value === 1) || (claim.unit === 'month' && claim.value === 12)));
   if (monthly && yearlyHorizon) {
     const total = Number(BigInt(Math.round(amount * 100)) * 12n) / 100;
-    result.push({ label: 'At the current monthly rate', explanation: `Calculated: ${moneyText(amount, symbol)} per month over 12 months is ${moneyText(total, symbol)}, assuming the rate and usage stay the same. This is not a commitment quote.`, amounts: [{ value: total, currency: symbol }] });
+    result.push({ label: 'At the current monthly rate', explanation: `Calculated: ${moneyText(amount, symbol)} per month over 12 months is ${moneyText(total, symbol)}, assuming the rate and usage stay the same. This is today's spending carried forward, not a savings figure or a commitment quote.`, amounts: [{ value: total, currency: symbol }] });
   }
   return result;
 }

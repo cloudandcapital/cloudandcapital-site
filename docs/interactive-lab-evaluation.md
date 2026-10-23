@@ -2,8 +2,9 @@
 
 The Lab turns a technology spending question into a short decision brief:
 a suggested next move, an option comparison, missing information, and practical
-actions. Version 3 replaces the longer report with its repeated facts,
-functional lenses, and speculative thresholds.
+actions. Version 4 labels whether each option was supplied or suggested. It keeps
+the short report introduced in version 3, without repeated facts, functional
+lenses, or speculative thresholds.
 
 ## Current behavior
 
@@ -14,9 +15,14 @@ functional lenses, and speculative thresholds.
   family clears incompatible answers.
 - The original context is available in the completed brief. Calculations are
   displayed separately from generated prose.
-- Copy includes the recommendation, actions, calculation assumptions, comparison,
-  missing information, decision, and example label. Print hides editing controls.
+- Copy and print include the original question and all four answers, along with
+  the result and example label. Editing keeps the last generated brief available
+  without another model call. Its original input snapshot stays attached.
 - Phone layouts show comparisons and action lists as labelled cards.
+- A fixed renewal checklist asks about auto-renewal and cancellation or seat-change
+  notice deadlines. It is visible even if the generated prose omits that check.
+- Same-family edits to the question warn visitors to recheck retained answers.
+- One short live status announces completion; focus moves to the brief heading.
 
 ## Generation and checks
 

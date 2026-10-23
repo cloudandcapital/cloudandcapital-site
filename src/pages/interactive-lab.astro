@@ -6,7 +6,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <style is:global>
     body { min-height: 100vh; font-family: var(--font-ui); font-weight: 400; color: var(--text); }
     button, textarea { font: inherit; }
-    button:focus-visible, textarea:focus-visible { outline: 3px solid rgba(107, 142, 127, .28); outline-offset: 2px; }
+    .lab-shell :is(button, textarea, summary, a):focus-visible, .lab-hero a:focus-visible, .brief-title:focus-visible { outline: 2px solid #3D6055; outline-offset: 3px; }
+    .lab-hero, .lab-shell { --text-light: #6B6B6B; }
+    .lab-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
     [hidden] { display: none !important; }
 
     .lab-hero { max-width: 1280px; margin: 0 auto; padding: 7.25rem 3.5rem 3rem; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(300px, .8fr); gap: 5rem; align-items: end; }
@@ -18,9 +20,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .lab-hero-note p { max-width: 430px; font-family: var(--font-body); font-size: 1.23rem; line-height: 1.55; color: var(--text-muted); }
     .lab-hero-note .lab-guide-link { margin-top: .8rem; font-size: .95rem; }
     .lab-guide-link a { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; color: var(--forest-deep); text-underline-offset: .2em; }
-    .lab-hero-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
-    .lab-hero-meta span { display: block; font-size: .62rem; letter-spacing: .13em; text-transform: uppercase; color: var(--text-light); }
-    .lab-hero-meta strong { display: block; margin-top: .25rem; font-size: .78rem; letter-spacing: 0; text-transform: none; color: var(--text-muted); font-weight: 500; }
 
     .lab-shell { max-width: 1280px; margin: 0 auto; padding: 0 3.5rem 7rem; }
     .lab-frame { background: var(--cream); border: 1px solid var(--border); box-shadow: 0 20px 70px rgba(26, 26, 26, .09); }
@@ -63,7 +62,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .type-chip::before { content: ''; width: .38rem; height: .38rem; border-radius: 50%; background: var(--forest); }
     .evidence-meter { margin-top: 1rem; display: flex; justify-content: space-between; gap: 1rem; font-size: .72rem; color: var(--text-muted); }
     .meter-track { flex: 1; max-width: 150px; height: 3px; margin-top: .5rem; background: var(--border); }
-    .meter-fill { width: 0; height: 100%; background: var(--forest); transition: width .25s ease; }
+    .meter-fill { display: block; width: 0; height: 100%; background: var(--forest); transition: width .25s ease; }
+    .context-change-note { margin-top: 1rem; padding: .8rem 1rem; border-left: 3px solid var(--dusty-rose); font-family: var(--font-body); font-size: .95rem; line-height: 1.5; color: var(--text-muted); background: var(--cream); }
+    .last-brief-button { margin-top: .8rem; }
 
     .form-actions { display: flex; align-items: center; gap: .7rem; margin-top: 1.3rem; }
     .lab-button { min-height: 44px; padding: .78rem 1.15rem; border: 1px solid var(--border-strong); background: transparent; color: var(--text); cursor: pointer; font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; transition: background .18s, color .18s, border-color .18s; }
@@ -103,7 +104,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .context-summary-label { font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: var(--forest-deep); font-weight: 500; }
     .context-summary-decision { flex: 1; overflow: hidden; color: var(--text-muted); font-family: var(--font-body); font-size: .94rem; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
     .context-summary-toggle { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-light); }
-    .context-summary[open] .context-summary-toggle { visibility: hidden; }
     .context-summary-body { padding: 0 1rem 1rem; border-top: 1px solid var(--border); }
     .context-summary-list { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem 1.25rem; padding: 1rem 0; }
     .context-summary-item dt { font-size: .59rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-light); }
@@ -133,6 +133,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .decision-matrix thead th:first-child { width: 15%; font-family: var(--font-ui); font-size: .59rem; letter-spacing: .09em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
     .decision-matrix tbody th { width: 15%; background: var(--cream); font-size: .6rem; letter-spacing: .09em; text-transform: uppercase; color: var(--forest-deep); font-weight: 500; }
     .decision-matrix td { font-family: var(--font-body); font-size: .92rem; line-height: 1.45; color: var(--text-muted); }
+    .option-source { display: block; margin-top: .45rem; font-family: var(--font-ui); font-size: .6rem; line-height: 1.5; letter-spacing: .05em; text-transform: uppercase; color: var(--text-muted); }
+    .option-note { margin-bottom: 1rem; font-family: var(--font-body); font-size: .94rem; line-height: 1.5; color: var(--text-muted); }
+    .renewal-checklist { margin-top: 1.75rem; padding: 1.1rem 1.3rem; border-left: 3px solid var(--dusty-rose); background: #fff; }
+    .renewal-checklist h3 { margin-bottom: .5rem; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--clay-ink); }
+    .renewal-checklist p { font-family: var(--font-body); font-size: 1rem; line-height: 1.5; color: var(--text-muted); }
+    .print-context { display: none; }
     .matrix-mobile { display: none; }
     .matrix-option { background: #fff; border: 1px solid var(--border); }
     .matrix-option + .matrix-option { margin-top: 1rem; }
@@ -182,7 +188,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       .lab-hero { padding: 5.6rem 1rem 2rem; }
       .lab-hero h1 { font-size: 3rem; }
       .lab-hero-note { padding-left: 1rem; }
-      .lab-hero-meta { grid-template-columns: 1fr 1fr; }
       .lab-shell { padding: 0 0 5rem; }
       .lab-frame { border-left: 0; border-right: 0; box-shadow: none; }
       .lab-step { justify-content: center; padding: .8rem .35rem; gap: .35rem; letter-spacing: .08em; }
@@ -190,7 +195,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       .lab-input-pane, .lab-output-pane { padding: 1.6rem 1rem 2rem; }
       .lab-workspace.is-results .lab-output-pane { padding: 1.6rem 1rem 2rem; }
       .scenario-button { padding: .78rem; }
-      .form-actions { position: sticky; bottom: 0; z-index: 10; margin: 1.2rem -1rem -2rem; padding: .8rem 1rem calc(.8rem + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); border-top: 1px solid var(--border); }
+      .form-actions { position: static; margin: 1.2rem 0 0; padding: 0; }
       .actions-table, .actions-table tbody, .actions-table tr { display: block; }
       .actions-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
       .actions-table tr { padding: .8rem; margin-bottom: .8rem; border: 1px solid var(--border); }
@@ -221,6 +226,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       .lab-workspace { display: block; }
       .lab-output-pane { padding: 0; background: #fff; }
       .brief-section { break-inside: avoid; }
+      .print-context { display: block; padding-block: 1.25rem; border-bottom: 1px solid #aaa; }
+      .print-context h2 { font: 600 1rem var(--font-body); }
+      .print-context p, .print-context dd { font-family: var(--font-body); font-size: .95rem; line-height: 1.5; }
+      .print-context dt { margin-top: .75rem; font-weight: 600; }
+      .decision-matrix { display: table; }
+      .matrix-mobile { display: none; }
     }
   </style>
 
@@ -232,15 +243,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="lab-hero-note">
       <p>Not sure whether to renew software, reserve capacity, or change your AI setup? Compare your options and see what to check before you decide.</p>
       <p class="lab-guide-link"><a href="/insights/using-interactive-lab">Walk through a software renewal <span aria-hidden="true">→</span></a></p>
-      <div class="lab-hero-meta" aria-label="Lab details">
-        <span>Input<strong>Your decision</strong></span>
-        <span>Process<strong>Guided context</strong></span>
-        <span>Output<strong>Decision brief</strong></span>
-      </div>
     </div>
   </header>
 
   <main class="lab-shell">
+    <p class="lab-status" id="labStatus" role="status" aria-live="polite" aria-atomic="true"></p>
     <section class="lab-frame" aria-label="Interactive decision lab">
       <div class="lab-rail" aria-label="Progress">
         <div class="lab-step is-active" id="stepDecision"><span class="lab-step-number">01</span> Decision</div>
@@ -265,7 +272,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <span class="scenario-index">ii</span><span><span class="scenario-name">Software renewal</span><span class="scenario-summary">A higher quote and seats that sit unused</span></span>
               </button>
               <button type="button" class="scenario-button" data-type="build_buy" data-analytics-scenario="ai_build_or_buy">
-                <span class="scenario-index">iii</span><span><span class="scenario-name">AI build or buy</span><span class="scenario-summary">Rising model cost and margin pressure</span></span>
+                <span class="scenario-index">iii</span><span><span class="scenario-name">AI build or buy</span><span class="scenario-summary">A $40K monthly API bill and three paths</span></span>
               </button>
               <button type="button" class="scenario-button" data-type="cost_review" data-analytics-scenario="cost_review">
                 <span class="scenario-index">iv</span><span><span class="scenario-name">Cost review</span><span class="scenario-summary">A large bill with limited recent analysis</span></span>
@@ -281,7 +288,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <textarea class="lab-textarea" id="decisionInput" maxlength="2000" aria-describedby="decisionHelp decisionCount" placeholder="What is the decision, and what makes it tricky?"></textarea>
             <span class="field-help" id="decisionCount">0 / 2,000 characters</span>
             <div class="form-actions">
-              <button type="button" class="lab-button lab-button-primary" id="contextBtn" disabled>Build the context →</button>
+              <button type="button" class="lab-button lab-button-primary" id="contextBtn" disabled>Next: add details →</button>
               <button type="button" class="lab-button lab-button-quiet" id="resetBtn">Reset</button>
             </div>
           </div>
@@ -291,12 +298,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <h2 class="pane-heading">Give the brief something real to work with.</h2>
             <p class="pane-intro">Share what you know. If something is missing, say so. You can go back and edit without losing your answers.</p>
             <div class="type-chip" id="typeChip"></div>
-            <div class="evidence-meter"><span id="evidenceText">0 of 4 questions answered</span><span class="meter-track" aria-hidden="true"><span class="meter-fill" id="meterFill"></span></span></div>
+            <p class="context-change-note" id="contextChangeNotice" hidden>You changed the decision. Check that the answers still match, especially prices and deadlines.</p>
+            <div class="evidence-meter"><span id="evidenceText">0 of 4 questions answered</span><span class="meter-track" id="evidenceProgress" role="progressbar" aria-labelledby="evidenceText" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"><span class="meter-fill" id="meterFill"></span></span></div>
             <div class="context-fields" id="contextFields"></div>
             <div class="form-actions">
               <button type="button" class="lab-button lab-button-primary" id="briefBtn" disabled>Generate the brief →</button>
               <button type="button" class="lab-button lab-button-quiet" id="backBtn">Back</button>
             </div>
+            <button type="button" class="lab-button lab-button-quiet last-brief-button" id="viewLastBriefBtn" hidden>View last brief</button>
           </div>
 
           <p class="privacy-note" id="exampleNotice" hidden>Illustrative example. These details are made up. Check or replace every detail before using it for your own decision, or go Back and Reset to start fresh.</p>
@@ -304,7 +313,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="lab-error" id="errorMsg" role="alert" hidden></div>
         </aside>
 
-        <section class="lab-output-pane" id="outputPane" aria-live="polite" aria-busy="false">
+        <section class="lab-output-pane" id="outputPane" aria-busy="false">
           <div class="brief-placeholder" id="placeholderState">
             <div class="brief-placeholder-top"><span class="memo-label">Cloud &amp; Capital · Decision Brief</span><span class="memo-status" id="placeholderStatus">Waiting for context</span></div>
             <div class="brief-placeholder-copy">
@@ -314,7 +323,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <div class="brief-outline" aria-label="Brief contents"><div class="outline-item">Suggested next move</div><div class="outline-item">Your options</div><div class="outline-item">What to check</div></div>
           </div>
 
-          <div class="thinking-state" id="thinkingState" role="status" hidden>
+          <div class="thinking-state" id="thinkingState" hidden>
             <div class="thinking-mark" aria-hidden="true"></div>
             <h2>Building the decision brief</h2>
             <p id="thinkingText">Reading your context</p>
@@ -330,14 +339,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </details>
             <header class="brief-header">
               <div class="brief-header-top"><span class="memo-label">Cloud &amp; Capital · Decision Brief</span><span class="brief-posture" id="briefPosture"></span></div>
-              <h2 class="brief-title" id="briefTitle"></h2>
+              <h2 class="brief-title" id="briefTitle" tabindex="-1"></h2>
               <p class="brief-posture-reason" id="briefPostureReason"></p>
             </header>
 
+            <section class="print-context"><h2>Context supplied</h2><p id="printDecision"></p><dl id="printAnswers"></dl></section>
+            <section class="renewal-checklist" id="renewalChecklist" hidden><h3>Before you renew</h3><p>Check whether the plan auto-renews and the deadlines to cancel or change seats. A notice deadline can fall before the renewal date.</p></section>
+
             <section class="brief-section"><h3>Recommendation</h3><div class="recommendation"><div class="recommendation-top"><span>The next move</span><span id="confidenceLabel"></span></div><p class="recommendation-move" id="recommendationMove"></p><p class="recommendation-rationale" id="recommendationRationale"></p></div></section>
-            <section class="brief-section"><h3>Next actions</h3><div class="options-wrap"><table class="actions-table"><thead><tr><th>Action</th><th>Owner</th><th>Timing</th></tr></thead><tbody id="actionsBody"></tbody></table></div></section>
+            <section class="brief-section"><h3>Next actions</h3><div class="options-wrap"><table class="actions-table"><thead><tr><th>Action</th><th>Suggested owner</th><th>Timing</th></tr></thead><tbody id="actionsBody"></tbody></table></div></section>
             <section class="brief-section" id="calculationsSection" hidden><h3>Calculated from your inputs</h3><ul class="brief-list" id="checkedCalculations"></ul></section>
-            <section class="brief-section"><h3>Compare your options</h3><div id="optionMatrix"></div></section>
+            <section class="brief-section"><h3>Options to compare</h3><p class="option-note">The AI organizes the options you named and labels ideas it adds as Suggested. Check that the choices are available to you. Owners are suggestions too.</p><div id="optionMatrix"></div></section>
             <section class="brief-section"><h3>What still needs checking</h3><ul class="brief-list" id="missingInformation"></ul></section>
             <p class="brief-disclosure">This is an AI-generated decision aid based only on the context supplied. Validate provider terms, calculations, and financially consequential decisions against primary data before acting.</p>
             <div class="brief-actions"><button type="button" class="lab-button lab-button-primary" id="copyBtn">Copy decision brief</button><button type="button" class="lab-button lab-button-quiet" id="printBtn">Print / Save PDF</button><button type="button" class="lab-button lab-button-quiet" id="editBtn">Edit context</button><button type="button" class="lab-button lab-button-quiet" id="anotherBtn">Try another</button></div>
@@ -349,7 +361,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </main>
 
   <script is:inline>
-    const state = { decisionType: '', questions: [], answers: {}, brief: null, calculations: [], selectedScenario: null, example: false };
+    const state = { decisionType: '', questions: [], answers: {}, brief: null, briefContext: null, calculations: [], selectedScenario: null, example: false, contextDecision: '', decisionChanged: false };
     const starterExamples = {
       commitment: {
         decision: 'Should we reserve GPU capacity for one year at $500K, or keep buying capacity as needed?',
@@ -361,7 +373,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       },
       build_buy: {
         decision: 'Our AI feature costs $40K per month. Over the next one year, should we optimize the API, try a smaller model, or build in-house?',
-        answers: { alternatives: 'Optimize the current API, try a smaller hosted model, or build and operate our own model.', exposure: 'The current API costs $40K per month. Replacement pricing, development effort, and ongoing operating costs are unknown.', demand: 'Customers use the feature regularly, but we have not yet measured which requests need the current model.', constraint: 'Protect answer quality and customer response times. Engineering capacity and the cost of operating a model still need to be checked.' },
+        answers: { alternatives: 'Optimize the current API, try a smaller hosted model, or build and operate our own model.', exposure: 'The current API costs $40K per month. Replacement pricing, development effort, and ongoing operating costs are unknown.', demand: 'Customers use the feature regularly, but we have not yet measured which requests need the current model.', constraint: 'We have not checked how much engineering time we could spare or what it would take to run a model ourselves. Any change must be tested for answer quality and customer response times.' },
       },
       cost_review: {
         decision: 'Our AWS bill is $180K per month. Where should we start reducing it without hurting reliability?',
@@ -387,7 +399,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     function setBusy(value) {
       busy = value;
-      document.querySelectorAll('.scenario-button, #decisionInput, #contextFields textarea, #backBtn').forEach((input) => { input.disabled = value; });
+      document.querySelectorAll('.scenario-button, #decisionInput, #contextFields textarea, #backBtn, #viewLastBriefBtn').forEach((input) => { input.disabled = value; });
       contextBtn.disabled = value || decisionInput.value.trim().length < 20;
       updateEvidence();
     }
@@ -409,6 +421,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       steps.forEach((step, index) => {
         step.classList.toggle('is-active', index === active);
         step.classList.toggle('is-complete', index < active);
+        if (index === active) step.setAttribute('aria-current', 'step'); else step.removeAttribute('aria-current');
       });
     }
 
@@ -444,6 +457,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       showPlaceholder('context');
       setError();
       updateEvidence();
+      $('viewLastBriefBtn').hidden = !state.brief;
+    }
+
+    function showCompletedBrief(message = 'Brief ready.') {
+      $('placeholderState').hidden = true;
+      stopThinking();
+      $('labWorkspace').classList.add('is-results');
+      $('briefState').hidden = false;
+      setStep(2);
+      $('labStatus').textContent = message;
+      $('briefTitle').focus({ preventScroll: true });
+      $('briefState').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function makeElement(tag, className, text) {
@@ -454,15 +479,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
 
     document.querySelectorAll('.scenario-button').forEach((button) => {
+      button.setAttribute('aria-pressed', 'false');
       button.addEventListener('click', () => {
         window.ccTrack?.('starter_scenario_selected', { scenario: button.dataset.analyticsScenario, tool: 'interactive_lab' });
-        document.querySelectorAll('.scenario-button').forEach((item) => item.classList.remove('is-selected'));
+        document.querySelectorAll('.scenario-button').forEach((item) => { item.classList.remove('is-selected'); item.setAttribute('aria-pressed', 'false'); });
         button.classList.add('is-selected');
+        button.setAttribute('aria-pressed', 'true');
         state.selectedScenario = button;
         state.decisionType = button.dataset.type;
         const example = starterExamples[button.dataset.type];
         decisionInput.value = example.decision;
         state.answers = { ...example.answers };
+        state.brief = null;
+        state.briefContext = null;
+        state.contextDecision = '';
+        state.decisionChanged = false;
         state.example = true;
         $('exampleNotice').hidden = false;
         updateDecisionCount();
@@ -475,6 +506,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       updateDecisionCount();
       if (state.selectedScenario && decisionInput.value !== starterExamples[state.selectedScenario.dataset.type].decision) {
         state.selectedScenario.classList.remove('is-selected');
+        state.selectedScenario.setAttribute('aria-pressed', 'false');
         state.selectedScenario = null;
       }
     });
@@ -516,6 +548,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       if (decision.length < 20 || busy) return;
       const operation = ++requestVersion;
       const previousType = state.decisionType;
+      const previousDecision = state.contextDecision;
       setBusy(true);
       contextBtn.textContent = 'Reading the decision…';
       setError();
@@ -529,6 +562,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         state.decisionType = data.decisionType;
         state.questions = data.questions;
         state.answers = previousType && previousType !== data.decisionType ? {} : data.answers || {};
+        if (previousType && previousType !== data.decisionType) state.decisionChanged = false;
+        else if (previousDecision && previousDecision !== decision && Object.values(state.answers).some(Boolean)) state.decisionChanged = true;
+        state.contextDecision = decision;
+        $('contextChangeNotice').hidden = !state.decisionChanged;
         renderContextFields(data);
         showContextStage();
         $('contextFields').querySelector('textarea')?.focus();
@@ -539,7 +576,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         setError(error.message, error.code, error.rejectedClaims, error.schemaIssue);
       } finally {
         if (operation === requestVersion) {
-          contextBtn.textContent = 'Build the context →';
+          contextBtn.textContent = 'Next: add details →';
           setBusy(false);
         }
       }
@@ -575,6 +612,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const total = state.questions.length || 4;
       $('evidenceText').textContent = `${complete} of ${total} questions answered`;
       $('meterFill').style.width = `${(complete / total) * 100}%`;
+      $('evidenceProgress').setAttribute('aria-valuenow', String(complete));
       briefBtn.disabled = busy || complete !== total;
     }
 
@@ -587,6 +625,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       stopThinking();
       showContextStage();
       setBusy(false);
+      $('labStatus').textContent = 'Generation cancelled. Your answers are still here.';
       $('contextStage').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     $('resetBtn').addEventListener('click', resetLab);
@@ -598,6 +637,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
     $('editBtn').addEventListener('click', editContext);
     $('summaryEditBtn').addEventListener('click', editContext);
+    $('viewLastBriefBtn').addEventListener('click', () => { if (state.brief) showCompletedBrief('Showing your last brief.'); });
 
     function resetLab() {
       requestVersion += 1;
@@ -612,17 +652,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       state.questions = [];
       state.answers = {};
       state.brief = null;
+      state.briefContext = null;
       state.calculations = [];
       state.example = false;
       state.selectedScenario = null;
+      state.contextDecision = '';
+      state.decisionChanged = false;
       decisionInput.value = '';
       $('exampleNotice').hidden = true;
       $('copyState').textContent = '';
-      contextBtn.textContent = 'Build the context →';
+      $('contextChangeNotice').hidden = true;
+      $('viewLastBriefBtn').hidden = true;
+      $('labStatus').textContent = '';
+      contextBtn.textContent = 'Next: add details →';
       briefBtn.textContent = 'Generate the brief →';
       updateDecisionCount();
       setBusy(false);
-      document.querySelectorAll('.scenario-button').forEach((item) => item.classList.remove('is-selected'));
+      document.querySelectorAll('.scenario-button').forEach((item) => { item.classList.remove('is-selected'); item.setAttribute('aria-pressed', 'false'); });
       showDecisionStage();
       decisionInput.focus();
       window.scrollTo({ top: document.querySelector('.lab-frame').offsetTop - 80, behavior: 'smooth' });
@@ -633,6 +679,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       $('briefState').hidden = true;
       $('thinkingState').hidden = false;
       outputPane.setAttribute('aria-busy', 'true');
+      $('labStatus').textContent = 'Building your brief.';
       const messages = ['Reading your context', 'Comparing your options', 'Looking at cost, budget, and practical tradeoffs', 'Checking what could change the answer'];
       let index = 0;
       $('thinkingText').textContent = messages[index];
@@ -657,19 +704,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       briefBtn.textContent = 'Building your brief…';
       $('thinkingState').scrollIntoView({ behavior: 'smooth', block: 'center' });
       try {
+        const suppliedContext = { decision: decisionInput.value.trim(), questions: state.questions.map((question) => ({ ...question })), answers: { ...state.answers }, example: state.example, decisionType: state.decisionType };
         const data = await callLab({ stage: 'brief', decision: decisionInput.value.trim(), decisionType: state.decisionType, answers: state.answers });
         if (operation !== requestVersion) return;
         if (data.status !== 'ready' || !data.brief) throw new Error('The Lab needs more context before it can generate the brief.');
         state.brief = data.brief;
+        state.briefContext = suppliedContext;
         state.calculations = data.calculations || [];
         $('copyState').textContent = '';
         renderBrief(data.brief);
         renderContextSummary();
-        stopThinking();
-        $('labWorkspace').classList.add('is-results');
-        $('briefState').hidden = false;
-        $('briefState').focus({ preventScroll: true });
-        $('briefState').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        showCompletedBrief();
         window.ccTrack?.('lab_stage_result', { stage: 'brief', result: 'success' });
         if (!toolCompletionTracked) {
           window.ccTrack?.('tool_complete', { tool: 'interactive_lab', result: 'completed' });
@@ -682,7 +727,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         setStep(1);
         showPlaceholder('context');
         setError(error.message, error.code, error.rejectedClaims, error.schemaIssue);
-        errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
         errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } finally {
         if (operation === requestVersion) {
@@ -712,12 +756,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       $('confidenceLabel').textContent = `${brief.recommendation.confidence} confidence`;
       $('recommendationMove').textContent = brief.recommendation.move;
       $('recommendationRationale').textContent = brief.recommendation.rationale;
+      $('renewalChecklist').hidden = state.briefContext.decisionType !== 'renewal';
       renderOptionMatrix(brief.options);
       appendTextList($('missingInformation'), brief.missing_information);
       $('actionsBody').replaceChildren();
       brief.next_actions.forEach((action) => {
         const row = document.createElement('tr');
-        [['action', 'Action'], ['owner', 'Owner'], ['timing', 'Timing']].forEach(([key, label]) => {
+        [['action', 'Action'], ['owner', 'Suggested owner'], ['timing', 'Timing']].forEach(([key, label]) => {
           const cell = makeElement('td', '', action[key]);
           cell.dataset.label = label;
           row.append(cell);
@@ -727,16 +772,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
 
     function renderContextSummary() {
+      const context = state.briefContext;
       $('contextSummary').open = false;
-      $('contextSummaryDecision').textContent = decisionInput.value.trim();
-      $('briefExampleNotice').hidden = !state.example;
+      $('contextSummaryDecision').textContent = context.decision;
+      $('contextSummary').querySelector('.context-summary-toggle').textContent = 'View details';
+      $('briefExampleNotice').hidden = !context.example;
+      $('printDecision').textContent = context.decision;
+      $('printAnswers').replaceChildren();
       const list = $('contextSummaryList');
       list.replaceChildren();
-      state.questions.forEach((question) => {
+      context.questions.forEach((question) => {
         const item = makeElement('div', 'context-summary-item');
-        item.append(makeElement('dt', '', question.label), makeElement('dd', '', state.answers[question.id] || ''));
+        item.append(makeElement('dt', '', question.label), makeElement('dd', '', context.answers[question.id] || ''));
         list.append(item);
+        $('printAnswers').append(makeElement('dt', '', question.label), makeElement('dd', '', context.answers[question.id] || ''));
       });
+    }
+
+    $('contextSummary').addEventListener('toggle', () => {
+      $('contextSummary').querySelector('.context-summary-toggle').textContent = $('contextSummary').open ? 'Hide details' : 'View details';
+    });
+
+    function optionSourceLabel(option) {
+      return option.source === 'supplied' ? 'From your context' : 'Suggested';
     }
 
     function renderOptionMatrix(options) {
@@ -752,7 +810,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const head = document.createElement('thead');
       const headRow = document.createElement('tr');
       headRow.append(makeElement('th', '', 'Criterion'));
-      options.forEach((option) => headRow.append(makeElement('th', '', option.name)));
+      options.forEach((option) => {
+        const heading = makeElement('th', '', option.name);
+        heading.append(makeElement('span', 'option-source', optionSourceLabel(option)));
+        headRow.append(heading);
+      });
       head.append(headRow);
       const body = document.createElement('tbody');
       criteria.forEach(([key, label]) => {
@@ -768,7 +830,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const mobile = makeElement('div', 'matrix-mobile');
       options.forEach((option) => {
         const card = makeElement('section', 'matrix-option');
-        card.append(makeElement('h4', '', option.name));
+        const heading = makeElement('h4', '', option.name);
+        heading.append(makeElement('span', 'option-source', optionSourceLabel(option)));
+        card.append(heading);
         const list = document.createElement('dl');
         criteria.forEach(([key, label]) => {
           const row = makeElement('div', 'matrix-option-row');
@@ -782,16 +846,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
 
     function briefToText(brief) {
+      const context = state.briefContext;
       const lines = [
         'CLOUD & CAPITAL · DECISION BRIEF', '', brief.decision_summary, brief.posture.rationale, '',
-        ...(state.example ? ['ILLUSTRATIVE EXAMPLE: Started with made-up details. Check or replace every detail before using it for a real decision.', ''] : []),
+        ...(context.example ? ['ILLUSTRATIVE EXAMPLE: Started with made-up details. Check or replace every detail before using it for a real decision.', ''] : []),
+        ...(context.decisionType === 'renewal' ? ['BEFORE YOU RENEW', $('renewalChecklist').querySelector('p').textContent, ''] : []),
         'RECOMMENDATION', brief.recommendation.move, `${brief.recommendation.confidence} confidence: ${brief.recommendation.rationale}`, '',
-        'NEXT ACTIONS', ...brief.next_actions.map((action) => `- ${action.action} | Owner: ${action.owner} | Timing: ${action.timing}`), '',
+        'NEXT ACTIONS', ...brief.next_actions.map((action) => `- ${action.action} | Suggested owner: ${action.owner} | Timing: ${action.timing}`), '',
         ...(state.calculations.length ? ['CALCULATED FROM YOUR INPUTS', ...state.calculations.map((item) => item.explanation), ''] : []),
-        'COMPARE YOUR OPTIONS',
+        'OPTIONS TO COMPARE',
       ];
-      brief.options.forEach((option) => lines.push(option.name, `Cost: ${option.cost_effect}`, `What changes: ${option.practical_effect}`, `Check before choosing: ${option.check}`, ''));
-      lines.push('WHAT STILL NEEDS CHECKING', ...brief.missing_information.map((item) => `- ${item}`), '', 'YOUR DECISION', decisionInput.value.trim(), '', 'AI-generated decision aid. Check terms and calculations against primary data before acting.');
+      brief.options.forEach((option) => lines.push(`${option.name} (${optionSourceLabel(option)})`, `Cost: ${option.cost_effect}`, `What changes: ${option.practical_effect}`, `Check before choosing: ${option.check}`, ''));
+      lines.push('WHAT STILL NEEDS CHECKING', ...brief.missing_information.map((item) => `- ${item}`), '', 'CONTEXT SUPPLIED', 'Your decision', context.decision, ...context.questions.flatMap((question) => [question.label, context.answers[question.id] || '', '']), 'AI-generated decision aid. Options and suggested owners need checking. Check terms and calculations against primary data before acting.');
       return lines.join('\n');
     }
 

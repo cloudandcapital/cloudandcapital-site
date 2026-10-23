@@ -3,8 +3,8 @@ export const validBrief = {
   posture: { label: 'Stage', rationale: 'A smaller test can check the baseline before committing.' },
   recommendation: { move: 'Measure the stable baseline before making a commitment.', confidence: 'Medium', rationale: 'Demand and commercial terms still need checking.' },
   options: [
-    { name: 'Wait', cost_effect: 'Keep paying for flexibility.', practical_effect: 'Keep the current setup.', check: 'Confirm whether capacity stays available.' },
-    { name: 'Stage the commitment', cost_effect: 'Limit exposure to proven demand.', practical_effect: 'Test a smaller commitment first.', check: 'Confirm the stable baseline and terms.' },
+    { name: 'Wait', source: 'supplied', cost_effect: 'Keep paying for flexibility.', practical_effect: 'Keep the current setup.', check: 'Confirm whether capacity stays available.' },
+    { name: 'Stage the commitment', source: 'suggested', cost_effect: 'Limit exposure to proven demand.', practical_effect: 'Test a smaller commitment first.', check: 'Confirm the stable baseline and terms.' },
   ],
   missing_information: ['The minimum stable demand.', 'The price and cancellation terms.'],
   next_actions: [

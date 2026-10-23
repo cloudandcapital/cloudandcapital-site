@@ -74,7 +74,7 @@ test('a different decision family does not reuse incompatible answers', async ()
     ui.input('decisionInput', 'Should we reserve GPU capacity for a year or buy it as needed?');
     ui.$('contextBtn').click();
     await tick();
-    assert.equal(ui.$('typeChip').textContent, 'Capacity or commitment');
+    assert.equal(ui.$('typeChip').textContent, 'Cloud capacity');
     assert.equal(ui.$('briefBtn').disabled, true);
     assert.ok([...ui.$('contextFields').querySelectorAll('textarea')].every((item) => !item.value));
   } finally { ui.dom.window.close(); }
@@ -132,10 +132,79 @@ test('successful output and Copy preserve the checked arithmetic and example lab
     ui.$('copyBtn').click();
     await tick();
     assert.match(copied, /ILLUSTRATIVE EXAMPLE/);
-    assert.ok(copied.indexOf('RECOMMENDATION') < copied.indexOf('COMPARE YOUR OPTIONS'));
+    assert.ok(copied.indexOf('RECOMMENDATION') < copied.indexOf('OPTIONS TO COMPARE'));
     assert.equal(copied.split(explanation).length - 1, 1);
     assert.equal(copied.split('NEXT ACTIONS').length - 1, 1);
     assert.equal(ui.$('copyState').textContent, 'Decision brief copied.');
+    assert.match(copied, /CONTEXT SUPPLIED/);
+    assert.match(copied, /Suggested owner:/);
+    assert.match(copied, /Before you renew|BEFORE YOU RENEW/);
+    for (const textarea of ui.$('contextFields').querySelectorAll('textarea')) assert.ok(copied.includes(textarea.value));
+    assert.equal(ui.$('renewalChecklist').hidden, false);
+    assert.equal(ui.window.document.activeElement, ui.$('briefTitle'));
+    assert.equal(ui.$('labStatus').textContent, 'Brief ready.');
+    assert.equal(ui.$('outputPane').hasAttribute('aria-live'), false);
+    assert.equal(ui.$('evidenceProgress').getAttribute('aria-valuenow'), '4');
+    assert.match(ui.$('optionMatrix').textContent, /From your context/);
+    assert.match(ui.$('optionMatrix').textContent, /Suggested/);
+  } finally { ui.dom.window.close(); }
+});
+
+test('changing a decision warns about retained answers and Reset clears the warning', async () => {
+  const ui = setup();
+  try {
+    await chooseExample(ui);
+    ui.$('backBtn').click();
+    ui.input('decisionInput', ui.$('decisionInput').value.replace('30 days', '45 days'));
+    ui.$('contextBtn').click();
+    await tick();
+    assert.equal(ui.$('contextChangeNotice').hidden, false);
+    assert.match(ui.$('context-exposure').value, /30 days/);
+    assert.equal(ui.$('briefBtn').disabled, false);
+    ui.$('backBtn').click();
+    ui.$('resetBtn').click();
+    assert.equal(ui.$('contextChangeNotice').hidden, true);
+  } finally { ui.dom.window.close(); }
+});
+
+test('the last brief keeps its original inputs when returning from edited answers', async () => {
+  let calls = 0;
+  let copied = '';
+  const ui = setup(async () => { calls += 1; return { ok: true, json: async () => ({ status: 'ready', brief: validBrief }) }; });
+  Object.defineProperty(ui.window.navigator, 'clipboard', { value: { writeText: async (text) => { copied = text; } } });
+  try {
+    await chooseExample(ui);
+    const original = ui.$('context-demand').value;
+    ui.$('briefBtn').click();
+    await tick();
+    ui.$('editBtn').click();
+    assert.equal(ui.$('viewLastBriefBtn').hidden, false);
+    ui.input('context-demand', 'A new answer that belongs only in the next generated brief.');
+    ui.$('viewLastBriefBtn').click();
+    assert.equal(ui.$('briefState').hidden, false);
+    assert.equal(calls, 1);
+    assert.ok(ui.$('printAnswers').textContent.includes(original));
+    assert.doesNotMatch(ui.$('printAnswers').textContent, /belongs only/);
+    ui.$('copyBtn').click();
+    await tick();
+    assert.ok(copied.includes(original));
+    assert.doesNotMatch(copied, /belongs only/);
+    ui.$('anotherBtn').click();
+    assert.equal(ui.$('viewLastBriefBtn').hidden, true);
+  } finally { ui.dom.window.close(); }
+});
+
+test('starter selection and context disclosure expose their current state', async () => {
+  const ui = setup(async () => ({ ok: true, json: async () => ({ status: 'ready', brief: validBrief }) }));
+  try {
+    await chooseExample(ui);
+    assert.equal(ui.window.document.querySelector('[data-type="renewal"]').getAttribute('aria-pressed'), 'true');
+    assert.equal(ui.window.document.querySelector('[data-type="commitment"]').getAttribute('aria-pressed'), 'false');
+    ui.$('briefBtn').click();
+    await tick();
+    ui.$('contextSummary').open = true;
+    ui.$('contextSummary').dispatchEvent(new ui.window.Event('toggle'));
+    assert.equal(ui.$('contextSummary').querySelector('.context-summary-toggle').textContent, 'Hide details');
   } finally { ui.dom.window.close(); }
 });
 

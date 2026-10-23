@@ -32,13 +32,16 @@ Rules:
 - Do not write numbers, prices, percentages, durations, or quantities, including number words. Refer to the higher quote, unused seats, current spending, or renewal deadline instead. The app shows the original context and independently checked arithmetic separately.
 - Never invent savings, contract terms, pricing minimums, cancellation rights, new commitments, approval steps, or implementation timelines.
 - Do not rank options as cheapest, highest spend, or best value when comparable prices are unknown. State which price or term is missing. Never promise zero disruption, unaffected users, or preserved access without evidence; say what needs checking.
+- Describe effects as possibilities unless supplied evidence confirms them. Optimization can affect quality and reliability: ask the visitor to test them, never say they are preserved while costs fall. A vendor conversation may not resolve the unknowns.
+- If the decision and answers conflict, flag the conflicting detail under missing_information and ask for confirmation before using it. Never silently choose a deadline or price.
 - Removing seats only reduces cost if the vendor confirms the pricing terms. Unknown migration cost does not make switching impossible. Keep file access, reliability, and other supplied constraints explicit.
-- Preserve every materially different choice the user supplied. Compare two to four options. Do not merge reducing scope with renewing everything.
+- Preserve every materially different choice the user supplied. Compare two to four options. Do not merge reducing scope with renewing everything. Set source to supplied only for a choice the visitor named. Set source to suggested for any option you introduce. If choices are unknown, suggest possibilities without presenting them as available or approved.
+- For a software renewal, explicitly check auto-renewal and cancellation or seat-change notice deadlines. Do not treat the renewal date as the last date to act. If terms are unconfirmed, put this check first among the missing information or next actions.
 - Use Explore when essential evidence is missing and feasibility is unclear; Stage when a reversible check or test is a useful next move; Commit only when supplied evidence supports the choice and bounds its downside.
 - Confidence reflects the evidence, not your writing style. Missing facts should lead to checks, not a confident purchase or cancellation recommendation.
 - Use only the allowed timing labels. Use Before the deadline only when the user supplied a deadline. Do not invent calendar periods or deadlines. Use a supplied owner role when known; otherwise name a suitable role without implying the business already has that role.
 - Make decision_summary a short decision title under 12 words, not a paragraph of facts. Keep the recommendation under 35 words and most other fields under 15 words. Keep the entire brief under 260 prose words. Use concise phrases in the comparison.
-- No generic slogans, repeated paragraphs, HTML, markdown, numbered steps, or disclaimers inside fields.`;
+- No generic slogans, repeated paragraphs, HTML, markdown, numbered steps, or disclaimers inside fields. Use US English and ordinary phrases such as reduce seats at renewal; avoid invented terms such as mid-count renewal or mid-tier reduction.`;
 }
 
 function buildUserPrompt(readiness) {
@@ -100,6 +103,7 @@ async function callModel(readiness, requestSignal) {
     // never wording, figures, or an unrecognized value.
     const labels = [[brief?.posture, 'label', ['Explore', 'Stage', 'Commit']], [brief?.recommendation, 'confidence', ['Low', 'Medium', 'High']]];
     if (Array.isArray(brief?.next_actions)) brief.next_actions.forEach((action) => labels.push([action, 'timing', ACTION_TIMINGS]));
+    if (Array.isArray(brief?.options)) brief.options.forEach((option) => labels.push([option, 'source', ['supplied', 'suggested']]));
     for (const [item, key, allowed] of labels) {
       if (typeof item?.[key] !== 'string') continue;
       const match = allowed.find((label) => label.toLowerCase() === item[key].toLowerCase());
@@ -195,7 +199,7 @@ export async function POST({ request }) {
 export async function GET() {
   return json({
     name: 'Cloud & Capital Interactive Lab',
-    version: 3,
+    version: 4,
     decisionTypes: Object.fromEntries(Object.entries(DECISION_TYPES).map(([key, value]) => [key, value.label])),
   });
 }

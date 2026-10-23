@@ -1,6 +1,6 @@
 # Manual Claude review: Interactive Lab and its guide
 
-Prepared for Diana to paste into her own Claude chat. Do not submit this through the connected draft-review plugin. The Lab directory listing remains under review. The walkthrough is a noindex review copy, not yet promoted in the guide archive.
+Original request prepared for Diana to paste into her own Claude chat. The manual review is complete; follow-up is recorded in `interactive-lab-claude-followup-2026-10-22.md`. At the time of this request, the directory entry was under review and the walkthrough was a noindex review copy. Do not submit this archived request through the connected draft-review plugin.
 
 ## Copy/paste prompt
 

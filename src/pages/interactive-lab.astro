@@ -392,9 +392,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       $('decisionCount').textContent = `${decisionInput.value.length.toLocaleString()} / 2,000 characters`;
     }
 
-    function setError(message = '') {
+    function setError(message = '', code = '', claims = []) {
       errorMsg.textContent = message;
       errorMsg.hidden = !message;
+      errorMsg.dataset.code = code;
+      errorMsg.dataset.rejectedClaims = JSON.stringify(claims);
     }
 
     function setStep(active) {
@@ -486,7 +488,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       });
       let data = {};
       try { data = await response.json(); } catch { data = {}; }
-      if (!response.ok) throw new Error(data.error || 'The Lab could not complete the request.');
+      if (!response.ok) {
+        const error = new Error(data.error || 'The Lab could not complete the request.');
+        error.code = data.code || '';
+        error.rejectedClaims = data.rejectedClaims || [];
+        throw error;
+      }
       return data;
       } catch (error) {
         if (error.name === 'AbortError') throw new Error('That took too long. Your answers are still here. Try again in a moment.');
@@ -523,7 +530,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       } catch (error) {
         if (operation !== requestVersion) return;
         window.ccTrack?.('lab_stage_result', { stage: 'questions', result: 'failure' });
-        setError(error.message);
+        setError(error.message, error.code, error.rejectedClaims);
       } finally {
         if (operation === requestVersion) {
           contextBtn.textContent = 'Build the context →';
@@ -668,7 +675,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         stopThinking();
         setStep(1);
         showPlaceholder('context');
-        setError(error.message);
+        setError(error.message, error.code, error.rejectedClaims);
         errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
         errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } finally {

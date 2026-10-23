@@ -302,3 +302,28 @@ test('hyphenated seat and workload descriptions retain their count units', () =>
   assert.deepEqual(findUnsupportedNumbers('A two-workload baseline.', 'Two workloads are stable.'), []);
   assert.deepEqual(findUnsupportedNumbers('A 12-request plan.', 'There are 12 seats.'), ['12-request']);
 });
+
+test('invalid model fields are diagnosed without returning a rejected draft', async () => {
+  const original = globalThis.fetch;
+  globalThis.fetch = async () => modelResponse({ ...validBrief, posture: { label: 'Maybe', rationale: 'Uncertain.' } });
+  try {
+    const response = await POST({ request: labRequest() });
+    const body = await response.json();
+    assert.equal(response.status, 502);
+    assert.equal(body.code, 'INVALID_MODEL_SCHEMA');
+    assert.equal(body.schemaIssue.field, 'posture');
+    assert.equal(body.brief, undefined);
+  } finally { globalThis.fetch = original; }
+});
+
+test('truncated model output fails closed with a distinct recovery code', async () => {
+  const original = globalThis.fetch;
+  globalThis.fetch = async () => new Response(JSON.stringify({ stop_reason: 'max_tokens', content: [{ type: 'text', text: '{"decision_summary":' }] }));
+  try {
+    const response = await POST({ request: labRequest() });
+    const body = await response.json();
+    assert.equal(response.status, 502);
+    assert.equal(body.code, 'MODEL_OUTPUT_TRUNCATED');
+    assert.equal(body.brief, undefined);
+  } finally { globalThis.fetch = original; }
+});

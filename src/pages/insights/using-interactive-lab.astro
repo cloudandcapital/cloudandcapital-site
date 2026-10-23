@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ActionLabel from '../../components/ActionLabel.astro';
+import '../../styles/guides-page.css';
+import '../../styles/interactive-lab-guide.css';
+
+const title = 'A higher renewal quote. Now what?';
+const description = 'Work through a software renewal in Interactive Lab. Compare the choices, find the missing details, and leave with a next step you can use.';
+---
+<BaseLayout title={`${title} | Cloud & Capital`} description={description} type="article" noindex={true}>
+  <main id="main-content" class="guides-page lab-guide">
+    <article class="guide-shell guide-article">
+      <header>
+        <a class="guide-back" href="/interactive-lab">← Interactive Lab</a>
+        <p class="guide-eyebrow">Technology decisions · A tool walkthrough · Review copy</p>
+        <h1>A higher renewal quote. <em>Now what?</em></h1>
+        <p class="guide-byline">By Diana Molski · <time datetime="2026-10-23">October 23, 2026</time></p>
+        <p class="guide-lede">The software is getting more expensive. Some seats sit unused. Switching might help, but you haven’t checked what that would involve. Where do you start?</p>
+        <p>I built Interactive Lab to help you work through a technology spending decision. You bring the question and a little context. It puts your options, the missing information, and a suggested next move into a short brief.</p>
+        <a class="guide-button" href="/interactive-lab" data-analytics-event="cta_click" data-analytics-destination="interactive_lab" data-analytics-source="interactive_lab_guide"><ActionLabel label="Open the free Lab" /></a>
+      </header>
+
+      <section aria-labelledby="start-title">
+        <h2 id="start-title">Try the renewal example with me.</h2>
+        <p>Open the Lab and choose <strong>Software renewal</strong> under <strong>Try a made-up example</strong>. It fills in the decision and the four follow-up answers so you can see how the tool works.</p>
+        <div class="lab-guide-case">
+          <p class="guide-eyebrow">The made-up situation</p>
+          <p>Your design software renews in 30 days. You pay $2,880 a year for 12 seats, and the new quote is 20% higher. Ten seats are used every week; two are unused. You could renew everything, reduce seats, negotiate, or switch.</p>
+          <p>You need to keep access to existing design files and comments. You haven’t confirmed the price of a smaller plan, the replacement cost, migration effort, or the next contract term.</p>
+        </div>
+        <p>Read the filled-in details, then choose <strong>Generate the brief</strong>. Give it a moment to finish. The answer is generated each time, so your wording may differ from the screenshot.</p>
+      </section>
+
+      <figure class="guide-screenshot">
+        <img src="/images/interactive-lab-renewal-brief.jpg" alt="An actual Interactive Lab renewal brief suggesting a vendor conversation to negotiate the higher quote and check whether removing unused seats would lower the price" width="1054" height="430" loading="lazy" decoding="async" />
+        <figcaption>A brief generated from the made-up renewal example. It suggests what to check before choosing.</figcaption>
+      </figure>
+
+      <section aria-labelledby="read-title">
+        <h2 id="read-title">What do I do with the answer?</h2>
+        <p>Start with <strong>Recommendation</strong> and <strong>Next actions</strong>. For this example, I’d ask the vendor for a better quote and written pricing for the seats the team uses. I’d also check what happens to shared files and comments before removing anyone’s access.</p>
+        <p>Then read <strong>Compare your options</strong>. Fewer seats might mean a lower bill, but only if the vendor’s pricing allows it. Switching is still worth checking; unknown migration effort doesn’t automatically rule it out.</p>
+        <p>That gives you something to do: get the missing prices and terms, check the impact on the team, and come back to the decision with better information. The brief can help you prepare for that conversation.</p>
+      </section>
+
+      <aside class="guide-example" aria-label="The renewal calculation">
+        <p class="guide-eyebrow">The calculation, separately</p>
+        <p>A 20% increase on $2,880 is <strong>$576</strong>, making the new total <strong>$3,456</strong>, assuming the increase applies to the whole annual charge.</p>
+        <p>The Lab shows this under <strong>Calculated from your inputs</strong>. It doesn’t calculate savings from removing seats because we don’t know the vendor’s seat-pricing rules.</p>
+      </aside>
+
+      <section aria-labelledby="own-title">
+        <h2 id="own-title">Now bring your own question.</h2>
+        <p>From a completed brief, choose <strong>Try another</strong> to start fresh. If you’re still editing an example, go <strong>Back</strong> and choose <strong>Reset</strong>. Editing only part of an example keeps its illustrative label, so you don’t accidentally treat made-up details as your own.</p>
+        <ol class="lab-guide-steps">
+          <li><strong>Describe the decision.</strong> Say what you’re choosing between and why it matters. “Our software renews next month and the price is going up” gives the Lab more to work with than “help with software.” Then choose <strong>Build the context</strong>.</li>
+          <li><strong>Answer the four follow-up questions.</strong> They change with the type of decision. For a renewal, you’ll cover the options, costs and deadline, usage and ownership, and what makes a change difficult.</li>
+          <li><strong>Say what you don’t know.</strong> “We haven’t checked the cancellation terms yet” is a useful answer. Fill in every field with a short explanation; you don’t have to invent a figure to continue.</li>
+          <li><strong>Generate, read, and check.</strong> Use the proposed actions to decide what to investigate. Open <strong>Context supplied</strong> to check what went into the brief, or choose <strong>Edit context</strong> when you have more information.</li>
+        </ol>
+        <p>Going Back keeps your answers for the same kind of decision. If you change to a different kind, such as moving from a renewal to an AI build-or-buy question, you’ll need to answer the relevant questions for that choice.</p>
+      </section>
+
+      <section aria-labelledby="confidence-title">
+        <h2 id="confidence-title">A confident answer still needs checking.</h2>
+        <p>The brief may say <strong>Gather more information</strong>, <strong>Compare before committing</strong>, or <strong>Ready to choose</strong>. These describe its suggested approach. The confidence label is the AI’s assessment of the context you supplied, not a measured probability that the recommendation is right.</p>
+        <p>The Lab doesn’t connect to your accounts, inspect a contract, or fetch current vendor prices. It can misunderstand your situation or make a claim that goes beyond the details you gave it. Check prices, terms, access, and operational effects with the people and records involved before acting.</p>
+        <p>You won’t always see a calculation section. It appears only for supported calculations with a clear basis, such as this price increase. It isn’t a full savings estimate or financial forecast.</p>
+      </section>
+
+      <section aria-labelledby="save-title">
+        <h2 id="save-title">Keep the brief before you leave.</h2>
+        <p><strong>Copy decision brief</strong> puts the result on your clipboard so you can paste it into your notes or share it with the person helping you decide. <strong>Print / Save PDF</strong> opens your browser’s print dialog, where you can choose a PDF destination.</p>
+        <p>Your work isn’t automatically saved for another visit. Refreshing or leaving the page can lose it. If generation fails or you choose <strong>Cancel</strong>, your answers stay on the page so you can edit or try again.</p>
+        <p>Your entries are sent to an AI model to generate the brief. Leave out confidential contract terms, customer data, passwords, and sensitive infrastructure details. You can describe the situation using anonymous names and rounded amounts.</p>
+      </section>
+
+      <footer class="guide-next">
+        <h2>Use the brief to move the decision along.</h2>
+        <p>You can also try questions about cloud capacity, AI build or buy, a rising technology bill, or moving workloads. Bring a specific choice and the details you have. If you’d like help reviewing the actual spending and following up on what you find, explore Technology Cost Review.</p>
+        <div class="guide-actions">
+          <a class="guide-button" href="/interactive-lab" data-analytics-event="cta_click" data-analytics-destination="interactive_lab" data-analytics-source="interactive_lab_guide"><ActionLabel label="Work through a decision" /></a>
+          <a href="/services#technology-cost-review"><ActionLabel label="Explore a cost review" /></a>
+        </div>
+      </footer>
+    </article>
+  </main>
+</BaseLayout>

@@ -16,6 +16,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .lab-hero h1 em { color: var(--forest); font-weight: 400; }
     .lab-hero-note { padding: 0 0 .5rem 1.75rem; border-left: 1px solid var(--border-strong); }
     .lab-hero-note p { max-width: 430px; font-family: var(--font-body); font-size: 1.23rem; line-height: 1.55; color: var(--text-muted); }
+    .lab-hero-note .lab-guide-link { margin-top: .8rem; font-size: .95rem; }
+    .lab-guide-link a { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; color: var(--forest-deep); text-underline-offset: .2em; }
     .lab-hero-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
     .lab-hero-meta span { display: block; font-size: .62rem; letter-spacing: .13em; text-transform: uppercase; color: var(--text-light); }
     .lab-hero-meta strong { display: block; margin-top: .25rem; font-size: .78rem; letter-spacing: 0; text-transform: none; color: var(--text-muted); font-weight: 500; }
@@ -229,6 +231,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
     <div class="lab-hero-note">
       <p>Not sure whether to renew software, reserve capacity, or change your AI setup? Compare your options and see what to check before you decide.</p>
+      <p class="lab-guide-link"><a href="/insights/using-interactive-lab">Walk through a software renewal <span aria-hidden="true">→</span></a></p>
       <div class="lab-hero-meta" aria-label="Lab details">
         <span>Input<strong>Your decision</strong></span>
         <span>Process<strong>Guided context</strong></span>

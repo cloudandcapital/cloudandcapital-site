@@ -123,26 +123,49 @@ function isTextArray(value, min, max) {
   return Array.isArray(value) && value.length >= min && value.length <= max && value.every((item) => isText(item, 500));
 }
 
-export function validateBrief(value) {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
-  if (!isText(value.decision_summary, 300)) return false;
-  if (!value.posture || !['Explore', 'Stage', 'Commit'].includes(value.posture.label) || !isText(value.posture.rationale, 600)) return false;
-  if (!isTextArray(value.known_facts, 3, 6)) return false;
-  if (!Array.isArray(value.working_assumptions) || value.working_assumptions.length > 5) return false;
-  if (!value.working_assumptions.every((item) => isText(item?.assumption, 400) && isText(item?.why_it_matters, 500))) return false;
-  if (!Array.isArray(value.options) || value.options.length < 2 || value.options.length > 4) return false;
-  if (!value.options.every((item) => ['name', 'economics', 'operational_effect', 'reversibility', 'risk', 'evidence_needed'].every((key) => isText(item?.[key], 600)))) return false;
-  if (!value.lenses || !['finops', 'finance', 'engineering'].every((lens) => isText(value.lenses?.[lens]?.view, 600) && isText(value.lenses?.[lens]?.need, 400))) return false;
-  if (!isText(value.common_ground, 700) || !isText(value.unresolved_tension, 700)) return false;
-  if (!value.economics || typeof value.economics.available !== 'boolean' || !isText(value.economics.analysis, 800)) return false;
-  if (!Array.isArray(value.economics.thresholds) || value.economics.thresholds.length > 4) return false;
-  if (!value.economics.thresholds.every((item) => ['metric', 'trigger', 'meaning', 'basis'].every((key) => isText(item?.[key], 500)))) return false;
-  if (!value.recommendation || !isText(value.recommendation.move, 900) || !['Low', 'Medium', 'High'].includes(value.recommendation.confidence) || !isText(value.recommendation.rationale, 700)) return false;
-  if (!isTextArray(value.change_the_answer, 2, 4)) return false;
-  if (!Array.isArray(value.next_actions) || value.next_actions.length < 2 || value.next_actions.length > 4) return false;
-  if (!value.next_actions.every((item) => ['action', 'owner', 'evidence', 'timing'].every((key) => isText(item?.[key], 500)))) return false;
+export function validateBrief(value, onInvalid = () => {}) {
+  const invalid = (field) => { onInvalid(field); return false; };
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return invalid('brief');
+  if (!isText(value.decision_summary, 300)) return invalid('decision_summary');
+  if (!value.posture || !['Explore', 'Stage', 'Commit'].includes(value.posture.label) || !isText(value.posture.rationale, 600)) return invalid('posture');
+  if (!isTextArray(value.known_facts, 3, 6)) return invalid('known_facts');
+  if (!Array.isArray(value.working_assumptions) || value.working_assumptions.length > 5) return invalid('working_assumptions.length');
+  if (!value.working_assumptions.every((item) => isText(item?.assumption, 400) && isText(item?.why_it_matters, 500))) return invalid('working_assumptions.fields');
+  if (!Array.isArray(value.options) || value.options.length < 2 || value.options.length > 4) return invalid('options.length');
+  if (!value.options.every((item) => ['name', 'economics', 'operational_effect', 'reversibility', 'risk', 'evidence_needed'].every((key) => isText(item?.[key], 600)))) return invalid('options.fields');
+  if (!value.lenses || !['finops', 'finance', 'engineering'].every((lens) => isText(value.lenses?.[lens]?.view, 600) && isText(value.lenses?.[lens]?.need, 400))) return invalid('lenses');
+  if (!isText(value.common_ground, 700) || !isText(value.unresolved_tension, 700)) return invalid('common_ground_or_tension');
+  if (!value.economics || typeof value.economics.available !== 'boolean' || !isText(value.economics.analysis, 800)) return invalid('economics');
+  if (!Array.isArray(value.economics.thresholds) || value.economics.thresholds.length > 4) return invalid('economics.thresholds.length');
+  if (!value.economics.thresholds.every((item) => ['metric', 'trigger', 'meaning', 'basis'].every((key) => isText(item?.[key], 500)))) return invalid('economics.thresholds.fields');
+  if (!value.recommendation || !isText(value.recommendation.move, 900) || !['Low', 'Medium', 'High'].includes(value.recommendation.confidence) || !isText(value.recommendation.rationale, 700)) return invalid('recommendation');
+  if (!isTextArray(value.change_the_answer, 2, 4)) return invalid('change_the_answer');
+  if (!Array.isArray(value.next_actions) || value.next_actions.length < 2 || value.next_actions.length > 4) return invalid('next_actions.length');
+  if (!value.next_actions.every((item) => ['action', 'owner', 'evidence', 'timing'].every((key) => isText(item?.[key], 500)))) return invalid('next_actions.fields');
   return true;
 }
+
+
+// Provider-supported JSON Schema; length/count constraints stay in validateBrief.
+const briefString = { type: 'string' };
+const briefObject = (properties) => ({ type: 'object', properties, required: Object.keys(properties), additionalProperties: false });
+const briefList = (items, description) => ({ type: 'array', items, description });
+const briefChoice = (...values) => ({ type: 'string', enum: values });
+const briefLens = briefObject({ view: briefString, need: briefString });
+export const BRIEF_OUTPUT_SCHEMA = briefObject({
+  decision_summary: briefString,
+  posture: briefObject({ label: briefChoice('Explore', 'Stage', 'Commit'), rationale: briefString }),
+  known_facts: briefList(briefString, 'Three to six facts reported by the user; no calculated amounts.'),
+  working_assumptions: briefList(briefObject({ assumption: briefString, why_it_matters: briefString }), 'Zero to two assumptions.'),
+  options: briefList(briefObject(Object.fromEntries(['name', 'economics', 'operational_effect', 'reversibility', 'risk', 'evidence_needed'].map((key) => [key, briefString]))), 'Two to four distinct options; preserve the user choices.'),
+  lenses: briefObject({ finops: briefLens, finance: briefLens, engineering: briefLens }),
+  common_ground: briefString,
+  unresolved_tension: briefString,
+  economics: briefObject({ available: { type: 'boolean' }, analysis: briefString, thresholds: briefList(briefObject({ metric: briefString, trigger: briefString, meaning: briefString, basis: briefString }), 'Zero to two thresholds using supplied figures or qualitative conditions.') }),
+  recommendation: briefObject({ move: briefString, confidence: briefChoice('Low', 'Medium', 'High'), rationale: briefString }),
+  change_the_answer: briefList(briefString, 'Two to four developments that could change the recommendation.'),
+  next_actions: briefList(briefObject({ action: briefString, owner: briefString, evidence: briefString, timing: briefString }), 'Exactly three practical next actions.'),
+});
 
 const NUMBER_WORD_VALUES = new Map([
   ['zero', 0], ['one', 1], ['two', 2], ['three', 3], ['four', 4], ['five', 5], ['six', 6], ['seven', 7], ['eight', 8], ['nine', 9],

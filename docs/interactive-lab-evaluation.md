@@ -65,3 +65,9 @@ count-unit parsing now preserves hyphenated count modifiers. Error responses
 carry a bounded failure code and rejected numeric claims back to the requesting
 visitor, never to logs, so live validation can be diagnosed without exposing a
 rejected draft as a usable brief.
+
+The next deployed check returned INVALID_MODEL_SCHEMA, not a numeric failure.
+The provider request now uses its native JSON schema format for required keys,
+field types, and enums; the server still checks lengths, counts, and numbers.
+Schema failures identify the failing field without returning draft content.
+Provider reference: https://platform.claude.com/docs/en/build-with-claude/structured-outputs.

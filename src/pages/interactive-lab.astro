@@ -392,11 +392,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       $('decisionCount').textContent = `${decisionInput.value.length.toLocaleString()} / 2,000 characters`;
     }
 
-    function setError(message = '', code = '', claims = []) {
+    function setError(message = '', code = '', claims = [], schemaIssue = null) {
       errorMsg.textContent = message;
       errorMsg.hidden = !message;
       errorMsg.dataset.code = code;
       errorMsg.dataset.rejectedClaims = JSON.stringify(claims);
+      errorMsg.dataset.schemaIssue = JSON.stringify(schemaIssue);
     }
 
     function setStep(active) {
@@ -492,6 +493,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         const error = new Error(data.error || 'The Lab could not complete the request.');
         error.code = data.code || '';
         error.rejectedClaims = data.rejectedClaims || [];
+        error.schemaIssue = data.schemaIssue || null;
         throw error;
       }
       return data;
@@ -530,7 +532,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       } catch (error) {
         if (operation !== requestVersion) return;
         window.ccTrack?.('lab_stage_result', { stage: 'questions', result: 'failure' });
-        setError(error.message, error.code, error.rejectedClaims);
+        setError(error.message, error.code, error.rejectedClaims, error.schemaIssue);
       } finally {
         if (operation === requestVersion) {
           contextBtn.textContent = 'Build the context →';
@@ -675,7 +677,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         stopThinking();
         setStep(1);
         showPlaceholder('context');
-        setError(error.message, error.code, error.rejectedClaims);
+        setError(error.message, error.code, error.rejectedClaims, error.schemaIssue);
         errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
         errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } finally {

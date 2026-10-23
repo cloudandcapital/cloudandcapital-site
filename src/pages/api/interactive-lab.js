@@ -1,4 +1,5 @@
 import {
+  BRIEF_OUTPUT_SCHEMA,
   DECISION_TYPES,
   MAX_DECISION_CHARS,
   assessReadiness,
@@ -108,6 +109,7 @@ async function callModel(readiness, requestSignal) {
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
         max_tokens: 2600,
+        output_config: { format: { type: 'json_schema', schema: BRIEF_OUTPUT_SCHEMA } },
         temperature: 0.2,
         system: [{ type: 'text', text: buildSystemPrompt(readiness), cache_control: { type: 'ephemeral' } }],
         messages: [{ role: 'user', content: `${buildUserPrompt(readiness)}${correction}` }],
@@ -136,9 +138,13 @@ async function callModel(readiness, requestSignal) {
       throw new Error('INVALID_MODEL_JSON');
     }
 
-    if (!validateBrief(brief)) {
-      console.error('Interactive Lab schema validation failed');
-      throw new Error('INVALID_MODEL_SCHEMA');
+    let invalidField = '';
+    if (!validateBrief(brief, (field) => { invalidField = field; })) {
+      console.error('Interactive Lab schema validation failed', { field: invalidField });
+      const error = new Error('INVALID_MODEL_SCHEMA');
+      const root = brief?.[invalidField.split('.')[0]];
+      error.schemaIssue = { field: invalidField, type: typeof root, count: Array.isArray(root) ? root.length : undefined };
+      throw error;
     }
 
     const sourceText = buildSourceText(readiness);
@@ -217,7 +223,7 @@ export async function POST({ request }) {
     const code = timedOut ? 'MODEL_TIMEOUT' : unavailable ? 'MODEL_UNAVAILABLE' : knownCodes.includes(error.message) ? error.message : 'MODEL_REQUEST_FAILED';
     // Return validation details only to the requesting visitor, never to logs.
     // This is an error response, not a usable or partially repaired brief.
-    return json({ error: message, code, rejectedClaims: error.rejectedClaims || [] }, timedOut ? 504 : unavailable ? 503 : 502);
+    return json({ error: message, code, rejectedClaims: error.rejectedClaims || [], schemaIssue: error.schemaIssue }, timedOut ? 504 : unavailable ? 503 : 502);
   }
 }
 

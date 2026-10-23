@@ -25,11 +25,11 @@ const { tool } = Astro.props;
   </div>
 </article>
 <style>
-  .directory-card { --preview-tint: #e4e9df; --card-accent: #3d6055; --card-surface: #fcfbf8; position: relative; isolation: isolate; display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 1px solid #d8d8ce; border-radius: 16px; background: var(--card-surface); color: var(--brand-ink); text-decoration: none; box-shadow: 0 12px 28px -22px #24211e55; transition: border-color 180ms ease, box-shadow 180ms ease; }
+  .directory-card { --preview-tint: #e4e9df; --card-accent: #3d6055; --card-surface: var(--cream); position: relative; isolation: isolate; display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 1px solid #d8d8ce; border-radius: 16px; background: var(--card-surface); color: var(--brand-ink); text-decoration: none; box-shadow: 0 12px 28px -22px #24211e55; transition: border-color 180ms ease, box-shadow 180ms ease; }
   .directory-card[data-tone="rose"] { --preview-tint: #eddbd6; --card-accent: #785752; border-color: #dfc7c0; }
-  .directory-card[data-tone="sand"] { --preview-tint: #eadfce; --card-accent: #6a5e4d; border-color: #dcd0bd; }
+  .directory-card[data-tone="sand"] { --preview-tint: var(--cream); --card-accent: #6a5e4d; border-color: #dcd0bd; }
   .directory-card[data-filter-tone="sage"] { --preview-tint: #e4e9df; --card-accent: #3d6055; --card-surface: #f0f3ec; border-color: #c2cdbb; }
-  .directory-card[data-filter-tone="sand"] { --preview-tint: #eadfce; --card-accent: #675844; --card-surface: #f6f0e6; border-color: #d3c6b1; }
+  .directory-card[data-filter-tone="sand"] { --preview-tint: var(--cream); --card-accent: #675844; --card-surface: var(--cream); border-color: #d3c6b1; }
   .directory-card[data-filter-tone="rose"] { --preview-tint: #eddbd6; --card-accent: #785752; --card-surface: #f6eae7; border-color: #d6b8b2; }
   .card-preview { display: grid; place-items: center; flex: none; aspect-ratio: 1.85; min-width: 0; overflow: hidden; padding: 1.25rem; background: var(--preview-tint); }
   .preview-window { display: grid; grid-template-rows: 19px minmax(0, 1fr); width: 100%; height: 100%; min-height: 0; overflow: hidden; border: 1px solid #e7e4df; border-radius: 8px; background: #fff; box-shadow: 0 17px 23px -12px #26372d59, 0 2px 5px #26372d0a; transition: transform 220ms ease, box-shadow 220ms ease; }

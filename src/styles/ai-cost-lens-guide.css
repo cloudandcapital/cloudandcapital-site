@@ -3,7 +3,7 @@
   .lens-guide .guide-byline { margin:0 0 1.5rem; color:#62645b; font-size:.9rem; }
   .lens-guide .guide-button { background:#3d6055; border-color:#3d6055; color:#faf6ef; }
   .lens-guide .guide-button:hover { background:#304e44; border-color:#304e44; }
-  .lens-table-wrap { margin-block:1.5rem; border:1px solid #c5ceb9; border-radius:12px; overflow:hidden; background:#fbfaf7; }
+  .lens-table-wrap { margin-block:1.5rem; border:1px solid #c5ceb9; border-radius:12px; overflow:hidden; background:var(--cream); }
   .lens-example-table { width:100%; border-collapse:collapse; font-size:1rem; }
   .lens-example-table caption { padding:1rem 1.2rem; color:#4f7165; font:400 .65rem/1.5 'DM Mono',monospace; letter-spacing:.08em; text-align:left; text-transform:uppercase; }
   .lens-example-table th,.lens-example-table td { padding:.85rem 1.2rem; border-top:1px solid #3d605526; line-height:1.5; }

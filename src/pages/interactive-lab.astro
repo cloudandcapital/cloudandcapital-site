@@ -21,18 +21,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .lab-hero-meta strong { display: block; margin-top: .25rem; font-size: .78rem; letter-spacing: 0; text-transform: none; color: var(--text-muted); font-weight: 500; }
 
     .lab-shell { max-width: 1280px; margin: 0 auto; padding: 0 3.5rem 7rem; }
-    .lab-frame { background: #fbf9f6; border: 1px solid var(--border); box-shadow: 0 20px 70px rgba(26, 26, 26, .09); }
-    .lab-rail { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border); background: #f2ece6; }
+    .lab-frame { background: var(--cream); border: 1px solid var(--border); box-shadow: 0 20px 70px rgba(26, 26, 26, .09); }
+    .lab-rail { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border); background: var(--cream); }
     .lab-step { position: relative; padding: 1.05rem 1.25rem; display: flex; gap: .7rem; align-items: center; font-size: .64rem; letter-spacing: .13em; text-transform: uppercase; color: var(--text-light); }
     .lab-step + .lab-step { border-left: 1px solid var(--border); }
     .lab-step-number { font-family: var(--font-body); font-size: 1rem; letter-spacing: 0; font-style: italic; }
-    .lab-step.is-active { background: #fbf9f6; color: var(--forest-deep); }
+    .lab-step.is-active { background: var(--cream); color: var(--forest-deep); }
     .lab-step.is-active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--forest); }
     .lab-step.is-complete { color: var(--text); }
 
     .lab-workspace { display: grid; grid-template-columns: minmax(360px, 42%) minmax(0, 58%); min-height: 650px; }
     .lab-input-pane { padding: 2.5rem 2.6rem 2.75rem; border-right: 1px solid var(--border); background: #fff; }
-    .lab-output-pane { position: relative; min-width: 0; padding: 2.5rem 2.8rem 3rem; background: #fbf9f6; }
+    .lab-output-pane { position: relative; min-width: 0; padding: 2.5rem 2.8rem 3rem; background: var(--cream); }
     .lab-workspace.is-results { display: block; min-height: 0; }
     .lab-workspace.is-results .lab-input-pane { display: none; }
     .lab-workspace.is-results .lab-output-pane { width: 100%; padding: 3rem 3.5rem 3.5rem; }
@@ -126,14 +126,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .options-wrap { overflow-x: auto; }
     .decision-matrix { width: 100%; table-layout: fixed; border-collapse: collapse; background: #fff; }
     .decision-matrix th, .decision-matrix td { padding: .9rem 1rem; border: 1px solid var(--border); text-align: left; vertical-align: top; }
-    .decision-matrix thead th { background: #f2ece6; font-family: var(--font-display); font-size: 1rem; line-height: 1.25; color: var(--text); font-weight: 400; }
+    .decision-matrix thead th { background: var(--cream); font-family: var(--font-display); font-size: 1rem; line-height: 1.25; color: var(--text); font-weight: 400; }
     .decision-matrix thead th:first-child { width: 15%; font-family: var(--font-ui); font-size: .59rem; letter-spacing: .09em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
-    .decision-matrix tbody th { width: 15%; background: #f8f4f0; font-size: .6rem; letter-spacing: .09em; text-transform: uppercase; color: var(--forest-deep); font-weight: 500; }
+    .decision-matrix tbody th { width: 15%; background: var(--cream); font-size: .6rem; letter-spacing: .09em; text-transform: uppercase; color: var(--forest-deep); font-weight: 500; }
     .decision-matrix td { font-family: var(--font-body); font-size: .92rem; line-height: 1.45; color: var(--text-muted); }
     .matrix-mobile { display: none; }
     .matrix-option { background: #fff; border: 1px solid var(--border); }
     .matrix-option + .matrix-option { margin-top: 1rem; }
-    .matrix-option h4 { padding: .9rem 1rem; background: #f2ece6; font-family: var(--font-display); font-size: 1.1rem; line-height: 1.25; font-weight: 400; }
+    .matrix-option h4 { padding: .9rem 1rem; background: var(--cream); font-family: var(--font-display); font-size: 1.1rem; line-height: 1.25; font-weight: 400; }
     .matrix-option dl { padding: 0 1rem; }
     .matrix-option-row { display: grid; grid-template-columns: 7rem 1fr; gap: .75rem; padding: .8rem 0; border-top: 1px solid var(--border); }
     .matrix-option-row dt { font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; color: var(--forest-deep); font-weight: 500; }

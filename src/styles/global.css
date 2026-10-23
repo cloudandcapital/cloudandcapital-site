@@ -1,6 +1,7 @@
 /* ─── Brand Tokens ─────────────────────────────────────────────────── */
 :root {
   --cream: #F5EEE9;
+  --cream-rgb: 245, 238, 233;
   --cream-dark: #EBE3DB;
   --cream-mid: #DDD5CA;
   /* Shared homepage surfaces and accents, used throughout the site. */
@@ -14,9 +15,10 @@
   --sage-surface-hover: #D3DBCC;
   --sage-strong: #AFB8A8;
   --brand-green: #3D6055;
+  --clay-ink: #785752;
   --brand-green-hover: #2E4E44;
   --brand-ink: #24211E;
-  --sand: #EADFCE;
+  --sand: var(--cream); /* All beige surfaces share the homepage color. */
   --soft-white: #FFFFFF;
   --pure-white: #FFFFFF;
   --near-black: #1A1A1A;

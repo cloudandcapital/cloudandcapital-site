@@ -2,7 +2,7 @@
 .business-services { --service-green: #3d6055; color: var(--brand-ink); }
 .business-services .services-shell { width: min(calc(100% - 4rem), 78rem); margin-inline: auto; }
 .business-services h1, .business-services h2, .business-services h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; letter-spacing: -.035em; text-wrap: balance; }
-.business-services h1 { font-size: clamp(3.2rem, 5.7vw, 5.4rem); line-height: 1; }
+.business-services h1 { font-size: clamp(3.2rem, 5.7vw, 5rem); line-height: 1; }
 .business-services h1 > span, .business-services h1 > em { display: inline-block; max-width: 100%; }
 .business-services h2 { font-size: clamp(2.3rem, 3vw, 3rem); line-height: 1.1; }
 .business-services p, .business-services li, .business-services label, .business-services input, .business-services textarea, .business-services select, .business-services summary { font-family: 'Jost', system-ui, sans-serif; font-size: 1rem; line-height: 1.7; }
@@ -15,10 +15,17 @@
 .business-services .service-kicker::after { content: ''; flex: 0 0 2.7rem; height: 1px; background: currentColor; opacity: .42; }
 .business-services .service-text-link { display: inline-flex; align-items: center; min-height: 50px; max-width: 100%; color: var(--service-green); text-decoration: none; }
 .business-services .service-text-link:hover { color: #785752; }
-.business-services .service-button { display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: .35rem 1.5rem; border: 1px solid #fcf8f2; border-radius: 8px; background: #fcf8f2; color: var(--brand-ink); text-decoration: none; }
+.business-services .service-button { display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: .35rem 1.5rem; border: 1px solid #fcf8f2; border-radius: 8px; background: var(--cream); color: var(--brand-ink); text-decoration: none; }
 .business-services a.service-button .action-label > span:first-child { text-decoration: none; }
 .business-services .service-button:hover { background: white; }
-.business-services .services-hero { padding-block: 9.5rem 2rem; }
+.business-services .services-opening { background: var(--brand-green); color: var(--cream); }
+.business-services .services-hero { padding-block: 9.5rem 3rem; }
+.business-services .services-hero h1 { max-width: 20ch; line-height: 1.06; }
+.business-services .services-hero h1 > span, .business-services .services-hero h1 > em { display: block; }
+.business-services .services-hero h1 em { color: inherit; font-style: normal; }
+.business-services .services-hero .service-kicker, .business-services .services-hero .service-text-link { color: var(--cream); }
+.business-services .services-hero .services-lede { color: rgba(var(--cream-rgb), .9); }
+.business-services .services-hero a:focus-visible { outline-color: var(--cream); }
 .business-services .services-lede { max-width: 57ch; margin-block: 1.5rem .5rem; color: #45483f; font-size: 1.1rem; }
 .business-services .services-lede > span { display: inline-block; }
 .business-services .offers-section { padding-block: 1.8rem 3rem; }
@@ -27,7 +34,7 @@
 .business-services .service-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; align-items: start; }
 .business-services .service-card { --card-accent: #785752; --card-rule: #a7766f40; min-width: 0; padding: 1.7rem; border: 1px solid #c8a9a266; border-radius: 12px; background: #eee0db; }
 .business-services .workflow-card { --card-accent: #3d6055; --card-rule: #597b5b40; background: #e4e9df; border-color: #a6b79d66; }
-.business-services .setup-card { --card-accent: #675844; --card-rule: #967e5e40; background: #eee5d7; border-color: #bba68666; }
+.business-services .setup-card { --card-accent: #675844; --card-rule: #967e5e40; background: var(--cream); border-color: #bba68666; }
 .business-services .service-card-heading { display: flex; align-items: center; justify-content: space-between; gap: .35rem; min-height: 5.5rem; margin-bottom: .9rem; }
 .business-services .service-card h3 { min-width: 0; font-size: clamp(1.65rem, 2.2vw, 2.1rem); font-weight: 600; line-height: 1.08; }
 .business-services .service-card h3 > span { display: block; }
@@ -74,11 +81,11 @@
 .business-services .contact-email { margin-block: 1.5rem 1.25rem; }
 .business-services .inquiry-draft { border-top: 1px solid #493d3533; }
 .business-services .inquiry-draft > summary { justify-content: flex-start; gap: .7rem; color: #493d35; font-size: .9rem; }
-.business-services .inquiry-box { margin-top: .5rem; padding: 1.6rem; border: 1px solid #ffffff80; border-radius: 12px; background: #fcf8f2; }
+.business-services .inquiry-box { margin-top: .5rem; padding: 1.6rem; border: 1px solid #ffffff80; border-radius: 12px; background: var(--cream); }
 .business-services .contact-privacy { color: #686258; font-size: .83rem; }
 .business-services .services-inquiry { margin-top: 1rem; }
 .business-services .services-inquiry label { font-size: .92rem; margin-bottom: 1rem; }
-.business-services .services-inquiry input, .business-services .services-inquiry textarea, .business-services .services-inquiry select { border: 1px solid #aeb3a5; border-radius: 6px; background: #fffdf8; }
+.business-services .services-inquiry input, .business-services .services-inquiry textarea, .business-services .services-inquiry select { border: 1px solid #aeb3a5; border-radius: 6px; background: var(--cream); }
 .business-services .services-inquiry textarea { resize: vertical; }
 .business-services .services-inquiry .fields { gap: 1rem; }
 .business-services .services-inquiry summary { justify-content: flex-start; gap: .6rem; color: var(--service-green); font-size: .88rem; }

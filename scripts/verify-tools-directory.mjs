@@ -33,10 +33,11 @@ assert.equal(dom.window.getComputedStyle(document.querySelector('[data-tool-filt
 
 const tones = {
   sage: { preview: '#e4e9df', body: '#f0f3ec' },
-  sand: { preview: '#eadfce', body: '#f6f0e6' },
+  sand: { preview: 'var(--cream)', body: 'var(--cream)' },
   rose: { preview: '#eddbd6', body: '#f6eae7' },
 };
 const allEntries = [...directoryTools, ...upcomingTools];
+assert.equal(dom.window.getComputedStyle(document.documentElement).getPropertyValue('--cream').trim().toLowerCase(), '#f5eee9');
 const visible = () => cards.filter(card => dom.window.getComputedStyle(card).display !== 'none');
 for (const topic of toolTopics) {
   const button = document.querySelector(`[data-tool-filter="${topic.id}"]`);

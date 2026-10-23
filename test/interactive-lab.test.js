@@ -381,6 +381,10 @@ test('observed promises need conditional language or a check', () => {
   assert.deepEqual(findUnqualifiedPromises('Could preserve quality, but test reliability before rollout.'), []);
   assert.deepEqual(findUnqualifiedPromises('Check whether there will be no disruption.'), []);
   assert.deepEqual(findUnqualifiedPromises('There is no guarantee of no disruption.'), []);
+  assert.equal(findUnqualifiedPromises('No change to access or workflow.').length, 1);
+  assert.equal(findUnqualifiedPromises('File history and comments preserved.').length, 1);
+  assert.deepEqual(findUnqualifiedPromises('Existing file access must be preserved.'), []);
+  assert.deepEqual(findUnqualifiedPromises('Continued access is subject to vendor confirmation.'), []);
 });
 
 test('a rejected promise is regenerated rather than displayed as a checked brief', async () => {

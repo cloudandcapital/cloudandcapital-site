@@ -289,10 +289,11 @@ export function findUnsupportedNumbers(value, sourceText, { includeCalculations 
 // that the remaining prose is true or that every unsupported claim is detected.
 export function findUnqualifiedPromises(value) {
   const matches = new Set();
-  const qualifiers = /\b(?:may|might|could|if|unless|unknown|uncertain|unconfirmed|check|confirm|test|assess|verify|whether|depends?|potential(?:ly)?)\b|\bnot\s+(?:confirmed|guaranteed)\b|\bno\s+guarantee\b/i;
+  const qualifiers = /\b(?:may|might|could|if|unless|unknown|uncertain|unconfirmed|check|confirm|confirmation|test|testing|assess|verify|verification|whether|depends?|potential(?:ly)?)\b|\bnot\s+(?:confirmed|guaranteed)\b|\bno\s+guarantee\b|\bsubject to\b|\bmust\s+(?:be|remain)\b/i;
   const promises = [
-    /\bno disruption\b/i,
+    /\bno\s+(?:disruption|downtime|change|impact|effect|risk)\b/i,
     /\b(?:keeps?|preserves?|maintains?)\b[^.!?;]{0,90}\b(?:quality|reliability|access)\b/i,
+    /\b(?:access|quality|reliability|files?|history|comments?)\b[^.!?;]{0,60}\b(?:preserved|unchanged|unaffected|maintained|guaranteed)\b/i,
     /\b(?:captures?|delivers?|guarantees?)\b[^.!?;]{0,60}\b(?:savings?|cost reduction)\b/i,
     /\bonly safe\s+(?:first\s+)?(?:move|path|option|step)\b/i,
   ];

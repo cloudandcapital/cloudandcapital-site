@@ -5,8 +5,9 @@ import { homepageWriting, newsletter } from '../../data/siteContent';
 import article from '../../data/softwareValueArticle.json';
 import '../../styles/guides-page.css';
 const guides = [
-  { kind: 'Tool walkthrough', title: 'Give every renewal a place to land.', description: 'Add your subscriptions, understand the totals, and keep notice deadlines in view.', href: '/insights/using-the-renewal-tracker', action: 'Use the tracker with me', image: '/images/software-renewal-project-desk.jpg', alt: 'Software Renewal Tracker with an illustrative Project desk subscription', tone: 'sage' },
-  { kind: 'Software spending', title: article.title, description: article.description, href: '/insights/is-this-software-worth-it', action: 'Read the guide', image: '/images/software-renewal-worksheet-preview.jpg', alt: 'Preview of the software renewal worksheet', tone: 'sand' },
+  { kind: 'AI costs · Tool walkthrough', title: 'The cheaper AI plan might cost you more.', description: 'Compare two plans, account for review time, and see what each usable result costs. Then try your own numbers.', href: '/insights/using-ai-cost-lens', action: 'Walk through an example', image: '/images/ai-cost-lens-usable-result-preview.jpg', imageWidth: 1193, imageHeight: 538, alt: 'AI Cost Lens example comparing $2.56 and $4.25 per usable result, including review time', tone: 'sage' },
+  { kind: 'Tool walkthrough', title: 'Give every renewal a place to land.', description: 'Add your subscriptions, understand the totals, and keep notice deadlines in view.', href: '/insights/using-the-renewal-tracker', action: 'Use the tracker with me', image: '/images/software-renewal-project-desk.jpg', imageWidth: 1168, imageHeight: 455, alt: 'Software Renewal Tracker with an illustrative Project desk subscription', tone: 'sage' },
+  { kind: 'Software spending', title: article.title, description: article.description, href: '/insights/is-this-software-worth-it', action: 'Read the guide', image: '/images/software-renewal-worksheet-preview.jpg', imageWidth: 1152, imageHeight: 395, alt: 'Preview of the software renewal worksheet', tone: 'sand' },
 ];
 ---
 <BaseLayout title="Guides & Writing | Cloud & Capital" description="Tool walkthroughs, software spending guides, and Diana Molski’s writing on money, markets, AI and technology. Learn something, try a tool, or explore Markets & Mimosas.">
@@ -18,7 +19,7 @@ const guides = [
     </section>
     <section class="guide-shell guide-section" aria-labelledby="walkthroughs-title">
       <div class="guide-section-heading"><div><p class="guide-eyebrow">Try it yourself</p><h2 id="walkthroughs-title">A guide beside the tool.</h2></div><a href="/tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="writing_archive"><ActionLabel label="Browse the free tools" /></a></div>
-      <div class="guide-grid">{guides.map(guide => <article class:list={['guide-card', guide.tone]}><img src={guide.image} alt={guide.alt} width="1168" height="455" loading="lazy" decoding="async" /><div><p class="guide-eyebrow">{guide.kind}</p><h3><a href={guide.href}>{guide.title}</a></h3><p>{guide.description}</p><a class="guide-read" href={guide.href}><ActionLabel label={guide.action} /></a></div></article>)}</div>
+      <div class="guide-grid">{guides.map(guide => <article class:list={['guide-card', guide.tone]}><img src={guide.image} alt={guide.alt} width={guide.imageWidth} height={guide.imageHeight} loading="lazy" decoding="async" /><div><p class="guide-eyebrow">{guide.kind}</p><h3><a href={guide.href}>{guide.title}</a></h3><p>{guide.description}</p><a class="guide-read" href={guide.href}><ActionLabel label={guide.action} /></a></div></article>)}</div>
       <p class="guide-learning">Exploring the markets for the first time? <a href="/learn">See investing and trading lessons <span aria-hidden="true">→</span></a></p>
     </section>
     <section class="essay-band" aria-labelledby="essays-title"><div class="guide-shell guide-section">

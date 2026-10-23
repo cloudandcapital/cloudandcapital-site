@@ -78,6 +78,31 @@
     "public_url": "https://guard.cloudandcapital.com/",
     "public_requirements": "Gzip, 18-place costs and explicit UTC disclosure confirmed",
     "public_source_pins": "matched merged producer revisions and billing module hashes",
-    "post_release_interactive_upload": "pending: local execution and browser workspace unavailable"
+    "post_release_interactive_upload": {
+      "status": "passed",
+      "date": "2026-10-23",
+      "input": "Unchanged public 1,000-row historical FOCUS CSV in Gzip wrapper",
+      "utc_confirmation": "required and explicitly selected for this test",
+      "rows": 1000,
+      "net": "20.52022672899",
+      "provider_totals": {
+        "AWS": "18.0066386184",
+        "Microsoft": "1.97651418586",
+        "Oracle": "0.53707392473"
+      },
+      "expanded_source_sha256": "e91e5ac7edf01ed2c9d926f37ef7dc1ae2aae97956fea8da6c9ee488b1c2839e",
+      "downloads": {
+        "evidence_json": {
+          "bytes": 2011042,
+          "sha256": "7601a70e19c62ff98aaebbe865538b12c5cac9cc38537d3ae4481a7ae28777d9"
+        },
+        "printable_html": {
+          "bytes": 6499,
+          "sha256": "24e48632dafdc27b8a13821e97fc8dfd6218ab62f8c0966afe139fb2267331e5"
+        }
+      },
+      "clear_data": "empty selectors; Review disabled",
+      "limits": "No private bill, fresh network capture, physical print or broad native-provider compatibility claim"
+    }
   }
 }

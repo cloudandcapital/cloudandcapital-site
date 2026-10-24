@@ -1,6 +1,6 @@
 # Provider input coverage — October 23, 2026
 
-Current implementation follow-up: the independent Claude audit repairs are released in Guard PR39, with matching guide PR84. Final strict CI passes 168 browser checks with 14 existing skips and no failures/retries; the public HTTPS quick example and all four clean source pins were verified. [The audit follow-up](guard-claude-audit-follow-up-2026-10-23.md) records B1-B11, the actual Chromium PDF, the independent 45,000-row native regression and remaining current-provider/device limits. Diana's targeted manual Claude recheck is next.
+Current implementation follow-up: October24 independent recheck repairs are in Guard PR40 with matching guide PR85. Final strict CI passes 171 browser checks with 14 existing skips and no failures/retries. The remaining template-total, correction/spike, Lumen, header/month, fee/wording, print and mobile defects are addressed. [The October24 recheck follow-up](guard-claude-recheck-2026-10-24.md) records source ownership, inspected two-page A4/Letter PDFs and exact delivery/acceptance boundaries. Prior [October23 audit evidence](guard-claude-audit-follow-up-2026-10-23.md) stays historical; Diana’s next manual Claude pass is targeted to the remaining reproduced cases.
 
 Latest provider-format follow-up: Guard PR38 handles valid UTC timestamps without
 seconds from Microsoft's published EA FOCUS file and recognized Google invoice

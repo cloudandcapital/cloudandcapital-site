@@ -15,7 +15,7 @@ const articleData = {
   publisher: { '@id': 'https://cloudandcapital.com/#organization' },
   mainEntityOfPage: articleUrl,
   datePublished: '2026-10-23',
-  dateModified: '2026-10-23',
+  dateModified: '2026-10-24',
   image: 'https://cloudandcapital.com/images/cloud-cost-guard-billing-review.png',
 };
 ---
@@ -26,7 +26,7 @@ const articleData = {
         <a class="guide-back" href="/insights">← Guides &amp; writing</a>
         <p class="guide-eyebrow">Cloud bills · A tool walkthrough</p>
         <h1><span>Your cloud bill grew.</span> <em>What changed?</em></h1>
-        <p class="guide-byline">By Diana Molski · <time datetime="2026-10-23">October 23, 2026</time></p>
+        <p class="guide-byline">By Diana Molski · <time datetime="2026-10-24">Updated October 24, 2026</time></p>
         <p class="guide-lede">A bigger bill tells you something changed. It doesn’t tell you where to start. Cloud Cost Guard breaks down your billing records and compares periods, so you can see which services deserve a closer look.</p>
         <p>Start with your own billing export. Upload one period for a spending breakdown, or add an earlier period to see what changed.</p>
         <a class="guide-button" href="https://guard.cloudandcapital.com/" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="cloud_cost_guard" data-analytics-source="writing_archive"><ActionLabel label="Open Cloud Cost Guard" /></a>
@@ -42,7 +42,7 @@ const articleData = {
           </div>
           <div>
             <dt>Azure</dt>
-            <dd>In Cost Management → Exports, choose <strong>Cost and usage details (FOCUS)</strong> and CSV. Download all data parts from one run, using its manifest to check the list. <strong>MOSP pay-as-you-go accounts do not support FOCUS exports.</strong> If yours is MOSP, copy the billed amounts into the simple template. Some pay-as-you-go accounts use MCA and can export FOCUS. Guard does not read provider manifests or verify that all parts are present. <a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports" target="_blank" rel="noopener noreferrer">Azure export instructions</a>.</dd>
+            <dd>In Cost Management → Exports, choose <strong>Cost and usage details (FOCUS)</strong> and CSV. Download all data parts from one run, using its manifest to check the list. <strong>Pay-as-you-go accounts on the Microsoft Online Services Program (MOSP) do not support FOCUS exports.</strong> Check Cost Management + Billing → Properties → Type (or Billing scopes when you have several). If yours is MOSP, copy the billed amounts into the simple template. Some pay-as-you-go accounts use MCA and can export FOCUS. Guard does not read provider manifests or verify that all parts are present. <a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports" target="_blank" rel="noopener noreferrer">Azure export instructions</a>.</dd>
           </div>
           <div>
             <dt>Google Cloud</dt>
@@ -76,6 +76,7 @@ const articleData = {
         <h2 id="result-title">What does the result tell you?</h2>
         <p><strong>Net cloud cost</strong> shows the total from your supplied records, including signed credits. <strong>Services</strong> breaks it down by service. If you added an earlier period, <strong>Findings</strong> shows the biggest movements between the two uploads.</p>
         <p>Check the dates, currency, and included accounts before using the result. The headline comparison uses period totals. A separate <strong>daily average</strong> divides each net total by its reporting days, so you can compare different-length periods. It is not measured daily usage or a forecast. Supplied FOCUS billing dates keep earlier usage corrections inside the right bill review. A partial export gives you a partial picture.</p>
+        <p>Copying a bill into the simple template? Keep the individual charges, taxes and signed credits. Leave out summary lines such as <strong>Invoice total</strong> or <strong>Total charges</strong>; adding those again would double count your bill. If the rows all start on the 1st and have no EndDate, Guard asks whether they cover the whole month.</p>
         <p>Google’s Cost table groups activity by invoice month, which can include late-arriving usage from another month. Guard shows an invoice-month view for this export. Use a detailed daily FOCUS export if you want to explore daily changes.</p>
         <aside class="guide-example"><p><strong>Open “Does this match your bill?” before using the total.</strong> Google control totals are checked against counted rows. An invoice header gap stays visible because filters, additional invoices or credit/debit memos can explain it. When no control total is supplied, compare the result with your original bill. A matching total does not prove complete account coverage.</p></aside>
         <p>The report covers the cloud records you supply. Separate software invoices, direct AI bills, or Kubernetes utilization need additional data; <strong>Overview</strong> explains what’s missing in one “Not in this file” card.</p>
@@ -89,14 +90,15 @@ const articleData = {
       <section aria-labelledby="next-title">
         <h2 id="next-title">Start with the biggest change.</h2>
         <p>With a comparison, open <strong>Findings</strong> and look at <strong>Biggest movement</strong> and <strong>Largest changes</strong>. Start with the service behind the largest increase. With one period, use <strong>Services</strong> to see which charges deserve a closer look.</p>
+        <p>The daily spike check needs enough consecutive daily records. Its count includes only service histories that could actually be tested. A correction for older usage stays in the bill total, but does not switch off a valid daily check for the current billing period. Gaps, hourly rows and monthly totals still need different evidence.</p>
         <p>I’d ask the service owner what changed between the periods, then check usage, rates, and the underlying charges. Was there more demand? A different configuration? A price change? The service total gives us a place to investigate. It doesn’t answer those questions on its own.</p>
         <p>Keep the next step small: one service, someone who can explain it, and the records needed to check the explanation. A higher bill might make sense for the work being done.</p>
       </section>
 
       <section aria-labelledby="keep-title">
         <h2 id="keep-title">Ask a question. Keep the review.</h2>
-        <p>Open <strong>Lumen</strong> and choose <strong>What changed?</strong> for a plain-language explanation. For uploaded bills, Lumen uses prepared answers from your report on your device, covering totals, services, negative adjustments, dates, daily averages and findings. It cannot verify tax correctness or forecast a future bill.</p>
-        <p>Choose <strong>Printable report</strong> to download an HTML copy you can open in your browser. The CSV exports keep the normalized records, and <strong>Evidence JSON</strong> keeps the fuller report data. Save what you need before leaving.</p>
+        <p>Open <strong>Lumen</strong> and choose <strong>What changed?</strong> for a plain-language explanation. For uploaded bills, Lumen uses prepared answers from your report on your device, covering totals, services, negative adjustments, dates, daily averages and findings. Try “How much did September cost?”, “How much was tax?” or “Why is the invoice total different?” Lumen uses the supplied period, explicit tax rows and bill checks for those answers. It cannot verify tax correctness or forecast a future bill.</p>
+        <p>Choose <strong>Printable report</strong> to download an HTML copy you can open in your browser and print. It keeps the total and bill checks together, with warning boxes that stand out on paper. The CSV exports keep the normalized records, and <strong>Evidence JSON</strong> keeps the fuller report data. Save what you need before leaving.</p>
         <p>Want a quick preview before finding your export? The optional <strong>Try an example</strong> button on the start screen reviews the two invented example CSVs through the same local pipeline as your files. Its result shows what to expect from your own upload.</p>
         <p>Your uploaded records, results, and Lumen questions stay in this tab’s memory. Reloading, closing the tab, or clearing the data removes them. Both your bill and the quick example use local prepared answers. The separate full technology spend demo, linked under the upload instructions, discloses when its AI chat sends messages to an AI service.</p>
       </section>

@@ -1,8 +1,18 @@
 # Cloud Cost Guard: service-name safety and the 2 pm recheck
 
-Status: source fixes and Guard PR42 are merged and live. Final strict browser, image and actual-print gates pass. This matching guide and review are delivered in site PR87.
+Status: Diana’s October24 3:50 pm independent manual recheck passes all requested live items. Earlier passes hold and no new reproducible defects were reported. The targeted repair loop is complete; current customer-provider/device acceptance remains separate.
 
 Diana supplied the full independent audit attachment. Its latest 2 pm section is the current verdict: the five requested fixes and six earlier passes hold at Guard b9846cd. A newly discovered service-name crash and the remaining reproduced defects are addressed here. Earlier write-ups remain historical; unverified current provider/device coverage is separate. No connected Claude review ran.
+
+## Independent manual closeout, October24 at 3:50 pm Pacific
+
+Diana supplied the complete latest Claude app audit of bundle main.bba298e2.js and Guard c3d1ccc. Combined Amazon EC2, Route53 and Lambda spikes complete at $9,500 with their respective September21/22/23 dates. All fourteen Amazon names from Claude’s public sample pass together offline. New S3 spending is correct on screen and in Lumen. Mixed-date tax, multiple months and a middle total retain the possible-summary warning; the four-row case stays $259.20 with every row counted. Actual tax lines remain charges, while qualified bill summaries stop. Polite summary requests, genuine future-budget limits, currency formatting, card labels, singular copy and all prior checks pass.
+
+Claude independently printed the exact downloaded HTML with headless Chromium153 on A4 and Letter: two pages, amber warning on page one and 12px body text. It reports Python, the new name-safety tests and all 229 Jest tests passing. Its shortened HTML hash is not treated as a complete byte identifier. This independent observation is separate from the exact internal CI and PDF evidence below.
+
+The warning also appears on 34 of 500 invented round-number bills with no total, and zero of 200 cent-level bills. That 6.8% synthetic construction is not a customer false-positive rate. Values are unchanged. With an unlabeled subtotal plus total, only the subtotal may be flagged; a warning still appears. Repeated date/warning copy and internal producer names are optional presentation work, not new defects. No runtime change is made for these observations.
+
+Current customer AWS/Azure/Google downloads, Safari/Firefox, Chrome’s print-dialog UI, physical phones and screen readers remain outside this pass. The supplied audit reports no clipboard writes and no source edits/publication. The prior implementation record follows. No connected Claude review ran.
 
 ## Reproductions and repairs
 
@@ -43,4 +53,4 @@ The guide explains differently dated tax, valid Total tax/VAT charges, reuploadi
 
 This repair release does not certify current AWS FOCUS 1.2, Azure or Google customer exports, every Google header variant, portal paths, complete invoice/account coverage, arbitrary/localized formats, Safari/Firefox, physical phones, screen readers, Chrome's print-dialog UI or physical paper. Prior public FOCUS/Gzip and Microsoft EA-prefix evidence remains valid. No private bill was used. The new printed possible-total warning is checked separately from the earlier printed Google invoice-gap warning.
 
-Diana's next independent manual recheck belongs in the same Claude app chat, focused on the crash, zero baseline, mixed dates/tax labels, polite/future questions and warning clarity. Preserve the already-passed items. No new automation, queue, schedule, ownership or historical cutoff is created. A later small Ask Lumen link remains a usability candidate only.
+Diana's targeted independent manual recheck is complete, including the crash, zero baseline, mixed dates/tax labels, polite/future questions and warning clarity. Preserve the already-passed items. No new automation, queue, schedule, ownership or historical cutoff is created. A later small Ask Lumen link remains a usability candidate only.

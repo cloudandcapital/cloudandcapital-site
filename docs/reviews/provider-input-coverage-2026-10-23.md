@@ -57,3 +57,7 @@ The independent Claude audit should evaluate this flow cold, then check arithmet
 ## October23 Guard implementation follow-up
 
 Diana authorized the concrete import fixes here. Guard PR36 adds bounded local Gzip CSV opening, 18-place exact cost support and explicit UTC confirmation with source evidence. The unchanged historical public CSVs and Gzip wrapper now pass the actual reader and producer pipeline with exact reconciled totals; native and WebAssembly results agree. See [the implementation review](guard-provider-import-fix-2026-10-23.md) for release and browser evidence. This repairs those observed blockers, without certifying all current native layouts or Google Cloud.
+
+## Google Cost table follow-up
+
+Guard PR37 implements the documented English Google Cost table layout with explicit invoice-month/currency confirmation. It preserves signed credits, tax and adjustments, checks/excludes a Total row and retains original source hashes and context. FOCUS missing-service rows and explicit BigQuery UTC microseconds are also handled. The [implementation review](guard-google-cost-table-2026-10-23.md) distinguishes contract fixtures, automated browser tests, production delivery and remaining current-provider acceptance. The earlier source-reported unsupported position above is historical, not the new Google Cost table verdict.

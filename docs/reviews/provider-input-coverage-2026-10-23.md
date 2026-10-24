@@ -1,5 +1,7 @@
 # Provider input coverage — October 23, 2026
 
+Current implementation follow-up: Diana supplied her independent Claude audit. Bill controls, date handling, the quick example and reader guidance are being finalized in Guard PR39. [The audit follow-up](guard-claude-audit-follow-up-2026-10-23.md) records the fixes, checks and remaining limits. Release verification is in progress.
+
 Latest provider-format follow-up: Guard PR38 handles valid UTC timestamps without
 seconds from Microsoft's published EA FOCUS file and recognized Google invoice
 headers before the charge table. An unchanged 5,000-row Microsoft demo prefix

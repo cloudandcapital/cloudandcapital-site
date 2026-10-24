@@ -1,6 +1,6 @@
 # Cloud Cost Guard: service-name safety and the 2 pm recheck
 
-Status: source fixes merged and local implementation checks pass. Guard PR42 browser/image/print gates and delivery are pending. Replace pending fields with observed evidence before publication.
+Status: source fixes and Guard PR42 are merged and live. Final strict browser, image and actual-print gates pass. This matching guide and review are delivered in site PR87.
 
 Diana supplied the full independent audit attachment. Its latest 2 pm section is the current verdict: the five requested fixes and six earlier passes hold at Guard b9846cd. A newly discovered service-name crash and the remaining reproduced defects are addressed here. Earlier write-ups remain historical; unverified current provider/device coverage is separate. No connected Claude review ran.
 
@@ -23,13 +23,19 @@ Lite PR31 merged as 74bcd004b27cc2c3c82b33d25951a1e7ca8f3d78 after CI40136499582
 
 Existing detector thresholds, severity and diagnostic metric rounding remain unchanged. Source tests compare billing diagnostics with generic detector output, including currency formatting. Watchdog's existing diagnostics round currency metrics to two decimal places; this repair does not change that analytical boundary. Full supplied precision remains in the bill records and producer-owned totals. This is separate from display precision for currencies with zero or three fractional digits.
 
-Local Guard validation: 228 frontend tests; 19 pipeline tests including the 35-name complete-validation matrix; 16 native/WebAssembly parity cases; optimized production build. Native and WebAssembly outputs agree exactly for Amazon EC2, Amazon Route 53, Lambda, new spending, the mixed-date warning and all retained previous cases. The new browser cases use real file controls across desktop/tablet/mobile, local Lumen and actual A4/Letter printing of the possible-total report with backgrounds off.
+Local Guard validation: 229 frontend tests; 19 pipeline tests including the 35-name complete-validation matrix; 16 native/WebAssembly parity cases; optimized production build. Native and WebAssembly outputs agree exactly for Amazon EC2, Amazon Route 53, Lambda, new spending, the mixed-date warning and all retained previous cases. The new browser cases use real file controls across desktop/tablet/mobile, local Lumen and actual A4/Letter printing of the possible-total report with backgrounds off.
 
-BROWSER_IMAGE_AND_PRINT_PENDING
+The initial app CI40136999749 at d06b4eb passed 179 browser checks and retained 14 existing skips. Seven tests failed: four screenshot checks covering the eight corrected bill-check views, plus the new-spending Lumen-title assertion across three viewports. The dashboard title was correct, but the local answer omitted it. Lumen now carries the producer-owned finding title and has a native-backed regression; all 229 frontend tests pass locally.
+
+Eight affected billing reference images were inspected and approved. Six repeat captures are pixel-identical; two table views have tiny one-to-three-level rasterization differences and pass the unchanged Playwright comparator with maxDiffPixels zero. Significant old-versus-new differences are confined to the corrected bill-check introduction. No masks, thresholds, skips, Lumen references or legacy images changed.
+
+Actual mixed-date possible-total reports were printed from the downloaded HTML with backgrounds off on A4 and Letter. Each is two pages. All four rendered pages were inspected: the possible-total warning is visible on page one; amounts, table columns and cards fit. A4 SHA256 e0636ae2a19e086d90a8d6dca9647017b5eba61e672dff683c982672bf820ab1. Letter SHA256 ee89d0bc8be7439ac837e362115cda336aec4846896a24f844fbdfe5a79bdbac. The new Amazon, new-spending and mixed-date screen views were inspected.
+
+Final Guard CI40138673493 at 46aa3e92231f4259c24e487f14de802a40b57621 passes 186 first-pass browser checks, 14 existing skips, no failures/retries. All 229 frontend tests, 19 pipeline tests, 16 native/WebAssembly parity cases, API and transport checks, optimized production build and mount checks pass. No failing assertion was skipped or loosened.
 
 ## Delivery and guide
 
-APP_AND_GUIDE_DELIVERY_PENDING
+Guard PR42 merged as c3d1ccc64825c837b56fc229592cc4af22ecb598, with an identical tree to the tested candidate. Its Vercel production commit status succeeded. Public runtime provenance matches all four clean producer pins. The public example, polite bill explanation, future-budget limit and clearing/reset were checked. Matching guide and scoped quality-rollup changes are in site PR87. Public guide delivery is verified after that merge and recorded in the canonical audit state.
 
 The guide explains differently dated tax, valid Total tax/VAT charges, reuploading a corrected file, new spending in supplied history and the polite Lumen question. All 138 site tests and its production build pass with Astro telemetry disabled. This repository has no GitHub Actions workflow. The approved homepage and current actual guide screenshot stay unchanged.
 

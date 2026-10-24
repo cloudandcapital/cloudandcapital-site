@@ -52,7 +52,7 @@ const articleData = {
         <p>Open <strong>What can I upload?</strong> on Guard’s start screen for the template and format details. PDF invoices, screenshots, Excel files, ZIP archives, and Parquet files aren’t read directly.</p>
         <ol class="guard-steps">
           <li>Under <strong>Your current bill</strong>, select all CSV parts from one export run.</li>
-          <li>For a Google Cost table, confirm the invoice month and three-letter currency code from your bill. No template editing needed.</li>
+          <li>For a Google Cost table, confirm the invoice month and three-letter currency code from your bill. Leave its invoice or statement header lines in the file. No template editing needed.</li>
           <li>To compare, add a separate earlier period under <strong>An earlier bill</strong>. This is optional.</li>
           <li>Choose <strong>Review my bill</strong>. The first review prepares the analysis tools on your device, so give it a moment.</li>
         </ol>
@@ -63,6 +63,7 @@ const articleData = {
             <li>The simple template needs <strong>Date, Service, Cost, and Currency</strong>. Preserve credits as negative amounts, and keep taxes and other charges you want included.</li>
             <li>Cost values keep up to <strong>18 decimal places</strong> through the analysis and downloads. Keep your original amounts; don’t round records just to force an upload.</li>
             <li>If timestamps leave out the timezone, Guard asks you to confirm UTC. Confirm only if your export uses UTC; otherwise export explicit UTC timestamps. The report records your choice.</li>
+            <li>UTC timestamps can use minutes or seconds, such as <strong>2026-09-01T00:00Z</strong>. You don’t need to edit valid timestamps just to add seconds.</li>
             <li>FOCUS files need <strong>ChargePeriodStart, ChargePeriodEnd, ServiceName, BilledCost, and BillingCurrency</strong>. This is support for those columns, not validation of the full FOCUS specification. Rows with an empty service name keep their amounts and get a flagged “service not supplied” label.</li>
             <li>Google Cost table credits and taxes stay in the review. A Total row is checked separately and isn’t counted as another charge. Unrounded cost is preferred; the report flags any rounded Cost values it uses.</li>
             <li>Use one currency and consistent account coverage and cost basis. The comparison must be earlier and must not overlap the current period.</li>

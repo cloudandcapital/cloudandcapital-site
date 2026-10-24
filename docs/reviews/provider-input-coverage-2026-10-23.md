@@ -1,5 +1,13 @@
 # Provider input coverage — October 23, 2026
 
+Latest provider-format follow-up: Guard PR38 handles valid UTC timestamps without
+seconds from Microsoft's published EA FOCUS file and recognized Google invoice
+headers before the charge table. An unchanged 5,000-row Microsoft demo prefix
+reconciles exactly; this is partial historical demo data, not a current customer
+invoice. Release checks and remaining coverage are in
+[the provider export follow-up](guard-provider-export-follow-up-2026-10-23.md).
+Diana's independent manual Claude review follows the released app and guide.
+
 ## Diana's requirement
 
 Every tool should accommodate the common inputs of its intended users. For spending tools, someone should be able to bring a bill or ordinary provider export and get a useful review of their own spending. Supporting only our examples or a specially prepared template is not enough to call the product ready for broad use.

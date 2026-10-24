@@ -59,7 +59,7 @@ for (const topic of toolTopics) {
 document.querySelector('[data-tool-filter="all"]').click();
 assert.equal(visible().length, cards.length);
 assert.equal(document.querySelectorAll('[data-filter-tone]').length, 0);
-assert.equal(document.querySelector('[data-tool-status]').textContent, '5 tools to explore · 1 under review · 4 coming soon');
+assert.equal(document.querySelector('[data-tool-status]').textContent, '6 tools to explore · 4 coming soon');
 for (const action of document.querySelectorAll('.card-action, .card-resource')) {
   const css = dom.window.getComputedStyle(action);
   assert.equal(css.alignSelf, 'center');

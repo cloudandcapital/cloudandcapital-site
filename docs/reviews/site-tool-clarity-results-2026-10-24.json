@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-24",
+  "base_commit": "7d301d42087c653911ebbd4034262a945e37c48e",
+  "website_tests": {
+    "passed": 138,
+    "failed": 0,
+    "skipped": 0
+  },
+  "production_build": "passed",
+  "tools_directory_rendered_check": "passed",
+  "rendered_routes": {
+    "count": 20,
+    "internal_link_references": 327,
+    "local_image_references": 68,
+    "failures": [],
+    "external_unique_destinations_not_certified": 29,
+    "scope": "Locally built SSR routes, internal links/anchors and local image paths; no remote service calls or browser rendering"
+  },
+  "renewal_live_check": {
+    "data": "Invented examples and one temporary illustrative record only",
+    "selected_example_month": "2026-11",
+    "monthly_equivalent_usd": "89.00",
+    "same_month_payments_usd": "859.00",
+    "annual_charges_usd": "1068.00",
+    "saved_record_reload": "passed",
+    "cancel_decision_keeps_projected_charge": "19.00",
+    "ended_billing_excludes_charge": "0.00",
+    "temporary_record_cleanup": "confirmed; original unsaved examples restored",
+    "csv_records": 3,
+    "csv_schema_marker": "cc-renewal-tracker-v1",
+    "csv_sha256": "9941dedb8102bc502836451d045edf6400152d97d189bbb19ed5f54338fd96a8",
+    "calendar_sha256": "3780e5f13b984c514513453b77c3c5a21a2ae719144bc8f9d24ad8879a14c3da",
+    "calendar_events": 18,
+    "billing_events": 14,
+    "renewal_events": 3,
+    "notice_events_in_export_window": 1,
+    "calendar_window": "2026-11-01 to 2027-11-01, end exclusive",
+    "automatic_alarms": false,
+    "calendar_app_import": "not performed in this pass",
+    "cross_browser_or_physical_device": "not newly certified"
+  },
+  "lens_website_alignment": {
+    "simple_cost_per_usable_result_usd": [
+      "2.56",
+      "4.25"
+    ],
+    "simple_totals_including_time_usd": [
+      "230.00",
+      "340.00"
+    ],
+    "source_upgrade_pr": 43,
+    "full_guide_pr": 44,
+    "public_verify_example_and_download": "checked before this website-copy pass",
+    "independent_review_of_new_workflow": "queued in existing plan after October25 6pm America/Los_Angeles; manual Claude app only"
+  },
+  "guard": {
+    "source_release": "c3d1ccc64825c837b56fc229592cc4af22ecb598",
+    "independent_recheck": "October24 3:50 pm; all requested items pass, earlier passes hold, no new reproducible defects",
+    "runtime_changed_in_this_pass": false
+  }
+}

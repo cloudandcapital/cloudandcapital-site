@@ -53,7 +53,7 @@ export const directoryTools: DirectoryTool[] = [
   {
     slug: 'cloud-cost-guard', topics: ['tech-spending'], name: 'Cloud Cost Guard', kind: 'Cloud bills',
     description: 'See where your cloud spending went and what changed between bills.',
-    bring: 'A supported FOCUS CSV or the simple billing template. Add an earlier period to compare.',
+    bring: 'A supported FOCUS CSV, Google Cost table CSV, or the billing template. Add an earlier bill to compare.',
     result: 'Cost drivers, a spending breakdown, and questions to investigate.',
     action: 'Review my cloud bill', href: releasedTool('cloud-cost-guard-lumen').href, external: true,
     destination: 'cloud_cost_guard', source: 'work_decision_tools', tone: 'rose',

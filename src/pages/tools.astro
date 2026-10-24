@@ -42,7 +42,7 @@ const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
           </button>
         ))}
       </div>
-      <p class="library-status" data-tool-status role="status" aria-live="polite" aria-atomic="true">{availableCount} tools to explore · {reviewCount} under review · {upcomingTools.length} coming soon</p>
+      <p class="library-status" data-tool-status role="status" aria-live="polite" aria-atomic="true">{availableCount} tools to explore{reviewCount > 0 && <> · {reviewCount} under review</>} · {upcomingTools.length} coming soon</p>
       <ul class="directory-grid" id="tool-gallery">
         {directoryTools.map(tool => (
           <li class="directory-item" data-tool-item data-tool-id={tool.slug} data-tool-topics={tool.topics.join(' ')} data-tool-review={tool.availability === 'review' || undefined}>

@@ -1,6 +1,6 @@
 # Tool quality and improvement plan
 
-Owner: Diana Molski. Updated October 23, 2026.
+Owner: Diana Molski. Updated October 24, 2026.
 
 Keep the approved Cloud & Capital positioning and homepage design. A tool earns its place by helping a named visitor complete a useful task. Finish the existing library before expanding it simply to fill cards.
 
@@ -30,12 +30,30 @@ Acceptance brief: [Provider input coverage](reviews/provider-input-coverage-2026
 | --- | --- | --- |
 | Market Tape | October 23 Claude review findings resolved; refreshed live guide and real screenshots; app 18 checks and site 109 checks at that release | Independent targeted retest if desired. Stored snapshot history is a future candidate, not shipped functionality. Weekly integrity workflow retains its existing scope. |
 | Interactive Lab | October 22–23 review and follow-up records in docs/reviews; live renewal guide and actual example images | Preserve known model limitations and any later owner feedback; do not equate shape validation with verified model prose. |
-| Software Renewal Tracker | Existing reviewed entry, CSV and calendar paths; companion guide and PDF resources | Use the current tracker owner for later work. Reconcile any new release before replacing screenshots or repeating defects. |
-| AI Cost Lens | Separate active app owner and weekly audit | Do not modify that app from this website task. Read the latest closeout before calling it complete or reopening a finding. |
-| Cloud Cost Guard | October24 2 pm crash and regressions repaired in Guard PR42 with matching guide PR87. The earlier independent five-plus-six passes are preserved. Final strict CI: 186 first-pass browser checks, 14 existing skips, no failures/retries; 229 frontend tests, 19 pipeline tests including 35 provider/service pairs, and 16 native/WebAssembly cases pass. Mixed-date possible-total reports have two inspected pages on A4 and Letter, with the warning on page one | Short targeted manual Claude recheck is next. Current customer-provider exports, full invoice/account coverage, other browsers/screen readers and physical paper remain separate. See docs/reviews/guard-name-safety-2026-10-24.md; prior public/provider evidence remains valid. |
+| Software Renewal Tracker | Existing reviewed entry/CSV/calendar paths and companion guide. October24 public check confirms $89 monthly equivalent/$859 same-month payments, save/reload, Cancel versus ended billing, and actual CSV/18-event calendar bytes | Keep the separate owner’s longer article/PDF shortening and release decision open. This check does not replace that package or claim a new calendar-app, physical-device or cross-browser acceptance. The short website guide remains live. |
+| AI Cost Lens | Controlled-test PR43 and full-guide PR44 are merged; their quality gates pass. The public simple comparison still matches $2.56/$4.25, and Verify’s caching example/download matches 40 distinct cases and 80 paired observations. The website walkthrough now explains where Verify appears and links directly to its detailed guide | Queue one focused manual Claude review of the new test workflow and matching guide after October25 at 6pm America/Los_Angeles. Existing app owner retains implementation; this pass changes website guidance only. This is not a new full independent Lens audit. |
+| Cloud Cost Guard | October24 3:50 pm manual Claude recheck passes every requested live item at c3d1ccc; earlier passes hold and no new reproducible defects were found. Internal strict CI and inspected A4/Letter warning output remain valid | Targeted repair loop complete. Preserve the passing runtime. Synthetic warning noise is recorded, not a measured customer error rate. Current customer-provider exports, complete coverage, remaining browser/device and accessibility checks remain separate. See docs/reviews/guard-name-safety-2026-10-24.md. |
 | Signal Audit | Scoring, applicability, first-step logic, local privacy, export, wording, guide, actual screenshots and responsive checks | Claude's r2 recheck passes all seven targeted items. Its remaining map/exclusion wording finding is fixed for screen and Copy; 138 tests pass. Real Chrome/Safari PDF pagination still unverified. See docs/reviews/signal-audit-claude-follow-up-2026-10-23.md. |
 
 A row is not a claim that every tool is locked. Each final status needs its owning release evidence.
+
+## Order of work from this pass
+
+1. Finish the current website clarity and link checks: directory counts/support wording, beginner Lens walkthrough to detailed Verify guide, and the renewal tracker’s existing guide/export journey. Keep the approved homepage and app calculations stable.
+2. Continue through Services, Guides & Writing, and Investing & Trading/Learning. For each page, identify the visitor’s job, simplify the choice, check the destination, and keep the existing sage/clay/cream design. Do not redesign every page at once.
+3. Resume new tools only after the current tool/resource journey is clear. Keep the existing AI helper, money planner, cash-flow planner and calculator cards as coming soon; this pass creates no new build commitment.
+
+### Manual Claude review waiting list
+
+Diana’s usage resets October25 at 6pm America/Los_Angeles. This is a review queue inside the existing plan, not a reminder or automatic review. Use her Claude app manually; do not call the connected editorial tool.
+
+- **First: AI Cost Lens’s new controlled tests and full guide.** Check one-change locking, fresh repeated runs, held-out cases, rejection paths, tiny API unit costs, saved/reopened records, print, memo attachment and production-Actuals boundaries. Keep the beginner comparison in the check. Preserve the previous Lens work; report exact new defects separately from untested coverage.
+- **Separate acceptance still open:** Signal Audit’s actual print pagination and the recorded tool-specific provider/device/accessibility limits. These are not invented defects or reasons to repeat all earlier reviews. Current provider exports need representative files, not another synthetic example.
+- **Guard’s latest targeted review is complete.** Minor repeated wording/internal names and synthetic warning noise are later presentation candidates. No new Guard repair review is queued without fresh evidence.
+
+### Resource structure to preserve
+
+Keep **Tools I built**, **Tools I use**, and **Free resources** distinct when the resource area is expanded. Organize them around the visitor’s problem, explain who each helps, and connect article → tool → relevant service. Only show tools and resources that actually exist. The first checklist candidate is **Before you renew**, tied to Technology Cost Review; reconcile it with the existing software-renewal worksheet before making another overlapping resource. No course or membership commitment is added.
 
 ### Guard: own spending comes first
 

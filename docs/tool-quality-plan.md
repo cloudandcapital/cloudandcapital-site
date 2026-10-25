@@ -42,7 +42,7 @@ A row is not a claim that every tool is locked. Each final status needs its owni
 1. **Complete:** directory counts/support wording, beginner Lens walkthrough to detailed Verify guide, and the renewal tracker’s existing guide/export journey. The approved homepage and app calculations remain stable.
 2. **Content/link repair pass complete; visual approval separate:** Services, its worked examples, Guides & Writing, and Investing & Trading/Learning have the checked descriptions, links and bounded layout fixes recorded in [the supporting-page review](reviews/site-page-journeys-2026-10-24.md). Diana clarified that those checks do not finish the designer pass. The three main pages now share the homepage's visual language in the design release described below; Diana's visual sign-off remains open. This does not certify every browser, physical phone or lesson outcome.
 3. **Visual review next:** Diana will make a closer designer pass on October25. Keep her visual approval open and use that feedback to continue the designer pass across the tool directory and tools themselves while retaining the per-tool technical status above. Start with the website's Renewal Tracker, Signal Audit and Interactive Lab, then coordinate fresh source with the Lens, Guard and Tape app work. Refresh directory/homepage screenshots only after each tool's design is released. The focused manual Lens review below and remaining file/device acceptance stay separate. Preserve the separate renewal article/PDF owner's work. Guard's targeted repair loop stays closed unless fresh reproducible evidence changes it.
-4. Resume new tools after that evidence is reconciled and Diana chooses the next build. Keep the existing AI helper, money planner, cash-flow planner and calculator cards as coming soon; this pass creates no new build commitment. Reconcile the Before you renew checklist with the existing worksheet before expanding the resource area.
+4. Resume new tools after that evidence is reconciled and Diana chooses the next build. Keep the existing AI helper, money planner, cash-flow planner and calculator cards as coming soon; this pass creates no new build commitment. The existing Before you renew worksheet is now reconciled and visible under Guides & Writing → Free resources; keep future resources grounded in a real visitor task.
 
 ### Functional closeout before Diana's visual review
 
@@ -70,7 +70,17 @@ Diana’s usage resets October25 at 6pm America/Los_Angeles. This is a review qu
 
 ### Resource structure to preserve
 
-Keep **Tools I built**, **Tools I use**, and **Free resources** distinct when the resource area is expanded. Organize them around the visitor’s problem, explain who each helps, and connect article → tool → relevant service. Only show tools and resources that actually exist. The first checklist candidate is **Before you renew**, tied to Technology Cost Review; reconcile it with the existing software-renewal worksheet before making another overlapping resource. No course or membership commitment is added.
+Keep **Tools I built**, **Tools I use**, and **Free resources** distinct when the resource area is expanded. Organize them around the visitor’s problem, explain who each helps, and connect article → tool → relevant service. Only show tools and resources that actually exist. **Before you renew** reuses the existing software-renewal worksheet. Its two-page fillable PDF, webpage, related guide, tracker and Technology Cost Review form one connected resource journey. It lives at /insights#resources, with a shortcut from the tool directory. Do not create a second overlapping checklist. No course or membership commitment is added.
+
+### A clear, personal website worth returning to
+
+Diana's October24 direction is to keep the site useful, straightforward and personal: good tools, interesting articles and things visitors can take away or return to. Creativity should make the useful thing easier to discover and understand. Keep the approved homepage/positioning and the calm cream, sage and dusty rose style.
+
+The [resource journey and reference-site research](reviews/resource-journey-2026-10-24.md) records the patterns applied here: a clear way in by task, useful curated reading beside a chronological archive, and a next step from article to resource/tool to service. This is structural inspiration, not evidence that another site's audience or revenue will transfer to Cloud & Capital.
+
+The first release gives the existing renewal worksheet a distinct Free resources home and keeps the walkthrough section to the six actual tools. It uses the real downloadable PDF as its preview. No new course, membership, signup requirement or recurring publishing promise is added. Tools I use should appear only once Diana's actual choices and the reasons for recommending them are checked; no empty section or borrowed endorsement is published.
+
+A small curated “rabbit holes worth opening” collection and short notes on what Diana actually tried are possible ways to express her curiosity later. Keep any selected content idea in the existing content-and-ideas workflow, not a second backlog or an automatic build assignment. Publication still needs real material and normal editorial decisions. Provider-file acceptance and the six tool designer passes retain their existing status.
 
 ### Guard: own spending comes first
 

@@ -1,55 +1,122 @@
+"""Build the existing two-page worksheet from the website's shared question data.
+
+Requires reportlab and fonttools. Fonts come from the installed, pinned
+@fontsource packages; no font download, account connection or PDF scripting.
+"""
+import json
 from pathlib import Path
-import re
-from reportlab.pdfgen import canvas
+from tempfile import TemporaryDirectory
+
+from fontTools.ttLib import TTFont as SourceFont
 from reportlab.lib.colors import HexColor
+from reportlab.lib.utils import simpleSplit
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-for name,file in [("Helvetica","DejaVuSans.ttf"),("Times-Roman","DejaVuSerif.ttf"),("Times-Italic","DejaVuSerif.ttf")]:
- pdfmetrics.registerFont(TTFont(name,"/usr/share/fonts/truetype/dejavu/"+file))
-from reportlab.lib.utils import simpleSplit
-root=Path(__file__).resolve().parents[1]
-qs=re.findall(r"title: '([^']+)', detail: '([^']+)'",(root/'src/data/softwareRenewal.ts').read_text())
-assert len(qs)==8
-out=root/'public/downloads/before-you-renew-that-software.pdf'
-c=canvas.Canvas(str(out),pagesize=(612,792),pageCompression=1)
-c.setTitle('Before you renew that software | Cloud & Capital')
-c.setAuthor('Diana Molski · Cloud & Capital')
-ink=HexColor('#293c31'); mute=HexColor('#68685d'); line=HexColor('#c9cabc')
-def text(x,y,s,font='Helvetica',size=10,color=ink):
- c.setFillColor(color);c.setFont(font,size);c.drawString(x,y,s)
-def rule(y):
- c.setStrokeColor(line);c.setLineWidth(.6);c.line(44,y,568,y)
-for page in range(2):
- c.setFillColor(HexColor('#faf8f1'));c.rect(0,0,612,792,fill=1,stroke=0)
- text(44,752,'CLOUD & CAPITAL',size=10)
- text(440,752,'A decision worksheet',size=9,color=mute)
- rule(735)
- if page==0:
-  text(44,687,'Before you renew',font='Times-Roman',size=34)
-  text(44,651,'that software.',font='Times-Italic',size=34)
-  text(44,620,'One subscription. Eight questions. A clearer next step.',size=11)
-  text(44,590,'Software / plan:',size=10);c.setStrokeColor(line);c.line(125,587,355,587)
-  text(374,590,'Renewal date:',size=10);c.line(438,587,568,587)
-  start=547; spacing=108
- else:
-  text(44,686,'Keep working through it.',font='Times-Roman',size=30)
-  text(44,655,'Keep confirmed costs, estimates, and assumptions separate.',size=11)
-  start=603;spacing=117
- for j,(title,detail) in enumerate(qs[page*4:page*4+4]):
-  y=start-j*spacing
-  text(44,y,f'{page*4+j+1:02}',size=10,color=mute)
-  text(76,y,title,font='Times-Roman',size=17)
-  lines=simpleSplit(detail,'Helvetica',9.5,484)
-  for k,s in enumerate(lines):text(76,y-20-k*13,s,size=9.5,color=mute)
-  for k in range(2):
-   c.setStrokeColor(line);c.line(76,y-57-k*17,568,y-57-k*17)
- if page==1:
-  text(44,106,'Next step owner:',size=9);c.line(126,103,333,103)
-  text(350,106,'Revisit on:',size=9);c.line(399,103,568,103)
- rule(72)
- text(44,51,'cloudandcapital.com/resources/software-renewal',size=8,color=mute)
- text(44,37,'Diana Molski  |  Use this worksheet without signing up.',size=8,color=mute)
- c.linkURL('https://cloudandcapital.com/resources/software-renewal',(44,46,330,63))
- c.showPage()
-c.save()
-print(out)
+from reportlab.pdfgen import canvas
+
+ROOT = Path(__file__).resolve().parents[1]
+PREFIX = 'export const renewalQuestions = '
+source = (ROOT / 'src/data/softwareRenewal.ts').read_text()
+assert source.startswith(PREFIX) and source.rstrip().endswith(';')
+questions = json.loads(source[len(PREFIX):].rstrip()[:-1])
+assert len(questions) == 8
+OUTPUT = ROOT / 'public/downloads/before-you-renew-that-software.pdf'
+CREAM, SAGE, ROSE = [HexColor(v) for v in ['#F5EEE9', '#3D6055', '#C8A5A5']]
+INK, MUTED, LINE = [HexColor(v) for v in ['#24211E', '#5D5C54', '#B8C3B8']]
+WHITE = HexColor('#FFFFFF')
+
+with TemporaryDirectory(prefix='cc-renewal-fonts-') as font_dir:
+    for name, package, filename in [
+        ('BrandSerif', 'cormorant-garamond', 'cormorant-garamond-latin-600-normal.woff'),
+        ('BrandItalic', 'cormorant-garamond', 'cormorant-garamond-latin-600-italic.woff'),
+        ('BrandBody', 'jost', 'jost-latin-400-normal.woff'),
+    ]:
+        font_path = ROOT / 'node_modules/@fontsource' / package / 'files' / filename
+        font = SourceFont(font_path)
+        font.flavor = None
+        converted = Path(font_dir) / (name + '.ttf')
+        font.save(converted)
+        pdfmetrics.registerFont(TTFont(name, str(converted)))
+
+    c = canvas.Canvas(str(OUTPUT), pagesize=(612, 792), pageCompression=1, invariant=1)
+    c.setTitle('Before you renew that software | Cloud & Capital')
+    c.setAuthor('Diana Molski | Cloud & Capital')
+    c.setSubject('Eight questions, three important dates and a next step for one software renewal.')
+    c.setCreator('Cloud & Capital worksheet builder')
+
+    def text(x, y, value, font='BrandBody', size=10, color=INK):
+        c.setFillColor(color)
+        c.setFont(font, size)
+        c.drawString(x, y, value)
+
+    def field(name, tooltip, x, y, width, height=22, multiline=False):
+        c.acroForm.textfield(
+            name=name, tooltip=tooltip, x=x, y=y, width=width, height=height,
+            fontName='Helvetica', fontSize=10.5, textColor=INK,
+            fillColor=WHITE, borderColor=LINE, borderWidth=.6,
+            borderStyle='solid', forceBorder=True,
+            fieldFlags='multiline' if multiline else '', maxlen=900 if multiline else 120,
+        )
+
+    def frame(page):
+        c.setFillColor(CREAM)
+        c.rect(0, 0, 612, 792, fill=1, stroke=0)
+        text(44, 753, 'CLOUD & CAPITAL', size=10, color=SAGE)
+        text(440, 753, 'Free renewal worksheet', size=9, color=MUTED)
+        c.setStrokeColor(LINE)
+        c.setLineWidth(.6)
+        c.line(44, 735, 568, 735)
+        c.line(44, 70, 568, 70)
+        text(44, 49, 'cloudandcapital.com/resources/software-renewal', size=8.5, color=SAGE)
+        c.linkURL('https://cloudandcapital.com/resources/software-renewal', (44, 45, 360, 60))
+        text(44, 33, 'Diana Molski  |  No signup required.', size=8, color=MUTED)
+        text(542, 33, f'{page} / 2', size=8, color=MUTED)
+
+    def question(index, y):
+        q = questions[index]
+        text(44, y, f'{index + 1:02}', size=10, color=SAGE)
+        text(76, y, q['title'], font='BrandSerif', size=18)
+        lines = simpleSplit(q['detail'], 'BrandBody', 10.25, 492)
+        assert len(lines) <= 2, q['title']
+        for line_index, line in enumerate(lines):
+            text(76, y - 18 - line_index * 13, line, size=10.25, color=MUTED)
+        field(f'q{index + 1:02}', f'{index + 1}. {q["title"]}', 76, y - 78, 492, 34, True)
+
+    frame(1)
+    text(44, 692, 'Before you renew', font='BrandSerif', size=36)
+    text(44, 658, 'that software.', font='BrandItalic', size=36, color=SAGE)
+    text(44, 631, 'One subscription. Eight questions. A clearer next step.', size=11)
+    text(44, 613, 'Use short notes. Type in a PDF reader or print, then save a copy.', size=9.5, color=MUTED)
+    text(44, 593, 'Software / plan', size=9.5, color=SAGE)
+    field('software', 'Software or subscription plan', 44, 566, 330)
+    text(392, 593, 'Currency on the bill', size=9.5, color=SAGE)
+    field('currency', 'Currency on the bill, for example USD or EUR', 392, 566, 176)
+    for name, label, x, width in [
+        ('renewal_date', 'Renewal date', 44, 160),
+        ('notice_deadline', 'Last day to give notice', 216, 160),
+        ('next_charge_date', 'Next charge date', 388, 180),
+    ]:
+        text(x, 549, label, size=9.5, color=SAGE)
+        field(name, label + '. Check the provider terms; write unknown if unconfirmed.', x, 522, width)
+    for i in range(4):
+        question(i, 498 - i * 100)
+    c.showPage()
+
+    frame(2)
+    text(44, 692, 'Make the call.', font='BrandSerif', size=34)
+    text(44, 665, 'Keeping it is a decision too. Write down what makes sense for this tool.', size=11)
+    for i in range(4, 8):
+        question(i, 617 - (i - 4) * 110)
+    text(44, 176, 'Who will act? (That can be you.)', size=9.5, color=SAGE)
+    field('owner', 'Person responsible for the next action', 44, 149, 330)
+    text(392, 176, 'Date to decide or revisit', size=9.5, color=SAGE)
+    field('revisit_date', 'Date to decide or revisit, before any relevant notice deadline', 392, 149, 176)
+    text(44, 126, 'The notice deadline can be earlier than renewal. Check the provider terms.', size=9.5, color=MUTED)
+    text(44, 106, 'Keep the dates in your Renewal Tracker', size=10, color=SAGE)
+    c.linkURL('https://cloudandcapital.com/tools/software-renewal-tracker', (44, 101, 275, 118))
+    text(326, 106, 'Need help? Technology Cost Review', size=10, color=SAGE)
+    c.linkURL('https://cloudandcapital.com/services#technology-cost-review', (326, 101, 568, 118))
+    c.showPage()
+    c.save()
+
+print(OUTPUT)

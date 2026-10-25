@@ -1,13 +1,61 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ExtrasArtwork from '../../components/ExtrasArtwork.astro';
+import ActionLabel from '../../components/ActionLabel.astro';
 import { renewalQuestions } from '../../data/softwareRenewal';
 import '../../styles/services.css';
 import '../../styles/editorial-pages.css';
+import '../../styles/resource-page.css';
 ---
-<BaseLayout title="Software Renewal Checklist: Free PDF | Cloud & Capital" description="Eight questions about cost, usage, dependencies, and switching work before renewing software. Download the free checklist, with no signup required.">
-<main id="main-content" class="offer-page editorial-page resource-page">
-<section class="offer-shell editorial-hero"><div><p class="offer-eyebrow">Free worksheet · Eight questions</p><h1><span class="renewal-title-line">Before you renew</span><br/><em>that software.</em></h1><p class="editorial-lede">Your software has a renewal date. It deserves a little performance review.</p><p>Pick one subscription. Bring the bill and a recent example of how it is used.</p><div class="offer-actions"><a class="offer-button" href="/downloads/before-you-renew-that-software.pdf" download>Download the PDF →</a><a class="quiet-link" href="#questions">Read the questions ↓</a></div><p class="small-note">Two pages, with space for your answers. No signup required.</p></div><div class="editorial-hero-art"><ExtrasArtwork kind="renewal"/></div></section>
-<section id="questions" class="offer-shell editorial-section"><p class="offer-eyebrow">Work through one decision</p><ol class="question-grid">{renewalQuestions.map(q=><li><h2>{q.title}</h2><p>{q.detail}</p></li>)}</ol></section>
-<section class="offer-shell resource-next"><p class="offer-eyebrow">Then choose a next step</p><h2>Keep. Adjust. Compare.<br/><em>Or investigate a little further.</em></h2><p>Write down your reason, who will act, and when you’ll revisit the decision. A clear answer may be all you need.</p><p>Once you know the next step, keep the charge, renewal date and notice deadline together in the free Software Renewal Tracker. Compare monthly equivalents with the full payments due each month.</p><div class="offer-actions"><a class="offer-button" href="/tools/software-renewal-tracker" data-analytics-event="cta_click" data-analytics-destination="software_renewal_tracker" data-analytics-source="software_renewal_resource">Open the renewal tracker →</a><a class="quiet-link" href="/services#inquiry">Still tangled? Tell me the question →</a></div></section>
-</main></BaseLayout>
+<BaseLayout title="Before You Renew: Free Software Checklist | Cloud & Capital" description="Review one software subscription before it renews. Eight questions, separate renewal and notice dates, and a free two-page PDF you can type in or print. No signup.">
+  <main id="main-content" class="offer-page editorial-page resource-page">
+    <section class="offer-shell editorial-hero">
+      <div>
+        <a class="resource-back" href="/insights#resources">← Free resources</a>
+        <p class="offer-eyebrow">Software spending · A free worksheet</p>
+        <h1><span class="renewal-title-line">Before you renew</span> <em>that software.</em></h1>
+        <p class="editorial-lede">Your software has a renewal date. It deserves a little performance review.</p>
+        <p>For business owners and teams deciding whether to keep or change a subscription. Pick one tool. Bring the bill, the plan terms and a recent example of how it is used.</p>
+        <div class="offer-actions">
+          <a class="offer-button" href="/downloads/before-you-renew-that-software.pdf" download><ActionLabel label="Get the free worksheet" /></a>
+          <a class="quiet-link" href="#questions"><ActionLabel label="Read the questions" /></a>
+        </div>
+        <p class="small-note">Two pages. Type in a PDF reader or print it. Save a copy to keep your answers. No signup required.</p>
+      </div>
+      <figure class="renewal-preview">
+        <img src="/images/software-renewal-worksheet-preview.jpg" alt="First page of the actual worksheet, with separate fields for renewal date, last day to give notice and next charge date" width="1152" height="1491" decoding="async" />
+        <figcaption>The first page of the worksheet. Eight questions across two pages.</figcaption>
+      </figure>
+    </section>
+
+    <aside class="offer-shell renewal-deadline-note" aria-labelledby="notice-title">
+      <p class="offer-eyebrow">The date worth finding first</p>
+      <h2 id="notice-title">When do you have to give notice?</h2>
+      <p>The last day to cancel or change a plan can be earlier than its renewal date. The next payment can be a different date too. Check the provider’s terms and write down all three. If something is unconfirmed, mark it for a follow-up.</p>
+    </aside>
+
+    <section id="questions" class="offer-shell editorial-section" aria-labelledby="questions-title">
+      <p class="offer-eyebrow">One subscription at a time</p>
+      <h2 id="questions-title">Eight questions. A clearer next step.</h2>
+      <ol class="question-grid">{renewalQuestions.map(q => <li><h3>{q.title}</h3><p>{q.detail}</p></li>)}</ol>
+    </section>
+
+    <section class="offer-shell renewal-next" aria-labelledby="next-title">
+      <p class="offer-eyebrow">Then make the call</p>
+      <h2 id="next-title">Keeping it is a decision too.</h2>
+      <p>Write down what makes sense, who will act and when. You might keep the tool, adjust the plan, compare alternatives or check one missing detail.</p>
+      <div class="renewal-next-grid">
+        <article>
+          <h3>Give the dates a home.</h3>
+          <p>Keep the charge, renewal date and notice deadline together in the free Software Renewal Tracker. See the payments due each month and export calendar events for the dates you enter.</p>
+          <a href="/tools/software-renewal-tracker" data-analytics-event="cta_click" data-analytics-destination="software_renewal_tracker" data-analytics-source="software_renewal_resource"><ActionLabel label="Open the renewal tracker" /></a>
+        </article>
+        <article>
+          <h3>Want another set of eyes?</h3>
+          <p>A Technology Cost Review gives us a place to work through your spending, terms and questions. Bring the worksheet along. We agree the scope and quote before work begins.</p>
+          <a href="/services#technology-cost-review"><ActionLabel label="Explore a cost review" /></a>
+        </article>
+      </div>
+      <a class="renewal-companion" href="/insights/is-this-software-worth-it"><ActionLabel label="Read the software spending guide" /></a>
+    </section>
+  </main>
+</BaseLayout>

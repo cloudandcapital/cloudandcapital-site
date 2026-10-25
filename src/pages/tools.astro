@@ -15,7 +15,7 @@ const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
       <div class="site-shell">
         <div class="hero-layout">
           <div class="hero-copy">
-            <p class="eyebrow">Free tools</p>
+            <p class="eyebrow">Free tools I built</p>
             <h1 id="tools-title"><span>Find something</span> <em>that helps.</em></h1>
             <p>Understand a bill, keep track of renewals, explore the market, or work through a decision. Start with what you need.</p>
           </div>
@@ -58,6 +58,7 @@ const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
           </li>
         ))}
       </ul>
+      <p class="resource-shortcut">Prefer a worksheet? <a href="/insights#resources"><ActionLabel label="Browse free resources" /></a></p>
       <div class="source-section">
         <p>Curious how they’re built?</p>
         <a href="https://github.com/cloudandcapital" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="github_pipeline" data-analytics-source="work_pipeline"><ActionLabel label="Explore on GitHub" /></a>
@@ -177,4 +178,9 @@ const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
   @media (prefers-reduced-motion: reduce) {
     .tool-topics button { transition: none; }
   }
+</style>
+
+<style>
+  .resource-shortcut { display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.25rem 1rem;margin-top:2.5rem;color:var(--brand-ink); }
+  .resource-shortcut a { display:inline-flex;align-items:center;min-height:44px;color:var(--brand-green);text-decoration:none; }
 </style>

@@ -33,7 +33,7 @@ Business services are Technology Cost Review for growing technology teams with m
 
 - **Framework:** Astro
 - **Fonts:** Cormorant Garamond · DM Sans · DM Mono (via @fontsource)
-- **Analytics:** Google Analytics 4 (G-GXRMNTEB3B)
+- **Analytics:** Google Analytics 4
 - **Deployment:** Vercel (auto-deploy on push to `main`)
 
 ## Development

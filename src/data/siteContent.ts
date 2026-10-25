@@ -8,17 +8,13 @@ export const navigation: SiteLink[] = [
   { label: 'Tools', href: '/tools' },
   { label: 'Services', href: '/services' },
   { label: 'Guides & writing', href: '/insights' },
+  { label: 'Investing & Trading', href: '/learn' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
 ];
 
 export const footerLinks: SiteLink[] = [
-  { label: 'Tools', href: '/tools' },
-  { label: 'Services', href: '/services' },
-  { label: 'Guides & writing', href: '/insights' },
-  { label: 'Investing & Trading', href: '/learn' },
-  { label: 'About', href: '/#about' },
-  { label: 'Contact', href: '/#contact' },
+  ...navigation,
   { label: 'Substack', href: 'https://cloudandcapital.substack.com', external: true },
 ];
 

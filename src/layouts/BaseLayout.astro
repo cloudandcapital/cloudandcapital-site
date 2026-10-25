@@ -161,7 +161,6 @@ const {
         border-radius: 2px;
         transition: background .25s;
       }
-      .site-nav-toggle.is-open span { background: rgba(var(--cream-rgb), .96); }
       .site-footer {
         padding: 1.75rem 0 1.5rem;
         background: #211f1b;
@@ -188,6 +187,9 @@ const {
       .site-footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.25rem; padding-top: 1.15rem; border-top: 1px solid rgba(245,238,233,.13); }
       .site-footer-copy { font-family: 'DM Mono', monospace; font-size: .68rem; line-height: 1.6; color: rgba(245,238,233,.68); }
       .site-footer-tagline { font-family: 'DM Mono', monospace; font-size: .68rem; line-height: 1.6; letter-spacing: .07em; text-transform: uppercase; color: rgba(245,238,233,.68); }
+      @media (min-width: 1021px) and (max-width: 1180px) {
+        .site-nav-links { gap: 1.5rem; }
+      }
       @media (max-width: 1020px) {
         .site-footer-top { grid-template-columns: 1fr; justify-items: start; gap: .35rem; }
         .site-footer-links { justify-content: flex-start; }
@@ -243,7 +245,7 @@ const {
         .site-footer-bottom { flex-direction: column; align-items: center; gap: .4rem; }
       }
     </style>
-    <nav class="site-nav">
+    <nav class="site-nav" aria-label="Main navigation">
       <a class="site-nav-logo" href="/"><span class="site-nav-logo-main">Cloud &amp; Capital</span><span class="site-nav-logo-sub">Turning numbers into strategy.</span></a>
       <button type="button" class="site-nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="tool-nav-links" id="tool-nav-toggle">
         <span></span><span></span><span></span>

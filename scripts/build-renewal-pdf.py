@@ -62,7 +62,7 @@ with TemporaryDirectory(prefix='cc-renewal-fonts-') as font_dir:
     def frame(page):
         c.setFillColor(CREAM)
         c.rect(0, 0, 612, 792, fill=1, stroke=0)
-        c.drawImage(str(WORDMARK), 44, 744, width=240, height=240 * 174 / 1551, mask='auto')
+        c.drawImage(str(WORDMARK), 44, 748, width=178, height=178 * 174 / 1551, mask='auto')
         text(440, 753, 'Free renewal worksheet', size=9, color=MUTED)
         c.setStrokeColor(LINE)
         c.setLineWidth(.6)

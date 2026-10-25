@@ -43,7 +43,7 @@ The October24 resource follow-through uses the same typography, close ActionLabe
 
 ## Official logo originals
 
-Diana supplied the authoritative artwork on October24. Byte-identical masters are public/images/brand/cloud-and-capital-wordmark.png (1551 × 174) and public/images/brand/cloud-and-capital-mark.png (500 × 500). Use the appropriate readable version for new Cloud & Capital materials, preserving the artwork, colors, background and aspect ratio. Do not recreate these logos with AI or approximate their typography. The wide wordmark is used in both renewal worksheet page headers; its preview is rendered from that PDF. The square cloud/dollar mark is the compact alternate. The approved homepage is preserved.
+Diana supplied the authoritative artwork on October24. Byte-identical masters are public/images/brand/cloud-and-capital-wordmark.png (1551 × 174) and public/images/brand/cloud-and-capital-mark.png (500 × 500). Use the appropriate readable version for new Cloud & Capital materials, preserving the artwork, colors, background and aspect ratio. Keep placement small and unobtrusive, usually at the top or bottom; the content takes priority. Do not recreate these logos with AI or approximate their typography. The wide wordmark is used in both renewal worksheet page headers; its preview is rendered from that PDF. The square cloud/dollar mark is the compact alternate. The approved homepage is preserved.
 
 | Original | SHA256 |
 |---|---|
@@ -51,3 +51,5 @@ Diana supplied the authoritative artwork on October24. Byte-identical masters ar
 | cloud-and-capital-mark.png | 8c57af24a285769e44e09b9b8fd377e77c01426532e1b567de8dbb57bd5d9c4f |
 
 The persistent brand reference is CloudAndCapital-Brain-v2/brands/cloud-and-capital/design.md. Use Cloud & Capital in PDF credits, footers and author metadata, without a Diana Molski personal-name credit. Follow the same branding for previews and future brand deliverables.
+
+The website also carries a small wordmark in Signal Audit and Interactive Lab print output and embeds it in the downloadable renewal HTML. Companion Lens finance/test memos and both Guard HTML report paths use the same original. Guard embeds the PNG so its downloads remain self-contained and make no image request. CSV, calendar and raw evidence formats retain their valid data structures. Third-party source documents are not rebranded.

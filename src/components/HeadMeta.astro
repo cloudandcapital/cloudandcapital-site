@@ -14,14 +14,16 @@ const {
   title,
   description = '',
   noindex = false,
-  image = '/images/og-image.png',
+  image,
   structuredData = [],
   type = 'website',
 } = Astro.props;
 
 const siteUrl = Astro.site ?? new URL('https://cloudandcapital.com');
 const canonicalUrl = new URL(canonicalPath(Astro.url.pathname), siteUrl);
-const imageUrl = new URL(image, siteUrl);
+const article = structuredData.find(entity => ['Article', 'BlogPosting'].includes(String(entity['@type'])));
+const articleImage = typeof article?.image === 'string' ? article.image : undefined;
+const imageUrl = new URL(image ?? articleImage ?? '/images/og-image.png', siteUrl);
 const graph = createSiteGraph({ siteUrl, pathname: Astro.url.pathname, title, description, entities: structuredData });
 ---
 

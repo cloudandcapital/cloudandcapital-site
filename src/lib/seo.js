@@ -8,6 +8,10 @@ const routeNames = {
   '/resources/software-renewal': 'Software renewal checklist',
   '/insights': 'Guides & writing',
   '/insights/using-ai-cost-lens': 'How to use AI Cost Lens',
+  '/insights/using-cloud-cost-guard': 'How to use Cloud Cost Guard',
+  '/insights/using-interactive-lab': 'How to use Interactive Lab',
+  '/insights/using-market-tape': 'How to use Market Tape',
+  '/insights/using-signal-audit': 'How to use Signal Audit',
   '/insights/using-the-renewal-tracker': 'How to use the Software Renewal Tracker',
   '/insights/is-this-software-worth-it': 'Is this software worth what we are paying?',
   '/signal-audit': 'Technology Cost Signal Audit',
@@ -28,6 +32,12 @@ export function createSiteGraph({ siteUrl, pathname, title, description, entitie
     {
       '@type': 'Organization', ...organization,
       name: 'Cloud & Capital', url: home,
+      logo: {
+        '@type': 'ImageObject',
+        url: new URL('/images/brand/cloud-and-capital-mark.png', home).href,
+        contentUrl: new URL('/images/brand/cloud-and-capital-mark.png', home).href,
+        width: 500, height: 500,
+      },
       description: 'Cloud, AI and software cost analysis, workflow reviews, and custom tools and automations for business owners and teams. Free tools and writing about money, markets, and technology.',
       founder: person, email: 'diana@cloudandcapital.com',
       sameAs: ['https://github.com/cloudandcapital', 'https://cloudandcapital.substack.com', 'https://www.instagram.com/cloud.and.capital/'],

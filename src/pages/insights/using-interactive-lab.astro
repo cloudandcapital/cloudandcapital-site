@@ -6,8 +6,16 @@ import '../../styles/interactive-lab-guide.css';
 
 const title = 'A higher renewal quote. Now what?';
 const description = 'Work through a software renewal in Interactive Lab. Compare the choices, find the missing details, and leave with a next step you can use.';
+const articleUrl = 'https://cloudandcapital.com/insights/using-interactive-lab';
+const articleData = {
+  '@type': 'Article', '@id': `${articleUrl}#article`, headline: title, description,
+  author: { '@id': 'https://cloudandcapital.com/#diana' },
+  publisher: { '@id': 'https://cloudandcapital.com/#organization' },
+  mainEntityOfPage: articleUrl, datePublished: '2026-10-22',
+  image: 'https://cloudandcapital.com/images/interactive-lab-renewal-brief.jpg',
+};
 ---
-<BaseLayout title={`${title} | Cloud & Capital`} description={description} type="article">
+<BaseLayout title={`${title} | Cloud & Capital`} description={description} type="article" structuredData={[articleData]}>
   <main id="main-content" class="guides-page lab-guide">
     <article class="guide-shell guide-article">
       <header>

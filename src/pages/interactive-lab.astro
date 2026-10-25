@@ -140,6 +140,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .renewal-checklist h3 { margin-bottom: .5rem; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--clay-ink); }
     .renewal-checklist p { font-family: var(--font-body); font-size: 1rem; line-height: 1.5; color: var(--text-muted); }
     .print-context { display: none; }
+    .brief-print-brand { display: none; }
     .matrix-mobile { display: none; }
     .matrix-option { background: #fff; border: 1px solid var(--border); }
     .matrix-option + .matrix-option { margin-top: 1rem; }
@@ -220,6 +221,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
 
     @media print {
+      .brief-print-brand { display:block; width:42mm; height:auto; margin-bottom:5mm; }
       .site-nav, .site-footer, .lab-hero, .lab-rail, .lab-input-pane, .context-summary, .brief-actions, .copy-state { display: none !important; }
       body { background: #fff; }
       .lab-shell { max-width: none; padding: 0; }
@@ -341,6 +343,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <div class="context-summary-body"><dl class="context-summary-list" id="contextSummaryList"></dl><div class="context-summary-actions"><button type="button" class="lab-button lab-button-quiet" id="summaryEditBtn">Edit context</button></div></div>
             </details>
             <header class="brief-header">
+              <img class="brief-print-brand" src="/images/brand/cloud-and-capital-wordmark.png" alt="Cloud & Capital" width="1551" height="174" />
               <div class="brief-header-top"><span class="memo-label">Cloud &amp; Capital · Decision Brief</span><span class="brief-posture" id="briefPosture"></span></div>
               <h2 class="brief-title" id="briefTitle" tabindex="-1"></h2>
               <p class="brief-posture-reason" id="briefPostureReason"></p>

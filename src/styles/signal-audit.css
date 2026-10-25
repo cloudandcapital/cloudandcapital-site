@@ -163,12 +163,14 @@
   .audit-stage,.results-rail { scroll-margin-top:5rem; }
 }
 @media(prefers-reduced-motion:reduce) { .audit-main * { scroll-behavior:auto !important; } }
+.audit-print-brand { display:none; }
 @media print {
   @page { margin:16mm; }
   body:has(#results:not([hidden])) :is(.site-nav,footer:not(.audit-next),.audit-hero,#auditStage,.audit-save,.audit-next,.audit-back) { display:none !important; }
   .audit-main { padding:0; }
   .results-rail { width:100%; max-width:none; }
   .audit-result-header,.audit-result-section,.audit-first-step { padding:1rem 0; }
+  .audit-print-brand { display:block; width:42mm; height:auto; margin-bottom:5mm; }
   .audit-result-header h2 { font-size:30pt; }
   .audit-main h3 { font-size:22pt; }
   .audit-main :is(h2,h3,h4,h5,summary,figcaption) { break-after:avoid; page-break-after:avoid; }

@@ -2,8 +2,19 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ActionLabel from '../../components/ActionLabel.astro';
 import '../../styles/guides-page.css';
+const title = 'How to Use the Software Renewal Tracker';
+const description = 'Add your subscriptions, separate monthly cost from payment dates, record cancellation deadlines, and export a backup. A guide to the free Software Renewal Tracker.';
+const articleUrl = 'https://cloudandcapital.com/insights/using-the-renewal-tracker';
+const articleData = {
+  '@type': 'Article', '@id': `${articleUrl}#article`,
+  headline: 'Give every renewal a place to land.', description,
+  author: { '@id': 'https://cloudandcapital.com/#diana' },
+  publisher: { '@id': 'https://cloudandcapital.com/#organization' },
+  mainEntityOfPage: articleUrl,
+  image: 'https://cloudandcapital.com/images/software-renewal-project-desk.jpg',
+};
 ---
-<BaseLayout title="How to Use the Software Renewal Tracker | Cloud & Capital" description="Add your subscriptions, separate monthly cost from payment dates, record cancellation deadlines, and export a backup. A guide to the free Software Renewal Tracker." type="article">
+<BaseLayout title={`${title} | Cloud & Capital`} description={description} type="article" structuredData={[articleData]}>
   <main id="main-content" class="guides-page tracker-guide">
     <article class="guide-shell guide-article">
       <header>

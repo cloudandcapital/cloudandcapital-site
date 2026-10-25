@@ -4,8 +4,16 @@ import ActionLabel from '../../components/ActionLabel.astro';
 import '../../styles/guides-page.css';
 const title = 'What happens after the cost report?';
 const description = 'Use Signal Audit to find where technology spending information gets stuck, then choose one next step. Walk through a software renewal example.';
+const articleUrl = 'https://cloudandcapital.com/insights/using-signal-audit';
+const articleData = {
+  '@type': 'Article', '@id': `${articleUrl}#article`, headline: title, description,
+  author: { '@id': 'https://cloudandcapital.com/#diana' },
+  publisher: { '@id': 'https://cloudandcapital.com/#organization' },
+  mainEntityOfPage: articleUrl, datePublished: '2026-10-23',
+  image: 'https://cloudandcapital.com/images/signal-audit-result-review.jpg',
+};
 ---
-<BaseLayout title={`${title} | Cloud & Capital`} description={description} type="article">
+<BaseLayout title={`${title} | Cloud & Capital`} description={description} type="article" structuredData={[articleData]}>
   <main id="main-content" class="guides-page signal-guide"><article class="guide-shell guide-article">
     <header><a class="guide-back" href="/signal-audit">← Signal Audit</a><p class="guide-eyebrow">Technology spending · A tool walkthrough</p><h1>What happens after <em>the cost report?</em></h1><p class="guide-byline">By Diana Molski · <time datetime="2026-10-23">October 23, 2026</time></p><p class="guide-lede">You can explain a software bill perfectly and still miss the date to change the contract. The numbers were there. They just didn’t reach the decision in time.</p><p>I built Signal Audit to help find that gap. You answer 12 questions about one part of a business and get a suggested first step, who to involve, and what to check. It works through the answers you choose; it doesn’t inspect your accounts or verify the business behind them.</p><a class="guide-button" href="/signal-audit"><ActionLabel label="Try the free audit" /></a></header>
     <section aria-labelledby="fit-title"><h2 id="fit-title">Pick a scope you can actually answer for.</h2><p>Choose one team, product, application, or business unit, then the technology spending involved. That might be software subscriptions, cloud infrastructure, AI usage, or a mix. Keep that scope in mind for every question.</p><p>Answer for what happens today. If you don’t know, choose <strong>I don’t know or can’t see this information</strong>. If a question genuinely doesn’t apply, choose <strong>This doesn’t apply to the scope I chose</strong>. Neither is scored as zero, and the result keeps them separate.</p><p>This is for reviewing business technology spending. It isn’t a personal budget tool. You also don’t need a formal finance department or separate people for every role; the person approving a purchase may be you.</p></section>

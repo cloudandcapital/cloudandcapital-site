@@ -21,6 +21,7 @@ assert source.startswith(PREFIX) and source.rstrip().endswith(';')
 questions = json.loads(source[len(PREFIX):].rstrip()[:-1])
 assert len(questions) == 8
 OUTPUT = ROOT / 'public/downloads/before-you-renew-that-software.pdf'
+WORDMARK = ROOT / 'public/images/brand/cloud-and-capital-wordmark.png'
 CREAM, SAGE, ROSE = [HexColor(v) for v in ['#F5EEE9', '#3D6055', '#C8A5A5']]
 INK, MUTED, LINE = [HexColor(v) for v in ['#24211E', '#5D5C54', '#B8C3B8']]
 WHITE = HexColor('#FFFFFF')
@@ -40,7 +41,7 @@ with TemporaryDirectory(prefix='cc-renewal-fonts-') as font_dir:
 
     c = canvas.Canvas(str(OUTPUT), pagesize=(612, 792), pageCompression=1, invariant=1)
     c.setTitle('Before you renew that software | Cloud & Capital')
-    c.setAuthor('Diana Molski | Cloud & Capital')
+    c.setAuthor('Cloud & Capital')
     c.setSubject('Eight questions, three important dates and a next step for one software renewal.')
     c.setCreator('Cloud & Capital worksheet builder')
 
@@ -61,7 +62,7 @@ with TemporaryDirectory(prefix='cc-renewal-fonts-') as font_dir:
     def frame(page):
         c.setFillColor(CREAM)
         c.rect(0, 0, 612, 792, fill=1, stroke=0)
-        text(44, 753, 'CLOUD & CAPITAL', size=10, color=SAGE)
+        c.drawImage(str(WORDMARK), 44, 744, width=240, height=240 * 174 / 1551, mask='auto')
         text(440, 753, 'Free renewal worksheet', size=9, color=MUTED)
         c.setStrokeColor(LINE)
         c.setLineWidth(.6)
@@ -69,7 +70,7 @@ with TemporaryDirectory(prefix='cc-renewal-fonts-') as font_dir:
         c.line(44, 70, 568, 70)
         text(44, 49, 'cloudandcapital.com/resources/software-renewal', size=8.5, color=SAGE)
         c.linkURL('https://cloudandcapital.com/resources/software-renewal', (44, 45, 360, 60))
-        text(44, 33, 'Diana Molski  |  No signup required.', size=8, color=MUTED)
+        text(44, 33, 'Cloud & Capital  |  No signup required.', size=8, color=MUTED)
         text(542, 33, f'{page} / 2', size=8, color=MUTED)
 
     def question(index, y):

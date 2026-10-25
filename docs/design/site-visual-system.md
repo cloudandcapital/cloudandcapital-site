@@ -40,3 +40,14 @@ All 138 existing site tests pass without failures or skips. The final optimized 
 ## Existing renewal resource
 
 The October24 resource follow-through uses the same typography, close ActionLabel arrows, sage action, rounded panels, exact cream and restrained shadows. Its preview is the actual two-page worksheet, not a drawn product mockup. The older flat calendar is removed from this page. The fillable PDF uses Cormorant/Jost from the pinned font packages and standard Helvetica input fields. It distinguishes renewal, notice and payment dates. See docs/reviews/resource-journey-2026-10-24.md for checks and remaining reader/device limits. Diana’s visual approval remains separate.
+
+## Official logo originals
+
+Diana supplied the authoritative artwork on October24. Byte-identical masters are public/images/brand/cloud-and-capital-wordmark.png (1551 × 174) and public/images/brand/cloud-and-capital-mark.png (500 × 500). Use the appropriate readable version for new Cloud & Capital materials, preserving the artwork, colors, background and aspect ratio. Do not recreate these logos with AI or approximate their typography. The wide wordmark is used in both renewal worksheet page headers; its preview is rendered from that PDF. The square cloud/dollar mark is the compact alternate. The approved homepage is preserved.
+
+| Original | SHA256 |
+|---|---|
+| cloud-and-capital-wordmark.png | 6448e9e5be7ca6a3d431a1fcffe96ea661ef80670f5569b9af69ade918ded299 |
+| cloud-and-capital-mark.png | 8c57af24a285769e44e09b9b8fd377e77c01426532e1b567de8dbb57bd5d9c4f |
+
+The persistent brand reference is CloudAndCapital-Brain-v2/brands/cloud-and-capital/design.md. Use Cloud & Capital in PDF credits, footers and author metadata, without a Diana Molski personal-name credit. Follow the same branding for previews and future brand deliverables.

@@ -10,6 +10,8 @@ For each tool, record the visitor, task, inputs, useful output, and next action.
 
 Check the actual rendered desktop and phone views, headings and line breaks, contrast, labels, keyboard focus, input controls, overflow, loading/failure states, copy/download behavior, and print support. Test data/network privacy against what the tool promises. Passing code checks does not establish user comprehension, physical-device compatibility, or factual accuracy of generated prose.
 
+Cloud & Capital resource and tool PDFs use **Cloud & Capital** branding, including the footer and author metadata. Diana does not want a personal-name credit on these PDFs. Apply the same rule to their preview images. Use the supplied official logo originals registered in docs/design/site-visual-system.md for new branded materials; do not redraw or retype them.
+
 Ship a casual, readable guide with a checked example and a concrete answer to “what do I do with this?” Use screenshots from that exact version of the tool, with real dimensions and honest example labels. Connect guide to tool and relevant service. Reconcile directory descriptions, source links, and images. Capture the source version and checks in a dated review record.
 
 Diana uses her own Claude app for independent review. Prepare a reproducible handoff covering live tool, guide, sources, arithmetic, usefulness, limitations, design, and exports. Work through material findings and retest changed behavior before marking that review complete. Do not call the connected editorial plugin on her behalf.

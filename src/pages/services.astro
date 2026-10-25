@@ -5,7 +5,7 @@ import InquiryForm from '../components/InquiryForm.astro';
 import ServiceWatermark from '../components/ServiceWatermark.astro';
 import ActionLabel from '../components/ActionLabel.astro';
 import FlowText from '../components/FlowText.astro';
-import ClaudePartnerBadge from '../components/ClaudePartnerBadge.astro';
+import FeaturedCredentials from '../components/FeaturedCredentials.astro';
 import '../styles/services-page.css';
 
 const projects = [
@@ -33,8 +33,8 @@ const projects = [
   },
   {
     id: 'custom-tools', legacyId: 'money-tools', kind: 'setup', nameLead: 'Tools &', nameEnd: 'Automation',
-    description: 'For a task that needs a working solution, from a tracker or calculator to a reporting automation.',
-    examples: 'An agreed setup, tested against its requirements, with instructions and a walkthrough.',
+    description: 'For a task that needs a tool of its own, such as a tracker, calculator, AI helper or reporting automation.',
+    examples: 'A working tool or automation, tested against the agreed requirements, with instructions and a walkthrough.',
     scope: [
       'We define the inputs, the result you need, and the tools or records involved. That can mean configuring an existing feature, connecting compatible apps or building a small tool.',
       'We agree what happens when information is missing, what needs human approval, and how the result will be checked.',
@@ -70,7 +70,7 @@ const questions = [
     <section class="services-shell services-hero" aria-labelledby="services-title">
       <p class="service-kicker">Work with Diana</p>
       <h1 id="services-title"><span>Understand the costs.</span> <em>Make work easier.</em></h1>
-      <p class="services-lede">I analyse cloud, AI and software costs, review recurring workflows, and build tools and automations. For business owners and growing teams with a question to answer or a task to improve.</p>
+      <p class="services-lede">I review cloud, AI and software costs, simplify recurring work, and build tools and automations for business owners and teams.</p>
       <a class="service-text-link" href="#offers"><ActionLabel label="Find your starting point" /></a>
     </section>
     </div>
@@ -99,7 +99,7 @@ const questions = [
         <h2 id="reviewer-title">You’ll work directly with me.</h2>
         <p>I’m Diana, a finance analyst and tool builder. My background includes a finance degree from Cal State Dominguez Hills, wealth management at Morgan Stanley, and FinOps, AWS and Azure credentials.</p>
         <a class="service-text-link" href="/#about"><ActionLabel label="More about me" /></a>
-        <ClaudePartnerBadge />
+        <FeaturedCredentials />
       </div>
     </section>
 

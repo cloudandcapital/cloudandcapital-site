@@ -39,9 +39,10 @@ A row is not a claim that every tool is locked. Each final status needs its owni
 
 ## Order of work from this pass
 
-1. Finish the current website clarity and link checks: directory counts/support wording, beginner Lens walkthrough to detailed Verify guide, and the renewal tracker’s existing guide/export journey. Keep the approved homepage and app calculations stable.
-2. Continue through Services, Guides & Writing, and Investing & Trading/Learning. For each page, identify the visitor’s job, simplify the choice, check the destination, and keep the existing sage/clay/cream design. Do not redesign every page at once.
-3. Resume new tools only after the current tool/resource journey is clear. Keep the existing AI helper, money planner, cash-flow planner and calculator cards as coming soon; this pass creates no new build commitment.
+1. **Complete:** directory counts/support wording, beginner Lens walkthrough to detailed Verify guide, and the renewal tracker’s existing guide/export journey. The approved homepage and app calculations remain stable.
+2. **Supporting page pass complete:** Services, its worked examples, Guides & Writing, and Investing & Trading/Learning. Services now states the tool-building deliverable plainly, its examples link to relevant free-tool walkthroughs, and guide cards name their tools. The learning page’s observed 320-pixel card overflow is fixed. Browser checks, inquiry-copy checks and the bounded responsive evidence are in [the supporting-page review](reviews/site-page-journeys-2026-10-24.md). This does not certify every browser, physical phone or lesson outcome.
+3. **Next:** the focused manual Lens review below, followed by the still-open tool-specific acceptance work when the required files/devices are available. Preserve the separate renewal article/PDF owner’s work. Guard’s targeted repair loop stays closed unless fresh reproducible evidence changes it.
+4. Resume new tools after that evidence is reconciled and Diana chooses the next build. Keep the existing AI helper, money planner, cash-flow planner and calculator cards as coming soon; this pass creates no new build commitment. Reconcile the Before you renew checklist with the existing worksheet before expanding the resource area.
 
 ### Manual Claude review waiting list
 

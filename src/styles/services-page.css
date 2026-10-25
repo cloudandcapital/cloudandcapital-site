@@ -55,7 +55,7 @@
 .business-services .scope-copy a { color: var(--card-accent); }
 .business-services .service-card-action { margin-top: .5rem; color: var(--card-accent); }
 .business-services .service-card-action .action-label, .business-services .scope-copy .action-label { font-size: .65rem; }
-.business-services .services-about { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 2rem; align-items: center; padding-block: 2rem; border-block: 1px solid #3d60552b; }
+.business-services .services-about { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 2rem; align-items: start; padding-block: 2rem; border-block: 1px solid #3d60552b; }
 .business-services .services-about > img { width: 7rem; height: 7rem; border-radius: 50%; object-fit: cover; }
 .business-services .services-about h2 { margin-bottom: .6rem; font-size: 2.2rem; }
 .business-services .services-about p { max-width: 78ch; color: #56584f; font-size: .95rem; }

@@ -15,7 +15,7 @@ Diana's approved homepage is the reference. On October24 she clarified that Serv
 
 Services keeps the three established offers and native scopes. Its sage opening is centered; the same bill, clock and building-block objects have more presence. Cards slightly overlap the end of the opening. The portrait, introduction and two existing image-only credentials form a compact row on desktop and stack naturally on phones.
 
-Guides & Writing keeps all seven cards, their existing text, real screenshots and destinations. Its introduction is editorial, with clear shortcuts to walkthroughs and essays. Screenshot figures are larger, framed and shadowed; card headings echo the italic tool titles on the homepage. Article templates are not restyled by this index-only treatment.
+Guides & Writing now groups the six actual tool walkthroughs together and pairs the existing software-spending article with its worksheet in a distinct Free resources section. Its introduction is editorial, with clear shortcuts to walkthroughs and essays. Screenshot figures are larger, framed and shadowed; card headings echo the italic tool titles on the homepage. Article templates are not restyled by this index-only treatment.
 
 Learning uses the same heading font, action component, sage buttons, dusty rose contact area and rounded form panel. Its three topic descriptions and lesson inclusions remain unchanged. The old flat hero artwork is replaced by a decorative 3D study scene; the small topic illustrations are removed so the lesson choices read calmly.
 
@@ -36,3 +36,7 @@ Real page frames in desktop Chrome were checked at 320, 390 and 768 CSS pixels f
 Both inquiry copy paths were exercised with invented inputs after the changes. The business and lesson subjects, recipient and distinct question labels remain correct. An open service scope stays within the phone layout. No email or booking was sent. Build/test and release evidence belong to the release PR; physical-device, other-browser and screen-reader acceptance remain separate.
 
 All 138 existing site tests pass without failures or skips. The final optimized build and unchanged directory verification pass. Built SSR checks cover twenty routes, 331 internal link/anchor references and seventy local image references without failures. Twenty-eight external destinations are recorded, not certified. The temporary responsive wrapper is absent from source and final build. No test assertion, threshold, skip or dependency input was changed.
+
+## Existing renewal resource
+
+The October24 resource follow-through uses the same typography, close ActionLabel arrows, sage action, rounded panels, exact cream and restrained shadows. Its preview is the actual two-page worksheet, not a drawn product mockup. The older flat calendar is removed from this page. The fillable PDF uses Cormorant/Jost from the pinned font packages and standard Helvetica input fields. It distinguishes renewal, notice and payment dates. See docs/reviews/resource-journey-2026-10-24.md for checks and remaining reader/device limits. Diana’s visual approval remains separate.

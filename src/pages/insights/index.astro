@@ -5,6 +5,7 @@ import { homepageWriting, newsletter } from '../../data/siteContent';
 import article from '../../data/softwareValueArticle.json';
 import '../../styles/guides-page.css';
 import '../../styles/supporting-pages.css';
+import '../../styles/resource-page.css';
 const guides = [
   { kind: 'Cloud Cost Guard · Walkthrough', title: 'Your cloud bill grew. What changed?', description: 'Find the right export for your provider, upload your billing records, and see what to check next.', href: '/insights/using-cloud-cost-guard', action: 'Review your own bill', image: '/images/cloud-cost-guard-billing-preview.jpg', imageWidth: 1232, imageHeight: 541, alt: 'Cloud Cost Guard showing a $1,310.13 example bill, credits, and charges by service', tone: 'sage' },
   { kind: 'Signal Audit · Walkthrough', title: 'What happens after the cost report?', description: 'Find the gap between a clear bill and a useful next step. Try a software renewal example in Signal Audit.', href: '/insights/using-signal-audit', action: 'Use the result with me', image: '/images/signal-audit-result-review.jpg', imageWidth: 1080, imageHeight: 555, alt: 'The actual Signal Audit renewal example with separate scores for understanding spending and using it in decisions', tone: 'sand' },
@@ -12,19 +13,25 @@ const guides = [
   { kind: 'AI Cost Lens · Walkthrough', title: 'The cheaper AI plan might cost you more.', description: 'Compare two plans, account for review time, and see what each usable result costs. Then try your own numbers.', href: '/insights/using-ai-cost-lens', action: 'Walk through an example', image: '/images/ai-cost-lens-usable-result-preview.jpg', imageWidth: 1193, imageHeight: 538, alt: 'AI Cost Lens example comparing $2.56 and $4.25 per usable result, including review time', tone: 'sage' },
   { kind: 'Interactive Lab · Walkthrough', title: 'A higher renewal quote. Now what?', description: 'Work through a renewal, compare the choices, and figure out what to check before you decide.', href: '/insights/using-interactive-lab', action: 'Work through the example', image: '/images/interactive-lab-renewal-brief.jpg', imageWidth: 1054, imageHeight: 597, alt: 'Interactive Lab renewal example showing a notice-deadline checklist and suggested next move', tone: 'sand' },
   { kind: 'Software Renewal Tracker · Walkthrough', title: 'Give every renewal a place to land.', description: 'Add your subscriptions, understand the totals, and keep notice deadlines in view.', href: '/insights/using-the-renewal-tracker', action: 'Use the tracker with me', image: '/images/software-renewal-project-desk.jpg', imageWidth: 1168, imageHeight: 455, alt: 'Software Renewal Tracker with an illustrative Project desk subscription', tone: 'sage' },
-  { kind: 'Software spending', title: article.title, description: article.description, href: '/insights/is-this-software-worth-it', action: 'Read the guide', image: '/images/software-renewal-worksheet-preview.jpg', imageWidth: 1152, imageHeight: 395, alt: 'Preview of the software renewal worksheet', tone: 'sand' },
 ];
 ---
 <BaseLayout title="Guides & Writing | Cloud & Capital" description="Tool walkthroughs, software spending guides, and Diana Molski’s writing on money, markets, AI and technology. Learn something, try a tool, or explore Markets & Mimosas.">
   <main id="main-content" class="guides-page guides-library">
     <section class="guide-shell guide-intro" aria-labelledby="guides-title">
       <div><p class="guide-eyebrow">Read, try, explore</p><h1 id="guides-title">Guides &amp; <em>writing.</em></h1></div>
-      <div><p class="guide-lede">How the tools work, what the numbers mean, and the questions I keep coming back to about money, markets and technology.</p><nav class="guide-jump" aria-label="On this page"><a href="#walkthroughs"><ActionLabel label="Tool walkthroughs" /></a><a href="#essays"><ActionLabel label="Essays & newsletter" /></a></nav></div>
+      <div><p class="guide-lede">How the tools work, what the numbers mean, and the questions I keep coming back to about money, markets and technology.</p><nav class="guide-jump" aria-label="On this page"><a href="#walkthroughs"><ActionLabel label="Tool walkthroughs" /></a><a href="#resources"><ActionLabel label="Free resources" /></a><a href="#essays"><ActionLabel label="Essays & newsletter" /></a></nav></div>
     </section>
     <section id="walkthroughs" class="guide-shell guide-section" aria-labelledby="walkthroughs-title">
-      <div class="guide-section-heading"><div><p class="guide-eyebrow">Try it yourself</p><h2 id="walkthroughs-title">A guide beside the tool.</h2></div><a href="/tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="writing_archive"><ActionLabel label="Browse the free tools" /></a></div>
+      <div class="guide-section-heading"><div><p class="guide-eyebrow">Tools I built · Try it yourself</p><h2 id="walkthroughs-title">A guide beside the tool.</h2></div><a href="/tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="writing_archive"><ActionLabel label="Browse the free tools" /></a></div>
       <div class="guide-grid">{guides.map(guide => <article class:list={['guide-card', guide.tone]}><figure class="guide-preview"><img src={guide.image} alt={guide.alt} width={guide.imageWidth} height={guide.imageHeight} loading="lazy" decoding="async" /></figure><div><p class="guide-eyebrow">{guide.kind}</p><h3><a href={guide.href}>{guide.title}</a></h3><p>{guide.description}</p><a class="guide-read" href={guide.href}><ActionLabel label={guide.action} /></a></div></article>)}</div>
       <p class="guide-learning">Exploring the markets for the first time? <a href="/learn">See investing and trading lessons <span aria-hidden="true">→</span></a></p>
+    </section>
+    <section id="resources" class="guide-shell guide-section" aria-labelledby="resources-title">
+      <div class="guide-section-heading"><div><p class="guide-eyebrow">Free resources</p><h2 id="resources-title">Something to take with you.</h2></div></div>
+      <article class="free-resource-card">
+        <figure><img src="/images/software-renewal-worksheet-preview.jpg" alt="Preview of the actual software renewal worksheet, including its separate notice deadline field" width="1152" height="1491" loading="lazy" decoding="async" /><figcaption>Two-page PDF. Type in a PDF reader or print. No signup.</figcaption></figure>
+        <div><p class="guide-eyebrow">Before the next software renewal</p><h3>Before you renew that software.</h3><p>For business owners and teams reviewing one subscription. Check the dates, the work it does and what changing it would involve. Leave with a reason for your next step.</p><div class="resource-actions"><a class="guide-button" href="/resources/software-renewal"><ActionLabel label="Get the free worksheet" /></a><a href="/insights/is-this-software-worth-it"><ActionLabel label="Read the spending guide" /></a></div><p class="guide-learning">The companion guide: {article.title}</p></div>
+      </article>
     </section>
     <section id="essays" class="essay-band" aria-labelledby="essays-title"><div class="guide-shell guide-section">
       <div class="guide-section-heading"><div><p class="guide-eyebrow">Essays &amp; Markets &amp; Mimosas</p><h2 id="essays-title">Beyond the how-to.</h2></div></div>

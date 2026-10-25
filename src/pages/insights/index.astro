@@ -4,6 +4,7 @@ import ActionLabel from '../../components/ActionLabel.astro';
 import { homepageWriting, newsletter } from '../../data/siteContent';
 import article from '../../data/softwareValueArticle.json';
 import '../../styles/guides-page.css';
+import '../../styles/supporting-pages.css';
 const guides = [
   { kind: 'Cloud Cost Guard · Walkthrough', title: 'Your cloud bill grew. What changed?', description: 'Find the right export for your provider, upload your billing records, and see what to check next.', href: '/insights/using-cloud-cost-guard', action: 'Review your own bill', image: '/images/cloud-cost-guard-billing-preview.jpg', imageWidth: 1232, imageHeight: 541, alt: 'Cloud Cost Guard showing a $1,310.13 example bill, credits, and charges by service', tone: 'sage' },
   { kind: 'Signal Audit · Walkthrough', title: 'What happens after the cost report?', description: 'Find the gap between a clear bill and a useful next step. Try a software renewal example in Signal Audit.', href: '/insights/using-signal-audit', action: 'Use the result with me', image: '/images/signal-audit-result-review.jpg', imageWidth: 1080, imageHeight: 555, alt: 'The actual Signal Audit renewal example with separate scores for understanding spending and using it in decisions', tone: 'sand' },
@@ -15,18 +16,17 @@ const guides = [
 ];
 ---
 <BaseLayout title="Guides & Writing | Cloud & Capital" description="Tool walkthroughs, software spending guides, and Diana Molski’s writing on money, markets, AI and technology. Learn something, try a tool, or explore Markets & Mimosas.">
-  <main id="main-content" class="guides-page">
+  <main id="main-content" class="guides-page guides-library">
     <section class="guide-shell guide-intro" aria-labelledby="guides-title">
-      <p class="guide-eyebrow">Read, try, explore</p>
-      <h1 id="guides-title">Guides &amp; writing.</h1>
-      <p class="guide-lede">How the tools work, what the numbers mean, and the questions I keep coming back to about money, markets and technology.</p>
+      <div><p class="guide-eyebrow">Read, try, explore</p><h1 id="guides-title">Guides &amp; <em>writing.</em></h1></div>
+      <div><p class="guide-lede">How the tools work, what the numbers mean, and the questions I keep coming back to about money, markets and technology.</p><nav class="guide-jump" aria-label="On this page"><a href="#walkthroughs"><ActionLabel label="Tool walkthroughs" /></a><a href="#essays"><ActionLabel label="Essays & newsletter" /></a></nav></div>
     </section>
-    <section class="guide-shell guide-section" aria-labelledby="walkthroughs-title">
+    <section id="walkthroughs" class="guide-shell guide-section" aria-labelledby="walkthroughs-title">
       <div class="guide-section-heading"><div><p class="guide-eyebrow">Try it yourself</p><h2 id="walkthroughs-title">A guide beside the tool.</h2></div><a href="/tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="writing_archive"><ActionLabel label="Browse the free tools" /></a></div>
-      <div class="guide-grid">{guides.map(guide => <article class:list={['guide-card', guide.tone]}><img src={guide.image} alt={guide.alt} width={guide.imageWidth} height={guide.imageHeight} loading="lazy" decoding="async" /><div><p class="guide-eyebrow">{guide.kind}</p><h3><a href={guide.href}>{guide.title}</a></h3><p>{guide.description}</p><a class="guide-read" href={guide.href}><ActionLabel label={guide.action} /></a></div></article>)}</div>
+      <div class="guide-grid">{guides.map(guide => <article class:list={['guide-card', guide.tone]}><figure class="guide-preview"><img src={guide.image} alt={guide.alt} width={guide.imageWidth} height={guide.imageHeight} loading="lazy" decoding="async" /></figure><div><p class="guide-eyebrow">{guide.kind}</p><h3><a href={guide.href}>{guide.title}</a></h3><p>{guide.description}</p><a class="guide-read" href={guide.href}><ActionLabel label={guide.action} /></a></div></article>)}</div>
       <p class="guide-learning">Exploring the markets for the first time? <a href="/learn">See investing and trading lessons <span aria-hidden="true">→</span></a></p>
     </section>
-    <section class="essay-band" aria-labelledby="essays-title"><div class="guide-shell guide-section">
+    <section id="essays" class="essay-band" aria-labelledby="essays-title"><div class="guide-shell guide-section">
       <div class="guide-section-heading"><div><p class="guide-eyebrow">Essays &amp; Markets &amp; Mimosas</p><h2 id="essays-title">Beyond the how-to.</h2></div></div>
       <div class="essay-list">{homepageWriting.map(item => <article class="guide-essay"><div><p class="guide-eyebrow">{item.topic} · {item.date}</p><h3><a href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a></h3><p>{item.description}</p><a class="guide-read" href={item.href} target="_blank" rel="noopener noreferrer"><ActionLabel label="Read on Substack" /></a></div><img src={item.archiveImage} alt={item.archiveImageAlt} width="800" height="500" loading="lazy" decoding="async" /></article>)}</div>
       <a class="guide-subscribe" href={`${newsletter.subscribeHref}/subscribe`} target="_blank" rel="noopener noreferrer"><img src="/images/substack-logo.svg" width="18" height="18" alt="" loading="lazy" /><ActionLabel label="Subscribe on Substack" /></a>

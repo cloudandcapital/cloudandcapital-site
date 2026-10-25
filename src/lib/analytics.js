@@ -28,6 +28,7 @@ const schema = Object.freeze({
 export const ANALYTICS_SCHEMA = schema;
 
 export function validateAnalyticsEvent(eventName, properties) {
+  if (typeof eventName !== 'string' || !Object.hasOwn(schema, eventName)) return null;
   const eventSchema = schema[eventName];
   if (!eventSchema || !properties || typeof properties !== 'object' || Array.isArray(properties)) return null;
   const expectedKeys = Object.keys(eventSchema).sort();

@@ -31,3 +31,9 @@ pnpm-debug.log*
 /private/
 /notes/
 /docs/
+
+# Local environment secrets
+.env
+.env.*
+!.env.example
+!**/.env.example

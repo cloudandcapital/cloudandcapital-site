@@ -78,13 +78,13 @@ export function cleanText(value, maxChars) {
 }
 
 export function classifyDecision(decision, requestedType) {
-  if (requestedType && DECISION_TYPES[requestedType]) return requestedType;
+  if (typeof requestedType === 'string' && Object.hasOwn(DECISION_TYPES, requestedType)) return requestedType;
   const source = cleanText(decision, MAX_DECISION_CHARS);
   return TYPE_SIGNALS.find(([, pattern]) => pattern.test(source))?.[0] || 'open';
 }
 
 export function getQuestions(decisionType) {
-  const type = DECISION_TYPES[decisionType] ? decisionType : 'open';
+  const type = typeof decisionType === 'string' && Object.hasOwn(DECISION_TYPES, decisionType) ? decisionType : 'open';
   return DECISION_TYPES[type].questions.map((question) => ({ ...question }));
 }
 

@@ -16,6 +16,8 @@ const JSON_HEADERS = {
   'Cache-Control': 'no-store',
 };
 
+const MAX_BODY_BYTES = 32 * 1024;
+
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), { status, headers: JSON_HEADERS });
 }
@@ -142,11 +144,36 @@ async function callModel(readiness, requestSignal) {
 }
 
 export async function POST({ request }) {
+  if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get('content-type') || '')) {
+    return json({ error: 'Use application/json.', code: 'INVALID_TYPE' }, 415);
+  }
+  if (Number(request.headers.get('content-length')) > MAX_BODY_BYTES) {
+    return json({ error: 'The request is too large.', code: 'PAYLOAD_TOO_LARGE' }, 413);
+  }
+  const reader = request.body?.getReader();
+  if (!reader) return json({ error: 'The request must contain valid JSON.' }, 400);
   let body;
   try {
-    body = await request.json();
+    const chunks = [];
+    let size = 0;
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > MAX_BODY_BYTES) {
+        await reader.cancel();
+        return json({ error: 'The request is too large.', code: 'PAYLOAD_TOO_LARGE' }, 413);
+      }
+      chunks.push(value);
+    }
+    const bytes = new Uint8Array(size);
+    let offset = 0;
+    for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
+    body = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
   } catch {
     return json({ error: 'The request must contain valid JSON.' }, 400);
+  } finally {
+    reader.releaseLock();
   }
 
   if (!body || typeof body !== 'object' || Array.isArray(body)) {

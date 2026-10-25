@@ -182,7 +182,7 @@ test('questions stage never calls the model and returns targeted context', async
 });
 
 test('invalid JSON fails closed and GET exposes only public contract metadata', async () => {
-  const invalid = await POST({ request: new Request('https://cloudandcapital.com/api/interactive-lab', { method: 'POST', body: '{' }) });
+  const invalid = await POST({ request: new Request('https://cloudandcapital.com/api/interactive-lab', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{' }) });
   assert.equal(invalid.status, 400);
   const metadata = await (await GET()).json();
   assert.equal(metadata.version, 5);

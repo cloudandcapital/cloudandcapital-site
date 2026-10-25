@@ -86,7 +86,7 @@ export function recordWarnings(r, asOf = '') {
 }
 // Apostrophe-prefix text so spreadsheet formula cells stay inert; double an
 // existing prefix as well, then undo exactly one prefix on tracker re-import.
-function safeCell(value) { return /^[=+\-@\t\r\n']/.test(value) ? "'" + value : value; }
+function safeCell(value) { return /^\s*[=+\-@\t\r\n']/.test(value) ? "'" + value : value; }
 export function exportCSV(records) {
   const rows = [['cc-renewal-tracker-v1'], FIELDS, ...records.map(r => FIELDS.map(k => safeCell(String(r[k]))))];
   return '\uFEFF' + rows.map(row => row.map(v => '"' + v.replaceAll('"', '""') + '"').join(',')).join('\r\n') + '\r\n';

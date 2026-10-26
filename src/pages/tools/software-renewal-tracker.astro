@@ -1,7 +1,20 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RenewalTracker from '../../components/RenewalTracker.astro';
+import RenewalThemeToggle from '../../components/RenewalThemeToggle.astro';
+import { THEME_STORAGE_KEY } from '../../lib/renewal-theme.js';
+import '../../styles/renewal-theme.css';
+const requested = Astro.url.searchParams.get('theme');
+const requestedTheme = requested === 'light' || requested === 'dark' ? requested : null;
 ---
-<BaseLayout title="Free Software Renewal Tracker | Cloud & Capital" description="Track software charges, renewal dates, and cancellation notice deadlines. Free browser-based tracker with CSV and calendar exports.">
+<BaseLayout title="Free Software Renewal Tracker | Cloud & Capital" description="Track software charges, renewal dates, and cancellation notice deadlines. Free browser-based tracker with CSV and calendar exports." themeScope="renewal" initialColorMode={requestedTheme || 'light'}>
+  <script slot="head" define:vars={{ themeKey: THEME_STORAGE_KEY, requestedTheme }}>
+    let saved;
+    try { saved = localStorage.getItem(themeKey); } catch {}
+    const mode = requestedTheme || (saved === 'dark' ? 'dark' : 'light');
+    document.documentElement.dataset.colorMode = mode;
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', mode === 'dark' ? '#211F1D' : '#F5EEE9');
+  </script>
+  <RenewalThemeToggle slot="nav-action" />
   <RenewalTracker />
 </BaseLayout>

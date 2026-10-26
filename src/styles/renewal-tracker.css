@@ -67,7 +67,7 @@
 @media(max-width:480px) { .rt-flow-demo { padding:1rem; } .rt-demo-step { gap:.6rem; } .rt-demo-subscription,.rt-demo-calendar { gap:.6rem; padding:.7rem; } .rt-demo-dates { padding:.7rem .8rem; gap:.6rem; } .rt-demo-dates>div+div { padding-left:.6rem; } .rt-demo-subscription strong,.rt-demo-calendar strong { font-size:.85rem; } .rt-demo-app { flex-basis:32px; width:32px; height:35px; } }
 @media(prefers-reduced-motion:reduce) { .rt-flow-demo :is(.rt-demo-number,.rt-demo-calendar) { animation:none; } }
 #rt-title { scroll-margin-top:8rem; }
-.renewal-tracker .rt-workspace-title.rt-is-example { display:inline-flex; align-items:center; gap:.65rem; font:500 1.8rem/1.2 'Jost',system-ui,sans-serif; letter-spacing:.1em; color:var(--rt-green); }
+.renewal-tracker .rt-workspace-title.rt-is-example { display:inline-flex; align-items:center; gap:.65rem; font:500 1.8rem/1.2 'Jost',system-ui,sans-serif; letter-spacing:.1em; color:var(--rt-example-accent,#986A6D); }
 #rt-example-arrow { flex:0 0 30px; width:30px; height:33px; }
 .renewal-tracker .rt-currency-note { margin:0 0 .5rem; }
 .rt-currency-note + .rt-summary { margin-top:0; }

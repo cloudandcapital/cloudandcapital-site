@@ -23,7 +23,10 @@ export function startRenewalDemo(root, now = new Date()) {
     const reduced = Boolean(preference?.matches);
     root.dataset.demoPlaying = String(!paused && !reduced);
     toggle.hidden = reduced;
-    toggle.textContent = paused ? 'Play demo' : 'Pause demo';
+    const label = paused ? 'Play animation' : 'Pause animation';
+    toggle.setAttribute('aria-label', label); toggle.title = label;
+    root.querySelector('[data-demo-pause]').toggleAttribute('hidden', paused);
+    root.querySelector('[data-demo-play]').toggleAttribute('hidden', !paused);
   };
   toggle.addEventListener('click', () => { paused = !paused; renderMotion(); });
   preference?.addEventListener('change', renderMotion);

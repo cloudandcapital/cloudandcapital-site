@@ -17,9 +17,10 @@ import RenewalDemo from './RenewalDemo.astro';
     <RenewalDemo />
   </header>
   <section class="rt-workspace" aria-labelledby="rt-title">
-    <div class="rt-section-heading"><div><p class="rt-kicker">USD only</p><h2 id="rt-title">Example tracker</h2></div><button type="button" class="rt-primary" id="rt-add" hidden>Add a subscription</button></div>
+    <div class="rt-section-heading"><h2 id="rt-title" class="rt-workspace-title rt-is-example"><span id="rt-title-text">EXAMPLE</span><svg id="rt-example-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18m-6-6 6 6 6-6"/></svg></h2><button type="button" class="rt-primary" id="rt-add" hidden>Add a subscription</button></div>
     <div id="rt-mode" class="rt-banner"></div>
     <p id="rt-feedback" role="status" aria-live="polite"></p>
+    <p class="rt-kicker rt-currency-note">USD only</p>
     <div class="rt-summary">
       <div><p>Monthly equivalent</p><strong id="rt-monthly">$89.00</strong><p class="rt-help">Ongoing charges spread across their billing periods. This is a budget comparison, not a payment schedule.</p></div>
       <div><label for="rt-month">Charges due in</label><input id="rt-month" type="month" min="1900-01" max="9999-12" placeholder="YYYY-MM" aria-describedby="rt-cash-note"/><strong id="rt-cash">$859.00</strong><p id="rt-cash-note" class="rt-help">From recorded billing dates.</p></div>

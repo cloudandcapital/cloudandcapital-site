@@ -29,7 +29,7 @@ test('example view shows correct cash/equivalent, is unsaved, and changes month'
   const {dom,w,$}=setup();
   assert.equal($('rt-monthly').textContent,'$89.00'); assert.equal($('rt-cash').textContent,'$859.00');
   assert.equal(w.localStorage.getItem(STORAGE_KEY),null); assert.equal($('rt-records').querySelectorAll('article').length,3);
-  assert.equal($('rt-start').hidden,false); assert.equal($('rt-add').hidden,true); assert.equal($('rt-mode').children.length,0); assert.equal($('rt-title').textContent,'Example tracker');
+  assert.equal($('rt-start').hidden,false); assert.equal($('rt-add').hidden,true); assert.equal($('rt-mode').children.length,0); assert.equal($('rt-title').textContent,'EXAMPLE'); assert.equal($('rt-example-arrow').hasAttribute('hidden'),false);
   $('rt-month').value='2026-12'; $('rt-month').dispatchEvent(new w.Event('change')); assert.equal($('rt-cash').textContent,'$19.00');
   dom.window.close();
 });
@@ -178,7 +178,7 @@ test('starting from an example preserves an existing diary until replacement is 
  const original=encodeSaved([{...EXAMPLES[0],vendor:'My existing tool',illustrative:'false'}]);
  const {dom,w,$,field,submit}=setup({saved:original});
  $('rt-demo').click(); assert.equal($('rt-demo').textContent,'Return to my tracker'); assert.equal($('rt-mode').children.length,0);
- $('rt-demo').click(); assert.equal($('rt-title').textContent,'Your tracker'); assert.equal($('rt-add').hidden,false); assert.equal(w.localStorage.getItem(STORAGE_KEY),original);
+ $('rt-demo').click(); assert.equal($('rt-title').textContent,'Your tracker'); assert.equal($('rt-example-arrow').hasAttribute('hidden'),true); assert.equal($('rt-add').hidden,false); assert.equal(w.localStorage.getItem(STORAGE_KEY),original);
  $('rt-demo').click(); $('rt-start').click(); assert.equal(w.localStorage.getItem(STORAGE_KEY),original);
  field('vendor','My new tool'); field('charge','30'); submit();
  assert.equal($('rt-confirm').open,true); assert.equal(w.localStorage.getItem(STORAGE_KEY),original);

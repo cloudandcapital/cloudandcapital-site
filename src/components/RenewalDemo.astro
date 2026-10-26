@@ -5,11 +5,7 @@ const record = examplesFor(new Date().toISOString().slice(0, 10))[0];
 const dateLabel = (date) => new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }).format(new Date(date + 'T00:00:00Z'));
 const notice = new Date(record.noticeDate + 'T00:00:00Z');
 ---
-<aside class="rt-example rt-flow-demo" aria-labelledby="rt-example-title" data-renewal-demo data-demo-playing="false">
-  <div class="rt-demo-top">
-    <p class="rt-kicker" id="rt-example-title">Illustrative example</p>
-    <button class="rt-demo-toggle" type="button" data-demo-toggle hidden>Pause demo</button>
-  </div>
+<aside class="rt-example rt-flow-demo" aria-label="How the tracker works" data-renewal-demo data-demo-playing="false">
   <ol class="rt-demo-flow" role="list" aria-label="How the renewal tracker works">
     <li class="rt-demo-step" style="--step-delay:0s">
       <span class="rt-demo-number" aria-hidden="true">1</span>
@@ -44,7 +40,12 @@ const notice = new Date(record.noticeDate + 'T00:00:00Z');
       </div>
     </li>
   </ol>
-  <p class="rt-demo-caption">Import the file into your calendar. Set any alerts there.</p>
+  <div class="rt-demo-controls">
+    <button class="rt-demo-toggle" type="button" data-demo-toggle aria-label="Pause animation" title="Pause animation" hidden>
+      <svg data-demo-pause viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>
+      <svg data-demo-play viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true" hidden><path d="m8 5 11 7-11 7Z"/></svg>
+    </button>
+  </div>
 </aside>
 <script>
   import { startRenewalDemo } from '../lib/renewal-demo.js';

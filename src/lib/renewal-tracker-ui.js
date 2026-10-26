@@ -60,7 +60,9 @@ export function startTracker(root) {
     demoBanner();
     $('rt-start').hidden = !demo;
     $('rt-add').hidden = demo;
-    $('rt-title').textContent = demo ? 'Example tracker' : 'Your tracker';
+    $('rt-title-text').textContent = demo ? 'EXAMPLE' : 'Your tracker';
+    $('rt-title').classList.toggle('rt-is-example', demo);
+    $('rt-example-arrow').toggleAttribute('hidden', !demo);
     const canReturn = demo && (savedDiary.length || !loadFailed && localStorageReadable());
     $('rt-demo').hidden = demo && !canReturn;
     $('rt-demo').textContent = canReturn ? 'Return to my tracker' : 'View example tracker';

@@ -36,8 +36,10 @@ test('demo can be paused and stays static when reduced motion is requested', () 
   const { dom, root, changePreference } = setup();
   startRenewalDemo(root);
   const toggle = root.querySelector('[data-demo-toggle]');
-  assert.equal(root.dataset.demoPlaying, 'true'); assert.equal(toggle.textContent, 'Pause demo');
-  toggle.click(); assert.equal(root.dataset.demoPlaying, 'false'); assert.equal(toggle.textContent, 'Play demo');
+  assert.equal(root.dataset.demoPlaying, 'true'); assert.equal(toggle.getAttribute('aria-label'), 'Pause animation');
+  assert.equal(root.querySelector('[data-demo-pause]').hasAttribute('hidden'), false); assert.equal(root.querySelector('[data-demo-play]').hasAttribute('hidden'), true);
+  toggle.click(); assert.equal(root.dataset.demoPlaying, 'false'); assert.equal(toggle.getAttribute('aria-label'), 'Play animation');
+  assert.equal(root.querySelector('[data-demo-pause]').hasAttribute('hidden'), true); assert.equal(root.querySelector('[data-demo-play]').hasAttribute('hidden'), false);
   startRenewalDemo(root); toggle.click(); assert.equal(root.dataset.demoPlaying, 'true');
   changePreference(true); assert.equal(root.dataset.demoPlaying, 'false'); assert.equal(toggle.hidden, true);
   changePreference(false); assert.equal(root.dataset.demoPlaying, 'true'); assert.equal(toggle.hidden, false);

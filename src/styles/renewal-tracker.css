@@ -65,6 +65,14 @@
 .rt-actions { gap:.65rem; }
 .rt-record-heading .rt-actions button { font-size:.9rem; }
 .rt-calendar { margin-top:2rem; }
+.rt-calendar-heading { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.75rem 1.5rem; margin-bottom:1rem; }
+.rt-calendar-heading h3 { margin-bottom:0; }
+.rt-calendar-heading button { flex:0 0 auto; }
+.rt-calendar-details { margin-bottom:1rem; }
+.rt-calendar-details summary { cursor:pointer; min-height:44px; padding:.5rem 0; color:var(--rt-green); }
+.rt-calendar-details p { margin:.5rem 0; }
+#rt-calendar-feedback { color:var(--rt-green); }
+#rt-calendar-feedback:empty { display:none; }
 .rt-calendar li { padding:.9rem .2rem; border-color:var(--rt-line); }
 .rt-calendar time { color:var(--rt-green); }
 .rt-storage { border:1px solid var(--rt-line); padding:1.75rem 2rem; border-radius:22px; }

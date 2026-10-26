@@ -159,7 +159,7 @@ export function startTracker(root) {
     e.target.value = '';
   };
   $('rt-ics').onclick = () => {
-    try { download(exportCalendar(records, $('rt-month').value), 'text/calendar;charset=utf-8', 'cloud-capital-renewals.ics'); storageFeedback('Calendar prepared for download: 12 months from the selected month. Import it into your calendar app and check the dates.'); } catch(err) { storageFeedback(err.message); }
+    try { download(exportCalendar(records, $('rt-month').value), 'text/calendar;charset=utf-8', 'cloud-capital-renewals.ics'); feedback('Calendar file ready. Import it into your calendar app, check the dates, and set any alerts there.', 'rt-calendar-feedback'); } catch(err) { feedback(err.message, 'rt-calendar-feedback'); }
   };
   $('rt-demo').onclick = () => {
     if (demo) {

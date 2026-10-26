@@ -139,6 +139,24 @@ test('import errors are shown next to import/export controls',async()=>{
  assert.ok($('rt-storage-feedback').closest('.rt-storage')); assert.ok($('rt-storage-feedback').textContent.includes('Nothing imported')); dom.window.close();
 });
 
+test('calendar download uses your selected month and reports results beside the dates',async()=>{
+ const original=encodeSaved([{...EXAMPLES[0],vendor:'My own subscription',illustrative:'false'}]);
+ const {dom,w,$}=setup({saved:original}), files=[], downloads=[];
+ w.Blob=Blob; w.URL.createObjectURL=blob=>{files.push(blob);return 'blob:calendar';};
+ w.HTMLAnchorElement.prototype.click=function(){downloads.push(this.download);};
+ $('rt-month').value='2026-11'; $('rt-month').dispatchEvent(new w.Event('change')); $('rt-ics').click();
+ assert.deepEqual(downloads,['cloud-capital-renewals.ics']); assert.equal(files[0].type,'text/calendar;charset=utf-8');
+ const calendar=await files[0].text();
+ assert.ok(calendar.includes('SUMMARY:Renewal: My own subscription')); assert.ok(calendar.includes('DTSTART;VALUE=DATE:20261105'));
+ assert.ok(calendar.includes('DTSTART;VALUE=DATE:20271005')); assert.equal(calendar.includes('DTSTART;VALUE=DATE:20271105'),false);
+ assert.equal(calendar.includes('VALARM'),false); assert.equal(calendar.includes('[Illustrative]'),false);
+ assert.ok($('rt-calendar-feedback').closest('.rt-calendar')); assert.ok($('rt-calendar-feedback').textContent.includes('set any alerts there'));
+ assert.equal($('rt-storage-feedback').textContent,''); assert.equal(w.localStorage.getItem(STORAGE_KEY),original);
+ $('rt-month').type='text'; $('rt-month').value='invalid'; $('rt-ics').click();
+ assert.equal(downloads.length,1); assert.ok($('rt-calendar-feedback').textContent.includes('valid start month')); assert.equal(w.localStorage.getItem(STORAGE_KEY),original);
+ dom.window.close();
+});
+
 test('reopening an editor clears previous field errors and restores charge help',()=>{
  const {dom,w,$,field,submit}=setup({saved:encodeSaved([])});$('rt-add').click();field('vendor','Test');field('charge','1,20');submit();assert.ok($('rt-form').querySelector('.rt-field-error'));
  $('rt-close').click();$('rt-add').click();assert.equal($('rt-form').querySelector('.rt-field-error'),null);assert.equal($('rt-form').elements.namedItem('charge').getAttribute('aria-describedby'),'rt-charge-help');assert.equal($('rt-example-edit').hidden,true);dom.window.close();

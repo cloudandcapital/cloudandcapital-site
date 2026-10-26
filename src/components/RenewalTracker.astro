@@ -9,7 +9,7 @@ import ActionLabel from './ActionLabel.astro';
       <h1>Give your software<br/><em>a date in the diary.</em></h1>
       <p class="rt-intro">Keep software charges, renewal dates, and notice deadlines together. Know what leaves the account and when to make the call.</p>
       <div class="rt-hero-actions">
-        <a class="rt-hero-action rt-primary" id="rt-start" href="#rt-title"><ActionLabel label="Start my own tracker" /></a>
+        <a class="rt-hero-action rt-primary" id="rt-start" href="#rt-title" aria-label="Start my own tracker"><ActionLabel label="Start my own tracker" /></a>
         <a class="rt-companion" href="https://cloudandcapital.com/resources/software-renewal"><ActionLabel label="Use the renewal worksheet" /></a>
       </div>
     </div>
@@ -28,7 +28,7 @@ import ActionLabel from './ActionLabel.astro';
     </aside>
   </header>
   <section class="rt-workspace" aria-labelledby="rt-title">
-    <div class="rt-section-heading"><div><p class="rt-kicker">Your renewal diary · USD only</p><h2 id="rt-title">A little planning, fewer surprises.</h2></div><button type="button" class="rt-primary" id="rt-add">Add a subscription</button></div>
+    <div class="rt-section-heading"><div><p class="rt-kicker">USD only</p><h2 id="rt-title">Example tracker</h2></div><button type="button" class="rt-primary" id="rt-add" hidden>Add a subscription</button></div>
     <div id="rt-mode" class="rt-banner"></div>
     <p id="rt-feedback" role="status" aria-live="polite"></p>
     <div class="rt-summary">

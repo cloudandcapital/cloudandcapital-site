@@ -49,27 +49,21 @@ export function startTracker(root) {
   function demoBanner() {
     const mode = $('rt-mode'); mode.replaceChildren();
     if (demo) {
-      mode.append(create('p', 'Explore the example below, or start with your own subscriptions.'));
-      const start = create('button', 'Start my own tracker', 'rt-primary'); start.type = 'button';
-      start.onclick = () => openEditor(undefined, start);
-      mode.append(start);
-      if (savedDiary.length || !loadFailed && localStorageReadable()) {
-        const back = create('button', 'Return to my saved diary'); back.type = 'button'; back.onclick = () => { records = savedDiary.map(r => ({ ...r })); demo = false; $('rt-month').value = currentMonth(); render(); feedback('Returned to your saved diary.'); }; mode.append(back);
-      }
+      if (loadFailed) mode.append(create('p', 'Your saved diary could not be read. Download the unreadable saved data below before replacing it.'));
     } else {
       const examplesInDiary = records.filter(r => r.illustrative === 'true');
-      mode.append(create('p', examplesInDiary.length
-        ? `Example entries in this diary: ${examplesInDiary.map(r => r.vendor).join(', ')}. Replace their details with your own, or remove them.`
-        : 'Your diary. Save a record to store changes in this browser; export CSV to keep a separate backup.'));
+      if (examplesInDiary.length) mode.append(create('p', `Example entries in this diary: ${examplesInDiary.map(r => r.vendor).join(', ')}. Replace their details with your own, or remove them.`));
     }
   }
   function localStorageReadable() { try { return localStorage.getItem(STORAGE_KEY) !== null; } catch { return false; } }
   function render() {
     demoBanner();
-    const startLabel = demo ? 'Start my own tracker' : 'Open my renewal diary';
-    $('rt-start').setAttribute('aria-label', startLabel);
-    const labelText = $('rt-start').querySelector('.action-label > span:first-child');
-    if (labelText) labelText.textContent = startLabel;
+    $('rt-start').hidden = !demo;
+    $('rt-add').hidden = demo;
+    $('rt-title').textContent = demo ? 'Example tracker' : 'Your tracker';
+    const canReturn = demo && (savedDiary.length || !loadFailed && localStorageReadable());
+    $('rt-demo').hidden = demo && !canReturn;
+    $('rt-demo').textContent = canReturn ? 'Return to my tracker' : 'View example tracker';
     $('rt-monthly').textContent = usd(monthlyEquivalent(records));
     const month = $('rt-month').value;
     let charges = [];
@@ -88,7 +82,7 @@ export function startTracker(root) {
       name.append(create('span', r.billingState === 'ended' ? 'Billing ended' : r.decision === 'Cancel' ? 'Decided: cancel' : r.decision, 'rt-tag'));
       const buttons = create('div', undefined, 'rt-actions');
       for (const action of ['Edit', 'Delete']) { const b = create('button', action); b.type = 'button'; b.setAttribute('aria-label', `${action} ${r.vendor}`); b.onclick = action === 'Edit' ? () => openEditor(r, b) : () => {
-        ask(`Delete ${r.vendor} from ${demo ? 'the example view' : 'your diary'}? This does not cancel a vendor subscription.`, () => { records = records.filter(x => x.id !== r.id); if (!demo) persist(); render(); $('rt-add').focus(); feedback(demo ? 'Removed from the unsaved example view.' : storageOK ? 'Record deleted and diary saved.' : 'Record removed from this page only.'); }, 'Delete record');
+        ask(`Delete ${r.vendor} from ${demo ? 'the example view' : 'your diary'}? This does not cancel a vendor subscription.`, () => { records = records.filter(x => x.id !== r.id); if (!demo) persist(); render(); (demo ? $('rt-start') : $('rt-add')).focus(); feedback(demo ? 'Removed from the unsaved example view.' : storageOK ? 'Record deleted and diary saved.' : 'Record removed from this page only.'); }, 'Delete record');
       }; buttons.append(b); }
       heading.append(name, buttons); article.append(heading);
       const grid = create('div', undefined, 'rt-record-grid');
@@ -122,7 +116,7 @@ export function startTracker(root) {
     form.elements.namedItem('charge').setAttribute('aria-describedby', 'rt-charge-help');
     $('rt-editor-title').textContent = record ? 'Edit subscription' : 'Add a subscription'; editor.showModal(); form.elements.namedItem('vendor').focus();
   }
-  function closeEditor() { editor.close(); if (focusBefore?.isConnected) focusBefore.focus(); else $('rt-add').focus(); }
+  function closeEditor() { editor.close(); if (focusBefore?.isConnected && !focusBefore.closest('[hidden]')) focusBefore.focus(); else (demo ? $('rt-start') : $('rt-add')).focus(); }
   function discard() { if (dirty) ask('Discard your unsaved changes to this subscription?', closeEditor, 'Discard changes'); else closeEditor(); }
   $('rt-start').onclick = e => { if (demo) { e.preventDefault(); openEditor(undefined, $('rt-start')); } };
   $('rt-add').onclick = () => openEditor(); $('rt-close').onclick = discard; $('rt-cancel').onclick = discard;
@@ -168,6 +162,12 @@ export function startTracker(root) {
     try { download(exportCalendar(records, $('rt-month').value), 'text/calendar;charset=utf-8', 'cloud-capital-renewals.ics'); storageFeedback('Calendar prepared for download: 12 months from the selected month. Import it into your calendar app and check the dates.'); } catch(err) { storageFeedback(err.message); }
   };
   $('rt-demo').onclick = () => {
+    if (demo) {
+      if (savedDiary.length || !loadFailed && localStorageReadable()) {
+        records = savedDiary.map(r => ({ ...r })); demo = false; $('rt-month').value = currentMonth(); render(); $('rt-add').focus(); feedback('Returned to your saved diary.');
+      }
+      return;
+    }
     const show = () => { records = examples(); demo = true; render(); feedback('Showing the example tracker.'); };
     if (!storageOK && !demo) ask('Your current changes are not saved. Export CSV before switching to examples, or confirm to discard the in-page changes.', show, 'View examples'); else show();
   };

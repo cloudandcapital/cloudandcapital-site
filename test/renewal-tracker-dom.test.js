@@ -29,12 +29,13 @@ test('example view shows correct cash/equivalent, is unsaved, and changes month'
   const {dom,w,$}=setup();
   assert.equal($('rt-monthly').textContent,'$89.00'); assert.equal($('rt-cash').textContent,'$859.00');
   assert.equal(w.localStorage.getItem(STORAGE_KEY),null); assert.equal($('rt-records').querySelectorAll('article').length,3);
+  assert.equal($('rt-start').hidden,false); assert.equal($('rt-add').hidden,true); assert.equal($('rt-mode').children.length,0); assert.equal($('rt-title').textContent,'Example tracker');
   $('rt-month').value='2026-12'; $('rt-month').dispatchEvent(new w.Event('change')); assert.equal($('rt-cash').textContent,'$19.00');
   dom.window.close();
 });
 test('start empty, add, save, reload, edit and delete preserve records',()=>{
   let {dom,w,$,field,submit}=setup();
-  $('rt-mode').querySelector('button').click(); assert.equal($('rt-confirm').open,false);
+  $('rt-start').click(); assert.equal($('rt-confirm').open,false);
   assert.equal($('rt-editor').open,true); assert.equal(w.document.activeElement.name,'vendor');
   field('vendor','Own tool'); field('charge','240'); field('frequency','annually'); field('billingDate','2026-11-30'); field('notes','Uses, dependencies and next action'); submit();
   assert.equal($('rt-editor').open,false); assert.equal(w.document.activeElement.id,'rt-add');
@@ -68,7 +69,7 @@ test('storage denial shows not saved; existing saved data remains intact',()=>{
 test('corrupt storage is preserved until overwrite is explicitly confirmed',()=>{
   const {dom,w,$,field,submit}=setup({saved:'{broken'});
   assert.ok($('rt-save-status').textContent.includes('could not be read'));
-  $('rt-add').click(); field('vendor','New'); field('charge','20'); submit();
+  $('rt-start').click(); field('vendor','New'); field('charge','20'); submit();
   assert.equal(w.localStorage.getItem(STORAGE_KEY),'{broken'); $('rt-confirm-no').click(); assert.equal(w.localStorage.getItem(STORAGE_KEY),'{broken'); dom.window.close();
 });
 test('unsaved editor discard requires confirmation and restores focus',()=>{
@@ -102,11 +103,11 @@ test('invalid nonempty fallback month never displays a zero cash total',()=>{
 test('examples stay current and starting your tracker opens a blank unsaved entry',()=>{
  const {dom,w,$}=setup({clock:'2027-03-10T12:00:00Z'});
  assert.equal($('rt-month').value,'2027-04'); assert.equal($('rt-cash').textContent,'$859.00'); assert.equal($('rt-dates').textContent.includes('Past date'),false);
- $('rt-mode').querySelector('button').click(); assert.equal($('rt-editor').open,true); assert.equal($('rt-form').elements.namedItem('vendor').value,''); assert.equal($('rt-form').elements.namedItem('illustrative').checked,false); assert.equal($('rt-confirm').open,false); assert.equal(w.localStorage.getItem(STORAGE_KEY),null); dom.window.close();
+ $('rt-start').click(); assert.equal($('rt-editor').open,true); assert.equal($('rt-form').elements.namedItem('vendor').value,''); assert.equal($('rt-form').elements.namedItem('illustrative').checked,false); assert.equal($('rt-confirm').open,false); assert.equal(w.localStorage.getItem(STORAGE_KEY),null); dom.window.close();
 });
 test('adding from examples is real; editing preserves illustrative status',()=>{
  for(const edit of [false,true]) { const {dom,w,$,field,submit}=setup();
- if(edit) $('rt-records').querySelector('button').click(); else $('rt-add').click();
+ if(edit) $('rt-records').querySelector('button').click(); else $('rt-start').click();
  field('vendor','My real tool'); field('charge','50'); field('frequency','monthly'); submit();
  const saved=decodeSaved(w.localStorage.getItem(STORAGE_KEY)); assert.equal(saved.length,1); assert.equal(saved[0].illustrative,String(edit)); assert.equal($('rt-monthly').textContent,'$50.00'); assert.equal($('rt-month').value,'2026-10'); dom.window.close(); }
 });
@@ -122,7 +123,7 @@ test('validation focuses failed input and puts its message alongside it',()=>{
 });
 test('blocked reads do not claim corruption or warn of unreadable saved records',()=>{
  const {dom,w,$,field,submit}=setup({readBlocked:true,blocked:true}); assert.ok($('rt-save-status').textContent.includes('unavailable')); assert.equal($('rt-recover').hidden,true);
- $('rt-add').click(); field('vendor','A'); field('charge','19'); submit(); assert.equal($('rt-confirm').open,false); assert.ok($('rt-save-status').textContent.includes('Not saved')); dom.window.close();
+ $('rt-start').click(); field('vendor','A'); field('charge','19'); submit(); assert.equal($('rt-confirm').open,false); assert.ok($('rt-save-status').textContent.includes('Not saved')); dom.window.close();
 });
 test('real past notice dates warn on the card; ordinary past payments do not',()=>{
  const r={...EXAMPLES[0],illustrative:'false',noticeDate:'2026-10-01',renewalDate:'2026-11-01',billingDate:'2025-03-15',decision:'Cancel'}, {dom,w,$}=setup({saved:encodeSaved([r])});
@@ -131,7 +132,7 @@ test('real past notice dates warn on the card; ordinary past payments do not',()
 });
 test('corrupted saved records have a raw recovery action and described confirmations',()=>{
  const {dom,w,$}=setup({saved:'{broken'}); assert.equal($('rt-recover').hidden,false); assert.equal($('rt-confirm').getAttribute('aria-describedby'),'rt-confirm-message');
- $('rt-mode').querySelector('button').click(); assert.equal($('rt-editor').open,true); $('rt-form').elements.namedItem('vendor').value='My tool'; $('rt-form').elements.namedItem('charge').value='20'; $('rt-form').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true})); assert.equal($('rt-confirm-yes').textContent,'Save only this subscription'); assert.ok($('rt-confirm-message').textContent.includes('replaces the saved diary')); $('rt-confirm-no').click(); assert.equal(w.localStorage.getItem(STORAGE_KEY),'{broken'); dom.window.close();
+ $('rt-start').click(); assert.equal($('rt-editor').open,true); $('rt-form').elements.namedItem('vendor').value='My tool'; $('rt-form').elements.namedItem('charge').value='20'; $('rt-form').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true})); assert.equal($('rt-confirm-yes').textContent,'Save only this subscription'); assert.ok($('rt-confirm-message').textContent.includes('replaces the saved diary')); $('rt-confirm-no').click(); assert.equal(w.localStorage.getItem(STORAGE_KEY),'{broken'); dom.window.close();
 });
 test('import errors are shown next to import/export controls',async()=>{
  const {dom,w,$}=setup({saved:encodeSaved([])}), input=$('rt-import'); Object.defineProperty(input,'files',{value:[{size:10,text:async()=>'bad,csv'}]}); await input.onchange({target:input});
@@ -158,11 +159,13 @@ test('hero start opens your first blank subscription without saving example reco
 test('starting from an example preserves an existing diary until replacement is confirmed',()=>{
  const original=encodeSaved([{...EXAMPLES[0],vendor:'My existing tool',illustrative:'false'}]);
  const {dom,w,$,field,submit}=setup({saved:original});
+ $('rt-demo').click(); assert.equal($('rt-demo').textContent,'Return to my tracker'); assert.equal($('rt-mode').children.length,0);
+ $('rt-demo').click(); assert.equal($('rt-title').textContent,'Your tracker'); assert.equal($('rt-add').hidden,false); assert.equal(w.localStorage.getItem(STORAGE_KEY),original);
  $('rt-demo').click(); $('rt-start').click(); assert.equal(w.localStorage.getItem(STORAGE_KEY),original);
  field('vendor','My new tool'); field('charge','30'); submit();
  assert.equal($('rt-confirm').open,true); assert.equal(w.localStorage.getItem(STORAGE_KEY),original);
  $('rt-confirm-no').click(); assert.equal($('rt-editor').open,true); assert.equal(w.localStorage.getItem(STORAGE_KEY),original);
  submit(); $('rt-confirm-yes').click();
  const saved=decodeSaved(w.localStorage.getItem(STORAGE_KEY)); assert.equal(saved.length,1); assert.equal(saved[0].vendor,'My new tool'); assert.equal(saved[0].illustrative,'false');
- assert.equal($('rt-start').getAttribute('aria-label'),'Open my renewal diary'); dom.window.close();
+ assert.equal($('rt-start').hidden,true); assert.equal($('rt-add').hidden,false); assert.equal($('rt-title').textContent,'Your tracker'); assert.equal(w.document.activeElement.id,'rt-add'); dom.window.close();
 });

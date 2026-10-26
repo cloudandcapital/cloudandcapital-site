@@ -1,6 +1,7 @@
 ---
 import '../styles/renewal-tracker.css';
 import ActionLabel from './ActionLabel.astro';
+import RenewalDemo from './RenewalDemo.astro';
 ---
 <main id="renewal-tracker" class="renewal-tracker">
   <header class="rt-hero">
@@ -13,19 +14,7 @@ import ActionLabel from './ActionLabel.astro';
         <a class="rt-companion" href="https://cloudandcapital.com/resources/software-renewal"><ActionLabel label="Use the renewal worksheet" /></a>
       </div>
     </div>
-    <aside class="rt-example" aria-labelledby="rt-example-title">
-      <p class="rt-kicker" id="rt-example-title">Illustrative example <span>· 3 subscriptions</span></p>
-      <div class="rt-example-numbers">
-        <div><p class="rt-example-value">$89 <span>Monthly<br/>equivalent</span></p></div>
-        <div><p class="rt-example-value">$859 <span>Charges in<br/>one month</span></p></div>
-      </div>
-      <p class="rt-example-caption">One monthly charge and two annual bills. The budget view and the payment month tell you different things.</p>
-      <details class="rt-example-details">
-        <summary>Why are the totals different?</summary>
-        <p>$19 monthly + $240 ÷ 12 + $600 ÷ 12.</p>
-        <p>$19 + $240 + $600, if both annual bills fall in that month. Other months require $19; over a full year, both views total $1,068. Assumes one $19 charge that month, unchanged USD prices, no extra tax or fees, and ongoing billing.</p>
-      </details>
-    </aside>
+    <RenewalDemo />
   </header>
   <section class="rt-workspace" aria-labelledby="rt-title">
     <div class="rt-section-heading"><div><p class="rt-kicker">USD only</p><h2 id="rt-title">Example tracker</h2></div><button type="button" class="rt-primary" id="rt-add" hidden>Add a subscription</button></div>

@@ -118,20 +118,20 @@ const articleData = {
 <style>
   .guard-guide h1 { max-width:none; }
   .guard-guide h1 > :is(span,em) { display:block; }
-  .guard-guide h1 em { color:var(--clay-ink); font-style:italic; }
+  .guard-guide h1 em { color: var(--clay-ink); font-style:italic; }
   .guard-guide header > p + p { margin-top:.8rem; }
   .guard-guide .guide-byline { margin-bottom:1rem; }
-  .guard-guide .guide-button { color:white; background:var(--brand-green); border-color:var(--brand-green); }
-  .guard-guide .guide-button :global(.action-label) { color:inherit; }
-  .guard-guide .guide-screenshot img { padding:0; border:1px solid #d3c9c0; border-radius:12px; background:var(--cream); }
-  .guard-providers { margin-block:1.5rem; border-top:1px solid #c8d1c0; }
-  .guard-providers > div { display:grid; grid-template-columns:8rem minmax(0,1fr); gap:1.25rem; padding:1.25rem 0; border-bottom:1px solid #c8d1c0; }
-  .guard-providers dt { color:var(--brand-green); font-size:1.2rem; font-weight:500; }
+  .guard-guide .guide-button { color: white; background: var(--theme-green-surface, var(--brand-green)); border-color: var(--brand-green); }
+  .guard-guide .guide-button :global(.action-label) { color: inherit; }
+  .guard-guide .guide-screenshot img { padding:0; border: 1px solid var(--theme-line, #d3c9c0); border-radius:12px; background: var(--cream); }
+  .guard-providers { margin-block:1.5rem; border-top: 1px solid var(--theme-line, #c8d1c0); }
+  .guard-providers > div { display:grid; grid-template-columns:8rem minmax(0,1fr); gap:1.25rem; padding:1.25rem 0; border-bottom: 1px solid var(--theme-line, #c8d1c0); }
+  .guard-providers dt { color: var(--brand-green); font-size:1.2rem; font-weight:500; }
   .guard-providers dd { margin:0; line-height:1.75; text-wrap:pretty; }
   .guard-steps { padding-left:1.4rem; }
-  .guard-file-help { margin-top:1.5rem; padding:1rem 1.3rem; border:1px solid #c8d1c0; border-radius:12px; }
+  .guard-file-help { margin-top:1.5rem; padding:1rem 1.3rem; border: 1px solid var(--theme-line, #c8d1c0); border-radius:12px; }
   .guard-file-help summary { min-height:44px; padding-block:.5rem; cursor:pointer; font-weight:500; }
-  .guard-file-help summary:focus-visible { outline:2px solid var(--clay-ink); outline-offset:4px; }
+  .guard-file-help summary:focus-visible { outline: 2px solid var(--clay-ink); outline-offset:4px; }
   .guard-file-help li { overflow-wrap:anywhere; }
   @media(max-width:760px) { .guard-wide-screenshot { display:none; } .guard-providers > div { grid-template-columns:1fr; gap:.35rem; } .guard-file-help { padding:.8rem 1rem; } }
 </style>

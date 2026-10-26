@@ -50,11 +50,11 @@ const learning = kind === 'learning';
 <style>
   [hidden]{display:none!important;}
   form{max-width:48rem;margin-top:1.8rem;} label{display:block;font-family:var(--font-ui);font-size:1rem;margin-bottom:1.1rem;} label span{font-size:.85rem;}
-  input,textarea,select{display:block;width:100%;background:var(--cream);color:#242b28;border:1px solid #809386;border-radius:3px;padding:.75rem;font:inherit;margin-top:.35rem;}
-  input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #36594c;outline-offset:2px;}
+  input,textarea,select{display:block;width:100%;background: var(--cream);color: var(--theme-ink, #242b28);border: 1px solid var(--theme-line, #809386);border-radius:3px;padding:.75rem;font:inherit;margin-top:.35rem;}
+  input:focus-visible,textarea:focus-visible,select:focus-visible{outline: 2px solid var(--theme-line-strong, #36594c);outline-offset:2px;}
   .fields{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;} summary{cursor:pointer;margin-bottom:1rem;}
   .email-note,.email-fallback{font-family:var(--font-ui);font-size:.93rem;line-height:1.6;margin-top:1rem;}
-  .copy-button{min-height:44px;padding:.75rem 1rem;margin-left:.6rem;border:1px solid #36594c;border-radius:3px;background:transparent;color:#36594c;font:inherit;cursor:pointer;}
+  .copy-button{min-height:44px;padding:.75rem 1rem;margin-left:.6rem;border: 1px solid var(--theme-line-strong, #36594c);border-radius:3px;background: transparent;color: var(--theme-green, #36594c);font:inherit;cursor:pointer;}
   [data-copy-status]:empty{display:none;}
   [data-copy-preview]{margin-top:1rem;}
   @media(max-width:560px){.fields{grid-template-columns:1fr;gap:0;}}

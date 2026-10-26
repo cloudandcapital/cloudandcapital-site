@@ -29,7 +29,7 @@ const { analyticsSource } = Astro.props;
 </div>
 
 <style>
-  .ai-cost-lens-feature { display: grid; grid-template-columns: minmax(19rem,.78fr) minmax(0,1.22fr); overflow: hidden; border: 1px solid rgba(255,255,255,.1); border-top: 2px solid var(--sage); background: var(--ink); }
+  .ai-cost-lens-feature { display: grid; grid-template-columns: minmax(19rem,.78fr) minmax(0,1.22fr); overflow: hidden; border: 1px solid var(--theme-line, rgba(255,255,255,.1)); border-top: 2px solid var(--sage); background: var(--ink); }
   .ai-cost-lens-copy { min-height: 430px; padding: clamp(2.6rem,4vw,4rem) clamp(2rem,3.6vw,3.5rem); display: flex; flex-direction: column; justify-content: center; }
   .ai-cost-lens-meta { margin-bottom: 1rem; font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
   .ai-cost-lens-title { margin: 0 0 .65rem; font-family: 'Cormorant Garamond', serif; font-size: clamp(2.9rem,4.5vw,4.7rem); font-weight: 400; line-height: .98; color: var(--cream); }
@@ -41,8 +41,8 @@ const { analyticsSource } = Astro.props;
   .ai-cost-lens-actions a:hover { text-decoration: underline; text-underline-offset: .3em; }
   .ai-cost-lens-actions a:focus-visible, .ai-cost-lens-preview:focus-visible { outline: 2px solid var(--cream); outline-offset: .35rem; }
   .ai-cost-lens-actions span { width: 100%; font-family: 'DM Mono', monospace; font-size: .57rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(244,239,230,.5); }
-  .ai-cost-lens-preview { min-width: 0; margin: 1.35rem; align-self: center; overflow: hidden; background: var(--cream); border: 1px solid rgba(244,239,230,.22); box-shadow: 0 24px 55px rgba(0,0,0,.28); color: var(--ink); text-decoration: none; }
-  .ai-cost-lens-preview-bar { display: flex; justify-content: space-between; gap: 1rem; padding: .8rem 1rem; border-bottom: 1px solid rgba(25,23,20,.12); font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(25,23,20,.54); }
+  .ai-cost-lens-preview { min-width: 0; margin: 1.35rem; align-self: center; overflow: hidden; background: var(--cream); border: 1px solid var(--theme-line, rgba(244,239,230,.22)); box-shadow: 0 24px 55px rgba(0,0,0,.28); color: var(--ink); text-decoration: none; }
+  .ai-cost-lens-preview-bar { display: flex; justify-content: space-between; gap: 1rem; padding: .8rem 1rem; border-bottom: 1px solid var(--theme-line, rgba(25,23,20,.12)); font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .14em; text-transform: uppercase; color: var(--theme-ink, rgba(25,23,20,.54)); }
   .ai-cost-lens-preview img { display: block; width: 100%; height: auto; transition: transform .35s ease; }
   .ai-cost-lens-preview:hover img { transform: scale(1.012); }
   @media (max-width: 1024px) { .ai-cost-lens-feature { grid-template-columns: 1fr; }.ai-cost-lens-copy { min-height: auto; }.ai-cost-lens-preview { margin-top: 0; } }

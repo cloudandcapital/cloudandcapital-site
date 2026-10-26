@@ -56,14 +56,14 @@
   .business-art img { display: block; width: 100%; height: auto; }
   .hero-lens-motion { position: absolute; inset: 0; display: none; transform-origin: 46% 45%; pointer-events: none; }
   .business-art .hero-lens-image { transform: scale(.8); transform-origin: 46% 45%; }
-  .art-motion-toggle { position: absolute; right: .5rem; bottom: .5rem; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; border: 1px solid #78938266; border-radius: 50%; background: #faf6efdb; color: #35463c; cursor: pointer; }
+  .art-motion-toggle { position: absolute; right: .5rem; bottom: .5rem; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; border: 1px solid var(--theme-line, #78938266); border-radius: 50%; background: var(--theme-panel, #faf6efdb); color: var(--theme-green, #35463c); cursor: pointer; }
   .art-motion-toggle[hidden] { display: none; }
   .art-motion-toggle svg { display: block; width: 14px; height: 14px; }
   .art-motion-toggle .art-motion-play { display: none; }
   .is-paused .art-motion-toggle .art-motion-pause { display: none; }
   .is-paused .art-motion-toggle .art-motion-play { display: block; }
-  .art-motion-toggle:hover { background: var(--cream); border-color: #789382; }
-  .art-motion-toggle:focus-visible { outline: 2px solid #785752; outline-offset: 3px; }
+  .art-motion-toggle:hover { background: var(--cream); border-color: var(--theme-line, #789382); }
+  .art-motion-toggle:focus-visible { outline: 2px solid var(--theme-line-strong, #785752); outline-offset: 3px; }
   @keyframes hero-inspect {
     0%, 100% { transform: translate(0, 0) rotate(0); }
     25% { transform: translate(-4.5%, -1.75%) rotate(-1deg); }

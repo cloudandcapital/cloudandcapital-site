@@ -104,15 +104,15 @@ const articleData = {
   </main>
 </BaseLayout>
 <style>
-  .tape-guide .guide-button { background:#dce4d9; border-color:#a8b8a5; }
-  .tape-guide .guide-screenshot img { background:var(--cream); border:1px solid #c9c2b7; padding:1rem; }
+  .tape-guide .guide-button { background: var(--theme-panel, #dce4d9); border-color: var(--theme-line, #a8b8a5); }
+  .tape-guide .guide-screenshot img { background: var(--cream); border: 1px solid var(--theme-line, #c9c2b7); padding:1rem; }
   .phone-review-notes { display: none; }
   @media (max-width: 760px) {
     .desktop-review-capture { display: none; }
-    .phone-review-notes { display: grid; gap: 1.25rem; padding: 1.25rem; background: var(--cream); border: 1px solid #c9c2b7; }
+    .phone-review-notes { display: grid; gap: 1.25rem; padding: 1.25rem; background: var(--cream); border: 1px solid var(--theme-line, #c9c2b7); }
     .phone-review-notes h3 { margin: 0 0 .5rem; font-size: 1.2rem; }
     .phone-review-notes p { margin: 0; font-size: .95rem; }
   }
   @media (max-width: 760px) { .tape-guide .guide-screenshot picture { display: block; max-width: 23rem; margin-inline: auto; } .tape-guide .guide-screenshot picture img { width: 100%; height: auto; padding: .5rem; } }
-  .tape-guide .guide-example { background:var(--cream); }
+  .tape-guide .guide-example { background: var(--cream); }
 </style>

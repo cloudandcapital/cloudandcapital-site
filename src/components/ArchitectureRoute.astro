@@ -32,7 +32,7 @@ const { label, title, description } = Astro.props;
     font-size: .65rem;
     letter-spacing: .16em;
     text-transform: uppercase;
-    color: #6b8e7f;
+    color: var(--theme-green, #6b8e7f);
   }
   h1 {
     margin: 0 0 1.25rem;
@@ -40,18 +40,18 @@ const { label, title, description } = Astro.props;
     font-size: clamp(3rem, 6vw, 5rem);
     font-weight: 300;
     line-height: 1;
-    color: #000;
+    color: var(--theme-ink, #000);
   }
   p {
     max-width: 36rem;
     margin: 0 0 2rem;
-    color: #4a4a4a;
+    color: var(--theme-muted, #4a4a4a);
     font-family: 'DM Sans', sans-serif;
     font-size: 1rem;
     line-height: 1.75;
   }
   a {
-    color: #3d6055;
+    color: var(--theme-green, #3d6055);
     font-family: 'DM Mono', monospace;
     font-size: .65rem;
     letter-spacing: .12em;

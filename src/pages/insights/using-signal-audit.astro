@@ -28,9 +28,9 @@ const articleData = {
   </article></main>
 </BaseLayout>
 <style>
-  .signal-guide .guide-button { background:#3d6055; border-color:#3d6055; color:white; }
-  .signal-guide .guide-button :global(.action-label) { color:inherit; }
-  .signal-guide .guide-screenshot img { padding:0; border:1px solid #d3c9c0; border-radius:10px; background:var(--cream); }
+  .signal-guide .guide-button { background: var(--theme-forest-panel, #3d6055); border-color: var(--theme-line-strong, #3d6055); color: white; }
+  .signal-guide .guide-button :global(.action-label) { color: inherit; }
+  .signal-guide .guide-screenshot img { padding:0; border: 1px solid var(--theme-line, #d3c9c0); border-radius:10px; background: var(--cream); }
   .signal-guide .guide-screenshot picture { display:block; }
   .signal-guide .guide-example { margin-block:1.5rem; }
   @media(max-width:760px) { .signal-guide .signal-guide-detail { display:none; } .signal-guide .guide-screenshot picture { max-width:24rem; margin-inline:auto; } }

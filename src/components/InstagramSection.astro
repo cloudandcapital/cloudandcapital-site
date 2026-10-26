@@ -68,31 +68,31 @@ import { instagramPosts, instagramProfile } from '../data/instagram';
 </script>
 
 <style>
-  .instagram-section { padding: clamp(3.5rem, 6vw, 5.5rem) 0; color: #24211e; background: #f3e4de; border-top: 1px solid #dec9bf; scroll-margin-top: 5rem; }
+  .instagram-section { padding: clamp(3.5rem, 6vw, 5.5rem) 0; color: var(--theme-ink, #24211e); background: var(--theme-rose-panel, #f3e4de); border-top: 1px solid var(--theme-line, #dec9bf); scroll-margin-top: 5rem; }
   .instagram-intro { display: flex; justify-content: space-between; align-items: end; gap: 2rem; }
-  .instagram-eyebrow { display: flex; align-items: center; gap: .75rem; color: #89534f; font: 500 .65rem/1.5 'DM Mono', monospace; letter-spacing: .09em; text-transform: uppercase; }
+  .instagram-eyebrow { display: flex; align-items: center; gap: .75rem; color: var(--theme-rose, #89534f); font: 500 .65rem/1.5 'DM Mono', monospace; letter-spacing: .09em; text-transform: uppercase; }
   .instagram-eyebrow::after { content: ''; width: 2.7rem; height: 1px; background: currentColor; opacity: .7; }
   .instagram-intro h2 { margin-top: .9rem; font: 400 clamp(2.65rem, 4vw, 4.2rem)/1.02 'Cormorant Garamond', Georgia, serif; letter-spacing: -.035em; }
-  .instagram-intro > p { max-width: 30ch; color: #65534c; font-size: 1rem; line-height: 1.75; }
+  .instagram-intro > p { max-width: 30ch; color: var(--theme-rose, #65534c); font-size: 1rem; line-height: 1.75; }
   .instagram-strip { --post-height: clamp(14.5rem, 18vw, 17rem); --post-gap: .9rem; margin-top: 2.5rem; }
   .instagram-viewport { overflow-x: auto; padding: 5px 0 12px; scroll-snap-type: x proximity; scrollbar-width: thin; scrollbar-color: #bb9991 transparent; }
   .instagram-track { display: flex; width: max-content; }
   .instagram-run { display: flex; flex: none; align-items: start; gap: var(--post-gap); padding-right: var(--post-gap); }
   .instagram-run-copy { display: none; }
-  .instagram-post { flex: none; display: block; width: fit-content; padding: .3rem; border: 1px solid #dac2b8; border-radius: 12px; background: var(--cream); box-shadow: 0 6px 16px #7857520d; scroll-snap-align: start; }
+  .instagram-post { flex: none; display: block; width: fit-content; padding: .3rem; border: 1px solid var(--theme-line, #dac2b8); border-radius: 12px; background: var(--cream); box-shadow: 0 6px 16px #7857520d; scroll-snap-align: start; }
   .instagram-post img { display: block; width: auto; max-width: none; height: var(--post-height); border-radius: 8px; }
   .instagram-footer { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 1.2rem; }
-  .instagram-follow { display: inline-flex; align-items: center; gap: .8rem; color: #89534f; text-decoration: none; }
+  .instagram-follow { display: inline-flex; align-items: center; gap: .8rem; color: var(--theme-rose, #89534f); text-decoration: none; }
   .instagram-follow :global(.action-label) { font-size: .875rem; }
   .instagram-follow :global(.action-arrow) { transition: transform 200ms ease; }
   .instagram-follow:is(:hover, :focus-visible) :global(.action-arrow) { transform: translateX(4px); }
-  .instagram-toggle { display: grid; place-items: center; flex: none; width: 44px; height: 44px; padding: 0; border: 1px solid #cbaaa0; border-radius: 50%; background: transparent; color: #89534f; cursor: pointer; }
+  .instagram-toggle { display: grid; place-items: center; flex: none; width: 44px; height: 44px; padding: 0; border: 1px solid var(--theme-line, #cbaaa0); border-radius: 50%; background: transparent; color: var(--theme-rose, #89534f); cursor: pointer; }
   .instagram-toggle[hidden], .instagram-toggle .play-icon { display: none; }
-  .instagram-toggle:hover { background: #faf6f066; }
+  .instagram-toggle:hover { background: var(--theme-panel, #faf6f066); }
   .instagram-strip[data-paused] .pause-icon { display: none; }
   .instagram-strip[data-paused] .play-icon { display: block; }
-  .instagram-post:focus-visible, .instagram-follow:focus-visible, .instagram-viewport:focus-visible, .instagram-toggle:focus-visible { outline: 2px solid #89534f; outline-offset: 3px; }
-  .instagram-post:hover { border-color: #a5756b; }
+  .instagram-post:focus-visible, .instagram-follow:focus-visible, .instagram-viewport:focus-visible, .instagram-toggle:focus-visible { outline: 2px solid var(--theme-line-strong, #89534f); outline-offset: 3px; }
+  .instagram-post:hover { border-color: var(--theme-line-strong, #a5756b); }
   .instagram-strip[data-motion-ready] .instagram-viewport { overflow-x: hidden; }
   .instagram-strip[data-motion-ready] .instagram-run-copy { display: flex; }
   .instagram-strip[data-motion-ready] .instagram-track { animation: instagram-tape 76s linear infinite; }

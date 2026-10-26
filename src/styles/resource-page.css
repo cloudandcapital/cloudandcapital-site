@@ -11,37 +11,37 @@
 .resource-page .small-note { font-size: .92rem; line-height: 1.65; }
 .resource-page .offer-eyebrow { font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .1em; color: var(--clay-ink); }
 .resource-page .offer-actions { gap: .5rem 1.25rem; }
-.resource-page .offer-button { display: inline-flex; align-items: center; min-height: 54px; padding: .2rem 1.1rem; border: 1px solid var(--brand-green); border-radius: 8px; background: var(--brand-green); color: var(--cream); }
+.resource-page .offer-button { display: inline-flex; align-items: center; min-height: 54px; padding: .2rem 1.1rem; border: 1px solid var(--brand-green); border-radius: 8px; background: var(--theme-green-surface, var(--brand-green)); color: var(--cream); }
 .resource-page .offer-button .action-label > span:first-child { text-decoration: none; }
 .resource-page .offer-button:hover { background: var(--brand-green-hover); }
 .resource-page .quiet-link { display: inline-flex; align-items: center; min-height: 44px; padding-bottom: 0; border: 0; }
 .resource-page .renewal-preview { min-width: 0; margin: 0; }
-.resource-page .renewal-preview img { display: block; width: auto; max-width: 100%; height: auto; max-height: 30rem; margin-inline: auto; border: 1px solid #3d605529; border-radius: 10px; background: var(--cream); box-shadow: 0 20px 35px -20px #243b2f66, 0 3px 8px #243b2f14; }
-.resource-page figcaption { margin-top: .9rem; font-size: .86rem; line-height: 1.55; color: #5d5c54; }
-.resource-page .renewal-deadline-note { padding: 1.8rem 2rem; border: 1px solid #c8a5a5; border-left: 4px solid var(--dusty-rose); border-radius: 16px; }
+.resource-page .renewal-preview img { display: block; width: auto; max-width: 100%; height: auto; max-height: 30rem; margin-inline: auto; border: 1px solid var(--theme-line, #3d605529); border-radius: 10px; background: var(--cream); box-shadow: 0 20px 35px -20px #243b2f66, 0 3px 8px #243b2f14; }
+.resource-page figcaption { margin-top: .9rem; font-size: .86rem; line-height: 1.55; color: var(--theme-muted, #5d5c54); }
+.resource-page .renewal-deadline-note { padding: 1.8rem 2rem; border: 1px solid var(--theme-line, #c8a5a5); border-left: 4px solid var(--dusty-rose); border-radius: 16px; }
 .resource-page .renewal-deadline-note h2 { margin-block: .5rem .8rem; font-size: clamp(2rem,3vw,2.65rem); }
 .resource-page .renewal-deadline-note p:last-child { max-width: 80ch; margin-bottom: 0; }
 .resource-page .editorial-section { padding-block: 3rem; }
 .resource-page .question-grid { gap: 1.2rem; margin-top: 1.75rem; }
-.resource-page .question-grid li { padding: 1.5rem 1.5rem 1.5rem 3.8rem; border: 1px solid #3d605529; border-radius: 20px; }
+.resource-page .question-grid li { padding: 1.5rem 1.5rem 1.5rem 3.8rem; border: 1px solid var(--theme-line, #3d605529); border-radius: 20px; }
 .resource-page .question-grid li:before { left: 1.5rem; top: 1.85rem; color: var(--brand-green); }
 .resource-page .question-grid h3 { margin: 0 0 .7rem; font-size: 1.9rem; line-height: 1.1; }
 .resource-page .renewal-next { padding-block: 0 4rem; }
 .resource-page .renewal-next > p:not(.offer-eyebrow) { max-width: 65ch; }
 .resource-page .renewal-next-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.25rem; margin-block: 1.75rem 1rem; }
 .resource-page .renewal-next-grid article { display: flex; flex-direction: column; min-width: 0; padding: 1.8rem; border-radius: 20px; background: var(--sage-surface); }
-.resource-page .renewal-next-grid article:last-child { background: var(--cream); border: 1px solid #bba68680; }
+.resource-page .renewal-next-grid article:last-child { background: var(--cream); border: 1px solid var(--theme-line, #bba68680); }
 .resource-page .renewal-next-grid h3 { margin: 0 0 .8rem; font-size: 2rem; }
 .resource-page .renewal-next-grid a { display: inline-flex; align-items: center; align-self: start; min-height: 44px; margin-top: auto; text-decoration: none; color: var(--brand-green); }
 .resource-page .renewal-companion { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
-.guides-library .free-resource-card { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.2fr); align-items: center; gap: 2.5rem; padding: 2rem; border: 1px solid #c8a5a580; border-radius: 20px; background: var(--cream); }
+.guides-library .free-resource-card { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.2fr); align-items: center; gap: 2.5rem; padding: 2rem; border: 1px solid var(--theme-line, #c8a5a580); border-radius: 20px; background: var(--cream); }
 .guides-library .free-resource-card figure { min-width: 0; margin: 0; }
-.guides-library .free-resource-card img { display: block; width: auto; max-width: 100%; height: auto; max-height: 24rem; margin-inline: auto; border: 1px solid #3d605529; border-radius: 8px; box-shadow: 0 14px 25px -17px #243b2f66; }
-.guides-library .free-resource-card figcaption { margin-top: .8rem; color: #5d5c54; font-size: .86rem; }
+.guides-library .free-resource-card img { display: block; width: auto; max-width: 100%; height: auto; max-height: 24rem; margin-inline: auto; border: 1px solid var(--theme-line, #3d605529); border-radius: 8px; box-shadow: 0 14px 25px -17px #243b2f66; }
+.guides-library .free-resource-card figcaption { margin-top: .8rem; color: var(--theme-muted, #5d5c54); font-size: .86rem; }
 .guides-library .free-resource-card h3 { margin-top: .7rem; font-style: italic; }
 .guides-library .resource-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem 1.5rem; }
 .guides-library .resource-actions a { display: inline-flex; align-items: center; min-height: 44px; color: var(--brand-green); text-decoration: none; }
-.guides-library .resource-actions .guide-button { margin: .5rem 0; background: var(--brand-green); border-color: var(--brand-green); color: var(--cream); }
+.guides-library .resource-actions .guide-button { margin: .5rem 0; background: var(--theme-green-surface, var(--brand-green)); border-color: var(--brand-green); color: var(--cream); }
 @media (max-width:900px) {
   .resource-page .editorial-hero { grid-template-columns: minmax(0,1fr); gap: 2rem; }
   .resource-page .renewal-preview { width: min(100%,36rem); margin-inline: auto; }

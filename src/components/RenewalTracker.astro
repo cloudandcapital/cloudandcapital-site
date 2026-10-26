@@ -1,10 +1,31 @@
 ---
 import '../styles/renewal-tracker.css';
+import ActionLabel from './ActionLabel.astro';
 ---
 <main id="renewal-tracker" class="renewal-tracker">
   <header class="rt-hero">
-    <div><p class="rt-kicker">Cloud & Capital · Free resource</p><h1>Give your software<br/><em>a date in the diary.</em></h1><p class="rt-intro">Know what leaves the account, when to review it, and who will make the call.</p><a href="https://cloudandcapital.com/resources/software-renewal">Use the companion renewal worksheet ↗</a></div>
-    <aside class="rt-example"><p class="rt-kicker">Three subscriptions, two useful numbers</p><p class="rt-example-value">$89 <span>/ month equivalent</span></p><p>$19 monthly + $240 ÷ 12 + $600 ÷ 12.</p><hr/><p class="rt-example-value">$859 <span>due in one month</span></p><p>$19 + $240 + $600, if both annual bills fall in that month. Other months require $19; over a full year, both views total $1,068. Assumes one $19 charge that month, unchanged USD prices, no extra tax or fees, and ongoing billing. All three subscriptions are illustrative.</p></aside>
+    <div class="rt-hero-copy">
+      <p class="rt-kicker">Software Renewal Tracker <span>· Free tool</span></p>
+      <h1>Give your software<br/><em>a date in the diary.</em></h1>
+      <p class="rt-intro">Keep software charges, renewal dates, and notice deadlines together. Know what leaves the account and when to make the call.</p>
+      <div class="rt-hero-actions">
+        <a class="rt-hero-action rt-primary" href="#rt-title"><ActionLabel label="Open my renewal diary" /></a>
+        <a class="rt-companion" href="https://cloudandcapital.com/resources/software-renewal"><ActionLabel label="Use the renewal worksheet" /></a>
+      </div>
+    </div>
+    <aside class="rt-example" aria-labelledby="rt-example-title">
+      <p class="rt-kicker" id="rt-example-title">Illustrative example <span>· 3 subscriptions</span></p>
+      <div class="rt-example-numbers">
+        <div><p class="rt-example-value">$89 <span>Monthly<br/>equivalent</span></p></div>
+        <div><p class="rt-example-value">$859 <span>Charges in<br/>one month</span></p></div>
+      </div>
+      <p class="rt-example-caption">One monthly charge and two annual bills. The budget view and the payment month tell you different things.</p>
+      <details class="rt-example-details">
+        <summary>Why are the totals different?</summary>
+        <p>$19 monthly + $240 ÷ 12 + $600 ÷ 12.</p>
+        <p>$19 + $240 + $600, if both annual bills fall in that month. Other months require $19; over a full year, both views total $1,068. Assumes one $19 charge that month, unchanged USD prices, no extra tax or fees, and ongoing billing. All three subscriptions are illustrative.</p>
+      </details>
+    </aside>
   </header>
   <section class="rt-workspace" aria-labelledby="rt-title">
     <div class="rt-section-heading"><div><p class="rt-kicker">Your renewal diary · USD only</p><h2 id="rt-title">A little planning, fewer surprises.</h2></div><button type="button" class="rt-primary" id="rt-add">Add a subscription</button></div>

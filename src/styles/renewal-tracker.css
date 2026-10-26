@@ -7,3 +7,75 @@
 @media(max-width:760px){.rt-record-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 .rt-calendar .rt-calendar-empty{display:block}.rt-banner{border:1px solid var(--rt-line)}
+
+/* Shared brand surfaces and a clearer route into the existing diary. */
+.renewal-tracker { --rt-green:var(--brand-green); --rt-ink:var(--brand-ink); --rt-clay:var(--dusty-rose); --rt-line:var(--border); padding-top:8.5rem; }
+.renewal-tracker h1 { font-size:clamp(2.7rem,5.2vw,4.6rem); line-height:1.05; text-wrap:balance; }
+.renewal-tracker h2 { text-wrap:balance; }
+.rt-kicker { font:400 .72rem/1.6 'DM Mono',monospace; letter-spacing:.06em; }
+.rt-kicker > span { display:inline-block; white-space:nowrap; }
+.rt-hero { grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:3rem; align-items:start; margin-bottom:3rem; }
+.rt-hero-copy { padding-top:.25rem; min-width:0; }
+.rt-intro { font-size:1.1rem; line-height:1.65; max-width:33rem; }
+.rt-hero-actions { display:flex; align-items:center; flex-wrap:wrap; gap:.5rem 1.5rem; margin-top:1.25rem; }
+.renewal-tracker .rt-hero-action { display:inline-flex; align-items:center; padding:.25rem 1.25rem; border-radius:12px; text-decoration:none; }
+.renewal-tracker a.rt-hero-action .action-label > span:first-child { text-decoration:none; }
+.rt-companion { display:inline-flex; text-decoration:none; }
+.rt-example { padding:1.6rem 1.75rem; background:var(--soft-white); border:1px solid var(--rt-line); border-radius:24px; box-shadow:0 4px 12px rgba(36,33,30,.025),0 18px 38px rgba(36,33,30,.06); }
+.rt-example .rt-kicker { margin-bottom:1.1rem; font-size:.66rem; }
+.rt-example-numbers { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.25rem; margin-bottom:1.1rem; }
+.rt-example-numbers > div + div { border-left:1px solid var(--rt-line); padding-left:1.25rem; }
+.rt-example p.rt-example-value { font:400 3.15rem/1 'Cormorant Garamond',Georgia,serif; margin:0; }
+.rt-example-value span { font:400 .92rem/1.4 'Jost',system-ui,sans-serif; margin-top:.55rem; }
+.rt-example .rt-example-caption { font-size:.9rem; line-height:1.55; color:var(--text-muted); margin-bottom:.8rem; }
+.rt-example-details { border-top:1px solid var(--rt-line); padding-top:.4rem; font-size:.9rem; }
+.rt-example-details summary { cursor:pointer; min-height:44px; padding:.55rem 0; color:var(--rt-green); }
+.rt-example-details p { margin:.6rem 0; }
+#rt-title { scroll-margin-top:8rem; }
+.rt-section-heading { margin-bottom:1.25rem; }
+.rt-section-heading h2 { margin-bottom:0; }
+.rt-section-heading .rt-kicker { margin-bottom:.45rem; }
+.renewal-tracker button,.rt-file-label { background:var(--soft-white); border-color:var(--border-strong); border-radius:10px; padding:.75rem 1rem; }
+.renewal-tracker .rt-primary { background:var(--rt-green); border-color:var(--rt-green); color:#fff; }
+.renewal-tracker .rt-primary:hover { background:var(--brand-green-hover); }
+.rt-banner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.8rem 1.25rem; background:var(--rt-sage); padding:1rem 1.25rem; border-radius:14px; margin-bottom:.5rem; }
+.rt-banner p { flex:1 1 30rem; margin:0; font-size:.94rem; }
+.rt-banner button { flex:0 0 auto; margin:0; font-size:.9rem; }
+#rt-feedback { margin:.5rem 0; }
+.rt-summary { grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.25rem; background:transparent; border:0; border-radius:0; padding:0; margin:1rem 0 1.5rem; }
+.rt-summary > div,.rt-summary > div + div { min-width:0; padding:1.5rem 1.75rem; background:var(--soft-white); border:1px solid var(--rt-line); border-radius:20px; box-shadow:0 5px 18px rgba(36,33,30,.035); }
+.rt-summary > div:first-child > p:first-child { min-height:44px; display:flex; align-items:center; margin-bottom:0; }
+.rt-summary .rt-help { margin-bottom:0; max-width:42ch; }
+.rt-summary input,.rt-summary label { vertical-align:middle; }
+.rt-summary input { padding:.4rem .65rem; }
+.renewal-tracker input,.renewal-tracker select,.renewal-tracker textarea { background:var(--soft-white); border-color:var(--border-strong); border-radius:9px; }
+.rt-assumptions { margin:0 0 2rem; padding-bottom:.9rem; }
+.rt-list-heading { gap:1rem; }
+.rt-list-heading h3 { margin-bottom:.5rem; }
+.rt-list-heading > span { color:var(--text-muted); font-size:.9rem; }
+.rt-record { padding:1.5rem 1.75rem; margin:1rem 0; background:var(--soft-white); border:1px solid var(--rt-line); border-radius:20px; box-shadow:0 4px 14px rgba(36,33,30,.025); }
+.rt-record-heading { margin-bottom:1.35rem; }
+.rt-record h3 { font-size:1.85rem; margin-bottom:.5rem; }
+.rt-tag { font-size:.77rem; color:var(--rt-ink); padding:.22rem .65rem; border-radius:20px; margin:0 .35rem .25rem 0; }
+.rt-record dl { min-width:0; }
+.rt-record dt { font-size:.8rem; line-height:1.4; margin-bottom:.25rem; color:var(--text-muted); }
+.rt-record dd { margin-bottom:.8rem; line-height:1.5; }
+.rt-record-grid > dl:nth-child(3) { align-self:start; background:var(--rt-sage); padding:.75rem .9rem .1rem; border-radius:12px; }
+.rt-notes { color:var(--text-muted); font-size:.92rem; margin:.6rem 0 0!important; }
+.rt-actions { gap:.65rem; }
+.rt-record-heading .rt-actions button { font-size:.9rem; }
+.rt-calendar { margin-top:2rem; }
+.rt-calendar li { padding:.9rem .2rem; border-color:var(--rt-line); }
+.rt-calendar time { color:var(--rt-green); }
+.rt-storage { border:1px solid var(--rt-line); padding:1.75rem 2rem; border-radius:22px; }
+.rt-storage p { max-width:78ch; }
+.rt-footer { margin-top:2rem; }
+.renewal-tracker dialog { border-radius:22px; padding:1.75rem 2rem; width:min(760px,calc(100% - 32px)); margin:auto; inset:0; box-shadow:0 24px 70px rgba(36,33,30,.22); }
+.renewal-tracker dialog::backdrop { background:rgba(36,33,30,.45); }
+.renewal-tracker dialog .rt-section-heading { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:start; gap:1rem; }
+.rt-form-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.05rem 1.5rem; }
+.rt-form-grid label { gap:.4rem; }
+.rt-empty { padding:1.5rem; margin:1rem 0; border-radius:16px; }
+@media(max-width:900px) { .rt-hero { gap:2rem; } .rt-example { padding:1.4rem; } .rt-record-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem 1.5rem; } }
+@media(max-width:760px) { .rt-hero { grid-template-columns:1fr; gap:1.75rem; margin-bottom:2.5rem; } .rt-section-heading { gap:1rem; } .rt-summary { gap:1rem; } .rt-summary > div,.rt-summary > div + div { padding:1.3rem; } .rt-summary input { display:block; width:100%; margin-top:.35rem; } .rt-storage { padding:1.5rem; } }
+@media(max-width:480px) { .renewal-tracker { padding-top:7rem; } .renewal-tracker h1 { font-size:clamp(2.2rem,10.6vw,2.85rem); } .rt-hero-actions { align-items:flex-start; flex-direction:column; gap:.4rem; } .renewal-tracker .rt-hero-action { padding-inline:1rem; } .rt-example { padding:1.3rem; border-radius:20px; } .rt-example p.rt-example-value { font-size:3rem; } .rt-example-numbers { gap:1rem; } .rt-example-numbers > div + div { padding-left:1rem; } .rt-summary { grid-template-columns:1fr; } .rt-summary > div,.rt-summary > div + div { border:1px solid var(--rt-line); padding:1.3rem; } .rt-summary input { display:inline-block; width:170px; margin-top:0; } .rt-record { padding:1.25rem; } .rt-record-grid { gap:1rem; } .rt-form-grid { grid-template-columns:1fr; } .renewal-tracker dialog { padding:1.25rem; width:calc(100% - 24px); border-radius:18px; } .renewal-tracker dialog h2 { font-size:2rem; } .rt-storage { padding:1.25rem; } .rt-storage .rt-actions { align-items:stretch; } }

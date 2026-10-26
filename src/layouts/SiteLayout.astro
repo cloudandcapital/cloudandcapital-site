@@ -1,5 +1,8 @@
 ---
 import '../styles/global.css';
+import '../styles/color-mode.css';
+import ColorModeToggle from '../components/ColorModeToggle.astro';
+import { themeBootstrap } from '../lib/color-mode.js';
 import '@fontsource/cormorant-garamond/300.css';
 import '@fontsource/cormorant-garamond/400.css';
 import '@fontsource/cormorant-garamond/500.css';
@@ -29,12 +32,14 @@ const {
 } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" data-color-mode="light">
   <head>
     <HeadMeta title={title} description={description} noindex={noindex} />
+    <script is:inline set:html={themeBootstrap} />
     <Analytics />
   </head>
   <body>
+    <div class="standalone-theme"><ColorModeToggle /></div>
     <slot />
     {showFooter && (
       <footer style="text-align:center;padding:1.5rem;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(0,0,0,0.3);border-top:1px solid rgba(0,0,0,0.07);">

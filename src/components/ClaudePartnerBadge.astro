@@ -11,7 +11,7 @@ const { dark = false, centered = false } = Astro.props;
   </div>
 </aside>
 <style>
-  .claude-credential { display: flex; align-items: center; gap: 1.25rem; max-width: 34rem; margin-block: 1.5rem 0; padding: 1.1rem 1.3rem; border: 1px solid #bd9c8d66; border-radius: 14px; background: var(--cream); color: #302923; }
+  .claude-credential { display: flex; align-items: center; gap: 1.25rem; max-width: 34rem; margin-block: 1.5rem 0; padding: 1.1rem 1.3rem; border: 1px solid var(--theme-line, #bd9c8d66); border-radius: 14px; background: var(--cream); color: var(--theme-ink, #302923); }
   img { flex: none; width: 6.5rem; height: 6.5rem; object-fit: contain; }
   p { margin: 0; }
   .badge-issuer { font: 400 .61rem/1.6 'DM Mono', monospace; letter-spacing: .06em; text-transform: uppercase; }
@@ -19,7 +19,7 @@ const { dark = false, centered = false } = Astro.props;
   .badge-name span { display: block; font-weight: 500; }
   a { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; color: inherit; font: 400 .83rem/1.5 'Jost', sans-serif; text-underline-offset: .2em; }
   a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
-  .on-dark { background: #faf6ef0a; border-color: #f5eee947; color: #faf6ef; }
+  .on-dark { background: #faf6ef0a; border-color: var(--theme-line, #f5eee947); color: #faf6ef; }
   .on-dark .badge-issuer { color: #d1dfd6; }
   .centered { width: fit-content; max-width: 100%; margin: 1.5rem auto 1.75rem; padding: .25rem 1rem; border: 0; background: transparent; }
   .centered img { width: 7.5rem; height: 7.5rem; }

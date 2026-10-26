@@ -49,18 +49,23 @@ export function startTracker(root) {
   function demoBanner() {
     const mode = $('rt-mode'); mode.replaceChildren();
     if (demo) {
-      mode.append(create('p', 'You’re viewing three illustrative subscriptions. These are fictional prices and terms, not your saved diary.'));
-      const start = create('button', 'Start my empty diary'); start.type = 'button';
-      start.onclick = () => replaceDiary([], 'Start a new empty diary? This replaces any saved subscriptions in this browser. Export CSV first if you want a backup.', 'Start empty diary');
-      mode.append(start);
-      if (savedDiary.length || !loadFailed && localStorageReadable()) {
-        const back = create('button', 'Return to my saved diary'); back.type = 'button'; back.onclick = () => { records = savedDiary.map(r => ({ ...r })); demo = false; $('rt-month').value = currentMonth(); render(); feedback('Returned to your saved diary.'); }; mode.append(back);
-      }
-    } else mode.append(create('p', 'Your diary. Save a record to store changes in this browser; export CSV to keep a separate backup.'));
+      if (loadFailed) mode.append(create('p', 'Your saved diary could not be read. Download the unreadable saved data below before replacing it.'));
+    } else {
+      const examplesInDiary = records.filter(r => r.illustrative === 'true');
+      if (examplesInDiary.length) mode.append(create('p', `Example entries in this diary: ${examplesInDiary.map(r => r.vendor).join(', ')}. Replace their details with your own, or remove them.`));
+    }
   }
   function localStorageReadable() { try { return localStorage.getItem(STORAGE_KEY) !== null; } catch { return false; } }
   function render() {
     demoBanner();
+    $('rt-start').hidden = !demo;
+    $('rt-add').hidden = demo;
+    $('rt-title-text').textContent = demo ? 'EXAMPLE' : 'Your tracker';
+    $('rt-title').classList.toggle('rt-is-example', demo);
+    $('rt-example-arrow').toggleAttribute('hidden', !demo);
+    const canReturn = demo && (savedDiary.length || !loadFailed && localStorageReadable());
+    $('rt-demo').hidden = demo && !canReturn;
+    $('rt-demo').textContent = canReturn ? 'Return to my tracker' : 'View example tracker';
     $('rt-monthly').textContent = usd(monthlyEquivalent(records));
     const month = $('rt-month').value;
     let charges = [];
@@ -76,11 +81,10 @@ export function startTracker(root) {
     for (const r of records) {
       const article = create('article', undefined, 'rt-record'), heading = create('div', undefined, 'rt-record-heading'), name = create('div');
       name.append(create('h3', r.vendor));
-      if (r.illustrative === 'true') name.append(create('span', 'Illustrative', 'rt-tag example'));
       name.append(create('span', r.billingState === 'ended' ? 'Billing ended' : r.decision === 'Cancel' ? 'Decided: cancel' : r.decision, 'rt-tag'));
       const buttons = create('div', undefined, 'rt-actions');
       for (const action of ['Edit', 'Delete']) { const b = create('button', action); b.type = 'button'; b.setAttribute('aria-label', `${action} ${r.vendor}`); b.onclick = action === 'Edit' ? () => openEditor(r, b) : () => {
-        ask(`Delete ${r.vendor} from ${demo ? 'the example view' : 'your diary'}? This does not cancel a vendor subscription.`, () => { records = records.filter(x => x.id !== r.id); if (!demo) persist(); render(); $('rt-add').focus(); feedback(demo ? 'Removed from the unsaved example view.' : storageOK ? 'Record deleted and diary saved.' : 'Record removed from this page only.'); }, 'Delete record');
+        ask(`Delete ${r.vendor} from ${demo ? 'the example view' : 'your diary'}? This does not cancel a vendor subscription.`, () => { records = records.filter(x => x.id !== r.id); if (!demo) persist(); render(); (demo ? $('rt-start') : $('rt-add')).focus(); feedback(demo ? 'Removed from the unsaved example view.' : storageOK ? 'Record deleted and diary saved.' : 'Record removed from this page only.'); }, 'Delete record');
       }; buttons.append(b); }
       heading.append(name, buttons); article.append(heading);
       const grid = create('div', undefined, 'rt-record-grid');
@@ -95,13 +99,13 @@ export function startTracker(root) {
       const warnings = recordWarnings(r, today()); if (warnings.length) { const ul = create('ul', undefined, 'rt-warning'); warnings.forEach(w => ul.append(create('li', w))); article.append(ul); }
       list.append(article);
     }
-    const dates = charges.map(c => ({ date: c.date, pastWarning: false, text: `Billing · ${c.record.vendor} · ${usd(c.cents / 100)}${c.record.illustrative === 'true' ? ' · Illustrative' : ''}` }));
-    for (const r of records.filter(r => r.billingState === 'ongoing')) for (const [field, label] of [['noticeDate', 'Notice deadline'], ['renewalDate', 'Renewal']]) if (r[field]) dates.push({ date: r[field], pastWarning: r.illustrative !== 'true', text: `${label} · ${r.vendor} · ${r.owner || 'Owner unassigned'}${r.illustrative === 'true' ? ' · Illustrative' : ''}` });
+    const dates = charges.map(c => ({ date: c.date, pastWarning: false, text: `Billing · ${c.record.vendor} · ${usd(c.cents / 100)}` }));
+    for (const r of records.filter(r => r.billingState === 'ongoing')) for (const [field, label] of [['noticeDate', 'Notice deadline'], ['renewalDate', 'Renewal']]) if (r[field]) dates.push({ date: r[field], pastWarning: r.illustrative !== 'true', text: `${label} · ${r.vendor} · ${r.owner || 'Owner unassigned'}` });
     dates.sort((a,b) => a.date.localeCompare(b.date));
     const diary = $('rt-dates'); diary.replaceChildren();
     if (!dates.length) diary.append(create('li', 'No dates recorded for this diary or billing month yet.', 'rt-calendar-empty'));
     for (const d of dates) { const li = create('li'), time = create('time', dateLabel(d.date)); time.dateTime = d.date; li.append(time, create('span', d.text + (d.pastWarning && d.date < today() ? ' · Past date: check record' : ''))); diary.append(li); }
-    if (demo && !loadFailed && storageOK) $('rt-save-status').textContent = 'Examples are not saved. Export them to explore the format, or start an empty diary.';
+    if (demo && !loadFailed && storageOK) $('rt-save-status').textContent = 'Start your own tracker to save subscriptions in this browser.';
   }
   function openEditor(record, opener = $('rt-add')) {
     focusBefore = opener; form.reset(); $('rt-form-error').textContent = ''; dirty = false;
@@ -114,8 +118,9 @@ export function startTracker(root) {
     form.elements.namedItem('charge').setAttribute('aria-describedby', 'rt-charge-help');
     $('rt-editor-title').textContent = record ? 'Edit subscription' : 'Add a subscription'; editor.showModal(); form.elements.namedItem('vendor').focus();
   }
-  function closeEditor() { editor.close(); if (focusBefore?.isConnected) focusBefore.focus(); else $('rt-add').focus(); }
+  function closeEditor() { editor.close(); if (focusBefore?.isConnected && !focusBefore.closest('[hidden]')) focusBefore.focus(); else (demo ? $('rt-start') : $('rt-add')).focus(); }
   function discard() { if (dirty) ask('Discard your unsaved changes to this subscription?', closeEditor, 'Discard changes'); else closeEditor(); }
+  $('rt-start').onclick = e => { if (demo) { e.preventDefault(); openEditor(undefined, $('rt-start')); } };
   $('rt-add').onclick = () => openEditor(); $('rt-close').onclick = discard; $('rt-cancel').onclick = discard;
   form.addEventListener('input', () => dirty = true); form.addEventListener('change', () => dirty = true);
   editor.addEventListener('cancel', e => { e.preventDefault(); discard(); });
@@ -156,10 +161,16 @@ export function startTracker(root) {
     e.target.value = '';
   };
   $('rt-ics').onclick = () => {
-    try { download(exportCalendar(records, $('rt-month').value), 'text/calendar;charset=utf-8', 'cloud-capital-renewals.ics'); storageFeedback('Calendar prepared for download: 12 months from the selected month. Import it into your calendar app and check the dates.'); } catch(err) { storageFeedback(err.message); }
+    try { download(exportCalendar(records, $('rt-month').value), 'text/calendar;charset=utf-8', 'cloud-capital-renewals.ics'); feedback('Calendar file ready. Import it into your calendar app, check the dates, and set any alerts there.', 'rt-calendar-feedback'); } catch(err) { feedback(err.message, 'rt-calendar-feedback'); }
   };
   $('rt-demo').onclick = () => {
-    const show = () => { records = examples(); demo = true; render(); feedback('Showing unsaved illustrative examples.'); };
+    if (demo) {
+      if (savedDiary.length || !loadFailed && localStorageReadable()) {
+        records = savedDiary.map(r => ({ ...r })); demo = false; $('rt-month').value = currentMonth(); render(); $('rt-add').focus(); feedback('Returned to your saved diary.');
+      }
+      return;
+    }
+    const show = () => { records = examples(); demo = true; render(); feedback('Showing the example tracker.'); };
     if (!storageOK && !demo) ask('Your current changes are not saved. Export CSV before switching to examples, or confirm to discard the in-page changes.', show, 'View examples'); else show();
   };
   $('rt-clear').onclick = () => ask('Remove the saved diary from this browser? Export CSV first if you want a backup. This does not cancel subscriptions or remove imported calendar events.', () => {

@@ -70,7 +70,7 @@ import FeaturedCredentials from './FeaturedCredentials.astro';
 </section>
 
 <style>
-  .diana-about { padding: clamp(4.5rem, 7vw, 6.25rem) 0; background: #3d6055; color: #faf6ef; scroll-margin-top: 5rem; }
+  .diana-about { padding: clamp(4.5rem, 7vw, 6.25rem) 0; background: var(--theme-forest-panel, #3d6055); color: #faf6ef; scroll-margin-top: 5rem; }
   .diana-shell { width: min(calc(100% - 4rem), 78rem); margin-inline: auto; }
   .diana-grid { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); grid-template-areas: 'photos intro' 'photos story'; grid-template-rows: auto 1fr; column-gap: clamp(3rem, 6vw, 5.5rem); align-items: start; }
   .diana-intro { grid-area: intro; margin-bottom: 1.5rem; }
@@ -83,11 +83,11 @@ import FeaturedCredentials from './FeaturedCredentials.astro';
   .diana-portrait { position: absolute; z-index: 1; top: 1.5%; left: 17%; width: 72%; }
   .diana-portrait-window { overflow: hidden; aspect-ratio: 1; border-radius: 50%; box-shadow: 0 1px 2px #152d2759, 3px 9px 18px -7px #152d2773; }
   .diana-portrait-window img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.012); }
-  .diana-polaroid { --photo-tilt: -8deg; position: absolute; z-index: 2; box-sizing: border-box; width: 42%; margin: 0; padding: clamp(.5rem, 1vw, .7rem); border: 1px solid #fffefa; border-radius: 2px; background: var(--cream); color: #2f2927; box-shadow: 1px 2px 0 #d9d1c4, 0 5px 8px -4px #142d2773, 3px 12px 20px -10px #122a258c; transform: rotate(var(--photo-tilt)); }
+  .diana-polaroid { --photo-tilt: -8deg; position: absolute; z-index: 2; box-sizing: border-box; width: 42%; margin: 0; padding: clamp(.5rem, 1vw, .7rem); border: 1px solid var(--theme-line, #fffefa); border-radius: 2px; background: var(--cream); color: var(--theme-ink, #2f2927); box-shadow: 1px 2px 0 #d9d1c4, 0 5px 8px -4px #142d2773, 3px 12px 20px -10px #122a258c; transform: rotate(var(--photo-tilt)); }
   .diana-myszka { --photo-warmth: .42; top: 47%; left: 3%; }
   .diana-beach { --photo-warmth: .42; --photo-tilt: 6deg; z-index: 3; top: 65%; right: 4%; }
   .diana-photo-window { position: relative; isolation: isolate; overflow: hidden; aspect-ratio: 1; background: var(--cream); }
-  .diana-photo-window::after { content: ''; position: absolute; inset: 0; background: #f2dca5; mix-blend-mode: multiply; opacity: .12; pointer-events: none; }
+  .diana-photo-window::after { content: ''; position: absolute; inset: 0; background: var(--theme-sand-panel, #f2dca5); mix-blend-mode: multiply; opacity: .12; pointer-events: none; }
   .diana-beach .diana-photo-window::after { opacity: .08; }
   .diana-photo-window img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .diana-myszka .diana-photo-window img { object-position: 50% 42%; }
@@ -98,19 +98,19 @@ import FeaturedCredentials from './FeaturedCredentials.astro';
   .diana-story { grid-area: story; min-width: 0; }
   .diana-biography p { max-width: 64ch; margin: 1.05rem 0 0; color: #f3f0e9; font-size: .95rem; line-height: 1.75; text-wrap: pretty; }
   .diana-biography p:first-child { margin-top: 0; }
-  .diana-community { display: grid; grid-template-columns: clamp(8.1rem, 11.7vw, 9.9rem) minmax(0, 1fr); align-items: start; gap: 1.2rem; margin-top: 1.8rem; padding-top: 1.6rem; border-top: 1px solid #f5eee92e; }
-  .diana-event-image { display: block; border: 1px solid #f5eee966; border-radius: 6px; overflow: hidden; box-shadow: 0 8px 16px -8px #162e27b3; }
+  .diana-community { display: grid; grid-template-columns: clamp(8.1rem, 11.7vw, 9.9rem) minmax(0, 1fr); align-items: start; gap: 1.2rem; margin-top: 1.8rem; padding-top: 1.6rem; border-top: 1px solid var(--theme-line, #f5eee92e); }
+  .diana-event-image { display: block; border: 1px solid var(--theme-line, #f5eee966); border-radius: 6px; overflow: hidden; box-shadow: 0 8px 16px -8px #162e27b3; }
   .diana-event-image img { display: block; width: 100%; height: auto; }
   .diana-event-date { margin: 0; color: #d1dfd6; font: 400 .55rem/1.6 'DM Mono', monospace; letter-spacing: .035em; }
   .diana-event-copy h3 { margin: .4rem 0; color: #faf6ef; font: italic 400 clamp(1.6rem, 2.75vw, 1.75rem)/1.1 'Cormorant Garamond', Georgia, serif; text-wrap: balance; }
   .diana-event-copy > p:last-of-type { margin: .6rem 0 .35rem; color: #e8eee7; font-size: .82rem; line-height: 1.65; text-wrap: pretty; }
-  .diana-credentials { margin-top: clamp(2.75rem, 5vw, 4rem); padding-top: 1.6rem; border-top: 1px solid #f5eee947; }
+  .diana-credentials { margin-top: clamp(2.75rem, 5vw, 4rem); padding-top: 1.6rem; border-top: 1px solid var(--theme-line, #f5eee947); }
   .diana-credentials dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; margin: .8rem 0 0; }
-  .diana-credential { display: grid; grid-template-columns: 7.7rem minmax(0, 1fr); align-items: baseline; gap: .75rem; padding: .8rem 0; border-bottom: 1px solid #f5eee926; }
+  .diana-credential { display: grid; grid-template-columns: 7.7rem minmax(0, 1fr); align-items: baseline; gap: .75rem; padding: .8rem 0; border-bottom: 1px solid var(--theme-line, #f5eee926); }
   .diana-credential dt { color: #cbdad0; font: 400 .58rem/1.6 'DM Mono', monospace; letter-spacing: .05em; }
   .diana-credential dd { margin: 0; color: #edf1ea; font-size: .79rem; line-height: 1.6; text-wrap: balance; }
   .diana-contribution { display: inline-flex; max-width: 100%; min-height: 32px; align-items: center; color: #edf1ea; text-decoration: none; }
-  .diana-about a:focus-visible { outline: 2px solid #f2c8c9; outline-offset: 5px; }
+  .diana-about a:focus-visible { outline: 2px solid var(--theme-line, #f2c8c9); outline-offset: 5px; }
   @media (max-width: 1020px) and (min-width: 761px) {
     .diana-grid { grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); column-gap: 2.5rem; }
     .diana-visual { align-self: start; margin-top: 2rem; }

@@ -1,6 +1,9 @@
 ---
 import '../styles/global.css';
 import '../styles/type.css';
+import '../styles/color-mode.css';
+import ColorModeToggle from '../components/ColorModeToggle.astro';
+import { themeBootstrap } from '../lib/color-mode.js';
 import HeadMeta from '../components/HeadMeta.astro';
 import Analytics from '../components/Analytics.astro';
 import FooterSocialLinks from '../components/FooterSocialLinks.astro';
@@ -23,10 +26,12 @@ const {
 } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" data-color-mode="light">
   <head>
     <HeadMeta title={title} description={description} noindex={noindex} structuredData={structuredData} type={type} />
+    <script is:inline set:html={themeBootstrap} />
     <Analytics />
+    <slot name="head" />
   </head>
   <body>
     <style>
@@ -41,7 +46,7 @@ const {
         background: var(--cream);
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
-        border-bottom: 1px solid rgba(0,0,0,.07);
+        border-bottom: 1px solid var(--theme-line, rgba(0,0,0,.07));
       }
       .site-nav-logo {
         display: flex;
@@ -57,14 +62,14 @@ const {
         font-weight: 500;
         letter-spacing: .12em;
         text-transform: uppercase;
-        color: #000;
+        color: var(--theme-ink, #000);
       }
       .site-nav-logo-sub {
         font-family: 'DM Mono', monospace;
         font-size: .54rem;
         letter-spacing: .18em;
         text-transform: uppercase;
-        color: #4A4A4A;
+        color: var(--theme-muted, #4A4A4A);
       }
       .site-nav-links {
         display: flex;
@@ -83,12 +88,12 @@ const {
         font-weight: 500;
         letter-spacing: .06em;
         text-transform: uppercase;
-        color: #4A4A4A;
+        color: var(--theme-muted, #4A4A4A);
         text-decoration: none;
         transition: color .2s;
       }
-      .site-nav-links a:hover { color: #000; }
-      .site-nav-links a:focus-visible, .site-nav-logo:focus-visible, .site-nav-toggle:focus-visible { outline: 2px solid #3d6055; outline-offset: 4px; }
+      .site-nav-links a:hover { color: var(--theme-ink, #000); }
+      .site-nav-links a:focus-visible, .site-nav-logo:focus-visible, .site-nav-toggle:focus-visible { outline: 2px solid var(--theme-line-strong, #3d6055); outline-offset: 4px; }
       .site-nav-dropdown { position: relative; }
       .site-nav-dropdown::after { content: ''; position: absolute; top: 100%; left: -0.5rem; right: -0.5rem; height: 1rem; z-index: 209; }
       .site-nav-dropdown-btn {
@@ -96,7 +101,7 @@ const {
         font-size: .58rem;
         letter-spacing: .12em;
         text-transform: uppercase;
-        color: #4A4A4A;
+        color: var(--theme-muted, #4A4A4A);
         background: none;
         border: none;
         cursor: pointer;
@@ -106,7 +111,7 @@ const {
         gap: .3rem;
         transition: color .2s;
       }
-      .site-nav-dropdown-btn:hover { color: #000; }
+      .site-nav-dropdown-btn:hover { color: var(--theme-ink, #000); }
       .site-nav-chevron { font-size: .48rem; display: inline-block; transition: transform .2s; }
       .site-nav-dropdown:hover .site-nav-chevron,
       .site-nav-dropdown.is-open .site-nav-chevron { transform: rotate(180deg); }
@@ -116,7 +121,7 @@ const {
         top: calc(100% + .85rem);
         right: 0;
         background: var(--cream);
-        border: 1px solid rgba(0,0,0,.08);
+        border: 1px solid var(--theme-line, rgba(0,0,0,.08));
         box-shadow: 0 8px 28px rgba(0,0,0,.08);
         list-style: none;
         padding: .4rem 0;
@@ -133,12 +138,12 @@ const {
         font-size: .58rem;
         letter-spacing: .12em;
         text-transform: uppercase;
-        color: #4A4A4A;
+        color: var(--theme-muted, #4A4A4A);
         text-decoration: none;
         transition: color .15s, background .15s;
         white-space: nowrap;
       }
-      .site-nav-dropdown-menu li a:hover { color: #000; background: rgba(107,142,127,.07); }
+      .site-nav-dropdown-menu li a:hover { color: var(--theme-ink, #000); background: var(--theme-sage-panel, rgba(107,142,127,.07)); }
       .site-nav-toggle {
         display: none;
         flex-direction: column;
@@ -157,14 +162,14 @@ const {
         display: block;
         width: 22px;
         height: 1.5px;
-        background: #000;
+        background: var(--theme-deep, #000);
         border-radius: 2px;
         transition: background .25s;
       }
       .site-footer {
         padding: 1.75rem 0 1.5rem;
-        background: #211f1b;
-        border-top: 1px solid rgba(245,238,233,.13);
+        background: var(--theme-deep, #211f1b);
+        border-top: 1px solid var(--theme-line, rgba(245,238,233,.13));
       }
       .site-footer-top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1.5rem; }
       .site-footer-logo {
@@ -179,12 +184,12 @@ const {
         color: #f5eee9;
         text-decoration: none;
       }
-      .site-footer-logo:focus-visible, .site-footer-links a:focus-visible { outline: 2px solid #f5eee9; outline-offset: 4px; }
+      .site-footer-logo:focus-visible, .site-footer-links a:focus-visible { outline: 2px solid var(--theme-line, #f5eee9); outline-offset: 4px; }
       .site-footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .25rem 1.5rem; list-style: none; margin: 0; padding: 0; }
       .site-footer-links a { display: inline-flex; align-items: center; min-height: 44px; font-family: 'DM Mono', monospace; font-size: .72rem; letter-spacing: .075em; text-transform: uppercase; color: rgba(245,238,233,.76); text-decoration: none; transition: color .2s; }
       .site-footer-links a:hover { color: #f5eee9; }
       .site-footer-social { justify-self: end; }
-      .site-footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.25rem; padding-top: 1.15rem; border-top: 1px solid rgba(245,238,233,.13); }
+      .site-footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.25rem; padding-top: 1.15rem; border-top: 1px solid var(--theme-line, rgba(245,238,233,.13)); }
       .site-footer-copy { font-family: 'DM Mono', monospace; font-size: .68rem; line-height: 1.6; color: rgba(245,238,233,.68); }
       .site-footer-tagline { font-family: 'DM Mono', monospace; font-size: .68rem; line-height: 1.6; letter-spacing: .07em; text-transform: uppercase; color: rgba(245,238,233,.68); }
       @media (min-width: 1021px) and (max-width: 1180px) {
@@ -204,7 +209,7 @@ const {
           top: 100%;
           left: 0;
           right: 0;
-          background: #191714;
+          background: var(--theme-deep, #191714);
           flex-direction: column;
           align-items: flex-start;
           justify-content: flex-start;
@@ -214,7 +219,7 @@ const {
           padding: .75rem 0 1.25rem;
           max-height: calc(100vh - 60px);
           overflow-y: auto;
-          border-top: 1px solid rgba(255,255,255,.06);
+          border-top: 1px solid var(--theme-line, rgba(255,255,255,.06));
           box-shadow: 0 12px 32px rgba(0,0,0,.35);
         }
         .site-nav-links.is-open { display: flex; }
@@ -227,11 +232,11 @@ const {
           color: rgba(var(--cream-rgb), .96);
         }
         .site-nav-links a:hover { color: rgba(244,239,230,1); }
-        .site-nav-links a:focus-visible { outline-color: #f5eee9; outline-offset: -4px; }
+        .site-nav-links a:focus-visible { outline-color: var(--theme-line, #f5eee9); outline-offset: -4px; }
         .site-nav-dropdown { width: 100%; }
         .site-nav-dropdown-btn { display: block; width: 100%; padding: .8rem 1.75rem; text-align: left; color: rgba(244,239,230,.65); font-size: .68rem; letter-spacing: .16em; }
         .site-nav-dropdown-btn:hover { color: rgba(244,239,230,1); }
-        .site-nav-dropdown-menu { position: static; background: rgba(255,255,255,.04); border: none; box-shadow: none; padding: .25rem 0; min-width: 0; text-align: left; }
+        .site-nav-dropdown-menu { position: static; background: var(--theme-panel, rgba(255,255,255,.04)); border: none; box-shadow: none; padding: .25rem 0; min-width: 0; text-align: left; }
         .site-nav-dropdown-menu li a { padding: .6rem 1.75rem .6rem 2.75rem; color: rgba(244,239,230,.42); font-size: .63rem; background: transparent; }
         .site-nav-dropdown-menu li a:hover { color: rgba(244,239,230,.85); background: transparent; }
         .site-footer-links { gap: 0 1.25rem; }
@@ -247,6 +252,7 @@ const {
     </style>
     <nav class="site-nav" aria-label="Main navigation">
       <a class="site-nav-logo" href="/"><span class="site-nav-logo-main">Cloud &amp; Capital</span><span class="site-nav-logo-sub">Turning numbers into strategy.</span></a>
+      <ColorModeToggle />
       <button type="button" class="site-nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="tool-nav-links" id="tool-nav-toggle">
         <span></span><span></span><span></span>
       </button>

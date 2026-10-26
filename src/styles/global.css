@@ -6,17 +6,17 @@
   --cream-mid: #DDD5CA;
   /* Shared homepage surfaces and accents, used throughout the site. */
   --clay: #C2AAA1;
-  --clay-hover: #BAA197;
+  --clay-hover: var(--theme-rose-panel, #BAA197);
   --rose: #B78384;
-  --rose-hover: #AF7D7F;
+  --rose-hover: var(--theme-rose-panel, #AF7D7F);
   --dusty-rose: #C8A5A5;
-  --dusty-rose-hover: #BF9797;
-  --sage-surface: #DDE3D7;
-  --sage-surface-hover: #D3DBCC;
+  --dusty-rose-hover: var(--theme-rose-panel, #BF9797);
+  --sage-surface: var(--theme-panel, #DDE3D7);
+  --sage-surface-hover: var(--theme-panel, #D3DBCC);
   --sage-strong: #AFB8A8;
   --brand-green: #3D6055;
   --clay-ink: #785752;
-  --brand-green-hover: #2E4E44;
+  --brand-green-hover: var(--theme-forest-panel, #2E4E44);
   --brand-ink: #24211E;
   --sand: var(--cream); /* All beige surfaces share the homepage color. */
   --soft-white: #FFFFFF;

@@ -1,14 +1,14 @@
 .lens-guide .lens-opening { max-width:65ch; font-size:1.05rem; }
   .lens-guide .lens-opening,.lens-guide section p + p { margin-top:1rem; }
-  .lens-guide .guide-byline { margin:0 0 1.5rem; color:#62645b; font-size:.9rem; }
-  .lens-guide .guide-button { background:#3d6055; border-color:#3d6055; color:#faf6ef; }
-  .lens-guide .guide-button:hover { background:#304e44; border-color:#304e44; }
-  .lens-table-wrap { margin-block:1.5rem; border:1px solid #c5ceb9; border-radius:12px; overflow:hidden; background:var(--cream); }
+  .lens-guide .guide-byline { margin:0 0 1.5rem; color: var(--theme-muted, #62645b); font-size:.9rem; }
+  .lens-guide .guide-button { background: var(--theme-forest-panel, #3d6055); border-color: var(--theme-line-strong, #3d6055); color: #faf6ef; }
+  .lens-guide .guide-button:hover { background: var(--theme-forest-panel, #304e44); border-color: var(--theme-line-strong, #304e44); }
+  .lens-table-wrap { margin-block:1.5rem; border: 1px solid var(--theme-line, #c5ceb9); border-radius:12px; overflow:hidden; background: var(--cream); }
   .lens-example-table { width:100%; border-collapse:collapse; font-size:1rem; }
-  .lens-example-table caption { padding:1rem 1.2rem; color:#4f7165; font:400 .65rem/1.5 'DM Mono',monospace; letter-spacing:.08em; text-align:left; text-transform:uppercase; }
-  .lens-example-table th,.lens-example-table td { padding:.85rem 1.2rem; border-top:1px solid #3d605526; line-height:1.5; }
+  .lens-example-table caption { padding:1rem 1.2rem; color: var(--theme-green, #4f7165); font:400 .65rem/1.5 'DM Mono',monospace; letter-spacing:.08em; text-align:left; text-transform:uppercase; }
+  .lens-example-table th,.lens-example-table td { padding:.85rem 1.2rem; border-top: 1px solid var(--theme-line, #3d605526); line-height:1.5; }
   .lens-example-table th { text-align:left; font-weight:500; }
-  .lens-example-table thead { background:#e4e9df; }
+  .lens-example-table thead { background: var(--theme-panel, #e4e9df); }
   .lens-example-table td { width:20%; text-align:right; font-variant-numeric:tabular-nums; }
   .lens-example-table thead th:not(:first-child) { text-align:right; white-space:nowrap; }
   .lens-steps { padding-left:1.4rem; }

@@ -1,0 +1,53 @@
+---
+import { examplesFor } from '../lib/renewal-tracker.js';
+
+const record = examplesFor(new Date().toISOString().slice(0, 10))[0];
+const dateLabel = (date) => new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }).format(new Date(date + 'T00:00:00Z'));
+const notice = new Date(record.noticeDate + 'T00:00:00Z');
+---
+<aside class="rt-example rt-flow-demo" aria-label="How the tracker works" data-renewal-demo data-demo-playing="false">
+  <ol class="rt-demo-flow" role="list" aria-label="How the renewal tracker works">
+    <li class="rt-demo-step" style="--step-delay:0s">
+      <span class="rt-demo-number" aria-hidden="true">1</span>
+      <div class="rt-demo-content">
+        <p class="rt-demo-label">Add a subscription</p>
+        <div class="rt-demo-subscription">
+          <span class="rt-demo-app" aria-hidden="true">p<span>·</span></span>
+          <div><strong data-demo-vendor>{record.vendor}</strong><span>Monthly subscription</span></div>
+          <p class="rt-demo-price"><strong data-demo-price>$19</strong><span>/ month</span></p>
+        </div>
+      </div>
+    </li>
+    <li class="rt-demo-step" style="--step-delay:3.6s">
+      <span class="rt-demo-number" aria-hidden="true">2</span>
+      <div class="rt-demo-content">
+        <p class="rt-demo-label">Know when to act</p>
+        <div class="rt-demo-dates">
+          <div><span>Give notice by</span><strong><time data-demo-notice datetime={record.noticeDate}>{dateLabel(record.noticeDate)}</time></strong></div>
+          <div><span>Renews on</span><strong><time data-demo-renewal datetime={record.renewalDate}>{dateLabel(record.renewalDate)}</time></strong></div>
+        </div>
+      </div>
+    </li>
+    <li class="rt-demo-step" style="--step-delay:7.2s">
+      <span class="rt-demo-number" aria-hidden="true">3</span>
+      <div class="rt-demo-content">
+        <p class="rt-demo-label">Download the dates</p>
+        <div class="rt-demo-calendar">
+          <div class="rt-demo-date-tile" aria-hidden="true"><span data-demo-month>{new Intl.DateTimeFormat('en-US', { month: 'short', timeZone: 'UTC' }).format(notice)}</span><strong data-demo-day>{notice.getUTCDate()}</strong></div>
+          <div><strong>A year of dates, ready to go.</strong><span>Calendar file · .ics</span></div>
+          <svg class="rt-demo-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg>
+        </div>
+      </div>
+    </li>
+  </ol>
+  <div class="rt-demo-controls">
+    <button class="rt-demo-toggle" type="button" data-demo-toggle aria-label="Pause animation" title="Pause animation" hidden>
+      <svg data-demo-pause viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>
+      <svg data-demo-play viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true" hidden><path d="m8 5 11 7-11 7Z"/></svg>
+    </button>
+  </div>
+</aside>
+<script>
+  import { startRenewalDemo } from '../lib/renewal-demo.js';
+  startRenewalDemo(document.querySelector('[data-renewal-demo]'));
+</script>

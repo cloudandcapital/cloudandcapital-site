@@ -25,7 +25,7 @@ const { analyticsSource } = Astro.props;
 </div>
 
 <style>
-  .cost-guard-feature { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border: 1px solid rgba(255,255,255,.08); border-top: 2px solid var(--sage); }
+  .cost-guard-feature { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border: 1px solid var(--theme-line, rgba(255,255,255,.08)); border-top: 2px solid var(--sage); }
   .cost-guard-copy { min-height: 420px; padding: 3.45rem 3.1rem; display: flex; flex-direction: column; justify-content: center; background: var(--ink); }
   .cost-guard-meta { margin-bottom: 1rem; font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
   .cost-guard-title { margin-bottom: 1.2rem; font-family: 'Cormorant Garamond', serif; font-size: 2.55rem; font-weight: 400; line-height: 1.04; color: var(--cream); white-space: nowrap; }

@@ -35,7 +35,7 @@ test('example view shows correct cash/equivalent, is unsaved, and changes month'
 test('start empty, add, save, reload, edit and delete preserve records',()=>{
   let {dom,w,$,field,submit}=setup();
   $('rt-mode').querySelector('button').click(); assert.equal($('rt-confirm').open,false);
-  $('rt-add').click(); assert.equal(w.document.activeElement.name,'vendor');
+  assert.equal($('rt-editor').open,true); assert.equal(w.document.activeElement.name,'vendor');
   field('vendor','Own tool'); field('charge','240'); field('frequency','annually'); field('billingDate','2026-11-30'); field('notes','Uses, dependencies and next action'); submit();
   assert.equal($('rt-editor').open,false); assert.equal(w.document.activeElement.id,'rt-add');
   const saved=w.localStorage.getItem(STORAGE_KEY); assert.equal(decodeSaved(saved).length,1); assert.equal(decodeSaved(saved)[0].illustrative,'false');
@@ -99,10 +99,10 @@ test('invalid nonempty fallback month never displays a zero cash total',()=>{
  for(const bad of ['11/2026','November 2026','2026-13','']) { $('rt-month').value=bad; $('rt-month').dispatchEvent(new w.Event('change')); assert.equal($('rt-cash').textContent,'Choose a month'); assert.ok($('rt-cash-note').textContent.includes('No charge total')); assert.equal($('rt-month').getAttribute('aria-invalid'),'true'); }
  $('rt-month').value='2026-11'; $('rt-month').dispatchEvent(new w.Event('change')); assert.equal($('rt-cash').textContent,'$859.00'); dom.window.close();
 });
-test('examples stay current and starting empty switches to current month',()=>{
+test('examples stay current and starting your tracker opens a blank unsaved entry',()=>{
  const {dom,w,$}=setup({clock:'2027-03-10T12:00:00Z'});
  assert.equal($('rt-month').value,'2027-04'); assert.equal($('rt-cash').textContent,'$859.00'); assert.equal($('rt-dates').textContent.includes('Past date'),false);
- $('rt-mode').querySelector('button').click(); assert.equal($('rt-month').value,'2027-03'); assert.equal($('rt-confirm').open,false); assert.equal(decodeSaved(w.localStorage.getItem(STORAGE_KEY)).length,0); dom.window.close();
+ $('rt-mode').querySelector('button').click(); assert.equal($('rt-editor').open,true); assert.equal($('rt-form').elements.namedItem('vendor').value,''); assert.equal($('rt-form').elements.namedItem('illustrative').checked,false); assert.equal($('rt-confirm').open,false); assert.equal(w.localStorage.getItem(STORAGE_KEY),null); dom.window.close();
 });
 test('adding from examples is real; editing preserves illustrative status',()=>{
  for(const edit of [false,true]) { const {dom,w,$,field,submit}=setup();
@@ -110,10 +110,10 @@ test('adding from examples is real; editing preserves illustrative status',()=>{
  field('vendor','My real tool'); field('charge','50'); field('frequency','monthly'); submit();
  const saved=decodeSaved(w.localStorage.getItem(STORAGE_KEY)); assert.equal(saved.length,1); assert.equal(saved[0].illustrative,String(edit)); assert.equal($('rt-monthly').textContent,'$50.00'); assert.equal($('rt-month').value,'2026-10'); dom.window.close(); }
 });
-test('editing only an example decision keeps its label through save and reload',()=>{
+test('saved example data stays identified once above the diary and in downloads',()=>{
  const {dom,w,$,field,submit}=setup(); $('rt-records').querySelector('button').click(); assert.equal($('rt-form').elements.namedItem('illustrative').checked,true); field('decision','Cancel'); submit();
- const saved=w.localStorage.getItem(STORAGE_KEY), records=decodeSaved(saved); assert.equal(records.length,1); assert.equal(records[0].illustrative,'true'); assert.equal(records[0].decision,'Cancel'); assert.ok($('rt-records').textContent.includes('Illustrative')); assert.ok(exportCSV(records).includes('true')); dom.window.close();
- const reopened=setup({saved}); assert.ok(reopened.$('rt-records').textContent.includes('Illustrative')); reopened.dom.window.close();
+ const saved=w.localStorage.getItem(STORAGE_KEY), records=decodeSaved(saved); assert.equal(records.length,1); assert.equal(records[0].illustrative,'true'); assert.equal(records[0].decision,'Cancel'); assert.ok($('rt-mode').textContent.includes('Example entries in this diary: Project desk')); assert.equal($('rt-records').textContent.includes('Illustrative'),false); assert.ok(exportCSV(records).includes('true')); dom.window.close();
+ const reopened=setup({saved}); assert.ok(reopened.$('rt-mode').textContent.includes('Example entries in this diary: Project desk')); assert.equal(reopened.$('rt-records').textContent.includes('Illustrative'),false); reopened.dom.window.close();
 });
 test('validation focuses failed input and puts its message alongside it',()=>{
  const {dom,w,$,field,submit}=setup({saved:encodeSaved([])}); $('rt-add').click(); field('vendor','A'); field('charge','1,20'); submit();
@@ -131,7 +131,7 @@ test('real past notice dates warn on the card; ordinary past payments do not',()
 });
 test('corrupted saved records have a raw recovery action and described confirmations',()=>{
  const {dom,w,$}=setup({saved:'{broken'}); assert.equal($('rt-recover').hidden,false); assert.equal($('rt-confirm').getAttribute('aria-describedby'),'rt-confirm-message');
- $('rt-mode').querySelector('button').click(); assert.equal($('rt-confirm-yes').textContent,'Start empty diary'); assert.ok($('rt-confirm-message').textContent.includes('overwrite')); $('rt-confirm-no').click(); assert.equal(w.localStorage.getItem(STORAGE_KEY),'{broken'); dom.window.close();
+ $('rt-mode').querySelector('button').click(); assert.equal($('rt-editor').open,true); $('rt-form').elements.namedItem('vendor').value='My tool'; $('rt-form').elements.namedItem('charge').value='20'; $('rt-form').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true})); assert.equal($('rt-confirm-yes').textContent,'Save only this subscription'); assert.ok($('rt-confirm-message').textContent.includes('replaces the saved diary')); $('rt-confirm-no').click(); assert.equal(w.localStorage.getItem(STORAGE_KEY),'{broken'); dom.window.close();
 });
 test('import errors are shown next to import/export controls',async()=>{
  const {dom,w,$}=setup({saved:encodeSaved([])}), input=$('rt-import'); Object.defineProperty(input,'files',{value:[{size:10,text:async()=>'bad,csv'}]}); await input.onchange({target:input});
@@ -141,4 +141,28 @@ test('import errors are shown next to import/export controls',async()=>{
 test('reopening an editor clears previous field errors and restores charge help',()=>{
  const {dom,w,$,field,submit}=setup({saved:encodeSaved([])});$('rt-add').click();field('vendor','Test');field('charge','1,20');submit();assert.ok($('rt-form').querySelector('.rt-field-error'));
  $('rt-close').click();$('rt-add').click();assert.equal($('rt-form').querySelector('.rt-field-error'),null);assert.equal($('rt-form').elements.namedItem('charge').getAttribute('aria-describedby'),'rt-charge-help');assert.equal($('rt-example-edit').hidden,true);dom.window.close();
+});
+
+
+test('hero start opens your first blank subscription without saving example records',()=>{
+ const {dom,w,$}=setup();
+ assert.equal($('rt-start').getAttribute('aria-label'),'Start my own tracker');
+ $('rt-start').click();
+ assert.equal($('rt-editor').open,true); assert.equal(w.document.activeElement.name,'vendor');
+ assert.equal($('rt-form').elements.namedItem('vendor').value,''); assert.equal($('rt-form').elements.namedItem('illustrative').checked,false);
+ assert.equal(w.localStorage.getItem(STORAGE_KEY),null);
+ $('rt-close').click(); assert.equal($('rt-editor').open,false); assert.equal(w.document.activeElement.id,'rt-start');
+ assert.equal(w.localStorage.getItem(STORAGE_KEY),null); dom.window.close();
+});
+
+test('starting from an example preserves an existing diary until replacement is confirmed',()=>{
+ const original=encodeSaved([{...EXAMPLES[0],vendor:'My existing tool',illustrative:'false'}]);
+ const {dom,w,$,field,submit}=setup({saved:original});
+ $('rt-demo').click(); $('rt-start').click(); assert.equal(w.localStorage.getItem(STORAGE_KEY),original);
+ field('vendor','My new tool'); field('charge','30'); submit();
+ assert.equal($('rt-confirm').open,true); assert.equal(w.localStorage.getItem(STORAGE_KEY),original);
+ $('rt-confirm-no').click(); assert.equal($('rt-editor').open,true); assert.equal(w.localStorage.getItem(STORAGE_KEY),original);
+ submit(); $('rt-confirm-yes').click();
+ const saved=decodeSaved(w.localStorage.getItem(STORAGE_KEY)); assert.equal(saved.length,1); assert.equal(saved[0].vendor,'My new tool'); assert.equal(saved[0].illustrative,'false');
+ assert.equal($('rt-start').getAttribute('aria-label'),'Open my renewal diary'); dom.window.close();
 });

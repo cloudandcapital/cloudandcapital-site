@@ -162,9 +162,9 @@ export function exportCalendar(records, startMonth, stamp = new Date()) {
   return lines.map(foldLine).join('\r\n') + '\r\n';
 }
 export const EXAMPLES = validateRecords([
-  { id: 'example-monthly', vendor: 'Project desk', charge: '19', frequency: 'monthly', billingDate: '2026-11-05', renewalDate: '2026-11-05', noticeDate: '2026-11-04', owner: 'Owner', decision: 'Keep', billingState: 'ongoing', notes: 'Illustrative only. Monthly renewal; check the real terms.', illustrative: 'true', currency: 'USD' },
-  { id: 'example-annual-240', vendor: 'Design library', charge: '240', frequency: 'annually', billingDate: '2026-11-18', renewalDate: '2026-11-18', noticeDate: '2026-10-19', owner: 'Owner', decision: 'Review needed', billingState: 'ongoing', notes: 'Illustrative 30-day notice period. This is not a real vendor policy.', illustrative: 'true', currency: 'USD' },
-  { id: 'example-annual-600', vendor: 'Client workspace', charge: '600', frequency: 'annually', billingDate: '2026-11-28', renewalDate: '2026-11-28', noticeDate: '2026-10-28', owner: 'Operations', decision: 'Compare alternatives', billingState: 'ongoing', notes: 'Illustrative one-calendar-month notice period. Confirm real terms before choosing a date.', illustrative: 'true', currency: 'USD' }
+  { id: 'example-monthly', vendor: 'Project desk', charge: '19', frequency: 'monthly', billingDate: '2026-11-05', renewalDate: '2026-11-05', noticeDate: '2026-11-04', owner: 'Owner', decision: 'Keep', billingState: 'ongoing', notes: 'Monthly renewal. Check the vendor terms.', illustrative: 'true', currency: 'USD' },
+  { id: 'example-annual-240', vendor: 'Design library', charge: '240', frequency: 'annually', billingDate: '2026-11-18', renewalDate: '2026-11-18', noticeDate: '2026-10-19', owner: 'Owner', decision: 'Review needed', billingState: 'ongoing', notes: '30-day notice period. Review before the deadline.', illustrative: 'true', currency: 'USD' },
+  { id: 'example-annual-600', vendor: 'Client workspace', charge: '600', frequency: 'annually', billingDate: '2026-11-28', renewalDate: '2026-11-28', noticeDate: '2026-10-28', owner: 'Operations', decision: 'Compare alternatives', billingState: 'ongoing', notes: 'One-calendar-month notice period. Compare plans before renewal.', illustrative: 'true', currency: 'USD' }
 ]);
 export function examplesFor(asOf) {
   if (!validDate(asOf)) throw new Error('Choose a valid example reference date.');

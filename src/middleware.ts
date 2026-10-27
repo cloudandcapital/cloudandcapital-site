@@ -5,7 +5,7 @@ const WINDOW_MS = 60 * 60 * 1000
 
 const ipRequests = new Map<string, { count: number; resetAt: number }>()
 
-const RATE_LIMITED_ROUTES = ['/api/interactive-lab', '/api/signal-audit']
+const RATE_LIMITED_ROUTES = ['/api/signal-audit']
 
 // Best-effort per-instance guard only. Serverless instances do not share this map,
 // so this is intentionally not presented as a durable global rate limiter.

@@ -7,7 +7,6 @@
   },
   "scripts": {
     "test": "node --test",
-    "evaluate:interactive-lab": "node scripts/evaluate-interactive-lab.mjs",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

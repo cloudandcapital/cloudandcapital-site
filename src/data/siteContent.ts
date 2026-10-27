@@ -59,14 +59,6 @@ export const tools = [
     description: 'A five-minute diagnostic showing where cost enters the decision chain before it reaches the invoice.',
     href: '/signal-audit',
   },
-  {
-    slug: 'interactive-lab',
-    title: 'Interactive Lab',
-    label: 'Interactive · Tool',
-    description:
-      'Turn one real question about cloud, AI, SaaS, or technology spend into a structured decision brief grounded in the context you provide.',
-    href: '/interactive-lab',
-  },
 ];
 
 export const openSourceTools = [

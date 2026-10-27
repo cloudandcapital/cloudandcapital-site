@@ -1,23 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { classifyDecision, getQuestions } from '../src/lib/interactive-lab.js';
-import { POST } from '../src/pages/api/interactive-lab.js';
+import { QUESTIONS } from '../src/lib/signal-audit.js';
+import { POST } from '../src/pages/api/signal-audit.js';
 import { createAnalyticsTracker, validateAnalyticsEvent } from '../src/lib/analytics.js';
 import { EXAMPLES, exportCSV, importCSV, parseCSV } from '../src/lib/renewal-tracker.js';
 
-const payload = { decision: 'Review our software renewal options', stage: 'questions' };
-const request = (body, headers = {}) => new Request('https://cloudandcapital.com/api/interactive-lab', {
+const payload = { targetScope: 'product', technologyScopes: ['public-cloud'], answers: Object.fromEntries(QUESTIONS.map(question => [question.id, 'score-2'])) };
+const request = (body, headers = {}) => new Request('https://cloudandcapital.com/api/signal-audit', {
   method: 'POST', headers: { 'Content-Type': 'application/json', ...headers }, body,
-});
-
-test('inherited property names and non-string decision types cannot crash the Lab', async () => {
-  for (const decisionType of ['__proto__', 'constructor', 'toString', ['constructor'], {}]) {
-    assert.equal(classifyDecision(payload.decision, decisionType), 'renewal');
-    assert.equal(getQuestions(decisionType).length, 4);
-    const response = await POST({ request: request(JSON.stringify({ ...payload, decisionType })) });
-    assert.equal(response.status, 200);
-    assert.equal((await response.json()).decisionType, 'renewal');
-  }
 });
 
 test('analytics rejects inherited property names without queuing an event', () => {
@@ -61,7 +51,7 @@ test('oversized streams are cancelled before the entire input is read', async ()
     pull(controller) { chunks++; controller.enqueue(new Uint8Array(8192)); },
     cancel() { cancelled = true; },
   }, { highWaterMark: 0 });
-  const response = await POST({ request: new Request('https://cloudandcapital.com/api/interactive-lab', {
+  const response = await POST({ request: new Request('https://cloudandcapital.com/api/signal-audit', {
     method: 'POST', headers: { 'Content-Type': 'application/json' }, body: stream, duplex: 'half',
   }) });
   assert.equal(response.status, 413);

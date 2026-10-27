@@ -31,7 +31,7 @@ test('Tools is canonical while Work remains a permanent compatibility redirect',
 test('directory opens released tools, preserves source links and has real screenshot assets', async () => {
   const [page, sitemap] = await Promise.all([source('src/pages/tools.astro'), source('src/pages/sitemap.xml.ts')]);
   const entries = directoryTools;
-  assert.equal(entries.length, 6);
+  assert.equal(entries.length, 5);
   assert.equal(new Set(entries.map(tool => tool.href)).size, entries.length);
   for (const tool of entries) {
     const registeredSlug = tool.slug === 'cloud-cost-guard' ? 'cloud-cost-guard-lumen' : tool.slug;
@@ -87,10 +87,10 @@ test('topic filters show each tool once, include upcoming work and restore View 
       assert.equal(card.querySelector('article').dataset.filterTone, topic.tone);
     }
   }
-  assert.deepEqual(shown(), ['ai-cost-lens', 'interactive-lab', 'personal-ai-helper']);
-  assert.equal(status.textContent, 'AI & automation: 2 tools to explore · 1 coming soon');
+  assert.deepEqual(shown(), ['ai-cost-lens', 'personal-ai-helper']);
+  assert.equal(status.textContent, 'AI & automation: 1 tool to explore · 1 coming soon');
   root.querySelector('[data-tool-filter="all"]').click();
-  assert.equal(status.textContent, '6 tools to explore · 4 coming soon');
+  assert.equal(status.textContent, '5 tools to explore · 4 coming soon');
   assert.equal(root.dataset.activeTopic, 'all');
   for (const card of cards) assert.equal(card.querySelector('article').dataset.filterTone, undefined);
   assert.equal(shown().length, entries.length);

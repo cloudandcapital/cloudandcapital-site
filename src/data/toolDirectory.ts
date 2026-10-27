@@ -98,18 +98,6 @@ export const directoryTools: DirectoryTool[] = [
     imageWidth: 1080, imageHeight: 555, imageLabel: 'Example answers',
     companion: { label: 'Use the result with me', href: '/insights/using-signal-audit' },
   },
-  {
-    slug: 'interactive-lab', topics: ['tech-spending', 'ai-automation'], name: 'Interactive Lab', kind: 'Decision brief',
-    description: 'Work through a cloud, AI, or software decision before you commit.',
-    bring: 'Your question and context, or start with an example.',
-    result: 'A suggested next move, options to compare, and the checks to make before deciding.',
-    action: 'Open Interactive Lab', href: releasedTool('interactive-lab').href, external: false,
-    destination: 'interactive_lab', source: 'work_decision_tools', tone: 'rose',
-    image: '/images/interactive-lab-renewal-brief.jpg',
-    imageAlt: 'An actual renewal brief with notice-deadline checks and a suggested next move',
-    imageWidth: 1054, imageHeight: 597, imageLabel: 'Example data',
-    companion: { label: 'Walk through a renewal decision', href: '/insights/using-interactive-lab' },
-  },
 ];
 
 export const upcomingTools: {

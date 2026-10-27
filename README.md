@@ -26,7 +26,6 @@ Business services are Technology Cost Review for growing technology teams with m
 | `/writing` | Legacy redirect to the configured newsletter subscription destination |
 | `/ai-cost-lens` | Redirect to https://lens.cloudandcapital.com |
 | `/signal-audit` | Cost diagnostic tool |
-| `/interactive-lab` | Decision briefs powered by Claude |
 | `404` | Branded not-found page |
 
 ## Stack

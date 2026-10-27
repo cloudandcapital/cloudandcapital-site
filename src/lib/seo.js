@@ -9,13 +9,11 @@ const routeNames = {
   '/insights': 'Guides & writing',
   '/insights/using-ai-cost-lens': 'How to use AI Cost Lens',
   '/insights/using-cloud-cost-guard': 'How to use Cloud Cost Guard',
-  '/insights/using-interactive-lab': 'How to use Interactive Lab',
   '/insights/using-market-tape': 'How to use Market Tape',
   '/insights/using-signal-audit': 'How to use Signal Audit',
   '/insights/using-the-renewal-tracker': 'How to use the Software Renewal Tracker',
   '/insights/is-this-software-worth-it': 'Is this software worth what we are paying?',
   '/signal-audit': 'Technology Cost Signal Audit',
-  '/interactive-lab': 'Interactive Lab',
 };
 
 export function canonicalPath(pathname) {

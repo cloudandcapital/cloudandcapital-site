@@ -9,7 +9,6 @@ const pages = [
   '/insights',
   '/insights/using-ai-cost-lens',
   '/insights/using-cloud-cost-guard',
-  '/insights/using-interactive-lab',
   '/insights/using-market-tape',
   '/insights/using-signal-audit',
   '/insights/using-the-renewal-tracker',
@@ -17,7 +16,6 @@ const pages = [
   '/tools',
   '/tools/software-renewal-tracker',
   '/signal-audit',
-  '/interactive-lab',
 ];
 
 export const GET: APIRoute = ({ site }) => {

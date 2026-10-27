@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { runInNewContext } from 'node:vm';
 import { directoryTools } from '../src/data/toolDirectory.ts';
 
-import { ANALYTICS_SCHEMA, createAnalyticsTracker, validateAnalyticsEvent } from '../src/lib/analytics.js';
+import { createAnalyticsTracker, validateAnalyticsEvent } from '../src/lib/analytics.js';
 
 const root = new URL('../', import.meta.url);
 const source = (path) => readFile(new URL(path, root), 'utf8');
@@ -61,7 +61,7 @@ test('all static CTA metadata is complete and accepted by the allowlist', async 
         continue;
       }
       if (tag[0].includes('data-analytics-destination={item.destination}')) {
-        for (const rowDestination of ['cloud_cost_guard', 'market_tape', 'signal_audit', 'interactive_lab']) {
+        for (const rowDestination of ['cloud_cost_guard', 'market_tape', 'signal_audit']) {
           assert.ok(validateAnalyticsEvent('cta_click', { destination: rowDestination, source: sourceValue }), `${file}: ${rowDestination}`);
         }
         continue;
@@ -76,18 +76,11 @@ test('all static CTA metadata is complete and accepted by the allowlist', async 
   assert.ok(count >= 20, `expected broad CTA coverage, found ${count}`);
 });
 
-test('tool wiring covers lifecycle events and reset is session-gated and clears state', async () => {
-  const [audit, lab] = await Promise.all([source('src/lib/signal-audit-ui.js'), source('src/pages/interactive-lab.astro')]);
+test('Signal Audit wiring covers its lifecycle and output actions', async () => {
+  const audit = await source('src/lib/signal-audit-ui.js');
   for (const action of ['copy', 'print', 'retake']) assert.match(audit, new RegExp(`action: ["']${action}["']`));
   assert.match(audit, /tool_start/);
   assert.match(audit, /tool_complete/);
-  for (const stage of ['questions', 'brief']) {
-    assert.match(lab, new RegExp(`stage: '${stage}', result: 'success'`));
-    assert.match(lab, new RegExp(`stage: '${stage}', result: 'failure'`));
-  }
-  for (const action of ['copy', 'print', 'edit', 'reset']) assert.match(lab, new RegExp(`action: '${action}'`));
-  assert.match(lab, /if \(toolSessionStarted\) window\.ccTrack\?\.\('tool_output_action', \{ tool: 'interactive_lab', action: 'reset' \}\);\s*toolSessionStarted = false;\s*toolCompletionTracked = false;/);
-  for (const scenario of ANALYTICS_SCHEMA.starter_scenario_selected.scenario) assert.match(lab, new RegExp(`data-analytics-scenario="${scenario}"`));
 });
 
 

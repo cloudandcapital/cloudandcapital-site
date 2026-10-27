@@ -12,7 +12,6 @@ const logo = `${origin}/images/brand/cloud-and-capital-mark.png`;
 const guideImages = {
   '/insights/using-ai-cost-lens': '/images/ai-cost-lens-usable-result-preview.jpg',
   '/insights/using-cloud-cost-guard': '/images/cloud-cost-guard-billing-review.png',
-  '/insights/using-interactive-lab': '/images/interactive-lab-renewal-brief.jpg',
   '/insights/using-market-tape': '/images/market-tape-equity-review.jpg',
   '/insights/using-signal-audit': '/images/signal-audit-result-review.jpg',
   '/insights/using-the-renewal-tracker': '/images/software-renewal-project-desk.jpg',

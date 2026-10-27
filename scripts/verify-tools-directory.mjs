@@ -32,9 +32,9 @@ assert.equal(document.querySelector('[data-tool-filters]').hidden, false);
 assert.equal(dom.window.getComputedStyle(document.querySelector('[data-tool-filters]')).justifyContent, 'center');
 
 const tones = {
-  sage: { preview: '#e4e9df', body: '#f0f3ec' },
+  sage: { preview: 'var(--theme-panel,#e4e9df)', body: 'var(--theme-panel,#f0f3ec)' },
   sand: { preview: 'var(--cream)', body: 'var(--cream)' },
-  rose: { preview: '#eddbd6', body: '#f6eae7' },
+  rose: { preview: 'var(--theme-rose-panel,#eddbd6)', body: 'var(--theme-panel,#f6eae7)' },
 };
 const allEntries = [...directoryTools, ...upcomingTools];
 assert.equal(dom.window.getComputedStyle(document.documentElement).getPropertyValue('--cream').trim().toLowerCase(), '#f5eee9');
@@ -59,7 +59,7 @@ for (const topic of toolTopics) {
 document.querySelector('[data-tool-filter="all"]').click();
 assert.equal(visible().length, cards.length);
 assert.equal(document.querySelectorAll('[data-filter-tone]').length, 0);
-assert.equal(document.querySelector('[data-tool-status]').textContent, '6 tools to explore · 4 coming soon');
+assert.equal(document.querySelector('[data-tool-status]').textContent, '5 tools to explore · 4 coming soon');
 for (const action of document.querySelectorAll('.card-action, .card-resource')) {
   const css = dom.window.getComputedStyle(action);
   assert.equal(css.alignSelf, 'center');

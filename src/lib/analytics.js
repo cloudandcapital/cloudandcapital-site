@@ -1,27 +1,19 @@
 const schema = Object.freeze({
   cta_click: Object.freeze({
-    destination: Object.freeze(['work', 'services', 'learn', 'signal_audit', 'interactive_lab', 'market_tape', 'cloud_cost_guard', 'ai_cost_lens', 'ai_cost_lens_github', 'github_pipeline', 'writing', 'substack', 'contact', 'software_renewal_tracker', 'instagram']),
+    destination: Object.freeze(['work', 'services', 'learn', 'signal_audit', 'market_tape', 'cloud_cost_guard', 'ai_cost_lens', 'ai_cost_lens_github', 'github_pipeline', 'writing', 'substack', 'contact', 'software_renewal_tracker', 'instagram']),
     source: Object.freeze(['homepage_hero', 'homepage_path_personal', 'homepage_path_business', 'homepage_path_team', 'homepage_path_workflow', 'homepage_path_setup', 'homepage_examples', 'homepage_featured_tools', 'homepage_work', 'homepage_writing', 'homepage_instagram', 'homepage_contact', 'work_flagship', 'work_decision_tools', 'work_market_context', 'work_pipeline', 'work_contact', 'writing_newsletter', 'writing_featured', 'writing_archive', 'writing_contact', 'signal_audit_results', 'software_renewal_resource']),
   }),
   tool_start: Object.freeze({
-    tool: Object.freeze(['signal_audit', 'interactive_lab']),
-    entry: Object.freeze(['audit_setup', 'audit_example', 'decision_form', 'starter_scenario']),
+    tool: Object.freeze(['signal_audit']),
+    entry: Object.freeze(['audit_setup', 'audit_example']),
   }),
   tool_complete: Object.freeze({
-    tool: Object.freeze(['signal_audit', 'interactive_lab']),
+    tool: Object.freeze(['signal_audit']),
     result: Object.freeze(['completed']),
   }),
-  lab_stage_result: Object.freeze({
-    stage: Object.freeze(['questions', 'brief']),
-    result: Object.freeze(['success', 'failure']),
-  }),
   tool_output_action: Object.freeze({
-    tool: Object.freeze(['signal_audit', 'interactive_lab']),
-    action: Object.freeze(['copy', 'print', 'retake', 'edit', 'reset']),
-  }),
-  starter_scenario_selected: Object.freeze({
-    scenario: Object.freeze(['gpu_commitment', 'saas_renewal', 'ai_build_or_buy', 'cost_review', 'multi_cloud']),
-    tool: Object.freeze(['interactive_lab']),
+    tool: Object.freeze(['signal_audit']),
+    action: Object.freeze(['copy', 'print', 'retake']),
   }),
 });
 

@@ -7,12 +7,20 @@ import '../styles/signal-audit.css';
   <main id="main-content" class="audit-main">
     <header class="audit-hero audit-rail">
       <a class="audit-back" href="/tools">← All free tools</a>
-      <p class="audit-eyebrow">Technology costs · Signal Audit</p>
-      <h1><span>Can your cost reports</span> <em>change a decision?</em></h1>
-      <p class="audit-dek">Find what gets lost between the bill and the decision. Answer 12 questions to get a first step, someone to involve, and a way to check progress.</p>
-      <p class="audit-fit">For cloud, AI, and software spending in a business. Choose one team, product, or part of the business you know.</p>
-      <div class="audit-meta"><span>12 questions</span><span>About 5 minutes</span><span>No sign-up</span><span>Instant result</span></div>
-      <div class="audit-hero-actions"><button id="exampleButton" type="button" class="audit-text-action">Try a made-up example →</button><a class="audit-text-action" href="/insights/using-signal-audit">How to use the result →</a></div>
+      <div class="audit-hero-grid">
+        <div class="audit-hero-copy">
+          <p class="audit-eyebrow">Technology costs · Signal Audit</p>
+          <h1><span>Can your cost reports</span> <em>change a decision?</em></h1>
+          <p class="audit-dek">Find what gets lost between the bill and the decision. Answer 12 questions to get a first step, someone to involve, and a way to check progress.</p>
+          <p class="audit-fit">For cloud, AI, and software spending in a business. Choose one team, product, or part of the business you know.</p>
+          <div class="audit-meta"><span>12 questions</span><span>About 5 minutes</span><span>No sign-up</span><span>Instant result</span></div>
+          <div class="audit-hero-actions"><a class="audit-text-action" href="/insights/using-signal-audit">How to use the result <span aria-hidden="true">→</span></a></div>
+        </div>
+        <aside class="audit-art" aria-label="Signal Audit example">
+          <img class="audit-art-image" src="/images/signal-audit-prism-v1.png" alt="" width="1254" height="1254" decoding="async" fetchpriority="high" />
+          <button id="exampleButton" type="button" class="audit-text-action">See an example result <span aria-hidden="true">→</span></button>
+        </aside>
+      </div>
     </header>
     <div id="liveStatus" class="audit-sr-only" role="status" aria-live="polite"></div>
     <noscript><p class="audit-rail audit-notice">The questionnaire needs JavaScript. You can still <a href="/insights/using-signal-audit">read the guide and worked example</a>.</p></noscript>

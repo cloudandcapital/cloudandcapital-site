@@ -4,7 +4,7 @@ import { tools } from '../data/siteContent';
 const lens = tools.find(tool => tool.slug === 'ai-cost-lens');
 const guard = tools.find(tool => tool.slug === 'cloud-cost-guard-lumen');
 const choices = [
-  lens && { name: 'AI Cost Lens', category: 'AI spending', description: ['Compare AI tools, including the time you spend checking and fixing their work.'], result: 'The estimated cost of one usable result, or a breakdown of the AI spending you enter.', href: lens.href, action: 'Open AI Cost Lens', destination: 'ai_cost_lens', external: true, image: '/images/ai-cost-lens-usable-result-preview.jpg', imageAlt: 'Example AI Cost Lens comparison: an 80 dollar plan costs 2 dollars 56 cents per usable result, while a 40 dollar plan costs 4 dollars 25 cents when review time is included', imageWidth: 1193, imageHeight: 538 },
+  lens && { name: 'AI Cost Lens', category: 'AI spending', description: ['Compare AI tools, including the time you spend checking and fixing their work.'], result: 'The estimated cost of one usable result, or a breakdown of the AI spending you enter.', href: lens.href, action: 'Open AI Cost Lens', destination: 'ai_cost_lens', external: true, image: '/images/ai-cost-lens-interface-preview.jpg', imageAlt: 'AI Cost Lens preview showing the cost question, glass lens illustration, and both ways to start a review', imageWidth: 1238, imageHeight: 525 },
   guard && { name: 'Cloud Cost Guard', category: 'Cloud spending', description: ['Upload a supported cloud billing CSV.', 'Add an earlier bill to compare costs.'], result: 'A spending breakdown, the biggest cost drivers, and questions worth investigating.', href: guard.href, action: 'Review my cloud bill', destination: 'cloud_cost_guard', external: true, image: '/images/cloud-cost-guard-billing-preview.jpg', imageAlt: 'Example Cloud Cost Guard result showing net cloud cost, credits, and charges by service', imageWidth: 1232, imageHeight: 541 },
   { name: 'Software Renewal Tracker', category: 'Software subscriptions', description: ['Add software charges and renewal dates.', 'Keep cancellation deadlines in view.'], result: 'See what is due each month and when to decide whether to keep a subscription.', href: '/tools/software-renewal-tracker', action: 'Open the renewal tracker', destination: 'software_renewal_tracker', external: false, image: '/images/software-renewal-budget-preview.jpg', imageAlt: 'Example renewal tracker comparing an 89 dollar monthly budget equivalent with 859 dollars in charges due in November', imageWidth: 714, imageHeight: 298 },
 ].filter(Boolean);
@@ -27,7 +27,7 @@ const choices = [
             <span class="tool-action"><ActionLabel label={choice.action} /></span>
           </div>
           <div class="tool-window">
-            <div class="window-heading" aria-hidden="true"><span class="window-dots"><i></i><i></i><i></i></span><span>{choice.name} <span class="window-sample">· Example data</span></span></div>
+            <div class="window-heading" aria-hidden="true"><span class="window-dots"><i></i><i></i><i></i></span>{choice.name === 'AI Cost Lens' ? <span>Inside the tool</span> : <span>{choice.name} <span class="window-sample">· Example data</span></span>}</div>
             <div class="window-canvas"><img src={choice.image} alt={choice.imageAlt} width={choice.imageWidth} height={choice.imageHeight} loading="lazy" decoding="async" /></div>
           </div>
         </a>

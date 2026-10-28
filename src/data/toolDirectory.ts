@@ -45,9 +45,9 @@ export const directoryTools: DirectoryTool[] = [
     result: 'Cost per usable result or an AI spending breakdown, with assumptions made clear.',
     action: 'Open AI Cost Lens', href: releasedTool('ai-cost-lens').href, external: true,
     destination: 'ai_cost_lens', source: 'work_flagship', tone: 'sage',
-    image: '/images/ai-cost-lens-usable-result-preview.jpg',
-    imageAlt: 'Example AI Cost Lens comparison showing tool charges, review time, and 2 dollars 56 cents versus 4 dollars 25 cents per usable result',
-    imageWidth: 1193, imageHeight: 538, imageLabel: 'Example data',
+    image: '/images/ai-cost-lens-welcome-preview.jpg',
+    imageAlt: 'AI Cost Lens welcome screen with a glass lens illustration and two choices: Compare two options or Review my AI spending',
+    imageWidth: 1238, imageHeight: 550, imageLabel: 'Start here',
     companion: { label: 'Walk through an example', href: '/insights/using-ai-cost-lens' },
   },
   {

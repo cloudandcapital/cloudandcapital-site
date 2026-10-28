@@ -16,7 +16,7 @@ const articleData = {
   publisher: { '@id': 'https://cloudandcapital.com/#organization' },
   mainEntityOfPage: articleUrl,
   datePublished: '2026-10-23',
-  dateModified: '2026-10-24',
+  dateModified: '2026-10-27',
   image: 'https://cloudandcapital.com/images/ai-cost-lens-usable-result-preview.jpg',
 };
 ---
@@ -27,11 +27,16 @@ const articleData = {
         <a class="guide-back" href="/insights">← Guides &amp; writing</a>
         <p class="guide-eyebrow">AI costs · A tool walkthrough</p>
         <h1>The cheaper AI plan <em>might cost you more.</em></h1>
-        <p class="guide-byline">By Diana Molski · Updated <time datetime="2026-10-24">October 24, 2026</time></p>
+        <p class="guide-byline">By Diana Molski · Updated <time datetime="2026-10-27">October 27, 2026</time></p>
         <p class="guide-lede">The monthly price is only part of what an AI tool costs. There’s also the time you spend checking the work, fixing it, and figuring out what you can actually use.</p>
         <p class="lens-opening">I built AI Cost Lens to help you look at those pieces together. Let’s walk through a made-up example, then try it with your own work. You don’t need to know anything about tokens to follow along.</p>
         <a class="guide-button" href="https://lens.cloudandcapital.com/" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="ai_cost_lens" data-analytics-source="writing_archive"><ActionLabel label="Open the free tool" /></a>
       </header>
+
+      <figure class="guide-screenshot">
+        <img src="/images/ai-cost-lens-welcome-preview.jpg" alt="AI Cost Lens welcome screen with Compare two options on the left and Review my AI spending on the right" width="1238" height="550" loading="lazy" decoding="async" />
+        <figcaption>Choose <strong>Compare two options</strong> to follow this example. The spending path starts with a bill or usage records.</figcaption>
+      </figure>
 
       <section aria-labelledby="example-title">
         <h2 id="example-title">Let’s compare two plans.</h2>
@@ -55,8 +60,8 @@ const articleData = {
       </section>
 
       <figure class="guide-screenshot">
-        <img src="/images/ai-cost-lens-usable-result-preview.jpg" alt="AI Cost Lens showing the example: Plan A costs $230 including time for 90 usable results, or $2.56 each; Plan B costs $340 for 80 usable results, or $4.25 each" width="1193" height="538" loading="lazy" decoding="async" />
-        <figcaption>The example in AI Cost Lens. Time is valued at $30 an hour.</figcaption>
+        <img src="/images/ai-cost-lens-usable-result-preview.jpg" alt="AI Cost Lens showing the example: Plan A costs $230 including time for 90 usable results, or $2.56 each; Plan B costs $340 for 80 usable results, or $4.25 each" width="1224" height="724" loading="lazy" decoding="async" />
+        <figcaption>The made-up example in AI Cost Lens. Time is valued at $30 an hour.</figcaption>
       </figure>
 
       <aside class="guide-example">
@@ -66,7 +71,7 @@ const articleData = {
       <section aria-labelledby="try-title">
         <h2 id="try-title">Try it with your own work.</h2>
         <ol class="lens-steps">
-          <li><strong>Choose “Compare two options”.</strong> Give each tool or plan a name and enter its monthly cost in USD. Keep the comparison focused on the same kind of task.</li>
+          <li><strong>On the welcome screen, choose “Compare two options”.</strong> Give each tool or plan a name and enter its monthly cost in USD. Keep the comparison focused on the same kind of task.</li>
           <li><strong>Enter your monthly task count.</strong> About how many of those tasks do you do? An estimate is fine; it will affect the projected totals.</li>
           <li><strong>Check a sample from each option.</strong> Enter how many outputs you checked, how many were usable, and the total minutes you spent reviewing or fixing them. Use the same standard for both.</li>
           <li><strong>Put a value on your time.</strong> Enter an hourly value, or zero if you want to leave time value out. Set the minimum percentage of usable outputs you would accept.</li>

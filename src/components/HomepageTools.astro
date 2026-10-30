@@ -4,7 +4,7 @@ import { tools } from '../data/siteContent';
 const lens = tools.find(tool => tool.slug === 'ai-cost-lens');
 const guard = tools.find(tool => tool.slug === 'cloud-cost-guard-lumen');
 const choices = [
-  lens && { name: 'AI Cost Lens', category: 'AI spending', description: ['Compare AI tools, including the time you spend checking and fixing their work.'], result: 'The estimated cost of one usable result, or a breakdown of the AI spending you enter.', href: lens.href, action: 'Open AI Cost Lens', destination: 'ai_cost_lens', external: true, image: '/images/ai-cost-lens-interface-preview.jpg', imageAlt: 'AI Cost Lens preview showing the cost question, glass lens illustration, and both ways to start a review', imageWidth: 1238, imageHeight: 525 },
+  lens && { name: 'AI Cost Lens', category: 'AI spending', description: ['Compare AI tools, including the time you spend checking and fixing their work.'], result: 'The estimated cost of one usable result, or a breakdown of the AI spending you enter.', href: lens.href, action: 'Open AI Cost Lens', destination: 'ai_cost_lens', external: true, image: '/images/ai-cost-lens-interface-preview-v2.jpg', imageAlt: 'AI Cost Lens start screen with a convex glass lens and two clearly labelled actions: compare two options or review AI spending', imageWidth: 1348, imageHeight: 926 },
   guard && { name: 'Cloud Cost Guard', category: 'Cloud spending', description: ['Upload a supported cloud billing CSV.', 'Add an earlier bill to compare costs.'], result: 'A spending breakdown, the biggest cost drivers, and questions worth investigating.', href: guard.href, action: 'Review my cloud bill', destination: 'cloud_cost_guard', external: true, image: '/images/cloud-cost-guard-billing-preview.jpg', imageAlt: 'Example Cloud Cost Guard result showing net cloud cost, credits, and charges by service', imageWidth: 1232, imageHeight: 541 },
   { name: 'Software Renewal Tracker', category: 'Software subscriptions', description: ['Add software charges and renewal dates.', 'Keep cancellation deadlines in view.'], result: 'See what is due each month and when to decide whether to keep a subscription.', href: '/tools/software-renewal-tracker', action: 'Open the renewal tracker', destination: 'software_renewal_tracker', external: false, image: '/images/software-renewal-budget-preview.jpg', imageAlt: 'Example renewal tracker comparing an 89 dollar monthly budget equivalent with 859 dollars in charges due in November', imageWidth: 714, imageHeight: 298 },
 ].filter(Boolean);
@@ -81,6 +81,8 @@ const choices = [
   .window-dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--theme-sand-panel, #bbb4a8); }
   .window-canvas { display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 0 0 12px 12px; background: var(--theme-panel, #fff); }
   .window-canvas img { display: block; width: 100%; height: auto; }
+  .tool-choice:first-child .window-canvas { aspect-ratio: 2.23; }
+  .tool-choice:first-child .window-canvas img { height: 100%; object-fit: cover; object-position: 50% 42%; }
   .tool-choice:not(:first-child) .window-canvas { aspect-ratio: 2.3; }
   .tool-choice:not(:first-child) .window-canvas img { height: 100%; object-fit: contain; }
   .tool-choice:hover { background-color: var(--theme-panel, #f8faf5); border-color: var(--theme-line, #9aaf93); }

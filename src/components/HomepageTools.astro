@@ -81,8 +81,9 @@ const choices = [
   .window-dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--theme-sand-panel, #bbb4a8); }
   .window-canvas { display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 0 0 12px 12px; background: var(--theme-panel, #fff); }
   .window-canvas img { display: block; width: 100%; height: auto; }
-  .tool-choice:first-child .window-canvas { aspect-ratio: 2.23; }
-  .tool-choice:first-child .window-canvas img { height: 100%; object-fit: cover; object-position: 50% 42%; }
+  .tool-choice:first-child .window-canvas { aspect-ratio: 2.23; justify-content: flex-start; }
+  /* Keep the captured 15px browser scrollbar outside the preview frame. */
+  .tool-choice:first-child .window-canvas img { width: calc(100% * 1348 / 1333); max-width: none; flex-shrink: 0; height: 100%; object-fit: cover; object-position: 50% 42%; }
   .tool-choice:not(:first-child) .window-canvas { aspect-ratio: 2.3; }
   .tool-choice:not(:first-child) .window-canvas img { height: 100%; object-fit: contain; }
   .tool-choice:hover { background-color: var(--theme-panel, #f8faf5); border-color: var(--theme-line, #9aaf93); }

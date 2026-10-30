@@ -243,7 +243,7 @@ import {
   .section-heading > p { max-width: 39ch; padding-left: 1.4rem; border-left: 2px solid var(--theme-line, rgba(107, 142, 127, .4)); color: var(--theme-muted, #4a4a4a); font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.08rem, 1.55vw, 1.35rem); line-height: 1.52; text-wrap: balance; }
   .path-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.15rem; margin-top: 2.25rem; }
   .path-card { position: relative; min-width: 0; min-height: 20.5rem; padding: 2rem; display: flex; flex-direction: column; border: 1px solid var(--path-rule); border-radius: 12px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 12px 24px -16px rgba(41, 49, 39, .24); }
-  .path-card-tint { background: var(--theme-panel, #e8ece2); }
+  .path-card-tint { background: var(--cream); }
   .path-number { position: absolute; top: 1.875rem; right: 1.875rem; color: var(--theme-green, rgba(61, 96, 85, .22)); font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(5.75rem, 7vw, 7rem); font-weight: 400; line-height: .8; letter-spacing: -.065em; pointer-events: none; }
   .card-label { color: var(--theme-green, #4f7167); }
   .path-card-header { display: grid; grid-template-columns: minmax(0, 1fr) 5.5rem; align-items: center; gap: .65rem; min-height: 5.5rem; }
@@ -350,8 +350,8 @@ import {
     --dark-rose: #82585b;
     --pale-rose: #f4ecea;
   }
-  .path-card { --path-accent: var(--theme-green, #3e5946); --path-rule: var(--theme-line, #cbd6c5); --path-underline: var(--theme-line, #789382); --path-hover: var(--theme-panel, #e0e7d9); --path-rule-hover: var(--theme-line, #9aaf93); transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease; }
-  .path-card:first-child { --path-accent: var(--theme-rose, #785752); --path-rule: var(--theme-line, #dfc7c0); --path-underline: var(--theme-line, #b78384); background: var(--theme-rose-panel, #f6e7e2); --path-hover: var(--theme-rose-panel, #f0ded8); --path-rule-hover: var(--theme-line, #b48c82); }
+  .path-card { --path-accent: var(--theme-green, #3e5946); --path-rule: var(--theme-line, #cbd6c5); --path-underline: var(--theme-line, #789382); background: var(--cream); --path-hover: var(--cream); --path-rule-hover: var(--theme-line, #9aaf93); transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease; }
+  .path-card:first-child { --path-accent: var(--theme-rose, #785752); --path-rule: var(--theme-line, #dfc7c0); --path-underline: var(--theme-line, #b78384); background: var(--cream); --path-hover: var(--cream); --path-rule-hover: var(--theme-line, #b48c82); }
   .path-card:last-child { --path-accent: var(--theme-sand, #5c594b); --path-rule: var(--theme-line, #ded3c4); --path-underline: var(--theme-line, #a18b70); background: var(--cream); --path-hover: var(--cream); --path-rule-hover: var(--theme-line, #b9a68c); }
   .path-card .card-label, .path-card a { color: var(--path-accent); }
   .path-card .path-number { color: var(--path-rule); opacity: .14; }

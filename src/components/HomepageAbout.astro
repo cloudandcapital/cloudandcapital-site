@@ -46,7 +46,7 @@ import FeaturedCredentials from './FeaturedCredentials.astro';
           </div>
           <div class="diana-event-copy">
             <p class="diana-event-date">April 9, 2026 · Hawthorne</p>
-            <h3 id="diana-community-title">Hosting FinOps Weekly LA</h3>
+            <h3 id="diana-community-title">Hosted FinOps Weekly LA</h3>
             <p><FlowText text="I organized and hosted LA’s first FinOps Weekly meetup with SmartClouds, featuring speakers from Ulta Beauty and Wiv.ai." /></p>
           </div>
         </aside>
@@ -61,8 +61,11 @@ import FeaturedCredentials from './FeaturedCredentials.astro';
           <div class="diana-credential"><dt>{credential.category}</dt><dd>{credential.detail}</dd></div>
         ))}
         <div class="diana-credential">
-          <dt>CONTRIBUTION</dt>
-          <dd><a class="diana-contribution" href={about.recognitionUrl} target="_blank" rel="noopener noreferrer"><ActionLabel label={about.recognition} /></a></dd>
+          <dt>CONTRIBUTIONS</dt>
+          <dd class="diana-contributions">
+            <a class="diana-contribution" href={about.recognitionUrl} target="_blank" rel="noopener noreferrer"><ActionLabel label={about.recognition} /></a>
+            <a class="diana-contribution" href="https://hub.xerj.org/contributors/dianuhs" target="_blank" rel="noopener noreferrer"><ActionLabel label="AI Cost Lens · XERJ Corpus Hub" /></a>
+          </dd>
         </div>
       </dl>
     </div>
@@ -110,6 +113,7 @@ import FeaturedCredentials from './FeaturedCredentials.astro';
   .diana-credential dt { color: #cbdad0; font: 400 .58rem/1.6 'DM Mono', monospace; letter-spacing: .05em; }
   .diana-credential dd { margin: 0; color: #edf1ea; font-size: .79rem; line-height: 1.6; text-wrap: balance; }
   .diana-contribution { display: inline-flex; max-width: 100%; min-height: 32px; align-items: center; color: #edf1ea; text-decoration: none; }
+  .diana-contributions { display: grid; justify-items: start; gap: .2rem; }
   .diana-about a:focus-visible { outline: 2px solid var(--theme-line, #f2c8c9); outline-offset: 5px; }
   @media (max-width: 1020px) and (min-width: 761px) {
     .diana-grid { grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); column-gap: 2.5rem; }

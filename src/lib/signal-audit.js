@@ -1,5 +1,5 @@
 // Independent, directional rubric. The cutoffs are ours, not an external benchmark.
-export const RUBRIC_VERSION = '2026-10-23-r2';
+export const RUBRIC_VERSION = '2026-10-31-r3';
 export const HIGH_BOUNDARY = 67;
 export const DIMENSIONS = [
   { id: 'signal-clarity', name: 'Understand the bill', description: 'Explain changes, connect spending to an owner, and keep a useful forecast.' },
@@ -104,8 +104,9 @@ export const ARCHETYPES = {
   'low-low': { name: 'Invoice Led', meaning: 'Important cost information is hard to explain or arrives after a choice is already made. Start with one gap that could change the next decision.' },
   'high-low': { name: 'Visible, Not Embedded', meaning: 'You can explain much of the spending, but the information doesn’t consistently reach a decision in time or lead to a recorded action.' },
   'low-high': { name: 'Decisions Ahead of the Data', meaning: 'People are trying to use costs when choosing, but the underlying information needs work before it can support those choices reliably.' },
-  'high-high': { name: 'Decision Embedded', meaning: 'Your answers suggest that cost information is understandable and reaches decisions in time. Check individual gaps and keep the parts that already work.' },
+  'high-high': { name: 'Visible, With Gaps', meaning: 'Your totals show stronger signals across both areas, but individual answers still need attention or checking. Review those gaps before treating the process as consistent.' },
 };
+const DECISION_EMBEDDED = { name: 'Decision Embedded', meaning: 'Every scored answer in this scope describes the strongest practice, with no unknown or unanswered questions. Check that description against recent decisions and records; this is still a self-assessment.' };
 const ACTIONS = {
   'cost-driver-visibility': { title: 'Explain one bill change', move: 'Pick a recent change that mattered. Separate price, usage, and one-off charges, then check the explanation with the person who owns the service.', measures: ['Can the owner reconcile the change to the bill and usage records?'], owners: 'The person responsible for the bill and the service owner' },
   attribution: { title: 'Give the largest costs a clear owner', move: 'Start with the largest unassigned charges. Record who uses each service, why it is needed, and who can approve a change. Keep shared costs visible rather than forcing an arbitrary split.', measures: ['Unassigned spending that still needs an owner'], owners: 'The spending owner, with finance or operations where relevant' },
@@ -148,7 +149,6 @@ export function scoreAudit(answers = {}) {
   const notApplicable = QUESTIONS.filter((q) => answers[q.id] === 'not-applicable').map((q) => q.id);
   const unanswered = QUESTIONS.filter((q) => !optionFor(q, answers)).map((q) => q.id);
   const valid = axes.signalReadiness !== null && axes.decisionIntegration !== null && answeredCount >= 8;
-  const archetype = valid ? classifyArchetype(axes.signalReadiness, axes.decisionIntegration) : { name: 'More Information Needed', meaning: 'There aren’t enough scored answers across all four areas to place this scope on the map. Unknown and not applicable answers are excluded from scoring; they don’t establish a low score.' };
   const lowestAnswer = (id) => Math.min(...QUESTIONS.filter((q) => q.dimension === id).map((q) => optionFor(q, answers)?.score).filter((score) => typeof score === 'number'));
   const ranked = DIMENSIONS.filter((d) => dimensions[d.id].valid).sort((a, b) => dimensions[a.id].score - dimensions[b.id].score || lowestAnswer(a.id) - lowestAnswer(b.id) || tieOrder.indexOf(a.id) - tieOrder.indexOf(b.id));
   const weakest = ranked[0]?.id ?? null;
@@ -175,6 +175,10 @@ export function scoreAudit(answers = {}) {
   } else {
     priority = { kind: 'maintain', questionId: null, title: 'Keep what’s working', move: 'Use a recent decision to check that the answers still hold. Keep the current process if it serves the business, and revisit this scope after a meaningful change in spending, ownership, or contracts.', reason: 'Every scored answer is at the strongest level in this rubric, with no unknown answers left. That still needs checking against records; it is not a reason to add more process.', measures: ['A recent decision supports the answers, with any exceptions recorded'], owners: 'The current spending and decision owners' };
   }
+  // High aggregate scores cannot establish consistent practices on their own.
+  const archetype = valid
+    ? priority.kind === 'maintain' ? DECISION_EMBEDDED : classifyArchetype(axes.signalReadiness, axes.decisionIntegration)
+    : { name: 'More Information Needed', meaning: 'There aren’t enough scored answers across all four areas to place this scope on the map. Unknown and not applicable answers are excluded from scoring; they don’t establish a low score.' };
   return { rubricVersion: RUBRIC_VERSION, dimensions, axes, answeredCount, coverage: { scored: answeredCount, total: QUESTIONS.length, unknown, notApplicable, unanswered }, valid, archetype, strongest, weakest, priority };
 }
 export function validatePayload(payload) {

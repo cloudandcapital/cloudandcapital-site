@@ -20,6 +20,19 @@ function setup() {
   const answerAll = (value) => { for (let i = 0; i < QUESTIONS.length; i++) { choose('answer', value); $('nextButton').click(); } };
   return { dom, window, state, $, choose, begin, answerAll, events, outbound: () => outbound };
 }
+test('partial answers show the qualified headline in the result and copied summary', async () => {
+  const ui=setup(); let copied='';
+  Object.defineProperty(ui.window.navigator,'clipboard',{value:{writeText:async text=>{copied=text;}}});
+  try {
+    ui.begin(); ui.answerAll('score-2');
+    assert.equal(ui.$('resultTitle').textContent,'Visible, With Gaps');
+    assert.equal(ui.$('axisSignalScore').textContent,'67/100');
+    assert.equal(ui.$('axisDecisionScore').textContent,'67/100');
+    ui.$('copyButton').click(); await new Promise(resolve=>setImmediate(resolve));
+    assert.match(copied,/Visible, With Gaps/); assert.doesNotMatch(copied,/Result: Decision Embedded/);
+    assert.equal(ui.outbound(),0);
+  } finally { ui.dom.window.close(); }
+});
 test('enabled controls explain missing selections, question focus moves, and Previous preserves answers', () => {
   const ui = setup(); try {
     assert.equal(ui.$('beginButton').disabled, false); ui.$('beginButton').click(); assert.match(ui.$('setupError').textContent, /Choose what to assess/); ui.begin();
@@ -89,7 +102,7 @@ test('edited examples keep their provenance without a false original scenario de
     assert.equal(ui.$('exampleContext').textContent, 'These answers started from the made-up example.');
     ui.$('copyButton').click(); await new Promise((r) => setImmediate(r));
     assert.match(copied, /Started from the made-up example, then edited/); assert.doesNotMatch(copied, /Made-up example: a team’s software renewals/);
-    assert.match(copied, /Taken: /); assert.equal(ui.$('assessmentDate').dateTime, ui.state.takenAt); assert.match(ui.$('rubricVersion').textContent, /-r2/);
+    assert.match(copied, /Taken: /); assert.equal(ui.$('assessmentDate').dateTime, ui.state.takenAt); assert.equal(ui.$('rubricVersion').textContent, '2026-10-31-r3');
   } finally { ui.dom.window.close(); }
 });
 

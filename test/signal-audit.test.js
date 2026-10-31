@@ -24,10 +24,39 @@ test('minimum and maximum score endpoints, with maintenance rather than an inven
   assert.equal(maximum.archetype.name, 'Decision Embedded'); assert.equal(maximum.priority.kind, 'maintain');
   assert.equal(scoreAudit(answersAt(2)).priority.kind, 'review');
 });
-test('the four patterns match their axis positions at the disclosed 67 point boundary', () => {
+test('aggregate patterns match the disclosed 67 point boundary without asserting complete practices', () => {
   assert.equal(HIGH_BOUNDARY, 67);
-  for (const [x, y, name] of [[66, 66, 'Invoice Led'], [67, 66, 'Visible, Not Embedded'], [66, 67, 'Decisions Ahead of the Data'], [67, 67, 'Decision Embedded']]) assert.equal(classifyArchetype(x, y).name, name);
+  for (const [x, y, name] of [[66, 66, 'Invoice Led'], [67, 66, 'Visible, Not Embedded'], [66, 67, 'Decisions Ahead of the Data'], [67, 67, 'Visible, With Gaps'], [100, 100, 'Visible, With Gaps']]) assert.equal(classifyArchetype(x, y).name, name);
   assert.equal(classifyArchetype(null, 70), null);
+});
+test('partial practices and a serious gap cannot receive the strongest headline', () => {
+  const middle = scoreAudit(answersAt(2));
+  assert.deepEqual(middle.axes, { signalReadiness: 67, decisionIntegration: 67 });
+  assert.equal(middle.archetype.name, 'Visible, With Gaps');
+  for (const question of QUESTIONS) for (const score of [0, 1, 2]) {
+    const answers = answersAt(3); answers[question.id] = `score-${score}`;
+    const result = scoreAudit(answers);
+    assert.equal(result.archetype.name, 'Visible, With Gaps');
+    assert.equal(result.priority.questionId, question.id);
+  }
+  const automaticRenewal = answersAt(3); automaticRenewal['commitments-contracts'] = 'score-0';
+  assert.deepEqual(scoreAudit(automaticRenewal).axes, { signalReadiness: 100, decisionIntegration: 84 });
+});
+test('unknown or unanswered practices keep evidence gaps visible even at 100/100', () => {
+  for (const missing of ['outside-visibility', undefined]) {
+    const answers = answersAt(3); answers.forecasting = missing;
+    const result = scoreAudit(answers);
+    assert.deepEqual(result.axes, { signalReadiness: 100, decisionIntegration: 100 });
+    assert.equal(result.archetype.name, 'Visible, With Gaps');
+    assert.equal(result.priority.kind, 'evidence');
+  }
+});
+test('genuine exclusions remain explicit in a fully strong included scope', () => {
+  const answers = answersAt(3); answers.forecasting = 'not-applicable';
+  const result = scoreAudit(answers);
+  assert.equal(result.archetype.name, 'Decision Embedded');
+  assert.deepEqual(result.coverage.notApplicable, ['forecasting']);
+  assert.match(result.archetype.meaning, /Every scored answer in this scope/);
 });
 test('all-unknown and all-inapplicable answers do not diagnose a process failure', () => {
   for (const id of ['outside-visibility', 'not-applicable']) {
@@ -116,7 +145,7 @@ test('API rejects invalid JSON, media type, complete forged answers, and oversiz
 });
 test('copy output preserves date, scope, all answers, exclusions, first-step basis, and the illustrative label', () => {
   const summary = buildAuditSummary(scoreAudit(EXAMPLE.answers), { ...EXAMPLE, isExample: true, takenAt: '2026-10-23T12:00:00Z' });
-  assert.match(summary, /Taken: Oct 23, 2026/); assert.match(summary, /Rubric version: 2026-10-23-r2/);
+  assert.match(summary, /Taken: Oct 23, 2026/); assert.match(summary, /Rubric version: 2026-10-31-r3/);
   assert.match(summary, /Made-up example/); assert.match(summary, /11\/12 scored; 0 unknown; 1 not applicable/);
   assert.match(summary, /78\/100 points/); assert.match(summary, /Why this first/);
   for (const q of QUESTIONS) assert.ok(summary.includes(q.options.find((o) => o.id === EXAMPLE.answers[q.id]).label));

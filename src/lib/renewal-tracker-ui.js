@@ -112,7 +112,7 @@ export function startTracker(root) {
     for (const node of form.querySelectorAll('.rt-field-error')) node.remove();
     const values = record || { id: crypto.randomUUID ? crypto.randomUUID() : `record-${Date.now()}-${Math.random().toString(16).slice(2)}`, illustrative: 'false', frequency: 'monthly', billingState: 'ongoing', decision: 'Review needed' };
     for (const [k,v] of Object.entries(values)) if (k !== 'illustrative' && form.elements.namedItem(k)) form.elements.namedItem(k).value = v;
-    form.elements.namedItem('illustrative').checked = values.illustrative === 'true';
+    form.elements.namedItem('illustrative').checked = !demo && values.illustrative === 'true';
     $('rt-example-edit').hidden = !(demo && record);
     for (const field of form.querySelectorAll('[aria-invalid]')) { field.removeAttribute('aria-invalid'); field.removeAttribute('aria-describedby'); }
     form.elements.namedItem('charge').setAttribute('aria-describedby', 'rt-charge-help');

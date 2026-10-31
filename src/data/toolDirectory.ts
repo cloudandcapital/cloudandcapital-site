@@ -47,7 +47,7 @@ export const directoryTools: DirectoryTool[] = [
     destination: 'ai_cost_lens', source: 'work_flagship', tone: 'sage',
     image: '/images/ai-cost-lens-welcome-preview.jpg',
     imageAlt: 'AI Cost Lens welcome screen with a glass lens illustration and two choices: Compare two options or Review my AI spending',
-    imageWidth: 1238, imageHeight: 550, imageLabel: 'Start here',
+    imageWidth: 1160, imageHeight: 605, imageLabel: 'Start here',
     companion: { label: 'Walk through an example', href: '/insights/using-ai-cost-lens' },
   },
   {
@@ -59,7 +59,7 @@ export const directoryTools: DirectoryTool[] = [
     destination: 'cloud_cost_guard', source: 'work_decision_tools', tone: 'rose',
     image: '/images/cloud-cost-guard-billing-preview.jpg',
     imageAlt: 'Cloud Cost Guard reviewing an example uploaded bill: $1,310.13 net cost, signed credits, and charges grouped by service',
-    imageWidth: 1232, imageHeight: 541, imageLabel: 'Example billing records',
+    imageWidth: 1216, imageHeight: 608, imageLabel: 'Example billing records',
     companion: { label: 'How to review your own bill', href: '/insights/using-cloud-cost-guard' },
   },
   {
@@ -70,8 +70,8 @@ export const directoryTools: DirectoryTool[] = [
     action: 'Open the renewal tracker', href: '/tools/software-renewal-tracker', external: false,
     destination: 'software_renewal_tracker', source: 'work_decision_tools', tone: 'sand',
     image: '/images/software-renewal-project-desk.jpg',
-    imageAlt: 'Software Renewal Tracker showing the Project desk subscription, charge and renewal date',
-    imageWidth: 1168, imageHeight: 455,
+    imageAlt: 'Software Renewal Tracker showing an example Project desk subscription, charge and renewal date',
+    imageWidth: 1120, imageHeight: 411, imageLabel: 'Example data',
     companion: { label: 'How to use this tracker', href: '/insights/using-the-renewal-tracker' },
   },
   {

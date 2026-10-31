@@ -25,6 +25,23 @@ function setup({saved,blocked=false,readBlocked=false,clock='2026-10-12T12:00:00
   const field=(name,value)=>{$('rt-form').elements.namedItem(name).value=value;};
   return {dom,w,$,submit,field};
 }
+test('copying an example to a real diary restores past-date warnings after save and reload', () => {
+  let view=setup({clock:'2026-10-31T12:00:00Z'});
+  view.$('rt-records').querySelector('button').click();
+  assert.equal(view.$('rt-form').elements.namedItem('illustrative').checked,false);
+  view.field('vendor','Fictional own subscription'); view.field('noticeDate','2026-10-01'); view.field('renewalDate','2026-10-20');
+  view.submit();
+  const saved=view.w.localStorage.getItem(STORAGE_KEY);
+  assert.equal(decodeSaved(saved)[0].illustrative,'false');
+  assert.match(view.$('rt-records').textContent,/Notice deadline has passed/);
+  assert.match(view.$('rt-records').textContent,/Recorded renewal date has passed/);
+  view.dom.window.close();
+  view=setup({saved,clock:'2026-10-31T12:00:00Z'});
+  assert.match(view.$('rt-records').textContent,/Notice deadline has passed/);
+  view.$('rt-records').querySelector('button').click();
+  assert.equal(view.$('rt-form').elements.namedItem('illustrative').checked,false);
+  view.dom.window.close();
+});
 test('example view shows correct cash/equivalent, is unsaved, and changes month',()=>{
   const {dom,w,$}=setup();
   assert.equal($('rt-monthly').textContent,'$89.00'); assert.equal($('rt-cash').textContent,'$859.00');
@@ -105,14 +122,14 @@ test('examples stay current and starting your tracker opens a blank unsaved entr
  assert.equal($('rt-month').value,'2027-04'); assert.equal($('rt-cash').textContent,'$859.00'); assert.equal($('rt-dates').textContent.includes('Past date'),false);
  $('rt-start').click(); assert.equal($('rt-editor').open,true); assert.equal($('rt-form').elements.namedItem('vendor').value,''); assert.equal($('rt-form').elements.namedItem('illustrative').checked,false); assert.equal($('rt-confirm').open,false); assert.equal(w.localStorage.getItem(STORAGE_KEY),null); dom.window.close();
 });
-test('adding from examples is real; editing preserves illustrative status',()=>{
+test('adding or copying from examples defaults to a real record',()=>{
  for(const edit of [false,true]) { const {dom,w,$,field,submit}=setup();
  if(edit) $('rt-records').querySelector('button').click(); else $('rt-start').click();
  field('vendor','My real tool'); field('charge','50'); field('frequency','monthly'); submit();
- const saved=decodeSaved(w.localStorage.getItem(STORAGE_KEY)); assert.equal(saved.length,1); assert.equal(saved[0].illustrative,String(edit)); assert.equal($('rt-monthly').textContent,'$50.00'); assert.equal($('rt-month').value,'2026-10'); dom.window.close(); }
+ const saved=decodeSaved(w.localStorage.getItem(STORAGE_KEY)); assert.equal(saved.length,1); assert.equal(saved[0].illustrative,'false'); assert.equal($('rt-monthly').textContent,'$50.00'); assert.equal($('rt-month').value,'2026-10'); dom.window.close(); }
 });
 test('saved example data stays identified once above the diary and in downloads',()=>{
- const {dom,w,$,field,submit}=setup(); $('rt-records').querySelector('button').click(); assert.equal($('rt-form').elements.namedItem('illustrative').checked,true); field('decision','Cancel'); submit();
+ const {dom,w,$,field,submit}=setup(); $('rt-records').querySelector('button').click(); assert.equal($('rt-form').elements.namedItem('illustrative').checked,false); $('rt-form').elements.namedItem('illustrative').checked=true; field('decision','Cancel'); submit();
  const saved=w.localStorage.getItem(STORAGE_KEY), records=decodeSaved(saved); assert.equal(records.length,1); assert.equal(records[0].illustrative,'true'); assert.equal(records[0].decision,'Cancel'); assert.ok($('rt-mode').textContent.includes('Example entries in this diary: Project desk')); assert.equal($('rt-records').textContent.includes('Illustrative'),false); assert.ok(exportCSV(records).includes('true')); dom.window.close();
  const reopened=setup({saved}); assert.ok(reopened.$('rt-mode').textContent.includes('Example entries in this diary: Project desk')); assert.equal(reopened.$('rt-records').textContent.includes('Illustrative'),false); reopened.dom.window.close();
 });

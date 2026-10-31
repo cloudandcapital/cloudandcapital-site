@@ -1,4 +1,6 @@
 ---
+// This iframe harness is for local development only. Never load tool production pages from a deployed QA route.
+if (!import.meta.env.DEV) return new Response('Not found', { status: 404 });
 const widths = ['320', '375', '390', '414', '768', '1024', '1280', '1440', '1600', '1920'];
 const width = widths.includes(Astro.url.searchParams.get('width') ?? '') ? Astro.url.searchParams.get('width') : '390';
 const page = Astro.url.searchParams.get('page');

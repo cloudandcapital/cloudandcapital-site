@@ -4,8 +4,9 @@ import FlowText from './FlowText.astro';
 import type { DirectoryTool } from '../data/toolDirectory';
 interface Props { tool: DirectoryTool; }
 const { tool } = Astro.props;
+const detailPreview = ['cloud-cost-guard', 'software-renewal-tracker'].includes(tool.slug);
 ---
-<article class="directory-card" data-tone={tool.tone} aria-labelledby={`${tool.slug}-name`}>
+<article class="directory-card" data-tone={tool.tone} data-detail-preview={detailPreview || undefined} aria-labelledby={`${tool.slug}-name`}>
   <div class="card-preview">
     <div class="preview-window">
       <div class="preview-bar" aria-hidden="true"><i></i><i></i><i></i>{tool.imageLabel && <span>{tool.imageLabel}</span>}</div>
@@ -37,6 +38,8 @@ const { tool } = Astro.props;
   .preview-bar i { width: 4px; height: 4px; border-radius: 50%; background: var(--theme-sand-panel, #bbb4a8); }
   .preview-bar span { margin-left: auto; color: var(--theme-muted, #625d55); font: 400 .5rem/1.3 'DM Mono', monospace; }
   .preview-window img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: contain; background: var(--theme-panel, #fff); }
+  .directory-card[data-detail-preview] .preview-window { height: auto; grid-template-rows: 19px auto; box-shadow: 0 21px 28px -15px #26372d66, 0 3px 7px #26372d14; }
+  .directory-card[data-detail-preview] .preview-window img { height: auto; aspect-ratio: 1.8; object-fit: cover; object-position: 50% 50%; }
   .card-copy { display: flex; flex-direction: column; flex: 1; min-width: 0; padding: 1.5rem; }
   .card-kind, dt { margin: 0; color: var(--card-accent); font: 500 .61rem/1.5 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
   h3 { margin: .65rem 0 0; font: italic 400 clamp(2.15rem, 2.7vw, 2.75rem)/1.05 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; text-wrap: balance; }

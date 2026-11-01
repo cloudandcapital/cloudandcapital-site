@@ -55,7 +55,7 @@ import FeaturedCredentials from './FeaturedCredentials.astro';
 
     <div class="diana-credentials" data-reveal>
       <p class="diana-eyebrow">Credentials &amp; contributions</p>
-      <FeaturedCredentials labelled />
+      <FeaturedCredentials />
       <dl aria-label="Professional credentials and contributions">
         {about.credentials.map(credential => (
           <div class="diana-credential"><dt>{credential.category}</dt><dd>{credential.detail}</dd></div>

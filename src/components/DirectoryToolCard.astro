@@ -31,7 +31,7 @@ const { tool } = Astro.props;
   .directory-card[data-filter-tone="sage"] { --preview-tint: var(--theme-panel, #e4e9df); --card-accent: var(--theme-green, #3d6055); --card-surface: var(--theme-panel, #f0f3ec); border-color: var(--theme-line, #c2cdbb); }
   .directory-card[data-filter-tone="sand"] { --preview-tint: var(--cream); --card-accent: var(--theme-sand, #675844); --card-surface: var(--cream); border-color: var(--theme-line, #d3c6b1); }
   .directory-card[data-filter-tone="rose"] { --preview-tint: var(--theme-rose-panel, #eddbd6); --card-accent: var(--theme-rose, #785752); --card-surface: var(--theme-panel, #f6eae7); border-color: var(--theme-line, #d6b8b2); }
-  .card-preview { display: grid; place-items: center; flex: none; aspect-ratio: 1.85; min-width: 0; overflow: hidden; padding: 1.25rem; background: var(--preview-tint); }
+  .card-preview { display: grid; place-items: center; flex: none; aspect-ratio: 1.4; min-width: 0; overflow: hidden; padding: 1.25rem; background: var(--preview-tint); }
   .preview-window { display: grid; grid-template-rows: 19px minmax(0, 1fr); width: 100%; height: 100%; min-height: 0; overflow: hidden; border: 1px solid var(--theme-line, #e7e4df); border-radius: 8px; background: var(--theme-panel, #fff); box-shadow: 0 17px 23px -12px #26372d59, 0 2px 5px #26372d0a; transition: transform 220ms ease, box-shadow 220ms ease; }
   .preview-bar { display: flex; align-items: center; gap: 4px; min-height: 19px; padding-inline: 8px; border-bottom: 1px solid var(--theme-line, #24211e12); background: var(--theme-panel, #fff); }
   .preview-bar i { width: 4px; height: 4px; border-radius: 50%; background: var(--theme-sand-panel, #bbb4a8); }

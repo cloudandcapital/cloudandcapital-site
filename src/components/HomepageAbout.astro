@@ -55,12 +55,12 @@ import FeaturedCredentials from './FeaturedCredentials.astro';
 
     <div class="diana-credentials" data-reveal>
       <p class="diana-eyebrow">Credentials &amp; contributions</p>
-      <FeaturedCredentials />
+      <FeaturedCredentials labelled />
       <dl aria-label="Professional credentials and contributions">
-        {about.credentials.map((credential, index) => (
-          <div class:list={['diana-credential', { 'diana-credential-wide': index === about.credentials.length - 1 && about.credentials.length % 2 !== 0 }]}><dt>{credential.category}</dt><dd>{credential.detail}</dd></div>
+        {about.credentials.map(credential => (
+          <div class="diana-credential"><dt>{credential.category}</dt><dd>{credential.detail}</dd></div>
         ))}
-        <div class="diana-credential diana-credential-wide">
+        <div class="diana-credential">
           <dt>CONTRIBUTIONS</dt>
           <dd class="diana-contributions">
             <a class="diana-contribution" href={about.recognitionUrl} target="_blank" rel="noopener noreferrer"><ActionLabel label={about.recognition} /></a>
@@ -107,14 +107,13 @@ import FeaturedCredentials from './FeaturedCredentials.astro';
   .diana-event-date { margin: 0; color: #d1dfd6; font: 400 .55rem/1.6 'DM Mono', monospace; letter-spacing: .035em; }
   .diana-event-copy h3 { margin: .4rem 0; color: #faf6ef; font: italic 400 clamp(1.6rem, 2.75vw, 1.75rem)/1.1 'Cormorant Garamond', Georgia, serif; text-wrap: balance; }
   .diana-event-copy > p:last-of-type { margin: .6rem 0 .35rem; color: #e8eee7; font-size: .82rem; line-height: 1.65; text-wrap: pretty; }
-  .diana-credentials { margin-top: clamp(2.75rem, 5vw, 4rem); padding-top: 1.6rem; border-top: 1px solid var(--theme-line, #f5eee947); }
-  .diana-credentials dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; margin: .8rem 0 0; }
-  .diana-credential { display: grid; grid-template-columns: 7.7rem minmax(0, 1fr); align-items: baseline; gap: .75rem; padding: .8rem 0; border-bottom: 1px solid var(--theme-line, #f5eee926); }
-  .diana-credential-wide { grid-column: 1 / -1; }
-  .diana-credential dt { color: #cbdad0; font: 400 .58rem/1.6 'DM Mono', monospace; letter-spacing: .05em; }
-  .diana-credential dd { margin: 0; color: #edf1ea; font-size: .79rem; line-height: 1.6; text-wrap: balance; }
+  .diana-credentials { margin-top: clamp(2.75rem, 5vw, 4rem); padding-top: 1.4rem; border-top: 1px solid var(--theme-line, #f5eee947); }
+  .diana-credentials dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 2.5rem; margin: 0; }
+  .diana-credential { display: flex; flex-direction: column; min-width: 0; min-height: 7.5rem; gap: .6rem; padding: 1.35rem 0; border-top: 1px solid var(--theme-line, #f5eee926); }
+  .diana-credential dt { color: #cbdad0; font: 400 .58rem/1.6 'DM Mono', monospace; letter-spacing: .08em; }
+  .diana-credential dd { margin: 0; color: #edf1ea; font-size: .85rem; line-height: 1.65; text-wrap: pretty; }
   .diana-contribution { display: inline-flex; max-width: 100%; min-height: 32px; align-items: center; color: #edf1ea; text-decoration: none; }
-  .diana-contributions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-items: start; column-gap: 2rem; }
+  .diana-contributions { display: flex; flex-direction: column; align-items: flex-start; gap: .15rem; }
   .diana-about a:focus-visible { outline: 2px solid var(--theme-line, #f2c8c9); outline-offset: 5px; }
   @media (max-width: 1020px) and (min-width: 761px) {
     .diana-grid { grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); column-gap: 2.5rem; }
@@ -122,7 +121,7 @@ import FeaturedCredentials from './FeaturedCredentials.astro';
     .diana-myszka { left: 1%; }
     .diana-beach { right: 1%; }
     .diana-photo-cluster { aspect-ratio: .56; }
-    .diana-credential { grid-template-columns: 1fr; gap: .3rem; }
+    .diana-credentials dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 760px) {
     .diana-shell { width: min(calc(100% - 2.5rem), 40rem); }
@@ -135,8 +134,7 @@ import FeaturedCredentials from './FeaturedCredentials.astro';
     .diana-biography p { font-size: .95rem; }
     .diana-polaroid figcaption { font-size: clamp(1.4rem, 6vw, 1.85rem); }
     .diana-credentials dl { grid-template-columns: minmax(0, 1fr); }
-    .diana-credential { grid-template-columns: 7.7rem minmax(0, 1fr); }
-    .diana-contributions { grid-template-columns: minmax(0, 1fr); gap: .2rem; }
+    .diana-credential { min-height: 0; padding-block: 1.2rem; }
   }
   @media (max-width: 560px) {
     .diana-community { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
@@ -144,6 +142,5 @@ import FeaturedCredentials from './FeaturedCredentials.astro';
   }
   @media (max-width: 380px) {
     .diana-photo-cluster { aspect-ratio: .55; }
-    .diana-credential { grid-template-columns: 1fr; gap: .3rem; }
   }
 </style>

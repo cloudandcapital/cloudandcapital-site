@@ -241,10 +241,14 @@ export const about = {
   biography: [
     "I’m a mom, a lifelong internet nerd, and almost always in the middle of building something. I love a good rabbit hole, especially one that ends with something I can share.",
     "I earned my finance degree at Cal State Dominguez Hills, where I was selected to represent the university in the CFA Institute Research Challenge. I then worked in wealth management at Morgan Stanley.",
-    "Today, I look at cloud, AI and software through a finance lens: what it costs, what you get, and whether it’s worth it. At Cloud & Capital, I build tools and automations, share how they work, and write Markets & Mimosas, my newsletter about money, markets and technology.",
+    "Today, I work in FinOps, looking at cloud, AI and software through a finance lens: what it costs, what you get, and whether it’s worth it. At Cloud & Capital, I build tools and automations, share how they work, and write Markets & Mimosas, my newsletter about money, markets and technology.",
     "Before finance, I worked in beauty and with animals, two of my other favorite things! I’m the daughter of Polish immigrants and grew up in LA’s South Bay, where I still live with my teenage son and our dog, Myszka.",
-    "Have a look around. Try a tool, read something, or say hello.",
   ],
+  invitation: {
+    text: 'Have a look around. Try a tool, read something, or',
+    linkText: 'tell me about a bill or workflow you’d like help with',
+    href: '#contact',
+  },
   credentials: [
     { category: 'BOOKKEEPING', detail: 'Intuit Certified Bookkeeping Professional' },
     { category: 'FINOPS', detail: 'FinOps Certified Practitioner · FinOps Certified FOCUS Analyst' },
@@ -256,3 +260,4 @@ export const about = {
   recognitionUrl:
     'https://hub.pointfive.co/inefficiencies/overcommitted-savings-plans-after-temporary-ai-inference-demand-spikes?cloud-services=aws-savings-plans',
 };
+

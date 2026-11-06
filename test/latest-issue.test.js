@@ -23,17 +23,18 @@ test('latest issue advances to October 24 while retaining October 11 and Septemb
 });
 
 
-test('homepage rotates newest reads and retires older articles to the archive', async () => {
+test('homepage curates technology, markets and personal writing while retaining the archive', async () => {
   const { homepageWriting, writing, writingFeatured, marketsMimosasLatest,
-    marketsMimosasOctober11, marketsMimosasSeptember27, featuredWriting, selectHomepageWriting } =
+    marketsMimosasOctober11, marketsMimosasSeptember27, featuredWriting, personalWriting } =
     await import('../src/data/siteContent.ts');
   assert.deepEqual(homepageWriting.map(article => article.href),
-    [writingFeatured.href, marketsMimosasLatest.href, marketsMimosasOctober11.href]);
-  assert.ok(writing.includes(featuredWriting));
-  const nextArticle = { ...marketsMimosasLatest, title: 'Next published read',
-    href: 'https://cloudandcapital.substack.com/p/next-read', date: 'October 31, 2026' };
-  const nextHomepage = selectHomepageWriting([...writing, nextArticle]);
-  assert.deepEqual(nextHomepage.map(article => article.href),
-    [writingFeatured.href, nextArticle.href, marketsMimosasLatest.href]);
-  assert.ok(writing.includes(marketsMimosasSeptember27));
+    [writingFeatured.href, marketsMimosasLatest.href, personalWriting.href]);
+  assert.deepEqual(homepageWriting.map(article => article.label),
+    ['Technology & costs', 'Markets & Mimosas', 'Personal article']);
+  assert.equal(personalWriting.href, 'https://cloudandcapital.substack.com/p/id-like-a-say-in-this-actually');
+  assert.equal(personalWriting.date, undefined);
+  for (const article of [featuredWriting, marketsMimosasOctober11, marketsMimosasSeptember27, personalWriting]) {
+    assert.ok(writing.includes(article));
+  }
+  await access(new URL(`public${personalWriting.archiveImage}`, root));
 });

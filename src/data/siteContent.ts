@@ -157,11 +157,21 @@ export const writingFeatured = {
   topic: 'The Decision Layer · Issue No. 1',
   date: 'August 14, 2026',
   href: 'https://cloudandcapital.substack.com/p/the-decision-layer',
-  description: 'Technology costs take shape long before the bill arrives: in what gets built, what gets locked in, and what quietly becomes the default.',
+  description: 'Technology costs take shape long before the bill arrives: in what gets built, what gets locked in, and what becomes the default.',
   image: '/images/writing/the-decision-layer.png',
   imageAlt: 'Editorial cover for The Decision Layer showing three architectural gates leading to a ledger',
   archiveImage: '/images/writing/the-decision-layer.png',
   archiveImageAlt: 'Editorial cover for The Decision Layer showing three architectural gates leading to a ledger',
+};
+
+export const personalWriting = {
+  title: 'I’d Like a Say in This, Actually.',
+  topic: 'Personal article',
+  date: undefined,
+  href: 'https://cloudandcapital.substack.com/p/id-like-a-say-in-this-actually',
+  description: 'A personal article about women, money and independence.',
+  archiveImage: '/images/writing/palos-verdes-coast-1280.webp',
+  archiveImageAlt: 'The misty Palos Verdes coast, photographed by Ars M.',
 };
 
 export const newsletter = {
@@ -176,6 +186,7 @@ export const newsletter = {
 export const writing = [
   writingFeatured,
   marketsMimosasLatest,
+  personalWriting,
   marketsMimosasOctober11,
   marketsMimosasSeptember27,
   featuredWriting,
@@ -210,14 +221,11 @@ export const writing = [
 
 // Keep the featured essay while rotating the two recent reads by publication date.
 // Adding a dated article to writing moves the former latest into the previous slot.
-export function selectHomepageWriting(articles: typeof writing, featured = writingFeatured) {
-  const recent = [...articles]
-    .filter((article) => article.href !== featured.href)
-    .sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
-  return [featured, ...recent.slice(0, 2)];
-}
-
-export const homepageWriting = selectHomepageWriting(writing);
+export const homepageWriting = [
+  { ...writingFeatured, label: 'Technology & costs', meta: writingFeatured.date },
+  { ...marketsMimosasLatest, label: 'Markets & Mimosas', meta: marketsMimosasLatest.date },
+  { ...personalWriting, label: 'Personal article', meta: 'Money & independence' },
+];
 
 export const events = [
   {

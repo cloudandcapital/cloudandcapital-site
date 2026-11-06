@@ -6,6 +6,7 @@ import ServiceWatermark from '../components/ServiceWatermark.astro';
 import HomepageTools from '../components/HomepageTools.astro';
 import HomepageAbout from '../components/HomepageAbout.astro';
 import HomepageWriting from '../components/HomepageWriting.astro';
+import CoastalTransition from '../components/CoastalTransition.astro';
 import InstagramSection from '../components/InstagramSection.astro';
 import {
   contactLink,
@@ -80,9 +81,11 @@ import {
 
     <HomepageTools />
 
-    <HomepageAbout />
-
     <HomepageWriting />
+
+    <CoastalTransition />
+
+    <HomepageAbout />
 
     <InstagramSection />
 
@@ -121,6 +124,7 @@ import {
 </script>
 
 <style>
+  .home :global(.coastal-transition + .diana-about) { padding-top: clamp(2rem, 4vw, 3rem); }
   :global(html) { scroll-behavior: smooth; }
   :global(body) { background: var(--cream); color: var(--theme-ink, #191714); }
   .home { overflow: hidden; font-family: 'Jost', system-ui, sans-serif; }

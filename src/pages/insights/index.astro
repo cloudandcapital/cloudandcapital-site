@@ -18,7 +18,7 @@ const guides = [
   <main id="main-content" class="guides-page guides-library">
     <section class="guide-shell guide-intro" aria-labelledby="guides-title">
       <div><p class="guide-eyebrow">Read, try, explore</p><h1 id="guides-title">Guides &amp; <em>writing.</em></h1></div>
-      <div><p class="guide-lede">How the tools work, what the numbers mean, and the questions I keep coming back to about money, markets and technology.</p><nav class="guide-jump" aria-label="On this page"><a href="#walkthroughs"><ActionLabel label="Tool walkthroughs" /></a><a href="#resources"><ActionLabel label="Free resources" /></a><a href="#essays"><ActionLabel label="Essays & newsletter" /></a></nav></div>
+      <div><p class="guide-lede">How the tools work, what the numbers mean, and the questions I keep coming back to about money, markets and technology.</p><nav class="guide-jump" aria-label="On this page"><a href="#walkthroughs"><ActionLabel label="Tool walkthroughs" /></a><a href="#resources"><ActionLabel label="Free resources" /></a><a href="#essays"><ActionLabel label="Articles & newsletters" /></a></nav></div>
     </section>
     <section id="walkthroughs" class="guide-shell guide-section" aria-labelledby="walkthroughs-title">
       <div class="guide-section-heading"><div><p class="guide-eyebrow">Tools I built · Try it yourself</p><h2 id="walkthroughs-title">A guide beside the tool.</h2></div><a href="/tools" data-analytics-event="cta_click" data-analytics-destination="work" data-analytics-source="writing_archive"><ActionLabel label="Browse the free tools" /></a></div>
@@ -33,8 +33,8 @@ const guides = [
       </article>
     </section>
     <section id="essays" class="essay-band" aria-labelledby="essays-title"><div class="guide-shell guide-section">
-      <div class="guide-section-heading"><div><p class="guide-eyebrow">Essays &amp; Markets &amp; Mimosas</p><h2 id="essays-title">Beyond the how-to.</h2></div></div>
-      <div class="essay-list">{homepageWriting.map(item => <article class="guide-essay"><div><p class="guide-eyebrow">{item.topic} · {item.date}</p><h3><a href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a></h3><p>{item.description}</p><a class="guide-read" href={item.href} target="_blank" rel="noopener noreferrer"><ActionLabel label="Read on Substack" /></a></div><img src={item.archiveImage} alt={item.archiveImageAlt} width="800" height="500" loading="lazy" decoding="async" /></article>)}</div>
+      <div class="guide-section-heading"><div><p class="guide-eyebrow">Articles &amp; newsletters</p><h2 id="essays-title">Beyond the how-to.</h2></div></div>
+      <div class="essay-list">{homepageWriting.map(item => <article class="guide-essay"><div><p class="guide-eyebrow">{item.label}{item.date && ` · ${item.date}`}</p><h3><a href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a></h3><p>{item.description}</p><a class="guide-read" href={item.href} target="_blank" rel="noopener noreferrer"><ActionLabel label="Read on Substack" /></a></div><img src={item.archiveImage} alt={item.archiveImageAlt} width="800" height="500" loading="lazy" decoding="async" /></article>)}</div>
       <a class="guide-subscribe" href={`${newsletter.subscribeHref}/subscribe`} target="_blank" rel="noopener noreferrer"><img src="/images/substack-logo.svg" width="18" height="18" alt="" loading="lazy" /><ActionLabel label="Subscribe on Substack" /></a>
     </div></section>
   </main>

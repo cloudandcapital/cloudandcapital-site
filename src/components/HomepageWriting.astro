@@ -10,7 +10,7 @@ const subscribeHref = `${newsletter.subscribeHref.replace(/\/$/, '')}/subscribe`
   <div class="site-shell">
     <header class="writing-heading" data-reveal>
       <p class="writing-eyebrow">Writing</p>
-      <h2 id="writing-title">Markets, money, <span class="writing-heading-phrase">and what I’m learning</span> <span class="writing-heading-phrase">as I build.</span></h2>
+      <h2 id="writing-title"><span class="writing-title-line">Money, markets,</span> <span class="writing-title-line">and the rest of life.</span></h2>
     </header>
 
     <div class="writing-grid">
@@ -26,8 +26,8 @@ const subscribeHref = `${newsletter.subscribeHref.replace(/\/$/, '')}/subscribe`
           data-analytics-source="homepage_writing"
         >
           <div class="essay-copy">
-            <p class="essay-kicker">{index === 0 ? 'Featured essay' : index === 1 ? 'Latest' : 'Previously'}</p>
-            <p class="essay-meta">{article.topic.replace(' · Issue No. 1', '').replace(' · Issue no. 1', '')} · {article.date}</p>
+            <p class="essay-kicker">{article.label}</p>
+            <p class="essay-meta">{article.meta}</p>
             <h3>{article.title.split(/(?<=[.!?])\s+/).map((sentence, sentenceIndex) => <Fragment>{sentenceIndex > 0 && ' '}<span class="writing-heading-phrase">{sentence}</span></Fragment>)}</h3>
             <p class="essay-description"><FlowText text={article.description} /></p>
             <div class="essay-read"><ActionLabel label="Read" /></div>
@@ -67,7 +67,7 @@ const subscribeHref = `${newsletter.subscribeHref.replace(/\/$/, '')}/subscribe`
 
 <style>
   .writing-section {
-    padding-block: clamp(4.25rem, 6vw, 5.6rem);
+    padding-block: clamp(4.25rem, 6vw, 5.6rem) 2.75rem;
     border-top: 1px solid var(--theme-line, rgba(36, 35, 31, .1));
     background: var(--cream);
     scroll-margin-top: 5rem;
@@ -79,6 +79,7 @@ const subscribeHref = `${newsletter.subscribeHref.replace(/\/$/, '')}/subscribe`
     text-wrap: balance;
   }
   .writing-heading-phrase { display: inline-block; max-width: 100%; }
+  .writing-title-line { display: block; }
   .writing-eyebrow {
     display: flex;
     align-items: center;

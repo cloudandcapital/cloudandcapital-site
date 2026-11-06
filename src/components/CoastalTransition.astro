@@ -1,0 +1,76 @@
+<figure class="coastal-transition" aria-label="Coastal photograph">
+  <img
+    src="/images/writing/palos-verdes-coast-1280.webp"
+    srcset="/images/writing/palos-verdes-coast-640.webp 640w, /images/writing/palos-verdes-coast-1280.webp 1280w, /images/writing/palos-verdes-coast-2400.webp 2400w"
+    sizes="100vw"
+    alt="Misty green bluffs curving around the Pacific shoreline in Palos Verdes."
+    width="2400"
+    height="1600"
+    loading="lazy"
+    decoding="async"
+  />
+  <figcaption class="coastal-caption site-shell">
+    <a href="https://unsplash.com/photos/misty-coastal-cliffs-overlooking-the-ocean-waves-AoNkf6YKYXs" target="_blank" rel="noopener noreferrer">Photo: Ars M / Unsplash</a>
+  </figcaption>
+</figure>
+
+<style>
+  .coastal-transition {
+    --coastal-forest: var(--theme-forest-panel, #3d6055);
+    position: relative;
+    isolation: isolate;
+    height: clamp(340px, 37vw, 520px);
+    margin: 0;
+    overflow: hidden;
+    background: var(--coastal-forest);
+  }
+  .coastal-transition > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 53%;
+  }
+  .coastal-transition::before, .coastal-transition::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .coastal-transition::before {
+    background: linear-gradient(to bottom, var(--cream) 0%, color-mix(in srgb, var(--cream) 84%, transparent) 5%, color-mix(in srgb, var(--cream) 25%, transparent) 18%, transparent 33%);
+  }
+  .coastal-transition::after {
+    background: linear-gradient(to top, var(--coastal-forest) 0%, color-mix(in srgb, var(--coastal-forest) 96%, transparent) 7%, color-mix(in srgb, var(--coastal-forest) 70%, transparent) 20%, transparent 52%);
+  }
+  .coastal-caption {
+    position: absolute;
+    inset: auto 0 .6rem;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0 2rem;
+    margin-inline: auto;
+    color: #a7bbb0;
+    font: 400 .65rem/1.5 'DM Mono', monospace;
+  }
+  .coastal-caption a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: inherit;
+    text-decoration: none;
+    text-underline-offset: .2em;
+  }
+  .coastal-caption a:hover, .coastal-caption a:focus-visible {
+    color: #f5eee9;
+    text-decoration: underline;
+  }
+  .coastal-caption a:focus-visible { outline: 2px solid; outline-offset: 4px; }
+  @media (max-width: 760px) {
+    .coastal-transition { height: 360px; }
+    .coastal-transition > img { object-position: 49% 53%; }
+  }
+</style>

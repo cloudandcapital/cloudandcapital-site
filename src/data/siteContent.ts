@@ -169,7 +169,7 @@ export const personalWriting = {
   topic: 'Personal article',
   date: undefined,
   href: 'https://cloudandcapital.substack.com/p/id-like-a-say-in-this-actually',
-  description: 'A personal article about women, money and independence.',
+  description: 'On women, money, and building a life that feels like your own.',
   archiveImage: '/images/writing/palos-verdes-coast-1280.webp',
   archiveImageAlt: 'The misty Palos Verdes coast, photographed by Ars M.',
 };

@@ -4,14 +4,17 @@ import { access } from 'node:fs/promises';
 
 const root = new URL('../', import.meta.url);
 
-test('latest issue advances to October 24 while retaining October 11 and September 27 in the archive', async () => {
-  const { marketsMimosasLatest, marketsMimosasOctober11, marketsMimosasSeptember27, writing, newsletter } =
+test('latest issue advances to November 6 while retaining the earlier issues in the archive', async () => {
+  const { marketsMimosasLatest, marketsMimosasOctober24, marketsMimosasOctober11, marketsMimosasSeptember27, writing, newsletter } =
     await import('../src/data/siteContent.ts');
-  assert.equal(marketsMimosasLatest.title, 'Oil Went Up. Gold Went Down. Everybody Got Nervous.');
-  assert.equal(marketsMimosasLatest.date, 'October 24, 2026');
-  assert.equal(marketsMimosasLatest.href, 'https://cloudandcapital.substack.com/p/oil-went-up-gold-went-down-everybody');
-  assert.equal(marketsMimosasLatest.description, 'The market spent two weeks worrying about inflation, AI and where to hide.');
+  assert.equal(marketsMimosasLatest.title, "We're So Back. It's So Over. Wait, the Economy's Fine?");
+  assert.equal(marketsMimosasLatest.date, 'November 6, 2026');
+  assert.equal(marketsMimosasLatest.href, 'https://cloudandcapital.substack.com/p/were-so-back-its-so-over-wait-the');
+  assert.equal(marketsMimosasLatest.description, '3 days, 3 moods, and why “the AI trade” isn’t one thing.');
   assert.equal(newsletter.latestIssueHref, marketsMimosasLatest.href);
+  assert.equal(marketsMimosasOctober24.date, 'October 24, 2026');
+  assert.equal(marketsMimosasOctober24.href, 'https://cloudandcapital.substack.com/p/oil-went-up-gold-went-down-everybody');
+  assert.ok(writing.includes(marketsMimosasOctober24));
   assert.equal(marketsMimosasOctober11.date, 'October 11, 2026');
   assert.equal(marketsMimosasOctober11.href, 'https://cloudandcapital.substack.com/p/the-ai-memory-boom-is-making-fortunes');
   assert.ok(writing.includes(marketsMimosasOctober11));

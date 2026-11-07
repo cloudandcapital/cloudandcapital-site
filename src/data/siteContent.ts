@@ -139,13 +139,26 @@ export const marketsMimosasOctober11 = {
   archiveImageAlt: 'Markets & Mimosas series artwork: a mimosa overlooking the coast at sunset',
 };
 
-export const marketsMimosasLatest = {
+export const marketsMimosasOctober24 = {
   title: 'Oil Went Up. Gold Went Down. Everybody Got Nervous.',
   topic: 'Markets & Mimosas',
   date: 'October 24, 2026',
   href: 'https://cloudandcapital.substack.com/p/oil-went-up-gold-went-down-everybody',
   description:
     'The market spent two weeks worrying about inflation, AI and where to hide.',
+  image: '/images/writing/markets-mimosas-hero.png',
+  imageAlt: 'A mimosa overlooking the coast at sunset',
+  archiveImage: '/images/writing/markets-mimosas-hero.png',
+  archiveImageAlt: 'Markets & Mimosas series artwork: a mimosa overlooking the coast at sunset',
+};
+
+export const marketsMimosasLatest = {
+  title: "We're So Back. It's So Over. Wait, the Economy's Fine?",
+  topic: 'Markets & Mimosas',
+  date: 'November 6, 2026',
+  href: 'https://cloudandcapital.substack.com/p/were-so-back-its-so-over-wait-the',
+  description:
+    '3 days, 3 moods, and why “the AI trade” isn’t one thing.',
   image: '/images/writing/markets-mimosas-hero.png',
   imageAlt: 'A mimosa overlooking the coast at sunset',
   archiveImage: '/images/writing/markets-mimosas-hero.png',
@@ -187,6 +200,7 @@ export const writing = [
   writingFeatured,
   marketsMimosasLatest,
   personalWriting,
+  marketsMimosasOctober24,
   marketsMimosasOctober11,
   marketsMimosasSeptember27,
   featuredWriting,

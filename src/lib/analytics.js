@@ -1,7 +1,15 @@
+export function isAnalyticsHost(hostname, production) {
+  return production === true && ['cloudandcapital.com', 'www.cloudandcapital.com'].includes(hostname);
+}
+
 const schema = Object.freeze({
+  inquiry_action: Object.freeze({
+    kind: Object.freeze(['business', 'learning']),
+    action: Object.freeze(['open_email_draft', 'copy_email_text']),
+  }),
   cta_click: Object.freeze({
-    destination: Object.freeze(['work', 'services', 'learn', 'signal_audit', 'market_tape', 'cloud_cost_guard', 'ai_cost_lens', 'ai_cost_lens_github', 'github_pipeline', 'writing', 'substack', 'contact', 'software_renewal_tracker', 'instagram']),
-    source: Object.freeze(['homepage_hero', 'homepage_path_personal', 'homepage_path_business', 'homepage_path_team', 'homepage_path_workflow', 'homepage_path_setup', 'homepage_examples', 'homepage_featured_tools', 'homepage_work', 'homepage_writing', 'homepage_instagram', 'homepage_contact', 'work_flagship', 'work_decision_tools', 'work_market_context', 'work_pipeline', 'work_contact', 'writing_newsletter', 'writing_featured', 'writing_archive', 'writing_contact', 'signal_audit_results', 'software_renewal_resource']),
+    destination: Object.freeze(['work', 'services', 'learn', 'signal_audit', 'market_tape', 'cloud_cost_guard', 'ai_cost_lens', 'ai_cost_lens_github', 'github_pipeline', 'writing', 'substack', 'contact', 'software_renewal_tracker', 'instagram', 'tools']),
+    source: Object.freeze(['homepage_hero', 'homepage_path_personal', 'homepage_path_business', 'homepage_path_team', 'homepage_path_workflow', 'homepage_path_setup', 'homepage_examples', 'homepage_featured_tools', 'homepage_work', 'homepage_writing', 'homepage_instagram', 'homepage_contact', 'work_flagship', 'work_decision_tools', 'work_market_context', 'work_pipeline', 'work_contact', 'writing_newsletter', 'writing_featured', 'writing_archive', 'writing_contact', 'signal_audit_results', 'software_renewal_resource', 'resource_links']),
   }),
   tool_start: Object.freeze({
     tool: Object.freeze(['signal_audit']),

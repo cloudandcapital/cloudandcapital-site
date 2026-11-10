@@ -15,6 +15,7 @@ Business services are Technology Cost Review for growing technology teams with m
 | Route | Description |
 | --- | --- |
 | `/` | Brand introduction, audience pathways, featured work, background and contact |
+| `/links` | Compact resource and writing page for social profiles |
 | `/services` | Three business services, process, background and inquiry form |
 | `/services/examples` | Illustrative service examples |
 | `/tools` | Financial and technology-cost tools, open-source work and renewal worksheet |

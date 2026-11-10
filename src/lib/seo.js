@@ -1,5 +1,6 @@
 // Describe the business using facts visitors can also read on the site.
 const routeNames = {
+  '/links': 'Resources & writing',
   '/services': 'Business services',
   '/services/examples': 'Example reviews',
   '/learn': 'Investing & trading lessons',

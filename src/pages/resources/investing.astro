@@ -1,0 +1,22 @@
+---
+import guide from '../../content/investing-starter.html?raw';
+import HeadMeta from '../../components/HeadMeta.astro';
+
+// Keep the reviewed guide's standalone design and interactions together.
+const styles = guide.match(/<style>([\s\S]*?)<\/style>/)?.[1];
+const body = guide.match(/<body>([\s\S]*?)<\/body>/)?.[1];
+if (!styles || !body) throw new Error('The investing guide is incomplete.');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <HeadMeta
+      title="The Investing Guide | Cloud & Capital"
+      description="A clear starting point for U.S. adults: understand account choices, funds, costs and the steps from adding money to owning an investment."
+    />
+    <style is:inline set:html={styles}></style>
+  </head>
+  <body>
+    <Fragment set:html={body} />
+  </body>
+</html>

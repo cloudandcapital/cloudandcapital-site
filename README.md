@@ -23,6 +23,7 @@ Business services are Technology Cost Review for growing technology teams with m
 | `/insights` | Website article index and Markets & Mimosas introduction |
 | `/insights/is-this-software-worth-it` | Software-value article |
 | `/resources/software-renewal` | Eight-question software renewal worksheet and PDF download |
+| `/resources/investing` | Free beginner investing guide, cash example and contribution calculator |
 | `/work` | Legacy redirect to `/tools` |
 | `/writing` | Legacy redirect to the configured newsletter subscription destination |
 | `/ai-cost-lens` | Redirect to https://lens.cloudandcapital.com |

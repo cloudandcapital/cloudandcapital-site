@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ActionLabel from '../../components/ActionLabel.astro';
+import InvestingGuideFeature from '../../components/InvestingGuideFeature.astro';
 import { homepageWriting, newsletter } from '../../data/siteContent';
 import article from '../../data/softwareValueArticle.json';
 import '../../styles/guides-page.css';
@@ -27,6 +28,7 @@ const guides = [
     </section>
     <section id="resources" class="guide-shell guide-section" aria-labelledby="resources-title">
       <div class="guide-section-heading"><div><p class="guide-eyebrow">Free resources</p><h2 id="resources-title">Something to take with you.</h2></div></div>
+      <InvestingGuideFeature source="writing_archive" />
       <article class="free-resource-card">
         <figure><img src="/images/software-renewal-worksheet-preview.jpg" alt="Preview of the actual software renewal worksheet, including its separate notice deadline field" width="1152" height="1491" loading="lazy" decoding="async" /><figcaption>Two-page PDF. Type in a PDF reader or print. No signup.</figcaption></figure>
         <div><p class="guide-eyebrow">Before the next software renewal</p><h3>Before you renew that software.</h3><p>For business owners and teams reviewing one subscription. Check the dates, the work it does and what changing it would involve. Leave with a reason for your next step.</p><div class="resource-actions"><a class="guide-button" href="/resources/software-renewal"><ActionLabel label="Get the free worksheet" /></a><a href="/insights/is-this-software-worth-it"><ActionLabel label="Read the spending guide" /></a></div><p class="guide-learning">The companion guide: {article.title}</p></div>

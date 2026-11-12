@@ -66,7 +66,7 @@ export const directoryTools: DirectoryTool[] = [
     slug: 'software-renewal-tracker', topics: ['tech-spending'], name: 'Software Renewal Tracker', kind: 'Software subscriptions',
     description: 'Keep software charges, renewal dates, and cancellation deadlines together.',
     bring: 'Your subscriptions, charges, and dates.',
-    result: 'Upcoming payments and a clearer time to review each subscription.',
+    result: 'Payments due each month, with renewal and notice dates together.',
     action: 'Open the renewal tracker', href: '/tools/software-renewal-tracker', external: false,
     destination: 'software_renewal_tracker', source: 'work_decision_tools', tone: 'sand',
     image: '/images/software-renewal-calendar-detail-preview.jpg',

@@ -25,7 +25,7 @@
       "heading": "Watch what happens after the dashboard",
       "paragraphs": [
         "Take one report or task from the first input to the finished result. Where does information get copied? Who checks it? What needs correcting? Where is someone remembering a step because the system does not?",
-        "That is useful evidence. A dashboard can look excellent while the person preparing it is quietly running a second operation behind the scenes. If the records are incomplete, the next improvement may be collecting better inputs. If a feature already exists, it may be configuring it properly. Buying something else can wait until we understand the gap."
+        "A dashboard can look excellent while someone is still doing a lot of work by hand to keep it that way. Check whether the problem is missing records or a feature that hasn’t been set up properly before buying another tool."
       ]
     },
     {
@@ -47,14 +47,14 @@
       "heading": "Make the next step manageable",
       "paragraphs": [
         "You should leave a review knowing what was checked, what the evidence supports, and what to do next. If you want help implementing an improvement, that work gets its own agreed scope: one result, checks, instructions, and a handoff. It should be clear who updates it afterward.",
-        "That distinction matters. Advice can help you make a decision. Setup can put the decision into practice. The right starting point depends on what is already clear and what still needs investigating."
+        "You can come to me for a review, help with the setup, or both. We’ll agree on what you need before work begins."
       ]
     },
     {
       "heading": "Make the help worth paying for",
       "paragraphs": [
         "A paid review needs a reason to exist. If the issue is an obvious small cancellation, a quick check may be enough. When a decision affects recurring work or meaningful spending, compare the cost of help with the realistic benefit and your ability to act.",
-        "My finance and FinOps background informs how I look at these questions: follow the numbers, check the assumptions, and consider what the change means in practice. Technology should earn its place in your business. A clear explanation should help you decide whether it does.",
+        "I bring my finance and FinOps background to the review: follow the numbers, check the assumptions, and work out what a change would mean for the business. Technology should earn its place in your business. A clear explanation should help you decide whether it does.",
         "The result should be something you can come back to when the renewal arrives again. Keep the reasoning with the recommendation, name what needs checking, and give someone ownership. Future you has enough tabs open. Let's make this one a bit easier."
       ]
     }

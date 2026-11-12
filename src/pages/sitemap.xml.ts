@@ -7,6 +7,7 @@ const pages = [
   '/services/examples',
   '/learn',
   '/resources/software-renewal',
+  '/resources/investing',
   '/insights',
   '/insights/using-ai-cost-lens',
   '/insights/using-cloud-cost-guard',

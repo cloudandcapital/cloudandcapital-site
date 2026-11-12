@@ -7,6 +7,7 @@ const routeNames = {
   '/tools': 'Free tools',
   '/tools/software-renewal-tracker': 'Software Renewal Tracker',
   '/resources/software-renewal': 'Software renewal checklist',
+  '/resources/investing': 'The investing guide',
   '/insights': 'Guides & writing',
   '/insights/using-ai-cost-lens': 'How to use AI Cost Lens',
   '/insights/using-cloud-cost-guard': 'How to use Cloud Cost Guard',

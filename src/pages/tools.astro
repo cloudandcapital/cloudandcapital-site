@@ -6,7 +6,6 @@ import { directoryTools, toolTopics, upcomingTools } from '../data/toolDirectory
 
 const availableCount = directoryTools.filter(tool => tool.availability !== 'review').length;
 const reviewCount = directoryTools.length - availableCount;
-const allEntries = [...directoryTools, ...upcomingTools];
 const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
 ---
 <BaseLayout title="Free Finance & Technology Tools | Cloud & Capital" description="Free tools for AI costs, cloud bills, software renewals, market context, and business decisions. See what each tool does, what to bring, and what you get.">
@@ -36,29 +35,32 @@ const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
       <h2 id="library-title" class="visually-hidden">Browse the tools</h2>
       <div class="tool-topics" data-tool-filters role="group" aria-label="Choose a tool topic" hidden>
         {filters.map(filter => (
-          <button type="button" data-tool-filter={filter.id} data-tool-tone={filter.tone} aria-pressed={filter.id === 'all' ? 'true' : 'false'} aria-controls="tool-gallery">
+          <button type="button" data-tool-filter={filter.id} data-tool-tone={filter.tone} aria-pressed={filter.id === 'all' ? 'true' : 'false'} aria-controls="tool-gallery upcoming-tools">
             <span>{filter.label}</span>
-            <span class="topic-count" aria-hidden="true">{allEntries.filter(tool => filter.id === 'all' || tool.topics.some(topic => topic === filter.id)).length}</span>
+            <span class="topic-count" aria-hidden="true">{directoryTools.filter(tool => filter.id === 'all' || tool.topics.some(topic => topic === filter.id)).length}</span>
           </button>
         ))}
       </div>
-      <p class="library-status" data-tool-status role="status" aria-live="polite" aria-atomic="true">{availableCount} tools to explore{reviewCount > 0 && <> · {reviewCount} under review</>} · {upcomingTools.length} coming soon</p>
+      <p class="library-status" data-tool-status role="status" aria-live="polite" aria-atomic="true">{availableCount} tools to explore{reviewCount > 0 && <> · {reviewCount} under review</>}</p>
       <ul class="directory-grid" id="tool-gallery">
         {directoryTools.map(tool => (
           <li class="directory-item" data-tool-item data-tool-id={tool.slug} data-tool-topics={tool.topics.join(' ')} data-tool-review={tool.availability === 'review' || undefined}>
             <DirectoryToolCard tool={tool} />
           </li>
         ))}
-        {upcomingTools.map(tool => (
-          <li class="directory-item" data-tool-item data-tool-id={tool.slug} data-tool-topics={tool.topics.join(' ')} data-tool-upcoming>
-            <article class="upcoming-card" data-tone={tool.tone} aria-labelledby={`${tool.slug}-title`}>
-              <div class="upcoming-preview" aria-hidden="true"><p>{tool.preview[0]}<br /><em>{tool.preview[1]}</em></p><span class="upcoming-sparkle">✳</span></div>
-              <div class="upcoming-copy"><p class="upcoming-label">{tool.next ? 'Coming next' : 'Coming soon'}</p><h3 id={`${tool.slug}-title`}>{tool.name}</h3><p>{tool.description}</p></div>
-            </article>
-          </li>
-        ))}
       </ul>
       <p class="resource-shortcut">Prefer a worksheet? <a href="/insights#resources"><ActionLabel label="Browse free resources" /></a></p>
+      <details class="upcoming-section" data-tool-upcoming-section>
+        <summary><span>In the works</span><span class="upcoming-count" data-tool-upcoming-count>{upcomingTools.length} ideas</span><span class="upcoming-toggle" aria-hidden="true">+</span></summary>
+        <p class="upcoming-intro">Ideas for future resources.</p>
+        <ul class="upcoming-list" id="upcoming-tools">
+          {upcomingTools.map(tool => (
+            <li data-tool-item data-tool-id={tool.slug} data-tool-topics={tool.topics.join(' ')} data-tool-upcoming>
+              <article data-tone={tool.tone} aria-labelledby={`${tool.slug}-title`}><h3 id={`${tool.slug}-title`}>{tool.name}</h3><p>{tool.description}</p></article>
+            </li>
+          ))}
+        </ul>
+      </details>
       <div class="source-section">
         <p>Curious how they’re built?</p>
         <a href="https://github.com/cloudandcapital" target="_blank" rel="noopener noreferrer" data-analytics-event="cta_click" data-analytics-destination="github_pipeline" data-analytics-source="work_pipeline"><ActionLabel label="Explore on GitHub" /></a>
@@ -124,19 +126,18 @@ const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
   .directory-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; padding: 0; list-style: none; }
   .directory-item { display: flex; min-width: 0; }
   .directory-item > :global(*) { width: 100%; }
-  .upcoming-card { --upcoming-surface: var(--theme-rose-panel, #e8d0cc); --upcoming-ink: var(--theme-rose, #5d453e); --upcoming-body: var(--cream); display: flex; flex-direction: column; width: 100%; min-width: 0; overflow: hidden; border: 1px solid var(--theme-line, #d6bcb5); border-radius: 16px; background: var(--upcoming-body); }
-  .upcoming-card[data-tone="sage"] { --upcoming-surface: var(--theme-panel, #e4e9df); --upcoming-ink: var(--theme-green, #3d6055); border-color: var(--theme-line, #c2cdbb); }
-  .upcoming-card[data-tone="sand"] { --upcoming-surface: var(--cream); --upcoming-ink: var(--theme-sand, #675844); border-color: var(--theme-line, #d3c6b1); }
-  .upcoming-card[data-filter-tone="sage"] { --upcoming-surface: var(--theme-panel, #e4e9df); --upcoming-ink: var(--theme-green, #3d6055); --upcoming-body: var(--theme-panel, #f0f3ec); border-color: var(--theme-line, #c2cdbb); }
-  .upcoming-card[data-filter-tone="sand"] { --upcoming-surface: var(--cream); --upcoming-ink: var(--theme-sand, #675844); --upcoming-body: var(--cream); border-color: var(--theme-line, #d3c6b1); }
-  .upcoming-card[data-filter-tone="rose"] { --upcoming-surface: var(--theme-rose-panel, #eddbd6); --upcoming-ink: var(--theme-rose, #785752); --upcoming-body: var(--theme-panel, #f6eae7); border-color: var(--theme-line, #d6b8b2); }
-  .upcoming-preview { position: relative; display: flex; flex-direction: column; justify-content: center; aspect-ratio: 1.85; padding: 1.5rem; overflow: hidden; background: var(--upcoming-surface); }
-  .upcoming-preview > p { color: var(--upcoming-ink); font: 400 clamp(2.25rem, 3.5vw, 3.25rem)/.95 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; }
-  .upcoming-sparkle { position: absolute; right: 1.5rem; bottom: 1.25rem; color: var(--upcoming-ink); opacity: .6; font-size: 3.25rem; line-height: 1; }
-  .upcoming-copy { padding: 1.5rem; }
-  .upcoming-label { color: var(--upcoming-ink); font: 500 .61rem/1.5 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
-  .upcoming-copy h3 { margin: .65rem 0 .9rem; font: italic 400 clamp(2.15rem, 2.7vw, 2.75rem)/1.05 'Cormorant Garamond', Georgia, serif; letter-spacing: -.025em; text-wrap: balance; }
-  .upcoming-copy > p:last-child { color: var(--theme-muted, #4a4a42); font-size: .9375rem; line-height: 1.7; text-wrap: pretty; }
+  .upcoming-section { margin-top: 1.75rem; border-block: 1px solid var(--border-strong); }
+  .upcoming-section summary { display: flex; align-items: center; gap: 1rem; min-height: 60px; padding: .75rem 0; cursor: pointer; list-style: none; font: 400 1.35rem/1.3 'Cormorant Garamond', Georgia, serif; }
+  .upcoming-section summary::-webkit-details-marker { display: none; }
+  .upcoming-section summary:focus-visible { outline: 3px solid var(--clay-ink); outline-offset: 4px; }
+  .upcoming-count { margin-left: auto; color: var(--text-muted); font: 400 .75rem/1.5 'Jost', sans-serif; }
+  .upcoming-toggle { color: var(--clay-ink); font: 400 1.2rem/1 'Jost', sans-serif; }
+  .upcoming-section[open] .upcoming-toggle { transform: rotate(45deg); }
+  .upcoming-intro { color: var(--text-muted); font-size: .875rem; }
+  .upcoming-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 2rem; padding: 1.5rem 0 1.75rem; list-style: none; }
+  .upcoming-list li { min-width: 0; }
+  .upcoming-list h3 { margin: 0 0 .4rem; font: 400 1.6rem/1.15 'Cormorant Garamond', Georgia, serif; }
+  .upcoming-list p { color: var(--text-muted); font: 400 .875rem/1.65 'Jost', sans-serif; }
   .source-section { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .3rem 1rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--theme-line, #3d605529); }
   .source-section p { color: var(--theme-muted, #585a51); font-size: .875rem; }
   .source-section a { display: inline-flex; color: var(--theme-green, #3d6055); text-decoration: none; }
@@ -167,7 +168,7 @@ const filters = [{ id: 'all', label: 'View all', tone: 'all' }, ...toolTopics];
     .tool-topics button { gap: .55rem; min-height: 58px; padding: .7rem .6rem; font-size: .875rem; }
     .topic-count { min-width: 1.4rem; height: 1.4rem; font-size: .68rem; }
     .directory-grid { grid-template-columns: 1fr; }
-    .upcoming-preview > p { font-size: clamp(2.5rem, 12vw, 3.5rem); }
+    .upcoming-list { grid-template-columns: 1fr; gap: 1.25rem; }
     .contact-layout { display: block; }
     .tools-contact a { margin-top: 1.25rem; }
   }

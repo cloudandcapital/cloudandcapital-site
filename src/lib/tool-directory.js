@@ -5,6 +5,8 @@ export function initToolDirectory(root) {
   const status = root.querySelector('[data-tool-status]');
   const buttons = [...root.querySelectorAll('[data-tool-filter]')];
   const cards = [...root.querySelectorAll('[data-tool-item]')];
+  const upcomingSection = root.querySelector('[data-tool-upcoming-section]');
+  const upcomingCount = root.querySelector('[data-tool-upcoming-count]');
   if (!controls || !status || !buttons.length) return;
 
   function selectTopic(topic, label, tone) {
@@ -29,7 +31,12 @@ export function initToolDirectory(root) {
     for (const button of buttons) {
       button.setAttribute('aria-pressed', String(button.dataset.toolFilter === topic));
     }
-    const count = `${ready} ${ready === 1 ? 'tool' : 'tools'} to explore${review ? ` · ${review} under review` : ''}${upcoming ? ` · ${upcoming} coming soon` : ''}`;
+    if (upcomingSection) {
+      upcomingSection.hidden = upcoming === 0;
+      if (upcoming === 0) upcomingSection.open = false;
+    }
+    if (upcomingCount) upcomingCount.textContent = `${upcoming} ${upcoming === 1 ? 'idea' : 'ideas'}`;
+    const count = `${ready} ${ready === 1 ? 'tool' : 'tools'} to explore${review ? ` · ${review} under review` : ''}`;
     status.textContent = topic === 'all' ? count : `${label}: ${count}`;
   }
 

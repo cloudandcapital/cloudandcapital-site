@@ -95,7 +95,7 @@ export const directoryTools: DirectoryTool[] = [
     destination: 'signal_audit', source: 'work_decision_tools', tone: 'sage',
     image: '/images/signal-audit-result-review.jpg',
     imageAlt: 'An actual Signal Audit example with 78 out of 100 for understanding spending and 28 out of 100 for using it in decisions',
-    imageWidth: 1080, imageHeight: 555, imageLabel: 'Example answers',
+    imageWidth: 1015, imageHeight: 518, imageLabel: 'Example answers',
     companion: { label: 'Use the result with me', href: '/insights/using-signal-audit' },
   },
 ];
